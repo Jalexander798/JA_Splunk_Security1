@@ -8,7 +8,7 @@ data_sources:
 - Windows Event Log Security 4625
 type: Anomaly
 status: production
-description: This detection identifies users who have been inactive for more than 30 days and suddenly have activity based on network traffic logs.
+description: This detection identifies network traffic activity from user accounts that have been inactive for over 30 days. It monitors the network logs for accounts with no recent activity within the past 30 days and flags any sudden activity (such as login or access events) as a potential anomaly. This can help detect cases where inactive accounts may have been compromised and are being used unexpectedly. The detection logic leverages data from network traffic logs and checks for accounts that have not had any recorded activity within the specified inactivity threshold.
 search: '| tstats summariesonly=true fillnull_value=null count min(_time) as firstTime
   max(_time) as lastTime from
 
@@ -51,20 +51,20 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View detailed inactivity and action history for $user$
-  search: '%original_detection_search% | search All_Traffic.user="$user$" | eval inactivityPeriodByDay = (now() - lastTime) / 86400 | eval status = if(inactivityPeriodByDay > 29, "inactive", "active") | eval inactivityPeriodByDay = round(inactivityPeriodByDay, 0) . " Days" | table user, action, firstTime, lastTime, inactivityPeriodByDay, status'
+  search: 'search All_Traffic.user="$user$" | eval inactivityPeriodByDay = (now() - lastTime) / 86400 | eval status = if(inactivityPeriodByDay > 29, "inactive", "active") | eval inactivityPeriodByDay = round(inactivityPeriodByDay, 0) . " Days" | table user, action, firstTime, lastTime, inactivityPeriodByDay, status'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View associated risk events for $user$
-  search: '%original_detection_search% | from datamodel Risk.All_Risk | search normalized_risk_object IN ($user$) starthoursago=168 endhoursago=1 | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+  search: 'from datamodel Risk.All_Risk | search normalized_risk_object IN ($user$) starthoursago=168 | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 tags:
   analytic_story: 
   - Insider Threat
   asset_type: Network
-  confidence: 85
-  impact: 70
-  message: This detection identifies users who have been inactive for an extended period and suddenly have activity on the network.
+  confidence: 80
+  impact: 50
+  message: Network traffic detected from an inactive user account - $user$
   mitre_attack_id:
   - T1078
   - T1110
@@ -83,7 +83,7 @@ tags:
   - authserver
   - vendor_product
   - action
-  risk_score: "{{ (impact * confidence) / 100 }}"
+  risk_score: 40
   security_domain: identity
   cve: []
 tests:
