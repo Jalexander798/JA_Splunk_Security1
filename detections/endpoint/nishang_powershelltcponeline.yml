@@ -1,7 +1,7 @@
 name: Nishang PowershellTCPOneLine
 id: 1a382c6c-7c2e-11eb-ac69-acde48001122
-version: 4
-date: '2024-09-30'
+version: 5
+date: '2024-12-11'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -30,6 +30,7 @@ drilldown_searches:
 tags:
   analytic_story:
   - HAFNIUM Group
+  - Cleo File Transfer Software
   asset_type: Endpoint
   confidence: 60
   impact: 70

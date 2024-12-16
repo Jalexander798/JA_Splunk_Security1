@@ -1,7 +1,7 @@
 name: System Information Discovery Detection
 id: 8e99f89e-ae58-4ebc-bf52-ae0b1a277e72
-version: 5
-date: '2024-09-30'
+version: 6
+date: '2024-12-11'
 author: Patrick Bareiss, Splunk
 status: production
 type: TTP
@@ -29,6 +29,7 @@ tags:
   - Windows Discovery Techniques
   - Gozi Malware
   - BlackSuit Ransomware
+  - Cleo File Transfer Software
   asset_type: Windows
   confidence: 50
   impact: 30

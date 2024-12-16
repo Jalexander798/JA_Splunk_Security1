@@ -1,7 +1,7 @@
 name: Domain Group Discovery With Net
 id: f2f14ac7-fa81-471a-80d5-7eb65c3c7349
-version: 4
-date: '2024-11-26'
+version: 5
+date: '2024-12-11'
 author: Mauricio Velazco, Splunk
 status: production
 type: Hunting
@@ -22,6 +22,7 @@ tags:
   - Prestige Ransomware
   - Graceful Wipe Out Attack
   - Rhysida Ransomware
+  - Cleo File Transfer Software
   asset_type: Endpoint
   confidence: 50
   impact: 30

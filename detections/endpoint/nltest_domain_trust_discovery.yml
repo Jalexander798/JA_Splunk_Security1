@@ -1,7 +1,7 @@
 name: NLTest Domain Trust Discovery
 id: c3e05466-5f22-11eb-ae93-0242ac130002
-version: 4
-date: '2024-09-30'
+version: 5
+date: '2024-12-11'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -38,6 +38,7 @@ tags:
   - Active Directory Discovery
   - Qakbot
   - Rhysida Ransomware
+  - Cleo File Transfer Software
   asset_type: Endpoint
   confidence: 50
   impact: 30
