@@ -1,7 +1,7 @@
 name: ICACLS Grant Command
 id: b1b1e316-accc-11eb-a9b4-acde48001122
-version: 3
-date: '2024-09-30'
+version: 4
+date: '2024-12-06'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -28,6 +28,7 @@ tags:
   analytic_story:
   - XMRig
   - Ransomware
+  - Defense Evasion or Unauthorized Access Via SDDL Tampering
   asset_type: Endpoint
   confidence: 70
   impact: 70
