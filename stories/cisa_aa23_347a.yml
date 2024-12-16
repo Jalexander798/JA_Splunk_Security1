@@ -1,7 +1,7 @@
 name: CISA AA23-347A
 id: 257a2f28-fcbe-4226-8d1f-957880098331
-version: 2
-date: '2023-12-14'
+version: 3
+date: '2024-12-09'
 author: Teoderick Contreras, Rod Soto, Splunk
 description: Leverage searches that allow you to detect and investigate unusual activities
   that might be related to the  SVR cyber activity tactics and techniques. While SVR followed a similar playbook in each compromise, 
@@ -14,7 +14,7 @@ narrative: SVR cyber operations pose a persistent threat to public and private o
   and foreign counterintelligence. The SVR also conducts cyber operations targeting technology companies that enable future cyber operations.
   The SVR's recent operation has targeted networks hosting TeamCity servers, further underscoring its persistent focus on technology companies. 
   By leveraging CVE-2023-42793, a vulnerability within a software development program, the SVR seeks to gain access to victims, potentially 
-  compromising numerous software developers' networks. JetBrains responded to this threat by issuing a patch in mid-September 2023, limting the SVR's 
+  compromising numerous software developers' networks. JetBrains responded to this threat by issuing a patch in mid-September 2023, limiting the SVR's 
   ability to exploit Internet-accessible TeamCity servers lacking the necessary updates. Despite this mitigation, the SVR has yet to utilize its 
   acquired access to software developers' networks for breaching customer systems. It appears that the SVR is still in the preparatory stages of its operation.
 references:
