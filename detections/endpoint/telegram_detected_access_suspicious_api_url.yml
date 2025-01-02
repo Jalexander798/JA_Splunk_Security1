@@ -1,0 +1,100 @@
+data_source:
+- Windows Security 4688
+name: Telegram Detected Access Suspicious API/URL
+id: 6e106492-561f-4f0c-919c-6560861e27d3
+version: 1
+date: '2025-01-02'
+author: Zaki Zarkasih Al Mustafa
+type: TTP
+status: production
+description: Detects suspicious process activity related to Telegram API
+search: index=windows (sourcetype=Wineventlog:Security OR source=Wineventlog:Security)
+  AND ParentProcessName=*Telegram* AND CommandLine=*api.telegram* | eval utc_time=strptime(TimeCreated,
+  "%Y-%m-%dT%H:%M:%S.%6NZ") | eval Time_Created=strftime(utc_time + 25200, "%Y-%m-%d
+  %H:%M:%S") | rename Time_Created as "Time Created", host as Host, src_user as User
+  | table "Time Created", Host, User, EventID, ParentProcessName, CommandLine, NewProcessName
+  | `telegram_detected_access_suspicious_api_url_filter`
+macros:
+  - telegram_detected_access_suspicious_api_url_filter
+lookups: []
+how_to_implement: |
+  Ensure the relevant data source (`Wineventlog:Security`) is ingested into Splunk.
+  Configure the macro `telegram_detected_access_suspicious_api_url_filter` to filter false positives or noisy data.
+  Deploy this detection rule in Splunk Enterprise Security or Splunk Cloud.
+
+known_false_positives: |
+  Non-malicious use of Telegram's API by legitimate applications or processes may trigger this detection.
+  Automated scripts or tools using Telegram for notifications or integrations might also appear as suspicious.
+  Developers testing Telegram API functionality in controlled environments.
+
+drilldown_searches:
+  - name: Original Detection
+    description: Original detection search results
+    search: "%original_detection_search%"
+    earliest_offset: -24h
+    latest_offset: now
+  
+  - name: Investigate Parent Process
+    description: |
+      This drilldown searches for other processes spawned by the same parent process
+      to identify potential patterns or related activities.
+    search: |
+      index=windows (sourcetype=Wineventlog:Security OR source=Wineventlog:Security)
+      AND ParentProcessName="$ParentProcessName$"
+      | table _time, ParentProcessName, NewProcessName, CommandLine
+    earliest_offset: -24h
+    latest_offset: now
+
+  - name: Investigate User Activity
+    description: |
+      This drilldown searches for all activities performed by the same user in the
+      Windows Event Logs to provide additional context.
+    search: |
+      index=windows (sourcetype=Wineventlog:Security OR source=Wineventlog:Security)
+      AND src_user="$src_user$"
+      | table _time, src_user, EventID, host, CommandLine
+    earliest_offset: -24h
+    latest_offset: now
+
+references:
+- https://securelist.com/telegram-phishing-services/109383/
+tags:
+  analytic_story:
+  - XMRig
+  asset_type: Endpoint
+  confidence: 85
+  impact: 70
+  message: Detects suspicious access to Telegram API for potential misuse or malicious activity.
+  mitre_attack_id:
+  - T1059.001
+  - T1059.003
+  - T1003.002
+  - T1105
+  - T1566
+  observable:
+  - name: CommandLine
+    type: Process Name
+    role:
+    - Attacker
+  - name: Host
+    type: Hostname
+    role:
+    - Victim
+  product:
+  - Splunk Enterprise
+  - Splunk Enterprise Security
+  - Splunk Cloud
+  required_fields:
+  - index
+  - sourcetype
+  - ParentProcessName
+  - CommandLine
+  risk_score: 59.5
+  security_domain: endpoint
+  cve: []
+tests:
+- name: True Positive Test
+  attack_data:
+  - data: https://github.com/splunk/contentctl/wiki
+    sourcetype: Wineventlog:Security
+    source: Wineventlog
