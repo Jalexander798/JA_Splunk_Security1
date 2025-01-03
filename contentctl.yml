@@ -77,9 +77,9 @@ apps:
 - uid: 5579
   title: Splunk Add-on for CrowdStrike FDR
   appid: Splunk_TA_CrowdStrike_FDR
-  version: 2.0.2
+  version: 2.0.3
   description: description of app
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-crowdstrike-fdr_202.tgz
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-crowdstrike-fdr_203.tgz
 - uid: 3185
   title: Splunk Add-on for Microsoft IIS
   appid: SPLUNK_TA_FOR_IIS
