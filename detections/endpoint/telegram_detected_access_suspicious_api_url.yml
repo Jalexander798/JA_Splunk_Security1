@@ -16,6 +16,7 @@ search: `wineventlog_security`
   | `telegram_detected_access_suspicious_api_url_filter`
 macros:
   - telegram_detected_access_suspicious_api_url_filter
+  - wineventlog_security
 how_to_implement: |
   Ensure the relevant data source (`Wineventlog:Security`) is ingested into Splunk.
   Configure the macro `telegram_detected_access_suspicious_api_url_filter` to filter false positives or noisy data.
