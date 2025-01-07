@@ -8,7 +8,7 @@ author: Zaki Zarkasih Al Mustafa
 type: TTP
 status: production
 description: Detects suspicious process activity related to Telegram API
-search: `wineventlog_security`
+search: | `wineventlog_security`
   AND ParentProcessName=*Telegram* AND CommandLine=*api.telegram* | eval utc_time=strptime(TimeCreated,
   "%Y-%m-%dT%H:%M:%S.%6NZ") | eval Time_Created=strftime(utc_time + 25200, "%Y-%m-%d
   %H:%M:%S") | rename Time_Created as "Time Created", host as Host, src_user as User
@@ -33,7 +33,7 @@ drilldown_searches:
       This drilldown searches for other processes spawned by the same parent process
       to identify potential patterns or related activities.
     search: |
-      `wineventlog_security`
+      ``
       AND ParentProcessName="$ParentProcessName$"
       | table _time, ParentProcessName, NewProcessName, CommandLine
     earliest_offset: $info_min_time$
@@ -44,7 +44,7 @@ drilldown_searches:
       This drilldown searches for all activities performed by the same user in the
       Windows Event Logs to provide additional context.
     search: |
-      `wineventlog_security`
+      ``
       AND src_user="$src_user$"
       | table _time, src_user, EventID, host, CommandLine
     earliest_offset: $info_min_time$
