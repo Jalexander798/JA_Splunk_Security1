@@ -7,9 +7,9 @@ status: production
 type: Anomaly
 description: The following analytic identifies the creation of GitHub Dependabot alerts, which indicate potential vulnerabilities in the codebase. It detects this activity by searching for logs with the "create" action and analyzing fields such as affected package, severity, and fixed version. This detection is significant for a SOC because it helps identify and address security risks in the codebase proactively. If confirmed malicious, these vulnerabilities could be exploited by attackers to gain unauthorized access or cause breaches, leading to potential data loss or system compromise.
 data_source:
-- GitHub
+- GitHub Webhooks
 search: '`github` alert.id=* action=create | rename repository.full_name as repository, repository.html_url as repository_url sender.login as user | stats min(_time) as firstTime max(_time) as lastTime by action alert.affected_package_name alert.affected_range alert.created_at alert.external_identifier alert.external_reference alert.fixed_in alert.severity repository repository_url user | eval phase="code" | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `github_dependabot_alert_filter`'
-how_to_implement: You must index GitHub logs. You can follow the url in reference to onboard GitHub logs.
+how_to_implement: You must ingest GitHub logs using webhooks to enable this detection. You can follow the url in reference to onboard GitHub logs using webhooks.
 known_false_positives: unknown
 references:
 - https://www.splunk.com/en_us/blog/tips-and-tricks/getting-github-data-with-webhooks.html
