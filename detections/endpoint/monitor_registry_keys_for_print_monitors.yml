@@ -1,7 +1,7 @@
 name: Monitor Registry Keys for Print Monitors
 id: f5f6af30-7ba7-4295-bfe9-07de87c01bbc
-version: 8
-date: '2024-11-14'
+version: 9
+date: '2024-12-08'
 author: Teoderick Contreras, Splunk, Steven Dick, Bhavin Patel
 status: production
 type: TTP
@@ -17,7 +17,7 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   | `monitor_registry_keys_for_print_monitors_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the registry value name, registry path, and registry value data from your
-  endpoints. If you are using Sysmon, you must have at least version 2.0 of the offical
+  endpoints. If you are using Sysmon, you must have at least version 2.0 of the official
   Sysmon TA. https://splunkbase.splunk.com/app/5709
 known_false_positives: You will encounter noise from legitimate print-monitor registry
   entries.

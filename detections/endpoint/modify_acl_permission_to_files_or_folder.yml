@@ -1,7 +1,7 @@
 name: Modify ACL permission To Files Or Folder
 id: 7e8458cc-acca-11eb-9e3f-acde48001122
-version: 4
-date: '2024-09-30'
+version: 5
+date: '2024-12-06'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -27,6 +27,7 @@ drilldown_searches:
 tags:
   analytic_story:
   - XMRig
+  - Defense Evasion or Unauthorized Access Via SDDL Tampering
   asset_type: Endpoint
   confidence: 80
   impact: 40

@@ -1,7 +1,7 @@
 name: Disable Windows App Hotkeys
 id: 1490f224-ad8b-11eb-8c4f-acde48001122
-version: 7
-date: '2024-11-14'
+version: 8
+date: '2024-12-08'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP
@@ -18,7 +18,7 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `disable_windows_app_hotkeys_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the registry value name, registry path, and registry value data from your
-  endpoints. If you are using Sysmon, you must have at least version 2.0 of the offical
+  endpoints. If you are using Sysmon, you must have at least version 2.0 of the official
   Sysmon TA. https://splunkbase.splunk.com/app/5709
 known_false_positives: unknown
 references:

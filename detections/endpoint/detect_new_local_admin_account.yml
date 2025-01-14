@@ -1,7 +1,7 @@
 name: Detect New Local Admin account
 id: b25f6f62-0712-43c1-b203-083231ffd97d
-version: 5
-date: '2024-09-30'
+version: 6
+date: '2024-12-12'
 author: David Dorsey, Splunk
 status: production
 type: TTP
@@ -9,7 +9,13 @@ description: The following analytic detects the creation of new accounts elevate
 data_source:
 - Windows Event Log Security 4732
 - Windows Event Log Security 4720
-search: '`wineventlog_security` EventCode=4720 OR (EventCode=4732 Group_Name=Administrators) | transaction src_user connected=false maxspan=180m | rename src_user as user | stats count min(_time) as firstTime max(_time) as lastTime by user dest | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `detect_new_local_admin_account_filter`'
+search: '`wineventlog_security` EventCode=4720 OR (EventCode=4732 Group_Name=Administrators) 
+| transaction user dest connected=false maxspan=180m 
+| stats count min(_time) as firstTime max(_time) as lastTime dc(EventCode) as distinct_eventcodes by src_user user dest
+| where distinct_eventcodes>1
+| `security_content_ctime(firstTime)` 
+| `security_content_ctime(lastTime)`
+| `detect_new_local_admin_account_filter`'
 how_to_implement: You must be ingesting Windows event logs using the Splunk Windows TA and collecting event code 4720 and 4732
 known_false_positives: The activity may be legitimate. For this reason, it's best to verify the account with an administrator and ask whether there was a valid service request for the account creation. If your local administrator group name is not "Administrators", this search may generate an excessive number of false positives
 references: []

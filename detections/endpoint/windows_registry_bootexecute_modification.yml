@@ -1,7 +1,7 @@
 name: Windows Registry BootExecute Modification
 id: eabbac3a-45aa-4659-920f-6b8cff383fb8
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2024-12-03'
 author: Michael Haag, Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -17,7 +17,7 @@ description: The following analytic detects modifications to the BootExecute reg
   confirmed malicious, this could allow an attacker to maintain persistence, execute
   arbitrary code at boot, or disrupt system operations.
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time) as lastTime FROM datamodel=Endpoint.Registry 
-  WHERE Registry.registry_path="HKLM\\System\\CurrentControlSet\\Control\\Session
+  WHERE Registry.registry_path="*\\System\\CurrentControlSet\\Control\\Session
   Manager\\BootExecute" BY Registry.dest Registry.registry_path Registry.registry_key_name
   Registry.registry_value_name Registry.registry_value_data Registry.process_guid,
   Registry.action | `drop_dm_object_name(Registry)` | where isnotnull(registry_value_data)

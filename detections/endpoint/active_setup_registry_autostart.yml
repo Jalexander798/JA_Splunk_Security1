@@ -1,7 +1,7 @@
 name: Active Setup Registry Autostart
 id: f64579c0-203f-11ec-abcc-acde48001122
-version: 7
-date: '2024-11-14'
+version: 8
+date: '2024-12-08'
 author: Steven Dick, Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -17,7 +17,7 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   | `security_content_ctime(lastTime)`| `active_setup_registry_autostart_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the registry value name, registry path, and registry value data from your
-  endpoints. If you are using Sysmon, you must have at least version 2.0 of the offical
+  endpoints. If you are using Sysmon, you must have at least version 2.0 of the official
   Sysmon TA. https://splunkbase.splunk.com/app/5709
 known_false_positives: Active setup installer may add or modify this registry.
 references:

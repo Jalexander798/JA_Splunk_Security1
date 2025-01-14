@@ -1,7 +1,7 @@
 name: Enable RDP In Other Port Number
 id: 99495452-b899-11eb-96dc-acde48001122
-version: 7
-date: '2024-11-14'
+version: 8
+date: '2024-12-03'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP
@@ -10,14 +10,14 @@ data_source:
 - Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time) as lastTime FROM datamodel=Endpoint.Registry 
-  WHERE (Registry.registry_path="*HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal
+  WHERE (Registry.registry_path="*\\CurrentControlSet\\Control\\Terminal
   Server\\WinStations\\RDP-Tcp*" Registry.registry_value_name = "PortNumber") BY Registry.dest Registry.user Registry.registry_path Registry.registry_key_name
   Registry.registry_value_name Registry.registry_value_data Registry.process_guid
   | `drop_dm_object_name(Registry)` | where isnotnull(registry_value_data) | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `enable_rdp_in_other_port_number_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the registry value name, registry path, and registry value data from your
-  endpoints. If you are using Sysmon, you must have at least version 2.0 of the offical
+  endpoints. If you are using Sysmon, you must have at least version 2.0 of the official
   Sysmon TA. https://splunkbase.splunk.com/app/5709
 known_false_positives: unknown
 references:

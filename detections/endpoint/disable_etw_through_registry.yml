@@ -1,7 +1,7 @@
 name: Disable ETW Through Registry
 id: f0eacfa4-d33f-11eb-8f9d-acde48001122
-version: 7
-date: '2024-11-14'
+version: 8
+date: '2024-12-08'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP
@@ -17,7 +17,7 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `disable_etw_through_registry_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the registry value name, registry path, and registry value data from your
-  endpoints. If you are using Sysmon, you must have at least version 2.0 of the offical
+  endpoints. If you are using Sysmon, you must have at least version 2.0 of the official
   Sysmon TA. https://splunkbase.splunk.com/app/5709
 known_false_positives: network operator may disable this feature of windows but not
   so common.
