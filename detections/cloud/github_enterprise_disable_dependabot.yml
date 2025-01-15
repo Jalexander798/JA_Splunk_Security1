@@ -18,7 +18,7 @@ search: '`github_enterprise` action=repository_vulnerability_alerts.disable
   | fillnull
   | stats count min(_time) as firstTime max(_time) as lastTime by actor, actor_id, actor_ip, actor_is_bot, actor_location.country_code, business, business_id, org, org_id, repo, repo_id, user, user_agent, user_id, action
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` 
-  | `github_disable_dependabot_filter`'
+  | `github_enterprise_disable_dependabot_filter`'
 how_to_implement: You must ingest GitHub Enterprise logs using Audit log streaming as described in this documentation https://docs.github.com/en/enterprise-cloud@latest/admin/monitoring-activity-in-your-enterprise/reviewing-audit-logs-for-your-enterprise/streaming-the-audit-log-for-your-enterprise#setting-up-streaming-to-splunk using a Splunk HTTP Event Collector.
 known_false_positives: unknown
 references:
