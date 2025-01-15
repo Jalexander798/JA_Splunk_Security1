@@ -4,8 +4,8 @@ version: 1
 date: '2025-01-15'
 author: Patrick Bareiss, Splunk
 description: Data source object for GitHub Enterprise logs
-source: github
-sourcetype: github:cloud:audit
+source: http:github
+sourcetype: httpevent
 supported_TA: 
 - name: Splunk Add-on for Github
   url: https://splunkbase.splunk.com/app/6254
