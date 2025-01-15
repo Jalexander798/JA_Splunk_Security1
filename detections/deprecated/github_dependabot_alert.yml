@@ -1,9 +1,9 @@
 name: GitHub Dependabot Alert
 id: 05032b04-4469-4034-9df7-05f607d75cba
-version: 3
-date: '2024-09-30'
+version: 4
+date: '2025-01-15'
 author: Patrick Bareiss, Splunk
-status: production
+status: deprecated
 type: Anomaly
 description: The following analytic identifies the creation of GitHub Dependabot alerts, which indicate potential vulnerabilities in the codebase. It detects this activity by searching for logs with the "create" action and analyzing fields such as affected package, severity, and fixed version. This detection is significant for a SOC because it helps identify and address security risks in the codebase proactively. If confirmed malicious, these vulnerabilities could be exploited by attackers to gain unauthorized access or cause breaches, leading to potential data loss or system compromise.
 data_source:
