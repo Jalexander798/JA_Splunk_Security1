@@ -1,0 +1,72 @@
+name: ASL AWS Network Access Control List Created with All Open Ports
+id: a2625034-c2de-44fc-b45c-7bac9c4a7974
+version: 1
+date: '2025-01-09'
+author: Patrick Bareiss, Splunk
+status: production
+type: TTP
+description: The following analytic detects the creation of AWS Network Access Control Lists (ACLs) with all ports open to a specified CIDR. It leverages AWS CloudTrail events, specifically monitoring for `CreateNetworkAclEntry` or `ReplaceNetworkAclEntry` actions with rules allowing all traffic. This activity is significant because it can expose the network to unauthorized access, increasing the risk of data breaches and other malicious activities. If confirmed malicious, an attacker could exploit this misconfiguration to gain unrestricted access to the network, potentially leading to data exfiltration, service disruption, or further compromise of the AWS environment.
+data_source: 
+- ASL AWS CloudTrail
+search: '`amazon_security_lake` api.operation=CreateNetworkAclEntry OR api.operation=ReplaceNetworkAclEntry status=Success
+  | spath input=api.request.data path=ruleAction output=ruleAction
+  | spath input=api.request.data path=egress output=egress
+  | spath input=api.request.data path=aclProtocol output=aclProtocol
+  | spath input=api.request.data path=cidrBlock output=cidrBlock
+  | spath input=api.request.data path=networkAclId output=networkAclId
+  | search ruleAction=allow AND egress=false AND aclProtocol=-1 AND cidrBlock=0.0.0.0/0
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by api.operation actor.user.uid actor.user.account.uid http_request.user_agent src_endpoint.ip cloud.region networkAclId
+  | rename actor.user.uid as user, src_endpoint.ip as src_ip, cloud.region as region, http_request.user_agent as user_agent, actor.user.account_uid as aws_account_id 
+  | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)` | `asl_aws_network_access_control_list_created_with_all_open_ports_filter`'
+how_to_implement: The detection is based on Amazon Security Lake events from Amazon Web Services (AWS), which is a centralized data lake that provides security-related data from AWS services. To use this detection, you must ingest CloudTrail logs from Amazon Security Lake into Splunk. To run this search, ensure that you ingest events using the latest version of Splunk Add-on for Amazon Web Services (https://splunkbase.splunk.com/app/1876) or the Federated Analytics App.
+known_false_positives: It's possible that an admin has created this ACL with all ports open for some legitimate purpose however, this should be scoped and not allowed in production environment.
+references: []
+drilldown_searches:
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search  user = "$user$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+tags:
+  analytic_story:
+  - AWS Network ACL Activity
+  asset_type: AWS Instance
+  confidence: 80
+  impact: 60
+  message: User $user$ has created network ACLs with all the ports open to a specified CIDR $requestParameters.cidrBlock$
+  mitre_attack_id:
+  - T1562.007
+  - T1562
+  observable:
+  - name: src_ip
+    type: IP Address
+    role:
+    - Attacker
+  - name: user
+    type: User
+    role:
+    - Victim
+  product:
+  - Splunk Enterprise
+  - Splunk Enterprise Security
+  - Splunk Cloud
+  required_fields:
+  - api.operation
+  - api.request.data
+  - actor.user.uid
+  - actor.user.account.uid
+  - http_request.user_agent
+  - src_endpoint.ip
+  - cloud.region
+  risk_score: 48
+  security_domain: network
+tests:
+- name: True Positive Test
+  attack_data:
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.007/aws_create_acl/asl_ocsf_cloudtrail.json
+    sourcetype: aws:asl
+    source: aws_asl
