@@ -16,7 +16,7 @@ data_source:
 - GitHub 
 search: '`github_enterprise` action=repository_vulnerability_alerts.disable OR vendor_action=repository_vulnerability_alerts.disable
   | fillnull
-  | stats count min(_time) as firstTime max(_time) as lastTime by actor, actor_id, actor_ip, actor_is_bot, actor_location.country_code, business, business_id, org, org_id, repo, repo_id, user, user_agent, user_id, src, action, vendor_action
+  | stats count min(_time) as firstTime max(_time) as lastTime by actor, actor_id, actor_ip, actor_is_bot, actor_location.country_code, business, business_id, org, org_id, repo, repo_id, user, user_agent, user_id, action, vendor_action
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` 
   | `github_disable_dependabot_filter`'
 how_to_implement: You must ingest GitHub Enterprise logs using the Splunk Add-on for GitHub https://splunkbase.splunk.com/app/6254 . 
