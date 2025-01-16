@@ -1,5 +1,5 @@
-name: GitHub Enterprise Disable Dependabot
-id: 787dd1c1-eb3a-4a31-8e8c-2ad24b214bc8
+name: GitHub Organizations Disable Dependabot
+id: 69078d8c-0de6-45de-bb00-14e78e042fd6
 version: 1
 date: '2025-01-14'
 author: Patrick Bareiss, Splunk
@@ -13,17 +13,17 @@ description: The following analytic detects when a user disables Dependabot secu
   be a precursor to supply chain attacks where attackers exploit vulnerable dependencies. The impact could be severe if vulnerabilities 
   remain unpatched, potentially leading to code execution, data theft, or other compromises through the software supply chain.
 data_source:
-- GitHub Enterprise Audit Logs
-search: '`github_enterprise` action=repository_vulnerability_alerts.disable 
+- GitHub Organizations Audit Logs
+search: '`github_organizations` vendor_action=repository_vulnerability_alerts.disable 
   | fillnull
-  | stats count min(_time) as firstTime max(_time) as lastTime by actor, actor_id, actor_ip, actor_is_bot, actor_location.country_code, business, business_id, org, org_id, repo, repo_id, user, user_agent, user_id, action
+  | stats count min(_time) as firstTime max(_time) as lastTime by actor, actor_id, actor_ip, actor_is_bot, actor_location.country_code, business, business_id, org, org_id, repo, repo_id, user, user_agent, user_id, vendor_action
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` 
-  | `github_enterprise_disable_dependabot_filter`'
-how_to_implement: You must ingest GitHub Enterprise logs using Audit log streaming as described in this documentation https://docs.github.com/en/enterprise-cloud@latest/admin/monitoring-activity-in-your-enterprise/reviewing-audit-logs-for-your-enterprise/streaming-the-audit-log-for-your-enterprise#setting-up-streaming-to-splunk using a Splunk HTTP Event Collector.
+  | `github_organizations_disable_dependabot_filter`'
+how_to_implement: You must ingest GitHub Organizations logs using Splunk Add-on for Github using a Personal Access Token https://docs.splunk.com/Documentation/AddOns/released/GitHub/Configureinputs .
 known_false_positives: unknown
 references:
+- https://docs.splunk.com/Documentation/AddOns/released/GitHub/Configureinputs
 - https://www.googlecloudcommunity.com/gc/Community-Blog/Monitoring-for-Suspicious-GitHub-Activity-with-Google-Security/ba-p/763610
-- https://docs.github.com/en/enterprise-cloud@latest/admin/monitoring-activity-in-your-enterprise/reviewing-audit-logs-for-your-enterprise/streaming-the-audit-log-for-your-enterprise#setting-up-streaming-to-splunk
 drilldown_searches:
 - name: View the detection results for - "$user$"
   search: '%original_detection_search% | search  user = "$user$"'
