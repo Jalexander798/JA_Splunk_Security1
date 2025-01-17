@@ -21,7 +21,7 @@ search: '`github_organizations` vendor_action=repo.archived
   | stats count min(_time) as firstTime max(_time) as lastTime by actor, actor_id, actor_is_bot, actor_location.country_code, business, business_id, org, org_id, repo, repo_id, user_agent, visibility, vendor_action
   | eval user=actor
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` 
-  | `github_organizations_repository_deleted_filter`'
+  | `github_organizations_repository_archived_filter`'
 how_to_implement: You must ingest GitHub Organizations logs using Splunk Add-on for Github using a Personal Access Token https://docs.splunk.com/Documentation/AddOns/released/GitHub/Configureinputs .
 known_false_positives: unknown
 references:
