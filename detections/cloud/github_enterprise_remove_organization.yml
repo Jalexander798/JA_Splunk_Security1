@@ -15,7 +15,7 @@ data_source:
 - GitHub Enterprise Audit Logs
 search: '`github_enterprise` action=business.remove_organization
   | fillnull
-  | stats count min(_time) as firstTime max(_time) as lastTime by actor, actor_id, actor_ip, actor_is_bot, actor_location.country_code, business, business_id, org, org_id, user_agent, action
+  | stats count min(_time) as firstTime max(_time) as lastTime by actor, actor_id, actor_is_bot, actor_location.country_code, business, business_id, org, org_id, user_agent, action
   | eval user=actor
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` 
   | `github_enterprise_remove_organization_filter`'
