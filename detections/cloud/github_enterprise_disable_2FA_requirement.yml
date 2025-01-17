@@ -69,5 +69,3 @@ tests:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/github_disable_two_factor_requirement/github.json
     source: http:github
     sourcetype: httpevent
-
-
