@@ -54,7 +54,6 @@ tags:
   required_fields:
   - actor
   - actor_id
-  - actor_ip
   - actor_is_bot
   - actor_location.country_code
   - business
