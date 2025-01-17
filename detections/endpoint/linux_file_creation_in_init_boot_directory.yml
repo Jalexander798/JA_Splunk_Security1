@@ -1,7 +1,7 @@
 name: Linux File Creation In Init Boot Directory
 id: 97d9cfb2-61ad-11ec-bb2d-acde48001122
-version: '4'
-date: '2024-12-17'
+version: '6'
+date: '2025-01-17'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -42,9 +42,11 @@ drilldown_searches:
   latest_offset: $info_max_time$
 tags:
   analytic_story:
-  - Linux Persistence Techniques
-  - XorDDos
   - Linux Privilege Escalation
+  - Nexus APT Threat Activity
+  - XorDDos
+  - Linux Persistence Techniques
+  - Backdoor Pingpong
   asset_type: Endpoint
   confidence: 70
   impact: 70
