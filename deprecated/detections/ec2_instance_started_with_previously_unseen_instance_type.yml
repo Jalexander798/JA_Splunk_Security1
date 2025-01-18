@@ -54,7 +54,8 @@ tags:
 deprecation_metadata:
   date: 01-20-2025
   version: 5.0.0
-  replacement_id: null
-  replacement_name: null
+  replacement_id: c6ddbf53-9715-49f3-bb4c-fb2e8a309cda
+  replacement_name: Cloud Compute Instance Created With Previously Unseen Instance
+    Type
   migration_guide: URL_to_migration_doc
   reason: These analytics are deprecated and are no longer supported

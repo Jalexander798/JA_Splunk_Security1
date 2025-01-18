@@ -54,7 +54,7 @@ tags:
 deprecation_metadata:
   date: 01-20-2025
   version: 5.0.0
-  replacement_id: null
-  replacement_name: null
+  replacement_id: bc91a8cd-35e7-4bb2-6140-e756cc46fd71
+  replacement_name: Detect AWS Console Login by New User
   migration_guide: URL_to_migration_doc
   reason: These analytics are deprecated and are no longer supported

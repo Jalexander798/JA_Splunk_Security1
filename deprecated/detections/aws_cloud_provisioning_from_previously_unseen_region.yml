@@ -69,7 +69,7 @@ tags:
 deprecation_metadata:
   date: 01-20-2025
   version: 5.0.0
-  replacement_id: null
-  replacement_name: null
+  replacement_id: 5aba1860-9617-4af9-b19d-aecac16fe4f2
+  replacement_name: Cloud Provisioning Activity From Previously Unseen Region
   migration_guide: URL_to_migration_doc
   reason: These analytics are deprecated and are no longer supported

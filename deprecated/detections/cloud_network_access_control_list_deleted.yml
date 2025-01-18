@@ -53,7 +53,7 @@ tags:
 deprecation_metadata:
   date: 01-20-2025
   version: 5.0.0
-  replacement_id: null
-  replacement_name: null
+  replacement_id: ada0f478-84a8-4641-a3f1-d82362d6fd75
+  replacement_name: AWS Network Access Control List Deleted
   migration_guide: URL_to_migration_doc
   reason: These analytics are deprecated and are no longer supported

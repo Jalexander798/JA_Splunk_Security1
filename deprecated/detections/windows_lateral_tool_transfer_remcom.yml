@@ -108,7 +108,7 @@ tests:
 deprecation_metadata:
   date: 01-20-2025
   version: 5.0.0
-  replacement_id: null
-  replacement_name: null
+  replacement_id: 7e3d68db-ea4d-419b-adbd-e14a525ecf09
+  replacement_name: Windows Service Execution RemCom
   migration_guide: URL_to_migration_doc
   reason: These analytics are deprecated and are no longer supported

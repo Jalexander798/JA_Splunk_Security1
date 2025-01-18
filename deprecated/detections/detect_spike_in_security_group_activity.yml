@@ -63,7 +63,7 @@ tags:
 deprecation_metadata:
   date: 01-20-2025
   version: 5.0.0
-  replacement_id: null
-  replacement_name: null
+  replacement_id: d4dfb7f3-7a37-498a-b5df-f19334e871af
+  replacement_name: Abnormally High Number Of Cloud Security Group API Calls
   migration_guide: URL_to_migration_doc
   reason: These analytics are deprecated and are no longer supported

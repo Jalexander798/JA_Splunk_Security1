@@ -57,7 +57,7 @@ tests:
 deprecation_metadata:
   date: 01-20-2025
   version: 5.0.0
-  replacement_id: null
-  replacement_name: null
+  replacement_id: a511426e-184f-4de6-8711-cfd2af29d1e1
+  replacement_name: Okta Multiple Accounts Locked Out
   migration_guide: URL_to_migration_doc
   reason: These analytics are deprecated and are no longer supported

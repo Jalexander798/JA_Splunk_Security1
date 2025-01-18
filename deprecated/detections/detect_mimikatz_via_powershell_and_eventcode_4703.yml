@@ -56,7 +56,7 @@ tags:
 deprecation_metadata:
   date: 01-20-2025
   version: 5.0.0
-  replacement_id: null
-  replacement_name: null
+  replacement_id: 8148c29c-c952-11eb-9255-acde48001122
+  replacement_name: Detect Mimikatz With PowerShell Script Block Logging
   migration_guide: URL_to_migration_doc
   reason: These analytics are deprecated and are no longer supported

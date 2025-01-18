@@ -49,7 +49,7 @@ tags:
 deprecation_metadata:
   date: 01-20-2025
   version: 5.0.0
-  replacement_id: null
-  replacement_name: null
+  replacement_id: f9cadf4e-df22-4f4e-a08f-9d3344c2165d
+  replacement_name: Kubernetes Scanning by Unauthenticated IP Address
   migration_guide: URL_to_migration_doc
   reason: These analytics are deprecated and are no longer supported

@@ -56,7 +56,7 @@ tags:
 deprecation_metadata:
   date: 01-20-2025
   version: 5.0.0
-  replacement_id: null
-  replacement_name: null
+  replacement_id: d5af132c-7c17-439c-9d31-13d55340f36c
+  replacement_name: Scheduled Task Deleted Or Created via CMD
   migration_guide: URL_to_migration_doc
   reason: These analytics are deprecated and are no longer supported

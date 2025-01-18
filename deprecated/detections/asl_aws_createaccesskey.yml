@@ -91,7 +91,7 @@ tests:
 deprecation_metadata:
   date: 01-20-2025
   version: 5.0.0
-  replacement_id: null
-  replacement_name: null
+  replacement_id: 81a9f2fe-1697-473c-af1d-086b0d8b63c8
+  replacement_name: ASL AWS Create Access Key
   migration_guide: URL_to_migration_doc
   reason: These analytics are deprecated and are no longer supported
