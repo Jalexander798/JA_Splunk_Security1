@@ -52,10 +52,3 @@ tags:
   - userIdentity.arn
   risk_score: 25
   security_domain: endpoint
-deprecation_metadata:
-  date: 01-20-2025
-  version: 5.0.0
-  replacement_id: 37a0ec8d-827e-4d6d-8025-cedf31f3a149
-  replacement_name: Cloud Compute Instance Created By Previously Unseen User
-  migration_guide: URL_to_migration_doc
-  reason: These analytics are deprecated and are no longer supported

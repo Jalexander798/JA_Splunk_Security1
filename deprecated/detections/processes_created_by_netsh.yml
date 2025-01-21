@@ -59,10 +59,3 @@ tags:
   - _time
   risk_score: 25
   security_domain: endpoint
-deprecation_metadata:
-  date: 01-20-2025
-  version: 5.0.0
-  replacement_id: b89919ed-fe5f-492c-b139-95dbb162040e
-  replacement_name: Processes launching netsh
-  migration_guide: URL_to_migration_doc
-  reason: These analytics are deprecated and are no longer supported

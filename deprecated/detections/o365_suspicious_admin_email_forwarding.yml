@@ -51,10 +51,3 @@ tests:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114.003/o365_mailbox_forwarding_enabled/o365_mailbox_forwarding_enabled.json
     sourcetype: o365:management:activity
     source: o365
-deprecation_metadata:
-  date: 01-20-2025
-  version: 5.0.0
-  replacement_id: 0b6bc75c-05d1-4101-9fc3-97e706168f24
-  replacement_name: O365 Mailbox Email Forwarding Enabled
-  migration_guide: URL_to_migration_doc
-  reason: These analytics are deprecated and are no longer supported

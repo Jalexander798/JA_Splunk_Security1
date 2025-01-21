@@ -37,10 +37,3 @@ tags:
   - _time
   risk_score: 25
   security_domain: threat
-deprecation_metadata:
-  date: 01-20-2025
-  version: 5.0.0
-  replacement_id: 40a064c1-4ec1-4381-9e35-61192ba8ef82
-  replacement_name: Kubernetes Abuse of Secret by Unusual Location
-  migration_guide: URL_to_migration_doc
-  reason: These analytics are deprecated and are no longer supported

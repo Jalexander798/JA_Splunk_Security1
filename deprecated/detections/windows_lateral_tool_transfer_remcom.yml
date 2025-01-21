@@ -105,10 +105,3 @@ tests:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1570/remcom/remcom_windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
-deprecation_metadata:
-  date: 01-20-2025
-  version: 5.0.0
-  replacement_id: 7e3d68db-ea4d-419b-adbd-e14a525ecf09
-  replacement_name: Windows Service Execution RemCom
-  migration_guide: URL_to_migration_doc
-  reason: These analytics are deprecated and are no longer supported

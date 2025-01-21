@@ -1,835 +1,739 @@
-deprecated_detection:
-  - deprecated_name: ASL AWS CreateAccessKey
-    deprecated_id: ccb3e4af-23d6-407f-9842-a26212816c9e
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 81a9f2fe-1697-473c-af1d-086b0d8b63c8
-    replacement_name: ASL AWS Create Access Key
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: ASL AWS Excessive Security Scanning
-    deprecated_id: ff2bfdbc-65b7-4434-8f08-d55761d1d446
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: ASL AWS Password Policy Changes
-    deprecated_id: 5ade5937-11a2-4363-ba6b-39a3ee8d5b1a
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: AWS Cloud Provisioning From Previously Unseen City
-    deprecated_id: 344a1778-0b25-490c-adb1-de8beddf59cd
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: e7ecc5e0-88df-48b9-91af-51104c68f02f
-    replacement_name: Cloud Provisioning Activity From Previously Unseen City
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: AWS Cloud Provisioning From Previously Unseen Country
-    deprecated_id: ceb8d3d8-06cb-49eb-beaf-829526e33ff0
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 94994255-3acf-4213-9b3f-0494df03bb31
-    replacement_name: Cloud Provisioning Activity From Previously Unseen Country
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: AWS Cloud Provisioning From Previously Unseen IP Address
-    deprecated_id: 42e15012-ac14-4801-94f4-f1acbe64880b
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: f86a8ec9-b042-45eb-92f4-e9ed1d781078
-    replacement_name: Cloud Provisioning Activity From Previously Unseen IP Address
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: AWS Cloud Provisioning From Previously Unseen Region
-    deprecated_id: 7971d3df-da82-4648-a6e5-b5637bea5253
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 5aba1860-9617-4af9-b19d-aecac16fe4f2
-    replacement_name: Cloud Provisioning Activity From Previously Unseen Region
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: AWS EKS Kubernetes cluster sensitive object access
-    deprecated_id: 7f227943-2196-4d4d-8d6a-ac8cb308e61c
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 40a064c1-4ec1-4381-9e35-61192ba8ef82
-    replacement_name: Kubernetes Abuse of Secret by Unusual Location
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Abnormally High AWS Instances Launched by User
-    deprecated_id: 2a9b80d3-6340-4345-b5ad-290bf5d0dac4
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: f2361e9f-3928-496c-a556-120cd4223a65
-    replacement_name: Abnormally High Number Of Cloud Instances Launched
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Abnormally High AWS Instances Launched by User - MLTK
-    deprecated_id: dec41ad5-d579-42cb-b4c6-f5dbb778bbe5
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Abnormally High AWS Instances Terminated by User
-    deprecated_id: 8d301246-fccf-45e2-a8e7-3655fd14379c
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ef629fc9-1583-4590-b62a-f2247fbf7bbf
-    replacement_name: Abnormally High Number Of Cloud Instances Destroyed
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Abnormally High AWS Instances Terminated by User - MLTK
-    deprecated_id: 1c02b86a-cd85-473e-a50b-014a9ac8fe3e
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Clients Connecting to Multiple DNS Servers
-    deprecated_id: 74ec6f18-604b-4202-a567-86b2066be3ce
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Cloud Network Access Control List Deleted
-    deprecated_id: 021abc51-1862-41dd-ad43-43c739c0a983
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ada0f478-84a8-4641-a3f1-d82362d6fd75
-    replacement_name: AWS Network Access Control List Deleted
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Correlation by Repository and Risk
-    deprecated_id: 8da9fdd9-6a1b-4ae0-8a34-8c25e6be9687
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 161bc0ca-4651-4c13-9c27-27770660cf67
-    replacement_name: Risk Rule for Dev Sec Ops by Repository
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Correlation by User and Risk
-    deprecated_id: 610e12dc-b6fa-4541-825e-4a0b3b6f6773
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 161bc0ca-4651-4c13-9c27-27770660cf67
-    replacement_name: Risk Rule for Dev Sec Ops by Repository
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: DNS Query Requests Resolved by Unauthorized DNS Servers
-    deprecated_id: 1a67f15a-f4ff-4170-84e9-08cf6f75d6f6
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: DNS record changed
-    deprecated_id: 44d3a43e-dcd5-49f7-8356-5209bb369065
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Detect API activity from users without MFA
-    deprecated_id: 4d46e8bd-4072-48e4-92db-0325889ef894
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: a520b1fe-cc9e-4f56-b762-18354594c52f
-    replacement_name: AWS Successful Single-Factor Authentication
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Detect AWS API Activities From Unapproved Accounts
-    deprecated_id: ada0f478-84a8-4641-a3f1-d82362d4bd55
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Detect Activity Related to Pass the Hash Attacks
-    deprecated_id: f5939373-8054-40ad-8c64-cec478a22a4b
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Detect DNS requests to Phishing Sites leveraging EvilGinx2
-    deprecated_id: 24dd17b1-e2fb-4c31-878c-d4f226595bfa
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Detect Long DNS TXT Record Response
-    deprecated_id: 05437c07-62f5-452e-afdc-04dd44815bb9
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Detect Mimikatz Using Loaded Images
-    deprecated_id: 29e307ba-40af-4ab2-91b2-3c6b392bbba0
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Detect Mimikatz Via PowerShell And EventCode 4703
-    deprecated_id: 98917be2-bfc8-475a-8618-a9bb06575188
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 8148c29c-c952-11eb-9255-acde48001122
-    replacement_name: Detect Mimikatz With PowerShell Script Block Logging
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Detect Spike in AWS API Activity
-    deprecated_id: ada0f478-84a8-4641-a3f1-d32362d4bd55
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: ''
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Detect Spike in Network ACL Activity
-    deprecated_id: ada0f478-84a8-4641-a1f1-e32372d4bd53
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 0840ddf1-8c89-46ff-b730-c8d6722478c0
-    replacement_name: Abnormally High Number Of Cloud Infrastructure API Calls
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Detect Spike in Security Group Activity
-    deprecated_id: ada0f478-84a8-4641-a3f1-e32372d4bd53
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: d4dfb7f3-7a37-498a-b5df-f19334e871af
-    replacement_name: Abnormally High Number Of Cloud Security Group API Calls
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Detect USB device insertion
-    deprecated_id: 104658f4-afdc-499f-9719-17a43f9826f5
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Detect new API calls from user roles
-    deprecated_id: 22773e84-bac0-4595-b086-20d3f335b4f1
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 2181ad1f-1e73-4d0c-9780-e8880482a08f
-    replacement_name: Cloud API Calls From Previously Unseen User Roles
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Detect new user AWS Console Login
-    deprecated_id: ada0f478-84a8-4641-a3f3-d82362dffd75
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: bc91a8cd-35e7-4bb2-6140-e756cc46fd71
-    replacement_name: Detect AWS Console Login by New User
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Detect web traffic to dynamic domain providers
-    deprecated_id: 134da869-e264-4a8f-8d7e-fcd01c18f301
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: a1e761ac-1344-4dbd-88b2-3f34c912d359
-    replacement_name: Detect hosts connecting to dynamic domain providers
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Detection of DNS Tunnels
-    deprecated_id: 104658f4-afdc-499f-9719-17a43f9826f4
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Dump LSASS via procdump Rename
-    deprecated_id: 21276daa-663d-11eb-ae93-0242ac130002
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 3742ebfe-64c2-11eb-ae93-0242ac130002
-    replacement_name: Dump LSASS via procdump
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: EC2 Instance Modified With Previously Unseen User
-    deprecated_id: 56f91724-cf3f-4666-84e1-e3712fb41e76
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: EC2 Instance Started In Previously Unseen Region
-    deprecated_id: ada0f478-84a8-4641-a3f3-d82362d6fd75
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: fa4089e2-50e3-40f7-8469-d2cc1564ca59
-    replacement_name: Cloud Compute Instance Created In Previously Unused Region
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: EC2 Instance Started With Previously Unseen AMI
-    deprecated_id: 347ec301-601b-48b9-81aa-9ddf9c829dd3
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: bc24922d-987c-4645-b288-f8c73ec194c4
-    replacement_name: Cloud Compute Instance Created With Previously Unseen Image
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: EC2 Instance Started With Previously Unseen Instance Type
-    deprecated_id: 65541c80-03c7-4e05-83c8-1dcd57a2e1ad
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: c6ddbf53-9715-49f3-bb4c-fb2e8a309cda
-    replacement_name: Cloud Compute Instance Created With Previously Unseen Instance
-      Type
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: EC2 Instance Started With Previously Unseen User
-    deprecated_id: 22773e84-bac0-4595-b086-20d3f735b4f1
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 37a0ec8d-827e-4d6d-8025-cedf31f3a149
-    replacement_name: Cloud Compute Instance Created By Previously Unseen User
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Execution of File With Spaces Before Extension
-    deprecated_id: ab0353e6-a956-420b-b724-a8b4846d5d5a
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: b06a555e-dce0-417d-a2eb-28a5d8d66ef7
-    replacement_name: Execution of File with Multiple Extensions
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Extended Period Without Successful Netbackup Backups
-    deprecated_id: a34aae96-ccf8-4aef-952c-3ea214444440
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: First time seen command line argument
-    deprecated_id: a1b6e73f-98d5-470f-99ac-77aacd578473
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: GCP Detect accounts with high risk roles by project
-    deprecated_id: 27af8c15-38b0-4408-b339-920170724adb
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: GCP Detect high risk permissions by resource and account
-    deprecated_id: 2e70ef35-2187-431f-aedc-4503dc9b06ba
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: GCP Kubernetes cluster scan detection
-    deprecated_id: db5957ec-0144-4c56-b512-9dccbe7a2d26
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: f9cadf4e-df22-4f4e-a08f-9d3344c2165d
-    replacement_name: Kubernetes Scanning by Unauthenticated IP Address
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Identify New User Accounts
-    deprecated_id: 475b9e27-17e4-46e2-b7e2-648221be3b89
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes AWS detect RBAC authorization by account
-    deprecated_id: de7264ed-3ed9-4fef-bb01-6eefc87cefe8
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes AWS detect most active service accounts by pod
-    deprecated_id: 5b30b25d-7d32-42d8-95ca-64dfcd9076e6
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes AWS detect sensitive role access
-    deprecated_id: b6013a7b-85e0-4a45-b051-10b252d69569
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes AWS detect service accounts forbidden failure access
-    deprecated_id: a6959c57-fa8f-4277-bb86-7c32fba579d5
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes Azure active service accounts by pod namespace
-    deprecated_id: 55a2264a-b7f0-45e5-addd-1e5ab3415c72
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes Azure detect RBAC authorization by account
-    deprecated_id: 47af7d20-0607-4079-97d7-7a29af58b54e
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes Azure detect sensitive object access
-    deprecated_id: 1bba382b-07fd-4ffa-b390-8002739b76e8
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes Azure detect sensitive role access
-    deprecated_id: f27349e5-1641-4f6a-9e68-30402be0ad4c
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes Azure detect service accounts forbidden failure access
-    deprecated_id: 019690d7-420f-4da0-b320-f27b09961514
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes Azure detect suspicious kubectl calls
-    deprecated_id: 4b6d1ba8-0000-4cec-87e6-6cbbd71651b5
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes Azure pod scan fingerprint
-    deprecated_id: 86aad3e0-732f-4f66-bbbc-70df448e461d
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes Azure scan fingerprint
-    deprecated_id: c5e5bd5c-1013-4841-8b23-e7b3253c840a
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes GCP detect RBAC authorizations by account
-    deprecated_id: 99487de3-7192-4b41-939d-fbe9acfb1340
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes GCP detect most active service accounts by pod
-    deprecated_id: 7f5c2779-88a0-4824-9caa-0f606c8f260f
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes GCP detect sensitive object access
-    deprecated_id: bdb6d596-86a0-4aba-8369-418ae8b9963a
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes GCP detect sensitive role access
-    deprecated_id: a46923f6-36b9-4806-a681-31f314907c30
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes GCP detect service accounts forbidden failure access
-    deprecated_id: 7094808d-432a-48e7-bb3c-77e96c894f3b
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Kubernetes GCP detect suspicious kubectl calls
-    deprecated_id: a5bed417-070a-41f2-a1e4-82b6aa281557
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Monitor DNS For Brand Abuse
-    deprecated_id: 24dd17b1-e2fb-4c31-878c-d4f746595bfa
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Multiple Okta Users With Invalid Credentials From The Same IP
-    deprecated_id: 19cba45f-cad3-4032-8911-0c09e0444552
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: de365ffa-42f5-46b5-b43f-fa72290b8218
-    replacement_name: Okta Multiple Users Failing To Authenticate From Ip
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: O365 Suspicious Admin Email Forwarding
-    deprecated_id: 7f398cfb-918d-41f4-8db8-2e2474e02c28
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 0b6bc75c-05d1-4101-9fc3-97e706168f24
-    replacement_name: O365 Mailbox Email Forwarding Enabled
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: O365 Suspicious Rights Delegation
-    deprecated_id: b25d2973-303e-47c8-bacd-52b61604c6a7
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 2246c142-a678-45f8-8546-aaed7e0efd30
-    replacement_name: O365 Elevated Mailbox Permission Assigned
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: O365 Suspicious User Email Forwarding
-    deprecated_id: f8dfe015-dbb3-4569-ba75-b13787e06aa4
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 0b6bc75c-05d1-4101-9fc3-97e706168f24
-    replacement_name: O365 Mailbox Email Forwarding Enabled
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Okta Account Locked Out
-    deprecated_id: d650c0ae-bdc5-400e-9f0f-f7aa0a010ef1
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: a511426e-184f-4de6-8711-cfd2af29d1e1
-    replacement_name: Okta Multiple Accounts Locked Out
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Okta Account Lockout Events
-    deprecated_id: 62b70968-a0a5-4724-8ac4-67871e6f544d
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: a511426e-184f-4de6-8711-cfd2af29d1e1
-    replacement_name: Okta Multiple Accounts Locked Out
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Okta Failed SSO Attempts
-    deprecated_id: 371a6545-2618-4032-ad84-93386b8698c5
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 5f661629-9750-4cb9-897c-1f05d6db8727
-    replacement_name: Okta Unauthorized Access to Application
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Okta ThreatInsight Login Failure with High Unknown users
-    deprecated_id: 632663b0-4562-4aad-abe9-9f621a049738
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Okta ThreatInsight Suspected PasswordSpray Attack
-    deprecated_id: 25dbad05-6682-4dd5-9ce9-8adecf0d9ae2
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 140504ae-5fe2-4d65-b2bc-a211813fbca6
-    replacement_name: Okta ThreatInsight Threat Detected
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Okta Two or More Rejected Okta Pushes
-    deprecated_id: d93f785e-4c2c-4262-b8c7-12b77a13fd39
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 826dbaae-a1e6-4c8c-b384-d16898956e73
-    replacement_name: Okta Multiple Failed MFA Requests For User
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Osquery pack - ColdRoot detection
-    deprecated_id: a6fffe5e-05c3-4c04-badc-887607fbb8dc
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Processes created by netsh
-    deprecated_id: b89919ed-fe5f-492c-b139-95dbb162041e
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: b89919ed-fe5f-492c-b139-95dbb162040e
-    replacement_name: Processes launching netsh
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Prohibited Software On Endpoint
-    deprecated_id: a51bfe1a-94f0-48cc-b4e4-b6ae50145893
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: a51bfe1a-94f0-48cc-b4e4-16a110145893
-    replacement_name: Attacker Tools On Endpoint
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Reg exe used to hide files directories via registry keys
-    deprecated_id: 61a7d1e6-f5d4-41d9-a9be-39a1ffe69459
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Remote Registry Key modifications
-    deprecated_id: c9f4b923-f8af-4155-b697-1354f5dcbc5e
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Scheduled tasks used in BadRabbit ransomware
-    deprecated_id: 1297fb80-f42a-4b4a-9c8b-78c066437cf6
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: d5af132c-7c17-439c-9d31-13d55340f36c
-    replacement_name: Scheduled Task Deleted Or Created via CMD
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Spectre and Meltdown Vulnerable Systems
-    deprecated_id: 354be8e0-32cd-4da0-8c47-796de13b60ea
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Suspicious Changes to File Associations
-    deprecated_id: 1b989a0e-0129-4446-a695-f193a5b746fc
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Suspicious Email - UBA Anomaly
-    deprecated_id: 56e877a6-1455-4479-ad16-0550dc1e33f8
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Suspicious File Write
-    deprecated_id: 57f76b8a-32f0-42ed-b358-d9fa3ca7bac8
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: ''
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Suspicious Powershell Command-Line Arguments
-    deprecated_id: 2cdb91d2-542c-497f-b252-be495e71f38c
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: c4db14d9-7909-48b4-a054-aa14d89dbb19
-    replacement_name: Malicious PowerShell Process - Encoded Command
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Suspicious Rundll32 Rename
-    deprecated_id: 7360137f-abad-473e-8189-acbdaa34d114
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Suspicious writes to System Volume Information
-    deprecated_id: cd6297cd-2bdd-4aa1-84aa-5d2f84228fac
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Uncommon Processes On Endpoint
-    deprecated_id: 29ccce64-a10c-4389-a45f-337cb29ba1f7
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: a51bfe1a-94f0-48cc-b4e4-16a110145893
-    replacement_name: Attacker Tools On Endpoint
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Unsigned Image Loaded by LSASS
-    deprecated_id: 56ef054c-76ef-45f9-af4a-a634695dcd65
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: ''
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Unsuccessful Netbackup backups
-    deprecated_id: a34aae96-ccf8-4aaa-952c-3ea21444444f
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Web Fraud - Account Harvesting
-    deprecated_id: bf1d7b5c-df2f-4249-a401-c09fdc221ddf
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Web Fraud - Anomalous User Clickspeed
-    deprecated_id: 31337bbb-bc22-4752-b599-ef192df2dc7a
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Web Fraud - Password Sharing Across Accounts
-    deprecated_id: 31337a1a-53b9-4e05-96e9-55c934cb71d3
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Windows DLL Search Order Hijacking Hunt
-    deprecated_id: 79c7d0fc-60c7-41be-a616-ccda752efe89
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 79c7d1fc-64c7-91be-a616-ccda752efe81
-    replacement_name: Windows DLL Search Order Hijacking Hunt with Sysmon
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Windows Lateral Tool Transfer RemCom
-    deprecated_id: e373a840-5bdc-47ef-b2fd-9cc7aaf387f0
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: 7e3d68db-ea4d-419b-adbd-e14a525ecf09
-    replacement_name: Windows Service Execution RemCom
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported. Please use the
-      new replacement detection and migration guide for more information.
-  - deprecated_name: Windows connhost exe started forcefully
-    deprecated_id: c114aaca-68ee-41c2-ad8c-32bf21db8769
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: Windows hosts file modification
-    deprecated_id: 06a6fc63-a72d-41dc-8736-7e3dd9612116
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
-  - deprecated_name: gcp detect oauth token abuse
-    deprecated_id: a7e9f7bb-8901-4ad0-8d88-0a4ab07b1972
-    date: 01-20-2025
-    version: 5.0.0
-    replacement_id: ''
-    replacement_name: '-'
-    migration_guide: URL_to_migration_doc
-    reason: These analytics are deprecated and are no longer supported
+deprecated_detections:
+- deprecated_name: ASL AWS CreateAccessKey
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - ASL AWS Create Access Key
+  replacement_id: 81a9f2fe-1697-473c-af1d-086b0d8b63c8
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: ASL AWS Excessive Security Scanning
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: ASL AWS Password Policy Changes
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: AWS Cloud Provisioning From Previously Unseen City
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Cloud Provisioning Activity From Previously Unseen City
+  replacement_id: e7ecc5e0-88df-48b9-91af-51104c68f02f
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: AWS Cloud Provisioning From Previously Unseen Country
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Cloud Provisioning Activity From Previously Unseen Country
+  replacement_id: 94994255-3acf-4213-9b3f-0494df03bb31
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: AWS Cloud Provisioning From Previously Unseen IP Address
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Cloud Provisioning Activity From Previously Unseen IP Address
+  replacement_id: f86a8ec9-b042-45eb-92f4-e9ed1d781078
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: AWS Cloud Provisioning From Previously Unseen Region
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Cloud Provisioning Activity From Previously Unseen Region
+  replacement_id: 5aba1860-9617-4af9-b19d-aecac16fe4f2
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: AWS EKS Kubernetes cluster sensitive object access
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Kubernetes Abuse of Secret by Unusual Location
+  replacement_id: 40a064c1-4ec1-4381-9e35-61192ba8ef82
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Abnormally High AWS Instances Launched by User
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Abnormally High Number Of Cloud Instances Launched
+  replacement_id: f2361e9f-3928-496c-a556-120cd4223a65
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Abnormally High AWS Instances Launched by User - MLTK
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Abnormally High AWS Instances Terminated by User
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Abnormally High Number Of Cloud Instances Destroyed
+  replacement_id: ef629fc9-1583-4590-b62a-f2247fbf7bbf
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Abnormally High AWS Instances Terminated by User - MLTK
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Clients Connecting to Multiple DNS Servers
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Cloud Network Access Control List Deleted
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - AWS Network Access Control List Deleted
+  replacement_id: ada0f478-84a8-4641-a3f1-d82362d6fd75
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Correlation by Repository and Risk
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Risk Rule for Dev Sec Ops by Repository
+  replacement_id: 161bc0ca-4651-4c13-9c27-27770660cf67
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Correlation by User and Risk
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Risk Rule for Dev Sec Ops by Repository
+  replacement_id: 161bc0ca-4651-4c13-9c27-27770660cf67
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: DNS Query Requests Resolved by Unauthorized DNS Servers
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: DNS record changed
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Detect API activity from users without MFA
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - AWS Successful Single-Factor Authentication
+  replacement_id: a520b1fe-cc9e-4f56-b762-18354594c52f
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Detect AWS API Activities From Unapproved Accounts
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Detect Activity Related to Pass the Hash Attacks
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Detect DNS requests to Phishing Sites leveraging EvilGinx2
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Detect Long DNS TXT Record Response
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Detect Mimikatz Using Loaded Images
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Detect Mimikatz Via PowerShell And EventCode 4703
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Detect Mimikatz With PowerShell Script Block Logging
+  replacement_id: 8148c29c-c952-11eb-9255-acde48001122
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Detect Spike in AWS API Activity
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - ''
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Detect Spike in Network ACL Activity
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Abnormally High Number Of Cloud Infrastructure API Calls
+  replacement_id: 0840ddf1-8c89-46ff-b730-c8d6722478c0
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Detect Spike in Security Group Activity
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Abnormally High Number Of Cloud Security Group API Calls
+  replacement_id: d4dfb7f3-7a37-498a-b5df-f19334e871af
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Detect USB device insertion
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Detect new API calls from user roles
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Cloud API Calls From Previously Unseen User Roles
+  replacement_id: 2181ad1f-1e73-4d0c-9780-e8880482a08f
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Detect new user AWS Console Login
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Detect AWS Console Login by New User
+  replacement_id: bc91a8cd-35e7-4bb2-6140-e756cc46fd71
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Detect web traffic to dynamic domain providers
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Detect hosts connecting to dynamic domain providers
+  replacement_id: a1e761ac-1344-4dbd-88b2-3f34c912d359
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Detection of DNS Tunnels
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Dump LSASS via procdump Rename
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Dump LSASS via procdump
+  replacement_id: 3742ebfe-64c2-11eb-ae93-0242ac130002
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: EC2 Instance Modified With Previously Unseen User
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Cloud API Calls From Previously Unseen User Roles
+  replacement_id: 2181ad1f-1e73-4d0c-9780-e8880482a08f
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: EC2 Instance Started In Previously Unseen Region
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Cloud Compute Instance Created In Previously Unused Region
+  replacement_id: fa4089e2-50e3-40f7-8469-d2cc1564ca59
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: EC2 Instance Started With Previously Unseen AMI
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Cloud Compute Instance Created With Previously Unseen Image
+  replacement_id: bc24922d-987c-4645-b288-f8c73ec194c4
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: EC2 Instance Started With Previously Unseen Instance Type
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Cloud Compute Instance Created With Previously Unseen Instance Type
+  replacement_id: c6ddbf53-9715-49f3-bb4c-fb2e8a309cda
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: EC2 Instance Started With Previously Unseen User
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Cloud Compute Instance Created By Previously Unseen User
+  replacement_id: 37a0ec8d-827e-4d6d-8025-cedf31f3a149
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Execution of File With Spaces Before Extension
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Execution of File with Multiple Extensions
+  replacement_id: b06a555e-dce0-417d-a2eb-28a5d8d66ef7
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Extended Period Without Successful Netbackup Backups
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: First time seen command line argument
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: GCP Detect accounts with high risk roles by project
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: GCP Detect high risk permissions by resource and account
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: GCP Kubernetes cluster scan detection
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Kubernetes Scanning by Unauthenticated IP Address
+  replacement_id: f9cadf4e-df22-4f4e-a08f-9d3344c2165d
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Identify New User Accounts
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes AWS detect RBAC authorization by account
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes AWS detect most active service accounts by pod
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes AWS detect sensitive role access
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes AWS detect service accounts forbidden failure access
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes Azure active service accounts by pod namespace
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes Azure detect RBAC authorization by account
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes Azure detect sensitive object access
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes Azure detect sensitive role access
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes Azure detect service accounts forbidden failure access
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes Azure detect suspicious kubectl calls
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes Azure pod scan fingerprint
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes Azure scan fingerprint
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes GCP detect RBAC authorizations by account
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes GCP detect most active service accounts by pod
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes GCP detect sensitive object access
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes GCP detect sensitive role access
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes GCP detect service accounts forbidden failure access
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Kubernetes GCP detect suspicious kubectl calls
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Monitor DNS For Brand Abuse
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Multiple Okta Users With Invalid Credentials From The Same IP
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Okta Multiple Users Failing To Authenticate From Ip
+  replacement_id: de365ffa-42f5-46b5-b43f-fa72290b8218
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: O365 Suspicious Admin Email Forwarding
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - O365 Mailbox Email Forwarding Enabled
+  replacement_id: 0b6bc75c-05d1-4101-9fc3-97e706168f24
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: O365 Suspicious Rights Delegation
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - O365 Elevated Mailbox Permission Assigned
+  replacement_id: 2246c142-a678-45f8-8546-aaed7e0efd30
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: O365 Suspicious User Email Forwarding
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - O365 Mailbox Email Forwarding Enabled
+  replacement_id: 0b6bc75c-05d1-4101-9fc3-97e706168f24
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Okta Account Locked Out
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Okta Multiple Accounts Locked Out
+  replacement_id: a511426e-184f-4de6-8711-cfd2af29d1e1
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Okta Account Lockout Events
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Okta Multiple Accounts Locked Out
+  replacement_id: a511426e-184f-4de6-8711-cfd2af29d1e1
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Okta Failed SSO Attempts
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Okta Unauthorized Access to Application
+  replacement_id: 5f661629-9750-4cb9-897c-1f05d6db8727
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Okta ThreatInsight Login Failure with High Unknown users
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Okta ThreatInsight Suspected PasswordSpray Attack
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Okta ThreatInsight Threat Detected
+  replacement_id: 140504ae-5fe2-4d65-b2bc-a211813fbca6
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Okta Two or More Rejected Okta Pushes
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Okta Multiple Failed MFA Requests For User
+  replacement_id: 826dbaae-a1e6-4c8c-b384-d16898956e73
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Osquery pack - ColdRoot detection
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Processes created by netsh
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Processes launching netsh
+  replacement_id: b89919ed-fe5f-492c-b139-95dbb162040e
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Prohibited Software On Endpoint
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Attacker Tools On Endpoint
+  replacement_id: a51bfe1a-94f0-48cc-b4e4-16a110145893
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Reg exe used to hide files directories via registry keys
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Remote Registry Key modifications
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Scheduled tasks used in BadRabbit ransomware
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Scheduled Task Deleted Or Created via CMD
+  replacement_id: d5af132c-7c17-439c-9d31-13d55340f36c
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Spectre and Meltdown Vulnerable Systems
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Suspicious Changes to File Associations
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Suspicious Email - UBA Anomaly
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Suspicious File Write
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - ''
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Suspicious Powershell Command-Line Arguments
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Malicious PowerShell Process - Encoded Command
+  replacement_id: c4db14d9-7909-48b4-a054-aa14d89dbb19
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Suspicious Rundll32 Rename
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Suspicious writes to System Volume Information
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Uncommon Processes On Endpoint
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Attacker Tools On Endpoint
+  replacement_id: a51bfe1a-94f0-48cc-b4e4-16a110145893
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Unsigned Image Loaded by LSASS
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - ''
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Unsuccessful Netbackup backups
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Web Fraud - Account Harvesting
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Web Fraud - Anomalous User Clickspeed
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Web Fraud - Password Sharing Across Accounts
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Windows DLL Search Order Hijacking Hunt
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Windows DLL Search Order Hijacking Hunt with Sysmon
+  replacement_id: 79c7d1fc-64c7-91be-a616-ccda752efe81
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Windows Lateral Tool Transfer RemCom
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name:
+  - Windows Service Execution RemCom
+  replacement_id: 7e3d68db-ea4d-419b-adbd-e14a525ecf09
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Windows connhost exe started forcefully
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: Windows hosts file modification
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported
+- deprecated_name: gcp detect oauth token abuse
+  date: 01-20-2025
+  version: 5.0.0
+  replacement_name: []
+  replacement_id: ''
+  migration_guide: URL_to_migration_doc
+  reason: These analytics are deprecated and are no longer supported

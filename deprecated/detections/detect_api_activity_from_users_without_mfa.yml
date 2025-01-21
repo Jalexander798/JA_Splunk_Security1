@@ -68,10 +68,3 @@ tags:
   - user
   risk_score: 25.0
   security_domain: network
-deprecation_metadata:
-  date: 01-20-2025
-  version: 5.0.0
-  replacement_id: a520b1fe-cc9e-4f56-b762-18354594c52f
-  replacement_name: AWS Successful Single-Factor Authentication
-  migration_guide: URL_to_migration_doc
-  reason: These analytics are deprecated and are no longer supported

@@ -51,10 +51,3 @@ tags:
   - requestParameters.instancesSet.items{}.imageId
   risk_score: 25
   security_domain: endpoint
-deprecation_metadata:
-  date: 01-20-2025
-  version: 5.0.0
-  replacement_id: bc24922d-987c-4645-b288-f8c73ec194c4
-  replacement_name: Cloud Compute Instance Created With Previously Unseen Image
-  migration_guide: URL_to_migration_doc
-  reason: These analytics are deprecated and are no longer supported

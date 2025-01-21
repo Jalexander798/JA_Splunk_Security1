@@ -47,10 +47,3 @@ tags:
   - _time
   risk_score: 70
   security_domain: network
-deprecation_metadata:
-  date: 01-20-2025
-  version: 5.0.0
-  replacement_id: 161bc0ca-4651-4c13-9c27-27770660cf67
-  replacement_name: Risk Rule for Dev Sec Ops by Repository
-  migration_guide: URL_to_migration_doc
-  reason: These analytics are deprecated and are no longer supported

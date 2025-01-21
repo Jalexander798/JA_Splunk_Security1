@@ -59,10 +59,3 @@ tags:
   - Web.dest
   risk_score: 25
   security_domain: network
-deprecation_metadata:
-  date: 01-20-2025
-  version: 5.0.0
-  replacement_id: a1e761ac-1344-4dbd-88b2-3f34c912d359
-  replacement_name: Detect hosts connecting to dynamic domain providers
-  migration_guide: URL_to_migration_doc
-  reason: These analytics are deprecated and are no longer supported

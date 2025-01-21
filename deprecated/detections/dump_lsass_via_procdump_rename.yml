@@ -68,10 +68,3 @@ tags:
   - parent_process_name
   risk_score: 80
   security_domain: endpoint
-deprecation_metadata:
-  date: 01-20-2025
-  version: 5.0.0
-  replacement_id: 3742ebfe-64c2-11eb-ae93-0242ac130002
-  replacement_name: Dump LSASS via procdump
-  migration_guide: URL_to_migration_doc
-  reason: These analytics are deprecated and are no longer supported

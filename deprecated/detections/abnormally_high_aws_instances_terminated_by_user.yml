@@ -51,10 +51,3 @@ tags:
   - userName
   risk_score: 25
   security_domain: network
-deprecation_metadata:
-  date: 01-20-2025
-  version: 5.0.0
-  replacement_id: ef629fc9-1583-4590-b62a-f2247fbf7bbf
-  replacement_name: Abnormally High Number Of Cloud Instances Destroyed
-  migration_guide: URL_to_migration_doc
-  reason: These analytics are deprecated and are no longer supported

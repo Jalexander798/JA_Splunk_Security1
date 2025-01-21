@@ -62,10 +62,3 @@ tags:
   - sourceIPAddress
   risk_score: 25
   security_domain: endpoint
-deprecation_metadata:
-  date: 01-20-2025
-  version: 5.0.0
-  replacement_id: e7ecc5e0-88df-48b9-91af-51104c68f02f
-  replacement_name: Cloud Provisioning Activity From Previously Unseen City
-  migration_guide: URL_to_migration_doc
-  reason: These analytics are deprecated and are no longer supported

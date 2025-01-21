@@ -54,10 +54,3 @@ tags:
   - eventName
   risk_score: 25.0
   security_domain: endpoint
-deprecation_metadata:
-  date: 01-20-2025
-  version: 5.0.0
-  replacement_id: 2181ad1f-1e73-4d0c-9780-e8880482a08f
-  replacement_name: Cloud API Calls From Previously Unseen User Roles
-  migration_guide: URL_to_migration_doc
-  reason: These analytics are deprecated and are no longer supported

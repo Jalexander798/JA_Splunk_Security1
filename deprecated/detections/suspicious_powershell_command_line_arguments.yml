@@ -60,10 +60,3 @@ tags:
   - _time
   risk_score: 25
   security_domain: endpoint
-deprecation_metadata:
-  date: 01-20-2025
-  version: 5.0.0
-  replacement_id: c4db14d9-7909-48b4-a054-aa14d89dbb19
-  replacement_name: Malicious PowerShell Process - Encoded Command
-  migration_guide: URL_to_migration_doc
-  reason: These analytics are deprecated and are no longer supported
