@@ -1,7 +1,7 @@
 name: ServicePrincipalNames Discovery with SetSPN
 id: ae8b3efc-2d2e-11ec-8b57-acde48001122
-version: '5'
-date: '2024-11-28'
+version: '6'
+date: '2025-01-21'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -64,6 +64,7 @@ tags:
   - Active Directory Privilege Escalation
   - Compromised Windows Host
   - Active Directory Kerberos Attacks
+  - Nexus APT Threat Activity
   asset_type: Endpoint
   confidence: 100
   impact: 80

@@ -1,7 +1,7 @@
 name: ServicePrincipalNames Discovery with PowerShell
 id: 13243068-2d38-11ec-8908-acde48001122
-version: 4
-date: '2024-09-30'
+version: 5
+date: '2025-01-21'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -41,6 +41,7 @@ tags:
   - Active Directory Kerberos Attacks
   - Malicious PowerShell
   - Active Directory Privilege Escalation
+  - Nexus APT Threat Activity
   asset_type: Endpoint
   confidence: 100
   impact: 80
