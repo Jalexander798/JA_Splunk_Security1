@@ -3,10 +3,15 @@ id: a0dd0f10-cc03-425d-bd5a-e1e0d954b856
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail DeleteNetworkAclEntry
+description: Logs the deletion of a network ACL entry in AWS, including details about the rule number and associated network ACL.
+mitre_components:
+- Firewall Rule Modification
+- Cloud Service Modification
+- Cloud Service Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: DeleteNetworkAclEntry
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876

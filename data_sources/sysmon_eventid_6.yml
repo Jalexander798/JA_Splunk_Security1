@@ -3,10 +3,16 @@ id: eadc297a-c20c-45a1-8fac-74ad54019767
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for Sysmon EventID 6
+description: Logs the loading of a driver into the kernel or user mode, including details about the driver name, file path, and associated process metadata.
+mitre_components:
+- Driver Load
+- Process Metadata
+- Application Log Content
+- OS API Execution
 source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
 sourcetype: xmlwineventlog
 separator: EventID
+separator_value: 6
 configuration: https://github.com/SwiftOnSecurity/sysmon-config
 supported_TA:
 - name: Splunk Add-on for Sysmon

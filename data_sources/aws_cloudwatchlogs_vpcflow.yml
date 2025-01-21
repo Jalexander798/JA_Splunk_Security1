@@ -3,10 +3,12 @@ id: 38a34fc4-e128-4478-a8f4-7835d51d5135
 version: 1
 author: Bhavin Patel, Splunk
 date: '2024-07-18'
-description: Data source object for AWS CloudWatchLogs VPCflow
+description: Logs an event when network traffic flow information such as source and destination IPs, ports, protocol, and action (allow/deny) is captured for VPC in AWS.
+mitre_components:
+- Network Traffic Flow
+- Network Connection Creation
 source: aws_cloudwatchlogs_vpcflow
 sourcetype: aws:cloudwatchlogs:vpcflow
-separator: eventName
 supported_TA:
 - name: Splunk Add-on for AWS
   version: 7.9.0

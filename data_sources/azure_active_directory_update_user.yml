@@ -3,10 +3,14 @@ id: 5495c90a-047c-4b8e-b2fe-1db6282d3872
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for Azure Active Directory Update user
+description: Logs an event when a user account is updated in Azure Active Directory.
+mitre_components:
+- User Account Modification
+- User Account Metadata
 source: Azure AD
 sourcetype: azure:monitor:aad
 separator: operationName
+separator_value: Update user
 supported_TA:
 - name: Splunk Add-on for Microsoft Cloud Services
   url: https://splunkbase.splunk.com/app/3110

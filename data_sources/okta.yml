@@ -3,7 +3,13 @@ id: ec26febe-e760-4981-bbee-72e107c7b9d2
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for Okta
+description: Logs authentication and administrative activities captured by Okta, including user login attempts, session management, and configuration changes.
+mitre_components:
+- User Account Authentication
+- Logon Session Creation
+- User Account Metadata
+- Configuration Modification
+- Application Log Content
 source: Okta
 sourcetype: OktaIM2:log
 supported_TA:

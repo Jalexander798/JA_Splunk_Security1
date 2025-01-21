@@ -3,7 +3,13 @@ id: 5f79120f-a235-4468-bd0d-55203758ac22
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for G Suite Drive
+description: Logs activities related to Google Drive in G Suite, including file creation, modification, sharing, and access details.
+mitre_components:
+- File Access
+- File Creation
+- File Modification
+- Cloud Storage Access
+- Cloud Storage Metadata
 source: http:gsuite
 sourcetype: gsuite:drive:json
 supported_TA:

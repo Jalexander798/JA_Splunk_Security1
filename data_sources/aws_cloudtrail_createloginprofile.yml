@@ -3,10 +3,16 @@ id: 0024fdb1-0d62-4449-970a-746952cf80b6
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail CreateLoginProfile
+description: Logs the creation of login profiles for IAM users, including associated metadata and authentication settings.
+mitre_components:
+- User Account Creation
+- User Account Metadata
+- Logon Session Metadata
+- Cloud Service Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: CreateLoginProfile
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876

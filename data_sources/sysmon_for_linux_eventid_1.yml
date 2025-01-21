@@ -3,10 +3,17 @@ id: 93643652-30fe-4941-a1f7-6454f2948660
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for Sysmon for Linux EventID 1
+description: Logs process creation events on Linux systems, including details about the process name, process ID, command line arguments, and parent process ID.
+mitre_components:
+- Process Creation
+- Command Execution
+- Process Metadata
+- OS API Execution
+- Application Log Content
 source: Syslog:Linux-Sysmon/Operational
 sourcetype: sysmon:linux
 separator: EventID
+separator_value: 1
 supported_TA:
 - name: Splunk Add-on for Sysmon for Linux
   url: https://splunkbase.splunk.com/app/6652

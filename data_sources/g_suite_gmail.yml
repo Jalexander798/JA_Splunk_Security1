@@ -3,7 +3,12 @@ id: 706c3978-41de-406b-b6e0-75bd01e12a5d
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for G Suite Gmail
+description: Logs Gmail activities in G Suite, including email sending, receiving, and access details, as well as potential security-related events.
+mitre_components:
+- Application Log Content
+- User Account Metadata
+- Email Metadata
+- Cloud Service Metadata
 source: http:gsuite
 sourcetype: gsuite:gmail:bigquery
 supported_TA:

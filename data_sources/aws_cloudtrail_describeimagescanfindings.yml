@@ -3,10 +3,15 @@ id: 688ea789-9ba2-4970-90a2-17e541e273c9
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail DescribeImageScanFindings
+description: Logs an event when findings from an image vulnerability scan are described using the DescribeImageScanFindings operation in AWS CloudTrail.
+mitre_components:
+- Image Metadata
+- Image Modification
+- Malware Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: DescribeImageScanFindings
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876

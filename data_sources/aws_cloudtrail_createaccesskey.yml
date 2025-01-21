@@ -3,10 +3,16 @@ id: 0460f7da-3254-4d90-b8c0-2ca657d0cea0
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail CreateAccessKey
+description: Logs the creation of new AWS access keys, including details of the associated user and permissions.
+mitre_components:
+- User Account Creation
+- User Account Metadata
+- Cloud Service Modification
+- Cloud Service Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: CreateAccessKey
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876

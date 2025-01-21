@@ -3,10 +3,14 @@ id: 28fffbfd-d98d-4a42-990b-b04ab47422eb
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail PutBucketAcl
+description: Logs an event when an ACL is set or modified for an S3 bucket in AWS CloudTrail.
+mitre_components:
+- Cloud Storage Modification
+- Cloud Storage Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: PutBucketAcl
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876

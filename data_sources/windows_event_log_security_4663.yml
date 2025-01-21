@@ -3,10 +3,14 @@ id: 5d6dca8c-dad9-494f-a321-ef2b0b92fbf4
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log Security 4663
+description: Logs an event when a user or process tried to access a file, directory, registry key, or other system object on the computer
+mitre_components:
+- File Access
+- File Modification
 source: XmlWinEventLog:Security
 sourcetype: xmlwineventlog
 separator: EventCode
+separator_value: 4663
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

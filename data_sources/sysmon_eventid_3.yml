@@ -3,10 +3,17 @@ id: 01d84dff-4e26-422c-9389-6a579ee6e75b
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for Sysmon EventID 3
+description: Logs details of network connections initiated by processes, including source and destination IPs, ports, protocols, and the associated process metadata.
+mitre_components:
+- Network Connection Creation
+- Network Traffic Flow
+- Process Metadata
+- Application Log Content
+- OS API Execution
 source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
 sourcetype: xmlwineventlog
 separator: EventID
+separator_value: 3
 configuration: https://github.com/SwiftOnSecurity/sysmon-config
 supported_TA:
 - name: Splunk Add-on for Sysmon

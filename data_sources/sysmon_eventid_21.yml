@@ -3,10 +3,16 @@ id: 304384bc-715e-4958-988b-a8051a91349a
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for Sysmon EventID 21
+description: Logs activity related to the association of a WMI event consumer with a filter, including details about the consumer, filter, and associated process.
+mitre_components:
+- WMI Creation
+- Process Metadata
+- Application Log Content
+- OS API Execution
 source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
 sourcetype: xmlwineventlog
 separator: EventID
+separator_value: 21
 configuration: https://github.com/SwiftOnSecurity/sysmon-config
 supported_TA:
 - name: Splunk Add-on for Sysmon

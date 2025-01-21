@@ -3,7 +3,13 @@ id: 34ad06fc-a296-4ab5-8315-2f07714948e3
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for CircleCI
+description: Logs activities related to CI/CD pipelines executed in CircleCI, including job execution, workflow progress, and configuration changes.
+mitre_components:
+- Scheduled Job Execution
+- Scheduled Job Metadata
+- Application Log Content
+- Configuration Modification
+- Host Status
 source: circleci
 sourcetype: circleci
 supported_TA:

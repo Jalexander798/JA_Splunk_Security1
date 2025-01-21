@@ -3,10 +3,16 @@ id: a05fd01e-34d9-4233-9089-11272416b531
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for O365 Update user.
+description: Logs updates to user account properties in Microsoft 365, including changes to roles, permissions, and profile information.
+mitre_components:
+- User Account Modification
+- User Account Metadata
+- Active Directory Object Modification
+- Application Log Content
 source: o365
 sourcetype: o365:management:activity
 separator: Operation
+separator_value: Update user.
 supported_TA:
 - name: Splunk Add-on for Microsoft Office 365
   url: https://splunkbase.splunk.com/app/4055

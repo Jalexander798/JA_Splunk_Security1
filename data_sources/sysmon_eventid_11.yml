@@ -3,10 +3,17 @@ id: f3db9179-f4f5-416d-bc03-39f4d4ff699e
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for Sysmon EventID 11
+description: Logs the creation of a new file, including details about the file path, hash information, and associated process metadata.
+mitre_components:
+- File Creation
+- File Metadata
+- Process Metadata
+- Application Log Content
+- OS API Execution
 source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
 sourcetype: xmlwineventlog
 separator: EventID
+separator_value: 11
 configuration: https://github.com/SwiftOnSecurity/sysmon-config
 supported_TA:
 - name: Splunk Add-on for Sysmon

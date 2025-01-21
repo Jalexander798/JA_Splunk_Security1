@@ -3,7 +3,13 @@ id: 17890675-61c1-40bd-a88e-6a8e9e246b43
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for PingID
+description: Logs authentication and multi-factor authentication (MFA) events managed by PingID, including user logins, device enrollments, and MFA challenges.
+mitre_components:
+- User Account Authentication
+- Logon Session Metadata
+- User Account Metadata
+- Application Log Content
+- Host Status
 source: XmlWinEventLog:Security
 sourcetype: XmlWinEventLog
 supported_TA: []

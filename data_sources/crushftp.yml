@@ -3,7 +3,13 @@ id: 8a42ace5-e4c8-4653-80cf-1b8e7e6024ef
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for CrushFTP
+description: Logs activities related to file transfers and user interactions in CrushFTP, including file uploads, downloads, user authentication, and session details.
+mitre_components:
+- File Access
+- File Metadata
+- User Account Authentication
+- Logon Session Metadata
+- Network Traffic Content
 source: crushftp
 sourcetype: crushftp:sessionlogs
 supported_TA: []

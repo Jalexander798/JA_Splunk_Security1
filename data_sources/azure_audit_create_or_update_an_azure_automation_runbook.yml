@@ -3,11 +3,14 @@ id: 2bd83221-7a8b-436f-9b2b-efa1d44d009e
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for Azure Audit Create or Update an Azure Automation
-  Runbook
+description: Logs an event when a new Azure Automation Runbook is created or an existing one is updated.
+mitre_components:
+- Scheduled Job Modification
+- Scheduled Job Creation
 source: mscs:azure:audit
 sourcetype: mscs:azure:audit
 separator: operationName.localizedValue
+separator_value: Create or Update an Azure Automation Runbook
 supported_TA:
 - name: Splunk Add-on for Microsoft Cloud Services
   url: https://splunkbase.splunk.com/app/3110

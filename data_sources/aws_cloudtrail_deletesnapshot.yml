@@ -3,10 +3,16 @@ id: b0731ac8-0992-4de8-b000-2c7d0fc2a61f
 version: 1
 date: '2024-07-18'
 author: Bhavin Patel, Splunk
-description: Data source object for AWS CloudTrail DeleteSnapshot
+description: Logs the deletion of a cloud resource snapshot, such as an Amazon EBS snapshot, including details about the snapshot ID and associated resource.
+mitre_components:
+- Snapshot Deletion
+- Snapshot Metadata
+- Cloud Service Modification
+- Cloud Service Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: DeleteSnapshot
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876

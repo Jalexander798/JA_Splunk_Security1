@@ -3,7 +3,10 @@ id: 2490537e-5e0c-46f7-9209-f56f852aa217
 version: 1
 date: '2024-11-21'
 author: Michael Haag, Splunk
-description: Data source object for Windows Event Microsoft Windows TerminalServices RDPClient 1024
+description: Logs an event when a Remote Desktop Protocol (RDP) client successfully connects to a remote host.
+mitre_components:
+- Network Connection Creation
+- Logon Session Creation
 source: WinEventLog:Microsoft-Windows-TerminalServices-RDPClient/Operational
 sourcetype: WinEventLog
 separator: EventCode

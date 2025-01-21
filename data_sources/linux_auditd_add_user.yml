@@ -3,9 +3,16 @@ id: 30f79353-e1d2-4585-8735-1e0359559f3f
 version: 1
 date: '2024-08-08'
 author: Teoderick Contreras, Splunk
-description: Data source object for Linux Auditd Add User Type
+description: Logs activities related to the addition of a new user account on a Linux system, including details about the username, UID, and the process initiating the action.
+mitre_components:
+- User Account Creation
+- User Account Metadata
+- OS API Execution
+- Application Log Content
 source: /var/log/audit/audit.log
 sourcetype: linux:audit
+separator: type
+separator_value: ADD_USER
 configuration: https://github.com/Neo23x0/auditd/blob/master/audit.rules
 supported_TA:
 - name: Splunk Add-on for Unix and Linux

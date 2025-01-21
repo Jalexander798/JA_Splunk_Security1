@@ -3,10 +3,13 @@ id: 31fd887d-0d14-44cc-bb64-80063a9f2968
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log Security 4725
+description: Logs an event when a user account has been disabled in Active Directory.
+mitre_components:
+- User Account Modification
 source: XmlWinEventLog:Security
 sourcetype: xmlwineventlog
 separator: EventCode
+separator_value: 4725
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

@@ -3,10 +3,14 @@ id: 954033e6-dd05-4775-a1f2-1f19632f4420
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log Security 4719
+description: Logs an event when a system audit policy is modified on a Windows system.
+mitre_components:
+- Service Modification
+- User Account Modification
 source: XmlWinEventLog:Security
 sourcetype: xmlwineventlog
 separator: EventCode
+separator_value: 4719
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

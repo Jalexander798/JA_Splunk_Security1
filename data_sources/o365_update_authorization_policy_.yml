@@ -3,10 +3,16 @@ id: d40e6a20-4d64-404c-8351-2caae8228d34
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for O365 Update authorization policy.
+description: Logs changes to authorization policies in Microsoft 365, including updates to access controls, permissions, and security settings.
+mitre_components:
+- Cloud Service Modification
+- Configuration Modification
+- User Account Metadata
+- Application Log Content
 source: o365
 sourcetype: o365:management:activity
 separator: Operation
+separator_value: Update authorization policy.
 supported_TA:
 - name: Splunk Add-on for Microsoft Office 365
   url: https://splunkbase.splunk.com/app/4055

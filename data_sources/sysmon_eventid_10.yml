@@ -3,10 +3,16 @@ id: 659cd5a8-148a-4c59-ade1-05f41ac1b096
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for Sysmon EventID 10
+description: Logs events where one process accesses another process, typically for memory reads or injections, including details about the source and target processes.
+mitre_components:
+- Process Access
+- Process Metadata
+- Application Log Content
+- OS API Execution
 source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
 sourcetype: xmlwineventlog
 separator: EventID
+separator_value: 10
 configuration: https://github.com/SwiftOnSecurity/sysmon-config
 supported_TA:
 - name: Splunk Add-on for Sysmon

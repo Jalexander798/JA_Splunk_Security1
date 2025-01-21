@@ -3,10 +3,16 @@ id: 4549f0ac-3df9-4bfb-bea5-1459690c8040
 version: 1
 date: '2024-07-18'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log System 4728
+description: Logs the addition of a user to a security-enabled group, including details about the group name, user account, and associated domain.
+mitre_components:
+- Group Modification
+- Group Metadata
+- User Account Metadata
+- Active Directory Object Modification
 source: XmlWinEventLog:System
 sourcetype: xmlwineventlog
 separator: EventCode
+separator_value: 4728
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742
