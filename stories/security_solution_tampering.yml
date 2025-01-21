@@ -17,9 +17,9 @@ references:
   - https://ppn.snovvcrash.rocks/pentest/infrastructure/ad/av-edr-evasion/defender
 tags:
   category:
-    - Defense Evasion
+    - Adversary Tactics
   product:
     - Splunk Enterprise
     - Splunk Enterprise Security
     - Splunk Cloud
-  usecase: Threat Detection
+  usecase: Advanced Threat Detection
