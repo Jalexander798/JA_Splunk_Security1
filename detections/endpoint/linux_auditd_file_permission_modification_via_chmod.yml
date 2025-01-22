@@ -1,8 +1,8 @@
 name: Linux Auditd File Permission Modification Via Chmod
 id: 5f1d2ea7-eec0-4790-8b24-6875312ad492
-version: '4'
-date: '2024-12-17'
-author: "Teoderick Contreras, Splunk, Ivar Nyg\xE5rd"
+version: 5
+date: '2024-12-19'
+author: Teoderick Contreras, Splunk, Ivar Nygård
 status: production
 type: Anomaly
 description: The following analytic detects suspicious file permission modifications
@@ -48,6 +48,14 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A $process_exec$ event occurred on host $dest$ to modify file permissions
+    using the "chmod" command.
+  risk_objects:
+  - field: dest
+    type: system
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - XorDDos
@@ -56,30 +64,18 @@ tags:
   - Linux Privilege Escalation
   - Linux Persistence Techniques
   asset_type: Endpoint
-  confidence: 50
-  impact: 50
-  message: A [$process_exec$] event occurred on host - [$dest$] to modify file permissions
-    using the "chmod" command.
   mitre_attack_id:
   - T1222.002
   - T1222
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - proctitle
-  risk_score: 25
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.002/linux_auditd_chmod_exec_attrib/linux_auditd_chmod_exec_attrib.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.002/linux_auditd_chmod_exec_attrib/linux_auditd_chmod_exec_attrib.log
     source: /var/log/audit/audit.log
     sourcetype: linux:audit

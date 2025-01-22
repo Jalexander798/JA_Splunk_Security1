@@ -1,7 +1,7 @@
 name: Windows KrbRelayUp Service Creation
 id: e40ef542-8241-4419-9af4-6324582ea60a
-version: '5'
-date: '2024-11-28'
+version: 6
+date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -37,37 +37,29 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A service was created on $dest$, related to KrbRelayUp.
+  risk_objects:
+  - field: dest
+    type: system
+    score: 64
+  threat_objects: []
 tags:
   analytic_story:
   - Local Privilege Escalation With KrbRelayUp
   - Compromised Windows Host
   asset_type: Endpoint
-  confidence: 80
-  impact: 80
-  message: A service was created on $dest$, related to KrbRelayUp.
   mitre_attack_id:
   - T1543.003
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - EventCode
-  - Service_File_Name
-  - Service_Name
-  - Service_Start_Type
-  - Service_Type
-  risk_score: 64
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1543.003/windows_krbrelayup_service_creation/windows-xml.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1543.003/windows_krbrelayup_service_creation/windows-xml.log
     source: XmlWinEventLog:System
     sourcetype: XmlWinEventLog

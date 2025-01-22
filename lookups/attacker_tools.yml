@@ -1,7 +1,12 @@
-description: A list of tools used by attackers
-filename: attacker_tools.csv
 name: attacker_tools
-default_match: 'false'
-match_type: WILDCARD(attacker_tool_names)
+date: 2024-12-23
+version: 2
+id: 72620fe1-26cb-4cee-a6ee-8c6127056d81
+author: Splunk Threat Research Team
+lookup_type: csv
+description: A list of tools used by attackers
+default_match: false
+match_type: 
+- WILDCARD(attacker_tool_names)
 min_matches: 1
-case_sensitive_match: 'false'
+case_sensitive_match: false

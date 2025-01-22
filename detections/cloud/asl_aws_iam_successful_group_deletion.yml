@@ -1,7 +1,7 @@
 name: ASL AWS IAM Successful Group Deletion
 id: 1bbe54f1-93d7-4764-8a01-ddaa12ece7ac
 version: 5
-date: '2024-10-22'
+date: '2024-11-14'
 author: Patrick Bareiss, Splunk
 status: production
 type: Hunting
@@ -18,35 +18,14 @@ tags:
   analytic_story:
   - AWS IAM Privilege Escalation
   asset_type: AWS Account
-  confidence: 50
-  impact: 10
-  message: User $user$ has sucessfully deleted a user group from $src_ip$
   mitre_attack_id:
   - T1069.003
   - T1098
   - T1069
-  observable:
-  - name: src_ip
-    type: IP Address
-    role:
-    - Attacker
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - api.operation
-  - actor.user.uid
-  - actor.user.account.uid
-  - http_request.user_agent
-  - src_endpoint.ip
-  - src_endpoint.domain
-  - cloud.region
-  risk_score: 5
   security_domain: access
 tests:
 - name: True Positive Test

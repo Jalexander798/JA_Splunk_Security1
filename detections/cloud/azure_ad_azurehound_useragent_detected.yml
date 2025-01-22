@@ -3,7 +3,7 @@ id: d62852db-a1f1-40db-a7fc-c3d56fa8bda3
 version: 1
 date: '2025-01-06'
 author: Dean Luxton 
-data_sources:
+data_source:
 - Azure Active Directory NonInteractiveUserSignInLogs
 - Azure Active Directory MicrosoftGraphActivityLogs
 type: TTP
@@ -31,40 +31,29 @@ drilldown_searches:
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: AzureHound UserAgent String $user_agent$ Detected on Tenant $tenantId$
+  risk_objects:
+  - field: tenantId
+    type: other
+    score: 80
+  threat_objects:
+  - field: src
+    type: ip_address
+  - field: user_agent
+    type: http_user_agent
 tags:
   analytic_story:
   - Azure Active Directory Privilege Escalation
   - Compromised User Account
   asset_type: Azure Tenant
-  confidence: 100
-  impact: 80
-  message: AzureHound UserAgent String $user_agent$ Detected on Tenant $tenantId$
   mitre_attack_id:
   - T1087.004
   - T1526
-  observable:
-  - name: tenantId
-    type: User
-    role:
-    - Victim
-  - name: src
-    type: IP Address
-    role:
-    - Attacker
-  - name: user_agent
-    type: Other
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - src
-  - category
-  - properties.userAgent
-  - tenantId
-  risk_score: 80
   security_domain: identity
 tests:
 - name: True Positive Test

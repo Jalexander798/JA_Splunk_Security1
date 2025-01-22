@@ -1,7 +1,7 @@
 name: Enumerate Users Local Group Using Telegram
 id: fcd74532-ae54-11eb-a5ab-acde48001122
-version: '6'
-date: '2024-11-28'
+version: 7
+date: '2024-12-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -40,47 +40,33 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: The Telegram application has been identified enumerating local groups on
+    $dest$ by $user$.
+  risk_objects:
+  - field: user
+    type: user
+    score: 80
+  - field: dest
+    type: system
+    score: 80
+  threat_objects: []
 tags:
   analytic_story:
   - XMRig
   - Compromised Windows Host
   asset_type: Endpoint
-  confidence: 100
-  impact: 80
-  message: The Telegram application has been identified enumerating local groups on
-    $dest$ by $user$.
   mitre_attack_id:
   - T1087
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - user
-  - dest
-  - EventCode
-  - Process_Name
-  - Process_ID
-  - Account_Name
-  - Account_Domain
-  - Logon_ID
-  - Security_ID
-  - Message
-  risk_score: 80
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087/enumerate_users_local_group_using_telegram/windows-xml.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087/enumerate_users_local_group_using_telegram/windows-xml.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

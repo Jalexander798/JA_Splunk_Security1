@@ -1,7 +1,7 @@
 name: Spectre and Meltdown Vulnerable Systems
 id: 354be8e0-32cd-4da0-8c47-796de13b60ea
-version: 3
-date: '2024-10-17'
+version: 4
+date: '2024-11-14'
 author: David Dorsey, Splunk
 status: deprecated
 type: TTP
@@ -18,25 +18,21 @@ how_to_implement: The search requires that you are ingesting your vulnerability-
 known_false_positives: It is possible that your vulnerability scanner is not detecting
   that the patches have been applied.
 references: []
+rba:
+  message: $dest$ enumerated as a Spectre or Meltdown vulnerable system
+  risk_objects:
+  - field: dest
+    type: system
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - Spectre And Meltdown Vulnerabilities
   asset_type: Endpoint
-  confidence: 50
   cve:
   - CVE-2017-5753
-  impact: 50
-  message: tbd
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  risk_score: 25
   security_domain: endpoint

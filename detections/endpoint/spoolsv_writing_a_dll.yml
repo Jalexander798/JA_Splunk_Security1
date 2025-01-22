@@ -1,7 +1,7 @@
 name: Spoolsv Writing a DLL
 id: d5bf5cf2-da71-11eb-92c2-acde48001122
-version: '5'
-date: '2024-11-28'
+version: 6
+date: '2024-12-10'
 author: Mauricio Velazco, Michael Haag, Splunk
 status: production
 type: TTP
@@ -51,48 +51,35 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: $process_name$ has been identified writing dll's to $file_path$ on endpoint
+    $dest$. This behavior is suspicious and related to PrintNightmare.
+  risk_objects:
+  - field: dest
+    type: system
+    score: 72
+  threat_objects:
+  - field: process_name
+    type: process_name
 tags:
   analytic_story:
   - PrintNightmare CVE-2021-34527
   - Compromised Windows Host
   asset_type: Endpoint
-  confidence: 90
   cve:
   - CVE-2021-34527
-  impact: 80
-  message: $process_name$ has been identified writing dll's to $file_path$ on endpoint
-    $dest$. This behavior is suspicious and related to PrintNightmare.
   mitre_attack_id:
   - T1547.012
   - T1547
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
-  - name: process_name
-    type: Process
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Filesystem.dest
-  - Filesystem.file_create_time
-  - Filesystem.file_name
-  - Filesystem.file_path
-  - Processes.process_name
-  - Processes.process_id
-  - Processes.process_name
-  - Processes.dest
-  risk_score: 72
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.012/printnightmare/windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.012/printnightmare/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

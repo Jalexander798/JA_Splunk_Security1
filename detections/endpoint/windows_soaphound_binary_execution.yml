@@ -1,7 +1,7 @@
 name: Windows SOAPHound Binary Execution
 id: 8e53f839-e127-4d6d-a54d-a2f67044a57f
-version: '5'
-date: '2024-11-28'
+version: 6
+date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -54,15 +54,21 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: The process $process_name$ was executed on $dest$ related to SOAPHound.
+  risk_objects:
+  - field: dest
+    type: system
+    score: 80
+  threat_objects:
+  - field: process_name
+    type: process
 tags:
   analytic_story:
   - Windows Discovery Techniques
   - Compromised Windows Host
   asset_type: Endpoint
   atomic_guid: []
-  confidence: 100
-  impact: 80
-  message: The process $process_name$ was executed on $dest$ related to SOAPHound.
   mitre_attack_id:
   - T1087.002
   - T1069.001
@@ -71,38 +77,15 @@ tags:
   - T1087
   - T1069.002
   - T1069
-  observable:
-  - name: process_name
-    type: Process
-    role:
-    - Victim
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  risk_score: 80
-  required_fields:
-  - Processes.process
-  - Processes.dest
-  - Processes.process_current_directory
-  - Processes.process_path
-  - Processes.process_integrity_level
-  - Processes.parent_process
-  - Processes.parent_process_path
-  - Processes.parent_process_guid
-  - Processes.parent_process_id
-  - Processes.process_guid
-  - Processes.process_id
-  - Processes.user
-  - Processes.original_file_nam
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/soaphound/sysmon_soaphound.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/soaphound/sysmon_soaphound.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

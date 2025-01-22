@@ -1,7 +1,7 @@
 name: Windows Process With NetExec Command Line Parameters
 id: adbff89c-c1f2-4a2e-88a4-b5e645856510
-version: 1
-date: '2024-12-19'
+version: 2
+date: '2025-01-09'
 author: Steven Dick, Github Community
 status: production
 type: TTP
@@ -34,45 +34,33 @@ drilldown_searches:
   search: '| from datamodel:Endpoint.Processes | search dest=$dest$ process_name = $process_name$'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba: 
+  message: NetExec command line parameters were used on $dest$ by $user$
+  risk_objects: 
+  - field: user
+    type: user
+    score: 64
+  - field: dest
+    type: system
+    score: 64
+  threat_objects:
+  - field: parent_process_name
+    type: parent_process_name
 tags:
   analytic_story: 
   - Active Directory Kerberos Attacks
   - Active Directory Privilege Escalation
   asset_type: Endpoint
-  confidence: 80
-  impact: 80
-  message: NetExec command line parameters were used on $dest$ by $user$
   mitre_attack_id: 
   - T1550
   - T1550.003
   - T1558
   - T1558.003
   - T1558.004
-  observable: 
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: parent_process_name
-    type: Process
-    role:
-    - Attacker
   product: 
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields: 
-  - _time
-  - Processes.process 
-  - Processes.user 
-  - Processes.dest
-  - Processes.process_name
-  - Processes.parent_process_name
-  risk_score: 64
   security_domain: endpoint
 tests:
 - name: True Positive Test

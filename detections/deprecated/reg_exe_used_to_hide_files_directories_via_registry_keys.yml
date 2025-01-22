@@ -1,7 +1,7 @@
 name: Reg exe used to hide files directories via registry keys
 id: 61a7d1e6-f5d4-41d9-a9be-39a1ffe69459
-version: 4
-date: '2024-10-17'
+version: 5
+date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: deprecated
 type: TTP
@@ -26,31 +26,26 @@ how_to_implement: The detection is based on data that originates from Endpoint D
   names and speed up the data modeling process.
 known_false_positives: None at the moment
 references: []
+rba:
+  message: Reg.exe used to hide a file or directory on $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 25
+  - field: user
+    type: user
+    score: 25
+  threat_objects: []
 tags:
   asset_type: Endpoint
   analytic_story:
   - Windows Defense Evasion Tactics
   - Suspicious Windows Registry Activities
   - Windows Persistence Techniques
-  confidence: 50
-  impact: 50
-  message: tbd
   mitre_attack_id:
   - T1564.001
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  risk_score: 25
   security_domain: endpoint

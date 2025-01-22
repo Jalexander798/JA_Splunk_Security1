@@ -1,7 +1,7 @@
 name: EC2 Instance Started With Previously Unseen User
 id: 22773e84-bac0-4595-b086-20d3f735b4f1
-version: 4
-date: '2024-10-17'
+version: 6
+date: '2025-01-16'
 author: David Dorsey, Splunk
 status: deprecated
 type: Anomaly
@@ -11,9 +11,9 @@ description: This search looks for EC2 instances being created by users who have
 data_source: []
 search: '`cloudtrail` eventName=RunInstances [search `cloudtrail` eventName=RunInstances
   errorCode=success | stats earliest(_time) as firstTime latest(_time) as lastTime
-  by userIdentity.arn | rename userIdentity.arn as arn | inputlookup append=t previously_seen_ec2_launches_by_user.csv
+  by userIdentity.arn | rename userIdentity.arn as arn | inputlookup append=t previously_seen_ec2_launches_by_user_lookup
   | stats min(firstTime) as firstTime, max(lastTime) as lastTime by arn | outputlookup
-  previously_seen_ec2_launches_by_user.csv | eval newUser=if(firstTime >= relative_time(now(),
+  previously_seen_ec2_launches_by_user_lookup | eval newUser=if(firstTime >= relative_time(now(),
   "-70m@m"), 1, 0) | where newUser=1 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | rename arn as userIdentity.arn | table userIdentity.arn] | rename requestParameters.instanceType
   as instanceType, responseElements.instancesSet.items{}.instanceId as dest, userIdentity.arn
@@ -26,29 +26,22 @@ known_false_positives: It's possible that a user will start to create EC2 instan
   when they haven't before for any number of reasons. Verify with the user that is
   launching instances that this is the intended behavior.
 references: []
+rba:
+  message: EC2 Instance $dest$ started by previously unseen user $user$
+  risk_objects:
+  - field: user
+    type: user
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - AWS Cryptomining
   - Suspicious AWS EC2 Activities
   asset_type: AWS Instance
-  confidence: 50
-  impact: 50
-  message: tbd
   mitre_attack_id:
   - T1078.004
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - eventName
-  - errorCode
-  - userIdentity.arn
-  risk_score: 25
   security_domain: endpoint

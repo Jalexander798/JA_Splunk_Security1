@@ -1,7 +1,7 @@
 name: Attacker Tools On Endpoint
 id: a51bfe1a-94f0-48cc-b4e4-16a110145893
-version: '6'
-date: '2024-11-28'
+version: 7
+date: '2024-12-10'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -50,6 +50,19 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: An attacker tool $process_name$, listed in attacker_tools.csv is executed
+    on host $dest$ by User $user$. This process $process_name$ is known to do- $description$
+  risk_objects:
+  - field: user
+    type: user
+    score: 64
+  - field: dest
+    type: system
+    score: 64
+  threat_objects:
+  - field: process_name
+    type: process_name
 tags:
   analytic_story:
   - XMRig
@@ -59,42 +72,20 @@ tags:
   - CISA AA22-264A
   - Compromised Windows Host
   asset_type: Endpoint
-  confidence: 80
-  impact: 80
-  message: An attacker tool $process_name$,listed in attacker_tools.csv is executed
-    on host $dest$ by User $user$. This process $process_name$ is known to do- $description$
   mitre_attack_id:
   - T1036.005
   - T1036
   - T1003
   - T1595
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: process_name
-    type: Process
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - Processes.dest
-  - Processes.user
-  - Processes.process_name
-  - Processes.parent_process
-  risk_score: 64
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1595/attacker_scan_tools/windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1595/attacker_scan_tools/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

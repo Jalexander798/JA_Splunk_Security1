@@ -1,7 +1,7 @@
 name: Short Lived Scheduled Task
 id: 6fa31414-546e-11ec-adfa-acde48001122
-version: '5'
-date: '2024-11-28'
+version: 6
+date: '2024-12-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -42,6 +42,13 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A windows scheduled task was created and deleted in 30 seconds on $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 81
+  threat_objects: []
 tags:
   analytic_story:
   - Active Directory Lateral Movement
@@ -50,33 +57,17 @@ tags:
   - Compromised Windows Host
   - Scheduled Tasks
   asset_type: Endpoint
-  confidence: 90
-  impact: 90
-  message: A windows scheduled task was created and deleted in 30 seconds on $dest$
   mitre_attack_id:
   - T1053.005
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - dest
-  - ComputerName
-  - Account_Name
-  - Task_Name
-  - Description
-  - Command
-  risk_score: 81
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/lateral_movement/windows-security.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/lateral_movement/windows-security.log
     source: WinEventLog:Security
     sourcetype: WinEventLog

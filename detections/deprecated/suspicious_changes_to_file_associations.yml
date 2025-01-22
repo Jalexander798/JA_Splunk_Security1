@@ -1,7 +1,7 @@
 name: Suspicious Changes to File Associations
 id: 1b989a0e-0129-4446-a695-f193a5b746fc
-version: 6
-date: '2024-10-17'
+version: 7
+date: '2024-11-14'
 author: Rico Valdez, Splunk
 status: deprecated
 type: TTP
@@ -32,26 +32,22 @@ known_false_positives: There may be other processes in your environment that use
   may legitimately use to modify file associations. If this is the case and you are
   finding false positives, you can modify the search to add those processes as exceptions.
 references: []
+rba:
+  message: Suspicious changes to file association on $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - Suspicious Windows Registry Activities
   - Windows File Extension and Association Abuse
   asset_type: Endpoint
-  confidence: 50
-  impact: 50
-  message: tbd
   mitre_attack_id:
   - T1546.001
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  risk_score: 25
   security_domain: endpoint

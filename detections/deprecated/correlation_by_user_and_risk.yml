@@ -1,7 +1,7 @@
 name: Correlation by User and Risk
 id: 610e12dc-b6fa-4541-825e-4a0b3b6f6773
-version: 2
-date: '2024-10-17'
+version: 3
+date: '2024-11-14'
 author: Patrick Bareiss, Splunk
 status: deprecated
 type: Correlation
@@ -18,22 +18,11 @@ tags:
   analytic_story:
   - Dev Sec Ops
   asset_type: AWS Account
-  confidence: 100
-  impact: 70
-  message: Correlation triggered for user $user$
   mitre_attack_id:
   - T1204.003
   - T1204
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  risk_score: 70
   security_domain: network

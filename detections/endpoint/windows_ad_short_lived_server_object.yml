@@ -1,7 +1,7 @@
 name: Windows AD Short Lived Server Object
 id: 193769d3-1e33-43a9-970e-ad4a88256cdb
-version: '5'
-date: '2024-11-28'
+version: 6
+date: '2024-12-10'
 author: Mauricio Velazco, Splunk
 type: TTP
 status: production
@@ -47,41 +47,32 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: Potential DCShadow Attack Detected on $Computer$
+  risk_objects:
+  - field: Computer
+    type: system
+    score: 64
+  - field: SubjectUsername
+    type: user
+    score: 64
+  threat_objects: []
 tags:
   analytic_story:
   - Compromised Windows Host
   - Sneaky Active Directory Persistence Tricks
   asset_type: Endpoint
-  confidence: 80
-  impact: 80
-  message: Potential DCShadow Attack Detected on $Computer$
   mitre_attack_id:
   - T1207
-  observable:
-  - name: SubjectUserName
-    type: User
-    role:
-    - Attacker
-  - name: Computer
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - EventCode
-  - ObjectDN
-  - signature
-  - SubjectUserName
-  - Computer
-  risk_score: 64
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1207/short_lived_server_object/windows-security.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1207/short_lived_server_object/windows-security.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

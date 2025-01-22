@@ -4,8 +4,6 @@ version: 1
 date: '2020-05-20'
 author: David Dorsey, Splunk
 type: Baseline
-datamodel:
-- Endpoint
 description: This search returns the first and last time a process was seen per endpoint
   with a parent process of zoom.exe (Windows) or zoom.us (macOS). This table is then
   cached.
@@ -28,11 +26,6 @@ tags:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.parent_process_name
-  - Processes.process_name
-  - Processes.dest
   security_domain: endpoint
 deployment:
   scheduling:

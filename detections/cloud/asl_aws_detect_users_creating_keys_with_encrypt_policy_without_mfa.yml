@@ -37,34 +37,23 @@ drilldown_searches:
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: AWS account is potentially compromised and user $user$ is trying to compromise other accounts
+  risk_objects:
+  - field: user
+    type: user
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - Ransomware Cloud
   asset_type: AWS Account
-  confidence: 50
-  impact: 50
-  message: AWS account is potentially compromised and user $user$ is trying to compromise other accounts.
   mitre_attack_id:
   - T1486
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - api.operation
-  - actor.user.uid
-  - actor.user.account.uid
-  - api.request.data
-  - http_request.user_agent
-  - src_endpoint.ip
-  - src_endpoint.domain
-  - cloud.region
-  risk_score: 25
   security_domain: threat
 tests:
 - name: True Positive Test

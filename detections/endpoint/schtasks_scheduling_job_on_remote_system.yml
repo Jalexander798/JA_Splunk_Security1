@@ -1,7 +1,7 @@
 name: Schtasks scheduling job on remote system
 id: 1297fb80-f42a-4b4a-9c8a-88c066237cf6
-version: '10'
-date: '2024-11-28'
+version: 11
+date: '2024-12-10'
 author: David Dorsey, Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -50,6 +50,19 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A scheduled task process $process_name$ with remote job command-line $process$
+    on host $dest$ by $user$.
+  risk_objects:
+  - field: dest
+    type: system
+    score: 63
+  - field: user
+    type: user
+    score: 63
+  threat_objects:
+  - field: process_name
+    type: process_name
 tags:
   analytic_story:
   - Active Directory Lateral Movement
@@ -61,42 +74,18 @@ tags:
   - Compromised Windows Host
   - RedLine Stealer
   asset_type: Endpoint
-  confidence: 90
-  impact: 70
-  message: A schedule task process $process_name$ with remote job command-line $process$
-    in host $dest$ by $user$.
   mitre_attack_id:
   - T1053.005
   - T1053
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: process_name
-    type: Process
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.process_name
-  - Processes.process
-  - Processes.parent_process_name
-  - Processes.dest
-  - Processes.user
-  risk_score: 63
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/atomic_red_team/windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
