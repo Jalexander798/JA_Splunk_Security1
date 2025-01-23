@@ -6,11 +6,11 @@ author: Jacob Delgado, SnapAttack
 description: Logs anomalous or unexpected network behaviors identified by Zeek (formerly
   Bro), including protocol violations and unusual traffic patterns.
 mitre_components:
-  - Network Traffic Flow
-  - Network Traffic Content
-  - Response Metadata
-  - Application Log Content
-  - Host Status
+- Network Traffic Flow
+- Network Traffic Content
+- Response Metadata
+- Application Log Content
+- Host Status
 source: bro:weird:json
 sourcetype: bro:weird:json
 supported_TA: []

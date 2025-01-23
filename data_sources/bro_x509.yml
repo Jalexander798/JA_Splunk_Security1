@@ -6,11 +6,11 @@ author: Jacob Delgado, SnapAttack
 description: Logs details about X.509 certificates observed in network traffic captured
   by Zeek (formerly Bro), including certificate fields, validity periods, and issuers.
 mitre_components:
-  - Certificate Registration
-  - Network Traffic Content
-  - Response Metadata
-  - Application Log Content
-  - Host Status
+- Certificate Registration
+- Network Traffic Content
+- Response Metadata
+- Application Log Content
+- Host Status
 source: bro:x509:json
 sourcetype: bro:x509:json
 supported_TA: []

@@ -7,79 +7,79 @@ description: Logs the addition of mailbox permissions in Microsoft 365, includin
   details about the mailbox, granted permissions, and the user or administrator performing
   the action.
 mitre_components:
-  - User Account Modification
-  - User Account Metadata
-  - Active Directory Object Modification
-  - Application Log Content
+- User Account Modification
+- User Account Metadata
+- Active Directory Object Modification
+- Application Log Content
 source: o365
 sourcetype: o365:management:activity
 separator: Operation
 separator_value: Add-MailboxPermission
 supported_TA:
-  - name: Splunk Add-on for Microsoft Office 365
-    url: https://splunkbase.splunk.com/app/4055
-    version: 4.7.0
+- name: Splunk Add-on for Microsoft Office 365
+  url: https://splunkbase.splunk.com/app/4055
+  version: 4.7.0
 fields:
-  - _time
-  - AccessRights
-  - AppId
-  - ClientAppId
-  - ClientIP
-  - CreationTime
-  - ExternalAccess
-  - Id
-  - Identity
-  - InheritanceType
-  - ObjectId
-  - Operation
-  - OrganizationId
-  - OrganizationName
-  - OriginatingServer
-  - Parameters{}.Name
-  - Parameters{}.Value
-  - RecordType
-  - ResultStatus
-  - SessionId
-  - User
-  - UserId
-  - UserKey
-  - UserType
-  - Version
-  - Workload
-  - app
-  - authentication_service
-  - command
-  - date_hour
-  - date_mday
-  - date_minute
-  - date_month
-  - date_second
-  - date_wday
-  - date_year
-  - date_zone
-  - dest
-  - dest_name
-  - dvc
-  - host
-  - index
-  - linecount
-  - object
-  - punct
-  - record_type
-  - signature
-  - source
-  - sourcetype
-  - splunk_server
-  - src
-  - src_ip
-  - status
-  - timeendpos
-  - timestartpos
-  - user
-  - user_id
-  - user_type
-  - vendor_account
-  - vendor_product
+- _time
+- AccessRights
+- AppId
+- ClientAppId
+- ClientIP
+- CreationTime
+- ExternalAccess
+- Id
+- Identity
+- InheritanceType
+- ObjectId
+- Operation
+- OrganizationId
+- OrganizationName
+- OriginatingServer
+- Parameters{}.Name
+- Parameters{}.Value
+- RecordType
+- ResultStatus
+- SessionId
+- User
+- UserId
+- UserKey
+- UserType
+- Version
+- Workload
+- app
+- authentication_service
+- command
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
+- dest
+- dest_name
+- dvc
+- host
+- index
+- linecount
+- object
+- punct
+- record_type
+- signature
+- source
+- sourcetype
+- splunk_server
+- src
+- src_ip
+- status
+- timeendpos
+- timestartpos
+- user
+- user_id
+- user_type
+- vendor_account
+- vendor_product
 example_log: '{"AppId": "", "ClientAppId": "", "ClientIP": "18.159.234.121:30395",
   "CreationTime": "2020-12-15T10:18:53", "ExternalAccess": false, "Id": "bb6e31a3-e98f-493d-bbff-08d8a0e2d2b0",
   "ObjectId": "jhernan", "Operation": "Add-MailboxPermission", "OrganizationId": "0e8108b1-18e9-41a4-961b-dfcddf92ef08",

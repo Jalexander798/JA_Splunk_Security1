@@ -7,69 +7,69 @@ description: Logs the creation of a new service principal in Azure Active Direct
   including details about the service principal, associated application, and the user
   or process performing the action.
 mitre_components:
-  - Cloud Service Creation
-  - Cloud Service Metadata
-  - User Account Metadata
-  - Active Directory Object Creation
+- Cloud Service Creation
+- Cloud Service Metadata
+- User Account Metadata
+- Active Directory Object Creation
 source: Azure AD
 sourcetype: azure:monitor:aad
 separator: operationName
 separator_value: Add service principal
 supported_TA:
-  - name: Splunk Add-on for Microsoft Cloud Services
-    url: https://splunkbase.splunk.com/app/3110
-    version: 5.4.1
+- name: Splunk Add-on for Microsoft Cloud Services
+  url: https://splunkbase.splunk.com/app/3110
+  version: 5.4.1
 fields:
-  - _time
-  - Level
-  - category
-  - correlationId
-  - date_hour
-  - date_mday
-  - date_minute
-  - date_month
-  - date_second
-  - date_wday
-  - date_year
-  - date_zone
-  - durationMs
-  - host
-  - index
-  - linecount
-  - operationName
-  - operationVersion
-  - properties.activityDateTime
-  - properties.activityDisplayName
-  - properties.additionalDetails{}.key
-  - properties.additionalDetails{}.value
-  - properties.category
-  - properties.correlationId
-  - properties.id
-  - properties.initiatedBy.user.displayName
-  - properties.initiatedBy.user.id
-  - properties.initiatedBy.user.ipAddress
-  - properties.initiatedBy.user.userPrincipalName
-  - properties.loggedByService
-  - properties.operationType
-  - properties.result
-  - properties.resultReason
-  - properties.targetResources{}.displayName
-  - properties.targetResources{}.id
-  - properties.targetResources{}.modifiedProperties{}.displayName
-  - properties.targetResources{}.modifiedProperties{}.newValue
-  - properties.targetResources{}.modifiedProperties{}.oldValue
-  - properties.targetResources{}.type
-  - properties.userAgent
-  - punct
-  - resourceId
-  - resultSignature
-  - source
-  - sourcetype
-  - splunk_server
-  - tenantId
-  - time
-  - timeendpos
-  - timestartpos
+- _time
+- Level
+- category
+- correlationId
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
+- durationMs
+- host
+- index
+- linecount
+- operationName
+- operationVersion
+- properties.activityDateTime
+- properties.activityDisplayName
+- properties.additionalDetails{}.key
+- properties.additionalDetails{}.value
+- properties.category
+- properties.correlationId
+- properties.id
+- properties.initiatedBy.user.displayName
+- properties.initiatedBy.user.id
+- properties.initiatedBy.user.ipAddress
+- properties.initiatedBy.user.userPrincipalName
+- properties.loggedByService
+- properties.operationType
+- properties.result
+- properties.resultReason
+- properties.targetResources{}.displayName
+- properties.targetResources{}.id
+- properties.targetResources{}.modifiedProperties{}.displayName
+- properties.targetResources{}.modifiedProperties{}.newValue
+- properties.targetResources{}.modifiedProperties{}.oldValue
+- properties.targetResources{}.type
+- properties.userAgent
+- punct
+- resourceId
+- resultSignature
+- source
+- sourcetype
+- splunk_server
+- tenantId
+- time
+- timeendpos
+- timestartpos
 example_log: '{"time": "2024-02-07T22:31:14.4970418Z", "resourceId": "/tenants/a417c578-c7ee-480d-a225-d48057e74df5/providers/Microsoft.aadiam",
   "operationName": "Add service principal", "operationVersion": "1.0", "category":
   "AuditLogs", "tenantId": "a417c578-c7ee-480d-a225-d48057e74df5", "resultSignature":

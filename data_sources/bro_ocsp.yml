@@ -6,11 +6,11 @@ author: Jacob Delgado, SnapAttack
 description: Logs Online Certificate Status Protocol (OCSP) activity captured by Zeek
   (formerly Bro), including details such as certificate validation requests and responses.
 mitre_components:
-  - Certificate Registration
-  - Network Traffic Flow
-  - Network Traffic Content
-  - Response Metadata
-  - Application Log Content
+- Certificate Registration
+- Network Traffic Flow
+- Network Traffic Content
+- Response Metadata
+- Application Log Content
 source: bro:ocsp:json
 sourcetype: bro:ocsp:json
 supported_TA: []

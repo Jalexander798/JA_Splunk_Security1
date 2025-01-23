@@ -6,22 +6,22 @@ author: Patrick Bareiss, Splunk
 description: Logs the list of installed IIS modules retrieved using PowerShell, including
   details about their names and statuses.
 mitre_components:
-  - Service Metadata
-  - Configuration Modification
-  - OS API Execution
-  - Application Log Content
+- Service Metadata
+- Configuration Modification
+- OS API Execution
+- Application Log Content
 source: powershell://AppCmdModules
 sourcetype: Pwsh:InstalledIISModules
 supported_TA: []
 fields:
-  - _time
-  - Schema
-  - host
-  - index
-  - linecount
-  - punct
-  - source
-  - sourcetype
-  - splunk_server
-  - timestamp
+- _time
+- Schema
+- host
+- index
+- linecount
+- punct
+- source
+- sourcetype
+- splunk_server
+- timestamp
 example_log: Schema="Microsoft.IIs.PowerShell.Framework.ConfigurationElementSchema"

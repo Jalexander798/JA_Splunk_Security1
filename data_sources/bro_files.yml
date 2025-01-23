@@ -7,11 +7,11 @@ description: Logs metadata about files transferred over the network captured by 
   (formerly Bro), including details such as file names, hashes, MIME types, and transfer
   protocols.
 mitre_components:
-  - File Metadata
-  - Network Traffic Content
-  - Network Traffic Flow
-  - Response Metadata
-  - Application Log Content
+- File Metadata
+- Network Traffic Content
+- Network Traffic Flow
+- Response Metadata
+- Application Log Content
 source: bro:files:json
 sourcetype: bro:files:json
 supported_TA: []

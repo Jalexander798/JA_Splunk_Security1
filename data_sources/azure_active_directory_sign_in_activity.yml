@@ -6,118 +6,118 @@ author: Patrick Bareiss, Splunk
 description: Logs an event when a user attempts to sign into Azure Active Directory,
   capturing authentication details and outcomes.
 mitre_components:
-  - User Account Authentication
-  - Logon Session Creation
-  - User Account Metadata
+- User Account Authentication
+- Logon Session Creation
+- User Account Metadata
 source: Azure AD
 sourcetype: azure:monitor:aad
 separator: operationName
 separator_value: Sign-in activity
 supported_TA:
-  - name: Splunk Add-on for Microsoft Cloud Services
-    url: https://splunkbase.splunk.com/app/3110
-    version: 5.4.1
+- name: Splunk Add-on for Microsoft Cloud Services
+  url: https://splunkbase.splunk.com/app/3110
+  version: 5.4.1
 fields:
-  - _time
-  - Level
-  - callerIpAddress
-  - category
-  - correlationId
-  - date_hour
-  - date_mday
-  - date_minute
-  - date_month
-  - date_second
-  - date_wday
-  - date_year
-  - date_zone
-  - durationMs
-  - host
-  - identity
-  - index
-  - linecount
-  - location
-  - operationName
-  - operationVersion
-  - properties.alternateSignInName
-  - properties.appDisplayName
-  - properties.appId
-  - properties.appServicePrincipalId
-  - properties.authenticationDetails{}.RequestSequence
-  - properties.authenticationDetails{}.StatusSequence
-  - properties.authenticationDetails{}.authenticationMethod
-  - properties.authenticationDetails{}.authenticationMethodDetail
-  - properties.authenticationDetails{}.authenticationStepDateTime
-  - properties.authenticationDetails{}.authenticationStepRequirement
-  - properties.authenticationDetails{}.authenticationStepResultDetail
-  - properties.authenticationDetails{}.succeeded
-  - properties.authenticationProcessingDetails{}.key
-  - properties.authenticationProcessingDetails{}.value
-  - properties.authenticationProtocol
-  - properties.authenticationRequirement
-  - properties.authenticationRequirementPolicies{}.detail
-  - properties.authenticationRequirementPolicies{}.requirementProvider
-  - properties.autonomousSystemNumber
-  - properties.clientAppUsed
-  - properties.clientCredentialType
-  - properties.conditionalAccessStatus
-  - properties.correlationId
-  - properties.createdDateTime
-  - properties.crossTenantAccessType
-  - properties.deviceDetail.deviceId
-  - properties.deviceDetail.operatingSystem
-  - properties.flaggedForReview
-  - properties.homeTenantId
-  - properties.id
-  - properties.incomingTokenType
-  - properties.ipAddress
-  - properties.isInteractive
-  - properties.isTenantRestricted
-  - properties.location.city
-  - properties.location.countryOrRegion
-  - properties.location.geoCoordinates.latitude
-  - properties.location.geoCoordinates.longitude
-  - properties.location.state
-  - properties.originalRequestId
-  - properties.originalTransferMethod
-  - properties.processingTimeInMilliseconds
-  - properties.resourceDisplayName
-  - properties.resourceId
-  - properties.resourceServicePrincipalId
-  - properties.resourceTenantId
-  - properties.riskDetail
-  - properties.riskLevelAggregated
-  - properties.riskLevelDuringSignIn
-  - properties.riskState
-  - properties.rngcStatus
-  - properties.servicePrincipalId
-  - properties.signInIdentifier
-  - properties.signInTokenProtectionStatus
-  - properties.ssoExtensionVersion
-  - properties.status.additionalDetails
-  - properties.status.errorCode
-  - properties.status.failureReason
-  - properties.tenantId
-  - properties.tokenIssuerName
-  - properties.tokenIssuerType
-  - properties.uniqueTokenIdentifier
-  - properties.userAgent
-  - properties.userDisplayName
-  - properties.userId
-  - properties.userPrincipalName
-  - properties.userType
-  - punct
-  - resourceId
-  - resultDescription
-  - resultSignature
-  - resultType
-  - source
-  - sourcetype
-  - splunk_server
-  - tenantId
-  - time
-  - timeendpos
-  - timestartpos
+- _time
+- Level
+- callerIpAddress
+- category
+- correlationId
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
+- durationMs
+- host
+- identity
+- index
+- linecount
+- location
+- operationName
+- operationVersion
+- properties.alternateSignInName
+- properties.appDisplayName
+- properties.appId
+- properties.appServicePrincipalId
+- properties.authenticationDetails{}.RequestSequence
+- properties.authenticationDetails{}.StatusSequence
+- properties.authenticationDetails{}.authenticationMethod
+- properties.authenticationDetails{}.authenticationMethodDetail
+- properties.authenticationDetails{}.authenticationStepDateTime
+- properties.authenticationDetails{}.authenticationStepRequirement
+- properties.authenticationDetails{}.authenticationStepResultDetail
+- properties.authenticationDetails{}.succeeded
+- properties.authenticationProcessingDetails{}.key
+- properties.authenticationProcessingDetails{}.value
+- properties.authenticationProtocol
+- properties.authenticationRequirement
+- properties.authenticationRequirementPolicies{}.detail
+- properties.authenticationRequirementPolicies{}.requirementProvider
+- properties.autonomousSystemNumber
+- properties.clientAppUsed
+- properties.clientCredentialType
+- properties.conditionalAccessStatus
+- properties.correlationId
+- properties.createdDateTime
+- properties.crossTenantAccessType
+- properties.deviceDetail.deviceId
+- properties.deviceDetail.operatingSystem
+- properties.flaggedForReview
+- properties.homeTenantId
+- properties.id
+- properties.incomingTokenType
+- properties.ipAddress
+- properties.isInteractive
+- properties.isTenantRestricted
+- properties.location.city
+- properties.location.countryOrRegion
+- properties.location.geoCoordinates.latitude
+- properties.location.geoCoordinates.longitude
+- properties.location.state
+- properties.originalRequestId
+- properties.originalTransferMethod
+- properties.processingTimeInMilliseconds
+- properties.resourceDisplayName
+- properties.resourceId
+- properties.resourceServicePrincipalId
+- properties.resourceTenantId
+- properties.riskDetail
+- properties.riskLevelAggregated
+- properties.riskLevelDuringSignIn
+- properties.riskState
+- properties.rngcStatus
+- properties.servicePrincipalId
+- properties.signInIdentifier
+- properties.signInTokenProtectionStatus
+- properties.ssoExtensionVersion
+- properties.status.additionalDetails
+- properties.status.errorCode
+- properties.status.failureReason
+- properties.tenantId
+- properties.tokenIssuerName
+- properties.tokenIssuerType
+- properties.uniqueTokenIdentifier
+- properties.userAgent
+- properties.userDisplayName
+- properties.userId
+- properties.userPrincipalName
+- properties.userType
+- punct
+- resourceId
+- resultDescription
+- resultSignature
+- resultType
+- source
+- sourcetype
+- splunk_server
+- tenantId
+- time
+- timeendpos
+- timestartpos
 example_log: '{"time": "2023-10-24T20:13:31.4449614Z", "resourceId": "/tenants/887c9144-28b8-431b-885b-764fdeefcf62/providers/Microsoft.aadiam",
   "operationName": "Sign-in activity", "operationVersion": "1.0", "category": "SignInLogs",
   "tenantId": "887c9144-28b8-431b-885b-764fdeefcf62", "resultType": "50076", "resultSignature":

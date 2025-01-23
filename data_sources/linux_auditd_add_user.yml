@@ -7,38 +7,38 @@ description: Logs activities related to the addition of a new user account on a 
   system, including details about the username, UID, and the process initiating the
   action.
 mitre_components:
-  - User Account Creation
-  - User Account Metadata
-  - OS API Execution
-  - Application Log Content
+- User Account Creation
+- User Account Metadata
+- OS API Execution
+- Application Log Content
 source: /var/log/audit/audit.log
 sourcetype: linux:audit
 separator: type
 separator_value: ADD_USER
 configuration: https://github.com/Neo23x0/auditd/blob/master/audit.rules
 supported_TA:
-  - name: Splunk Add-on for Unix and Linux
-    url: https://splunkbase.splunk.com/app/833
-    version: 9.2.0
+- name: Splunk Add-on for Unix and Linux
+  url: https://splunkbase.splunk.com/app/833
+  version: 9.2.0
 fields:
-  - msg
-  - type
-  - pid
-  - uid
-  - auid
-  - ses
-  - subj
-  - msg
-  - op
-  - id
-  - exe
-  - hostname
-  - addr
-  - terminal
-  - res
-  - UID
-  - AUID
-  - ID
-example_log: "type=ADD_USER msg=audit(1722950859.266:6994): pid=1788 uid=0 auid=1000
-  ses=1 subj=unconfined msg='op=adding user id=1002 exe=\"/usr/sbin/useradd\" hostname=ar-linux1
-  addr=? terminal=pts/1 res=success'UID=\"root\" AUID=\"ubuntu\" ID=\"unknown(1002)\""
+- msg
+- type
+- pid
+- uid
+- auid
+- ses
+- subj
+- msg
+- op
+- id
+- exe
+- hostname
+- addr
+- terminal
+- res
+- UID
+- AUID
+- ID
+example_log: 'type=ADD_USER msg=audit(1722950859.266:6994): pid=1788 uid=0 auid=1000
+  ses=1 subj=unconfined msg=''op=adding user id=1002 exe="/usr/sbin/useradd" hostname=ar-linux1
+  addr=? terminal=pts/1 res=success''UID="root" AUID="ubuntu" ID="unknown(1002)"'

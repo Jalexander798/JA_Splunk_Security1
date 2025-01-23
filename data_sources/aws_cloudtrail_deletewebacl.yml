@@ -6,92 +6,92 @@ author: Patrick Bareiss, Splunk
 description: Logs an event when a Web Access Control List (WebACL) is deleted in AWS
   CloudTrail.
 mitre_components:
-  - Cloud Service Modification
-  - Cloud Service Metadata
+- Cloud Service Modification
+- Cloud Service Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
 separator_value: DeleteWebACL
 supported_TA:
-  - name: Splunk Add-on for AWS
-    url: https://splunkbase.splunk.com/app/1876
-    version: 7.9.0
+- name: Splunk Add-on for AWS
+  url: https://splunkbase.splunk.com/app/1876
+  version: 7.9.0
 fields:
-  - _time
-  - apiVersion
-  - app
-  - awsRegion
-  - aws_account_id
-  - command
-  - date_hour
-  - date_mday
-  - date_minute
-  - date_month
-  - date_second
-  - date_wday
-  - date_year
-  - date_zone
-  - dest
-  - dvc
-  - errorCode
-  - eventCategory
-  - eventID
-  - eventName
-  - eventSource
-  - eventTime
-  - eventType
-  - eventVersion
-  - eventtype
-  - host
-  - index
-  - linecount
-  - managementEvent
-  - msg
-  - object_category
-  - product
-  - punct
-  - readOnly
-  - recipientAccountId
-  - region
-  - requestID
-  - requestParameters.changeToken
-  - requestParameters.webACLId
-  - responseElements.changeToken
-  - signature
-  - source
-  - sourceIPAddress
-  - sourcetype
-  - splunk_server
-  - src
-  - src_ip
-  - start_time
-  - tag
-  - tag::eventtype
-  - timeendpos
-  - timestartpos
-  - tlsDetails.cipherSuite
-  - tlsDetails.clientProvidedHostHeader
-  - tlsDetails.tlsVersion
-  - user
-  - userAgent
-  - userIdentity.accessKeyId
-  - userIdentity.accountId
-  - userIdentity.arn
-  - userIdentity.principalId
-  - userIdentity.type
-  - userIdentity.userName
-  - userName
-  - user_access_key
-  - user_agent
-  - user_arn
-  - user_group_id
-  - user_id
-  - user_name
-  - user_type
-  - vendor
-  - vendor_account
-  - vendor_product
-  - vendor_region
+- _time
+- apiVersion
+- app
+- awsRegion
+- aws_account_id
+- command
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
+- dest
+- dvc
+- errorCode
+- eventCategory
+- eventID
+- eventName
+- eventSource
+- eventTime
+- eventType
+- eventVersion
+- eventtype
+- host
+- index
+- linecount
+- managementEvent
+- msg
+- object_category
+- product
+- punct
+- readOnly
+- recipientAccountId
+- region
+- requestID
+- requestParameters.changeToken
+- requestParameters.webACLId
+- responseElements.changeToken
+- signature
+- source
+- sourceIPAddress
+- sourcetype
+- splunk_server
+- src
+- src_ip
+- start_time
+- tag
+- tag::eventtype
+- timeendpos
+- timestartpos
+- tlsDetails.cipherSuite
+- tlsDetails.clientProvidedHostHeader
+- tlsDetails.tlsVersion
+- user
+- userAgent
+- userIdentity.accessKeyId
+- userIdentity.accountId
+- userIdentity.arn
+- userIdentity.principalId
+- userIdentity.type
+- userIdentity.userName
+- userName
+- user_access_key
+- user_agent
+- user_arn
+- user_group_id
+- user_id
+- user_name
+- user_type
+- vendor
+- vendor_account
+- vendor_product
+- vendor_region
 example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "IAMUser", "principalId":
   "AIDAYTOGP2RLI4PXTGCEU", "arn": "arn:aws:iam::111111111111:user/gowthamaraj_cli",
   "accountId": "111111111111", "accessKeyId": "AKIAYTOGP2RLFLKADUVG", "userName":

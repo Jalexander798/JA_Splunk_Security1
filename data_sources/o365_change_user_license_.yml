@@ -6,88 +6,88 @@ author: Patrick Bareiss, Splunk
 description: Logs changes to user licenses in Microsoft 365, including additions,
   removals, or updates to service plans associated with a user account.
 mitre_components:
-  - User Account Modification
-  - User Account Metadata
-  - Cloud Service Modification
-  - Configuration Modification
+- User Account Modification
+- User Account Metadata
+- Cloud Service Modification
+- Configuration Modification
 source: o365
 sourcetype: o365:management:activity
 separator: Operation
 separator_value: Change user license.
 supported_TA:
-  - name: Splunk Add-on for Microsoft Office 365
-    url: https://splunkbase.splunk.com/app/4055
-    version: 4.7.0
+- name: Splunk Add-on for Microsoft Office 365
+  url: https://splunkbase.splunk.com/app/4055
+  version: 4.7.0
 fields:
-  - _time
-  - ActorContextId
-  - Actor{}.ID
-  - Actor{}.Type
-  - AzureActiveDirectoryEventType
-  - CreationTime
-  - ExtendedProperties{}.Name
-  - ExtendedProperties{}.Value
-  - Id
-  - InterSystemsId
-  - IntraSystemId
-  - ObjectId
-  - Operation
-  - OrganizationId
-  - RecordType
-  - ResultStatus
-  - SupportTicketId
-  - TargetContextId
-  - Target{}.ID
-  - Target{}.Type
-  - UserId
-  - UserKey
-  - UserType
-  - Version
-  - Workload
-  - action
-  - additionalDetails
-  - app
-  - authentication_service
-  - change_type
-  - command
-  - dataset_name
-  - date_hour
-  - date_mday
-  - date_minute
-  - date_month
-  - date_second
-  - date_wday
-  - date_year
-  - date_zone
-  - dest
-  - dest_name
-  - dvc
-  - event_type
-  - eventtype
-  - extendedAuditEventCategory
-  - host
-  - index
-  - linecount
-  - object
-  - object_attrs
-  - object_category
-  - punct
-  - record_type
-  - signature
-  - source
-  - sourcetype
-  - splunk_server
-  - src_user
-  - status
-  - tag
-  - tag::eventtype
-  - timeendpos
-  - timestartpos
-  - user
-  - user_id
-  - user_type
-  - vendor_account
-  - vendor_product
+- _time
+- ActorContextId
+- Actor{}.ID
+- Actor{}.Type
+- AzureActiveDirectoryEventType
+- CreationTime
+- ExtendedProperties{}.Name
+- ExtendedProperties{}.Value
+- Id
+- InterSystemsId
+- IntraSystemId
+- ObjectId
+- Operation
+- OrganizationId
+- RecordType
+- ResultStatus
+- SupportTicketId
+- TargetContextId
+- Target{}.ID
+- Target{}.Type
+- UserId
+- UserKey
+- UserType
+- Version
+- Workload
+- action
+- additionalDetails
+- app
+- authentication_service
+- change_type
+- command
+- dataset_name
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
+- dest
+- dest_name
+- dvc
+- event_type
+- eventtype
+- extendedAuditEventCategory
+- host
+- index
+- linecount
+- object
+- object_attrs
+- object_category
+- punct
+- record_type
+- signature
+- source
+- sourcetype
+- splunk_server
+- src_user
+- status
+- tag
+- tag::eventtype
+- timeendpos
+- timestartpos
+- user
+- user_id
+- user_type
+- vendor_account
+- vendor_product
 example_log: '{"CreationTime": "2023-09-11T15:55:46", "Id": "1e39f32d-081d-4494-994a-533b57f91df7",
   "Operation": "Change user license.", "OrganizationId": "bbad9541-eb53-4533-bcef-2b76182c3b75",
   "RecordType": 8, "ResultStatus": "Success", "UserKey": "1003BFFD98415B4E@splunkresearch.onmicrosoft.com",

@@ -6,81 +6,81 @@ author: Patrick Bareiss, Splunk
 description: Logs access to mailbox items in Microsoft 365, including details about
   the user accessing the items, the accessed content, and the method of access.
 mitre_components:
-  - File Access
-  - User Account Metadata
-  - Application Log Content
-  - Active Directory Object Access
+- File Access
+- User Account Metadata
+- Application Log Content
+- Active Directory Object Access
 source: o365
 sourcetype: o365:management:activity
 separator: Operation
 separator_value: MailItemsAccessed
 supported_TA:
-  - name: Splunk Add-on for Microsoft Office 365
-    url: https://splunkbase.splunk.com/app/4055
-    version: 4.7.0
+- name: Splunk Add-on for Microsoft Office 365
+  url: https://splunkbase.splunk.com/app/4055
+  version: 4.7.0
 fields:
-  - _time
-  - AppId
-  - ClientAppId
-  - ClientIPAddress
-  - ClientInfoString
-  - CreationTime
-  - ExternalAccess
-  - Folders{}.FolderItems{}.InternetMessageId
-  - Folders{}.FolderItems{}.SizeInBytes
-  - Folders{}.Id
-  - Folders{}.Path
-  - Id
-  - InternalLogonType
-  - IsThrottled
-  - LogonType
-  - LogonUserSid
-  - MailAccessType
-  - MailboxGuid
-  - MailboxOwnerSid
-  - MailboxOwnerUPN
-  - Operation
-  - OperationCount
-  - OperationProperties{}.Name
-  - OperationProperties{}.Value
-  - OrganizationId
-  - OrganizationName
-  - OriginatingServer
-  - RecordType
-  - ResultStatus
-  - UserId
-  - UserKey
-  - UserType
-  - Version
-  - Workload
-  - app
-  - authentication_service
-  - command
-  - date_hour
-  - date_mday
-  - date_minute
-  - date_month
-  - date_second
-  - date_wday
-  - date_year
-  - date_zone
-  - dvc
-  - host
-  - index
-  - linecount
-  - punct
-  - signature
-  - source
-  - sourcetype
-  - splunk_server
-  - status
-  - timeendpos
-  - timestartpos
-  - user
-  - user_id
-  - user_type
-  - vendor_account
-  - vendor_product
+- _time
+- AppId
+- ClientAppId
+- ClientIPAddress
+- ClientInfoString
+- CreationTime
+- ExternalAccess
+- Folders{}.FolderItems{}.InternetMessageId
+- Folders{}.FolderItems{}.SizeInBytes
+- Folders{}.Id
+- Folders{}.Path
+- Id
+- InternalLogonType
+- IsThrottled
+- LogonType
+- LogonUserSid
+- MailAccessType
+- MailboxGuid
+- MailboxOwnerSid
+- MailboxOwnerUPN
+- Operation
+- OperationCount
+- OperationProperties{}.Name
+- OperationProperties{}.Value
+- OrganizationId
+- OrganizationName
+- OriginatingServer
+- RecordType
+- ResultStatus
+- UserId
+- UserKey
+- UserType
+- Version
+- Workload
+- app
+- authentication_service
+- command
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
+- dvc
+- host
+- index
+- linecount
+- punct
+- signature
+- source
+- sourcetype
+- splunk_server
+- status
+- timeendpos
+- timestartpos
+- user
+- user_id
+- user_type
+- vendor_account
+- vendor_product
 example_log: '{"CreationTime": "2024-02-01T16:07:34", "Id": "9cef02e9-4bfa-4c73-be7d-9dad68b9cea8",
   "Operation": "MailItemsAccessed", "OrganizationId": "75243ab2-44f8-435c-a7a6-b479385df6d4",
   "RecordType": 50, "ResultStatus": "Succeeded", "UserKey": "100320030DF47B14", "UserType":

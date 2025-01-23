@@ -6,11 +6,11 @@ author: Patrick Bareiss, Splunk
 description: Logs HTTP traffic analyzed by Zeek (formerly Bro), including details
   such as request methods, URLs, user agents, response codes, and headers.
 mitre_components:
-  - Network Traffic Content
-  - Network Traffic Flow
-  - Response Content
-  - Response Metadata
-  - Application Log Content
+- Network Traffic Content
+- Network Traffic Flow
+- Response Content
+- Response Metadata
+- Application Log Content
 source: bro:http:json
 sourcetype: bro:http:json
 supported_TA: []

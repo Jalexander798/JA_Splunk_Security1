@@ -6,10 +6,10 @@ author: Patrick Bareiss, Splunk
 description: Logs the inventory of System Integrity Policies (SIP) on a system retrieved
   via PowerShell, including details about policy configurations and statuses.
 mitre_components:
-  - Configuration Modification
-  - Host Status
-  - Application Log Content
-  - OS API Execution
+- Configuration Modification
+- Host Status
+- Application Log Content
+- OS API Execution
 source: powershell://SubjectInterfacePackage
 sourcetype: PwSh:SubjectInterfacePackage
 supported_TA: []

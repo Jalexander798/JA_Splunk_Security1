@@ -6,90 +6,90 @@ author: Patrick Bareiss, Splunk
 description: Logs the addition of a member to a role in Microsoft 365, including details
   about the role, the added member, and the user or administrator performing the action.
 mitre_components:
-  - Group Modification
-  - Group Metadata
-  - User Account Metadata
-  - Cloud Service Modification
+- Group Modification
+- Group Metadata
+- User Account Metadata
+- Cloud Service Modification
 source: o365
 sourcetype: o365:management:activity
 separator: Operation
 separator_value: Add member to role.
 supported_TA:
-  - name: Splunk Add-on for Microsoft Office 365
-    url: https://splunkbase.splunk.com/app/4055
-    version: 4.7.0
+- name: Splunk Add-on for Microsoft Office 365
+  url: https://splunkbase.splunk.com/app/4055
+  version: 4.7.0
 fields:
-  - _time
-  - ActorContextId
-  - Actor{}.ID
-  - Actor{}.Type
-  - AzureActiveDirectoryEventType
-  - CreationTime
-  - ExtendedProperties{}.Name
-  - ExtendedProperties{}.Value
-  - Id
-  - InterSystemsId
-  - IntraSystemId
-  - ModifiedProperties{}.Name
-  - ModifiedProperties{}.NewValue
-  - ModifiedProperties{}.OldValue
-  - ObjectId
-  - Operation
-  - OrganizationId
-  - RecordType
-  - ResultStatus
-  - SupportTicketId
-  - TargetContextId
-  - Target{}.ID
-  - Target{}.Type
-  - UserId
-  - UserKey
-  - UserType
-  - Version
-  - Workload
-  - action
-  - additionalDetails
-  - app
-  - authentication_service
-  - change_type
-  - command
-  - dataset_name
-  - date_hour
-  - date_mday
-  - date_minute
-  - date_month
-  - date_second
-  - date_wday
-  - date_year
-  - date_zone
-  - dest
-  - dest_name
-  - dvc
-  - event_type
-  - eventtype
-  - extendedAuditEventCategory
-  - host
-  - index
-  - linecount
-  - object
-  - object_attrs
-  - object_category
-  - punct
-  - record_type
-  - signature
-  - source
-  - sourcetype
-  - splunk_server
-  - status
-  - tag
-  - tag::eventtype
-  - timeendpos
-  - timestartpos
-  - user
-  - user_id
-  - user_type
-  - vendor_account
-  - vendor_product
+- _time
+- ActorContextId
+- Actor{}.ID
+- Actor{}.Type
+- AzureActiveDirectoryEventType
+- CreationTime
+- ExtendedProperties{}.Name
+- ExtendedProperties{}.Value
+- Id
+- InterSystemsId
+- IntraSystemId
+- ModifiedProperties{}.Name
+- ModifiedProperties{}.NewValue
+- ModifiedProperties{}.OldValue
+- ObjectId
+- Operation
+- OrganizationId
+- RecordType
+- ResultStatus
+- SupportTicketId
+- TargetContextId
+- Target{}.ID
+- Target{}.Type
+- UserId
+- UserKey
+- UserType
+- Version
+- Workload
+- action
+- additionalDetails
+- app
+- authentication_service
+- change_type
+- command
+- dataset_name
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
+- dest
+- dest_name
+- dvc
+- event_type
+- eventtype
+- extendedAuditEventCategory
+- host
+- index
+- linecount
+- object
+- object_attrs
+- object_category
+- punct
+- record_type
+- signature
+- source
+- sourcetype
+- splunk_server
+- status
+- tag
+- tag::eventtype
+- timeendpos
+- timestartpos
+- user
+- user_id
+- user_type
+- vendor_account
+- vendor_product
 example_log: '{"CreationTime": "2023-10-20T16:50:46", "Id": "30a8b107-b190-406c-9b80-c3f5c3a29129",
   "Operation": "Add member to role.", "OrganizationId": "d8211c86-3244-409b-8c4f-ae27ed34b4a5",
   "RecordType": 8, "ResultStatus": "Success", "UserKey": "1003BFFD98415B4E@splunkresearch.onmicrosoft.com",

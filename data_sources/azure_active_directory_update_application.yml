@@ -6,68 +6,68 @@ author: Patrick Bareiss, Splunk
 description: Logs an event when an application in Azure Active Directory is updated,
   such as changes to its settings or permissions.
 mitre_components:
-  - Service Modification
-  - User Account Modification
-  - Cloud Service Modification
+- Service Modification
+- User Account Modification
+- Cloud Service Modification
 source: Azure AD
 sourcetype: azure:monitor:aad
 separator: operationName
 separator_value: Update application
 supported_TA:
-  - name: Splunk Add-on for Microsoft Cloud Services
-    url: https://splunkbase.splunk.com/app/3110
-    version: 5.4.1
+- name: Splunk Add-on for Microsoft Cloud Services
+  url: https://splunkbase.splunk.com/app/3110
+  version: 5.4.1
 fields:
-  - _time
-  - Level
-  - category
-  - correlationId
-  - date_hour
-  - date_mday
-  - date_minute
-  - date_month
-  - date_second
-  - date_wday
-  - date_year
-  - date_zone
-  - durationMs
-  - host
-  - index
-  - linecount
-  - operationName
-  - operationVersion
-  - properties.activityDateTime
-  - properties.activityDisplayName
-  - properties.additionalDetails{}.key
-  - properties.additionalDetails{}.value
-  - properties.category
-  - properties.correlationId
-  - properties.id
-  - properties.initiatedBy.user.displayName
-  - properties.initiatedBy.user.id
-  - properties.initiatedBy.user.ipAddress
-  - properties.initiatedBy.user.userPrincipalName
-  - properties.loggedByService
-  - properties.operationType
-  - properties.result
-  - properties.resultReason
-  - properties.targetResources{}.displayName
-  - properties.targetResources{}.id
-  - properties.targetResources{}.modifiedProperties{}.displayName
-  - properties.targetResources{}.modifiedProperties{}.newValue
-  - properties.targetResources{}.modifiedProperties{}.oldValue
-  - properties.targetResources{}.type
-  - properties.userAgent
-  - punct
-  - resourceId
-  - resultSignature
-  - source
-  - sourcetype
-  - splunk_server
-  - tenantId
-  - time
-  - timeendpos
-  - timestartpos
+- _time
+- Level
+- category
+- correlationId
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
+- durationMs
+- host
+- index
+- linecount
+- operationName
+- operationVersion
+- properties.activityDateTime
+- properties.activityDisplayName
+- properties.additionalDetails{}.key
+- properties.additionalDetails{}.value
+- properties.category
+- properties.correlationId
+- properties.id
+- properties.initiatedBy.user.displayName
+- properties.initiatedBy.user.id
+- properties.initiatedBy.user.ipAddress
+- properties.initiatedBy.user.userPrincipalName
+- properties.loggedByService
+- properties.operationType
+- properties.result
+- properties.resultReason
+- properties.targetResources{}.displayName
+- properties.targetResources{}.id
+- properties.targetResources{}.modifiedProperties{}.displayName
+- properties.targetResources{}.modifiedProperties{}.newValue
+- properties.targetResources{}.modifiedProperties{}.oldValue
+- properties.targetResources{}.type
+- properties.userAgent
+- punct
+- resourceId
+- resultSignature
+- source
+- sourcetype
+- splunk_server
+- tenantId
+- time
+- timeendpos
+- timestartpos
 example_log: '{"time": "2024-01-29T21:31:03.0102031Z", "resourceId": "/tenants/75243ab2-44f8-435c-a7a6-b479385df6d4/providers/Microsoft.aadiam",
   "operationName": "Update application", "operationVersion": "1.0", "category": "AuditLogs",
   "tenantId": "75243ab2-44f8-435c-a7a6-b479385df6d4", "resultSignature": "None", "durationMs":

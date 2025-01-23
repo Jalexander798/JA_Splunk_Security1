@@ -7,87 +7,87 @@ description: Logs the assignment of an application role to a service principal i
   Microsoft 365, including details about the role, service principal, and application
   involved.
 mitre_components:
-  - Cloud Service Modification
-  - Cloud Service Metadata
-  - User Account Metadata
-  - Group Modification
+- Cloud Service Modification
+- Cloud Service Metadata
+- User Account Metadata
+- Group Modification
 source: o365
 sourcetype: o365:management:activity
 separator: Operation
 separator_value: Add app role assignment to service principal.
 supported_TA:
-  - name: Splunk Add-on for Microsoft Office 365
-    url: https://splunkbase.splunk.com/app/4055
-    version: 4.7.0
+- name: Splunk Add-on for Microsoft Office 365
+  url: https://splunkbase.splunk.com/app/4055
+  version: 4.7.0
 fields:
-  - _time
-  - ActorContextId
-  - Actor{}.ID
-  - Actor{}.Type
-  - AzureActiveDirectoryEventType
-  - CreationTime
-  - ExtendedProperties{}.Name
-  - ExtendedProperties{}.Value
-  - Id
-  - InterSystemsId
-  - IntraSystemId
-  - ModifiedProperties{}.Name
-  - ModifiedProperties{}.NewValue
-  - ModifiedProperties{}.OldValue
-  - ObjectId
-  - Operation
-  - OrganizationId
-  - RecordType
-  - ResultStatus
-  - SupportTicketId
-  - TargetContextId
-  - Target{}.ID
-  - Target{}.Type
-  - UserId
-  - UserKey
-  - UserType
-  - Version
-  - Workload
-  - additionalDetails
-  - app
-  - authentication_service
-  - command
-  - date_hour
-  - date_mday
-  - date_minute
-  - date_month
-  - date_second
-  - date_wday
-  - date_year
-  - date_zone
-  - dest
-  - dest_name
-  - dvc
-  - event_type
-  - eventtype
-  - extendedAuditEventCategory
-  - host
-  - index
-  - linecount
-  - object
-  - punct
-  - record_type
-  - signature
-  - source
-  - sourcetype
-  - splunk_server
-  - status
-  - tag
-  - tag::eventtype
-  - timeendpos
-  - timestartpos
-  - user
-  - user_agent
-  - user_agent_change
-  - user_id
-  - user_type
-  - vendor_account
-  - vendor_product
+- _time
+- ActorContextId
+- Actor{}.ID
+- Actor{}.Type
+- AzureActiveDirectoryEventType
+- CreationTime
+- ExtendedProperties{}.Name
+- ExtendedProperties{}.Value
+- Id
+- InterSystemsId
+- IntraSystemId
+- ModifiedProperties{}.Name
+- ModifiedProperties{}.NewValue
+- ModifiedProperties{}.OldValue
+- ObjectId
+- Operation
+- OrganizationId
+- RecordType
+- ResultStatus
+- SupportTicketId
+- TargetContextId
+- Target{}.ID
+- Target{}.Type
+- UserId
+- UserKey
+- UserType
+- Version
+- Workload
+- additionalDetails
+- app
+- authentication_service
+- command
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
+- dest
+- dest_name
+- dvc
+- event_type
+- eventtype
+- extendedAuditEventCategory
+- host
+- index
+- linecount
+- object
+- punct
+- record_type
+- signature
+- source
+- sourcetype
+- splunk_server
+- status
+- tag
+- tag::eventtype
+- timeendpos
+- timestartpos
+- user
+- user_agent
+- user_agent_change
+- user_id
+- user_type
+- vendor_account
+- vendor_product
 example_log: '{"CreationTime": "2024-02-08T21:49:53", "Id": "a6bee61d-8b3f-42e1-b4fa-778fb05c43ac",
   "Operation": "Add app role assignment to service principal.", "OrganizationId":
   "75243ab2-44f8-435c-a7a6-b479385df6d4", "RecordType": 8, "ResultStatus": "Success",

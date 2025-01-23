@@ -6,109 +6,109 @@ author: Patrick Bareiss, Splunk
 description: Logs attempts to assume roles via SAML authentication in AWS, including
   details of identity provider and role mapping.
 mitre_components:
-  - User Account Authentication
-  - Logon Session Creation
-  - User Account Metadata
-  - Cloud Service Metadata
-  - Instance Modification
+- User Account Authentication
+- Logon Session Creation
+- User Account Metadata
+- Cloud Service Metadata
+- Instance Modification
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
 separator_value: AssumeRoleWithSAML
 supported_TA:
-  - name: Splunk Add-on for AWS
-    url: https://splunkbase.splunk.com/app/1876
-    version: 7.9.0
+- name: Splunk Add-on for AWS
+  url: https://splunkbase.splunk.com/app/1876
+  version: 7.9.0
 fields:
-  - _time
-  - action
-  - app
-  - awsRegion
-  - change_type
-  - command
-  - date_hour
-  - date_mday
-  - date_minute
-  - date_month
-  - date_second
-  - date_wday
-  - date_year
-  - date_zone
-  - dest
-  - dvc
-  - errorCode
-  - eventCategory
-  - eventID
-  - eventName
-  - eventSource
-  - eventTime
-  - eventType
-  - eventVersion
-  - eventtype
-  - host
-  - index
-  - linecount
-  - managementEvent
-  - msg
-  - object_category
-  - product
-  - punct
-  - readOnly
-  - recipientAccountId
-  - region
-  - requestID
-  - requestParameters.durationSeconds
-  - requestParameters.principalArn
-  - requestParameters.roleArn
-  - requestParameters.roleSessionName
-  - requestParameters.sAMLAssertionID
-  - resources{}.ARN
-  - resources{}.accountId
-  - resources{}.type
-  - responseElements.assumedRoleUser.arn
-  - responseElements.assumedRoleUser.assumedRoleId
-  - responseElements.audience
-  - responseElements.credentials.accessKeyId
-  - responseElements.credentials.expiration
-  - responseElements.credentials.sessionToken
-  - responseElements.issuer
-  - responseElements.nameQualifier
-  - responseElements.subject
-  - responseElements.subjectType
-  - signature
-  - source
-  - sourceIPAddress
-  - sourcetype
-  - splunk_server
-  - src
-  - src_ip
-  - src_user
-  - src_user_id
-  - src_user_type
-  - start_time
-  - status
-  - tag
-  - tag::action
-  - tag::eventtype
-  - temp_access_key
-  - timeendpos
-  - timestartpos
-  - user
-  - userAgent
-  - userIdentity.identityProvider
-  - userIdentity.principalId
-  - userIdentity.type
-  - userIdentity.userName
-  - user_agent
-  - user_arn
-  - user_id
-  - user_name
-  - user_role
-  - user_type
-  - vendor
-  - vendor_account
-  - vendor_product
-  - vendor_region
+- _time
+- action
+- app
+- awsRegion
+- change_type
+- command
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
+- dest
+- dvc
+- errorCode
+- eventCategory
+- eventID
+- eventName
+- eventSource
+- eventTime
+- eventType
+- eventVersion
+- eventtype
+- host
+- index
+- linecount
+- managementEvent
+- msg
+- object_category
+- product
+- punct
+- readOnly
+- recipientAccountId
+- region
+- requestID
+- requestParameters.durationSeconds
+- requestParameters.principalArn
+- requestParameters.roleArn
+- requestParameters.roleSessionName
+- requestParameters.sAMLAssertionID
+- resources{}.ARN
+- resources{}.accountId
+- resources{}.type
+- responseElements.assumedRoleUser.arn
+- responseElements.assumedRoleUser.assumedRoleId
+- responseElements.audience
+- responseElements.credentials.accessKeyId
+- responseElements.credentials.expiration
+- responseElements.credentials.sessionToken
+- responseElements.issuer
+- responseElements.nameQualifier
+- responseElements.subject
+- responseElements.subjectType
+- signature
+- source
+- sourceIPAddress
+- sourcetype
+- splunk_server
+- src
+- src_ip
+- src_user
+- src_user_id
+- src_user_type
+- start_time
+- status
+- tag
+- tag::action
+- tag::eventtype
+- temp_access_key
+- timeendpos
+- timestartpos
+- user
+- userAgent
+- userIdentity.identityProvider
+- userIdentity.principalId
+- userIdentity.type
+- userIdentity.userName
+- user_agent
+- user_arn
+- user_id
+- user_name
+- user_role
+- user_type
+- vendor
+- vendor_account
+- vendor_product
+- vendor_region
 example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "SAMLUser", "principalId":
   "ZRu9MRAjiG9tvi1QBNfdI664G5A=:rodsoto@rodsoto.onmicrosoft.com", "userName": "rodsoto@rodsoto.onmicrosoft.com",
   "identityProvider": "ZRu9MRAjiG9tvi1QBNfdI664G5A="}, "eventTime": "2021-01-22T03:44:16Z",

@@ -6,52 +6,52 @@ author: Patrick Bareiss, Splunk
 description: Logs successful login attempts to Google Workspace accounts, including
   details about the user, IP address, and session metadata.
 mitre_components:
-  - User Account Authentication
-  - Logon Session Creation
-  - User Account Metadata
-  - Logon Session Metadata
+- User Account Authentication
+- Logon Session Creation
+- User Account Metadata
+- Logon Session Metadata
 source: gws:reports:admin
 sourcetype: gws:reports:admin
 separator: event.name
 separator_value: login_success
 supported_TA:
-  - name: Splunk Add-on for Google Workspace
-    url: https://splunkbase.splunk.com/app/5556
-    version: 3.0.2
+- name: Splunk Add-on for Google Workspace
+  url: https://splunkbase.splunk.com/app/5556
+  version: 3.0.2
 fields:
-  - _time
-  - actor.email
-  - actor.profileId
-  - date_hour
-  - date_mday
-  - date_minute
-  - date_month
-  - date_second
-  - date_wday
-  - date_year
-  - date_zone
-  - etag
-  - event.name
-  - event.parameters{}.boolValue
-  - event.parameters{}.multiValue{}
-  - event.parameters{}.name
-  - event.parameters{}.value
-  - event.type
-  - host
-  - id.applicationName
-  - id.customerId
-  - id.time
-  - id.uniqueQualifier
-  - index
-  - ipAddress
-  - kind
-  - linecount
-  - punct
-  - source
-  - sourcetype
-  - splunk_server
-  - timeendpos
-  - timestartpos
+- _time
+- actor.email
+- actor.profileId
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
+- etag
+- event.name
+- event.parameters{}.boolValue
+- event.parameters{}.multiValue{}
+- event.parameters{}.name
+- event.parameters{}.value
+- event.type
+- host
+- id.applicationName
+- id.customerId
+- id.time
+- id.uniqueQualifier
+- index
+- ipAddress
+- kind
+- linecount
+- punct
+- source
+- sourcetype
+- splunk_server
+- timeendpos
+- timestartpos
 example_log: '{"kind": "admin#reports#activity", "id": {"time": "2022-10-13T20:57:35.833Z",
   "uniqueQualifier": "437744618349", "applicationName": "login", "customerId": "C046r85ir"},
   "etag": "\"JCPRxFaiNR1s5TJ6ecIH8OpGdY4efiOYXbIB65itOzY/OgAbD-Tz8hSD1vUJWw7NLiJ5SF4\"",

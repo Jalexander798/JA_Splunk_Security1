@@ -6,114 +6,114 @@ author: Patrick Bareiss, Splunk
 description: Logs the creation of new AWS KMS keys, including details of key properties
   and associated metadata.
 mitre_components:
-  - Cloud Service Creation
-  - Cloud Service Metadata
-  - Instance Creation
-  - Volume Metadata
+- Cloud Service Creation
+- Cloud Service Metadata
+- Instance Creation
+- Volume Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
 separator_value: CreateKey
 supported_TA:
-  - name: Splunk Add-on for AWS
-    url: https://splunkbase.splunk.com/app/1876
-    version: 7.9.0
+- name: Splunk Add-on for AWS
+  url: https://splunkbase.splunk.com/app/1876
+  version: 7.9.0
 fields:
-  - _time
-  - app
-  - awsRegion
-  - aws_account_id
-  - command
-  - date_hour
-  - date_mday
-  - date_minute
-  - date_month
-  - date_second
-  - date_wday
-  - date_year
-  - date_zone
-  - dest
-  - dvc
-  - errorCode
-  - eventCategory
-  - eventID
-  - eventName
-  - eventSource
-  - eventTime
-  - eventType
-  - eventVersion
-  - eventtype
-  - host
-  - index
-  - linecount
-  - managementEvent
-  - msg
-  - object_category
-  - product
-  - punct
-  - readOnly
-  - recipientAccountId
-  - region
-  - requestID
-  - requestParameters.bypassPolicyLockoutSafetyCheck
-  - requestParameters.customerMasterKeySpec
-  - requestParameters.description
-  - requestParameters.keyUsage
-  - requestParameters.origin
-  - requestParameters.policy
-  - resources{}.ARN
-  - resources{}.accountId
-  - resources{}.type
-  - responseElements.keyMetadata.aWSAccountId
-  - responseElements.keyMetadata.arn
-  - responseElements.keyMetadata.creationDate
-  - responseElements.keyMetadata.customerMasterKeySpec
-  - responseElements.keyMetadata.description
-  - responseElements.keyMetadata.enabled
-  - responseElements.keyMetadata.encryptionAlgorithms{}
-  - responseElements.keyMetadata.keyId
-  - responseElements.keyMetadata.keyManager
-  - responseElements.keyMetadata.keyState
-  - responseElements.keyMetadata.keyUsage
-  - responseElements.keyMetadata.origin
-  - signature
-  - source
-  - sourceIPAddress
-  - sourcetype
-  - splunk_server
-  - src
-  - src_ip
-  - start_time
-  - tag
-  - tag::eventtype
-  - timeendpos
-  - timestartpos
-  - user
-  - userAgent
-  - userIdentity.accessKeyId
-  - userIdentity.accountId
-  - userIdentity.arn
-  - userIdentity.principalId
-  - userIdentity.sessionContext.attributes.creationDate
-  - userIdentity.sessionContext.attributes.mfaAuthenticated
-  - userIdentity.sessionContext.sessionIssuer.accountId
-  - userIdentity.sessionContext.sessionIssuer.arn
-  - userIdentity.sessionContext.sessionIssuer.principalId
-  - userIdentity.sessionContext.sessionIssuer.type
-  - userIdentity.sessionContext.sessionIssuer.userName
-  - userIdentity.type
-  - userName
-  - user_access_key
-  - user_agent
-  - user_arn
-  - user_group_id
-  - user_id
-  - user_name
-  - user_type
-  - vendor
-  - vendor_account
-  - vendor_product
-  - vendor_region
+- _time
+- app
+- awsRegion
+- aws_account_id
+- command
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
+- dest
+- dvc
+- errorCode
+- eventCategory
+- eventID
+- eventName
+- eventSource
+- eventTime
+- eventType
+- eventVersion
+- eventtype
+- host
+- index
+- linecount
+- managementEvent
+- msg
+- object_category
+- product
+- punct
+- readOnly
+- recipientAccountId
+- region
+- requestID
+- requestParameters.bypassPolicyLockoutSafetyCheck
+- requestParameters.customerMasterKeySpec
+- requestParameters.description
+- requestParameters.keyUsage
+- requestParameters.origin
+- requestParameters.policy
+- resources{}.ARN
+- resources{}.accountId
+- resources{}.type
+- responseElements.keyMetadata.aWSAccountId
+- responseElements.keyMetadata.arn
+- responseElements.keyMetadata.creationDate
+- responseElements.keyMetadata.customerMasterKeySpec
+- responseElements.keyMetadata.description
+- responseElements.keyMetadata.enabled
+- responseElements.keyMetadata.encryptionAlgorithms{}
+- responseElements.keyMetadata.keyId
+- responseElements.keyMetadata.keyManager
+- responseElements.keyMetadata.keyState
+- responseElements.keyMetadata.keyUsage
+- responseElements.keyMetadata.origin
+- signature
+- source
+- sourceIPAddress
+- sourcetype
+- splunk_server
+- src
+- src_ip
+- start_time
+- tag
+- tag::eventtype
+- timeendpos
+- timestartpos
+- user
+- userAgent
+- userIdentity.accessKeyId
+- userIdentity.accountId
+- userIdentity.arn
+- userIdentity.principalId
+- userIdentity.sessionContext.attributes.creationDate
+- userIdentity.sessionContext.attributes.mfaAuthenticated
+- userIdentity.sessionContext.sessionIssuer.accountId
+- userIdentity.sessionContext.sessionIssuer.arn
+- userIdentity.sessionContext.sessionIssuer.principalId
+- userIdentity.sessionContext.sessionIssuer.type
+- userIdentity.sessionContext.sessionIssuer.userName
+- userIdentity.type
+- userName
+- user_access_key
+- user_agent
+- user_arn
+- user_group_id
+- user_id
+- user_name
+- user_type
+- vendor
+- vendor_account
+- vendor_product
+- vendor_region
 example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "principalId":
   "AROAIJIESMXKGCJRCTPR6:pbareiss@splunk.local", "arn": "arn:aws:sts::111111111111:assumed-role/okta_adm_role/pbareiss@splunk.local",
   "accountId": "111111111111", "accessKeyId": "ASIAYTOGP2RLK74OPBDR", "sessionContext":

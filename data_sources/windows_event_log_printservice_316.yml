@@ -5,59 +5,59 @@ date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs an event when printer drivers are installed or updated on the system.
 mitre_components:
-  - Driver Load
-  - Driver Metadata
+- Driver Load
+- Driver Metadata
 source: WinEventLog:Microsoft-Windows-PrintService/Admin
 sourcetype: WinEventLog
 separator: EventCode
 separator_value: 316
 supported_TA:
-  - name: Splunk Add-on for Microsoft Windows
-    url: https://splunkbase.splunk.com/app/742
-    version: 9.0.1
+- name: Splunk Add-on for Microsoft Windows
+  url: https://splunkbase.splunk.com/app/742
+  version: 9.0.1
 fields:
-  - _time
-  - ComputerName
-  - EventCode
-  - EventType
-  - Keywords
-  - LogName
-  - Message
-  - OpCode
-  - RecordNumber
-  - Sid
-  - SidType
-  - SourceName
-  - TaskCategory
-  - Type
-  - User
-  - category
-  - date_hour
-  - date_mday
-  - date_minute
-  - date_month
-  - date_second
-  - date_wday
-  - date_year
-  - date_zone
-  - dvc
-  - dvc_nt_host
-  - event_id
-  - eventtype
-  - host
-  - id
-  - index
-  - linecount
-  - punct
-  - severity
-  - severity_id
-  - signature_id
-  - source
-  - sourcetype
-  - splunk_server
-  - tag
-  - tag::eventtype
-  - timeendpos
-  - timestartpos
-  - vendor_product
+- _time
+- ComputerName
+- EventCode
+- EventType
+- Keywords
+- LogName
+- Message
+- OpCode
+- RecordNumber
+- Sid
+- SidType
+- SourceName
+- TaskCategory
+- Type
+- User
+- category
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
+- dvc
+- dvc_nt_host
+- event_id
+- eventtype
+- host
+- id
+- index
+- linecount
+- punct
+- severity
+- severity_id
+- signature_id
+- source
+- sourcetype
+- splunk_server
+- tag
+- tag::eventtype
+- timeendpos
+- timestartpos
+- vendor_product
 example_log: 07/01/2021 04:20:47 PM

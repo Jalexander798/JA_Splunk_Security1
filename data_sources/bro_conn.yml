@@ -6,11 +6,10 @@ author: Jacob Delgado, SnapAttack
 description: Logs network connection metadata captured by Zeek (formerly Bro), including
   details such as source and destination IPs, ports, connection state, and protocol.
 mitre_components:
-  - Network Connection Creation
-  - Network Traffic Flow
-  - Response Metadata
-  - Application Log Content
+- Network Connection Creation
+- Network Traffic Flow
+- Response Metadata
+- Application Log Content
 source: bro:conn:json
 sourcetype: bro:conn:json
 supported_TA: []
-
