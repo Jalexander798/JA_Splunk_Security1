@@ -1,72 +1,73 @@
 name: osquery
 id: 7ec4d7c8-c1d0-423a-9169-261f6adb74c0
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Logs system queries performed using osquery, including details about processes, file access, network activity, and system configurations.
+description: Logs system queries performed using osquery, including details about
+  processes, file access, network activity, and system configurations.
 mitre_components:
-- Process Metadata
-- File Access
-- Network Traffic Content
-- Host Status
-- Application Log Content
+  - Process Metadata
+  - File Access
+  - Network Traffic Content
+  - Host Status
+  - Application Log Content
 source: osquery
 sourcetype: osquery:results
 supported_TA: []
 fields:
-- _time
-- calendarTime
-- columns.cdhash
-- columns.child_pid
-- columns.cmdline
-- columns.cmdline_count
-- columns.cwd
-- columns.egid
-- columns.env
-- columns.env_count
-- columns.euid
-- columns.event_type
-- columns.exit_code
-- columns.gid
-- columns.global_seq_num
-- columns.original_parent
-- columns.parent
-- columns.path
-- columns.pid
-- columns.platform_binary
-- columns.seq_num
-- columns.signing_id
-- columns.team_id
-- columns.time
-- columns.uid
-- columns.username
-- columns.version
-- counter
-- dest
-- epoch
-- eventtype
-- host
-- hostIdentifier
-- index
-- linecount
-- name
-- numerics
-- parent_process_id
-- process_current_directory
-- process_id
-- process_path
-- punct
-- source
-- sourcetype
-- splunk_server
-- src
-- subject
-- tag
-- tag::eventtype
-- timestamp
-- unixTime
-- user_id
-- vendor_product
+  - _time
+  - calendarTime
+  - columns.cdhash
+  - columns.child_pid
+  - columns.cmdline
+  - columns.cmdline_count
+  - columns.cwd
+  - columns.egid
+  - columns.env
+  - columns.env_count
+  - columns.euid
+  - columns.event_type
+  - columns.exit_code
+  - columns.gid
+  - columns.global_seq_num
+  - columns.original_parent
+  - columns.parent
+  - columns.path
+  - columns.pid
+  - columns.platform_binary
+  - columns.seq_num
+  - columns.signing_id
+  - columns.team_id
+  - columns.time
+  - columns.uid
+  - columns.username
+  - columns.version
+  - counter
+  - dest
+  - epoch
+  - eventtype
+  - host
+  - hostIdentifier
+  - index
+  - linecount
+  - name
+  - numerics
+  - parent_process_id
+  - process_current_directory
+  - process_id
+  - process_path
+  - punct
+  - source
+  - sourcetype
+  - splunk_server
+  - src
+  - subject
+  - tag
+  - tag::eventtype
+  - timestamp
+  - unixTime
+  - user_id
+  - vendor_product
 example_log: '{"name":"es_process_events","hostIdentifier":"HackBook.local","calendarTime":"Tue
   Mar 29 13:03:51 2022 UTC","unixTime":1648559031,"epoch":0,"counter":82,"numerics":false,"columns":{"cdhash":"f63c5fbfcf1484b20aa4407a26e087fe3fe28146","child_pid":"","cmdline":"plutil
   --help ","cmdline_count":"2","cwd":"/Users/patrick","egid":"20","env":"TERM_SESSION_ID=w0t1p0:93AA9D79-7028-49F1-A93D-4EAEFB7BA6E3

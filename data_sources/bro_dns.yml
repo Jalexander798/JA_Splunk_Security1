@@ -1,15 +1,16 @@
 name: Bro dns
 id: a4576cbf-06cc-4ed0-976c-bf06ccaed011
-version: 1
-date: '2025-20-01'
+version: 2
+date: '2025-01-23'
 author: Jacob Delgado, SnapAttack
-description: Logs DNS queries and responses captured by Zeek (formerly Bro), including details such as queried domains, resolved IPs, query types, and response codes.
+description: Logs DNS queries and responses captured by Zeek (formerly Bro), including
+  details such as queried domains, resolved IPs, query types, and response codes.
 mitre_components:
-- Active DNS
-- Passive DNS
-- Network Traffic Content
-- Network Traffic Flow
-- Response Metadata
+  - Active DNS
+  - Passive DNS
+  - Network Traffic Content
+  - Network Traffic Flow
+  - Response Metadata
 source: bro:dns:json
 sourcetype: bro:dns:json
 supported_TA: []

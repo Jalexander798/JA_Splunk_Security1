@@ -1,7 +1,7 @@
 name: Detect Outbound LDAP Traffic
 id: 5e06e262-d7cd-4216-b2f8-27b437e18458
-version: 4
-date: '2024-11-15'
+version: 5
+date: '2025-01-23'
 author: Bhavin Patel, Johan Bjerke, Splunk
 status: production
 type: Hunting
@@ -13,7 +13,10 @@ description: The following analytic identifies outbound LDAP traffic to external
   this to access sensitive directory information, leading to data breaches or further
   network compromise.
 data_source:
-- Bro
+- Bro conn
+- Palo Alto Network Traffic
+- Splunk Stream TCP
+- Splunk Stream IP
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime values(All_Traffic.dest_ip) as dest_ip from datamodel=Network_Traffic.All_Traffic
   where All_Traffic.dest_port = 389 OR All_Traffic.dest_port = 636 AND NOT (All_Traffic.dest_ip

@@ -1,95 +1,96 @@
 name: O365 Update user.
 id: a05fd01e-34d9-4233-9089-11272416b531
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Logs updates to user account properties in Microsoft 365, including changes to roles, permissions, and profile information.
+description: Logs updates to user account properties in Microsoft 365, including changes
+  to roles, permissions, and profile information.
 mitre_components:
-- User Account Modification
-- User Account Metadata
-- Active Directory Object Modification
-- Application Log Content
+  - User Account Modification
+  - User Account Metadata
+  - Active Directory Object Modification
+  - Application Log Content
 source: o365
 sourcetype: o365:management:activity
 separator: Operation
 separator_value: Update user.
 supported_TA:
-- name: Splunk Add-on for Microsoft Office 365
-  url: https://splunkbase.splunk.com/app/4055
-  version: 4.7.0
+  - name: Splunk Add-on for Microsoft Office 365
+    url: https://splunkbase.splunk.com/app/4055
+    version: 4.7.0
 fields:
-- _time
-- ActorContextId
-- Actor{}.ID
-- Actor{}.Type
-- AzureActiveDirectoryEventType
-- CreationTime
-- ExtendedProperties{}.Name
-- ExtendedProperties{}.Value
-- Id
-- InterSystemsId
-- IntraSystemId
-- ModifiedProperties{}.Name
-- ModifiedProperties{}.NewValue
-- ModifiedProperties{}.OldValue
-- ObjectId
-- Operation
-- OrganizationId
-- RecordType
-- ResultStatus
-- SupportTicketId
-- TargetContextId
-- Target{}.ID
-- Target{}.Type
-- UserId
-- UserKey
-- UserType
-- Version
-- Workload
-- action
-- additionalDetails
-- app
-- authentication_service
-- change_type
-- command
-- dataset_name
-- date_hour
-- date_mday
-- date_minute
-- date_month
-- date_second
-- date_wday
-- date_year
-- date_zone
-- dest
-- dest_name
-- dvc
-- event_type
-- eventtype
-- extendedAuditEventCategory
-- host
-- index
-- linecount
-- object
-- object_attrs
-- object_category
-- punct
-- record_type
-- signature
-- source
-- sourcetype
-- splunk_server
-- src_user
-- status
-- tag
-- tag::eventtype
-- timeendpos
-- timestartpos
-- user
-- user_id
-- user_type
-- vendor_account
-- vendor_product
+  - _time
+  - ActorContextId
+  - Actor{}.ID
+  - Actor{}.Type
+  - AzureActiveDirectoryEventType
+  - CreationTime
+  - ExtendedProperties{}.Name
+  - ExtendedProperties{}.Value
+  - Id
+  - InterSystemsId
+  - IntraSystemId
+  - ModifiedProperties{}.Name
+  - ModifiedProperties{}.NewValue
+  - ModifiedProperties{}.OldValue
+  - ObjectId
+  - Operation
+  - OrganizationId
+  - RecordType
+  - ResultStatus
+  - SupportTicketId
+  - TargetContextId
+  - Target{}.ID
+  - Target{}.Type
+  - UserId
+  - UserKey
+  - UserType
+  - Version
+  - Workload
+  - action
+  - additionalDetails
+  - app
+  - authentication_service
+  - change_type
+  - command
+  - dataset_name
+  - date_hour
+  - date_mday
+  - date_minute
+  - date_month
+  - date_second
+  - date_wday
+  - date_year
+  - date_zone
+  - dest
+  - dest_name
+  - dvc
+  - event_type
+  - eventtype
+  - extendedAuditEventCategory
+  - host
+  - index
+  - linecount
+  - object
+  - object_attrs
+  - object_category
+  - punct
+  - record_type
+  - signature
+  - source
+  - sourcetype
+  - splunk_server
+  - src_user
+  - status
+  - tag
+  - tag::eventtype
+  - timeendpos
+  - timestartpos
+  - user
+  - user_id
+  - user_type
+  - vendor_account
+  - vendor_product
 example_log: '{"CreationTime": "2023-10-20T19:32:59", "Id": "d06df1c6-b3f2-4595-90b9-99b8f91811c3",
   "Operation": "Update user.", "OrganizationId": "99825d50-9544-4061-8e46-68923805cbf2",
   "RecordType": 8, "ResultStatus": "Success", "UserKey": "10032002CC029AE9@splunkresearch1.onmicrosoft.com",

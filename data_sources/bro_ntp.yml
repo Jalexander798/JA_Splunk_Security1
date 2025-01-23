@@ -1,14 +1,15 @@
 name: Bro ntp
 id: 3f64a544-47a4-4958-a4a5-4447a47958df
-version: 1
-date: '2025-20-01'
+version: 2
+date: '2025-01-23'
 author: Jacob Delgado, SnapAttack
-description: Logs Network Time Protocol (NTP) activity captured by Zeek (formerly Bro), including details such as NTP requests, responses, and server metadata.
+description: Logs Network Time Protocol (NTP) activity captured by Zeek (formerly
+  Bro), including details such as NTP requests, responses, and server metadata.
 mitre_components:
-- Network Traffic Flow
-- Network Traffic Content
-- Response Metadata
-- Application Log Content
+  - Network Traffic Flow
+  - Network Traffic Content
+  - Response Metadata
+  - Application Log Content
 source: bro:ntp:json
 sourcetype: bro:ntp:json
 supported_TA: []

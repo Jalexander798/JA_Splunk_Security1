@@ -1,96 +1,97 @@
 name: O365 Add service principal.
 id: 9c1ef9f5-bc30-4a47-a1bd-cb34484ee778
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Logs the addition of a new service principal in Microsoft 365, including details about the associated application and the action initiator.
+description: Logs the addition of a new service principal in Microsoft 365, including
+  details about the associated application and the action initiator.
 mitre_components:
-- Cloud Service Creation
-- Cloud Service Metadata
-- User Account Metadata
-- Active Directory Object Creation
+  - Cloud Service Creation
+  - Cloud Service Metadata
+  - User Account Metadata
+  - Active Directory Object Creation
 source: o365
 sourcetype: o365:management:activity
 separator: Operation
 separator_value: Add service principal.
 supported_TA:
-- name: Splunk Add-on for Microsoft Office 365
-  url: https://splunkbase.splunk.com/app/4055
-  version: 4.7.0
+  - name: Splunk Add-on for Microsoft Office 365
+    url: https://splunkbase.splunk.com/app/4055
+    version: 4.7.0
 fields:
-- _time
-- ActorContextId
-- Actor{}.ID
-- Actor{}.Type
-- AzureActiveDirectoryEventType
-- CreationTime
-- ExtendedProperties{}.Name
-- ExtendedProperties{}.Value
-- Id
-- InterSystemsId
-- IntraSystemId
-- ModifiedProperties{}.Name
-- ModifiedProperties{}.NewValue
-- ModifiedProperties{}.OldValue
-- ObjectId
-- Operation
-- OrganizationId
-- RecordType
-- ResultStatus
-- SupportTicketId
-- TargetContextId
-- Target{}.ID
-- Target{}.Type
-- UserId
-- UserKey
-- UserType
-- Version
-- Workload
-- action
-- additionalDetails
-- app
-- authentication_service
-- change_type
-- command
-- dataset_name
-- date_hour
-- date_mday
-- date_minute
-- date_month
-- date_second
-- date_wday
-- date_year
-- date_zone
-- dest
-- dest_name
-- dvc
-- event_type
-- eventtype
-- extendedAuditEventCategory
-- host
-- index
-- linecount
-- object_attrs
-- object_category
-- punct
-- record_type
-- signature
-- source
-- sourcetype
-- splunk_server
-- src_user
-- status
-- tag
-- tag::eventtype
-- timeendpos
-- timestartpos
-- user
-- user_agent
-- user_agent_change
-- user_id
-- user_type
-- vendor_account
-- vendor_product
+  - _time
+  - ActorContextId
+  - Actor{}.ID
+  - Actor{}.Type
+  - AzureActiveDirectoryEventType
+  - CreationTime
+  - ExtendedProperties{}.Name
+  - ExtendedProperties{}.Value
+  - Id
+  - InterSystemsId
+  - IntraSystemId
+  - ModifiedProperties{}.Name
+  - ModifiedProperties{}.NewValue
+  - ModifiedProperties{}.OldValue
+  - ObjectId
+  - Operation
+  - OrganizationId
+  - RecordType
+  - ResultStatus
+  - SupportTicketId
+  - TargetContextId
+  - Target{}.ID
+  - Target{}.Type
+  - UserId
+  - UserKey
+  - UserType
+  - Version
+  - Workload
+  - action
+  - additionalDetails
+  - app
+  - authentication_service
+  - change_type
+  - command
+  - dataset_name
+  - date_hour
+  - date_mday
+  - date_minute
+  - date_month
+  - date_second
+  - date_wday
+  - date_year
+  - date_zone
+  - dest
+  - dest_name
+  - dvc
+  - event_type
+  - eventtype
+  - extendedAuditEventCategory
+  - host
+  - index
+  - linecount
+  - object_attrs
+  - object_category
+  - punct
+  - record_type
+  - signature
+  - source
+  - sourcetype
+  - splunk_server
+  - src_user
+  - status
+  - tag
+  - tag::eventtype
+  - timeendpos
+  - timestartpos
+  - user
+  - user_agent
+  - user_agent_change
+  - user_id
+  - user_type
+  - vendor_account
+  - vendor_product
 example_log: '{"CreationTime": "2024-02-07T22:31:14", "Id": "f624ed92-b4a2-4d42-aa8b-20a261d06b7f",
   "Operation": "Add service principal.", "OrganizationId": "75243ab2-44f8-435c-a7a6-b479385df6d4",
   "RecordType": 8, "ResultStatus": "Success", "UserKey": "1003BFFD98415B4E@splunkresearch.onmicrosoft.com",

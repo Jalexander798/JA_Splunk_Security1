@@ -1,119 +1,119 @@
 name: Azure Audit Create or Update an Azure Automation webhook
 id: 575faeb2-09d0-4849-b1f6-eae241f26ff2
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs an event when a webhook is created or updated in Azure Automation.
 mitre_components:
-- Scheduled Job Modification
-- Cloud Service Modification
-- Scheduled Job Metadata
+  - Scheduled Job Modification
+  - Cloud Service Modification
+  - Scheduled Job Metadata
 source: mscs:azure:audit
 sourcetype: mscs:azure:audit
 separator: operationName.localizedValue
 separator_value: Create or Update an Azure Automation webhook
 supported_TA:
-- name: Splunk Add-on for Microsoft Cloud Services
-  url: https://splunkbase.splunk.com/app/3110
-  version: 5.4.1
+  - name: Splunk Add-on for Microsoft Cloud Services
+    url: https://splunkbase.splunk.com/app/3110
+    version: 5.4.1
 fields:
-- _time
-- authorization.action
-- authorization.scope
-- caller
-- channels
-- claims.aio
-- claims.altsecid
-- claims.appid
-- claims.appidacr
-- claims.aud
-- claims.exp
-- claims.groups
-- claims.http://schemas.microsoft.com/claims/authnclassreference
-- claims.http://schemas.microsoft.com/claims/authnmethodsreferences
-- claims.http://schemas.microsoft.com/identity/claims/identityprovider
-- claims.http://schemas.microsoft.com/identity/claims/objectidentifier
-- claims.http://schemas.microsoft.com/identity/claims/scope
-- claims.http://schemas.microsoft.com/identity/claims/tenantid
-- claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress
-- claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname
-- claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
-- claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier
-- claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname
-- claims.iat
-- claims.ipaddr
-- claims.iss
-- claims.name
-- claims.nbf
-- claims.puid
-- claims.rh
-- claims.uti
-- claims.ver
-- claims.wids
-- claims.xms_tcdt
-- correlationId
-- date_hour
-- date_mday
-- date_minute
-- date_month
-- date_second
-- date_wday
-- date_year
-- date_zone
-- dest
-- dvc
-- eventDataId
-- eventName.localizedValue
-- eventName.value
-- eventSource.localizedValue
-- eventSource.value
-- eventTimestamp
-- host
-- httpRequest.clientIpAddress
-- httpRequest.clientRequestId
-- httpRequest.method
-- id
-- index
-- level
-- linecount
-- object
-- object_id
-- object_path
-- operationId
-- operationName.localizedValue
-- operationName.value
-- product
-- properties.entity
-- properties.eventCategory
-- properties.hierarchy
-- properties.message
-- properties.serviceRequestId
-- properties.statusCode
-- punct
-- resourceGroupName
-- resourceProviderName.localizedValue
-- resourceProviderName.value
-- resourceUri
-- result
-- result_id
-- source
-- sourcetype
-- splunk_server
-- src
-- status
-- status.localizedValue
-- status.value
-- subStatus.localizedValue
-- subStatus.value
-- submissionTimestamp
-- subscriptionId
-- timeendpos
-- timestartpos
-- user
-- user_name
-- vendor
-- vendor_product
-- vendor_res_code
+  - _time
+  - authorization.action
+  - authorization.scope
+  - caller
+  - channels
+  - claims.aio
+  - claims.altsecid
+  - claims.appid
+  - claims.appidacr
+  - claims.aud
+  - claims.exp
+  - claims.groups
+  - claims.http://schemas.microsoft.com/claims/authnclassreference
+  - claims.http://schemas.microsoft.com/claims/authnmethodsreferences
+  - claims.http://schemas.microsoft.com/identity/claims/identityprovider
+  - claims.http://schemas.microsoft.com/identity/claims/objectidentifier
+  - claims.http://schemas.microsoft.com/identity/claims/scope
+  - claims.http://schemas.microsoft.com/identity/claims/tenantid
+  - claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress
+  - claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname
+  - claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
+  - claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier
+  - claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname
+  - claims.iat
+  - claims.ipaddr
+  - claims.iss
+  - claims.name
+  - claims.nbf
+  - claims.puid
+  - claims.rh
+  - claims.uti
+  - claims.ver
+  - claims.wids
+  - claims.xms_tcdt
+  - correlationId
+  - date_hour
+  - date_mday
+  - date_minute
+  - date_month
+  - date_second
+  - date_wday
+  - date_year
+  - date_zone
+  - dest
+  - dvc
+  - eventDataId
+  - eventName.localizedValue
+  - eventName.value
+  - eventSource.localizedValue
+  - eventSource.value
+  - eventTimestamp
+  - host
+  - httpRequest.clientIpAddress
+  - httpRequest.clientRequestId
+  - httpRequest.method
+  - id
+  - index
+  - level
+  - linecount
+  - object
+  - object_id
+  - object_path
+  - operationId
+  - operationName.localizedValue
+  - operationName.value
+  - product
+  - properties.entity
+  - properties.eventCategory
+  - properties.hierarchy
+  - properties.message
+  - properties.serviceRequestId
+  - properties.statusCode
+  - punct
+  - resourceGroupName
+  - resourceProviderName.localizedValue
+  - resourceProviderName.value
+  - resourceUri
+  - result
+  - result_id
+  - source
+  - sourcetype
+  - splunk_server
+  - src
+  - status
+  - status.localizedValue
+  - status.value
+  - subStatus.localizedValue
+  - subStatus.value
+  - submissionTimestamp
+  - subscriptionId
+  - timeendpos
+  - timestartpos
+  - user
+  - user_name
+  - vendor
+  - vendor_product
+  - vendor_res_code
 example_log: '{"authorization": {"action": "Microsoft.Automation/automationAccounts/webhooks/write",
   "scope": "/subscriptions/e0c00901-96b2-4151-80f7-746e24c03e98/resourceGroups/resourceGroup1providers/Microsoft.Automation/automationAccounts/SuspiciousAutomationAccount/webhooks/MaliciousWebHook"},
   "caller": "evilAdmin@contoso.com", "channels": "Operation", "claims": {"aud": "https://management.core.windows.net/",

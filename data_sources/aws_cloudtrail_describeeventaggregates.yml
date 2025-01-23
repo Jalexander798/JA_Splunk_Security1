@@ -1,92 +1,93 @@
 name: AWS CloudTrail DescribeEventAggregates
 id: 7efe4afe-62ae-4f96-81d1-76598ea37fc2
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Logs an event when aggregate details about AWS events are queried, often for analysis.
+description: Logs an event when aggregate details about AWS events are queried, often
+  for analysis.
 mitre_components:
-- Cloud Service Enumeration
-- Cloud Service Metadata
+  - Cloud Service Enumeration
+  - Cloud Service Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
 separator_value: DescribeEventAggregates
 supported_TA:
-- name: Splunk Add-on for AWS
-  url: https://splunkbase.splunk.com/app/1876
-  version: 7.9.0
+  - name: Splunk Add-on for AWS
+    url: https://splunkbase.splunk.com/app/1876
+    version: 7.9.0
 fields:
-- _time
-- app
-- awsRegion
-- aws_account_id
-- command
-- date_hour
-- date_mday
-- date_minute
-- date_month
-- date_second
-- date_wday
-- date_year
-- date_zone
-- dest
-- dvc
-- errorCode
-- eventCategory
-- eventID
-- eventName
-- eventSource
-- eventTime
-- eventType
-- eventVersion
-- host
-- index
-- linecount
-- managementEvent
-- msg
-- object_category
-- product
-- punct
-- readOnly
-- recipientAccountId
-- region
-- requestID
-- requestParameters.aggregateField
-- requestParameters.filter.eventStatusCodes{}
-- requestParameters.filter.startTimes{}.from
-- responseElements
-- sessionCredentialFromConsole
-- signature
-- source
-- sourceIPAddress
-- sourcetype
-- splunk_server
-- src
-- src_ip
-- start_time
-- timeendpos
-- timestartpos
-- user
-- userAgent
-- userIdentity.accessKeyId
-- userIdentity.accountId
-- userIdentity.arn
-- userIdentity.principalId
-- userIdentity.sessionContext.attributes.creationDate
-- userIdentity.sessionContext.attributes.mfaAuthenticated
-- userIdentity.type
-- userName
-- user_access_key
-- user_agent
-- user_arn
-- user_group_id
-- user_id
-- user_name
-- user_type
-- vendor
-- vendor_account
-- vendor_product
-- vendor_region
+  - _time
+  - app
+  - awsRegion
+  - aws_account_id
+  - command
+  - date_hour
+  - date_mday
+  - date_minute
+  - date_month
+  - date_second
+  - date_wday
+  - date_year
+  - date_zone
+  - dest
+  - dvc
+  - errorCode
+  - eventCategory
+  - eventID
+  - eventName
+  - eventSource
+  - eventTime
+  - eventType
+  - eventVersion
+  - host
+  - index
+  - linecount
+  - managementEvent
+  - msg
+  - object_category
+  - product
+  - punct
+  - readOnly
+  - recipientAccountId
+  - region
+  - requestID
+  - requestParameters.aggregateField
+  - requestParameters.filter.eventStatusCodes{}
+  - requestParameters.filter.startTimes{}.from
+  - responseElements
+  - sessionCredentialFromConsole
+  - signature
+  - source
+  - sourceIPAddress
+  - sourcetype
+  - splunk_server
+  - src
+  - src_ip
+  - start_time
+  - timeendpos
+  - timestartpos
+  - user
+  - userAgent
+  - userIdentity.accessKeyId
+  - userIdentity.accountId
+  - userIdentity.arn
+  - userIdentity.principalId
+  - userIdentity.sessionContext.attributes.creationDate
+  - userIdentity.sessionContext.attributes.mfaAuthenticated
+  - userIdentity.type
+  - userName
+  - user_access_key
+  - user_agent
+  - user_arn
+  - user_group_id
+  - user_id
+  - user_name
+  - user_type
+  - vendor
+  - vendor_account
+  - vendor_product
+  - vendor_region
 example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "Root", "principalId":
   "140429656527", "arn": "arn:aws:iam::140429656527:root", "accountId": "140429656527",
   "accessKeyId": "ASIASBMSCQHHQQ6LB24V", "sessionContext": {"sessionIssuer": {}, "webIdFederationData":

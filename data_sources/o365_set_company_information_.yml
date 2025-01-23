@@ -1,97 +1,98 @@
 name: O365 Set Company Information.
 id: 06c6d576-f032-41e3-b15d-80a434ce13d8
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Logs updates to organizational settings and company information in Microsoft 365, including changes to contact details, branding, and configuration policies.
+description: Logs updates to organizational settings and company information in Microsoft
+  365, including changes to contact details, branding, and configuration policies.
 mitre_components:
-- Cloud Service Modification
-- Configuration Modification
-- Cloud Service Metadata
-- Application Log Content
+  - Cloud Service Modification
+  - Configuration Modification
+  - Cloud Service Metadata
+  - Application Log Content
 source: o365
 sourcetype: o365:management:activity
 separator: Operation
 separator_value: Set Company Information.
 supported_TA:
-- name: Splunk Add-on for Microsoft Office 365
-  url: https://splunkbase.splunk.com/app/4055
-  version: 4.7.0
+  - name: Splunk Add-on for Microsoft Office 365
+    url: https://splunkbase.splunk.com/app/4055
+    version: 4.7.0
 fields:
-- _time
-- ActorContextId
-- ActorIpAddress
-- Actor{}.ID
-- Actor{}.Type
-- AzureActiveDirectoryEventType
-- ClientIP
-- CreationTime
-- ExtendedProperties{}.Name
-- ExtendedProperties{}.Value
-- Id
-- InterSystemsId
-- IntraSystemId
-- ModifiedProperties{}.Name
-- ModifiedProperties{}.NewValue
-- ModifiedProperties{}.OldValue
-- ObjectId
-- Operation
-- OrganizationId
-- RecordType
-- ResultStatus
-- SupportTicketId
-- TargetContextId
-- Target{}.ID
-- Target{}.Type
-- UserId
-- UserKey
-- UserType
-- Version
-- Workload
-- action
-- additionalDetails
-- app
-- authentication_service
-- change_type
-- command
-- dataset_name
-- date_hour
-- date_mday
-- date_minute
-- date_month
-- date_second
-- date_wday
-- date_year
-- date_zone
-- dest
-- dest_name
-- dvc
-- event_type
-- eventtype
-- extendedAuditEventCategory
-- extended_properties
-- host
-- index
-- linecount
-- object
-- object_attrs
-- object_category
-- punct
-- record_type
-- signature
-- source
-- sourcetype
-- splunk_server
-- status
-- tag
-- tag::eventtype
-- timeendpos
-- timestartpos
-- user
-- user_id
-- user_type
-- vendor_account
-- vendor_product
+  - _time
+  - ActorContextId
+  - ActorIpAddress
+  - Actor{}.ID
+  - Actor{}.Type
+  - AzureActiveDirectoryEventType
+  - ClientIP
+  - CreationTime
+  - ExtendedProperties{}.Name
+  - ExtendedProperties{}.Value
+  - Id
+  - InterSystemsId
+  - IntraSystemId
+  - ModifiedProperties{}.Name
+  - ModifiedProperties{}.NewValue
+  - ModifiedProperties{}.OldValue
+  - ObjectId
+  - Operation
+  - OrganizationId
+  - RecordType
+  - ResultStatus
+  - SupportTicketId
+  - TargetContextId
+  - Target{}.ID
+  - Target{}.Type
+  - UserId
+  - UserKey
+  - UserType
+  - Version
+  - Workload
+  - action
+  - additionalDetails
+  - app
+  - authentication_service
+  - change_type
+  - command
+  - dataset_name
+  - date_hour
+  - date_mday
+  - date_minute
+  - date_month
+  - date_second
+  - date_wday
+  - date_year
+  - date_zone
+  - dest
+  - dest_name
+  - dvc
+  - event_type
+  - eventtype
+  - extendedAuditEventCategory
+  - extended_properties
+  - host
+  - index
+  - linecount
+  - object
+  - object_attrs
+  - object_category
+  - punct
+  - record_type
+  - signature
+  - source
+  - sourcetype
+  - splunk_server
+  - status
+  - tag
+  - tag::eventtype
+  - timeendpos
+  - timestartpos
+  - user
+  - user_id
+  - user_type
+  - vendor_account
+  - vendor_product
 example_log: '{"Actor": [{"ID": "bpatel@rodsoto.onmicrosoft.com", "Type": 5}, {"ID":
   "100320010208B5DC", "Type": 3}, {"ID": "User_425b75db-38be-4c7b-a474-5f0709247370",
   "Type": 2}, {"ID": "425b75db-38be-4c7b-a474-5f0709247370", "Type": 2}, {"ID": "User",

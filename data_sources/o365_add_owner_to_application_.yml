@@ -1,96 +1,98 @@
 name: O365 Add owner to application.
 id: da012cbf-af6e-40ee-a1ba-32a5f8da8f8a
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Logs the addition of an owner to an application in Microsoft 365, including details about the application, the new owner, and the user or administrator performing the action.
+description: Logs the addition of an owner to an application in Microsoft 365, including
+  details about the application, the new owner, and the user or administrator performing
+  the action.
 mitre_components:
-- User Account Modification
-- Group Modification
-- Cloud Service Modification
-- Cloud Service Metadata
+  - User Account Modification
+  - Group Modification
+  - Cloud Service Modification
+  - Cloud Service Metadata
 source: o365
 sourcetype: o365:management:activity
 separator: Operation
 separator_value: Add owner to application.
 supported_TA:
-- name: Splunk Add-on for Microsoft Office 365
-  url: https://splunkbase.splunk.com/app/4055
-  version: 4.7.0
+  - name: Splunk Add-on for Microsoft Office 365
+    url: https://splunkbase.splunk.com/app/4055
+    version: 4.7.0
 fields:
-- _time
-- ActorContextId
-- Actor{}.ID
-- Actor{}.Type
-- AzureActiveDirectoryEventType
-- CreationTime
-- ExtendedProperties{}.Name
-- ExtendedProperties{}.Value
-- Id
-- InterSystemsId
-- IntraSystemId
-- ModifiedProperties{}.Name
-- ModifiedProperties{}.NewValue
-- ModifiedProperties{}.OldValue
-- ObjectId
-- Operation
-- OrganizationId
-- RecordType
-- ResultStatus
-- SupportTicketId
-- TargetContextId
-- Target{}.ID
-- Target{}.Type
-- UserId
-- UserKey
-- UserType
-- Version
-- Workload
-- action
-- additionalDetails
-- app
-- authentication_service
-- change_type
-- command
-- dataset_name
-- date_hour
-- date_mday
-- date_minute
-- date_month
-- date_second
-- date_wday
-- date_year
-- date_zone
-- dest
-- dest_name
-- dvc
-- event_type
-- eventtype
-- extendedAuditEventCategory
-- host
-- index
-- linecount
-- object
-- object_attrs
-- object_category
-- punct
-- record_type
-- signature
-- source
-- sourcetype
-- splunk_server
-- status
-- tag
-- tag::eventtype
-- timeendpos
-- timestartpos
-- user
-- user_agent
-- user_agent_change
-- user_id
-- user_type
-- vendor_account
-- vendor_product
+  - _time
+  - ActorContextId
+  - Actor{}.ID
+  - Actor{}.Type
+  - AzureActiveDirectoryEventType
+  - CreationTime
+  - ExtendedProperties{}.Name
+  - ExtendedProperties{}.Value
+  - Id
+  - InterSystemsId
+  - IntraSystemId
+  - ModifiedProperties{}.Name
+  - ModifiedProperties{}.NewValue
+  - ModifiedProperties{}.OldValue
+  - ObjectId
+  - Operation
+  - OrganizationId
+  - RecordType
+  - ResultStatus
+  - SupportTicketId
+  - TargetContextId
+  - Target{}.ID
+  - Target{}.Type
+  - UserId
+  - UserKey
+  - UserType
+  - Version
+  - Workload
+  - action
+  - additionalDetails
+  - app
+  - authentication_service
+  - change_type
+  - command
+  - dataset_name
+  - date_hour
+  - date_mday
+  - date_minute
+  - date_month
+  - date_second
+  - date_wday
+  - date_year
+  - date_zone
+  - dest
+  - dest_name
+  - dvc
+  - event_type
+  - eventtype
+  - extendedAuditEventCategory
+  - host
+  - index
+  - linecount
+  - object
+  - object_attrs
+  - object_category
+  - punct
+  - record_type
+  - signature
+  - source
+  - sourcetype
+  - splunk_server
+  - status
+  - tag
+  - tag::eventtype
+  - timeendpos
+  - timestartpos
+  - user
+  - user_agent
+  - user_agent_change
+  - user_id
+  - user_type
+  - vendor_account
+  - vendor_product
 example_log: '{"CreationTime": "2023-09-07T13:42:04", "Id": "6e2c723b-8f6e-47f4-8c60-fa23ef3fccee",
   "Operation": "Add owner to application.", "OrganizationId": "48203edf-5d2c-45f2-8123-a368cc8b0e51",
   "RecordType": 8, "ResultStatus": "Success", "UserKey": "1003BFFD98415B4E@contoso.onmicrosoft.com",

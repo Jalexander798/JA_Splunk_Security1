@@ -1,76 +1,78 @@
 name: Windows Event Log Defender 1122
 id: 4a2d0499-f489-4557-82f4-f357025cf3e7
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Logs an event when a process attempts to load a DLL that is blocked by an attack surface reduction rule.
+description: Logs an event when a process attempts to load a DLL that is blocked by
+  an attack surface reduction rule.
 mitre_components:
-- Application Log Content
-- Process Creation
-- Module Load
+  - Application Log Content
+  - Process Creation
+  - Module Load
 source: WinEventLog:Microsoft-Windows-Windows Defender/Operational
 sourcetype: xmlwineventlog
 separator: EventCode
 separator_value: 1122
 supported_TA:
-- name: Splunk Add-on for Microsoft Windows
-  url: https://splunkbase.splunk.com/app/742
-  version: 9.0.1
+  - name: Splunk Add-on for Microsoft Windows
+    url: https://splunkbase.splunk.com/app/742
+    version: 9.0.1
 fields:
-- _time
-- ActivityID
-- Channel
-- Computer
-- Detection_Time
-- Engine_Version
-- EventCode
-- EventData_Xml
-- EventID
-- EventRecordID
-- Guid
-- ID
-- Inhertiance_Flags
-- Keywords
-- Level
-- Name
-- Opcode
-- Parent_Commandline
-- Path
-- ProcessID
-- Process_Name
-- Product_Name
-- Product_Version
-- RecordNumber
-- RuleType
-- Security_intelligence_Version
-- SystemTime
-- System_Props_Xml
-- Target_Commandline
-- Task
-- ThreadID
-- User
-- UserID
-- Version
-- dvc
-- dvc_nt_host
-- event_id
-- eventtype
-- host
-- id
-- index
-- linecount
-- punct
-- signature_id
-- source
-- sourcetype
-- splunk_server
-- tag
-- tag::eventtype
-- timestamp
-- user_id
-- vendor_product
+  - _time
+  - ActivityID
+  - Channel
+  - Computer
+  - Detection_Time
+  - Engine_Version
+  - EventCode
+  - EventData_Xml
+  - EventID
+  - EventRecordID
+  - Guid
+  - ID
+  - Inhertiance_Flags
+  - Keywords
+  - Level
+  - Name
+  - Opcode
+  - Parent_Commandline
+  - Path
+  - ProcessID
+  - Process_Name
+  - Product_Name
+  - Product_Version
+  - RecordNumber
+  - RuleType
+  - Security_intelligence_Version
+  - SystemTime
+  - System_Props_Xml
+  - Target_Commandline
+  - Task
+  - ThreadID
+  - User
+  - UserID
+  - Version
+  - dvc
+  - dvc_nt_host
+  - event_id
+  - eventtype
+  - host
+  - id
+  - index
+  - linecount
+  - punct
+  - signature_id
+  - source
+  - sourcetype
+  - splunk_server
+  - tag
+  - tag::eventtype
+  - timestamp
+  - user_id
+  - vendor_product
 example_log: <Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider
-  Name='Microsoft-Windows-Windows Defender' Guid='{11cd958a-c507-4ef3-b3f2-5fd9dfbd2c78}'/><EventID>1122</EventID><Version>0</Version><Level>4</Level><Task>0</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated
+  Name='Microsoft-Windows-Windows Defender' 
+  Guid='{11cd958a-c507-4ef3-b3f2-5fd9dfbd2c78}'/><EventID>1122</EventID><Version>0</Version><Level>4</Level><Task>0</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated
   SystemTime='2023-11-26T23:43:08.7101401Z'/><EventRecordID>3701</EventRecordID><Correlation
   ActivityID='{b68511a1-ec5f-4bc7-a9bb-2bd601338de2}'/><Execution ProcessID='3512'
   ThreadID='5936'/><Channel>Microsoft-Windows-Windows Defender/Operational</Channel><Computer>researchvmhaa</Computer><Security

@@ -1,74 +1,77 @@
 name: Windows Event Log CertificateServicesClient 1007
 id: c51444e3-479d-4c4a-b111-e8276a3acf39
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Logs the export of a certificate from the local certificate store, including details about the certificate thumbprint, subject names, and the process involved.
+description: Logs the export of a certificate from the local certificate store, including
+  details about the certificate thumbprint, subject names, and the process involved.
 mitre_components:
-- Certificate Registration
-- Certificate Metadata
-- Process Metadata
-- Application Log Content
-- User Account Metadata
-source: XmlWinEventLog:Microsoft-Windows-CertificateServicesClient-Lifecycle-System/Operational
+  - Certificate Registration
+  - Certificate Metadata
+  - Process Metadata
+  - Application Log Content
+  - User Account Metadata
+source: 
+  XmlWinEventLog:Microsoft-Windows-CertificateServicesClient-Lifecycle-System/Operational
 sourcetype: XmlWinEventLog
 separator: EventCode
 separator_value: 1007
 supported_TA:
-- name: Splunk Add-on for Microsoft Windows
-  url: https://splunkbase.splunk.com/app/742
-  version: 9.0.1
+  - name: Splunk Add-on for Microsoft Windows
+    url: https://splunkbase.splunk.com/app/742
+    version: 9.0.1
 fields:
-- _time
-- ActivityID
-- Channel
-- Computer
-- EventCode
-- EventID
-- EventRecordID
-- Guid
-- Keywords
-- Level
-- Name
-- Opcode
-- ProcessID
-- RecordNumber
-- SystemTime
-- System_Props_Xml
-- Task
-- ThreadID
-- UserData_Xml
-- UserID
-- Version
-- date_hour
-- date_mday
-- date_minute
-- date_month
-- date_second
-- date_wday
-- date_year
-- date_zone
-- dvc
-- dvc_nt_host
-- event_id
-- eventtype
-- host
-- id
-- index
-- linecount
-- punct
-- signature_id
-- source
-- sourcetype
-- splunk_server
-- tag
-- tag::eventtype
-- timeendpos
-- timestartpos
-- user_id
-- vendor_product
+  - _time
+  - ActivityID
+  - Channel
+  - Computer
+  - EventCode
+  - EventID
+  - EventRecordID
+  - Guid
+  - Keywords
+  - Level
+  - Name
+  - Opcode
+  - ProcessID
+  - RecordNumber
+  - SystemTime
+  - System_Props_Xml
+  - Task
+  - ThreadID
+  - UserData_Xml
+  - UserID
+  - Version
+  - date_hour
+  - date_mday
+  - date_minute
+  - date_month
+  - date_second
+  - date_wday
+  - date_year
+  - date_zone
+  - dvc
+  - dvc_nt_host
+  - event_id
+  - eventtype
+  - host
+  - id
+  - index
+  - linecount
+  - punct
+  - signature_id
+  - source
+  - sourcetype
+  - splunk_server
+  - tag
+  - tag::eventtype
+  - timeendpos
+  - timestartpos
+  - user_id
+  - vendor_product
 example_log: <Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider
-  Name='Microsoft-Windows-CertificateServicesClient-Lifecycle-System' Guid='{bc0669e1-a10d-4a78-834e-1ca3c806c93b}'/><EventID>1007</EventID><Version>0</Version><Level>4</Level><Task>0</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated
+  Name='Microsoft-Windows-CertificateServicesClient-Lifecycle-System' 
+  Guid='{bc0669e1-a10d-4a78-834e-1ca3c806c93b}'/><EventID>1007</EventID><Version>0</Version><Level>4</Level><Task>0</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated
   SystemTime='2023-02-01T17:08:44.1466587Z'/><EventRecordID>2</EventRecordID><Correlation
   ActivityID='{3b615f97-365d-0000-130d-623b5d36d901}'/><Execution ProcessID='7716'
   ThreadID='8384'/><Channel>Microsoft-Windows-CertificateServicesClient-Lifecycle-System/Operational</Channel><Computer>DESKTOP-92OQLA1</Computer><Security
