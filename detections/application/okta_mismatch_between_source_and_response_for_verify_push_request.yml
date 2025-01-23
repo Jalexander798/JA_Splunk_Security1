@@ -60,9 +60,9 @@ references:
 - https://splunkbase.splunk.com/app/6553
 rba:
   message: A mismatch between source and response for verifying a push request has
-    occurred for $actor.alternateId$
+    occurred for $user$
   risk_objects:
-  - field: actor.alternateId
+  - field: user
     type: user
     score: 64
   threat_objects: []

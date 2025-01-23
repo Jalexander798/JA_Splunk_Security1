@@ -48,7 +48,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Potential DCShadow Attack Detected on $Computer$
+  message: A short-lived server object was created and deleted on $Computer$
   risk_objects:
   - field: Computer
     type: system
