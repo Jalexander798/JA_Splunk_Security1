@@ -1,7 +1,7 @@
 name: Living Off The Land Detection
 id: 1be30d80-3a39-4df9-9102-64a467b24abc
-version: 5
-date: '2024-11-13'
+version: 6      
+date: '2025-01-23'
 author: Michael Haag, Splunk
 status: production
 type: Correlation
@@ -26,7 +26,7 @@ search: '| tstats `security_content_summariesonly` min(_time) as firstTime max(_
   All_Risk.annotations.mitre_attack.mitre_tactic | `drop_dm_object_name(All_Risk)`
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | where
   source_count >= 5 | `living_off_the_land_detection_filter`'
-how_to_implement: To implement this correlation search a user needs to enable all
+how_to_implement: To implement this Detection (Event-based), a user needs to enable all
   detections in the Living Off The Land Analytic Story and confirm it is generating
   risk events. A simple search `index=risk analyticstories="Living Off The Land"`
   should contain events.

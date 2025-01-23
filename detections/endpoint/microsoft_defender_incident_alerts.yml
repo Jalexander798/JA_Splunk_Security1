@@ -43,7 +43,7 @@ how_to_implement: In order to properly run this search, you need to ingest alert
   point to the proper index that contains the ms365:defender:incident:alerts sourcetype.
   **NOTE** - We also have a detection named `Detect Critical Alerts from Security
   Tools` that triggers on the same data and is written against the Alerts datamodel.
-  Enabling both of these detections will result in duplicate risk/notable events,
+  Enabling both of these detections will result in duplicate findings,
   we recommend enabling only one of these detections.
 known_false_positives: False positives may vary based on Microsfot Defender configuration;
   monitor and filter out the alerts that are not relevant to your environment.

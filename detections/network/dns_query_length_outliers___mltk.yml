@@ -31,7 +31,7 @@ how_to_implement: "To successfully implement this search, you will need to ensur
   available for use. You should periodically re-run the support search to rebuild
   the model with the latest data available in your environment.\nThis search produces
   fields (`query`,`query_length`,`count`) that are not yet supported by ES Incident
-  Review and therefore cannot be viewed when a notable event is raised. These fields
+  Review and therefore cannot be viewed when a finding is raised. These fields
   contribute additional context to the notable. To see the additional metadata, add
   the following fields, if not already present, to Incident Review - Event Attributes
   (Configure > Incident Management > Incident Review Settings > Add New Entry):\n

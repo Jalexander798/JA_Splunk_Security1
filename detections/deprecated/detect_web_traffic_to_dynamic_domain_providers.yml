@@ -19,7 +19,7 @@ how_to_implement: "This search requires you to be ingesting web-traffic logs. Yo
   which contains a non-exhaustive list of dynamic DNS providers. Consider periodically
   updating this local lookup file with new domains.\nThis search produces fields (`isDynDNS`)
   that are not yet supported by ES Incident Review and therefore cannot be viewed
-  when a notable event is raised. These fields contribute additional context to the
+  when a finding is raised. These fields contribute additional context to the
   notable. To see the additional metadata, add the following fields, if not already
   present, to Incident Review - Event Attributes (Configure > Incident Management
   > Incident Review Settings > Add New Entry):\n* **Label:** IsDynamicDNS, **Field:**
