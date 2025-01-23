@@ -1,7 +1,7 @@
 name: Office Product Writing cab or inf
 id: f48cd1d4-125a-11ec-a447-acde48001122
-version: '8'
-date: '2024-11-28'
+version: 9
+date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -56,47 +56,36 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: An instance of $process_name$ was identified on $dest$ writing an inf or
+    cab file to this. This is not typical of $process_name$.
+  risk_objects:
+  - field: dest
+    type: system
+    score: 80
+  threat_objects:
+  - field: process_name
+    type: process_name
 tags:
   analytic_story:
   - Spearphishing Attachments
   - Microsoft MSHTML Remote Code Execution CVE-2021-40444
   - Compromised Windows Host
   asset_type: Endpoint
-  confidence: 100
   cve:
   - CVE-2021-40444
-  impact: 80
-  message: An instance of $process_name$ was identified on $dest$ writing an inf or
-    cab file to this. This is not typical of $process_name$.
   mitre_attack_id:
   - T1566
   - T1566.001
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: process_name
-    type: Process
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - dest
-  - process_name
-  - process
-  - file_create_time
-  - file_name
-  - file_path
-  risk_score: 80
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon_cabinf.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon_cabinf.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

@@ -1,7 +1,7 @@
 name: Windows Domain Admin Impersonation Indicator
 id: 10381f93-6d38-470a-9c30-d25478e3bd3f
-version: '5'
-date: '2024-11-28'
+version: 6
+date: '2024-12-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -58,6 +58,14 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: $TargetUserName$ may be impersonating a Domain Administrator through a
+    forged Kerberos ticket.
+  risk_objects:
+  - field: TargetUserName
+    type: user
+    score: 80
+  threat_objects: []
 tags:
   analytic_story:
   - Active Directory Kerberos Attacks
@@ -65,32 +73,17 @@ tags:
   - Compromised Windows Host
   - Active Directory Privilege Escalation
   asset_type: Endpoint
-  confidence: 100
-  impact: 80
-  message: $TargetUserName$ may be impersonating a Domain Administrator through a
-    forged Kerberos ticket.
   mitre_attack_id:
   - T1558
-  observable:
-  - name: TargetUserName
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  risk_score: 80
-  required_fields:
-  - _time,
-  - EventCode
-  - LogonType
-  - TargetUserName
-  - GroupMembership
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558/diamond_ticket/security.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558/diamond_ticket/security.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

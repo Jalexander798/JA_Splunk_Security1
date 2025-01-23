@@ -1,7 +1,12 @@
-default_match: 'false'
+name: brandMonitoring_lookup
+date: 2024-12-23
+version: 2
+id: 6fff763a-d654-42dc-8e56-92c8e255ac55
+author: Splunk Threat Research Team
+lookup_type: csv
+default_match: false
 description: A file that contains look-a-like domains for brands that you want to
   monitor
-filename: brand_monitoring.csv
-match_type: WILDCARD(domain)
+match_type: 
+- WILDCARD(domain)
 min_matches: 1
-name: brandMonitoring_lookup

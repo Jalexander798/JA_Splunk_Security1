@@ -1,7 +1,7 @@
 name: ASL AWS IAM Delete Policy
 id: 609ced68-d420-4ff7-8164-ae98b4b4018c
 version: 5
-date: '2024-10-17'
+date: '2024-11-14'
 author: Patrick Bareiss, Splunk
 status: production
 type: Hunting
@@ -18,33 +18,12 @@ tags:
   analytic_story:
   - AWS IAM Privilege Escalation
   asset_type: AWS Account
-  confidence: 50
-  impact: 20
-  message: User $user$ has deleted AWS Policies from IP address $src_ip$.
   mitre_attack_id:
   - T1098
-  observable:
-  - name: src_ip
-    type: IP Address
-    role:
-    - Attacker
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - api.operation
-  - actor.user.uid
-  - actor.user.account.uid
-  - http_request.user_agent
-  - src_endpoint.ip
-  - src_endpoint.domain
-  - cloud.region
-  risk_score: 10
   security_domain: access
 tests:
 - name: True Positive Test

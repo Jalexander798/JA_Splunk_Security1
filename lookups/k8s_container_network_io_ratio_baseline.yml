@@ -1,4 +1,15 @@
-description: A place holder for a list of used Kuberntes Container Network IO Ratio
-collection: k8s_container_network_io_ratio_baseline
 name: k8s_container_network_io_ratio_baseline
-fields_list: key, avg_outbound_network_io, avg_inbound_network_io, stdev_outbound_network_io, stdev_inbound_network_io, count, last_seen
+date: 2024-12-23
+version: 2
+id: fdb4f703-0378-4803-9300-92f562e1b840
+author: Splunk Threat Research Team
+lookup_type: kvstore
+description: A place holder for a list of used Kuberntes Container Network IO Ratio
+fields: 
+- _key
+- avg_outbound_network_io
+- avg_inbound_network_io
+- stdev_outbound_network_io
+- stdev_inbound_network_io
+- count
+- last_seen

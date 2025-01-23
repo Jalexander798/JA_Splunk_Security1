@@ -1,7 +1,7 @@
 name: Detect Mimikatz Via PowerShell And EventCode 4703
 id: 98917be2-bfc8-475a-8618-a9bb06575188
-version: 4
-date: '2024-10-17'
+version: 5
+date: '2024-11-14'
 author: Rico Valdez, Splunk
 status: deprecated
 type: TTP
@@ -26,30 +26,21 @@ known_false_positives: The activity may be legitimate. PowerShell is often used 
   in those cases. In these cases, false positives should be fairly obvious and you
   may need to tweak the search to eliminate noise.
 references: []
+rba:
+  message: Potential Mimikatz usage on $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - Cloud Federated Credential Abuse
   asset_type: Windows
-  confidence: 50
-  impact: 50
-  message: tbd
   mitre_attack_id:
   - T1003.001
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - signature_id
-  - Process_Name
-  - Message
-  - dest
-  - Process_ID
-  risk_score: 25
   security_domain: access

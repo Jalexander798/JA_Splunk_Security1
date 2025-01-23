@@ -1,7 +1,7 @@
 name: Linux Kernel Module Enumeration
 id: 6df99886-0e04-4c11-8b88-325747419278
-version: '5'
-date: '2024-12-17'
+version: 6
+date: '2024-11-17'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly
@@ -47,58 +47,38 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: An instance of $parent_process_name$ spawning $process_name$ was identified
+    on endpoint $dest$ by user $user$ enumeration kernel modules.
+  risk_objects:
+  - field: user
+    type: user
+    score: 15
+  - field: dest
+    type: system
+    score: 15
+  threat_objects:
+  - field: parent_process_name
+    type: parent_process_name
+  - field: process_name
+    type: process_name
 tags:
   analytic_story:
   - XorDDos
   - Linux Rootkit
   asset_type: Endpoint
-  confidence: 50
-  impact: 30
-  message: An instance of $parent_process_name$ spawning $process_name$ was identified
-    on endpoint $dest$ by user $user$ enumeration kernel modules.
   mitre_attack_id:
   - T1082
   - T1014
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: parent_process_name
-    type: Process
-    role:
-    - Attacker
-  - name: process_name
-    type: Process
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.dest
-  - Processes.user
-  - Processes.parent_process_name
-  - Processes.parent_process
-  - Processes.original_file_name
-  - Processes.process_name
-  - Processes.process
-  - Processes.process_id
-  - Processes.parent_process_path
-  - Processes.process_path
-  - Processes.parent_process_id
-  risk_score: 15
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1082/atomic_red_team/linux-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1082/atomic_red_team/linux-sysmon.log
     source: Syslog:Linux-Sysmon/Operational
     sourcetype: sysmon:linux
-    update_timestamp: true

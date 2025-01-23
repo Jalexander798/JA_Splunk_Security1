@@ -4,7 +4,6 @@ version: 1
 date: '2020-06-08'
 author: Bhavin Patel, Splunk
 type: Investigation
-datamodel: []
 description: This search retrieves the all the alerts created by AWS Security Hub
   for a specific dest(instance_id).
 search: '`aws_securityhub_firehose` "findings{}.Resources{}.Type"=AWSEC2Instance |
@@ -24,15 +23,4 @@ tags:
   - AWS Suspicious Provisioning Activities
   product:
   - Splunk Phantom
-  required_fields:
-  - _time
-  - findings{}.Resources{}.Type
-  - findings{}.Resources{}.Id
-  - instance
-  - Remediation.Recommendation.Text
-  - Title
-  - ProductArn
-  - Description
-  - FirstObservedAt
-  - RecordState
   security_domain: network

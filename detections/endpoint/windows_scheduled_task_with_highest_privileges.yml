@@ -1,7 +1,7 @@
 name: Windows Scheduled Task with Highest Privileges
 id: 2f15e1a4-0fc2-49dd-919e-cbbe60699218
-version: '4'
-date: '2024-11-28'
+version: 5
+date: '2024-12-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -51,6 +51,14 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A $process_name$ process created a scheduled task $process$ with highest
+    run level privilege on $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 64
+  threat_objects: []
 tags:
   analytic_story:
   - AsyncRAT
@@ -59,41 +67,18 @@ tags:
   - Scheduled Tasks
   - RedLine Stealer
   asset_type: Endpoint
-  confidence: 80
-  impact: 80
-  message: a $process_name$ creating a schedule task $process$ with highest run level
-    privilege in $dest$
   mitre_attack_id:
   - T1053
   - T1053.005
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.dest
-  - Processes.user
-  - Processes.parent_process_name
-  - Processes.parent_process
-  - Processes.original_file_name
-  - Processes.process_name
-  - Processes.process
-  - Processes.process_id
-  - Processes.parent_process_path
-  - Processes.process_path
-  - Processes.parent_process_id
-  risk_score: 64
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/asyncrat_highest_priv_schtasks/sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/asyncrat_highest_priv_schtasks/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
-    update_timestamp: true

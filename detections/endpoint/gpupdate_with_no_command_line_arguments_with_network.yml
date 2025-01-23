@@ -1,7 +1,7 @@
 name: GPUpdate with no Command Line Arguments with Network
 id: 2c853856-a140-11eb-a5b5-acde48001122
-version: '6'
-date: '2024-11-28'
+version: 7
+date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -54,6 +54,22 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: Process gpupdate.exe  with parent_process $parent_process_name$ is executed
+    on $dest$ by user $user$, followed by an outbound network connection to $C2$ on
+    port $dest_port$. This behaviour is seen with cobaltstrike.
+  risk_objects:
+  - field: user
+    type: user
+    score: 81
+  - field: dest
+    type: system
+    score: 81
+  threat_objects:
+  - field: parent_process_name
+    type: parent_process_name
+  - field: C2
+    type: ip_address
 tags:
   analytic_story:
   - Graceful Wipe Out Attack
@@ -61,47 +77,17 @@ tags:
   - Compromised Windows Host
   - BlackByte Ransomware
   asset_type: Endpoint
-  confidence: 90
-  impact: 90
-  message: Process gpupdate.exe  with parent_process $parent_process_name$ is executed
-    on $dest$ by user $user$, followed by an outbound network connection to $C2$ on
-    port $dest_port$. This behaviour is seen with cobaltstrike.
   mitre_attack_id:
   - T1055
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
-  - name: parent_process_name
-    type: Process Name
-    role:
-    - Attacker
-  - name: C2
-    type: IP Address
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - EventID
-  - process_name
-  - process_id
-  - parent_process_name
-  - dest_port
-  - process_path
-  risk_score: 81
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/cobalt_strike/windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/cobalt_strike/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

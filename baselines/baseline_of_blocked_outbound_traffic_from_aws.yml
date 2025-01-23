@@ -4,7 +4,6 @@ version: 1
 date: '2018-05-07'
 author: Bhavin Patel, Splunk
 type: Baseline
-datamodel: []
 description: This search establishes, on a per-hour basis, the average and the standard
   deviation of the number of outbound connections blocked in your VPC flow logs by
   each source IP address (IP address of your EC2 instances). Also recorded is the
@@ -34,9 +33,4 @@ tags:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - action
-  - src_ip
-  - dest_ip
   security_domain: network

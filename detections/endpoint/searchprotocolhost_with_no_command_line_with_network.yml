@@ -1,7 +1,7 @@
 name: SearchProtocolHost with no Command Line with Network
 id: b690df8c-a145-11eb-a38b-acde48001122
-version: '6'
-date: '2024-11-28'
+version: 7
+date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -51,6 +51,16 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A searchprotocolhost.exe process $process_name$ with no commandline on
+    host $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 70
+  threat_objects:
+  - field: process_name
+    type: process_name
 tags:
   analytic_story:
   - Graceful Wipe Out Attack
@@ -58,37 +68,17 @@ tags:
   - Compromised Windows Host
   - BlackByte Ransomware
   asset_type: Endpoint
-  confidence: 100
-  impact: 70
-  message: A searchprotocolhost.exe process $process_name$ with no commandline in
-    host $dest$
   mitre_attack_id:
   - T1055
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: process_name
-    type: Process Name
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - process_name
-  - process_id
-  - parent_process_name
-  - dest_port
-  - process_path
-  risk_score: 70
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/cobalt_strike/windows-sysmon_searchprotocolhost.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/cobalt_strike/windows-sysmon_searchprotocolhost.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

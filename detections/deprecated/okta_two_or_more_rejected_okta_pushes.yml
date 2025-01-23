@@ -1,15 +1,14 @@
 name: Okta Two or More Rejected Okta Pushes
 id: d93f785e-4c2c-4262-b8c7-12b77a13fd39
-version: 3
-date: '2024-10-17'
+version: 4
+date: '2024-11-14'
 author: Michael Haag, Marissa Bower, Splunk
 status: deprecated
 type: TTP
-description: 
-  '**DEPRECATION NOTE** - This search has been deprecated and replaced with `Okta Multiple Failed MFA Requests For User`.
-  The following analytic identifies an account that has rejected more than
-  2 Push notifications in a 10 minute window. Modify this query for your environment
-  by upping the count or time window.'
+description: '**DEPRECATION NOTE** - This search has been deprecated and replaced
+  with `Okta Multiple Failed MFA Requests For User`. The following analytic identifies
+  an account that has rejected more than 2 Push notifications in a 10 minute window.
+  Modify this query for your environment by upping the count or time window.'
 data_source: []
 search: '`okta` outcome.reason="User rejected Okta push verify" OR (debugContext.debugData.factor="OKTA_VERIFY_PUSH"
   outcome.result=FAILURE legacyEventType="core.user.factor.attempt_fail" "target{}.detailEntry.methodTypeUsed"="Get
@@ -28,30 +27,22 @@ known_false_positives: False positives may be present. Tune Okta and tune the an
   is complete.
 references:
 - https://developer.okta.com/docs/reference/api/event-types/?q=user.acount.lock
+rba:
+  message: $user$ account has rejected multiple Okta pushes.
+  risk_objects:
+  - field: user
+    type: user
+    score: 64
+  threat_objects: []
 tags:
   analytic_story:
   - Suspicious Okta Activity
   - Okta MFA Exhaustion
   asset_type: Infrastructure
-  confidence: 80
-  impact: 80
-  message: $user$ account has rejected multiple Okta pushes.
   mitre_attack_id:
   - T1110
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - user
-  - src_ip
-  - eventType
-  - status
-  risk_score: 64
   security_domain: access

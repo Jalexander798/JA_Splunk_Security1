@@ -3,7 +3,7 @@ id: b686d0bd-cca7-44ca-ae07-87f6465131d9
 version: 1
 date: '2025-01-06'
 author: Dean Luxton
-data_sources:
+data_source:
 - O365 Add app role assignment grant to user
 type: TTP
 status: production
@@ -33,40 +33,27 @@ drilldown_searches:
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$servicePrincipal$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: Service Principal $servicePrincipal$ has elevated privileges by adding themself to app role $appRole$
+  risk_objects:
+  - field: servicePrincipal
+    type: user
+    score: 100
+  threat_objects:
+  - field: user_agent
+    type: http_user_agent
 tags:
   analytic_story:
   - Azure Active Directory Privilege Escalation
   - Office 365 Account Takeover
   asset_type: Azure Tenant
-  confidence: 100
-  impact: 100
-  message: Service Principal $servicePrincipal$ has elevated privileges by adding themself to app role $appRole$
   mitre_attack_id:
   - T1098.003
   - T1098
-  observable:
-  - name: servicePrincipal
-    type: User
-    role:
-    - Victim
-  - name: user_agent
-    type: Other
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - user_agent
-  - Actor{}.ID
-  - ResultStatus
-  - Operation
-  - ModifiedProperties{} 
-  - user
-  - InterSystemsId
-  - tenant_id
-  risk_score: 100
   security_domain: identity
 tests:
 - name: True Positive Test

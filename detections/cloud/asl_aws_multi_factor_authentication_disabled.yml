@@ -1,7 +1,7 @@
 name: ASL AWS Multi-Factor Authentication Disabled
 id: 4d2df5e0-1092-4817-88a8-79c7fa054668
 version: 5
-date: '2024-09-30'
+date: '2024-11-14'
 author: Patrick Bareiss, Splunk
 status: production
 type: TTP
@@ -20,44 +20,37 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: User $user$ has disabled Multi-Factor authentication
+  risk_objects:
+  - field: user
+    type: user
+    score: 64
+  threat_objects:
+  - field: src_ip
+    type: ip_address
 tags:
   analytic_story:
   - AWS Identity and Access Management Account Takeover
   asset_type: AWS Account
-  confidence: 80
-  impact: 80
-  message: User $user$ has disabled Multi-Factor authentication
   mitre_attack_id:
   - T1586
   - T1586.003
   - T1621
   - T1556
   - T1556.006
-  observable:
-  - name: src_ip
-    type: IP Address
-    role:
-    - Attacker
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - api.operation
-  - actor.user.uid
-  - actor.user.account.uid
-  - http_request.user_agent
-  - src_endpoint.ip
-  - src_endpoint.domain
-  - cloud.region
-  risk_score: 64
   security_domain: threat
 tests:
 - name: True Positive Test

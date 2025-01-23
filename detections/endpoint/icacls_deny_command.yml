@@ -1,7 +1,7 @@
 name: Icacls Deny Command
 id: cf8d753e-a8fe-11eb-8f58-acde48001122
-version: 5
-date: '2024-12-06'
+version: 6
+date: '2024-12-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -50,6 +50,17 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: Process name $process_name$ with deny argument executed by $user$ to change
+    security permission of a specific file or directory on host $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 72
+  - field: user
+    type: user
+    score: 72
+  threat_objects: []
 tags:
   analytic_story:
   - Azorult
@@ -58,38 +69,17 @@ tags:
   - Compromised Windows Host
   - Defense Evasion or Unauthorized Access Via SDDL Tampering
   asset_type: Endpoint
-  confidence: 80
-  impact: 90
-  message: Process name $process_name$ with deny argument executed by $user$ to change
-    security permission of a specific file or directory on host $dest$
   mitre_attack_id:
   - T1222
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.parent_process_name
-  - Processes.process_name
-  - Processes.dest
-  - Processes.user
-  - Processes.process_id
-  - Processes.process
-  risk_score: 72
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

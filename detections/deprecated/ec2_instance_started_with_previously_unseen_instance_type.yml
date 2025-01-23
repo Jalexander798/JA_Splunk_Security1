@@ -1,7 +1,7 @@
 name: EC2 Instance Started With Previously Unseen Instance Type
 id: 65541c80-03c7-4e05-83c8-1dcd57a2e1ad
-version: 4
-date: '2024-10-17'
+version: 6
+date: '2025-01-16'
 author: David Dorsey, Splunk
 status: deprecated
 type: Anomaly
@@ -12,9 +12,9 @@ data_source: []
 search: '`cloudtrail` eventName=RunInstances [search `cloudtrail` eventName=RunInstances
   errorCode=success | fillnull value="m1.small" requestParameters.instanceType | stats
   earliest(_time) as earliest latest(_time) as latest by requestParameters.instanceType
-  | rename requestParameters.instanceType as instanceType | inputlookup append=t previously_seen_ec2_instance_types.csv
+  | rename requestParameters.instanceType as instanceType | inputlookup append=t previously_seen_ec2_instance_types_lookup
   | stats min(earliest) as earliest max(latest) as latest by instanceType | outputlookup
-  previously_seen_ec2_instance_types.csv | eval newType=if(earliest >= relative_time(now(),
+  previously_seen_ec2_instance_types_lookup | eval newType=if(earliest >= relative_time(now(),
   "-70m@m"), 1, 0) | `security_content_ctime(earliest)` | `security_content_ctime(latest)`
   | where newType=1 | rename instanceType as requestParameters.instanceType | table
   requestParameters.instanceType] | spath output=user userIdentity.arn | rename requestParameters.instanceType
@@ -28,26 +28,19 @@ known_false_positives: It is possible that an admin will create a new system usi
   a new instance type never used before. Verify with the creator that they intended
   to create the system with the new instance type.
 references: []
+rba:
+  message: EC2 Instance $dest$ launched with previously unseen instance type $instanceType$
+  risk_objects:
+  - field: user
+    type: user
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - AWS Cryptomining
   asset_type: AWS Instance
-  confidence: 50
-  impact: 50
-  message: tbd
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - eventName
-  - errorCode
-  - requestParameters.instanceType
-  risk_score: 25
   security_domain: endpoint

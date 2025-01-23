@@ -1,8 +1,15 @@
-description: A list of Remote Access Software
-filename: remote_access_software20240726.csv
 name: remote_access_software
-default_match: 'false'
-match_type: WILDCARD(remote_utility),WILDCARD(remote_domain),WILDCARD(remote_utility_fileinfo)
+date: 2024-12-23
+version: 2
+id: f3b92ff9-667c-481f-b29d-458e10d48508
+author: Splunk Threat Research Team
+lookup_type: csv
+description: A list of Remote Access Software
+default_match: false
+match_type: 
+- WILDCARD(remote_utility)
+- WILDCARD(remote_domain)
+- WILDCARD(remote_utility_fileinfo)
 min_matches: 1
 max_matches: 1
-case_sensitive_match: 'false'
+case_sensitive_match: false

@@ -29,36 +29,26 @@ drilldown_searches:
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: User $user$ has caused multiple failures with errorCode AccessDenied, which potentially means adversary is attempting to identify a role name.
+  risk_objects:
+  - field: user
+    type: user
+    score: 28
+  threat_objects:
+  - field: src_ip
+    type: ip_address
 tags:
   analytic_story:
   - AWS IAM Privilege Escalation
   asset_type: AWS Account
-  confidence: 70
-  impact: 40
-  message: User $user$ has caused multiple failures with errorCode AccessDenied, which potentially means adversary is attempting to identify a role name.
   mitre_attack_id:
   - T1580
   - T1110
-  observable:
-  - name: src_ip
-    type: IP Address
-    role:
-    - Attacker
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - api.operation
-  - actor.user.uid
-  - src_endpoint.ip
-  - cloud.region
-  risk_score: 28
   security_domain: access
 tests:
 - name: True Positive Test

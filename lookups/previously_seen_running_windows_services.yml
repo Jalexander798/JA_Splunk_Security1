@@ -1,4 +1,12 @@
-description: A placeholder for the list of Windows Services running
-collection: previously_seen_running_windows_services
 name: previously_seen_running_windows_services
-fields_list: _key, service, firstTimeSeen, lastTimeSeen
+date: 2024-12-23
+version: 2
+id: d997cadc-75ac-48a5-bebc-ccbc94c4023a
+author: Splunk Threat Research Team
+lookup_type: kvstore
+description: A placeholder for the list of Windows Services running
+fields: 
+- _key
+- service
+- firstTimeSeen
+- lastTimeSeen

@@ -4,8 +4,6 @@ version: 1
 date: '2020-08-15'
 author: Rico Valdez, Splunk
 type: Baseline
-datamodel:
-- Authentication
 description: This search looks for **AssumeRole** events where the requesting account
   differs from the requested account, then writes these relationships to a lookup
   file.
@@ -32,13 +30,6 @@ tags:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Authentication.signature
-  - Authentication.vendor_account
-  - Authentication.user
-  - Authentication.src
-  - Authentication.user_role
   security_domain: network
 deployment:
   scheduling:
