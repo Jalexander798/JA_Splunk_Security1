@@ -66,15 +66,16 @@ rba:
 tags:
   analytic_story:
   - Azorult
-  - Ryuk Ransomware
-  - Scheduled Tasks
-  - Ransomware
-  - Windows Persistence Techniques
-  - Living Off The Land
-  - DarkCrystal RAT
-  - CISA AA23-347A
   - MoonPeak
   - CISA AA24-241A
+  - Windows Persistence Techniques
+  - CISA AA23-347A
+  - Ransomware
+  - Scheduled Tasks
+  - Ryuk Ransomware
+  - Crypto Stealer
+  - DarkCrystal RAT
+  - Living Off The Land
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.005

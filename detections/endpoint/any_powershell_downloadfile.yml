@@ -71,15 +71,16 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - DarkCrystal RAT
-  - Ingress Tool Transfer
   - Hermetic Wiper
-  - Malicious PowerShell
-  - Data Destruction
   - Log4Shell CVE-2021-44228
   - Phemedrone Stealer
-  - Braodo Stealer
+  - Data Destruction
   - PXA Stealer
+  - Ingress Tool Transfer
+  - Malicious PowerShell
+  - DarkCrystal RAT
+  - Crypto Stealer
+  - Braodo Stealer
   asset_type: Endpoint
   cve:
   - CVE-2021-44228

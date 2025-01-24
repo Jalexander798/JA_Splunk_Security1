@@ -54,14 +54,15 @@ rba:
     type: service
 tags:
   analytic_story:
-  - Clop Ransomware
-  - Active Directory Lateral Movement
-  - Brute Ratel C4
   - Qakbot
-  - Snake Malware
-  - Flax Typhoon
-  - PlugX
   - CISA AA23-347A
+  - Flax Typhoon
+  - Clop Ransomware
+  - Brute Ratel C4
+  - PlugX
+  - Active Directory Lateral Movement
+  - Crypto Stealer
+  - Snake Malware
   asset_type: Endpoint
   mitre_attack_id:
   - T1569

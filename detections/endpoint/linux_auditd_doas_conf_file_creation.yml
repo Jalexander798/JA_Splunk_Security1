@@ -47,7 +47,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A [$type$] event occured on host - [$dest$] to create a doas.conf file.
+  message: A [$type$] event occurred on host - [$dest$] to create a doas.conf file.
   risk_objects:
   - field: dest
     type: system

@@ -61,41 +61,42 @@ rba:
     type: file_name
 tags:
   analytic_story:
-  - Double Zero Destructor
-  - Graceful Wipe Out Attack
-  - AsyncRAT
-  - WhisperGate
-  - DarkGate Malware
-  - AgentTesla
-  - Brute Ratel C4
-  - NjRAT
-  - RedLine Stealer
-  - Rhysida Ransomware
-  - Swift Slicer
-  - IcedID
-  - DarkCrystal RAT
-  - Chaos Ransomware
-  - PlugX
-  - Industroyer2
-  - Azorult
-  - Remcos
-  - XMRig
-  - Qakbot
   - Volt Typhoon
-  - Hermetic Wiper
-  - Warzone RAT
-  - Trickbot
-  - Amadey
-  - BlackByte Ransomware
   - LockBit Ransomware
-  - CISA AA23-347A
   - Data Destruction
   - Snake Keylogger
+  - XMRig
+  - DarkGate Malware
+  - Chaos Ransomware
+  - Double Zero Destructor
+  - Hermetic Wiper
+  - Warzone RAT
   - AcidPour
+  - Graceful Wipe Out Attack
+  - BlackByte Ransomware
+  - IcedID
+  - NjRAT
   - Handala Wiper
-  - MoonPeak
-  - ValleyRAT
   - Meduza Stealer
+  - CISA AA23-347A
+  - AsyncRAT
+  - Amadey
+  - Industroyer2
+  - ValleyRAT
+  - Rhysida Ransomware
+  - DarkCrystal RAT
+  - Crypto Stealer
+  - Azorult
+  - Swift Slicer
+  - AgentTesla
+  - Qakbot
+  - Remcos
+  - Trickbot
+  - Brute Ratel C4
+  - RedLine Stealer
+  - PlugX
+  - MoonPeak
+  - WhisperGate
   asset_type: Endpoint
   mitre_attack_id:
   - T1036

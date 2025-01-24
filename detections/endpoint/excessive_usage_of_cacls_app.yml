@@ -62,10 +62,11 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - XMRig
   - Azorult
   - Windows Post-Exploitation
   - Prestige Ransomware
+  - XMRig
+  - Crypto Stealer
   - Defense Evasion or Unauthorized Access Via SDDL Tampering
   asset_type: Endpoint
   mitre_attack_id:

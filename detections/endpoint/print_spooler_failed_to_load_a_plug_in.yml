@@ -43,7 +43,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Suspicious printer spooler errors have occured on endpoint $ComputerName$
+  message: Suspicious printer spooler errors have occurred on endpoint $ComputerName$
     with EventCode $EventCode$.
   risk_objects:
   - field: ComputerName

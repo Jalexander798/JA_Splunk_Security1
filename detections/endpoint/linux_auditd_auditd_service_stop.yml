@@ -46,7 +46,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A service event - [$type$] event occured on host - [$dest$].
+  message: A service event - [$type$] event occurred on host - [$dest$].
   risk_objects:
   - field: dest
     type: system

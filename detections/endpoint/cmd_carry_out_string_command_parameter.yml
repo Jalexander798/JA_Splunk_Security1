@@ -38,26 +38,27 @@ references:
 - https://www.microsoft.com/security/blog/2022/01/15/destructive-malware-targeting-ukrainian-organizations/
 tags:
   analytic_story:
-  - AsyncRAT
-  - Winter Vivern
-  - WhisperGate
-  - Living Off The Land
+  - Data Destruction
   - DarkGate Malware
-  - ProxyNotShell
-  - Log4Shell CVE-2021-44228
-  - NjRAT
-  - RedLine Stealer
-  - Rhysida Ransomware
-  - IcedID
   - Chaos Ransomware
-  - PlugX
-  - Azorult
-  - Qakbot
   - Hermetic Wiper
   - Warzone RAT
-  - DarkCrystal RAT
+  - Winter Vivern
+  - ProxyNotShell
+  - IcedID
+  - Living Off The Land
+  - NjRAT
+  - Log4Shell CVE-2021-44228
   - CISA AA23-347A
-  - Data Destruction
+  - AsyncRAT
+  - Rhysida Ransomware
+  - DarkCrystal RAT
+  - Crypto Stealer
+  - Azorult
+  - Qakbot
+  - RedLine Stealer
+  - PlugX
+  - WhisperGate
   asset_type: Endpoint
   cve:
   - CVE-2021-44228

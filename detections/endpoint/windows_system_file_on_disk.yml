@@ -30,8 +30,9 @@ references:
 - https://redcanary.com/blog/tracking-driver-inventory-to-expose-rootkits/
 tags:
   analytic_story:
-  - Windows Drivers
   - CISA AA22-264A
+  - Windows Drivers
+  - Crypto Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1068

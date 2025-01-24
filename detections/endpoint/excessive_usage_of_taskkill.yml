@@ -62,12 +62,13 @@ rba:
     type: parent_process_name
 tags:
   analytic_story:
-  - XMRig
   - Azorult
-  - CISA AA22-264A
   - AgentTesla
   - CISA AA22-277A
   - NjRAT
+  - CISA AA22-264A
+  - XMRig
+  - Crypto Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
