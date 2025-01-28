@@ -1,4 +1,4 @@
-name: Windows Global Object Access Audit List Cleared Via Auditpol
+name: Windows Audit Policy Security Descriptor Tampering via Auditpol
 id: 5628e0b7-73dc-4f1b-b37a-6e68efc2225f
 version: 1
 date: '2025-01-27'
