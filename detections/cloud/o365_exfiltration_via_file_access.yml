@@ -41,7 +41,7 @@ tags:
   analytic_story: 
   - Data Exfiltration
   - Office 365 Account Takeover
-  asset_type: Cloud
+  asset_type: O365 Tenant
   confidence: 50
   impact: 40
   message: The user $user$ accessed an excessive number of files [$count$] from $file_path$ using $src$
