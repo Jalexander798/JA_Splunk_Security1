@@ -1,10 +1,10 @@
-name: Suspicious Event Log Service Behavior
-id: 2b85aa3d-f5f6-4c2e-a081-a09f6e1c2e40
-version: 6
-date: '2025-02-10'
+name: Windows Event Logging Service Has Shutdown
+id: d696f622-6b08-4336-b456-696cb5b43ba0
+version: 1
+date: '2025-01-28'
 author: Mauricio Velazco, Splunk
 status: production
-type: Hunting
+type: Anomaly
 description: The following analytic detects the shutdown of the Windows Event Log
   service using Windows Event ID 1100. This event is logged every time the service
   stops, including during normal system shutdowns. Monitoring this activity is crucial
@@ -20,7 +20,7 @@ search: (`wineventlog_security` EventCode=1100) | stats count min(_time) as firs
 how_to_implement: To successfully implement this search, you need to be ingesting
   Windows event logs from your hosts. In addition, the Splunk Windows TA is needed.
 known_false_positives: It is possible the Event Logging service gets shut down due
-  to system errors or legitimately administration tasks. Filter as needed.
+  to system errors or legitimately administration tasks. Investigate the cause of this issue and apply additional filters as needed.
 references:
 - https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-1100
 - https://www.ired.team/offensive-security/defense-evasion/disabling-windows-event-logs-by-suspending-eventlog-service-threads
@@ -33,6 +33,7 @@ tags:
   - Clop Ransomware
   asset_type: Endpoint
   mitre_attack_id:
+  - T1070
   - T1070.001
   product:
   - Splunk Enterprise
