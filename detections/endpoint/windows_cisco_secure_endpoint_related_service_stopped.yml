@@ -30,35 +30,28 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: Cisco Secure Endpoint Service $param1$ stopped on $dest$
+  risk_objects:
+  - field: user
+    type: user
+    score: 64
+  - field: dest
+    type: system
+    score: 64
+  threat_objects:
+  - field: param1
+    type: other
 tags:
   analytic_story:
   - Security Solution Tampering
   asset_type: Endpoint
-  confidence: 70
-  impact: 60
-  message: Cisco Secure Endpoint Service $param1$ stopped on $dest$
   mitre_attack_id:
   - T1490
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
-  - name: param1
-    type: Other
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - EventCode
-  - Message
-  - dest
-  - Type
-  risk_score: 42
   security_domain: endpoint
 tests:
 - name: True Positive Test
