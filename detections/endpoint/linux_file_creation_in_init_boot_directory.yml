@@ -1,7 +1,7 @@
 name: Linux File Creation In Init Boot Directory
 id: 97d9cfb2-61ad-11ec-bb2d-acde48001122
-version: 5
-date: '2024-12-19'
+version: 6
+date: '2025-01-27'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -49,9 +49,11 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
+  - Linux Privilege Escalation
+  - Backdoor Pingpong
   - Linux Persistence Techniques
   - XorDDos
-  - Linux Privilege Escalation
+  - Nexus APT Threat Activity
   asset_type: Endpoint
   mitre_attack_id:
   - T1037.004
@@ -64,7 +66,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.004/linux_init_profile/sysmon_linux.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.004/linux_init_profile/sysmon_linux.log
     source: Syslog:Linux-Sysmon/Operational
     sourcetype: sysmon:linux

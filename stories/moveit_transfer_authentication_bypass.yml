@@ -3,6 +3,7 @@ id: b4c0b91f-eee5-47fd-ab02-11f68a9c0858
 version: 1
 date: '2024-06-28'
 author: Michael Haag, Splunk
+status: production
 description: 'This analytic story addresses the critical authentication bypass vulnerability (CVE-2024-5806) in Progress MOVEit Transfer. The vulnerability allows attackers to impersonate any valid user on the system without proper credentials, potentially leading to unauthorized access, data theft, and system compromise. This story includes detections for key indicators of exploitation attempts, helping security teams identify and respond to potential attacks leveraging this vulnerability.'
 narrative: 'In June 2024, a severe authentication bypass vulnerability (CVE-2024-5806) was discovered in Progress MOVEit Transfer, a widely used file transfer solution. This vulnerability allows attackers to bypass authentication and impersonate any valid user on the system, even without prior access or the ability to upload files.
 

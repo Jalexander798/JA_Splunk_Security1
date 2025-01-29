@@ -3,6 +3,7 @@ id: e4acbea6-75bb-4873-8c22-bc2da9525e89
 version: 1
 date: '2023-10-30'
 author: Michael Haag, Splunk
+status: production
 description: "Research into leading software revealed vulnerabilities in both Apache Tomcat and the F5 BIG-IP suite. Apache's AJP protocol vulnerability, designated CVE-2022-26377, relates to AJP request smuggling. Successful exploitation enables unauthorized system activities. F5 BIG-IP Virtual Edition exhibited a distinct vulnerability, an authentication bypass in the Traffic Management User Interface (TMUI), resulting in system compromise. Assigned CVE-2023-46747, this vulnerability also arose from request smuggling, bearing similarity to CVE-2022-26377. Given the wide adoption of both Apache Tomcat and F5 products, these vulnerabilities present grave risks to organizations. Remediation and vulnerability detection mechanisms are essential to address these threats effectively."
 narrative: Both Apache Tomcat's AJP protocol and F5's BIG-IP Virtual Edition have been exposed to critical vulnerabilities. Apache's CVE-2022-26377 pertains to request smuggling by manipulating the "Transfer-Encoding" header. If successfully exploited, this allows attackers to bypass security controls and undertake unauthorized actions. 
 

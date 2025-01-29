@@ -4,6 +4,7 @@ version: 2
 date: '2019-04-01'
 author: Bhavin Patel, Splunk
 type: Investigation
+status: deprecated
 description: This search will return information about the process associated with
   observed network traffic to a specific destination port from a specific host.
 search: '| tstats `security_content_summariesonly` count min(_time) max(_time) as

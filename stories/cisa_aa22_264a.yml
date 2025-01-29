@@ -3,6 +3,7 @@ id: bc7056a5-c3b0-4b83-93ce-5f31739305c8
 version: 1
 date: '2022-09-22'
 author: Michael Haag, Splunk
+status: production
 description: Iranian State Actors Conduct Cyber Operations Against the Government of Albania.
 narrative: The Federal Bureau of Investigation (FBI) and the Cybersecurity and Infrastructure Security Agency (CISA) are releasing this joint Cybersecurity Advisory to provide information on recent cyber operations against the Government of Albania in July and September. This advisory provides a timeline of activity observed, from initial access to execution of encryption and wiper attacks. Additional information concerning files used by the actors during their exploitation of and cyber attack against the victim organization is provided in Appendices A and B. In September 2022, Iranian cyber actors launched another wave of cyber attacks against the Government of Albania, using similar TTPs and malware as the cyber attacks in July. These were likely done in retaliation for public attribution of the cyber attacks in July and severed diplomatic ties between Albania and Iran.
 

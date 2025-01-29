@@ -4,6 +4,7 @@ version: 1
 date: '2017-09-12'
 author: David Dorsey, Splunk
 type: Baseline
+status: production
 description: This search is intended to give you a feel for how often backup failures
   happen in your environments.  Fluctuations in these numbers will allow you to determine
   when you should investigate.

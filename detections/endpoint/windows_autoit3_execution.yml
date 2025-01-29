@@ -67,8 +67,9 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - DarkGate Malware
+  - Crypto Stealer
   - Handala Wiper
+  - DarkGate Malware
   asset_type: Endpoint
   atomic_guid: []
   mitre_attack_id:

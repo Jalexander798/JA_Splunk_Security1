@@ -51,11 +51,12 @@ rba:
     type: process
 tags:
   analytic_story:
-  - Clop Ransomware
   - LockBit Ransomware
-  - BlackByte Ransomware
-  - Rhysida Ransomware
+  - Clop Ransomware
   - Snake Keylogger
+  - Rhysida Ransomware
+  - BlackByte Ransomware
+  - Crypto Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1486

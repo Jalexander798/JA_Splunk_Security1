@@ -1,10 +1,10 @@
 name: Windows Service Creation Using Registry Entry
 id: 25212358-948e-11ec-ad47-acde48001122
-version: 7
-date: '2024-12-08'
+version: 11
+date: '2025-01-27'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
-type: TTP
+type: Anomaly
 description: The following analytic detects the modification of registry keys that
   define Windows services using reg.exe. This detection leverages Splunk to search
   for specific keywords in the registry path, value name, and value data fields. This
@@ -53,13 +53,17 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Active Directory Lateral Movement
-  - Suspicious Windows Registry Activities
-  - Windows Persistence Techniques
-  - Windows Registry Abuse
   - Brute Ratel C4
   - PlugX
+  - Windows Persistence Techniques
   - CISA AA23-347A
+  - Windows Registry Abuse
+  - Suspicious Windows Registry Activities
+  - Active Directory Lateral Movement
+  - Crypto Stealer
+  - Derusbi
+  - Nexus APT Threat Activity
+  - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:
   - T1574.011
@@ -71,7 +75,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.011/change_registry_path_service/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.011/change_registry_path_service/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

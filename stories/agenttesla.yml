@@ -3,6 +3,7 @@ id: 9bb6077a-843e-418b-b134-c57ef997103c
 version: 1
 date: '2022-04-12'
 author: Teoderick Contreras, Splunk
+status: production
 description: Leverage searches that allow you to detect and investigate unusual activities
   that might relate to the AgentTesla malware including .chm application child process, ftp/smtp connection, persistence and many more.
   AgentTesla is one of the advanced remote access trojans (RAT) that are capable of stealing sensitive information from the infected or targeted host machine. 

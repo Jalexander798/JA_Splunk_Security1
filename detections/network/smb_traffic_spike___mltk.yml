@@ -31,12 +31,11 @@ how_to_implement: "To successfully implement this search, you will need to ensur
   should periodically re-run the support search to rebuild the model with the latest
   data available in your environment.\nThis search produces a field (Number of events,count)
   that are not yet supported by ES Incident Review and therefore cannot be viewed
-  when a notable event is raised. This field contributes additional context to the
-  notable. To see the additional metadata, add the following field, if not already
+  when a finding is raised. This field contributes additional context to the
+  finding. To see the additional metadata, add the following field, if not already
   present, to Incident Review - Event Attributes (Configure > Incident Management
   > Incident Review Settings > Add New Entry):\n* **Label:** Number of events, **Field:**
-  count\nDetailed documentation on how to create a new field within Incident Review
-  is found here: `https://docs.splunk.com/Documentation/ES/5.3.0/Admin/Customizenotables#Add_a_field_to_the_notable_event_details`"
+  count"
 known_false_positives: If you are seeing more results than desired, you may consider
   reducing the value of the threshold in the search. You should also periodically
   re-run the support search to re-build the ML model on the latest data. Please update

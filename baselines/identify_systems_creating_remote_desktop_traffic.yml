@@ -4,6 +4,7 @@ version: 1
 date: '2017-09-15'
 author: David Dorsey, Splunk
 type: Baseline
+status: production
 description: This search counts the numbers of times the system has generated remote
   desktop traffic.
 search: '| tstats `security_content_summariesonly` count from datamodel=Network_Traffic

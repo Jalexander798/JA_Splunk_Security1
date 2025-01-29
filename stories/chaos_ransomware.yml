@@ -3,6 +3,7 @@ id: 153d7b8f-27f2-4e4d-bae8-dfafd93a22a8
 version: 1
 date: '2023-01-11'
 author: Teoderick Contreras, Splunk
+status: production
 description: Leverage searches that allow you to detect and investigate unusual activities
   that might relate to the Chaos ransomware, including looking for file writes (file encryption and ransomware notes), 
   deleting shadow volume storage, registry key modification, dropping of files in startup folder, and more.

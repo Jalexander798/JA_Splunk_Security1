@@ -1,10 +1,10 @@
 name: ICACLS Grant Command
 id: b1b1e316-accc-11eb-a9b4-acde48001122
-version: 5
-date: '2024-12-16'
+version: '5'
+date: '2024-12-17'
 author: Teoderick Contreras, Splunk
 status: production
-type: TTP
+type: Anomaly
 description: The following analytic detects the use of the ICACLS command to grant
   additional access permissions to files or directories. It leverages data from Endpoint
   Detection and Response (EDR) agents, focusing on specific process names and command-line
@@ -62,8 +62,9 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - XMRig
   - Ransomware
+  - Crypto Stealer
+  - XMRig
   - Defense Evasion or Unauthorized Access Via SDDL Tampering
   asset_type: Endpoint
   mitre_attack_id:

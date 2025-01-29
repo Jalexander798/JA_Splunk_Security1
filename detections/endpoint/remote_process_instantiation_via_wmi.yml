@@ -1,7 +1,7 @@
 name: Remote Process Instantiation via WMI
 id: d25d2c3d-d9d8-40ec-8fdf-e86fe155a3da
-version: 10
-date: '2024-11-13'
+version: 11
+date: '2025-01-27'
 author: Rico Valdez, Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -65,10 +65,12 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Ransomware
   - CISA AA23-347A
-  - Active Directory Lateral Movement
+  - Ransomware
   - Suspicious WMI Use
+  - Active Directory Lateral Movement
+  - Nexus APT Threat Activity
+  - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:
   - T1047
@@ -80,7 +82,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1047/atomic_red_team/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1047/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

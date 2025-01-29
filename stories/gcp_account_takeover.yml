@@ -3,6 +3,7 @@ id: 8601caff-414f-4c6d-9a04-75b66778869d
 version: 1
 date: '2022-10-12'
 author: Mauricio Velazco, Bhavin Patel, Splunk
+status: production
 description: Monitor for activities and techniques associated with Account Takeover
   attacks against Google Cloud Platform tenants.
 narrative: 'Account Takeover (ATO) is an attack whereby cybercriminals gain unauthorized access to online accounts by using different techniques like brute force, social engineering, 

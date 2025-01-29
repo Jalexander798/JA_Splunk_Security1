@@ -47,7 +47,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A [$type$] event has occured on host - [$dest$] to modify the preload file.
+  message: A [$type$] event has occurred on host - [$dest$] to modify the preload file.
   risk_objects:
   - field: dest
     type: system

@@ -3,6 +3,7 @@ id: 99171cdd-57a1-4b8a-873c-f8bee12e2025
 version: 1
 date: '2023-06-21'
 author: Michael Haag, Splunk
+status: production
 description: CVE-2023-20887 is a critical vulnerability affecting VMware's vRealize Network Insight (also known as VMware Aria Operations for Networks). It allows a remote, unauthenticated attacker to execute arbitrary commands with root privileges via the Apache Thrift RPC interface. The exploit, which has a severity score of 9.8, targets an endpoint ("/saas./resttosaasservlet") in the application and delivers a malicious payload designed to create a reverse shell, granting the attacker control over the system. VMware has released an advisory recommending users to update to the latest version to mitigate this threat.
 narrative: CVE-2023-20887 is a highly critical vulnerability found in VMware's vRealize Network Insight. This software is widely used for intelligent operations management across physical, virtual, and cloud environments, so a vulnerability in it poses a significant risk to many organizations.
 

@@ -62,8 +62,9 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - Ransomware
   - Sandworm Tools
+  - Ransomware
+  - Crypto Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1222

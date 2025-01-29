@@ -62,8 +62,9 @@ rba:
     type: parent_process_name
 tags:
   analytic_story:
-  - NjRAT
   - PXA Stealer
+  - NjRAT
+  - Crypto Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1562

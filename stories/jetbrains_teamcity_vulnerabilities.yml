@@ -3,6 +3,7 @@ id: 3cd841e8-2f64-45e8-b148-7767255db111
 version: 1
 date: '2024-03-04'
 author: Michael Haag, Splunk
+status: production
 description: This story provides a high-level overview of JetBrains TeamCity vulnerabilities and how to detect and respond to them using Splunk.
 narrative: JetBrains TeamCity is a continuous integration and deployment server that allows developers to automate the process of building, testing, and deploying code. It is a popular tool used by many organizations to streamline their development and deployment processes. However, like any software, JetBrains TeamCity is not immune to vulnerabilities.
 references:

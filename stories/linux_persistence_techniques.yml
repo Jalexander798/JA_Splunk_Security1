@@ -3,6 +3,7 @@ id: e40d13e5-d38b-457e-af2a-e8e6a2f2b516
 version: 1
 date: '2021-12-17'
 author: Teoderick Contreras, Splunk
+status: production
 description: Monitor for activities and techniques associated with maintaining persistence
   on a Linux system--a sign that an adversary may have compromised your environment.
 narrative: Maintaining persistence is one of the first steps taken by attackers after

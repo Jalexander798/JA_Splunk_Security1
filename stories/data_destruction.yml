@@ -3,6 +3,7 @@ id: 4ae5c0d1-cebd-47d1-bfce-71bf096e38aa
 version: 1
 date: '2023-04-06'
 author: Teoderick Contreras, Splunk
+status: production
 description: Leverage searches that allow you to detect and investigate unusual activities that might relate to the data destruction, 
   including deleting files, overwriting files, wiping disk and unrecoverable file encryption. This analytic story may cover several 
   known activities related to malware implants used in geo-political war to wipe disks or files to interrupt the network-wide operation 
