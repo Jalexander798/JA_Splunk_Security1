@@ -33,12 +33,9 @@ drilldown_searches:
 rba:
   message: Cisco Secure Endpoint Service $param1$ stopped on $dest$
   risk_objects:
-  - field: user
-    type: user
-    score: 64
   - field: dest
     type: system
-    score: 64
+    score: 60
   threat_objects:
   - field: param1
     type: service
