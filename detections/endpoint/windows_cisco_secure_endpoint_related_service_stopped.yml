@@ -41,7 +41,7 @@ rba:
     score: 64
   threat_objects:
   - field: param1
-    type: other
+    type: service
 tags:
   analytic_story:
   - Security Solution Tampering
