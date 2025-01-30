@@ -97,3 +97,13 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "IAMUser", "prin
   "eventID": "742f6e55-4bc7-49e2-965f-56ffbc46a980", "readOnly": false, "eventType":
   "AwsApiCall", "managementEvent": true, "eventCategory": "Management", "recipientAccountId":
   "111111111111"}'
+output_fields:
+- action
+- dest
+- user
+- user_agent
+- status
+- src
+- vendor_account
+- vendor_region
+- vendor_product

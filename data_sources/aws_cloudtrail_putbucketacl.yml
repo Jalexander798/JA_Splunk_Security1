@@ -114,3 +114,13 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "IAMUser", "prin
   "readOnly": false, "resources": [{"accountId": "111111111111", "type": "AWS::S3::Bucket",
   "ARN": "arn:aws:s3:::patricktestbucket19"}], "eventType": "AwsApiCall", "managementEvent":
   true, "eventCategory": "Management", "recipientAccountId": "111111111111"}'
+output_fields:
+- action
+- dest
+- user
+- user_agent
+- status
+- src
+- vendor_account
+- vendor_region
+- vendor_product

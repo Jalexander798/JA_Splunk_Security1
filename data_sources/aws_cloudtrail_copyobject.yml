@@ -117,3 +117,13 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "IAMUser", "prin
   {"type": "AWS::S3::Object", "ARN": "arn:aws:s3:::patricktestbucketencrypt/kms_aws_events.json"}],
   "eventType": "AwsApiCall", "managementEvent": false, "recipientAccountId": "111111111111",
   "eventCategory": "Data"}'
+output_fields:
+- action
+- dest
+- user
+- user_agent
+- status
+- src
+- vendor_account
+- vendor_region
+- vendor_product

@@ -100,3 +100,13 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "IAMUser", "prin
   "AwsApiCall", "apiVersion": "2015-08-24", "managementEvent": true, "recipientAccountId":
   "111111111111", "eventCategory": "Management", "tlsDetails": {"tlsVersion": "TLSv1.2",
   "cipherSuite": "ECDHE-RSA-AES128-GCM-SHA256", "clientProvidedHostHeader": "waf.amazonaws.com"}}'
+output_fields:
+- action
+- dest
+- user
+- user_agent
+- status
+- src
+- vendor_account
+- vendor_region
+- vendor_product

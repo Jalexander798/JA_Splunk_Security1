@@ -139,3 +139,13 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "bcfccd92-5bf1-4de1-9cfd-87fdeb70e452", "readOnly": false, "eventType": "AwsApiCall",
   "managementEvent": true, "recipientAccountId": "111111111111", "eventCategory":
   "Management"}'
+output_fields:
+- action
+- dest
+- user
+- user_agent
+- status
+- src
+- vendor_account
+- vendor_region
+- vendor_product

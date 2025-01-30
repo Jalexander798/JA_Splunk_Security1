@@ -82,3 +82,13 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"accountId": "1111111111
   "jobArn": "arn:aws:s3:us-west-2:111111111111:job/bb54efd8-937d-4f0c-967d-aa8443998dac",
   "status": "New", "jobEventId": "4e70d2f1053c07a79d9be9a14e486020", "failureCodes":
   [], "statusChangeReason": []}, "eventCategory": "Management"}'
+output_fields:
+- action
+- dest
+- user
+- user_agent
+- status
+- src
+- vendor_account
+- vendor_region
+- vendor_product
