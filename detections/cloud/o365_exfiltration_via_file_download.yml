@@ -35,37 +35,27 @@ drilldown_searches:
   search: '`o365_management_activity` Operation IN ("filedownloaded") UserId="$UserId$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: The user $user$ downloaded an excessive number of files [$count$] from $file_path$ using $src$
+  risk_objects:
+  - field: user
+    type: user
+    score: 25
+  threat_objects:
+  - field: src
+    type: src
 tags:
   analytic_story: 
   - Data Exfiltration
   - Office 365 Account Takeover
   asset_type: O365 Tenant
-  confidence: 50
-  impact: 50
-  message: The user $user$ downloaded an excessive number of files [$count$] from $file_path$ using $src$
   mitre_attack_id: 
   - T1567
   - T1530  
-  observable: 
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: src
-    type: IP Address
-    role:
-    - Attacker
   product: 
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields: 
-  - _time
-  - Operation
-  - UserId
-  - Workload
-  - SiteUrl
-  risk_score: 25
   security_domain: threat
 tests:
 - name: True Positive Test
