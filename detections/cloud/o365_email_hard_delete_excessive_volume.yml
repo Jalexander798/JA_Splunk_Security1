@@ -37,7 +37,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: message: The user $user$ deleted an excessing number of emails [$count$] within a short timeframe
+  message: The user $user$ deleted an excessing number of emails [$count$] within a short timeframe
   risk_objects:
   - field: user
     type: user
