@@ -22,7 +22,7 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   "*\\windows\\temp\\*", "*\\users\\public\\*", "*\\windows\\debug\\*", "*\\Users\\Administrator\\Music\\*",
   "*\\Windows\\servicing\\*", "*\\Users\\Default\\*", "*Recycle.bin*", "*\\Windows\\Media\\*",  "\\Windows\\repair\\*",
   "*\\temp\\*" , "*\\PerfLogs\\*","*\\windows\\tasks\\*", "*:\\programdata\\*") by
-  Processes.parent_process_name Processes.parent_process Processes.process_path Processes.dest
+  Processes.parent_process_name Processes.parent_process Processes.process_name Processes.process_path Processes.dest
   Processes.user | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `suspicious_process_file_path_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
