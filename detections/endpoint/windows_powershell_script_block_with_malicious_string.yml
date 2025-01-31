@@ -36,25 +36,25 @@ drilldown_searches:
   search: '`powershell` ScriptBlockText EventCode=4104 Computer=$dest|s$ "*$match$*"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: The user $user$ ran a known malicious PowerShell string matching *$match$* on $dest$
+  risk_objects:
+  - field: user
+    type: user
+    score: 70
+  - field: dest
+    type: system
+    score: 70
+  threat_objects:
+  - field: signature_id
+    type: signature_id
 tags:
   analytic_story: 
   - Malicious PowerShell
   asset_type: Endpoint
-  confidence: 90
-  impact: 80
-  message: The user $user$ ran a known malicious PowerShell string matching *$match$* on $dest$
   mitre_attack_id: 
   - T1059
   - T1059.001
-  observable: 
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: user
-    type: User
-    role:
-    - Victim
   product: 
   - Splunk Enterprise
   - Splunk Enterprise Security
@@ -64,7 +64,6 @@ tags:
   - Computer
   - EventCode
   - ScriptBlockText
-  risk_score: 72
   security_domain: threat
 tests:
 - name: True Positive Test
