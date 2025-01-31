@@ -4,3 +4,4 @@ match_type: WILDCARD(command)
 min_matches: 1
 max_matches: 1
 name: malicious_powershell_strings
+case_sensitive_match: false
