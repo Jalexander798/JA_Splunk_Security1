@@ -37,38 +37,27 @@ drilldown_searches:
   search: '`o365_management_activity` Operation IN ("fileaccessed") UserId="$UserId$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: The user $user$ accessed an excessive number of files [$count$] from $file_path$ using $src$
+  risk_objects:
+  - field: user
+    type: user
+    score: 20
+  threat_objects:
+  - field: src
+    type: src
 tags:
   analytic_story: 
   - Data Exfiltration
   - Office 365 Account Takeover
-  asset_type: O365 Tenant
-  confidence: 50
-  impact: 40
-  message: The user $user$ accessed an excessive number of files [$count$] from $file_path$ using $src$
+  asset_type: O365 Tenant  
   mitre_attack_id: 
   - T1567
   - T1530  
-  observable: 
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: src
-    type: IP Address
-    role:
-    - Attacker
   product: 
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields: 
-  - _time
-  - Operation
-  - UserId
-  - SourceFileExtension
-  - Workload
-  - SiteUrl
-  risk_score: 20
   security_domain: threat
 tests:
 - name: True Positive Test
