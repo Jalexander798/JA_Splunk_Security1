@@ -50,43 +50,30 @@ drilldown_searches:
   search: '`o365_management_activity` Workload=Exchange (Operation IN ("Send*")) AND Item.Attachments=* AND UserId = "$user$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: The user $user$ sent an excessive number of email attachments [$count$] to external recipient(s) within a short timeframe
+  risk_objects:
+  - field: user
+    type: user
+    score: 20
+  threat_objects:
+  - field: recipient 
+    type: user
+  - field: src
+    type: ip_address
 tags:
   analytic_story: 
   - Office 365 Account Takeover
   - Suspicious Emails
-  asset_type: Cloud
-  confidence: 50
-  impact: 30
-  message: The user $user$ sent an excessing number of email attachments [$count$] to external recipient(s) within a short timeframe
+  asset_type: O365 Tenant
   mitre_attack_id: 
   - T1070
   - T1070.008
   - T1485
-  observable: 
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: src
-    type: IP Address
-    role:
-    - Attacker
-  - name: recipient 
-    type: User 
-    role:
-    - Attacker
   product: 
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields: 
-  - _time
-  - Status
-  - SenderAddress
-  - InternetMessageId 
-  - Workload
-  - Operation
-  risk_score: 15
   security_domain: threat
 tests:
 - name: True Positive Test
