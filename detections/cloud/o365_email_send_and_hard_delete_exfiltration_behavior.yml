@@ -49,53 +49,37 @@ drilldown_searches:
   search: '`o365_management_activity` Workload=Exchange (Operation IN ("Send")) OR (Operation IN ("HardDelete") AND Folder.Path IN ("\\Sent Items","\\Recoverable Items\\Deletions")) AND UserId = "$user$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: The user $user$ sent and hard deleted an email to an external recipient [$recipient$] within a short timeframe
+  risk_objects:
+  - field: user
+    type: user
+    score: 40
+  - field: recipient
+    type: user    
+    score: 40
+  threat_objects:
+  - field: src
+    type: ip_address
+  - field: subject
+    type: signature    
 tags:
   analytic_story: 
   - Office 365 Account Takeover
   - Office 365 Collection Techniques
   - Suspicious Emails
   - Data Destruction
-  asset_type: Cloud
-  confidence: 80
-  impact: 50
-  message: The user $user$ sent and hard deleted an email to an external recipient [$recipient$] within a short timeframe
+  asset_type: O365 Tenant 
   mitre_attack_id: 
   - T1114
   - T1114.001
   - T1070
   - T1070.008
   - T1485
-  observable: 
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: src
-    type: IP Address
-    role:
-    - Attacker
-  - name: subject
-    type: Other
-    role:
-    - Attacker
-  - name: recipient
-    type: User
-    role:
-    - Attacker
   product: 
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields: 
-  - _time
-  - Status
-  - SenderAddress
-  - MessageId
-  - InternetMessageId
-  - Workload
-  - Folder.Path
-  - Organization
-  risk_score: 40
   security_domain: threat
 tests:
 - name: True Positive Test
