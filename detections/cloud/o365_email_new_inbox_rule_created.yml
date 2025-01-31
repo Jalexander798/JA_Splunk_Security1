@@ -33,37 +33,27 @@ drilldown_searches:
   search: '`o365_management_activity` Workload=Exchange AND (Operation=New-InboxRule OR Operation=Set-InboxRule) AND UserId = "$user$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A new email inbox rule was created for $user$
+  risk_objects:
+  - field: user
+    type: user
+    score: 10
+  threat_objects:
+  - field: desc
+    type: signature
 tags:
   analytic_story: 
   - Office 365 Collection Techniques
-  asset_type: Cloud
-  confidence: 40
-  impact: 40
-  message: A new email inbox rule was created for $user$
+  asset_type: O365 Tenant  
   mitre_attack_id: 
   - T1114
   - T1114.003
   - T1564.008
-  observable: 
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: desc
-    type: Other
-    role:
-    - Attacker
   product: 
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields: 
-  - Workload 
-  - Operation
-  - Parameters{}.Name
-  - UserId
-  - Name
-  risk_score: 10
   security_domain: audit
 tests:
 - name: True Positive Test
