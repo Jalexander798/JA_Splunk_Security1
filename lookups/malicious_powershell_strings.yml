@@ -1,5 +1,6 @@
 description: A list of commands and commandlets used with known malicious powershell tooling.
 filename: malicious_powershell_strings_20250113.csv
+lookup_type: csv
 match_type: WILDCARD(command)
 min_matches: 1
 max_matches: 1
