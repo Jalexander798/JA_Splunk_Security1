@@ -44,7 +44,7 @@ rba:
     score: 25
   threat_objects:
   - field: src
-    type: src
+    type: ip_address
 tags:
   analytic_story: 
   - Data Exfiltration
