@@ -48,7 +48,7 @@ rba:
   - field: src
     type: ip_address
   - field: subject
-    type: signature
+    type: email_subject
 tags:
   analytic_story: 
   - Office 365 Account Takeover
