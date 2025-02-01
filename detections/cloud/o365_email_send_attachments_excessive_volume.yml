@@ -59,9 +59,7 @@ rba:
     score: 20
   threat_objects:
   - field: recipient 
-    type: user
-  - field: src
-    type: ip_address
+    type: email_address
 tags:
   analytic_story: 
   - Office 365 Account Takeover
