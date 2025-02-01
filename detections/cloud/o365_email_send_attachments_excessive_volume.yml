@@ -3,6 +3,7 @@ id: 70a050a2-8537-488a-a628-b60a9558d96a
 version: 1
 date: '2025-01-20'
 author: Steven Dick
+status: production
 type: Anomaly
 description: The following analytic identifies when an O365 email account sends an excessive number of email attachments to external recipients within a short period (within 1 hour). This behavior may indicate a compromised account where the threat actor is attempting to exfiltrate data from the mailbox. Threat actors may attempt to transfer data through email as a simple means of exfiltration from the compromised mailbox. Some account owner legitimate behaviors can trigger this alert, however these actions may not be aligned with organizational expectations / best practice behaviors.
 data_source: 
@@ -32,7 +33,7 @@ search: |-
   | `security_content_ctime(lastTime)`
   | `o365_email_send_attachments_excessive_volume_filter`
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest Office 365 management activity events AND Message Trace events.
-known_false_positives: Users or processes that are send a larage number of attachments may trigger this alert, adjust thresholds accordingly.
+known_false_positives: Users or processes that are send a large number of attachments may trigger this alert, adjust thresholds accordingly.
 references:
 - https://attack.mitre.org/techniques/T1114/
 - https://www.hhs.gov/sites/default/files/help-desk-social-engineering-sector-alert-tlpclear.pdf
