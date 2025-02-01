@@ -61,4 +61,4 @@ tests:
   attack_data:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114/o365_suspect_email_actions/o365_exchange_suspect_events.log
     source: o365
-	sourcetype: o365:management:activity
+    sourcetype: o365:management:activity
