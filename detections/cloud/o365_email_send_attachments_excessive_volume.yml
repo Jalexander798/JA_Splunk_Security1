@@ -9,12 +9,12 @@ description: The following analytic identifies when an O365 email account sends 
 data_source: 
 - Office 365 Universal Audit Log
 search: |-
-`o365_messagetrace` Status=Delivered
-| eval mailtime = _time
-| bin _time span=1hr
-| eval user = lower(SenderAddress), recipient = lower(RecipientAddress)
-| eval InternetMessageId = lower(MessageId)
-| join InternetMessageId, user, _time max=0
+  `o365_messagetrace` Status=Delivered
+  | eval mailtime = _time
+  | bin _time span=1hr
+  | eval user = lower(SenderAddress), recipient = lower(RecipientAddress)
+  | eval InternetMessageId = lower(MessageId)
+  | join InternetMessageId, user, _time max=0
     [
     | search `o365_management_activity` Workload=Exchange Operation IN ("Send","SendAs","SendOnBehalf") 
     | eval user = lower(UserId), sender = lower(CASE(isnotnull(SendAsUserSmtp),SendAsUserSmtp,isnotnull(SendOnBehalfOfUserSmtp),SendOnBehalfOfUserSmtp,true(),MailboxOwnerUPN)), subject = trim(CASE(Operation IN ("Send","SendAs","SendOnBehalf"),'Item.Subject',Operation IN ("SoftDelete","HardDelete"),'AffectedItems{}.Subject')), -time = _time,file_name = trim(CASE(Operation IN ("Send","SendAs","SendOnBehalf"),split('Item.Attachments',"; "),Operation IN ("SoftDelete","HardDelete"),split('AffectedItems{}.Attachments',"; "))), file_size = CASE(Operation IN ("Send","SendAs","SendOnBehalf"),round(tonumber('Item.SizeInBytes')/1024/1024,2),true(),round(tonumber(replace(file_name, "(.+)\s\((\d+)(b\)$)", "\2"))/1024/1024,2)), InternetMessageId = lower('Item.InternetMessageId')
@@ -25,13 +25,13 @@ search: |-
     | where count > 25
     | eval file_name = mvjoin(file_name,"||")
     ]
-| eval file_name = split(file_name,"||")
-| stats values(sender) as sender, values(recipient) as recipient, values(http_user_agent) as http_user_agent, values(signature) as signature, values(file_name) as file_name, max(file_size) as file_size, min(firstTime) as firstTime, max(lastTime) as lastTime max(count) as count by subject,user,Organization,InternetMessageId
-| eval recipient = mvmap(recipient, if(match(mvindex(split(lower(recipient),"@"),1),mvindex(split(lower(user),"@"),1)), null(),recipient))
-| search recipient = *
-| `security_content_ctime(firstTime)` 
-| `security_content_ctime(lastTime)`
-| `o365_email_send_attachments_excessive_volume_filter`
+  | eval file_name = split(file_name,"||")
+  | stats values(sender) as sender, values(recipient) as recipient, values(http_user_agent) as http_user_agent, values(signature) as signature, values(file_name) as file_name, max(file_size) as file_size, min(firstTime) as firstTime, max(lastTime) as lastTime max(count) as count by subject,user,Organization,InternetMessageId
+  | eval recipient = mvmap(recipient, if(match(mvindex(split(lower(recipient),"@"),1),mvindex(split(lower(user),"@"),1)), null(),recipient))
+  | search recipient = *
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)`
+  | `o365_email_send_attachments_excessive_volume_filter`
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest Office 365 management activity events AND Message Trace events.
 known_false_positives: Users or processes that are send a larage number of attachments may trigger this alert, adjust thresholds accordingly.
 references:
