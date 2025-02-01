@@ -9,12 +9,12 @@ description: The following analytic identifies the creation of new email inbox r
 data_source: 
 - Office 365 Universal Audit Log
 search: |-
-`o365_management_activity` Workload=Exchange AND (Operation=New-InboxRule OR Operation=Set-InboxRule) Parameters{}.Name IN (SoftDeleteMessage,DeleteMessage,ForwardTo,ForwardAsAttachmentTo,RedirectTo,MoveToFolder,CopyToFolder)
-| eval file_path = mvappend(MoveToFolder,CopyToFolder), recipient=mvappend(ForwardTo, ForwardAsAttachmentTo, RedirectTo), user = lower(UserId), signature = Operation, src = mvindex(split(ClientIP,":"),0), desc = Name, action = 'Parameters{}.Name'
-| stats values(action) as action, values(src) as src, values(recipient) as recipient, values(file_path) as file_path, count, min(_time) as firstTime, max(_time) as lastTime by user, signature, desc
-| `security_content_ctime(firstTime)` 
-| `security_content_ctime(lastTime)` 
-| `o365_email_new_inbox_rule_created_filter`
+  `o365_management_activity` Workload=Exchange AND (Operation=New-InboxRule OR Operation=Set-InboxRule) Parameters{}.Name IN (SoftDeleteMessage,DeleteMessage,ForwardTo,ForwardAsAttachmentTo,RedirectTo,MoveToFolder,CopyToFolder)
+  | eval file_path = mvappend(MoveToFolder,CopyToFolder), recipient=mvappend(ForwardTo, ForwardAsAttachmentTo, RedirectTo), user = lower(UserId), signature = Operation, src = mvindex(split(ClientIP,":"),0), desc = Name, action = 'Parameters{}.Name'
+  | stats values(action) as action, values(src) as src, values(recipient) as recipient, values(file_path) as file_path, count, min(_time) as firstTime, max(_time) as lastTime by user, signature, desc
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `o365_email_new_inbox_rule_created_filter`
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest Office 365 management activity events.
 known_false_positives: Users may create email rules for legitimate purposes. Filter as needed.
 references:
