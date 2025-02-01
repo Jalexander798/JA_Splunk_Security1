@@ -8,15 +8,15 @@ type: Anomaly
 description: The following analytic identifies when an O365 email account hard deletes an excessive number of emails within a short period (within 1 hour). This behavior may indicate a compromised account where the threat actor is attempting to permanently purge a large amount of items from the mailbox. Threat actors may attempt to remove evidence of their activity by purging items from the compromised mailbox. --- Some account owner legitimate behaviors can trigger this alert, however these actions may not be aligned with organizational expectations / best practice behaviors.
 data_source: 
 - Office 365 Universal Audit Log
-search: '`o365_management_activity` Workload=Exchange (Operation IN ("HardDelete") AND Folder.Path IN ("\\Sent Items","\\Recoverable Items\\Deletions"))
-| rename AffectedItems{}.* as AffectedItems_*, Item.* as Item_*
-| eval user = lower(UserId), sender = lower(CASE(isnotnull(SendAsUserSmtp),SendAsUserSmtp,isnotnull(SendOnBehalfOfUserSmtp),SendOnBehalfOfUserSmtp,true(),MailboxOwnerUPN)), subject = trim(CASE(Operation IN ("Send","SendAs","SendOnBehalf"),Item_Subject,Operation IN ("SoftDelete","HardDelete"),AffectedItems_Subject)), -time = _time,file_name = CASE(Operation IN ("Send","SendAs","SendOnBehalf"),split(Item_Attachments,"; "),Operation IN ("SoftDelete","HardDelete"),split(AffectedItems_Attachments,"; ")), file_size = CASE(Operation IN ("Send","SendAs","SendOnBehalf"),round(tonumber(Item_SizeInBytes)/1024/1024,2),true(),round(tonumber(replace(file_name, "(.+)\s\((\d+)(b\)$)", "\2"))/1024/1024,2))
+search: |-
+`o365_management_activity` Workload=Exchange (Operation IN ("HardDelete") AND Folder.Path IN ("\\Sent Items","\\Recoverable Items\\Deletions"))
+| eval user = lower(UserId), sender = lower(CASE(isnotnull(SendAsUserSmtp),SendAsUserSmtp,isnotnull(SendOnBehalfOfUserSmtp),SendOnBehalfOfUserSmtp,true(),MailboxOwnerUPN)), subject = trim(CASE(Operation IN ("Send","SendAs","SendOnBehalf"),'Item.Subject',Operation IN ("SoftDelete","HardDelete"),'AffectedItems{}.Subject')), -time = _time,file_name = CASE(Operation IN ("Send","SendAs","SendOnBehalf"),split('Item.Attachments',"; "),Operation IN ("SoftDelete","HardDelete"),split('AffectedItems{}.Attachments',"; ")), file_size = CASE(Operation IN ("Send","SendAs","SendOnBehalf"),round(tonumber('Item.SizeInBytes')/1024/1024,2),true(),round(tonumber(replace(file_name, "(.+)\s\((\d+)(b\)$)", "\2"))/1024/1024,2))
 | bin _time span=1hr
 | stats values(sender) as sender, values(ClientIPAddress) as src, values(ClientInfoString) as http_user_agent, values(Operation) as signature, latest(file_name) as file_name, sum(file_size) as file_size, values(Folder.Path) as file_path, min(-time) as firstTime, max(-time) as lastTime, dc(subject) as count by _time,user
 | where count > 50 OR file_size > 10
 | `security_content_ctime(firstTime)` 
 | `security_content_ctime(lastTime)`
-| `o365_email_hard_delete_excessive_volume_filter`'
+| `o365_email_hard_delete_excessive_volume_filter`
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest Office 365 management activity events.
 known_false_positives: Users that habitually/proactively cleaning the recoverable items folder may trigger this alert.
 references:
@@ -65,4 +65,4 @@ tests:
   attack_data:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114/o365_suspect_email_actions/o365_exchange_suspect_events.log
     source: o365
-	sourcetype: o365:management:activity
+    sourcetype: o365:management:activity
