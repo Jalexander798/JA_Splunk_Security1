@@ -9,14 +9,14 @@ description: The following analytic identifies when an O365 email account hard d
 data_source: 
 - Office 365 Universal Audit Log
 search: |-
-`o365_management_activity` Workload=Exchange (Operation IN ("HardDelete") AND Folder.Path IN ("\\Sent Items","\\Recoverable Items\\Deletions"))
-| eval user = lower(UserId), sender = lower(CASE(isnotnull(SendAsUserSmtp),SendAsUserSmtp,isnotnull(SendOnBehalfOfUserSmtp),SendOnBehalfOfUserSmtp,true(),MailboxOwnerUPN)), subject = trim(CASE(Operation IN ("Send","SendAs","SendOnBehalf"),'Item.Subject',Operation IN ("SoftDelete","HardDelete"),'AffectedItems{}.Subject')), -time = _time,file_name = CASE(Operation IN ("Send","SendAs","SendOnBehalf"),split('Item.Attachments',"; "),Operation IN ("SoftDelete","HardDelete"),split('AffectedItems{}.Attachments',"; ")), file_size = CASE(Operation IN ("Send","SendAs","SendOnBehalf"),round(tonumber('Item.SizeInBytes')/1024/1024,2),true(),round(tonumber(replace(file_name, "(.+)\s\((\d+)(b\)$)", "\2"))/1024/1024,2))
-| bin _time span=1hr
-| stats values(sender) as sender, values(ClientIPAddress) as src, values(ClientInfoString) as http_user_agent, values(Operation) as signature, latest(file_name) as file_name, sum(file_size) as file_size, values(Folder.Path) as file_path, min(-time) as firstTime, max(-time) as lastTime, dc(subject) as count by _time,user
-| where count > 50 OR file_size > 10
-| `security_content_ctime(firstTime)` 
-| `security_content_ctime(lastTime)`
-| `o365_email_hard_delete_excessive_volume_filter`
+  `o365_management_activity` Workload=Exchange (Operation IN ("HardDelete") AND Folder.Path IN ("\\Sent Items","\\Recoverable Items\\Deletions"))
+  | eval user = lower(UserId), sender = lower(CASE(isnotnull(SendAsUserSmtp),SendAsUserSmtp,isnotnull(SendOnBehalfOfUserSmtp),SendOnBehalfOfUserSmtp,true(),MailboxOwnerUPN)), subject = trim(CASE(Operation IN ("Send","SendAs","SendOnBehalf"),'Item.Subject',Operation IN ("SoftDelete","HardDelete"),'AffectedItems{}.Subject')), -time = _time,file_name = CASE(Operation IN ("Send","SendAs","SendOnBehalf"),split('Item.Attachments',"; "),Operation IN ("SoftDelete","HardDelete"),split('AffectedItems{}.Attachments',"; ")), file_size = CASE(Operation IN ("Send","SendAs","SendOnBehalf"),round(tonumber('Item.SizeInBytes')/1024/1024,2),true(),round(tonumber(replace(file_name, "(.+)\s\((\d+)(b\)$)", "\2"))/1024/1024,2))
+  | bin _time span=1hr
+  | stats values(sender) as sender, values(ClientIPAddress) as src, values(ClientInfoString) as http_user_agent, values(Operation) as signature, latest(file_name) as file_name, sum(file_size) as file_size, values(Folder.Path) as file_path, min(-time) as firstTime, max(-time) as lastTime, dc(subject) as count by _time,user
+  | where count > 50 OR file_size > 10
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)`
+  | `o365_email_hard_delete_excessive_volume_filter`
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest Office 365 management activity events.
 known_false_positives: Users that habitually/proactively cleaning the recoverable items folder may trigger this alert.
 references:
