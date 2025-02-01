@@ -9,7 +9,8 @@ description: The following analytic identifies when an O365 email account sends 
 data_source: 
 - Office 365 Universal Audit Log
 - Office 365 Reporting Message Trace
-search: '`o365_messagetrace` Status=Delivered
+search: |-
+`o365_messagetrace` Status=Delivered
 | eval mailtime = _time
 | bin _time span=1hr
 | eval user = lower(SenderAddress), recipient = lower(RecipientAddress)
@@ -17,8 +18,7 @@ search: '`o365_messagetrace` Status=Delivered
 | join InternetMessageId, user, max=0
     [
     | search `o365_management_activity` Workload=Exchange (Operation IN ("Send*")) OR (Operation IN ("HardDelete") AND Folder.Path IN ("\\Sent Items","\\Recoverable Items\\Deletions"))
-    | rename AffectedItems{}.* as AffectedItems_*, Item.* as Item_*
-    | eval user = lower(UserId), sender = lower(CASE(isnotnull(SendAsUserSmtp),SendAsUserSmtp,isnotnull(SendOnBehalfOfUserSmtp),SendOnBehalfOfUserSmtp,true(),MailboxOwnerUPN)), subject = trim(CASE(Operation IN ("Send","SendAs","SendOnBehalf"),Item_Subject,Operation IN ("SoftDelete","HardDelete"),AffectedItems_Subject)), -time = _time,file_name = CASE(Operation IN ("Send","SendAs","SendOnBehalf"),split(Item_Attachments,"; "),Operation IN ("SoftDelete","HardDelete"),split(AffectedItems_Attachments,"; ")), file_size = CASE(Operation IN ("Send","SendAs","SendOnBehalf"),round(tonumber(Item_SizeInBytes)/1024/1024,2),true(),round(tonumber(replace(file_name, "(.+)\s\((\d+)(b\)$)", "\2"))/1024/1024,2)), InternetMessageId = lower(Item_InternetMessageId)
+    | eval user = lower(UserId), sender = lower(CASE(isnotnull(SendAsUserSmtp),SendAsUserSmtp,isnotnull(SendOnBehalfOfUserSmtp),SendOnBehalfOfUserSmtp,true(),MailboxOwnerUPN)), subject = trim(CASE(Operation IN ("Send","SendAs","SendOnBehalf"),'Item.Subject',Operation IN ("SoftDelete","HardDelete"),'AffectedItems{}.Subject')), -time = _time,file_name = CASE(Operation IN ("Send","SendAs","SendOnBehalf"),split('Item.Attachments',"; "),Operation IN ("SoftDelete","HardDelete"),split('AffectedItems{}.Attachments',"; ")), file_size = CASE(Operation IN ("Send","SendAs","SendOnBehalf"),round(tonumber('Item.SizeInBytes')/1024/1024,2),true(),round(tonumber(replace(file_name, "(.+)\s\((\d+)(b\)$)", "\2"))/1024/1024,2)), InternetMessageId = lower('Item.InternetMessageId')
     | eval sendtime = CASE(Operation IN ("Send","SendAs","SendOnBehalf"),_time)
     | eval deltime = CASE(Operation IN ("SoftDelete","HardDelete"),_time)
     | bin _time span=1hr
@@ -30,7 +30,7 @@ search: '`o365_messagetrace` Status=Delivered
 | where externalRecipient = 1
 | `security_content_ctime(firstTime)` 
 | `security_content_ctime(lastTime)`
-| `o365_email_send_and_hard_delete_exfiltration_behavior_filter`'
+| `o365_email_send_and_hard_delete_exfiltration_behavior_filter`
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest Office 365 management activity events AND Message Trace events.
 known_false_positives: Users that habitually/proactively cleaning the recoverable items folder may trigger this alert.
 references:
@@ -87,9 +87,9 @@ tests:
   attack_data:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114/o365_suspect_email_actions/o365_exchange_suspect_events.log
     source: o365
-	sourcetype: o365:management:activity
+    sourcetype: o365:management:activity
 - name: True Positive Test
   attack_data:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114/o365_suspect_email_actions/o365_messagetrace_suspect_events.log
     source: o365_messagetrace
-	sourcetype: o365:reporting:messagetrace	
+    sourcetype: o365:reporting:messagetrace
