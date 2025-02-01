@@ -1,7 +1,6 @@
 name: O365 Email Send Attachments Excessive Volume
 id: 70a050a2-8537-488a-a628-b60a9558d96a
 version: 1
-date: '2024-11-07'
 date: '2025-01-20'
 author: Steven Dick
 type: Anomaly
