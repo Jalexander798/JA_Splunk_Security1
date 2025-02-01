@@ -60,8 +60,6 @@ rba:
     type: user    
     score: 40
   threat_objects:
-  - field: src
-    type: ip_address
   - field: subject
     type: signature    
 tags:
