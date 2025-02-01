@@ -4,6 +4,13 @@ version: 3
 date: '2024-11-14'
 author: Patrick Bareiss, Splunk
 status: deprecated
+deprecation_info:
+  deprecation_date: '2025-02-26'
+  deprecation_version: 5.2.0
+  content_type: detection
+  reason: Detections updated to use the datamodel
+  replacement_content:
+  - Risk Rule for Dev Sec Ops by Repository
 type: Correlation
 description: |-
   This search has been deprecated and updated with Risk Rule for Dev Sec Ops by Repository detection. The following analytic detects by correlating repository and risk score to identify patterns and trends in the data based on the level of risk associated. The analytic adds any null values and calculates the sum of the risk scores for each detection. Then, the analytic captures the source and user information for each detection and sorts the results in ascending order based on the risk score. Finally, the analytic filters the detections with a risk score below 80 and focuses only on high-risk detections.This detection is important because it provides valuable insights into the distribution of high-risk activities across different repositories. It also identifies the most vulnerable repositories that are frequently targeted by potential threats. Additionally, it proactively detects and responds to potential threats, thereby minimizing the impact of attacks and safeguarding critical assets. Finally, it provides a comprehensive view of the risk landscape and helps to make informed decisions to protect the organization's data and infrastructure. False positives might occur so it is important to identify the impact of the attack and prioritize response and mitigation efforts.

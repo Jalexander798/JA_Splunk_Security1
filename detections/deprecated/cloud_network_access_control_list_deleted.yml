@@ -4,6 +4,14 @@ version: 4
 date: '2024-11-14'
 author: Peter Gael, Splunk
 status: deprecated
+deprecation_info:
+  deprecation_date: '2025-02-26'
+  deprecation_version: 5.2.0
+  content_type: detection
+  reason: Detections updated to use the new search logic and field names due to the
+    TA update
+  replacement_content:
+  - AWS Network Access Control List Deleted
 type: Anomaly
 description: Enforcing network-access controls is one of the defensive mechanisms
   used by cloud administrators to restrict access to a cloud instance. After the attacker

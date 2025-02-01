@@ -4,16 +4,23 @@ version: 6
 date: '2025-01-24'
 author: Mauricio Velazco, Splunk
 status: deprecated
+deprecation_info:
+  deprecation_date: '2025-02-26'
+  deprecation_version: 5.2.0
+  content_type: detection
+  reason: Renamed and updated logic
+  replacement_content:
+  - Windows Network Connection Discovery Via Net
 type: Hunting
-description: The following analytic has been deprecated.
-  The following analytic identifies the execution of `net.exe` or `net1.exe`
-  with command-line arguments used to list network connections on a compromised system.
-  It leverages data from Endpoint Detection and Response (EDR) agents, focusing on
-  process names and command-line executions. This activity is significant as it indicates
-  potential network reconnaissance by adversaries or Red Teams, aiming to gather situational
-  awareness and Active Directory information. If confirmed malicious, this behavior
-  could allow attackers to map the network, identify critical assets, and plan further
-  attacks, potentially leading to data exfiltration or lateral movement.
+description: The following analytic has been deprecated. The following analytic identifies
+  the execution of `net.exe` or `net1.exe` with command-line arguments used to list
+  network connections on a compromised system. It leverages data from Endpoint Detection
+  and Response (EDR) agents, focusing on process names and command-line executions.
+  This activity is significant as it indicates potential network reconnaissance by
+  adversaries or Red Teams, aiming to gather situational awareness and Active Directory
+  information. If confirmed malicious, this behavior could allow attackers to map
+  the network, identify critical assets, and plan further attacks, potentially leading
+  to data exfiltration or lateral movement.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688

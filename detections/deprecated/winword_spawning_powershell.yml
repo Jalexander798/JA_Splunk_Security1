@@ -4,16 +4,24 @@ version: 7
 date: '2025-01-13'
 author: Michael Haag, Splunk
 status: deprecated
+deprecation_info:
+  deprecation_date: '2025-02-26'
+  deprecation_version: 5.2.0
+  content_type: detection
+  reason: ''
+  replacement_content:
+  - Windows Office Product Spawned Uncommon Process
 type: TTP
-description: The following analytic has been deprecated in favour of a more generic approach in "Windows Office Product Spawned Uncommon Process".
-  The following analytic identifies instances where Microsoft Word (winword.exe)
-  spawns a PowerShell process. This behavior is detected using Endpoint Detection
-  and Response (EDR) telemetry, focusing on process creation events where the parent
-  process is winword.exe. This activity is significant because it is uncommon and
-  often associated with spearphishing attacks, where malicious documents execute encoded
-  PowerShell commands. If confirmed malicious, this could allow an attacker to execute
-  arbitrary code, potentially leading to data exfiltration, system compromise, or
-  further lateral movement within the network.
+description: The following analytic has been deprecated in favour of a more generic
+  approach in "Windows Office Product Spawned Uncommon Process". The following analytic
+  identifies instances where Microsoft Word (winword.exe) spawns a PowerShell process.
+  This behavior is detected using Endpoint Detection and Response (EDR) telemetry,
+  focusing on process creation events where the parent process is winword.exe. This
+  activity is significant because it is uncommon and often associated with spearphishing
+  attacks, where malicious documents execute encoded PowerShell commands. If confirmed
+  malicious, this could allow an attacker to execute arbitrary code, potentially leading
+  to data exfiltration, system compromise, or further lateral movement within the
+  network.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
@@ -85,6 +93,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

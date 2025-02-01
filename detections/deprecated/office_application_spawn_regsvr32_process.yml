@@ -4,16 +4,24 @@ version: 8
 date: '2025-01-13'
 author: Teoderick Contreras, Splunk
 status: deprecated
+deprecation_info:
+  deprecation_date: '2025-02-26'
+  deprecation_version: 5.2.0
+  content_type: detection
+  reason: ''
+  replacement_content:
+  - Windows Office Product Spawned Uncommon Process
 type: TTP
-description: The following analytic has been deprecated in favour of a more generic approach in "Windows Office Product Spawned Uncommon Process".
-  The following analytic identifies instances where an Office application
-  spawns a Regsvr32 process, which is often indicative of macro execution or malicious
-  code. This detection leverages data from Endpoint Detection and Response (EDR) agents,
-  focusing on process creation events where the parent process is a known Office application.
-  This activity is significant because it is a common technique used by malware, such
-  as IcedID, to initiate infections. If confirmed malicious, this behavior could lead
-  to code execution, allowing attackers to gain control over the affected system and
-  potentially escalate privileges.
+description: The following analytic has been deprecated in favour of a more generic
+  approach in "Windows Office Product Spawned Uncommon Process". The following analytic
+  identifies instances where an Office application spawns a Regsvr32 process, which
+  is often indicative of macro execution or malicious code. This detection leverages
+  data from Endpoint Detection and Response (EDR) agents, focusing on process creation
+  events where the parent process is a known Office application. This activity is
+  significant because it is a common technique used by malware, such as IcedID, to
+  initiate infections. If confirmed malicious, this behavior could lead to code execution,
+  allowing attackers to gain control over the affected system and potentially escalate
+  privileges.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688

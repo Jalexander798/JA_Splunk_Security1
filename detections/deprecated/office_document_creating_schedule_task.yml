@@ -4,15 +4,22 @@ version: 10
 date: '2025-01-24'
 author: Teoderick Contreras, Splunk
 status: deprecated
+deprecation_info:
+  deprecation_date: '2025-02-26'
+  deprecation_version: 5.2.0
+  content_type: detection
+  reason: Renamed and updated logic
+  replacement_content:
+  - Windows Office Product Loading Taskschd DLL
 type: TTP
-description: The following analytic has been deprecated.
-  The following analytic detects an Office document creating a scheduled
-  task, either through a macro VBA API or by loading `taskschd.dll`. This detection
-  leverages Sysmon EventCode 7 to identify when Office applications load the `taskschd.dll`
-  file. This activity is significant as it is a common technique used by malicious
-  macro malware to establish persistence or initiate beaconing. If confirmed malicious,
-  this could allow an attacker to maintain persistence, execute arbitrary commands,
-  or schedule future malicious activities, posing a significant threat to the environment.
+description: The following analytic has been deprecated. The following analytic detects
+  an Office document creating a scheduled task, either through a macro VBA API or
+  by loading `taskschd.dll`. This detection leverages Sysmon EventCode 7 to identify
+  when Office applications load the `taskschd.dll` file. This activity is significant
+  as it is a common technique used by malicious macro malware to establish persistence
+  or initiate beaconing. If confirmed malicious, this could allow an attacker to maintain
+  persistence, execute arbitrary commands, or schedule future malicious activities,
+  posing a significant threat to the environment.
 data_source:
 - Sysmon EventID 7
 search: '`sysmon` EventCode=7 process_name IN ("WINWORD.EXE", "EXCEL.EXE", "POWERPNT.EXE","onenote.exe","onenotem.exe","onenoteviewer.exe","onenoteim.exe",

@@ -4,15 +4,23 @@ version: 10
 date: '2025-01-13'
 author: Michael Haag, Splunk
 status: deprecated
+deprecation_info:
+  deprecation_date: '2025-02-26'
+  deprecation_version: 5.2.0
+  content_type: detection
+  reason: ''
+  replacement_content:
+  - Windows Office Product Spawned Uncommon Process
 type: TTP
-description: The following analytic has been deprecated in favour of a more generic approach in "Windows Office Product Spawned Uncommon Process".
-  The following analytic detects an Office product spawning WScript.exe
-  or CScript.exe. It leverages data from Endpoint Detection and Response (EDR) agents,
-  focusing on process creation events where Office applications are the parent processes.
-  This activity is significant because it may indicate the execution of potentially
-  malicious scripts through Office products, a common tactic in phishing attacks and
-  malware delivery. If confirmed malicious, this behavior could lead to unauthorized
-  code execution, data exfiltration, or further system compromise.
+description: The following analytic has been deprecated in favour of a more generic
+  approach in "Windows Office Product Spawned Uncommon Process". The following analytic
+  detects an Office product spawning WScript.exe or CScript.exe. It leverages data
+  from Endpoint Detection and Response (EDR) agents, focusing on process creation
+  events where Office applications are the parent processes. This activity is significant
+  because it may indicate the execution of potentially malicious scripts through Office
+  products, a common tactic in phishing attacks and malware delivery. If confirmed
+  malicious, this behavior could lead to unauthorized code execution, data exfiltration,
+  or further system compromise.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
@@ -84,6 +92,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.002/atomic_red_team/windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.002/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

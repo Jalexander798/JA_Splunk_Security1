@@ -4,6 +4,12 @@ version: 5
 date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: deprecated
+deprecation_info:
+  deprecation_date: '2025-02-26'
+  deprecation_version: 5.2.0
+  content_type: detection
+  reason: ''
+  replacement_content: []
 type: TTP
 description: "This search is used to detect DNS tunneling, by calculating the sum
   of the length of DNS queries and DNS answers. The search also filters out potential

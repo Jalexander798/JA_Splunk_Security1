@@ -4,17 +4,23 @@ version: 9
 date: '2025-01-24'
 author: Rico Valdez, Splunk
 status: deprecated
+deprecation_info:
+  deprecation_date: '2025-02-26'
+  deprecation_version: 5.2.0
+  content_type: detection
+  reason: Renamed and updated logic
+  replacement_content:
+  - Windows Attempt To Stop Security Service
 type: TTP
-description: The following analytic has been deprecated.
-  The following analytic detects attempts to stop security-related services
-  on an endpoint, which may indicate malicious activity. It leverages data from Endpoint
-  Detection and Response (EDR) agents, specifically searching for processes involving
-  the "sc.exe" command with the "stop" parameter. This activity is significant because
-  disabling security services can undermine the organization's security posture, potentially
-  leading to unauthorized access, data exfiltration, or further attacks like malware
-  installation or privilege escalation. If confirmed malicious, this behavior could
-  compromise the endpoint and the entire network, necessitating immediate investigation
-  and response.
+description: The following analytic has been deprecated. The following analytic detects
+  attempts to stop security-related services on an endpoint, which may indicate malicious
+  activity. It leverages data from Endpoint Detection and Response (EDR) agents, specifically
+  searching for processes involving the "sc.exe" command with the "stop" parameter.
+  This activity is significant because disabling security services can undermine the
+  organization's security posture, potentially leading to unauthorized access, data
+  exfiltration, or further attacks like malware installation or privilege escalation.
+  If confirmed malicious, this behavior could compromise the endpoint and the entire
+  network, necessitating immediate investigation and response.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688

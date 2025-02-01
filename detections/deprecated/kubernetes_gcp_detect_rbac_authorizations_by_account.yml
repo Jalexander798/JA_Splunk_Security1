@@ -4,6 +4,13 @@ version: 4
 date: '2024-11-14'
 author: Rod Soto, Splunk
 status: deprecated
+deprecation_info:
+  deprecation_date: '2025-02-26'
+  deprecation_version: 5.2.0
+  content_type: detection
+  reason: ''
+  replacement_content:
+  - '- '
 type: Hunting
 description: This search provides information on Kubernetes RBAC authorizations by
   accounts, this search can be modified by adding top to see both extremes of RBAC

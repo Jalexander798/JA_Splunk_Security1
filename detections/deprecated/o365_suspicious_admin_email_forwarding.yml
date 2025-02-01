@@ -4,6 +4,14 @@ version: 3
 date: '2024-11-14'
 author: Patrick Bareiss, Splunk
 status: deprecated
+deprecation_info:
+  deprecation_date: '2025-02-26'
+  deprecation_version: 5.2.0
+  content_type: detection
+  reason: Detections updated to use the new search logic and field names due to the
+    TA update
+  replacement_content:
+  - O365 Mailbox Email Forwarding Enabled
 type: Anomaly
 description: '**DEPRECATION NOTE** - This search has been deprecated and replaced
   with `O365 Mailbox Email Forwarding Enabled`. This search detects when an admin

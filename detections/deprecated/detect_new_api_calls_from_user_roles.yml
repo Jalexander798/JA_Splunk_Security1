@@ -4,6 +4,14 @@ version: 4
 date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: deprecated
+deprecation_info:
+  deprecation_date: '2025-02-26'
+  deprecation_version: 5.2.0
+  content_type: detection
+  reason: Detections updated to use the new search logic and field names due to the
+    TA update
+  replacement_content:
+  - Cloud API Calls From Previously Unseen User Roles
 type: Anomaly
 description: This search detects new API calls that have either never been seen before
   or that have not been seen in the previous hour, where the identity type is `AssumedRole`.
@@ -12,9 +20,9 @@ search: '`cloudtrail` eventType=AwsApiCall errorCode=success userIdentity.type=A
   [search `cloudtrail` eventType=AwsApiCall errorCode=success  userIdentity.type=AssumedRole
   | stats earliest(_time) as earliest latest(_time) as latest by userName eventName
   |  inputlookup append=t previously_seen_api_calls_from_user_roles | stats min(earliest)
-  as earliest, max(latest) as latest by userName eventName | outputlookup previously_seen_api_calls_from_user_roles |
-  eval newApiCallfromUserRole=if(earliest>=relative_time(now(), "-70m@m"), 1, 0) |
-  where newApiCallfromUserRole=1 | `security_content_ctime(earliest)` | `security_content_ctime(latest)`
+  as earliest, max(latest) as latest by userName eventName | outputlookup previously_seen_api_calls_from_user_roles
+  | eval newApiCallfromUserRole=if(earliest>=relative_time(now(), "-70m@m"), 1, 0)
+  | where newApiCallfromUserRole=1 | `security_content_ctime(earliest)` | `security_content_ctime(latest)`
   | table eventName userName]  |rename userName as user| stats values(eventName) earliest(_time)
   as earliest latest(_time) as latest by user | `security_content_ctime(earliest)`
   | `security_content_ctime(latest)` | `detect_new_api_calls_from_user_roles_filter`'

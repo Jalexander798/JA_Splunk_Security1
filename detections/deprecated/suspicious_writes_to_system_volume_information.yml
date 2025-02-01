@@ -4,6 +4,12 @@ version: 5
 date: '2024-11-14'
 author: Rico Valdez, Splunk
 status: deprecated
+deprecation_info:
+  deprecation_date: '2025-02-26'
+  deprecation_version: 5.2.0
+  content_type: detection
+  reason: ''
+  replacement_content: []
 type: Hunting
 description: This search detects writes to the 'System Volume Information' folder
   by something other than the System process.

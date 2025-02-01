@@ -4,16 +4,22 @@ version: 5
 date: '2025-01-24'
 author: Teoderick Contreras, Splunk
 status: deprecated
+deprecation_info:
+  deprecation_date: '2025-02-26'
+  deprecation_version: 5.2.0
+  content_type: detection
+  reason: Renamed and updated logic
+  replacement_content:
+  - Windows List ENV Variables Via SET Command From Uncommon Parent
 type: TTP
-description: The following analytic has been deprecated.
-  The following analytic identifies a suspicious process command line fetching
-  environment variables with a non-shell parent process. It leverages data from Endpoint
-  Detection and Response (EDR) agents, focusing on command-line executions and parent
-  process names. This activity is significant as it is commonly associated with malware
-  like Qakbot, which uses this technique to gather system information. If confirmed
-  malicious, this behavior could indicate that the parent process has been compromised,
-  potentially allowing attackers to execute arbitrary commands, escalate privileges,
-  or persist within the environment.
+description: The following analytic has been deprecated. The following analytic identifies
+  a suspicious process command line fetching environment variables with a non-shell
+  parent process. It leverages data from Endpoint Detection and Response (EDR) agents,
+  focusing on command-line executions and parent process names. This activity is significant
+  as it is commonly associated with malware like Qakbot, which uses this technique
+  to gather system information. If confirmed malicious, this behavior could indicate
+  that the parent process has been compromised, potentially allowing attackers to
+  execute arbitrary commands, escalate privileges, or persist within the environment.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
