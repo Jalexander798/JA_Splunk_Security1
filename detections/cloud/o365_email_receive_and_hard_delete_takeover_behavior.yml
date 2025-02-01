@@ -57,7 +57,7 @@ rba:
     score: 80
   threat_objects:
   - field: subject
-    type: signature
+    type: email_subject
   - field: src
     type: ip_address
 tags:
