@@ -8,16 +8,17 @@ type: Anomaly
 description: The following analytic detects when an excessive number of files are access from o365 by the same user over a short period of time. A malicious actor may abuse the "open in app" functionality of SharePoint through scripted or Graph API based access to evade triggering the FileDownloaded Event. This behavior may indicate an attacker staging data for exfiltration or an insider threat removing organizational data. Additional attention should be take with any Azure Guest (#EXT#) accounts.
 data_source: 
 - Office 365 Universal Audit Log
-search: '`o365_management_activity` Operation IN ("fileaccessed") UserId!=app@sharepoint NOT SourceFileExtension IN (bmp,png,jpeg,jpg)
-| eval user = replace(mvindex(split(lower(UserId),"#ext#"),0),"_","@"), user_flat = replace(UserId, "[^A-Za-z0-9]","_")
-| where NOT match(SiteUrl,user_flat)
-| stats values(user) as user, latest(ClientIP) as src values(ZipFileName) as file_name, values(Operation) as signature, values(UserAgent) as http_user_agent, dc(SourceFileName) as count, min(_time) as firstTime, max(_time) as lastTime by Workload,UserId,SiteUrl
-| eventstats avg(count) as avg stdev(count) as stdev by Workload
-| rename SiteUrl as file_path,Workload as app
-| where count > 50 AND count > (avg + (3*(stdev))) 
-| `security_content_ctime(firstTime)` 
-| `security_content_ctime(lastTime)`
-| `o365_exfiltration_via_file_access_filter`'
+search: |-
+  `o365_management_activity` Operation IN ("fileaccessed") UserId!=app@sharepoint NOT SourceFileExtension IN (bmp,png,jpeg,jpg)
+  | eval user = replace(mvindex(split(lower(UserId),"#ext#"),0),"_","@"), user_flat = replace(UserId, "[^A-Za-z0-9]","_")
+  | where NOT match(SiteUrl,user_flat)
+  | stats values(user) as user, latest(ClientIP) as src values(ZipFileName) as file_name, values(Operation) as signature, values(UserAgent) as http_user_agent, dc(SourceFileName) as count, min(_time) as firstTime, max(_time) as lastTime by Workload,UserId,SiteUrl
+  | eventstats avg(count) as avg stdev(count) as stdev by Workload
+  | rename SiteUrl as file_path,Workload as app
+  | where count > 50 AND count > (avg + (3*(stdev))) 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)`
+  | `o365_exfiltration_via_file_access_filter`
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest Office 365 management activity events.
 known_false_positives: It is possible that certain file access scenarios may trigger this alert, specifically OneDrive syncing and users accessing personal onedrives of other users. Adjust threshold and filtering as needed.
 references:
