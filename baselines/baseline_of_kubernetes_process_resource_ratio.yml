@@ -4,6 +4,7 @@ version: 2
 date: '2024-09-24'
 author: Matthew Moore, Splunk
 type: Baseline
+status: production
 description: This baseline rule calculates the average and standard deviation of the
   ratio of various process resources in a Kubernetes environment. It uses metrics
   from the Kubernetes API and the Splunk Infrastructure Monitoring Add-on. The rule

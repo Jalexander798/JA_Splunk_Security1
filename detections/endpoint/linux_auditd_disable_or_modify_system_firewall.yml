@@ -46,7 +46,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A service event - [$type$] to disable or modify system firewall occured
+  message: A service event - [$type$] to disable or modify system firewall occurred
     on host - [$dest$] .
   risk_objects:
   - field: dest

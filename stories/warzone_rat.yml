@@ -3,6 +3,7 @@ id: 8dc84752-f4da-4285-931c-bddd5c4d440b
 version: 1
 date: '2023-07-26'
 author: Teoderick Contreras, Splunk
+status: production
 description: This analytic story contains detections that allow security analysts to detect and investigate unusual activities
   that might related to warzone (Ave maria) RAT. This analytic story looks for suspicious process execution, command-line activity, downloads, persistence, defense evasion and more.
 narrative: Warzone RAT, also known as Ave Maria, is a sophisticated remote access trojan (RAT) that surfaced in January 2019. 

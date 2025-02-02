@@ -1,7 +1,7 @@
 name: Windows Replication Through Removable Media
 id: 60df805d-4605-41c8-bbba-57baa6a4eb97
-version: 4
-date: '2024-11-13'
+version: 7
+date: '2025-01-27'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -60,9 +60,12 @@ rba:
     type: file_name
 tags:
   analytic_story:
-  - Chaos Ransomware
-  - NjRAT
   - PlugX
+  - Chaos Ransomware
+  - Derusbi
+  - Nexus APT Threat Activity
+  - Earth Estries
+  - NjRAT
   asset_type: Endpoint
   mitre_attack_id:
   - T1091
@@ -74,7 +77,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/chaos_ransomware/spread_in_root_drives/sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/chaos_ransomware/spread_in_root_drives/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

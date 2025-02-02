@@ -1,7 +1,7 @@
 name: Detect Renamed WinRAR
 id: 1b7bfb2c-b8e6-11eb-99ac-acde48001122
-version: 7
-date: '2024-11-13'
+version: 8
+date: '2025-01-27'
 author: Michael Haag, Splunk
 status: production
 type: Hunting
@@ -39,6 +39,8 @@ references:
 tags:
   analytic_story:
   - Collection and Staging
+  - Earth Estries
+  - Nexus APT Threat Activity
   - CISA AA22-277A
   asset_type: Endpoint
   mitre_attack_id:
@@ -52,7 +54,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1560.001/archive_utility/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1560.001/archive_utility/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

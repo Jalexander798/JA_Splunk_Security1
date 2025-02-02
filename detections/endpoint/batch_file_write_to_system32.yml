@@ -30,7 +30,7 @@ how_to_implement: To successfully implement this search you need to be ingesting
   your endpoints into the `Endpoint` datamodel in the `Processes` node. In addition,
   confirm the latest CIM App 4.20 or higher is installed and the latest TA for the
   endpoint product.
-known_false_positives: It is possible for this search to generate a notable event
+known_false_positives: It is possible for this search to generate a finding event
   for a batch file write to a path that includes the string "system32", but is not
   the actual Windows system directory. As such, you should confirm the path of the
   batch file identified by the search. In addition, a false positive may be generated

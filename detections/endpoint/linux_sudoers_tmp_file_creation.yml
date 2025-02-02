@@ -1,7 +1,7 @@
 name: Linux Sudoers Tmp File Creation
 id: be254a5c-63e7-11ec-89da-acde48001122
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-01-27'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -52,6 +52,8 @@ rba:
 tags:
   analytic_story:
   - Linux Privilege Escalation
+  - Earth Estries
+  - Nexus APT Threat Activity
   - Linux Persistence Techniques
   asset_type: Endpoint
   mitre_attack_id:
@@ -65,7 +67,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.003/sudoers_temp/sysmon_linux.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.003/sudoers_temp/sysmon_linux.log
     source: Syslog:Linux-Sysmon/Operational
     sourcetype: sysmon:linux

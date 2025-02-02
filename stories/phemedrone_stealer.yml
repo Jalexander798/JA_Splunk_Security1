@@ -3,6 +3,7 @@ id: 386f64dd-657b-4dcf-8eb3-5e297d30924c
 version: 2
 date: '2024-01-24'
 author: Teoderick Contreras, Splunk
+status: production
 description: Phemedrone Stealer is a potent data-stealing malware designed to infiltrate systems discreetly, 
   primarily targeting sensitive user information. Operating with a stealthy modus operandi, it covertly collects 
   and exfiltrates critical data such as login credentials, personal details, and financial information. 

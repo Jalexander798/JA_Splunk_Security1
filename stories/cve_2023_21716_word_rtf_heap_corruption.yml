@@ -3,6 +3,7 @@ id: b1aeaf2c-8496-42e7-b2f7-15c328bc75d9
 version: 1
 date: '2023-03-10'
 author: Michael Haag, Splunk
+status: production
 description: A proof-of-concept for CVE-2023-21716, a critical vulnerability in Microsoft Word that allows remote code execution utilizing a heap corruption in rich text files.
 narrative: This analytic story covers content that will assist organizations in identifying potential RTF RCE abuse on endpoints.
   The vulnerability was assigned a 9.8 out of 10 severity score, with Microsoft addressing it in the February Patch Tuesday security updates along with a couple of workarounds. 

@@ -1,7 +1,7 @@
 name: Suspicious Scheduled Task from Public Directory
 id: 7feb7972-7ac3-11eb-bac8-acde48001122
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-01-27'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly
@@ -65,15 +65,18 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Azorult
-  - Ryuk Ransomware
-  - Scheduled Tasks
-  - Ransomware
   - Windows Persistence Techniques
-  - Living Off The Land
-  - DarkCrystal RAT
   - CISA AA23-347A
+  - Ransomware
+  - DarkCrystal RAT
+  - Scheduled Tasks
+  - Azorult
+  - Crypto Stealer
+  - Nexus APT Threat Activity
+  - Living Off The Land
   - MoonPeak
+  - Ryuk Ransomware
+  - Earth Estries
   - CISA AA24-241A
   asset_type: Endpoint
   mitre_attack_id:
@@ -87,7 +90,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/schtasks/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/schtasks/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

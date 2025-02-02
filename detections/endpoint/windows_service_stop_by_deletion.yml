@@ -65,6 +65,7 @@ tags:
   analytic_story:
   - Azorult
   - Graceful Wipe Out Attack
+  - Crypto Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1489

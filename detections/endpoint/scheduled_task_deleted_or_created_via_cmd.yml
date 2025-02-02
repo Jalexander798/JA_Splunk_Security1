@@ -1,7 +1,7 @@
 name: Scheduled Task Deleted Or Created via CMD
 id: d5af132c-7c17-439c-9d31-13d55340f36c
-version: 9
-date: '2024-11-13'
+version: 10
+date: '2025-01-27'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -66,30 +66,32 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - AsyncRAT
-  - Winter Vivern
   - Windows Persistence Techniques
-  - Living Off The Land
-  - Prestige Ransomware
-  - AgentTesla
-  - NjRAT
-  - RedLine Stealer
-  - Rhysida Ransomware
-  - Azorult
   - DHS Report TA18-074A
-  - Scheduled Tasks
-  - Sandworm Tools
-  - Qakbot
-  - CISA AA22-257A
   - Trickbot
+  - CISA AA23-347A
+  - Qakbot
+  - Azorult
+  - ShrinkLocker
+  - AsyncRAT
+  - Phemedrone Stealer
+  - NjRAT
+  - Prestige Ransomware
+  - Scheduled Tasks
+  - AgentTesla
+  - MoonPeak
   - NOBELIUM Group
+  - Living Off The Land
+  - CISA AA22-257A
+  - CISA AA24-241A
   - Amadey
   - DarkCrystal RAT
-  - CISA AA23-347A
-  - Phemedrone Stealer
-  - ShrinkLocker
-  - MoonPeak
-  - CISA AA24-241A
+  - Sandworm Tools
+  - Winter Vivern
+  - Nexus APT Threat Activity
+  - Earth Estries
+  - Rhysida Ransomware
+  - RedLine Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.005
@@ -102,7 +104,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/atomic_red_team/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

@@ -3,6 +3,7 @@ id: 12e31e8b-671b-4d6e-b362-a682812a71eb
 version: 1
 date: '2023-04-24'
 author: Teoderick Contreras, Splunk
+status: production
 description: Leverage searches that allow you to detect and investigate unusual activities
   that might relate to the Redline Stealer trojan, including looking for file writes associated
   with its payload, screencapture, registry modification, persistence

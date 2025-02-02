@@ -3,6 +3,7 @@ id: 6c8f76f6-1272-4c0e-afbd-5a9f58947fa5
 version: 1
 date: '2024-11-13'
 author: Michael Haag, Nasreddine Bencherchali, Splunk
+status: production
 description: Lumma Stealer is a sophisticated information-stealing malware that has been operating as a Malware-as-a-Service (MaaS) platform since 2022. Recent campaigns in 2024 have shown increased sophistication in distribution methods, particularly through fake CAPTCHA verification pages, cracked game downloads, and phishing emails targeting GitHub users. The malware is designed to steal sensitive information including browser credentials, cryptocurrency wallet data, and password manager archives.
 narrative: As of late 2024, Lumma Stealer has emerged as one of the most prominent information stealers in the threat landscape, employing increasingly sophisticated distribution techniques. The malware's primary infection vector involves a deceptive CAPTCHA campaign where attackers create convincing phishing sites featuring fake Google CAPTCHA verification pages. When users interact with these pages by clicking "I'm not a robot," malicious code is automatically copied to their clipboard. Users are then socially engineered to paste this code into the Windows Run dialog (Win+R), triggering PowerShell commands that download and execute the Lumma Stealer payload. /
 

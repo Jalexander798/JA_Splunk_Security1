@@ -60,6 +60,7 @@ tags:
   analytic_story:
   - Unusual Processes
   - Rhysida Ransomware
+  - Crypto Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1204

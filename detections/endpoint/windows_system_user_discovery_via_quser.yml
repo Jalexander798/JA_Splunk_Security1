@@ -41,8 +41,9 @@ references:
 - https://www.microsoft.com/en-us/security/blog/2022/10/14/new-prestige-ransomware-impacts-organizations-in-ukraine-and-poland/
 tags:
   analytic_story:
-  - Windows Post-Exploitation
   - Prestige Ransomware
+  - Crypto Stealer
+  - Windows Post-Exploitation
   asset_type: Endpoint
   mitre_attack_id:
   - T1033

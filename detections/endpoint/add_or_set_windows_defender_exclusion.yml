@@ -1,7 +1,7 @@
 name: Add or Set Windows Defender Exclusion
 id: 773b66fe-4dd9-11ec-8289-acde48001122
-version: 6
-date: '2024-12-10'
+version: '6'
+date: '2024-12-17'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -65,14 +65,15 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - WhisperGate
-  - Windows Defense Evasion Tactics
+  - CISA AA22-320A
+  - AgentTesla
   - Remcos
   - Data Destruction
-  - CISA AA22-320A
-  - ValleyRAT
   - Compromised Windows Host
-  - AgentTesla
+  - ValleyRAT
+  - Windows Defense Evasion Tactics
+  - WhisperGate
+  - Crypto Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001

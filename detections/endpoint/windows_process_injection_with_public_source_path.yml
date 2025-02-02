@@ -25,7 +25,7 @@ how_to_implement: To successfully implement this search, you must be ingesting d
   in the processes node. If you are using Sysmon, you must have at least version 6.0.4
   of the Sysmon TA.
 known_false_positives: Some security products or third party applications may utilize
-  CreateRemoteThread, filter as needed before enabling as a notable.
+  CreateRemoteThread, filter as needed.
 references:
 - https://unit42.paloaltonetworks.com/brute-ratel-c4-tool/
 tags:

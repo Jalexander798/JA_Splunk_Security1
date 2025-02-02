@@ -4,6 +4,7 @@ version: 1
 date: '2020-04-13'
 author: Rod Soto, Splunk
 type: Investigation
+status: deprecated
 description: This search provides investigation data about requests via user agent,
   authentication request URI, resource path and cluster name data against Kubernetes
   cluster from a specific IP address

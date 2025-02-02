@@ -1,7 +1,7 @@
 name: Linux Common Process For Elevation Control
 id: 66ab15c0-63d0-11ec-9e70-acde48001122
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-01-27'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
@@ -45,8 +45,10 @@ references:
 tags:
   analytic_story:
   - Linux Privilege Escalation
-  - Linux Persistence Techniques
   - Linux Living Off The Land
+  - Linux Persistence Techniques
+  - Nexus APT Threat Activity
+  - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:
   - T1548.001
@@ -59,7 +61,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.001/chmod_uid/sysmon_linux.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.001/chmod_uid/sysmon_linux.log
     source: Syslog:Linux-Sysmon/Operational
     sourcetype: sysmon:linux

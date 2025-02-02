@@ -1,7 +1,7 @@
 name: Windows Access Token Manipulation SeDebugPrivilege
 id: 6ece9ed0-5f92-4315-889d-48560472b188
-version: 6
-date: '2024-12-10'
+version: 10
+date: '2025-01-27'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -57,12 +57,16 @@ rba:
 tags:
   analytic_story:
   - Brute Ratel C4
-  - AsyncRAT
-  - DarkGate Malware
-  - CISA AA23-347A
   - PlugX
+  - AsyncRAT
+  - CISA AA23-347A
+  - WinDealer RAT
   - ValleyRAT
+  - Derusbi
+  - Nexus APT Threat Activity
+  - DarkGate Malware
   - Meduza Stealer
+  - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:
   - T1134.002
@@ -75,7 +79,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/sedebugprivilege_token/security-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/sedebugprivilege_token/security-xml.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

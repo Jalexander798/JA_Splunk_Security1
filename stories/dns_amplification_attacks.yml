@@ -3,6 +3,7 @@ id: a563972b-d2e2-4978-b6ca-6e83e24af4d3
 version: 1
 date: '2016-09-13'
 author: Bhavin Patel, Splunk
+status: production
 description: DNS poses a serious threat as a Denial of Service (DOS) amplifier, if
   it responds to `ANY` queries. This Analytic Story can help you detect attackers
   who may be abusing your company's DNS infrastructure to launch amplification attacks,

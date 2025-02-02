@@ -20,7 +20,7 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   as lastTime FROM datamodel=Endpoint.Registry WHERE Registry.registry_path= "*\\Services\\Eventlog\\*"
   AND Registry.registry_value_name=CustomSD BY Registry.dest Registry.registry_value_data
   Registry.action Registry.process_guid Registry.process_id Registry.registry_key_name
-  Registry.user Registry.registry_value_name | `drop_dm_object_name(Registry)` | where
+  Registry.user Registry.registry_value_name Registry.registry_path | `drop_dm_object_name(Registry)` | where
   isnotnull(registry_value_data) | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_new_custom_security_descriptor_set_on_eventlog_channel_filter`'
 how_to_implement: To successfully implement this search, you must be ingesting data

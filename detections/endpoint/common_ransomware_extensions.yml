@@ -27,8 +27,7 @@ search: '| tstats `security_content_summariesonly` min(_time) as firstTime max(_
 how_to_implement: 'You must be ingesting data that records the filesystem activity
   from your hosts to populate the Endpoint Filesystem data model node. To see the
   additional metadata, add the following fields, if not already present, please review
-  the detailed documentation on how to create a new field within Incident Review may
-  be found here: `https://docs.splunk.com/Documentation/ES/5.3.0/Admin/Customizenotables#Add_a_field_to_the_notable_event_details`'
+  the detailed documentation on how to create a new field within Incident Review'
 known_false_positives: It is possible for a legitimate file with these extensions
   to be created. If this is a true ransomware attack, there will be a large number
   of files created with these extensions.

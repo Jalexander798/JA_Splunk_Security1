@@ -3,6 +3,7 @@ id: b9879c24-670a-44c0-895e-98cdb7d0e848
 version: 1
 date: '2021-12-17'
 author: Teoderick Contreras, Splunk
+status: production
 description: Monitor for and investigate activities that may be associated with a
   Linux privilege-escalation attack, including unusual processes running on endpoints,
   schedule task, services, setuid, root execution and more.

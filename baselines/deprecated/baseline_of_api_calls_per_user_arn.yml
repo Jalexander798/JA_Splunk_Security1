@@ -4,6 +4,7 @@ version: 1
 date: '2018-04-09'
 author: David Dorsey, Splunk
 type: Baseline
+status: deprecated
 description: This search establishes, on a per-hour basis, the average and the standard
   deviation of the number of API calls made by each user. Also recorded is the number
   of data points for each user. This table is then outputted to a lookup file to allow

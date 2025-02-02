@@ -3,6 +3,7 @@ id: db408f93-e915-4215-9962-5fada348bdd7
 version: 1
 date: '2022-10-05'
 author: Michael Haag, Splunk
+status: production
 description: From November 2021 through January 2022, the Cybersecurity and Infrastructure Security Agency (CISA) responded to advanced persistent threat (APT) activity on a Defense Industrial Base (DIB) Sector organization's enterprise network. During incident response activities, multiple utilities were utilized.
 narrative: CISA uncovered that likely multiple APT groups compromised the organization's network, and some APT actors had long-term access to the environment. APT actors used an open-source toolkit called Impacket to gain their foothold within the environment and further compromise the network, and also used a custom data exfiltration tool, CovalentStealer, to steal the victim's sensitive data.
 references:

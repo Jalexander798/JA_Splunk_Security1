@@ -3,6 +3,7 @@ id: 0ec9dbfe-f64e-46bb-8eb8-04e92326f513
 version: 1
 date: '2022-08-23'
 author: Teoderick Contreras, Splunk
+status: production
 description: Leverage searches that allow you to detect and investigate unusual activities
   that may be related to Brute Ratel Red Teaming tool. This includes creation, modification and deletion of services,
   collection or data, ping IP, DNS cache, process injection, debug privileges adjustment, winlogon process duplicate token, 

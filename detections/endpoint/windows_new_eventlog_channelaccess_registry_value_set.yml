@@ -20,7 +20,7 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   as lastTime FROM datamodel=Endpoint.Registry WHERE Registry.registry_path IN ("*\\Microsoft\\Windows\\CurrentVersion\\WINEVT\\Channels\\*",
   "*\Microsoft\Windows\EventLog\*") AND Registry.registry_value_name=ChannelAccess
   BY Registry.dest Registry.registry_value_data Registry.action Registry.process_guid
-  Registry.process_id Registry.registry_key_name Registry.user Registry.registry_value_name
+  Registry.process_id Registry.registry_key_name Registry.user Registry.registry_value_name Registry.registry_path
   | `drop_dm_object_name(Registry)` | where isnotnull(registry_value_data) | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_new_eventlog_channelaccess_registry_value_set_filter`'
 how_to_implement: To successfully implement this search, you must be ingesting data

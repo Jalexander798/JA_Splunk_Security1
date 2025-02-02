@@ -64,14 +64,15 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Windows Service Abuse
-  - DHS Report TA18-074A
+  - Azorult
   - Orangeworm Attack Group
+  - Windows Drivers
+  - NOBELIUM Group
   - Windows Persistence Techniques
   - Disabling Security Tools
-  - NOBELIUM Group
-  - Azorult
-  - Windows Drivers
+  - Windows Service Abuse
+  - DHS Report TA18-074A
+  - Crypto Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1543.003

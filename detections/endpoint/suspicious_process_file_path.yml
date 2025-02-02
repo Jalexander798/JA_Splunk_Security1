@@ -17,18 +17,14 @@ data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
 - CrowdStrike ProcessRollup2
-search: '| tstats `security_content_summariesonly` count values(Processes.process_name)
-  as process_name values(Processes.process) as process min(_time) as firstTime max(_time)
-  as lastTime from datamodel=Endpoint.Processes where Processes.process_path = "*\\windows\\fonts\\*"
-  OR Processes.process_path = "*\\windows\\temp\\*" OR Processes.process_path = "*\\users\\public\\*"
-  OR Processes.process_path = "*\\windows\\debug\\*" OR Processes.process_path = "*\\Users\\Administrator\\Music\\*"
-  OR Processes.process_path = "*\\Windows\\servicing\\*" OR Processes.process_path
-  = "*\\Users\\Default\\*" OR Processes.process_path = "*Recycle.bin*" OR Processes.process_path
-  = "*\\Windows\\Media\\*" OR Processes.process_path = "\\Windows\\repair\\*" OR Processes.process_path
-  = "*\\temp\\*" OR Processes.process_path = "*\\PerfLogs\\*" by Processes.parent_process_name
-  Processes.parent_process Processes.process_path Processes.dest Processes.user |
-  `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `suspicious_process_file_path_filter`'
+search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
+  as lastTime from datamodel=Endpoint.Processes where Processes.process_path IN("*\\windows\\fonts\\*",
+  "*\\windows\\temp\\*", "*\\users\\public\\*", "*\\windows\\debug\\*", "*\\Users\\Administrator\\Music\\*",
+  "*\\Windows\\servicing\\*", "*\\Users\\Default\\*", "*Recycle.bin*", "*\\Windows\\Media\\*",  "\\Windows\\repair\\*",
+  "*\\temp\\*" , "*\\PerfLogs\\*","*\\windows\\tasks\\*", "*:\\programdata\\*") by
+  Processes.parent_process_name Processes.parent_process Processes.process_name Processes.process_path Processes.dest
+  Processes.user | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `suspicious_process_file_path_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -72,40 +68,41 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - Double Zero Destructor
-  - Graceful Wipe Out Attack
-  - AsyncRAT
-  - WhisperGate
-  - Prestige Ransomware
-  - DarkGate Malware
-  - AgentTesla
-  - Brute Ratel C4
-  - RedLine Stealer
-  - Rhysida Ransomware
-  - Swift Slicer
-  - IcedID
-  - DarkCrystal RAT
-  - Chaos Ransomware
-  - PlugX
-  - Industroyer2
-  - Azorult
-  - Remcos
-  - XMRig
-  - Qakbot
   - Volt Typhoon
+  - LockBit Ransomware
+  - Data Destruction
+  - XMRig
+  - DarkGate Malware
+  - Chaos Ransomware
+  - Double Zero Destructor
   - Hermetic Wiper
   - Warzone RAT
-  - Trickbot
-  - Amadey
-  - BlackByte Ransomware
-  - LockBit Ransomware
-  - CISA AA23-347A
-  - Data Destruction
   - Phemedrone Stealer
+  - Prestige Ransomware
+  - Graceful Wipe Out Attack
+  - BlackByte Ransomware
+  - IcedID
   - Handala Wiper
-  - MoonPeak
-  - ValleyRAT
   - Meduza Stealer
+  - CISA AA23-347A
+  - AsyncRAT
+  - Amadey
+  - Industroyer2
+  - ValleyRAT
+  - Rhysida Ransomware
+  - DarkCrystal RAT
+  - Crypto Stealer
+  - Azorult
+  - Swift Slicer
+  - AgentTesla
+  - Qakbot
+  - Remcos
+  - Trickbot
+  - Brute Ratel C4
+  - RedLine Stealer
+  - PlugX
+  - MoonPeak
+  - WhisperGate
   asset_type: Endpoint
   mitre_attack_id:
   - T1543

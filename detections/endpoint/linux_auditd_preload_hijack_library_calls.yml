@@ -1,7 +1,7 @@
 name: Linux Auditd Preload Hijack Library Calls
 id: 35c50572-a70b-452f-afa9-bebdf3c3ce36
-version: 3
-date: '2024-11-13'
+version: 4
+date: '2025-01-27'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -16,13 +16,14 @@ description: The following analytic detects the use of the LD_PRELOAD environmen
 data_source:
 - Linux Auditd Execve
 search: '`linux_auditd` `linux_auditd_normalized_execve_process` | rename host as
-  dest | where LIKE (process_exec, "%LD_PRELOAD%")| stats count min(_time) as firstTime
-  max(_time) as lastTime by argc process_exec dest | `security_content_ctime(firstTime)`|
-  `security_content_ctime(lastTime)`| `linux_auditd_preload_hijack_library_calls_filter`'
+  dest | rename comm as process_name | rename exe as process | where LIKE (process_exec,
+  "%LD_PRELOAD%")| stats count min(_time) as firstTime max(_time) as lastTime by argc
+  process_exec dest | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`|
+  `linux_auditd_preload_hijack_library_calls_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
-  data, that consist SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
-  executions and process details on Unix/Linux systems. These logs should be ingested
-  and processed using Splunk Add-on for Unix and Linux (https://splunkbase.splunk.com/app/833),
+  data, that consists of SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures
+  command-line executions and process details on Unix/Linux systems. These logs should
+  be ingested and processed using Splunk Add-on for Unix and Linux (https://splunkbase.splunk.com/app/833),
   which is essential for correctly parsing and categorizing the data. The next step
   involves normalizing the field names  to match the field names set by the Splunk
   Common Information Model (CIM) to ensure consistency across different data sources
@@ -57,8 +58,10 @@ rba:
 tags:
   analytic_story:
   - Linux Privilege Escalation
-  - Linux Persistence Techniques
   - Compromised Linux Host
+  - Linux Persistence Techniques
+  - Nexus APT Threat Activity
+  - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:
   - T1574.006
@@ -71,7 +74,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.006/linux_auditd_ldpreload/linux_auditd_ldpreload.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.006/linux_auditd_ldpreload/linux_auditd_ldpreload.log
     source: /var/log/audit/audit.log
     sourcetype: linux:audit

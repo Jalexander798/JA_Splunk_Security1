@@ -65,8 +65,9 @@ tags:
   analytic_story:
   - Azorult
   - Sandworm Tools
-  - XMRig
   - Compromised Windows Host
+  - XMRig
+  - Crypto Stealer
   - Defense Evasion or Unauthorized Access Via SDDL Tampering
   asset_type: Endpoint
   mitre_attack_id:

@@ -60,10 +60,11 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Windows Persistence Techniques
   - Azorult
+  - Windows Persistence Techniques
   - Compromised Windows Host
   - Windows Defense Evasion Tactics
+  - Crypto Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1222
