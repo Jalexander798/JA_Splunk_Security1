@@ -1,7 +1,7 @@
 name: Prohibited Software On Endpoint
 id: a51bfe1a-94f0-48cc-b4e4-b6ae50145893
-version: 4
-date: '2024-10-17'
+version: 5
+date: '2024-11-14'
 author: David Dorsey, Splunk
 status: deprecated
 type: Hunting
@@ -30,23 +30,8 @@ tags:
   - Emotet Malware DHS Report TA18-201A
   - SamSam Ransomware
   asset_type: Endpoint
-  confidence: 50
-  impact: 50
-  message: tbd
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _times
-  risk_score: 25
   security_domain: endpoint

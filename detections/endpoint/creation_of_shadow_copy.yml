@@ -1,7 +1,7 @@
 name: Creation of Shadow Copy
 id: eb120f5f-b879-4a63-97c1-93352b5df844
-version: '5'
-date: '2024-11-28'
+version: 6
+date: '2024-12-10'
 author: Patrick Bareiss, Splunk
 status: production
 type: TTP
@@ -52,60 +52,44 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: An instance of $parent_process_name$ spawning $process_name$ was identified
+    on endpoint $dest$ by user $user$ attempting to create a shadow copy to perform
+    offline password cracking.
+  risk_objects:
+  - field: user
+    type: user
+    score: 81
+  - field: dest
+    type: system
+    score: 81
+  threat_objects:
+  - field: parent_process_name
+    type: parent_process_name
 tags:
   analytic_story:
   - Volt Typhoon
   - Compromised Windows Host
   - Credential Dumping
   asset_type: Endpoint
-  confidence: 90
-  impact: 90
-  message: An instance of $parent_process_name$ spawning $process_name$ was identified
-    on endpoint $dest$ by user $user$ attempting to create a shadow copy to perform
-    offline password cracking.
   mitre_attack_id:
   - T1003.003
   - T1003
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: parent_process_name
-    type: Process
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.dest
-  - Processes.user
-  - Processes.parent_process_name
-  - Processes.parent_process
-  - Processes.original_file_name
-  - Processes.process_name
-  - Processes.process
-  - Processes.process_id
-  - Processes.parent_process_path
-  - Processes.process_path
-  - Processes.parent_process_id
-  risk_score: 81
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.003/atomic_red_team/windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.003/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.003/atomic_red_team/crowdstrike_falcon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.003/atomic_red_team/crowdstrike_falcon.log
     source: crowdstrike
     sourcetype: crowdstrike:events:sensor

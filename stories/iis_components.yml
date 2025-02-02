@@ -3,6 +3,7 @@ id: 0fbde550-8252-43ab-a26a-03976f55b58b
 version: 1
 date: '2022-12-19'
 author: Michael Haag, Splunk
+status: production
 description: Adversaries may install malicious components that run on Internet Information Services (IIS) web servers to establish persistence.
 narrative: IIS provides several mechanisms to extend the functionality of the web servers. For example, Internet Server Application Programming Interface (ISAPI) extensions and filters can be installed to examine and/or modify incoming and outgoing IIS web requests. Extensions and filters are deployed as DLL files that export three functions - Get{Extension/Filter}Version, Http{Extension/Filter}Proc, and (optionally) Terminate{Extension/Filter}. IIS modules may also be installed to extend IIS web servers.
 

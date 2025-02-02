@@ -1,7 +1,7 @@
 name: Abnormally High AWS Instances Launched by User - MLTK
 id: dec41ad5-d579-42cb-b4c6-f5dbb778bbe5
-version: 4
-date: '2024-10-17'
+version: 5
+date: '2024-11-14'
 author: Jason Brewer, Splunk
 status: deprecated
 type: Anomaly
@@ -21,29 +21,22 @@ known_false_positives: Many service accounts configured within an AWS infrastruc
   out service accounts from the output. Always verify if this search alerted on a
   human user.
 references: []
+rba:
+  message: Abnormal number of instances launched by $src_user$
+  risk_objects:
+  - field: src_user
+    type: user
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - AWS Cryptomining
   - Suspicious AWS EC2 Activities
   asset_type: AWS Instance
-  confidence: 50
-  impact: 50
-  message: tbd
   mitre_attack_id:
   - T1078.004
-  observable:
-  - name: src_user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - eventName
-  - errorCode
-  - src_user
-  risk_score: 25.0
   security_domain: network

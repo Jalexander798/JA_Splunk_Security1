@@ -3,6 +3,7 @@ id: 66b0fe0c-1351-11eb-adc1-0242ac120002
 version: 2
 date: '2023-05-17'
 author: Bhavin Patel, Shannon Davis, Splunk
+status: production
 description: Data exfiltration refers to the unauthorized transfer or extraction of sensitive or valuable data from a compromised system or network during a cyber attack. It is a critical phase in many targeted attacks, where adversaries aim to steal confidential information, such as intellectual property, financial records, personal data, or trade secrets.
 
 narrative: This Analytic Story supports you to detect Tactics, Techniques and Procedures (TTPs) leveraged by adversaries to exfiltrate data from your environments. Exfiltration comes in many flavors and its done differently on every environment. Adversaries can collect data over encrypted or non-encrypted channels.  They can utilise Command And Control channels that are already in place to exfiltrate data.  They can use both standard data transfer protocols such as FTP, SCP, etc to exfiltrate data.  Or they can use non-standard protocols such as DNS, ICMP, etc with specially crafted fields to try and circumvent security technologies in place.

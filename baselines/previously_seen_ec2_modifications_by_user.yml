@@ -4,7 +4,7 @@ version: 1
 date: '2018-04-05'
 author: David Dorsey, Splunk
 type: Baseline
-datamodel: []
+status: production
 description: This search builds a table of previously seen ARNs that have launched
   a EC2 instance.
 search: '`cloudtrail` `ec2_modification_api_calls` errorCode=success | spath output=arn
@@ -24,8 +24,4 @@ tags:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - userIdentity.arn
-  - errorCode
   security_domain: network

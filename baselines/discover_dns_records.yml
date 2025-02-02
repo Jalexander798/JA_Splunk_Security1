@@ -1,17 +1,16 @@
 name: Discover DNS records
 id: c096f721-8842-42ce-bfc7-74bd8c72b7c3
 version: 1
-date: '2019-02-14'
+date: '2025-01-16'
 author: Jose Hernandez, Splunk
 type: Baseline
-datamodel:
-- Network_Resolution
+status: production
 description: The search takes corporate and common cloud provider domains configured
   under `cim_corporate_email_domains.csv`, `cim_corporate_web_domains.csv`, and `cloud_domains.csv`
   finds their responses across the last 30 days from data in the `Network_Resolution
   ` datamodel, then stores the output under the `discovered_dns_records.csv` lookup
-search: '| inputlookup cim_corporate_email_domains.csv | inputlookup append=T cim_corporate_web_domains.csv
-  | inputlookup append=T cim_cloud_domains.csv | eval domain = trim(replace(domain,
+search: '| inputlookup cim_corporate_email_domain_lookup | inputlookup append=T cim_corporate_web_domain_lookup
+  | inputlookup append=T cim_cloud_domain_lookup | eval domain = trim(replace(domain,
   "\*", "")) | join domain [|tstats `security_content_summariesonly` count values(DNS.record_type)
   as type, values(DNS.answer) as answer from datamodel=Network_Resolution where DNS.message_type=RESPONSE
   DNS.answer!="unknown" DNS.answer!="" by DNS.query | rename DNS.query as query |
@@ -33,9 +32,4 @@ tags:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - DNS.record_type
-  - DNS.answer
-  - DNS.query
   security_domain: network

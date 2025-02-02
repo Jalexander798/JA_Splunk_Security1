@@ -1,7 +1,7 @@
 name: Linux Auditd Possible Append Cronjob Entry On Existing Cronjob File
 id: fea71cf0-fa10-4ef6-9202-9682b2e0c477
-version: '3'
-date: '2024-12-17'
+version: 4
+date: '2025-01-20'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
@@ -19,7 +19,7 @@ search: '`linux_auditd` type=PATH name IN("*/etc/cron*", "*/var/spool/cron/*", "
   by name nametype OGID  dest | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`|
   `linux_auditd_possible_append_cronjob_entry_on_existing_cronjob_file_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
-  data, that consist SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
+  data, that consists of SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
   executions and process details on Unix/Linux systems. These logs should be ingested
   and processed using Splunk Add-on for Unix and Linux (https://splunkbase.splunk.com/app/833),
   which is essential for correctly parsing and categorizing the data. The next step
@@ -43,32 +43,18 @@ tags:
   - Scheduled Tasks
   - Linux Persistence Techniques
   asset_type: Endpoint
-  confidence: 70
-  impact: 70
-  message: A [$type$] event has occured on host - [$dest$] to append a cronjob entry
-    on an existing cronjob file.
   mitre_attack_id:
   - T1053.003
   - T1053
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - name
-  - nametype
-  - OGID
-  risk_score: 49
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.003/linux_auditd_cron_file_audited/linux_auditd_cron_file_audited2.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.003/linux_auditd_cron_file_audited/linux_auditd_cron_file_audited2.log
     source: /var/log/audit/audit.log
     sourcetype: linux:audit

@@ -1,7 +1,7 @@
 name: Kubernetes GCP detect sensitive role access
 id: a46923f6-36b9-4806-a681-31f314907c30
-version: 4
-date: '2024-10-17'
+version: 5
+date: '2024-11-14'
 author: Rod Soto, Splunk
 status: deprecated
 type: Hunting
@@ -14,27 +14,16 @@ search: '`google_gcp_pubsub_message` data.labels.authorization.k8s.io/reason=Clu
   | dedup src_ip src_user |`kubernetes_gcp_detect_sensitive_role_access_filter`'
 how_to_implement: You must install splunk add on for GCP. This search works with pubsub
   messaging servicelogs.
-known_false_positives: 'Sensitive role resource access is necessary for cluster operation,
+known_false_positives: Sensitive role resource access is necessary for cluster operation,
   however source IP, user agent, decision and reason may indicate possible malicious
-  use.'
+  use.
 references: []
 tags:
   analytic_story:
   - Kubernetes Sensitive Role Activity
   asset_type: GCP GKE EKS Kubernetes cluster
-  confidence: 50
-  impact: 50
-  message: tbd
-  observable:
-  - name: src_user
-    type: User
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  risk_score: 25
   security_domain: threat

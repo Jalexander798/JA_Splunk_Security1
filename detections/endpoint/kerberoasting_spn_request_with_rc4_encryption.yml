@@ -1,7 +1,7 @@
 name: Kerberoasting spn request with RC4 encryption
 id: 5cc67381-44fa-4111-8a37-7a230943f027
-version: '8'
-date: '2024-11-28'
+version: 9
+date: '2024-12-10'
 author: Jose Hernandez, Patrick Bareiss, Mauricio Velazco, Dean Luxton, Splunk
 status: production
 type: TTP
@@ -45,6 +45,13 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: User $user$ requested a service ticket for SPN $service_id$ with RC4 encryption
+  risk_objects:
+  - field: user
+    type: user
+    score: 72
+  threat_objects: []
 tags:
   analytic_story:
   - Windows Privilege Escalation
@@ -53,34 +60,18 @@ tags:
   - Compromised Windows Host
   - Hermetic Wiper
   asset_type: Endpoint
-  confidence: 80
-  impact: 90
-  message: User $user$ requested a service ticket for SPN $service_id$ with RC4 encryption
   mitre_attack_id:
   - T1558
   - T1558.003
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - EventCode
-  - TicketOptions
-  - TicketEncryptionType
-  - Computer
-  - service
-  - service_id
-  risk_score: 72
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558.003/kerberoasting_spn_request_with_rc4_encryption/windows-xml.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558.003/kerberoasting_spn_request_with_rc4_encryption/windows-xml.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

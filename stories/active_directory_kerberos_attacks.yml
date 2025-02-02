@@ -3,6 +3,7 @@ id: 38b8cf16-8461-11ec-ade1-acde48001122
 version: 1
 date: '2022-02-02'
 author: Mauricio Velazco, Splunk
+status: production
 description: Monitor for activities and techniques associated with Kerberos based attacks within with Active Directory environments.
 narrative: Kerberos, initially named after Cerberus, the three-headed dog in Greek mythology, is a network authentication protocol that allows computers and
  users to prove their identity through a trusted third-party. This trusted third-party issues Kerberos tickets using symmetric encryption to allow users access

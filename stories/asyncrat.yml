@@ -3,6 +3,7 @@ id: d7053072-7dd2-4874-8314-bfcbc99978a4
 version: 1
 date: '2023-01-24'
 author: Teoderick Contreras, Splunk
+status: production
 description: Leverage searches that allow you to detect and investigate unusual activities
   that might relate to the AsyncRAT malware including mshta application child process, bat loader execution, persistence and many more.
   AsyncRAT is an open source remote administration tool released last 2019. It's designed to remotely control computers via an encrypted 

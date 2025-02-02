@@ -1,7 +1,7 @@
 name: Linux File Creation In Init Boot Directory
 id: 97d9cfb2-61ad-11ec-bb2d-acde48001122
-version: '4'
-date: '2024-12-17'
+version: 6
+date: '2025-01-27'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -40,35 +40,28 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A file $file_name$ is created in $file_path$ on $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 49
+  threat_objects: []
 tags:
   analytic_story:
+  - Linux Privilege Escalation
+  - Backdoor Pingpong
   - Linux Persistence Techniques
   - XorDDos
-  - Linux Privilege Escalation
+  - Nexus APT Threat Activity
   asset_type: Endpoint
-  confidence: 70
-  impact: 70
-  message: A file $file_name$ is created in $file_path$ on $dest$
   mitre_attack_id:
   - T1037.004
   - T1037
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Filesystem.dest
-  - Filesystem.file_create_time
-  - Filesystem.file_name
-  - Filesystem.process_guid
-  - Filesystem.file_path
-  risk_score: 49
   security_domain: endpoint
 tests:
 - name: True Positive Test

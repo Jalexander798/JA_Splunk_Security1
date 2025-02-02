@@ -3,6 +3,7 @@ id: fa34a5d8-df0a-404c-8237-11f99cba1d5f
 version: 1
 date: '2023-03-20'
 author: Mauricio Velazco, Splunk
+status: production
 description: Monitor for activities and techniques associated with Privilege Escalation
   attacks within Active Directory environments.
 narrative: Privilege Escalation consists of techniques that adversaries use to gain higher-level permissions on a system or network. 

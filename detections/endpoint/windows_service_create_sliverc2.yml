@@ -1,7 +1,7 @@
 name: Windows Service Create SliverC2
 id: 89dad3ee-57ec-43dc-9044-131c4edd663f
-version: '4'
-date: '2024-11-28'
+version: 5
+date: '2024-12-10'
 author: Michael Haag, Splunk
 type: TTP
 status: production
@@ -40,37 +40,30 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A user mode service was created on $dest$ related to SliverC2.
+  risk_objects:
+  - field: dest
+    type: system
+    score: 90
+  threat_objects: []
 tags:
   analytic_story:
   - BishopFox Sliver Adversary Emulation Framework
   - Compromised Windows Host
   asset_type: Endpoint
-  confidence: 100
-  impact: 90
-  message: A user mode service was created on $dest$ related to SliverC2.
   mitre_attack_id:
   - T1569
   - T1569.002
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - EventCode
-  - Computer
-  - ServiceName
-  - ImagePath
-  - ServiceType
-  risk_score: 90
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/sliver/sliver_windows-system.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/sliver/sliver_windows-system.log
     source: XmlWinEventLog:System
     sourcetype: XmlWinEventLog

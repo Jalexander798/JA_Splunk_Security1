@@ -1,7 +1,7 @@
 name: Windows AD Domain Controller Promotion
 id: e633a0ef-2a6e-4ed7-b925-5ff999e5d1f0
-version: '4'
-date: '2024-11-28'
+version: 5
+date: '2024-12-10'
 author: Dean Luxton
 type: TTP
 status: production
@@ -46,38 +46,29 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: AD Domain Controller Promotion Event Detected for $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 80
+  threat_objects: []
 tags:
   analytic_story:
   - Compromised Windows Host
   - Sneaky Active Directory Persistence Tricks
   asset_type: Endpoint
-  confidence: 100
-  impact: 80
-  message: AD Domain Controller Promotion Event Detected for $dest$
   mitre_attack_id:
   - T1207
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - EventCode
-  - ServicePrincipalNames
-  - src_user
-  - user
-  - Logon_ID
-  - dvc
-  risk_score: 80
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1207/dc_promo/windows-security-xml.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1207/dc_promo/windows-security-xml.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

@@ -1,0 +1,10 @@
+service,description,category
+*mpssvc*,Windows Firewall Service,security
+*wscsvc*,Windows Security Center Service,security
+*windefend*,Windows Defender Service,security
+*sysmon*,Sysmon Driver,security
+*csc_iseagent*,Cisco Secure Client - ISE Posture Agent,security
+*csc_nvmagent*,Cisco Secure Client - Network Visibility Agent,security
+*csc_umbrellaagent*,Cisco Secure Client - Umbrella Agent,security
+*csc_swgagent*,Cisco Secure Client - Umbrella SWG Agent,security
+*CiscoAMP*,Cisco Secure Endpoint,security

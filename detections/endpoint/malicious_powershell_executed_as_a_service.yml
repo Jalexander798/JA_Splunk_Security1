@@ -1,7 +1,7 @@
 name: Malicious Powershell Executed As A Service
 id: 8e204dfd-cae0-4ea8-a61d-e972a1ff2ff8
-version: '6'
-date: '2024-11-28'
+version: 7
+date: '2024-12-10'
 author: Ryan Becwar
 status: production
 type: TTP
@@ -44,46 +44,35 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: Identifies the abuse the Windows SC.exe to execute malicious powerShell
+    as a service $ImagePath$ by $user$ on $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 72
+  - field: user
+    type: user
+    score: 72
+  threat_objects: []
 tags:
   analytic_story:
   - Compromised Windows Host
   - Rhysida Ransomware
   - Malicious PowerShell
   asset_type: Endpoint
-  confidence: 80
-  impact: 90
-  message: Identifies the abuse the Windows SC.exe to execute malicious powerShell
-    as a service $ImagePath$ by $user$ on $dest$
   mitre_attack_id:
   - T1569
   - T1569.002
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - EventCode
-  - Service_File_Name
-  - Service_Type
-  - _time
-  - Service_Name
-  - Service_Start_Type
-  - Service_Account
-  - user
-  risk_score: 72
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1569.002/malicious_powershell_executed_as_a_service/windows-xml.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1569.002/malicious_powershell_executed_as_a_service/windows-xml.log
     source: XmlWinEventLog:System
     sourcetype: XmlWinEventLog

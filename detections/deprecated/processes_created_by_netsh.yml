@@ -1,7 +1,7 @@
 name: Processes created by netsh
 id: b89919ed-fe5f-492c-b139-95dbb162041e
-version: 7
-date: '2024-10-17'
+version: 8
+date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: deprecated
 type: TTP
@@ -33,29 +33,24 @@ known_false_positives: It is unusual for netsh.exe to have any child processes i
   the process spawned is legitimate. We explicitely exclude "C:\Program Files\rempl\sedlauncher.exe"
   process path since it is a legitimate process by Mircosoft.
 references: []
+rba:
+  message: Proccesses created by netsh.exe on $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 25
+  - field: user
+    type: user
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - Netsh Abuse
   asset_type: Endpoint
-  confidence: 50
-  impact: 50
-  message: tbd
   mitre_attack_id:
   - T1562.004
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  risk_score: 25
   security_domain: endpoint

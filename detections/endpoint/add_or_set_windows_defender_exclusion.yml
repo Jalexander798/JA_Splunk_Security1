@@ -1,7 +1,7 @@
 name: Add or Set Windows Defender Exclusion
 id: 773b66fe-4dd9-11ec-8289-acde48001122
-version: '5'
-date: '2024-11-28'
+version: '6'
+date: '2024-12-17'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -53,54 +53,40 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: exclusion command $process$ executed on $dest$
+  risk_objects:
+  - field: user
+    type: user
+    score: 64
+  - field: dest
+    type: system
+    score: 64
+  threat_objects: []
 tags:
   analytic_story:
-  - WhisperGate
-  - Windows Defense Evasion Tactics
+  - CISA AA22-320A
+  - AgentTesla
   - Remcos
   - Data Destruction
-  - CISA AA22-320A
-  - ValleyRAT
   - Compromised Windows Host
-  - AgentTesla
+  - ValleyRAT
+  - Windows Defense Evasion Tactics
+  - WhisperGate
+  - Crypto Stealer
   asset_type: Endpoint
-  confidence: 80
-  impact: 80
-  message: exclusion command $process$ executed on $dest$
   mitre_attack_id:
   - T1562.001
   - T1562
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.dest
-  - Processes.user
-  - Processes.parent_process_name
-  - Processes.parent_process
-  - Processes.original_file_name
-  - Processes.process_name
-  - Processes.process
-  - Processes.process_id
-  - Processes.parent_process_path
-  - Processes.process_path
-  - Processes.parent_process_id
-  risk_score: 64
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/defender_exclusion_sysmon/sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/defender_exclusion_sysmon/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

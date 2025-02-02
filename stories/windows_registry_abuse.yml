@@ -3,6 +3,7 @@ id: 78df1df1-25f1-4387-90f9-c4ea31ce6b75
 version: 1
 date: '2022-03-17'
 author: Teoderick Contreras, Splunk
+status: production
 description: Windows services are often used by attackers for persistence, privilege escalation,  
   lateral movement, defense evasion, collection of data, a tool for recon, credential dumping and 
   payload impact. This Analytic Story helps you monitor your environment for indications 

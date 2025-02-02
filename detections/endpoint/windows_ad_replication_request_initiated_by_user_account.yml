@@ -1,7 +1,7 @@
 name: Windows AD Replication Request Initiated by User Account
 id: 51307514-1236-49f6-8686-d46d93cc2821
-version: '5'
-date: '2024-11-28'
+version: 6
+date: '2024-12-10'
 author: Dean Luxton
 type: TTP
 status: production
@@ -55,53 +55,34 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: Windows Active Directory Replication Request Initiated by User Account
+    $user$ at $src_ip$
+  risk_objects:
+  - field: user
+    type: user
+    score: 100
+  threat_objects:
+  - field: src_ip
+    type: ip_address
 tags:
   analytic_story:
   - Compromised Windows Host
   - Sneaky Active Directory Persistence Tricks
   - Credential Dumping
   asset_type: Endpoint
-  confidence: 100
-  impact: 100
-  message: Windows Active Directory Replication Request Initiated by User Account
-    $user$ at $src_ip$
   mitre_attack_id:
   - T1003.006
   - T1003
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: src_ip
-    type: IP Address
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - EventCode
-  - ObjectType
-  - Properties
-  - AccessMask
-  - SubjectDomainName
-  - SubjectUserName
-  - SubjectUserSid
-  - Computer
-  - Logon_ID
-  - ObjectName
-  - ObjectServer
-  - ObjectType
-  - OperationType
-  - status
-  risk_score: 100
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.006/mimikatz/xml-windows-security.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.006/mimikatz/xml-windows-security.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

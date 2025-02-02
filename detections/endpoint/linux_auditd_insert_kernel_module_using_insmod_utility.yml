@@ -1,7 +1,7 @@
 name: Linux Auditd Insert Kernel Module Using Insmod Utility
 id: bc0ca53f-dea6-4906-9b12-09c396fdf1d3
-version: '3'
-date: '2024-12-17'
+version: 4
+date: '2024-12-19'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -19,7 +19,7 @@ search: '`linux_auditd` type=SYSCALL comm=insmod | rename host as dest | stats c
   success dest | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`|
   `linux_auditd_insert_kernel_module_using_insmod_utility_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
-  data, that consist SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
+  data, that consists of SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
   executions and process details on Unix/Linux systems. These logs should be ingested
   and processed using Splunk Add-on for Unix and Linux (https://splunkbase.splunk.com/app/833),
   which is essential for correctly parsing and categorizing the data. The next step
@@ -47,6 +47,14 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A SYSCALL - [$comm$] event was executed on host - [$dest$] to insert a
+    Linux kernel module using the insmod utility.
+  risk_objects:
+  - field: dest
+    type: system
+    score: 64
+  threat_objects: []
 tags:
   analytic_story:
   - XorDDos
@@ -55,35 +63,18 @@ tags:
   - Linux Privilege Escalation
   - Linux Persistence Techniques
   asset_type: Endpoint
-  confidence: 80
-  impact: 80
-  message: A SYSCALL - [$comm$] event was executed on host - [$dest$] to insert a
-    Linux kernel module using the insmod utility.
   mitre_attack_id:
   - T1547.006
   - T1547
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - comm
-  - exe
-  - SYSCALL
-  - UID
-  - ppid
-  - pid
-  risk_score: 64
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.006/linux_auditd_insmod/linux_auditd_insmod.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.006/linux_auditd_insmod/linux_auditd_insmod.log
     source: /var/log/audit/audit.log
     sourcetype: linux:audit

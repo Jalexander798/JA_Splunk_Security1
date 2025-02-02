@@ -1,7 +1,7 @@
 name: Linux Add Files In Known Crontab Directories
 id: 023f3452-5f27-11ec-bf00-acde48001122
-version: '4'
-date: '2024-12-17'
+version: 5
+date: '2024-12-19'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -42,6 +42,13 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: a file $file_name$ is created in $file_path$ on $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - XorDDos
@@ -50,33 +57,18 @@ tags:
   - Scheduled Tasks
   - Linux Persistence Techniques
   asset_type: Endpoint
-  confidence: 50
-  impact: 50
-  message: a file $file_name$ is created in $file_path$ on $dest$
   mitre_attack_id:
   - T1053.003
   - T1053
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Filesystem.dest
-  - Filesystem.file_create_time
-  - Filesystem.file_name
-  - Filesystem.process_guid
-  - Filesystem.file_path
-  risk_score: 25
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.003/cronjobs_entry/sysmon_linux.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.003/cronjobs_entry/sysmon_linux.log
     source: Syslog:Linux-Sysmon/Operational
     sourcetype: sysmon:linux

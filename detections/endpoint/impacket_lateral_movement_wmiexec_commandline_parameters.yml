@@ -1,7 +1,7 @@
 name: Impacket Lateral Movement WMIExec Commandline Parameters
 id: d6e464e4-5c6a-474e-82d2-aed616a3a492
-version: '4'
-date: '2024-11-28'
+version: 5
+date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -60,6 +60,14 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: Suspicious command-line parameters on $dest$ may represent lateral movement
+    using wmiexec.
+  risk_objects:
+  - field: dest
+    type: system
+    score: 63
+  threat_objects: []
 tags:
   analytic_story:
   - WhisperGate
@@ -74,38 +82,21 @@ tags:
   - CISA AA22-277A
   asset_type: Endpoint
   atomic_guid: []
-  confidence: 70
-  impact: 90
-  message: Suspicious command-line parameters on $dest$ may represent lateral movement
-    using wmiexec.
   mitre_attack_id:
   - T1021
   - T1021.002
   - T1021.003
   - T1047
   - T1543.003
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - Processes.process_name
-  - Processes.dest
-  - Processes.user
-  - Processes.parent_process_name
-  - Processes.process
-  - Processes.process_id
-  - Processes.parent_process_id
-  risk_score: 63
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.002/atomic_red_team/wmiexec_windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.002/atomic_red_team/wmiexec_windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

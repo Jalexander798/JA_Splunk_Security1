@@ -4,7 +4,7 @@ version: 1
 date: '2018-04-16'
 author: Bhavin Patel, Splunk
 type: Baseline
-datamodel: []
+status: deprecated
 description: This search looks for successful API calls made by different user roles,
   then creates a baseline of the earliest and latest times we have encountered this
   user role. It also returns the name of the API call in our dataset--grouped by user
@@ -28,24 +28,4 @@ tags:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - eventType
-  - errorCode
-  - userIdentity.type
-  - userName
-  - eventName
   security_domain: network
-  kill_chain_phases:
-  - Exploitation
-  confidence: 50
-  impact: 50
-  risk_score: 25
-  context:
-  - Unknown
-  message: tbd
-  observable:
-  - name: field
-    type: Unknown
-    role:
-    - Unknown

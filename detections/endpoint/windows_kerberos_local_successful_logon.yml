@@ -1,7 +1,7 @@
 name: Windows Kerberos Local Successful Logon
 id: 8309c3a8-4d34-48ae-ad66-631658214653
-version: '5'
-date: '2024-11-28'
+version: 6
+date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -40,41 +40,31 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A successful localhost Kerberos authentication event occurred on $dest$,
+    possibly indicative of Kerberos relay attack.
+  risk_objects:
+  - field: dest
+    type: system
+    score: 64
+  threat_objects: []
 tags:
   analytic_story:
   - Local Privilege Escalation With KrbRelayUp
   - Active Directory Kerberos Attacks
   - Compromised Windows Host
   asset_type: Endpoint
-  confidence: 80
-  impact: 80
-  message: A successful localhost Kerberos authentication event occurred on $dest$,
-    possibly indicative of Kerberos relay attack.
   mitre_attack_id:
   - T1558
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - dest
-  - subject
-  - action
-  - Security_ID
-  - user
-  - TargetUserName
-  - src_ip
-  risk_score: 64
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558/windows_kerberos_local_successful_logon/windows-xml.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558/windows_kerberos_local_successful_logon/windows-xml.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

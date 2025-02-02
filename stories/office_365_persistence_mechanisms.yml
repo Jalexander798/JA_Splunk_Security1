@@ -3,6 +3,7 @@ id: d230a106-0475-4605-a8d8-abaf4c31ced7
 version: 1
 date: '2023-10-17'
 author: Mauricio Velazco, Patrick Bareiss, Splunk
+status: production
 description: Monitor for activities and anomalies indicative of potential persistence techniques within Office 365 environments.
 narrative: Office 365 (O365) is Microsoft's cloud-based suite of productivity tools, encompassing email, collaboration platforms, and office applications, all integrated with Azure Active Directory for identity and access management. O365's centralized storage of sensitive data and widespread adoption make it a key asset, yet also a prime target for security threats. The "Office 365 Persistence Mechanisms" analytic story delves into the tactics and techniques attackers employ to maintain prolonged unauthorized access within the O365 environment. Persistence in this context refers to methods used by adversaries to keep their foothold after an initial compromise. This can involve actions like modifying mailbox rules, establishing covert forwarding rules, manipulating application permissions. By monitoring signs of persistence, organizations can effectively detect and respond to stealthy threats, thereby protecting their O365 assets and data.
 references:

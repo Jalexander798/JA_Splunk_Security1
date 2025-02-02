@@ -1,7 +1,7 @@
 name: Linux Possible Cronjob Modification With Editor
 id: dcc89bde-5f24-11ec-87ca-acde48001122
-version: '4'
-date: '2024-12-17'
+version: 5
+date: '2024-12-19'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
@@ -42,35 +42,18 @@ tags:
   - Scheduled Tasks
   - Linux Persistence Techniques
   asset_type: Endpoint
-  confidence: 30
-  impact: 20
-  message: A commandline $process$ that may modify cronjob file using editor in $dest$
   mitre_attack_id:
   - T1053.003
   - T1053
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.dest
-  - Processes.user
-  - Processes.parent_process_name
-  - Processes.process_name
-  - Processes.process
-  - Processes.process_id
-  - Processes.parent_process_id
-  risk_score: 6
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.003/cronjobs_entry/sysmon_linux.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.003/cronjobs_entry/sysmon_linux.log
     source: Syslog:Linux-Sysmon/Operational
     sourcetype: sysmon:linux

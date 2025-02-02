@@ -1,7 +1,7 @@
 name: Windows UAC Bypass Suspicious Escalation Behavior
 id: 00d050d3-a5b4-4565-a6a5-a31f69681dc3
-version: '4'
-date: '2024-11-28'
+version: 5
+date: '2024-12-10'
 author: Steven Dick
 status: production
 type: TTP
@@ -62,60 +62,41 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A UAC bypass behavior was detected by process $parent_process_name$ on
+    host $dest$ by $user$.
+  risk_objects:
+  - field: dest
+    type: system
+    score: 64
+  - field: user
+    type: user
+    score: 64
+  threat_objects:
+  - field: process_name
+    type: process_name
+  - field: process_name
+    type: process_name
+  - field: parent_process_name
+    type: parent_process_name
 tags:
   analytic_story:
   - Living Off The Land
   - Compromised Windows Host
   - Windows Defense Evasion Tactics
   asset_type: Endpoint
-  confidence: 80
-  impact: 80
-  message: A UAC bypass behavior was detected by parent process name- $parent_process_name$
-    on host $dest$ by $user$.
   mitre_attack_id:
   - T1548
   - T1548.002
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: process_name
-    type: Process
-    role:
-    - Attacker
-  - name: process_name
-    type: Process Name
-    role:
-    - Attacker
-  - name: parent_process_name
-    type: Process Name
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - Processes.dest
-  - Processes.user
-  - Processes.parent_process_guid
-  - Processes.parent_process
-  - Processes.parent_process_name
-  - Processes.process_name Processes.process
-  - Processes.process_path
-  - Processes.process_integrity_level
-  - Processes.process_current_directory
-  risk_score: 64
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.002/uac_behavior/uac_behavior_sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.002/uac_behavior/uac_behavior_sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
-    update_timestamp: true

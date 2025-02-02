@@ -3,6 +3,7 @@ id: b18259ac-0746-45d7-bd1f-81d65274a80b
 version: 1
 date: '2023-07-10'
 author: Teoderick Contreras, Splunk
+status: production
 description: Leverage searches that allow you to detect and investigate unusual activities
   that might relate to the BlackByte ransomware, including looking for file writes
   associated with BlackByte, persistence, initial access, account registry

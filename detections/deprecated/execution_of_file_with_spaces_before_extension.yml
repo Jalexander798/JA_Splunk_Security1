@@ -1,7 +1,7 @@
 name: Execution of File With Spaces Before Extension
 id: ab0353e6-a956-420b-b724-a8b4846d5d5a
-version: 5
-date: '2024-10-17'
+version: 6
+date: '2024-11-14'
 author: Rico Valdez, Splunk
 status: deprecated
 type: TTP
@@ -26,31 +26,22 @@ how_to_implement: The detection is based on data that originates from Endpoint D
   names and speed up the data modeling process.
 known_false_positives: None identified.
 references: []
+rba:
+  message: Execution of file with spaces before the extension on $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - Windows File Extension and Association Abuse
   - Masquerading - Rename System Utilities
   asset_type: Endpoint
-  confidence: 50
-  impact: 50
-  message: tbd
   mitre_attack_id:
   - T1036.003
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.process_path
-  - Processes.process
-  - Processes.dest
-  - Processes.user
-  - Processes.process_name
-  risk_score: 25
   security_domain: endpoint

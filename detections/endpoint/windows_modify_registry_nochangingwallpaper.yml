@@ -1,7 +1,7 @@
 name: Windows Modify Registry NoChangingWallPaper
 id: a2276412-e254-4e9a-9082-4d92edb6a3e0
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-01-21'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -15,8 +15,8 @@ description: The following analytic detects modifications to the Windows registr
   to enforce a malicious wallpaper, thereby limiting user control over system settings.
   If confirmed malicious, this registry change could indicate a ransomware infection,
   leading to further system compromise and user disruption.
-search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time) as lastTime FROM datamodel=Endpoint.Registry 
-  WHERE (Registry.registry_path= "*\\Windows\\CurrentVersion\\Policies\\ActiveDesktop\\NoChangingWallPaper"
+search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
+  as lastTime FROM datamodel=Endpoint.Registry WHERE (Registry.registry_path= "*\\Windows\\CurrentVersion\\Policies\\ActiveDesktop\\NoChangingWallPaper"
   Registry.registry_value_data = 1) BY Registry.dest Registry.user Registry.registry_path
   Registry.registry_key_name Registry.registry_value_name Registry.registry_value_data
   Registry.process_guid | `drop_dm_object_name(Registry)` | where isnotnull(registry_value_data)
@@ -35,40 +35,37 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$dest$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: the registry settings was modified to disable changing of wallpaper on
+    $dest$.
+  risk_objects:
+  - field: dest
+    type: system
+    score: 36
+  threat_objects: []
 tags:
   analytic_story:
   - Rhysida Ransomware
   asset_type: Endpoint
-  confidence: 60
-  impact: 60
-  message: the registry settings was modified to disable changing of wallpaper on $dest$.
   mitre_attack_id:
   - T1112
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  risk_score: 36
-  required_fields:
-  - _time
-  - Registry.registry_key_name
-  - Registry.registry_path
-  - Registry.user
-  - Registry.dest
-  - Registry.registry_value_name
-  - Registry.action
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/no_changing_wallpaper/NoChangingWallPaper.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/no_changing_wallpaper/NoChangingWallPaper.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
