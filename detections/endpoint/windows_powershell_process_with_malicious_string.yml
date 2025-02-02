@@ -10,13 +10,14 @@ data_source:
 - Windows Security Event ID 4688
 - Sysmon Event ID 1
 - CrowdStrike ProcessRollup2
-search: '| tstats `security_content_summariesonly` count values(Processes.original_file_name) as original_file_name values(Processes.process) as process values(Processes.parent_process) as parent_process min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Processes where `process_powershell` by Processes.user Processes.dest Processes.process_name Processes.parent_process_name Processes.process 
-| `drop_dm_object_name(Processes)` 
-| `security_content_ctime(firstTime)`
-| `security_content_ctime(lastTime)`
-| lookup malicious_powershell_strings command as process
-| where isnotnull(match)
-| `windows_powershell_process_with_malicious_string_filter`'
+search: |-
+  | tstats `security_content_summariesonly` count values(Processes.original_file_name) as original_file_name values(Processes.process) as process values(Processes.parent_process) as parent_process min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Processes where `process_powershell` by Processes.user Processes.dest Processes.process_name Processes.parent_process_name Processes.process 
+  | `drop_dm_object_name(Processes)` 
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)`
+  | lookup malicious_powershell_strings command as process
+  | where isnotnull(match)
+  | `windows_powershell_process_with_malicious_string_filter`
 how_to_implement: The detection is based on data that originates from Endpoint Detection and Response (EDR) agents. These agents are designed to provide security-related telemetry from the endpoints where the agent is installed. To implement this search, you must ingest logs that contain the process GUID, process name, and parent process. Additionally, you must ingest complete command-line executions. These logs must be processed using the appropriate Splunk Technology Add-ons that are specific to the EDR product. The logs must also be mapped to the `Processes` node of the `Endpoint` data model. Use the Splunk Common Information Model (CIM) to normalize the field names and speed up the data modeling process.
 known_false_positives: Unknown, possible usage by internal red team or powershell commands with overlap.
 references:
