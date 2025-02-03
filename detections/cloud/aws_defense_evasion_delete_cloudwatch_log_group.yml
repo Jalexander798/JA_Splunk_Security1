@@ -15,11 +15,11 @@ description: The following analytic detects the deletion of CloudWatch log group
   within the compromised AWS environment.
 data_source:
 - AWS CloudTrail DeleteLogGroup
-search: '`cloudtrail` eventName = DeleteLogGroup eventSource = logs.amazonaws.com
-  userAgent !=console.amazonaws.com errorCode = success| stats count min(_time) as
-  firstTime max(_time) as lastTime values(requestParameters.logGroupName) as log_group_name
-  by src region eventName userAgent user_arn aws_account_id | `security_content_ctime(firstTime)`|
-  `security_content_ctime(lastTime)`| `aws_defense_evasion_delete_cloudwatch_log_group_filter`'
+search: '`cloudtrail` eventName = DeleteLogGroup eventSource = logs.amazonaws.com userAgent !=console.amazonaws.com errorCode = success
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
+  | eval vendor_product = "AWS"
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product
+  | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`| `aws_defense_evasion_delete_cloudwatch_log_group_filter`'
 how_to_implement: You must install Splunk AWS Add on and enable CloudTrail logs in
   your AWS Environment.
 known_false_positives: While this search has no known false positives, it is possible
@@ -27,12 +27,12 @@ known_false_positives: While this search has no known false positives, it is pos
 references:
 - https://attack.mitre.org/techniques/T1562/008/
 drilldown_searches:
-- name: View the detection results for - "$user_arn$"
-  search: '%original_detection_search% | search  user_arn = "$user_arn$"'
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search  user = "$user$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$user_arn$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user_arn$")
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -41,10 +41,10 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: User $user_arn$ has deleted a CloudWatch logging group for account id $aws_account_id$
+  message: User $user$ has deleted a CloudWatch logging group for account id $vendor_account$
     from IP $src$
   risk_objects:
-  - field: user_arn
+  - field: user
     type: user
     score: 90
   threat_objects:

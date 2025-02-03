@@ -10,7 +10,7 @@ data_source:
 - ASL AWS CloudTrail
 search: '`amazon_security_lake` (api.operation=DeleteVirtualMFADevice OR api.operation=DeactivateMFADevice) 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by api.operation actor.user.uid actor.user.account.uid http_request.user_agent src_endpoint.ip cloud.region 
+  | stats count min(_time) as firstTime max(_time) as lastTime by actor.user.uid api.operation actor.user.account.uid http_request.user_agent src_endpoint.ip cloud.region 
   | rename actor.user.uid as user, src_endpoint.ip as src_ip, cloud.region as region, http_request.user_agent as user_agent 
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` 
   | `asl_aws_multi_factor_authentication_disabled_filter`'

@@ -104,7 +104,6 @@ output_fields:
 - dest
 - user
 - user_agent
-- status
 - src
 - vendor_account
 - vendor_region

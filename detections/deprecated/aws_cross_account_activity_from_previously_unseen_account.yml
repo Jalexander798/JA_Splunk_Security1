@@ -3,7 +3,7 @@ id: 21193641-cb96-4a2c-a707-d9b9a7f7792b
 version: 4
 date: '2024-11-14'
 author: Rico Valdez, Splunk
-status: experimental
+status: deprecated
 type: Anomaly
 description: The following analytic identifies AssumeRole events where an IAM role
   in a different AWS account is accessed for the first time. It detects this activity
