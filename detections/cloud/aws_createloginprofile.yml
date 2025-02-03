@@ -22,7 +22,7 @@ search: '`cloudtrail` eventName = CreateLoginProfile
   | rename userIdentity.userName  as new_login_profile 
   | stats count values(eventName) min(_time) as firstTime max(_time) as lastTime by eventSource aws_account_id errorCode userAgent eventID awsRegion userIdentity.principalId user_arn new_login_profile src_ip 
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`]
-  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
+  | rename eventName as action, eventSource as dest, user_arn as user, userAgent as user_agent, src_ip as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
   | eval vendor_product = "AWS"
   | `aws_createloginprofile_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
