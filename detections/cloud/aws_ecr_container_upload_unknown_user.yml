@@ -15,10 +15,12 @@ description: The following analytic detects the upload of a new container image 
 data_source:
 - AWS CloudTrail PutImage
 search: '`cloudtrail` eventSource=ecr.amazonaws.com eventName=PutImage NOT `aws_ecr_users`
-  | rename requestParameters.* as * | rename repositoryName AS image | eval phase="release"
-  | eval severity="high" | stats min(_time) as firstTime max(_time) as lastTime by
-  awsRegion, eventName, eventSource, user, userName, src_ip, imageTag, registryId,
-  image, phase, severity | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | rename requestParameters.* as * 
+  | rename repositoryName AS image 
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
+  | eval vendor_product = "AWS"
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product image 
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `aws_ecr_container_upload_unknown_user_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
   search works with AWS CloudTrail logs.
@@ -46,7 +48,7 @@ rba:
     type: user
     score: 49
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:

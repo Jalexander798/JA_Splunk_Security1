@@ -15,10 +15,10 @@ description: The following analytic detects API calls to enable S3 bucket replic
   could replicate sensitive data to external accounts, leading to data breaches and
   compliance violations.
 search: '`cloudtrail`  eventName = PutBucketReplication eventSource = s3.amazonaws.com
-  | rename requestParameters.* as * | stats count values(bucketName) as source_bucket
-  values(ReplicationConfiguration.Rule.ID) as rule_id values(ReplicationConfiguration.Rule.Destination.Bucket)
-  as destination_bucket by _time user_arn userName user_type src_ip aws_account_id
-  userIdentity.principalId user_agent | `aws_exfiltration_via_bucket_replication_filter`'
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region, requestParameters.bucketName as bucket_name
+  | eval vendor_product = "AWS"
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product bucket_name
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `aws_exfiltration_via_bucket_replication_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
   search works with AWS CloudTrail logs.
 known_false_positives: It is possible that an AWS admin has legitimately implemented
@@ -42,14 +42,14 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: AWS Bucket Replication rule $rule_id$ added on $source_bucket$ to $destination_bucket$
-    by user $user_arn$ from IP Address - $src_ip$
+  message: AWS Bucket Replication rule added to $bucket_name$
+    by user $user$ from IP Address - $src$
   risk_objects:
-  - field: user_arn
+  - field: user
     type: user
     score: 64
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:

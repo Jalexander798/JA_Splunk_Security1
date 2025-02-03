@@ -14,10 +14,13 @@ description: The following analytic identifies multiple failed multi-factor auth
   AWS environment, potentially compromising sensitive data and resources.
 data_source:
 - AWS CloudTrail ConsoleLogin
-search: '`cloudtrail` eventName= ConsoleLogin "additionalEventData.MFAUsed"=Yes errorMessage="Failed
-  authentication" | bucket span=5m _time |  stats dc(_raw) as mfa_prompts values(userAgent)
-  as userAgent values(src) as src by _time user_name user_arn aws_account_id eventName
-  errorMessage | where mfa_prompts > 10| `aws_multiple_failed_mfa_requests_for_user_filter`'
+search: '`cloudtrail` eventName= ConsoleLogin "additionalEventData.MFAUsed"=Yes errorMessage="Failed authentication" 
+  | bucket span=5m _time 
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
+  | eval vendor_product = "AWS"
+  | stats dc(_raw) as mfa_prompts min(_time) as firstTime max(_time) as lastTime values(user_agent) as user_agent values(src) as src by _time user dest action vendor_account vendor_region vendor_product errorMessage _time
+  | where mfa_prompts > 10
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `aws_multiple_failed_mfa_requests_for_user_filter`'
 how_to_implement: The Splunk AWS Add-on is required to utilize this data. The search
   requires AWS CloudTrail logs.
 known_false_positives: Multiple Failed MFA requests may also be a sign of authentication
@@ -26,12 +29,12 @@ references:
 - https://attack.mitre.org/techniques/T1621/
 - https://aws.amazon.com/what-is/mfa/
 drilldown_searches:
-- name: View the detection results for - "$user_name$"
-  search: '%original_detection_search% | search  user_name = "$user_name$"'
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search  user = "$user$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$user_name$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user_name$")
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -40,10 +43,10 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: User $user_name$ is seen to have high number of MFA prompt failures within
+  message: User $user$ is seen to have high number of MFA prompt failures within
     a short period of time.
   risk_objects:
-  - field: user_name
+  - field: user
     type: user
     score: 64
   threat_objects:

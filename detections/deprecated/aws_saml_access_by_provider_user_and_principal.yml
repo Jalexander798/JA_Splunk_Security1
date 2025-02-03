@@ -3,7 +3,7 @@ id: bbe23980-6019-11eb-ae93-0242ac130002
 version: 4
 date: '2024-11-14'
 author: Rod Soto, Splunk
-status: production
+status: deprecated
 type: Anomaly
 description: The following analytic identifies specific SAML access events by a service
   provider, user, and targeted principal within AWS. It leverages AWS CloudTrail logs

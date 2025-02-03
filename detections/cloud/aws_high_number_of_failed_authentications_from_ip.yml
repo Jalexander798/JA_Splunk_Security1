@@ -14,10 +14,14 @@ description: The following analytic detects an IP address with 20 or more failed
   of AWS resources.
 data_source:
 - AWS CloudTrail ConsoleLogin
-search: '`cloudtrail` eventName=ConsoleLogin action=failure | bucket span=5m _time
-  | stats dc(_raw) AS failed_attempts values(user_name) as tried_accounts values(user_agent)
-  by _time, src_ip, eventName, eventSource aws_account_id | where failed_attempts
-  > 20 |  `aws_high_number_of_failed_authentications_from_ip_filter`'
+search: '`cloudtrail` eventName=ConsoleLogin action=failure 
+  | bucket span=10m _time
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
+  | eval vendor_product = "AWS"
+  | stats dc(_raw) AS failed_attempts values(user) as user values(user_agent) as user_agent by _time, src, action, dest, vendor_account vendor_region, vendor_product
+  | where failed_attempts > 20  
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `aws_high_number_of_failed_authentications_from_ip_filter`'
 how_to_implement: You must install Splunk Add-on for AWS in order to ingest Cloudtrail.
   We recommend the users to try different combinations of the bucket span time and
   the tried account threshold to tune this search according to their environment.
@@ -28,12 +32,12 @@ references:
 - https://www.whiteoaksecurity.com/blog/goawsconsolespray-password-spraying-tool/
 - https://softwaresecuritydotblog.wordpress.com/2019/09/28/how-to-protect-against-credential-stuffing-on-aws/
 drilldown_searches:
-- name: View the detection results for - "$tried_accounts$"
-  search: '%original_detection_search% | search  tried_accounts = "$tried_accounts$"'
+- name: View the detection results for - "$src$"
+  search: '%original_detection_search% | search  src = "$src$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$tried_accounts$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$tried_accounts$")
+- name: View risk events for the last 7 days for - "$src$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$src$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -43,9 +47,9 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: 'Multiple failed console login attempts (Count: $failed_attempts$) against
-    users from IP Address - $src_ip$'
+    users from IP Address - $src$'
   risk_objects:
-  - field: tried_accounts
+  - field: user
     type: user
     score: 54
   threat_objects: []

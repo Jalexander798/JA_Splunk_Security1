@@ -16,16 +16,15 @@ description: The following analytic detects the creation of AWS Network Access C
 data_source:
 - AWS CloudTrail CreateNetworkAclEntry
 - AWS CloudTrail ReplaceNetworkAclEntry
-search: "`cloudtrail` eventName=CreateNetworkAclEntry OR eventName=ReplaceNetworkAclEntry
-  requestParameters.ruleAction=allow requestParameters.egress=false requestParameters.aclProtocol=-1
+search: "`cloudtrail` eventName=CreateNetworkAclEntry OR eventName=ReplaceNetworkAclEntry requestParameters.ruleAction=allow requestParameters.egress=false requestParameters.aclProtocol=-1
   | append [search `cloudtrail` eventName=CreateNetworkAclEntry OR eventName=ReplaceNetworkAclEntry
   requestParameters.ruleAction=allow requestParameters.egress=false requestParameters.aclProtocol!=-1
   | eval port_range='requestParameters.portRange.to' - 'requestParameters.portRange.from'
-  | where port_range>1024] | fillnull | stats count min(_time) as firstTime max(_time)
-  as lastTime by userName user_arn userIdentity.principalId eventName requestParameters.ruleAction
-  requestParameters.egress requestParameters.aclProtocol requestParameters.portRange.to
-  requestParameters.portRange.from src userAgent requestParameters.cidrBlock | `security_content_ctime(firstTime)`|
-  `security_content_ctime(lastTime)` | `aws_network_access_control_list_created_with_all_open_ports_filter`"
+  | where port_range>1024] 
+  | fillnull 
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region 
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product requestParameters.ruleAction requestParameters.egress requestParameters.aclProtocol requestParameters.portRange.to requestParameters.portRange.from requestParameters.cidrBlock 
+  | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)` | `aws_network_access_control_list_created_with_all_open_ports_filter`"
 how_to_implement: You must install the AWS App for Splunk (version 5.1.0 or later)
   and Splunk Add-on for AWS, version 4.4.0 or later, and configure your AWS CloudTrail
   inputs.
@@ -34,12 +33,12 @@ known_false_positives: It's possible that an admin has created this ACL with all
   in production environment.
 references: []
 drilldown_searches:
-- name: View the detection results for - "$user_arn$"
-  search: '%original_detection_search% | search  user_arn = "$user_arn$"'
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search  user = "$user$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$user_arn$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user_arn$")
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -48,10 +47,10 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: User $user_arn$ has created network ACLs with all the ports open to a specified
+  message: User $user$ has created network ACLs with all the ports open to a specified
     CIDR $requestParameters.cidrBlock$
   risk_objects:
-  - field: user_arn
+  - field: user
     type: user
     score: 48
   threat_objects:

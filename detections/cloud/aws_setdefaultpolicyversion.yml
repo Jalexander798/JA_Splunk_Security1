@@ -15,10 +15,10 @@ description: The following analytic detects when a user sets a default policy ve
 data_source:
 - AWS CloudTrail SetDefaultPolicyVersion
 search: '`cloudtrail` eventName=SetDefaultPolicyVersion eventSource = iam.amazonaws.com
-  | stats count min(_time) as firstTime max(_time) as lastTime values(requestParameters.policyArn)
-  as policy_arn by src requestParameters.versionId eventName eventSource aws_account_id
-  errorCode userAgent eventID awsRegion userIdentity.principalId user_arn | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `aws_setdefaultpolicyversion_filter`'
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
+  | eval vendor_product = "AWS"
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product 
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `aws_setdefaultpolicyversion_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
   search works with AWS CloudTrail logs.
 known_false_positives: While this search has no known false positives, it is possible
@@ -29,12 +29,12 @@ references:
 - https://bishopfox.com/blog/privilege-escalation-in-aws
 - https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation-part-2/
 drilldown_searches:
-- name: View the detection results for - "$user_arn$"
-  search: '%original_detection_search% | search  user_arn = "$user_arn$"'
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search  user = "$user$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$user_arn$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user_arn$")
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -43,10 +43,10 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: From IP address $src$, user $user_arn$ has trigged an event $eventName$
+  message: From IP address $src$, user $user$ has trigged an action $action$
     for updating the the default policy version
   risk_objects:
-  - field: user_arn
+  - field: user
     type: user
     score: 30
   threat_objects:

@@ -14,9 +14,13 @@ description: The following analytic detects an AWS account successfully authenti
   resources, leading to data breaches or further exploitation within the AWS environment.
 data_source:
 - AWS CloudTrail ConsoleLogin
-search: '`cloudtrail` eventName = ConsoleLogin | bin span=5m _time | stats values(userAgent)
-  as userAgent values(eventName) as eventName values(src_ip) as src_ip dc(src_ip)
-  as distinct_ip_count by _time user_arn | where distinct_ip_count>1 | `aws_successful_console_authentication_from_multiple_ips_filter`'
+search: '`cloudtrail` eventName = ConsoleLogin 
+  | bin span=5m _time 
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
+  | eval vendor_product = "AWS"
+  | stats  dc(src) as distinct_ip_count values(src) as src values(user_agent) as user_agent by _time, user, action, dest, vendor_account, vendor_region, vendor_product
+  | where distinct_ip_count>1 
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `aws_successful_console_authentication_from_multiple_ips_filter`'
 how_to_implement: You must install Splunk AWS add on and Splunk App for AWS. This
   search works when AWS CloudTrail events are normalized use the Authentication datamodel.
 known_false_positives: A user with successful authentication events from different
@@ -25,12 +29,12 @@ known_false_positives: A user with successful authentication events from differe
 references:
 - https://rhinosecuritylabs.com/aws/mfa-phishing-on-aws/
 drilldown_searches:
-- name: View the detection results for - "$user_arn$"
-  search: '%original_detection_search% | search  user_arn = "$user_arn$"'
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search  user = "$user$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$user_arn$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user_arn$")
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -39,14 +43,14 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: User $user_arn$ has successfully logged into the AWS Console from different
-    IP addresses $src_ip$ within 5 mins
+  message: User $user$ has successfully logged into the AWS Console from different
+    IP addresses $src$ within 5 mins
   risk_objects:
-  - field: user_arn
+  - field: user
     type: user
     score: 72
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:
