@@ -5,9 +5,9 @@ date: '2025-02-04'
 author: Ryan Long, Bhavin Patel, Splunk
 status: production
 type: Anomaly
-description: __UPDATE__ by providing a description of your search
+description: Detections are from Cisco Secure App which detects exploited vulnerabilities against business applications.
 data_source:
-- __UPDATE__ zero or more data_sources
+- Cisco Secure Application Alerts
 search: '|
   `appdynamics_security` blocked=false
   | fields - tag::eventtype, eventtype, host, id, index, linecount, punct, source, sourcetype, splunk_server, tag, SourceType, app, clientAddressType, application, tier, "attackEvents{}.*"
@@ -33,7 +33,7 @@ search: '|
       (signature="DESEREAL"),
       "The application ".app_name." deserializes untrusted data without sufficiently verifying that the resulting data will be valid. Data which is untrusted cannot be trusted to be well formed. Malformed data or unexpected data could be used to abuse application logic, deny service, or execute arbitrary code, when deserialized."
     )
-  | eval defanged_message = replace(replace(risk_message, "\d{1,3}(\.\d{1,3}){3}", "(\\0)"), "(http[s]?:\/\/|www\.)[^\s]+", "(\\0)")
+  | eval risk_message = replace(replace(risk_message, "\d{1,3}(\.\d{1,3}){3}", "(\\0)"), "(http[s]?:\/\/|www\.)[^\s]+", "(\\0)")
   | `cisco_secure_application_alerts_filter`'
 how_to_implement: __UPDATE__ how to implement your search
 known_false_positives: __UPDATE__ known false positives for your search
