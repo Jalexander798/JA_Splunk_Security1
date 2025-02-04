@@ -1,0 +1,79 @@
+name: Cisco Secure Application Alerts
+id: 9982bff4-fc5d-49a3-ab9e-2dbbab2a711b
+version: 1
+date: '2025-02-04'
+author: Ryan Long, Bhavin Patel, Splunk
+status: production
+type: Anomaly
+description: __UPDATE__ by providing a description of your search
+data_source:
+- __UPDATE__ zero or more data_sources
+search: '|
+  `appdynamics_security` blocked=false
+  | fields - tag::eventtype, eventtype, host, id, index, linecount, punct, source, sourcetype, splunk_server, tag, SourceType, app, clientAddressType, application, tier, "attackEvents{}.*"
+  | eval socketOut=mvjoin(socketOut," AND ")
+  | eval risk_score=kennaScore
+  | fillnull risk_score value="0"
+  | eval risk_object=app_name
+  | stats values(*) as * by attackId
+  | eval severity=case(
+      risk_score>=100 OR signature="LOG4J", "critical",
+      risk_score>50 AND risk_score<75, "high",
+      risk_score=0 AND attackOutcome="EXPLOITED", "high",
+      risk_score<=50 AND attackOutcome!="OBSERVED", "medium",
+      risk_score=0 AND attackOutcome="ATTEMPTED", "medium",
+      risk_score=0, "low",
+      risk_score=0 AND attackOutcome="OBSERVED", "low"
+    )
+  | eval risk_message=case(
+      (signature="API" OR signature="LOG4J" OR signature="SSRF"),
+      "An ".attackOutcome." ".signature." vulnerability is attempted to be abused from ".src_category." ip address ".src_ip." and was seen connecting to server ".dest_nt_host." hosting application ".app_name." and possibly exfiltrating data to ".socketOut."",
+      (signature="MALIP" OR signature="SQL"),
+      "A vulnerability is being ".attackOutcome." to be abused from ".src_category." ip address ".src_ip." and was seen connecting to server ".dest_nt_host." hosting application ".app_name.".",
+      (signature="DESEREAL"),
+      "The application ".app_name." deserializes untrusted data without sufficiently verifying that the resulting data will be valid. Data which is untrusted cannot be trusted to be well formed. Malformed data or unexpected data could be used to abuse application logic, deny service, or execute arbitrary code, when deserialized."
+    )
+  | eval defanged_message = replace(replace(risk_message, "\d{1,3}(\.\d{1,3}){3}", "(\\0)"), "(http[s]?:\/\/|www\.)[^\s]+", "(\\0)")
+  | `cisco_secure_application_alerts_filter`'
+how_to_implement: __UPDATE__ how to implement your search
+known_false_positives: __UPDATE__ known false positives for your search
+references:
+- https://docs.appdynamics.com/appd/24.x/latest/en/application-security-monitoring/integrate-cisco-secure-application-with-splunk
+drilldown_searches:
+- name: View the detection results for - "$app_name$"
+  search: '%original_detection_search% | search  app_name = "$app_name$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: View risk events for the last 7 days for - "$app_name$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$app_name$") starthoursago=168  | stats count min(_time)
+    as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message)
+    as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
+    as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
+    by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+rba:
+  message: $risk_message$
+  risk_objects:
+  - field: app_name
+    type: other
+    score: 10
+  threat_objects:
+  - field: src_ip
+    type: ip_address
+tags:
+  analytic_story:
+  - Critical Alerts
+  asset_type: Web Application
+  mitre_attack_id: []
+  product:
+  - Splunk Enterprise
+  - Splunk Enterprise Security
+  - Splunk Cloud
+  security_domain: threat
+tests:
+- name: True Positive Test
+  attack_data:
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/alerts/cisco_secure_app_alerts.log
+    sourcetype: appdynamics_security
+    source: AppDynamics Security
