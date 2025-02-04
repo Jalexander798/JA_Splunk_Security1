@@ -22,7 +22,7 @@ search: '`cloudtrail` eventName IN ("CreateSnapshot", "DescribeSnapshotAttribute
   |  bin _time span=5m 
   | eval vendor_product = "AWS"
   | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
-  |  stats count dc(eventName) as distinct_api_calls values(action) as action values(dest) as dest values(requestParameters.attributeType) as attributeType values(requestParameters.createVolumePermission.add.items{}.userId) as aws_account_id_added values(user_agent) as user_agent by _time user src vendor_account vendor_region vendor_product
+  |  stats count dc(action) as distinct_api_calls values(action) as action values(dest) as dest values(requestParameters.attributeType) as attributeType values(requestParameters.createVolumePermission.add.items{}.userId) as aws_account_id_added values(user_agent) as user_agent by _time user src vendor_account vendor_region vendor_product
   | where distinct_api_calls >= 2 
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `aws_exfiltration_via_ec2_snapshot_filter`'

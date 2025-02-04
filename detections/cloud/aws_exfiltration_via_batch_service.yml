@@ -15,6 +15,7 @@ description: The following analytic identifies the creation of AWS Batch jobs th
   could lead to unauthorized data transfer between S3 buckets, resulting in data breaches
   and loss of sensitive information.
 search: '`cloudtrail` eventName = JobCreated 
+  | fillnull
   | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
   | eval vendor_product = "AWS"
   | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product

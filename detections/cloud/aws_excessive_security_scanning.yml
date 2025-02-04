@@ -15,10 +15,10 @@ description: The following analytic identifies excessive security scanning activ
 data_source:
 - AWS CloudTrail
 search: '`cloudtrail` eventName=Describe* OR eventName=List* OR eventName=Get*  
+  | fillnull
   | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
   | eval vendor_product = "AWS"
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product bucket_name
-  | stats dc(eventName) as dc_events min(_time) as firstTime max(_time) as lastTime values(action) as action values(dest) as dest values(user_agent) as user_agent values(src) as src values(vendor_account) as vendor_account values(vendor_region) as vendor_region by user 
+  | stats dc(action) as dc_events min(_time) as firstTime max(_time) as lastTime values(action) as action values(dest) as dest values(user_agent) as user_agent values(src) as src values(vendor_account) as vendor_account values(vendor_region) as vendor_region by user 
   | where dc_events > 50 
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`|`aws_excessive_security_scanning_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This

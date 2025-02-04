@@ -18,7 +18,7 @@ search: '`cloudtrail` eventName= ConsoleLogin "additionalEventData.MFAUsed"=Yes 
   | bucket span=5m _time 
   | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
   | eval vendor_product = "AWS"
-  | stats dc(_raw) as mfa_prompts min(_time) as firstTime max(_time) as lastTime values(user_agent) as user_agent values(src) as src by _time user dest action vendor_account vendor_region vendor_product errorMessage _time
+  | stats dc(_raw) as mfa_prompts min(_time) as firstTime max(_time) as lastTime values(user_agent) as user_agent values(src) as src by _time user dest action vendor_account vendor_region vendor_product errorMessage 
   | where mfa_prompts > 10
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `aws_multiple_failed_mfa_requests_for_user_filter`'
 how_to_implement: The Splunk AWS Add-on is required to utilize this data. The search
