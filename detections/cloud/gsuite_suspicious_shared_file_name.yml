@@ -1,6 +1,6 @@
 name: Gsuite Suspicious Shared File Name
 id: 07eed200-03f5-11ec-98fb-acde48001122
-version: 4
+version: 5
 date: '2024-11-14'
 author: Teoderick Contreras, Splunk
 status: production

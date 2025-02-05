@@ -3,7 +3,7 @@ app:
   uid: 3449
   title: ES Content Updates
   appid: DA-ESS-ContentUpdate
-  version: 4.44.0
+  version: 5.0.0
   description: Explore the Analytic Stories included with ES Content Updates.
   prefix: ESCU
   label: ESCU
@@ -71,9 +71,9 @@ apps:
 - uid: 833
   title: Splunk Add-on for Unix and Linux
   appid: Splunk_TA_nix
-  version: 9.2.0
+  version: 10.0.0
   description: description of app
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-unix-and-linux_920.tgz
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-unix-and-linux_1000.tgz
 - uid: 5579
   title: Splunk Add-on for CrowdStrike FDR
   appid: Splunk_TA_CrowdStrike_FDR

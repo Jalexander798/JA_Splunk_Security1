@@ -1,6 +1,6 @@
 name: Detect Large Outbound ICMP Packets
 id: e9c102de-4d43-42a7-b1c8-8062ea297419
-version: 8
+version: 9
 date: '2025-01-27'
 author: Rico Valdez, Dean Luxton, Splunk
 status: production

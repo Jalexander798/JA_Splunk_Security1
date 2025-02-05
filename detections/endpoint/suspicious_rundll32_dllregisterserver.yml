@@ -1,6 +1,6 @@
 name: Suspicious Rundll32 dllregisterserver
 id: 8c00a385-9b86-4ac0-8932-c9ec3713b159
-version: 6
+version: 7
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production

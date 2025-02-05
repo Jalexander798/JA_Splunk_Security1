@@ -1,6 +1,6 @@
 name: Office Product Spawning Windows Script Host
 id: b3628a5b-8d02-42fa-a891-eebf2351cbe1
-version: 10
+version: 11
 date: '2025-01-13'
 author: Michael Haag, Splunk
 status: deprecated

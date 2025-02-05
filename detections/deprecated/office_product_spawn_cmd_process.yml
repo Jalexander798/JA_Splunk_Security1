@@ -1,6 +1,6 @@
 name: Office Product Spawn CMD Process
 id: b8b19420-e892-11eb-9244-acde48001122
-version: 8
+version: 9
 date: '2025-01-13'
 author: Teoderick Contreras, Splunk
 status: deprecated

@@ -1,6 +1,6 @@
 name: Any Powershell DownloadString
 id: 4d015ef2-7adf-11eb-95da-acde48001122
-version: 7
+version: 8
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production

@@ -1,6 +1,6 @@
 name: Windows Suspect Process With Authentication Traffic
 id: 953322db-128a-4ce9-8e89-56e039e33d98
-version: 4
+version: 5
 date: '2024-11-13'
 author: Steven Dick
 status: production

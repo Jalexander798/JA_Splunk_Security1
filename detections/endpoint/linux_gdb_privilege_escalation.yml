@@ -1,6 +1,6 @@
 name: Linux GDB Privilege Escalation
 id: 310b7da2-ab52-437f-b1bf-0bd458674308
-version: 5
+version: 6
 date: '2024-11-13'
 author: Gowthamaraj Rajendran, Splunk
 status: production

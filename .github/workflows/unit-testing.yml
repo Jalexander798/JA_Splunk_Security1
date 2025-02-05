@@ -23,7 +23,13 @@ jobs:
         - name: Install Python Dependencies and ContentCTL
           run: |
             python -m pip install --upgrade pip
-            pip install contentctl==5.0.0
+            if [ -n "${{ vars.CONTENTCTL_VERSION }}" ]; then
+              echo "Installing contentctl version ${{ vars.CONTENTCTL_VERSION }}"
+              pip install contentctl==${{ vars.CONTENTCTL_VERSION }}
+            else
+              echo "Installing latest contentctl version"
+              pip install contentctl
+            fi
            
         # Running contentctl test with a few arguments, before running the command make sure you checkout into the current branch of the pull request. This step only performs unit testing on all the changes against the target-branch. In most cases this target branch will be develop
         # Make sure we check out the PR, even if it actually lives in a fork

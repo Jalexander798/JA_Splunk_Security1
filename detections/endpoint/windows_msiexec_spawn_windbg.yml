@@ -1,6 +1,6 @@
 name: Windows MSIExec Spawn WinDBG
 id: 9a18f7c2-1fe3-47b8-9467-8b3976770a30
-version: 6
+version: 7
 date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production

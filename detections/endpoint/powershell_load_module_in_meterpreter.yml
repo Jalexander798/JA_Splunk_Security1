@@ -1,6 +1,6 @@
 name: Powershell Load Module in Meterpreter
 id: d5905da5-d050-48db-9259-018d8f034fcf
-version: 4
+version: 5
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production

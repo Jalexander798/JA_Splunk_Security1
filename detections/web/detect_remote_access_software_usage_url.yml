@@ -1,6 +1,6 @@
 name: Detect Remote Access Software Usage URL
 id: 9296f515-073c-43a5-88ec-eda5a4626654
-version: 5
+version: 6
 date: '2024-11-15'
 author: Steven Dick
 status: production

@@ -1,6 +1,6 @@
 name: Linux c89 Privilege Escalation
 id: 54c95f4d-3e5d-44be-9521-ea19ba62f7a8
-version: 5
+version: 6
 date: '2024-11-13'
 author: Gowthamaraj Rajendran, Splunk
 status: production
