@@ -3,19 +3,31 @@ id: 9982bff4-fc5d-49a3-ab9e-2dbbab2a711b
 version: 1
 date: '2025-02-04'
 author: Ryan Long, Bhavin Patel, Splunk
-status: production
+status: experimental
 type: Anomaly
-description: Detections are from Cisco Secure App which detects exploited vulnerabilities against business applications.
+description: |
+  The following analytic is to leverage alerts from Cisco SecureApp, which identifies and monitors exploit attempts targeting business applications. The primary attack observed involves exploiting vulnerabilities in web applications, including injection attacks (SQL, API abuse), deserialization vulnerabilities, remote code execution attempts, LOG4J and zero day attacks. These attacks are typically aimed at gaining unauthorized access, exfiltrating sensitive data, or disrupting application functionality.
+
+  Cisco SecureApp provides real-time detection of these threats by analyzing application-layer events and correlating attack behavior with known vulnerability signatures. This detection methodology helps the Security Operations Center (SOC) by:
+
+  * Identifying active exploitation attempts in real-time, allowing for quicker incident response.
+  * Categorizing attack severity to prioritize remediation efforts based on risk level.
+  * Providing visibility into attacker tactics, including source IP, attack techniques, and affected applications.
+  * Generating risk-based scoring and contextual alerts to enhance decision-making within SOC workflows.
+  * Helping analysts determine whether an attack was merely an attempt or if it successfully exploited a vulnerability.
+
+  By leveraging this information, SOC teams can proactively mitigate security threats, patch vulnerable applications, and enforce security controls to prevent further exploitation.
 data_source:
-- Cisco Secure Application Alerts
+- Cisco Secure Application AppDynamics Alerts
 search: '|
-  `appdynamics_security` blocked=false
-  | fields - tag::eventtype, eventtype, host, id, index, linecount, punct, source, sourcetype, splunk_server, tag, SourceType, app, clientAddressType, application, tier, "attackEvents{}.*"
-  | eval socketOut=mvjoin(socketOut," AND ")
-  | eval risk_score=kennaScore
-  | fillnull risk_score value="0"
-  | eval risk_object=app_name
-  | stats values(*) as * by attackId
+  `appdynamics_security` blocked=false 
+  | rename attackEvents{}.attackOutcome AS attackOutcome, "attackEvents{}.vulnerabilityInfo.*" AS * 
+  | fields - tag::eventtype, eventtype, host, id, index, linecount, punct, source, sourcetype, splunk_server, tag, SourceType, app clientAddressType, application, tier, "attackEvents{}.*" 
+  | eval socketOut=mvjoin(socketOut," AND ") 
+  | eval risk_score=kennaScore 
+  | fillnull risk_score value="0" 
+  | eval risk_object=app_name 
+  | stats values(*) as * by attackId 
   | eval severity=case(
       risk_score>=100 OR signature="LOG4J", "critical",
       risk_score>50 AND risk_score<75, "high",
@@ -24,19 +36,15 @@ search: '|
       risk_score=0 AND attackOutcome="ATTEMPTED", "medium",
       risk_score=0, "low",
       risk_score=0 AND attackOutcome="OBSERVED", "low"
-    )
+      ) 
   | eval risk_message=case(
-      (signature="API" OR signature="LOG4J" OR signature="SSRF"),
-      "An ".attackOutcome." ".signature." vulnerability is attempted to be abused from ".src_category." ip address ".src_ip." and was seen connecting to server ".dest_nt_host." hosting application ".app_name." and possibly exfiltrating data to ".socketOut."",
-      (signature="MALIP" OR signature="SQL"),
-      "A vulnerability is being ".attackOutcome." to be abused from ".src_category." ip address ".src_ip." and was seen connecting to server ".dest_nt_host." hosting application ".app_name.".",
-      (signature="DESEREAL"),
-      "The application ".app_name." deserializes untrusted data without sufficiently verifying that the resulting data will be valid. Data which is untrusted cannot be trusted to be well formed. Malformed data or unexpected data could be used to abuse application logic, deny service, or execute arbitrary code, when deserialized."
-    )
-  | eval risk_message = replace(replace(risk_message, "\d{1,3}(\.\d{1,3}){3}", "(\\0)"), "(http[s]?:\/\/|www\.)[^\s]+", "(\\0)")
-  | `cisco_secure_application_alerts_filter`'
-how_to_implement: __UPDATE__ how to implement your search
-known_false_positives: __UPDATE__ known false positives for your search
+      (signature="API" OR signature="LOG4J" OR signature="SSRF"), "An ".attackOutcome." ".signature." vulnerability is attempted to be abused from ".src_category." IP address ".src_ip." and was seen connecting to server ".dest_nt_host." hosting application ".app_name." and possibly exfiltrating data to ".socketOut."",
+      (signature="MALIP" OR signature="SQL"), "A vulnerability is being ".attackOutcome." to be abused from ".src_category." IP address ".src_ip." and was seen connecting to server ".dest_nt_host." hosting application ".app_name.".",
+      (signature="DESEREAL"), "The application ".app_name." deserializes untrusted data without sufficiently verifying that the resulting data will be valid. Data which is untrusted cannot be trusted to be well-formed. Malformed data or unexpected data could be used to abuse application logic, deny service, or execute arbitrary code, when deserialized."
+      )
+   | `cisco_secure_application_alerts_filter`'
+how_to_implement: In order to properly run this search, you need to ingest alerts data from AppD SecureApp, specifically ingesting data via HEC. You will also need to ensure that the data is going to sourcetype appdynamics_security. You will need to install the Splunk Add-on for AppDynamics. This add-on will give the needed field aliases to properly run this search. In a future update you will be able to run this detection if ingesting data via the TA.
+known_false_positives: None known at this time
 references:
 - https://docs.appdynamics.com/appd/24.x/latest/en/application-security-monitoring/integrate-cisco-secure-application-with-splunk
 drilldown_searches:
@@ -71,6 +79,7 @@ tags:
   - Splunk Enterprise Security
   - Splunk Cloud
   security_domain: threat
+  manual_test: We are dynamically creating the risk_score field based on the severity of the alert in the SPL and that supersedes the risk score set in the detection. Setting these to manual test since otherwise we fail integration testing. The detection is also failing on unit-testing as some of the fields set in the observables are empty.
 tests:
 - name: True Positive Test
   attack_data:
