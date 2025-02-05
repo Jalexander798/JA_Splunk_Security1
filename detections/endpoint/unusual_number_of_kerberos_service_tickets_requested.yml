@@ -1,6 +1,6 @@
 name: Unusual Number of Kerberos Service Tickets Requested
 id: eb3e6702-8936-11ec-98fe-acde48001122
-version: 6
+version: 7
 date: '2024-11-13'
 author: Mauricio Velazco, Dean Luxton, Splunk
 status: production

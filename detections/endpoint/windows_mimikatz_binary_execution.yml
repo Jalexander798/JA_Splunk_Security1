@@ -1,6 +1,6 @@
 name: Windows Mimikatz Binary Execution
 id: a9e0d6d3-9676-4e26-994d-4e0406bb4467
-version: 6
+version: 7
 date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production

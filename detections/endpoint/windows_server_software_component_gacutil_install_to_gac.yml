@@ -1,6 +1,6 @@
 name: Windows Server Software Component GACUtil Install to GAC
 id: 7c025ef0-9e65-4c57-be39-1c13dbb1613e
-version: 5
+version: 6
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production

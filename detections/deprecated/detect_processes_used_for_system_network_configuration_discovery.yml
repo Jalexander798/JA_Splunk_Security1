@@ -1,6 +1,6 @@
 name: Detect processes used for System Network Configuration Discovery
 id: a51bfe1a-94f0-48cc-b1e4-16ae10145893
-version: 7
+version: 8
 date: '2025-01-24'
 author: Bhavin Patel, Splunk
 status: deprecated

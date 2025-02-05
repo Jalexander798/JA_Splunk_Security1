@@ -1,6 +1,6 @@
 name: Linux GNU Awk Privilege Escalation
 id: 0dcf43b9-50d8-42a6-acd9-d1c9201fe6ae
-version: 5
+version: 6
 date: '2024-11-13'
 author: Gowthamaraj Rajendran, Splunk
 status: production

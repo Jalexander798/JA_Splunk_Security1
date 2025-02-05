@@ -1,6 +1,6 @@
 name: Linux Docker Privilege Escalation
 id: 2e7bfb78-85f6-47b5-bc2f-15813a4ef2b3
-version: 5
+version: 6
 date: '2024-11-13'
 author: Gowthamaraj Rajendran, Splunk
 status: production

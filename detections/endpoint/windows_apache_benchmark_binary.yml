@@ -1,6 +1,6 @@
 name: Windows Apache Benchmark Binary
 id: 894f48ea-8d85-4dcd-9132-c66cdb407c9b
-version: 5
+version: 6
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production

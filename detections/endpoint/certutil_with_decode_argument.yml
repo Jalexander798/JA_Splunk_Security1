@@ -1,6 +1,6 @@
 name: CertUtil With Decode Argument
 id: bfe94226-8c10-11eb-a4b3-acde48001122
-version: 6
+version: 7
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production

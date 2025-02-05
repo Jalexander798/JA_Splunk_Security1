@@ -1,6 +1,6 @@
 name: Create local admin accounts using net exe
 id: b89919ed-fe5f-492c-b139-151bb162040e
-version: 15
+version: 16
 date: '2025-01-24'
 author: Bhavin Patel, Splunk
 status: deprecated
