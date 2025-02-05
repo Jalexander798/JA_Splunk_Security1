@@ -1,6 +1,6 @@
 name: Microsoft Defender Incident Alerts
 id: 13435b55-afd8-46d4-9045-7d5457f430a5
-version: 2
+version: 3
 date: '2025-01-20'
 author: Bryan Pluta, Bhavin Patel, Splunk
 status: production

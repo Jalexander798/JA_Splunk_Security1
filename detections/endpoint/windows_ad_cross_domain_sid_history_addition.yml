@@ -1,6 +1,6 @@
 name: Windows AD Cross Domain SID History Addition
 id: 41bbb371-28ba-439c-bb5c-d9930c28365d
-version: 5
+version: 6
 date: '2024-12-10'
 author: Dean Luxton
 type: TTP

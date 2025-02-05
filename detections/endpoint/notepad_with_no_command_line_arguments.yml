@@ -1,6 +1,6 @@
 name: Notepad with no Command Line Arguments
 id: 5adbc5f1-9a2f-41c1-a810-f37e015f8179
-version: 5
+version: 6
 date: '2024-11-13'
 author: Michael Haag, Splunk
 type: TTP

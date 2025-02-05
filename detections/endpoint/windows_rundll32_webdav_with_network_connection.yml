@@ -1,6 +1,6 @@
 name: Windows Rundll32 WebDav With Network Connection
 id: f03355e0-28b5-4e9b-815a-6adffc63b38c
-version: 5
+version: 6
 date: '2024-11-13'
 author: Michael Haag, Splunk
 type: TTP

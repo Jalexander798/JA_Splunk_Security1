@@ -1,6 +1,6 @@
 name: Excel Spawning PowerShell
 id: 42d40a22-9be3-11eb-8f08-acde48001122
-version: 7
+version: 8
 date: '2025-01-13'
 author: Michael Haag, Splunk
 status: deprecated

@@ -1,6 +1,6 @@
 name: Attempt To Add Certificate To Untrusted Store
 id: 6bc5243e-ef36-45dc-9b12-f4a6be131159
-version: 11
+version: 12
 date: '2024-11-13'
 author: Patrick Bareiss, Rico Valdez, Splunk
 status: production

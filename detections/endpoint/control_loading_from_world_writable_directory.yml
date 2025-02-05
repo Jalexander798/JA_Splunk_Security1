@@ -1,6 +1,6 @@
 name: Control Loading from World Writable Directory
 id: 10423ac4-10c9-11ec-8dc4-acde48001122
-version: 6
+version: 7
 date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production

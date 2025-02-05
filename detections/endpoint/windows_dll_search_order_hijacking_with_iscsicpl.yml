@@ -1,6 +1,6 @@
 name: Windows DLL Search Order Hijacking with iscsicpl
 id: f39ee679-3b1e-4f47-841c-5c3c580acda2
-version: 6
+version: 7
 date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production

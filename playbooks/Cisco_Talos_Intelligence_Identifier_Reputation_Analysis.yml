@@ -5,7 +5,7 @@ date: '2025-01-17'
 author: Kelby Shelton, Tapish Jain, Splunk
 type: Investigation
 description: "Accepts a URL, IP or Domain and provides intelligence on the objects. Generates a per observable report that includes the objects threat level, threat categories, acceptable use categories and score."
-playbook: Cisco_Talos_Intelligence_Identifier_Reputation_Analysis
+playbook: CiscoTalosIntelligence_Identifier_Reputation_Analysis
 how_to_implement: This input playbook requires the Cisco Talos Intelligence connector to be configured and a Splunk SOAR cloud license. 
 references:
   - https://d3fend.mitre.org/technique/d3f:IdentifierReputationAnalysis/

@@ -1,6 +1,6 @@
 name: Linux MySQL Privilege Escalation
 id: c0d810f4-230c-44ea-b703-989da02ff145
-version: 5
+version: 6
 date: '2024-11-13'
 author: Gowthamaraj Rajendran, Splunk
 status: production

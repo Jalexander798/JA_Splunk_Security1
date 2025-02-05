@@ -1,6 +1,6 @@
 name: Extraction of Registry Hives
 id: 8bbb7d58-b360-11eb-ba21-acde48001122
-version: 6
+version: 7
 date: '2025-01-24'
 author: Michael Haag, Splunk
 status: deprecated

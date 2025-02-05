@@ -1,6 +1,6 @@
 name: Windows AD Suspicious Attribute Modification
 id: 5682052e-ce55-4f9f-8d28-59191420b7e0
-version: 3
+version: 4
 date: '2025-01-21'
 author: Dean Luxton
 status: production

@@ -1,6 +1,6 @@
 name: Windows Default Group Policy Object Modified with GPME
 id: eaf688b3-bb8f-454d-b105-920a862cd8cb
-version: 5
+version: 6
 date: '2024-11-13'
 author: Mauricio Velazco, Splunk
 status: production

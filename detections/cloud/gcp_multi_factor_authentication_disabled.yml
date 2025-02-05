@@ -1,6 +1,6 @@
 name: GCP Multi-Factor Authentication Disabled
 id: b9bc5513-6fc1-4821-85a3-e1d81e451c83
-version: 5
+version: 6
 date: '2024-11-14'
 author: Bhavin Patel, Mauricio Velazco, Splunk
 status: production
