@@ -1,6 +1,6 @@
 name: Windows InstallUtil Uninstall Option with Network
 id: 1a52c836-43ef-11ec-a36c-acde48001122
-version: 7
+version: 8
 date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production

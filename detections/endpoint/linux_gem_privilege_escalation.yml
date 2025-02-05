@@ -1,6 +1,6 @@
 name: Linux Gem Privilege Escalation
 id: 0115482a-5dcb-4bb0-bcca-5d095d224236
-version: 5
+version: 6
 date: '2024-11-13'
 author: Gowthamaraj Rajendran, Splunk
 status: production

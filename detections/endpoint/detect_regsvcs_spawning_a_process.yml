@@ -1,6 +1,6 @@
 name: Detect Regsvcs Spawning a Process
 id: bc477b57-5c21-4ab6-9c33-668772e7f114
-version: 7
+version: 8
 date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production

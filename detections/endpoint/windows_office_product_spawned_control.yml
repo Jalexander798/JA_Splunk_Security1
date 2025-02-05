@@ -1,6 +1,6 @@
 name: Windows Office Product Spawned Control
 id: 081c485d-ac8d-4bee-ad4c-525772fead4d
-version: 1
+version: 2
 date: '2025-01-14'
 author: Michael Haag, Splunk
 status: production

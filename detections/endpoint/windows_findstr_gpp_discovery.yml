@@ -1,6 +1,6 @@
 name: Windows Findstr GPP Discovery
 id: 1631ac2d-f2a9-42fa-8a59-d6e210d472f5
-version: 4
+version: 5
 date: '2024-11-13'
 author: Mauricio Velazco, Splunk
 type: TTP

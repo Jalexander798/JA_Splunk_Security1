@@ -1,6 +1,6 @@
 name: Linux Proxy Socks Curl
 id: bd596c22-ad1e-44fc-b242-817253ce8b08
-version: 5
+version: 6
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production

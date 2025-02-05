@@ -1,6 +1,6 @@
 name: Potential System Network Configuration Discovery Activity
 id: 3f0b95e3-3195-46ac-bea3-84fb59e7fac5
-version: 1
+version: 2
 date: '2025-01-20'
 author: Bhavin Patel, Splunk
 status: production

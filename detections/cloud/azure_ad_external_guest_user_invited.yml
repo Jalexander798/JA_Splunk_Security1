@@ -1,6 +1,6 @@
 name: Azure AD External Guest User Invited
 id: c1fb4edb-cab1-4359-9b40-925ffd797fb5
-version: 5
+version: 6
 date: '2024-11-14'
 author: Gowthamaraj Rajendran, Mauricio Velazco, Splunk
 status: production

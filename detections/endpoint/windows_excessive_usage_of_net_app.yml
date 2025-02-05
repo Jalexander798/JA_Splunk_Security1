@@ -1,6 +1,6 @@
 name: Windows Excessive Usage Of Net App
 id: 355ba810-0a20-4215-8485-9ce3f87f2e38
-version: 1
+version: 2
 date: '2025-01-13'
 author: Teoderick Contreras, Splunk
 status: production

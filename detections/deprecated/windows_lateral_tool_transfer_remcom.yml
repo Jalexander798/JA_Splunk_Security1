@@ -1,6 +1,6 @@
 name: Windows Lateral Tool Transfer RemCom
 id: e373a840-5bdc-47ef-b2fd-9cc7aaf387f0
-version: 5
+version: 6
 date: '2024-12-10'
 author: Michael Haag, Splunk
 type: TTP

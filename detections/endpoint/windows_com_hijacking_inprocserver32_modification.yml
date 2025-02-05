@@ -1,6 +1,6 @@
 name: Windows COM Hijacking InprocServer32 Modification
 id: b7bd83c0-92b5-4fc7-b286-23eccfa2c561
-version: 6
+version: 7
 date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production
