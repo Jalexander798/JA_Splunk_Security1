@@ -35,33 +35,23 @@ drilldown_searches:
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: $user$ disabled 2FA requirement 
+  risk_objects:
+  - field: user
+    type: user
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - GitHub Malicious Activity
   asset_type: GitHub
-  confidence: 90
-  impact: 30
-  message: $user$ disabled 2FA requirement 
   mitre_attack_id:
   - T1562.001
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - actor
-  - actor_id
-  - actor_is_bot
-  - actor_location.country_code
-  - business
-  - business_id
-  - user_agent
-  risk_score: 27
   security_domain: network
 tests:
 - name: True Positive Test
