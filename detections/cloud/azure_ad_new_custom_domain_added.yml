@@ -15,10 +15,14 @@ description: The following analytic detects the addition of a new custom domain 
   posing a severe security risk.
 data_source:
 - Azure Active Directory Add unverified domain
-search: '`azure_monitor_aad`  operationName="Add unverified domain" properties.result=success
-  | rename properties.* as * | rename targetResources{}.displayName as domain | stats
-  count min(_time) as firstTime max(_time) as lastTime by user, domain, result, operationName,
-  src_ip | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+search: '`azure_monitor_aad` operationName="Add unverified domain" properties.result=success 
+  | rename properties.* as * 
+  | rename targetResources{}.displayName as domain 
+  | rename operationName as action, userAgent as user_agent 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product user_agent domain
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
   | `azure_ad_new_custom_domain_added_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).

@@ -14,11 +14,14 @@ description: The following analytic detects the assignment of an Azure AD Privil
   monitored to prevent unauthorized access. If confirmed malicious, an attacker could
   exploit this to gain privileged access, potentially leading to unauthorized actions,
   data breaches, or further compromise of the environment.
-search: '`azure_monitor_aad` operationName="Add eligible member to role in PIM completed*"
-  | rename properties.* as * | stats count min(_time) as firstTime max(_time) as lastTime
-  values(user) as user values(targetResources{}.displayName) as displayName  by result,
-  operationName, initiatedBy.user.displayName | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `azure_ad_pim_role_assigned_filter`'
+search: '`azure_monitor_aad` operationName="Add eligible member to role in PIM completed*" 
+  | rename properties.* as * 
+  | rename operationName as action 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `azure_ad_pim_role_assigned_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase(https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment.

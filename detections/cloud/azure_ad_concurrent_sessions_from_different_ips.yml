@@ -16,12 +16,16 @@ description: The following analytic detects an Azure AD account with concurrent 
 data_source:
 - Azure Active Directory
 search: '`azure_monitor_aad` properties.authenticationDetails{}.succeeded=true category=NonInteractiveUserSignInLogs
-  action=success | rename properties.* as * | bucket span=5m _time | stats count min(_time)
-  as firstTime max(_time) as lastTime dc(src_ip) AS unique_ips dc(location.city) as
-  dc_city values(location.city) as city values(src_ip) as src_ip values(appDisplayName)
-  as appDisplayName values(location.countryOrRegion) by user _time | where unique_ips
-  > 1 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` |
-  `azure_ad_concurrent_sessions_from_different_ips_filter`'
+    action=success 
+  | rename properties.* as * 
+  | bucket span=5m _time 
+  | rename operationName as action, userAgent as user_agent 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime dc(src) as unique_ips values(action) as action values(dest) as dest values(src) as src values(user_agent) as user_agent by user _time vendor_account vendor_product
+  | where unique_ips > 1 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `azure_ad_concurrent_sessions_from_different_ips_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment
@@ -57,7 +61,7 @@ rba:
     type: user
     score: 42
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:

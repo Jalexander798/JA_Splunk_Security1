@@ -14,12 +14,18 @@ description: The following analytic detects the assignment of privileged Azure A
   over the Azure AD infrastructure.
 data_source:
 - Azure Active Directory Add member to role
-search: '`azure_monitor_aad`  "operationName"="Add member to role" | rename properties.*  as
-  * | rename initiatedBy.user.userPrincipalName as initiatedBy | rename targetResources{}.modifiedProperties{}.newValue  as
-  roles | eval role=mvindex(roles,1) | stats count min(_time) as firstTime max(_time)
-  as lastTime values(user) as user by initiatedBy, result, operationName, role | lookup
-  privileged_azure_ad_roles azureadrole AS role OUTPUT isprvilegedadrole description
-  | search isprvilegedadrole = True | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+search: '`azure_monitor_aad` "operationName"="Add member to role" 
+  | rename properties.* as * 
+  | rename initiatedBy.user.userPrincipalName as initiatedBy 
+  | rename targetResources{}.modifiedProperties{}.newValue as roles 
+  | eval role=mvindex(roles,1) 
+  | rename operationName as action 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product displayName initiatedBy result role 
+  | lookup privileged_azure_ad_roles azureadrole AS role OUTPUT isprvilegedadrole description 
+  | search isprvilegedadrole = True 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
   | `azure_ad_privileged_role_assigned_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).

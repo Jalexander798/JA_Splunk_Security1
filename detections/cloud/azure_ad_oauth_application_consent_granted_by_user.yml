@@ -15,13 +15,20 @@ description: The following analytic detects when a user in an Azure AD environme
   lead to unauthorized access to sensitive information and resources. Immediate investigation
   is required to validate the application's legitimacy, review permissions, and mitigate
   potential risks.
-search: "`azure_monitor_aad` operationName=\"Consent to application\" properties.result=success
-  | rename properties.* as *  | eval permissions_index = if(mvfind('targetResources{}.modifiedProperties{}.displayName',
-  \"ConsentAction.Permissions\") >= 0, mvfind('targetResources{}.modifiedProperties{}.displayName',
-  \"ConsentAction.Permissions\"), -1) | eval permissions = mvindex('targetResources{}.modifiedProperties{}.newValue',permissions_index)
-  | rex field=permissions \"Scope: (?<Scope>[^,]+)\" | stats count min(_time) as firstTime
-  max(_time) as lastTime by operationName, user, Scope | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `azure_ad_oauth_application_consent_granted_by_user_filter`"
+search: "`azure_monitor_aad` operationName=\"Consent to application\" properties.result=success 
+  | rename properties.* as * 
+  | eval permissions_index = if(mvfind('targetResources{}.modifiedProperties{}.displayName',
+      \"ConsentAction.Permissions\") >= 0, mvfind('targetResources{}.modifiedProperties{}.displayName',
+      \"ConsentAction.Permissions\"), -1) 
+  | eval permissions = mvindex('targetResources{}.modifiedProperties{}.newValue',permissions_index) 
+  | rex field=permissions \"Scope: (?<Scope> 
+      [ ^,]+)\" 
+  | rename operationName as action 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product Scope 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `azure_ad_oauth_application_consent_granted_by_user_filter`"
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment

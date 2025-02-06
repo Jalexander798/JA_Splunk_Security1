@@ -14,11 +14,15 @@ description: The following analytic detects a single source IP failing to authen
   access, data breaches, or privilege escalation within the Azure AD environment.
 data_source:
 - Azure Active Directory
-search: '`azure_monitor_aad`  category=SignInLogs properties.status.errorCode=50126
-  properties.authenticationDetails{}.succeeded=false | rename properties.* as * |
-  bucket span=5m _time | stats count min(_time) as firstTime max(_time) as lastTime
-  dc(user) AS unique_accounts values(user) as user by src_ip | where unique_accounts
-  > 30 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+search: '`azure_monitor_aad` category=SignInLogs properties.status.errorCode=50126 properties.authenticationDetails{}.succeeded=false 
+  | rename properties.* as * 
+  | bucket span=5m _time 
+  | rename operationName as action, userAgent as user_agent 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime dc(user) as unique_user values(action) as action values(dest) as dest values(user) as user values(user_agent) as user_agent values(vendor_account) as vendor_account values(vendor_product) as vendor_product by src 
+  | where unique_user > 30 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
   | `azure_ad_multiple_users_failing_to_authenticate_from_ip_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
@@ -47,13 +51,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Source Ip $src_ip$ failed to authenticate with 30 users within 5 minutes.
+  message: Source Ip $src$ failed to authenticate with 30 users within 5 minutes.
   risk_objects:
   - field: user
     type: user
     score: 63
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:

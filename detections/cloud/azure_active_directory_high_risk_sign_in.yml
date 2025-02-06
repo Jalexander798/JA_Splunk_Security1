@@ -14,10 +14,11 @@ description: The following analytic detects high-risk sign-in attempts against A
   exploitation within the environment.
 data_source:
 - Azure Active Directory
-search: '`azure_monitor_aad` category=UserRiskEvents properties.riskLevel=high | rename
-  properties.* as * | stats count min(_time) as firstTime max(_time) as lastTime values(user)
-  as user by src_ip, activity, riskLevel, riskEventType, additionalInfo | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `azure_active_directory_high_risk_sign_in_filter`'
+search: '`azure_monitor_aad` `azure_monitor_aad` category=UserRiskEvents properties.riskLevel=high
+  | rename category as action
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `azure_active_directory_high_risk_sign_in_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment
@@ -51,7 +52,7 @@ rba:
     type: user
     score: 54
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:

@@ -15,14 +15,15 @@ description: The following analytic detects unusual authentication activity in A
   If confirmed malicious, it suggests a compromised account, potentially leading to
   further exploitation, lateral movement, and data exfiltration. Early detection is
   crucial to prevent substantial harm.
-search: '`azure_monitor_aad` category=SignInLogs operationName="Sign-in activity"
-  (properties.authenticationRequirement="multiFactorAuthentication" AND properties.status.additionalDetails="MFA
-  required in Azure AD") OR (properties.authenticationRequirement=singleFactorAuthentication
-  AND "properties.authenticationDetails{}.succeeded"=true) | bucket span=5m _time
-  | rename properties.* as * | stats count min(_time) as firstTime max(_time) as lastTime
-  dc(appId) as unique_app_ids dc(userAgent) as unique_user_agents values(appDisplayName)
-  values(deviceDetail.operatingSystem) by user, src_ip | where count > 5 and unique_app_ids
-  > 2 and unique_user_agents > 5 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+search: '`azure_monitor_aad` category=SignInLogs operationName="Sign-in activity" (properties.authenticationRequirement="multiFactorAuthentication" properties.status.additionalDetails="MFA required in Azure AD") OR (properties.authenticationRequirement=singleFactorAuthentication "properties.authenticationDetails{}.succeeded"=true) 
+  | bucket span=5m _time 
+  | rename properties.* as * 
+  | rename operationName as action, userAgent as user_agent 
+  | fillnull 
+  | stats count dc(appId) as unique_app_ids dc(user_agent) as unique_user_agents min(_time) as firstTime max(_time) as lastTime values(action) as action values(dest) as dest values(user_agent) as user_agent by user src
+  | where count > 5 and unique_app_ids > 2 and unique_user_agents > 5 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
   | `azure_ad_multiple_appids_and_useragents_authentication_spike_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).

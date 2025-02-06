@@ -15,15 +15,22 @@ description: The following analytic detects the assignment of privileged roles t
   and ensures the security of Azure environments.
 data_source:
 - Azure Active Directory Add member to role
-search: '`azure_monitor_aad`  operationName="Add member to role" | rename properties.*
-  as * | search "targetResources{}.type"=ServicePrincipal | rename initiatedBy.user.userPrincipalName
-  as initiatedBy | rename targetResources{}.modifiedProperties{}.newValue  as roles
-  | eval role=mvindex(roles,1) | rename targetResources{}.displayName as apps | eval
-  displayName=mvindex(apps,0) | stats count min(_time) as firstTime max(_time) as
-  lastTime values(displayName) as displayName by initiatedBy, result, operationName,
-  role | lookup privileged_azure_ad_roles azureadrole AS role OUTPUT isprvilegedadrole
-  description | search isprvilegedadrole = True | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `azure_ad_privileged_role_assigned_to_service_principal_filter`'
+search: '`azure_monitor_aad` operationName="Add member to role" 
+  | rename properties.* as * 
+  | search "targetResources{}.type"=ServicePrincipal 
+  | rename initiatedBy.user.userPrincipalName as initiatedBy 
+  | rename targetResources{}.modifiedProperties{}.newValue as roles 
+  | eval role=mvindex(roles,1) 
+  | rename targetResources{}.displayName as apps 
+  | eval displayName=mvindex(apps,0) 
+  | rename operationName as action 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product displayName initiatedBy result role
+  | lookup privileged_azure_ad_roles azureadrole AS role OUTPUT isprvilegedadrole description 
+  | search isprvilegedadrole = True 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `azure_ad_privileged_role_assigned_to_service_principal_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment.
