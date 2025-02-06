@@ -3,6 +3,7 @@ id: 9abdd884-909d-46a8-bf11-9fbcd076fac2
 version: 1
 date: '2025-01-14'
 author: Patrick Bareiss, Splunk
+status: production
 description: Leverage searches that allow you to detect and investigate suspicious GitHub activities
   that might indicate malicious behavior, including pull requests from unknown users, disabled security
   workflows, and other potentially harmful repository modifications. These detections help identify
