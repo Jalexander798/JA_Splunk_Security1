@@ -1,6 +1,6 @@
 name: GitHub Pull Request from Unknown User
 id: 9d7b9100-8878-4404-914e-ca5e551a641e
-version: 4
+version: 5
 date: '2024-11-14'
 author: Patrick Bareiss, Splunk
 status: deprecated

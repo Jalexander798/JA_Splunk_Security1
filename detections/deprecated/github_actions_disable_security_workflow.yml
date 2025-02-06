@@ -1,6 +1,6 @@
 name: GitHub Actions Disable Security Workflow
 id: 0459f1a5-c0ac-4987-82d6-65081209f854
-version: 4
+version: 5
 date: '2024-11-14'
 author: Patrick Bareiss, Splunk
 status: deprecated
