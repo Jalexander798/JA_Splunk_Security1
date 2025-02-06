@@ -1,6 +1,6 @@
 name: Windows AD Suspicious GPO Modification
 id: 0a2afc18-a3b5-4452-b60a-2e774214f9bf
-version: 3
+version: 4
 date: '2025-01-21'
 author: Dean Luxton
 status: experimental

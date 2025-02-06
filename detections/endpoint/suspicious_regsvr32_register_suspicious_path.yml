@@ -1,6 +1,6 @@
 name: Suspicious Regsvr32 Register Suspicious Path
 id: 62732736-6250-11eb-ae93-0242ac130002
-version: 10
+version: 11
 date: '2025-01-27'
 author: Michael Haag, Splunk
 status: production

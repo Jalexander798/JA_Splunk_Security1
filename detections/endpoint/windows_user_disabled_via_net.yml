@@ -1,6 +1,6 @@
 name: Windows User Disabled Via Net
 id: b0359e05-c87b-4354-83d8-aee0d890243f
-version: 1
+version: 2
 date: '2025-01-13'
 author: Teoderick Contreras, Splunk
 status: production

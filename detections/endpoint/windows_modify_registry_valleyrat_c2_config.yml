@@ -1,6 +1,6 @@
 name: Windows Modify Registry ValleyRAT C2 Config
 id: ac59298a-8d81-4c02-8c9b-ffdac993891f
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 data_source:

@@ -1,6 +1,6 @@
 name: Windows Office Product Spawning MSDT
 id: 127eba64-c981-40bf-8589-1830638864a7
-version: 9
+version: 10
 date: '2025-01-24'
 author: Michael Haag, Teoderick Contreras, Splunk
 status: deprecated

@@ -1,6 +1,6 @@
 name: Linux Node Privilege Escalation
 id: 2e58a4ff-398f-42f4-8fd0-e01ebfe2a8ce
-version: 5
+version: 6
 date: '2024-11-13'
 author: Gowthamaraj Rajendran, Splunk
 status: production

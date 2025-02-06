@@ -1,6 +1,6 @@
 name: Windows Steal Authentication Certificates - ESC1 Abuse
 id: cbe761fc-d945-4c8c-a71d-e26d12255d32
-version: 5
+version: 6
 date: '2024-11-13'
 author: Steven Dick
 status: production

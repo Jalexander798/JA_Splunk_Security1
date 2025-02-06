@@ -1,6 +1,6 @@
 name: Regsvr32 with Known Silent Switch Cmdline
 id: c9ef7dc4-eeaf-11eb-b2b6-acde48001122
-version: 6
+version: 7
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

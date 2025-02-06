@@ -1,6 +1,6 @@
 name: Linux OpenVPN Privilege Escalation
 id: d25feebe-fa1c-4754-8a1e-afb03bedc0f2
-version: 5
+version: 6
 date: '2024-11-13'
 author: Gowthamaraj Rajendran, Splunk
 status: production

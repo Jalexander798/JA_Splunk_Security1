@@ -1,6 +1,6 @@
 name: Zscaler Privacy Risk Destinations Threat Blocked
 id: 5456bdef-d765-4565-8e1f-61ca027bc50d
-version: 4
+version: 5
 date: '2024-11-15'
 author: Gowthamaraj Rajendran, Rod Soto, Splunk
 status: production

@@ -1,6 +1,6 @@
 name: Recon AVProduct Through Pwh or WMI
 id: 28077620-c9f6-11eb-8785-acde48001122
-version: 5
+version: 6
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

@@ -1,6 +1,6 @@
 name: Windows User Deletion Via Net
 id: b0b6fd2c-8953-4d1b-8f7b-56075ea6ab3e
-version: 1
+version: 2
 date: '2025-01-13'
 author: Teoderick Contreras, Splunk
 status: production

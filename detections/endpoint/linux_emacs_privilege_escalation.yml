@@ -1,6 +1,6 @@
 name: Linux Emacs Privilege Escalation
 id: 92033cab-1871-483d-a03b-a7ce98665cfc
-version: 5
+version: 6
 date: '2024-11-13'
 author: Gowthamaraj Rajendran, Splunk
 status: production
