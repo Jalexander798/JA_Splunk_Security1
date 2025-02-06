@@ -1,7 +1,7 @@
 name: Suspicious Rundll32 Rename
 id: 7360137f-abad-473e-8189-acbdaa34d114
-version: 6
-date: '2024-10-17'
+version: 7
+date: '2024-11-14'
 author: Michael Haag, Splunk
 status: deprecated
 type: Hunting
@@ -39,39 +39,13 @@ tags:
   - Suspicious Rundll32 Activity
   - Masquerading - Rename System Utilities
   asset_type: Endpoint
-  confidence: 90
-  impact: 70
-  message: Suspicious renamed rundll32.exe binary ran on $dest$ by $user$
   mitre_attack_id:
   - T1218
   - T1036
   - T1218.011
   - T1036.003
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
-  - name: User
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.dest
-  - Processes.user
-  - Processes.parent_process_name
-  - Processes.parent_process
-  - Processes.original_file_name
-  - Processes.process_name
-  - Processes.process
-  - Processes.process_id
-  - Processes.parent_process_path
-  - Processes.process_path
-  - Processes.parent_process_id
-  risk_score: 63
   security_domain: endpoint

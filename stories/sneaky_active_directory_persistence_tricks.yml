@@ -3,6 +3,7 @@ id: f676c4c1-c769-4ecb-9611-5fd85b497c56
 version: 2
 date: '2024-03-14'
 author: Dean Luxton, Mauricio Velazco, Splunk
+status: production
 description: Monitor for activities and techniques associated with Windows Active Directory persistence techniques. 
 narrative: Persistence consists of techniques that adversaries use to keep access to systems across restarts, changed credentials, and other interruptions that could cut off their access. 
   Active Directory is a centralized and hierarchical database that stores information about users, computers, and other resources on a network. It provides secure and efficient management 

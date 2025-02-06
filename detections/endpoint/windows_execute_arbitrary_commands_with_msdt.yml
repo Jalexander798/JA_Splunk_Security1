@@ -1,7 +1,7 @@
 name: Windows Execute Arbitrary Commands with MSDT
 id: e1d5145f-38fe-42b9-a5d5-457796715f97
-version: '7'
-date: '2024-11-28'
+version: 8
+date: '2024-12-10'
 author: Michael Haag, Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -57,59 +57,39 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A parent process $parent_process_name$ has spawned a child process $process_name$
+    on host $dest$ possibly indicative of indirect command execution.
+  risk_objects:
+  - field: user
+    type: user
+    score: 100
+  - field: dest
+    type: system
+    score: 100
+  threat_objects:
+  - field: parent_process_name
+    type: parent_process_name
+  - field: process_name
+    type: process_name
 tags:
   analytic_story:
   - Compromised Windows Host
   - Microsoft Support Diagnostic Tool Vulnerability CVE-2022-30190
   asset_type: Endpoint
-  confidence: 100
   cve:
   - CVE-2022-30190
-  impact: 100
-  message: A parent process $parent_process_name$ has spawned a child process $process_name$
-    on host $dest$ possibly indicative of indirect command execution.
   mitre_attack_id:
   - T1218
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: parent_process_name
-    type: Process
-    role:
-    - Attacker
-  - name: process_name
-    type: Process
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.dest
-  - Processes.user
-  - Processes.parent_process_name
-  - Processes.parent_process
-  - Processes.original_file_name
-  - Processes.process_name
-  - Processes.process
-  - Processes.process_id
-  - Processes.parent_process_path
-  - Processes.process_path
-  - Processes.parent_process_id
-  risk_score: 100
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/msdt.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/msdt.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
-    update_timestamp: true

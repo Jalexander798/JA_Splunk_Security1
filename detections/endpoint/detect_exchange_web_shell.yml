@@ -54,6 +54,20 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A file - $file_name$ was written to disk that is related to IIS exploitation
+    previously performed by HAFNIUM. Review further file modifications on endpoint
+    $dest$ by user $user$.
+  risk_objects:
+  - field: user
+    type: user
+    score: 81
+  - field: dest
+    type: system
+    score: 81
+  threat_objects:
+  - field: file_name
+    type: file_name
 tags:
   analytic_story:
   - ProxyNotShell
@@ -63,45 +77,20 @@ tags:
   - Compromised Windows Host
   - BlackByte Ransomware
   asset_type: Endpoint
-  confidence: 90
-  impact: 90
-  message: A file - $file_name$ was written to disk that is related to IIS exploitation
-    previously performed by HAFNIUM. Review further file modifications on endpoint
-    $dest$ by user $user$.
   mitre_attack_id:
   - T1505
   - T1505.003
   - T1190
   - T1133
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: file_name
-    type: File Name
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Filesystem.file_path
-  - Filesystem.process_id
-  - Filesystem.file_name
-  - Filesystem.file_hash
-  - Filesystem.user
-  risk_score: 81
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.003/windows-sysmon_proxylogon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.003/windows-sysmon_proxylogon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

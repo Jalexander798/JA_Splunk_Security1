@@ -1,7 +1,7 @@
 name: Windows Spearphishing Attachment Onenote Spawn Mshta
 id: 35aeb0e7-7de5-444a-ac45-24d6788796ec
-version: '4'
-date: '2024-11-28'
+version: 5
+date: '2024-12-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -50,51 +50,34 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: Office process $parent_process_name$ observed executing a suspicious child
+    process $process_name$ with process ID $process_id$ on host $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 81
+  threat_objects:
+  - field: process_name
+    type: process_name
 tags:
   analytic_story:
   - Spearphishing Attachments
   - Compromised Windows Host
   - AsyncRAT
   asset_type: Endpoint
-  confidence: 90
-  impact: 90
-  message: office parent process $parent_process_name$ will execute a suspicious child
-    process $process_name$ with process id $process_id$ in host $dest$
   mitre_attack_id:
   - T1566.001
   - T1566
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: process_name
-    type: Process
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.dest
-  - Processes.user
-  - Processes.parent_process_name
-  - Processes.parent_process
-  - Processes.original_file_name
-  - Processes.process_name
-  - Processes.process
-  - Processes.process_id
-  - Processes.parent_process_path
-  - Processes.process_path
-  - Processes.parent_process_id
-  risk_score: 81
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/onenote_spear_phishing/sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/onenote_spear_phishing/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
-    update_timestamp: true

@@ -4,7 +4,7 @@ version: 1
 date: '2017-10-20'
 author: Bhavin Patel, Splunk
 type: Investigation
-datamodel: []
+status: deprecated
 description: This search helps an analyst investigate a notable event related to a
   potential Apache Struts exploitation. To investigate, we will want to isolate and
   analyze the "payload" or the commands that were passed to the vulnerable hosts by
@@ -27,10 +27,4 @@ tags:
   - Apache Struts Vulnerability
   product:
   - Splunk Phantom
-  required_fields:
-  - _time
-  - src_ip
-  - dest_ip
-  - cs_content_type
-  - url
   security_domain: network

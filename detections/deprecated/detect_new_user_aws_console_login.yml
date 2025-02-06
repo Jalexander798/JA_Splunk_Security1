@@ -1,7 +1,7 @@
 name: Detect new user AWS Console Login
 id: ada0f478-84a8-4641-a3f3-d82362dffd75
-version: 4
-date: '2024-10-17'
+version: 5
+date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: deprecated
 type: Hunting
@@ -13,7 +13,7 @@ description: This search looks for AWS CloudTrail events wherein a console login
 data_source: []
 search: '`cloudtrail` eventName=ConsoleLogin | rename userIdentity.arn as user | stats
   earliest(_time) as firstTime latest(_time) as lastTime by user | inputlookup append=t
-  previously_seen_users_console_logins_cloudtrail  | stats min(firstTime) as firstTime
+  previously_seen_users_console_logins  | stats min(firstTime) as firstTime
   max(lastTime) as lastTime by user | eval userStatus=if(firstTime >= relative_time(now(),
   "-70m@m"), "First Time Logging into AWS Console","Previously Seen User") | `security_content_ctime(firstTime)`|`security_content_ctime(lastTime)`|
   where userStatus ="First Time Logging into AWS Console"  | `detect_new_user_aws_console_login_filter`'
@@ -31,23 +31,10 @@ tags:
   analytic_story:
   - Suspicious AWS Login Activities
   asset_type: AWS Instance
-  confidence: 50
-  impact: 50
-  message: tbd
   mitre_attack_id:
   - T1078.004
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - eventName
-  - userIdentity.arn
-  risk_score: 25
   security_domain: network

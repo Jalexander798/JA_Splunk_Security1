@@ -1,7 +1,7 @@
 name: Web Fraud - Account Harvesting
 id: bf1d7b5c-df2f-4249-a401-c09fdc221ddf
-version: 3
-date: '2024-10-17'
+version: 4
+date: '2024-11-14'
 author: Jim Apger, Splunk
 status: deprecated
 type: TTP
@@ -35,28 +35,21 @@ known_false_positives: As is common with many fraud-related searches, we are usu
 references:
 - https://splunkbase.splunk.com/app/2734/
 - https://splunkbase.splunk.com/app/1809/
+rba:
+  message: Multiple user accounts using the same email domain
+  risk_objects:
+  - field: src_user
+    type: user
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - Web Fraud Detection
   asset_type: Account
-  confidence: 50
-  impact: 50
-  message: tbd
   mitre_attack_id:
   - T1136
-  observable:
-  - name: src_user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - http_content_type
-  - uri
-  - cookie
-  risk_score: 25
   security_domain: threat

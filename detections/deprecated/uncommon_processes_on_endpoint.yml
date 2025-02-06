@@ -1,7 +1,7 @@
 name: Uncommon Processes On Endpoint
 id: 29ccce64-a10c-4389-a45f-337cb29ba1f7
-version: 6
-date: '2024-10-17'
+version: 7
+date: '2024-11-14'
 author: David Dorsey, Splunk
 status: deprecated
 type: Hunting
@@ -30,21 +30,10 @@ tags:
   - Unusual Processes
   - Hermetic Wiper
   asset_type: Endpoint
-  confidence: 50
-  impact: 50
-  message: tbd
   mitre_attack_id:
   - T1204.002
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  risk_score: 25
   security_domain: endpoint

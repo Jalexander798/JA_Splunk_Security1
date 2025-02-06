@@ -1,7 +1,7 @@
 name: Abnormally High AWS Instances Launched by User
 id: 2a9b80d3-6340-4345-b5ad-290bf5d0dac4
-version: 4
-date: '2024-10-17'
+version: 5
+date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: deprecated
 type: Anomaly
@@ -25,29 +25,22 @@ known_false_positives: Many service accounts configured within an AWS infrastruc
   out service accounts from the output. Always verify if this search alerted on a
   human user.
 references: []
+rba:
+  message: Abnormal number of instances launched by $userName$
+  risk_objects:
+  - field: userName
+    type: user
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - AWS Cryptomining
   - Suspicious AWS EC2 Activities
   asset_type: AWS Instance
-  confidence: 50
-  impact: 50
-  message: tbd
   mitre_attack_id:
   - T1078.004
-  observable:
-  - name: userName
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - eventName
-  - errorCode
-  - userName
-  risk_score: 25.0
   security_domain: network

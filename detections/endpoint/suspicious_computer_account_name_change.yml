@@ -1,7 +1,7 @@
 name: Suspicious Computer Account Name Change
 id: 35a61ed8-61c4-11ec-bc1e-acde48001122
-version: '5'
-date: '2024-11-28'
+version: 6
+date: '2024-12-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -40,48 +40,38 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A computer account $OldTargetUserName$ was renamed with a suspicious computer
+    name on $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 70
+  - field: OldTargetUserName
+    type: user
+    score: 70
+  threat_objects: []
 tags:
   analytic_story:
   - Active Directory Privilege Escalation
   - Compromised Windows Host
   - sAMAccountName Spoofing and Domain Controller Impersonation
   asset_type: Endpoint
-  confidence: 70
   cve:
   - CVE-2021-42287
   - CVE-2021-42278
-  impact: 100
-  message: A computer account $OldTargetUserName$ was renamed with a suspicious computer
-    name on $dest$
   mitre_attack_id:
   - T1078
   - T1078.002
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
-  - name: OldTargetUserName
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - EventCode
-  - Computer
-  - Caller_User_Name
-  - OldTargetUserName
-  - NewTargetUserName
-  risk_score: 70
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.002/suspicious_computer_account_name_change/windows-xml.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.002/suspicious_computer_account_name_change/windows-xml.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog
-    update_timestamp: true

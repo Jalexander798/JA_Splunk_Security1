@@ -1,7 +1,7 @@
 name: ASL AWS New MFA Method Registered For User
 id: 33ae0931-2a03-456b-b1d7-b016c5557fbd
 version: 6
-date: '2024-10-17'
+date: '2024-11-14'
 author: Patrick Bareiss, Splunk
 status: experimental
 type: TTP
@@ -16,38 +16,26 @@ references:
 - https://attack.mitre.org/techniques/T1556/
 - https://attack.mitre.org/techniques/T1556/006/
 - https://twitter.com/jhencinski/status/1618660062352007174
+rba:
+  message: A new virtual device is added to user $user$
+  risk_objects:
+  - field: user
+    type: user
+    score: 64
+  threat_objects:
+  - field: src_ip
+    type: ip_address
 tags:
   analytic_story:
   - AWS Identity and Access Management Account Takeover
   asset_type: AWS Account
-  confidence: 80
-  impact: 80
-  message: A new virtual device is added to user $user$
   mitre_attack_id:
   - T1556
   - T1556.006
-  observable:
-  - name: src_ip
-    type: IP Address
-    role:
-    - Attacker
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - api.operation
-  - actor.user.uid
-  - actor.user.account.uid
-  - http_request.user_agent
-  - src_endpoint.ip
-  - src_endpoint.domain
-  - cloud.region
-  risk_score: 64
   security_domain: identity
 tests:
 - name: True Positive Test

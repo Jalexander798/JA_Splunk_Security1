@@ -3,6 +3,7 @@ id: b3782036-8cbd-11eb-9d8e-acde48001122
 version: 1
 date: '2021-03-24'
 author: Michael Haag, Splunk
+status: production
 description: Adversaries may transfer tools or other files from an external system
   into a compromised environment. Files may be copied from an external adversary controlled
   system through the Command And Control channel to bring tools into the victim network

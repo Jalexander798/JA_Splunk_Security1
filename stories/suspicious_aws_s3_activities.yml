@@ -3,6 +3,7 @@ id: 66732346-8fb0-407b-9633-da16756567d6
 version: 3
 date: '2023-04-24'
 author: Bhavin Patel, Splunk
+status: production
 description: Use the searches in this Analytic Story using Cloudtrail logs to to monitor your AWS S3 buckets
   for evidence of anomalous activity and suspicious behaviors, such as detecting open
   S3 buckets and buckets being accessed from a new IP, permission and policy updates to the bucket, potential misuse of other services leading to data being leaked.  

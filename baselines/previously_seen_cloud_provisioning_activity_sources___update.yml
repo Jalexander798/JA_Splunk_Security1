@@ -4,8 +4,7 @@ version: 1
 date: '2020-08-20'
 author: David Dorsey, Splunk
 type: Baseline
-datamodel:
-- Change
+status: production
 description: This returns the first and last times seen for every IP address (along
   with its physical location) previously associated with cloud-provisioning activity
   within the last day. Cloud provisioning is broadly defined as any event that runs
@@ -38,9 +37,4 @@ tags:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - All_Changes.action
-  - All_Changes.src
-  - All_Changes.status
   security_domain: network

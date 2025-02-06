@@ -1,7 +1,7 @@
 name: Windows System Binary Proxy Execution Compiled HTML File Decompile
 id: 2acf0e19-4149-451c-a3f3-39cd3c77e37d
-version: '5'
-date: '2024-11-28'
+version: 6
+date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -51,55 +51,37 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: $process_name$ has been identified using decompile against a CHM on $dest$
+    under user $user$.
+  risk_objects:
+  - field: user
+    type: user
+    score: 90
+  - field: dest
+    type: system
+    score: 90
+  threat_objects:
+  - field: process_name
+    type: process_name
 tags:
   analytic_story:
   - Suspicious Compiled HTML Activity
   - Living Off The Land
   - Compromised Windows Host
   asset_type: Endpoint
-  confidence: 90
-  impact: 100
-  message: $process_name$ has been identified using decompile against a CHM on $dest$
-    under user $user$.
   mitre_attack_id:
   - T1218.001
   - T1218
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: process_name
-    type: Process
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.dest
-  - Processes.user
-  - Processes.parent_process_name
-  - Processes.parent_process
-  - Processes.original_file_name
-  - Processes.process_name
-  - Processes.process
-  - Processes.process_id
-  - Processes.parent_process_path
-  - Processes.process_path
-  - Processes.parent_process_id
-  risk_score: 90
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.001/atomic_red_team/hh_decom_windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.001/atomic_red_team/hh_decom_windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
-    update_timestamp: true

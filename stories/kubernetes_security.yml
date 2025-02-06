@@ -3,6 +3,7 @@ id: 77006b3a-306c-4e32-afd5-30b6e40c1c41
 version: 1
 date: '2023-12-06'
 author: 'Patrick Bareiss'
+status: production
 description: Kubernetes, as a container orchestration platform, faces unique security challenges. This story explores various tactics and techniques adversaries 
   use to exploit Kubernetes environments, including attacking the control plane, exploiting misconfigurations, and compromising containerized applications.
 narrative: 

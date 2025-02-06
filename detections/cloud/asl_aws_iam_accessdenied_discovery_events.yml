@@ -28,34 +28,25 @@ drilldown_searches:
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: User $user$ is seen to perform excessive number of discovery related api calls- $failures$, within an hour where the access was denied.
+  risk_objects:
+  - field: user
+    type: user
+    score: 10
+  threat_objects:
+  - field: src_ip
+    type: ip_address
 tags:
   analytic_story:
   - Suspicious Cloud User Activities
   asset_type: AWS Account
-  confidence: 50
-  impact: 20
-  message: User $user$ is seen to perform excessive number of discovery related api calls- $failures$, within an hour where the access was denied.
   mitre_attack_id:
   - T1580
-  observable:
-  - name: src_ip
-    type: IP Address
-    role:
-    - Attacker
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - api.operation
-  - actor.user.uid
-  - src_endpoint.ip
-  - cloud.region
-  risk_score: 10
   security_domain: access
 tests:
 - name: True Positive Test

@@ -1,6 +1,12 @@
-default_match: 'false'
-description: A list of services that deal with security
-filename: security_services.csv
-match_type: WILDCARD(service)
-min_matches: 1
 name: security_services_lookup
+date: 2024-12-23
+version: 2
+id: c9038bad-c77b-4caa-9df2-09dc4454ac77
+author: Splunk Threat Research Team
+lookup_type: csv
+default_match: false
+description: A list of services that deal with security
+match_type: 
+- WILDCARD(service)
+min_matches: 1
+

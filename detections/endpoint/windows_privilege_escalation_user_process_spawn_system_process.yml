@@ -1,7 +1,7 @@
 name: Windows Privilege Escalation User Process Spawn System Process
 id: c9687a28-39ad-43c6-8bcf-eaf061ba0cbe
-version: '4'
-date: '2024-11-28'
+version: 5
+date: '2024-12-10'
 author: Steven Dick
 status: production
 type: TTP
@@ -59,51 +59,38 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: The user $user$ launched the process $process_name$ which spawned a system
+    level integrity process $system_process$ .
+  risk_objects:
+  - field: dest
+    type: system
+    score: 80
+  - field: user
+    type: user
+    score: 80
+  threat_objects:
+  - field: process_name
+    type: process_name
 tags:
   analytic_story:
   - Windows Privilege Escalation
   - Compromised Windows Host
   - BlackSuit Ransomware
   asset_type: Endpoint
-  confidence: 80
-  impact: 100
-  message: The user $user$ launched a process [$process_name$] which spawned a system
-    level integrity process [$system_process$].
   mitre_attack_id:
   - T1068
   - T1548
   - T1134
-  observable:
-  - name: dest
-    role:
-    - Victim
-    type: Hostname
-  - name: user
-    role:
-    - Victim
-    type: User
-  - name: process_name
-    role:
-    - Attacker
-    type: Other
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - dest
-  - user
-  - ParentUser
-  - parent_process_name
-  - parent_process_guid
-  - IntegrityLevel
-  risk_score: 80
   security_domain: endpoint
 tests:
 - attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1068/windows_escalation_behavior/windows_escalation_behavior_sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1068/windows_escalation_behavior/windows_escalation_behavior_sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
-    update_timestamp: true
   name: True Positive Test

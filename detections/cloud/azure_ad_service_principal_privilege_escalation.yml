@@ -3,7 +3,7 @@ id: 29eb39d3-2bc8-49cc-99b3-35593191a588
 version: 1
 date: '2025-01-06'
 author: Dean Luxton
-data_sources:
+data_source:
 - Azure Active Directory Add app role assignment to service principal
 type: TTP
 status: production
@@ -35,42 +35,26 @@ drilldown_searches:
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$servicePrincipal$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba: 
+  message: Service Principal $servicePrincipal$ has elevated privileges by adding themself to app role $appRole$
+  risk_objects:
+  - field: servicePrincipal
+    type: user
+    score: 100
+  threat_objects:
+  - field: user_agent
+    type: http_user_agent
 tags:
   analytic_story:
   - Azure Active Directory Privilege Escalation
   asset_type: Azure Tenant
-  confidence: 100
-  impact: 100
-  message: Service Principal $servicePrincipal$ has elevated privileges by adding themself to app role $appRole$
   mitre_attack_id:
   - T1098.003
   - T1098
-  observable:
-  - name: servicePrincipal
-    type: User
-    role:
-    - Victim
-  - name: user_agent
-    type: Other
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - user_agent
-  - identity
-  - properties.initiatedBy.app.servicePrincipalId
-  - operationName
-  - tenantId 
-  - correlationId
-  - category
-  - properties.initiatedBy.app.displayName
-  - properties.result
-  - properties{}.targetResources{}.modifiedProperties{}
-  - properties.targetResources{}.displayName
-  risk_score: 100
   security_domain: identity
 tests:
 - name: True Positive Test

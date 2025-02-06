@@ -1,4 +1,13 @@
-description: A placeholder for a list of IPs that have access S3
-collection: previously_seen_api_calls_from_user_roles
 name: previously_seen_api_calls_from_user_roles
-fields_list: _key,earliest,latest,userName,eventName
+date: 2024-12-23
+version: 2
+id: 80620693-2a0f-4c17-8579-2f9a6a2bfa15
+author: Splunk Threat Research Team
+lookup_type: kvstore
+description: A placeholder for a list of IPs that have access S3
+fields: 
+- _key
+- earliest
+- latest
+- userName
+- eventName

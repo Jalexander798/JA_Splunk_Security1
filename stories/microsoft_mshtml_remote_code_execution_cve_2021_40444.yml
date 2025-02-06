@@ -3,6 +3,7 @@ id: 4ad4253e-10ca-11ec-8235-acde48001122
 version: 1
 date: '2021-09-08'
 author: Michael Haag, Splunk
+status: production
 description: CVE-2021-40444 is a remote code execution vulnerability in MSHTML, recently
   used to delivery targeted spearphishing documents.
 narrative: "Microsoft is aware of targeted attacks that attempt to exploit this vulnerability,

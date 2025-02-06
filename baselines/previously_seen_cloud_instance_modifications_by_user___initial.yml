@@ -4,8 +4,7 @@ version: 1
 date: '2020-07-29'
 author: Rico Valdez, Splunk
 type: Baseline
-datamodel:
-- Change
+status: production
 description: This search builds a table of previously seen users that have modified
   a cloud instance.
 search: '| tstats earliest(_time) as firstTimeSeen, latest(_time) as lastTimeSeen
@@ -26,12 +25,6 @@ tags:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - All_Changes.action
-  - All_Changes.change_type
-  - All_Changes.status
-  - All_Changes.user
   security_domain: network
 deployment:
   scheduling:

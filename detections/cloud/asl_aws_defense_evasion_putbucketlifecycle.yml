@@ -17,37 +17,15 @@ tags:
   analytic_story:
   - AWS Defense Evasion
   asset_type: AWS Account
-  confidence: 40
-  impact: 50
-  message: User $user$ has created a new rule to on an S3 bucket $bucketName$ with short expiration days
   mitre_attack_id:
   - T1562.008
   - T1562
   - T1485.001
   - T1485
-  observable:
-  - name: src_ip
-    type: IP Address
-    role:
-    - Attacker
-  - name: user
-    type: User
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - api.operation
-  - api.request.data
-  - actor.user.uid
-  - actor.user.account.uid
-  - http_request.user_agent
-  - src_endpoint.ip
-  - src_endpoint.domain
-  - cloud.region
-  risk_score: 20
   security_domain: threat
 tests:
 - name: True Positive Test

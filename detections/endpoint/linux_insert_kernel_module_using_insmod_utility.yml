@@ -1,6 +1,6 @@
 name: Linux Insert Kernel Module Using Insmod Utility
 id: 18b5a1a0-6326-11ec-943a-acde48001122
-version: '4'
+version: 5
 date: '2024-12-17'
 author: Teoderick Contreras, Splunk
 status: production
@@ -50,6 +50,13 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A commandline $process$ that may install kernel module on $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 64
+  threat_objects: []
 tags:
   analytic_story:
   - Linux Persistence Techniques
@@ -57,35 +64,18 @@ tags:
   - Linux Rootkit
   - Linux Privilege Escalation
   asset_type: Endpoint
-  confidence: 80
-  impact: 80
-  message: A commandline $process$ that may install kernel module on $dest$
   mitre_attack_id:
   - T1547.006
   - T1547
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.dest
-  - Processes.user
-  - Processes.parent_process_name
-  - Processes.process_name
-  - Processes.process
-  - Processes.process_id
-  - Processes.parent_process_id
-  risk_score: 64
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.006/loading_linux_kernel_module/sysmon_linux.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.006/loading_linux_kernel_module/sysmon_linux.log
     source: Syslog:Linux-Sysmon/Operational
     sourcetype: sysmon:linux

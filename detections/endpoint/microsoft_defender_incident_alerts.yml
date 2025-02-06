@@ -1,7 +1,7 @@
 name: Microsoft Defender Incident Alerts
 id: 13435b55-afd8-46d4-9045-7d5457f430a5
-version: 1
-date: '2024-10-30'
+version: 2
+date: '2025-01-20'
 author: Bryan Pluta, Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -21,7 +21,7 @@ url = mvmap(tmp_filtered_mv, spath(tmp_filtered_mv, "url"))
 | eval tmp_filtered_mv=mvfilter(json_extract(tmp_filtered_mv, "entityType") = "File"), fileName = mvmap(tmp_filtered_mv, spath(tmp_filtered_mv, "fileName"))
 | eval risk_score=case(severity="informational", 5, severity="low", 15, severity="medium", 25, severity="high", 50, true(), 2)
 | stats count  min(_time) as firstTime max(_time) as lastTime values(fileName) as file_name values(severity) as severity values(processCommandLine) as process values(ipAddress) as ip_address values(registryKey) as registry_key values(url) as url values(mitreTechniques{}) as annotations.mitre_attack.mitre_technique_id values(signature) as signature values(user) as user values(risk_score) as risk_score by id description dest | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`| `microsoft_defender_incident_alerts_filter`'
-how_to_implement: In order to properly run this search, you need to ingest alerts data from Microsoft Defender, specifcally using the Splunk add-on for Microsfot Security. This add-on will collect alerts using the ms365:defender:incident:alerts sourcetype. You will need to define the `ms365_defender_incident_alerts` macro to point to the proper index that contains the ms365:defender:incident:alerts sourcetype. **NOTE** - We also have a detection named `Detect Critical Alerts from Security Tools` that triggers on the same data and is written against the Alerts datamodel. Enabling both of these detections will result in duplicate risk/notable events, we recommend enabling only one of these detections.
+how_to_implement: In order to properly run this search, you need to ingest alerts data from Microsoft Defender, specifcally using the Splunk add-on for Microsfot Security. This add-on will collect alerts using the ms365:defender:incident:alerts sourcetype. You will need to define the `ms365_defender_incident_alerts` macro to point to the proper index that contains the ms365:defender:incident:alerts sourcetype.
 known_false_positives: False positives may vary based on Microsfot Defender configuration; monitor and filter out the alerts that are not relevant to your environment.
 references:
 - https://learn.microsoft.com/en-us/defender-xdr/api-list-incidents?view=o365-worldwide
@@ -37,66 +37,36 @@ drilldown_searches:
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$","$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: $severity$ alert for $dest$ - $signature$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 81
+  - field: user
+    type: user
+    score: 81
+  threat_objects:
+  - field: file_name
+    type: file_name
+  - field: process
+    type: process_name
+  - field: ip_address
+    type: ip_address
+  - field: registry_key
+    type: registry_path
+  - field: url
+    type: url
 tags:
   analytic_story:
   - Critical Alerts
   asset_type: Endpoint
   atomic_guid: []
-  confidence: 90
-  impact: 90
-  message: $severity$ alert for $dest$ - $signature$
   mitre_attack_id: []
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: file_name
-    type: File Name
-    role:
-    - Attacker
-  - name: process
-    type: Process Name
-    role:
-    - Attacker
-  - name: ip_address
-    type: IP Address
-    role:
-    - Attacker
-  - name: registry_key
-    type: Registry Key
-    role:
-    - Attacker
-  - name: url
-    type: URL String
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - entityType
-  - filePath
-  - processCommandLine
-  - ipAddress
-  - registryKey
-  - url
-  - fileName
-  - risk_score
-  - firstTime
-  - lastTime
-  - src
-  - severity
-  - annotations.mitre_attack.mitre_technique_id
-  - signature
-  - user
-  risk_score: 81
   security_domain: endpoint
   manual_test: We are dynamically creating the risk_score field based on the severity of the alert in the SPL and that supersedes the risk score set in the detection. Setting these to manual test since otherwise we fail integration testing. The detection is also failing on unit-testing as some of the fields set in the observables are empty. 
 tests:

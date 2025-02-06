@@ -3,6 +3,7 @@ id: 7c75b1c8-dfff-46f1-8250-e58df91b6fd9
 version: 2
 date: '2024-03-14'
 author: Teoderick Contreras, Splunk
+status: production
 description: Leverage searches that allow you to detect and investigate unusual activities
   that might relate to the cyclopsblink malware including firewall modification, spawning more process, botnet c2 communication, defense evasion and etc.
   Cyclops Blink is a Linux ELF executable compiled for 32-bit x86 and PowerPC architecture that has targeted several network devices. 

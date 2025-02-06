@@ -3,6 +3,7 @@ id: 4dcadae4-df82-42f3-9e77-4d852d20ac78
 version: 2
 date: '2024-09-24'
 author: Michael Haag, Splunk
+status: production
 description: |-
   This analytic story covers various vulnerabilities identified in Ivanti Endpoint Manager (EPM), including but not limited to SQL injection, remote code execution, and privilege escalation. These vulnerabilities can potentially be exploited by adversaries to gain unauthorized access, execute arbitrary code, and compromise the security of managed endpoints.
 narrative: |-

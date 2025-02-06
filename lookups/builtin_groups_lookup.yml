@@ -1,3 +1,8 @@
-description: A lookup file that will contain translations for builtin AD group strings
-filename: builtin_groups_lookup.csv
 name: builtin_groups_lookup
+date: 2024-12-23
+version: 2
+id: 7d0a0c1c-2ef0-48a9-87c6-de97a0ad1ccf
+author: Splunk Threat Research Team
+lookup_type: csv
+description: A lookup file that will contain translations for builtin AD group strings
+
