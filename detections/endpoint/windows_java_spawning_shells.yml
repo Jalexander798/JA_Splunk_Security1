@@ -1,6 +1,6 @@
 name: Windows Java Spawning Shells
 id: 28c81306-5c47-11ec-bfea-acde48001122
-version: 7
+version: 8
 date: '2024-12-16'
 author: Michael Haag, Splunk
 status: experimental

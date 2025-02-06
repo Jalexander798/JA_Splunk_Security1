@@ -1,6 +1,6 @@
 name: Office Spawning Control
 id: 053e027c-10c7-11ec-8437-acde48001122
-version: 10
+version: 11
 date: '2025-01-24'
 author: Michael Haag, Splunk
 status: deprecated

@@ -1,6 +1,6 @@
 name: Windows PowerSploit GPP Discovery
 id: 0130a0df-83a1-4647-9011-841e950ff302
-version: 5
+version: 6
 date: '2024-11-13'
 author: Mauricio Velazco, Splunk
 status: production

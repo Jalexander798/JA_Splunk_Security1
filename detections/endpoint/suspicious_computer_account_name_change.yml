@@ -1,6 +1,6 @@
 name: Suspicious Computer Account Name Change
 id: 35a61ed8-61c4-11ec-bc1e-acde48001122
-version: 6
+version: 7
 date: '2024-12-10'
 author: Mauricio Velazco, Splunk
 status: production

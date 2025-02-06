@@ -1,6 +1,6 @@
 name: Suspicious wevtutil Usage
 id: 2827c0fd-e1be-4868-ae25-59d28e0f9d4f
-version: 8
+version: 9
 date: '2024-11-13'
 author: David Dorsey, Michael Haag, Teoderick Contreras, Splunk
 status: production

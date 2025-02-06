@@ -1,6 +1,6 @@
 name: Windows SQL Spawning CertUtil
 id: dfc18a5a-946e-44ee-a373-c0f60d06e676
-version: 6
+version: 7
 date: '2024-12-16'
 author: Michael Haag, Splunk
 status: experimental

@@ -1,6 +1,6 @@
 name: Linux Decode Base64 to Shell
 id: 637b603e-1799-40fd-bf87-47ecbd551b66
-version: 6
+version: 7
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production

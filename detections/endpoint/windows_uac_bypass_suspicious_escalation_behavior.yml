@@ -1,6 +1,6 @@
 name: Windows UAC Bypass Suspicious Escalation Behavior
 id: 00d050d3-a5b4-4565-a6a5-a31f69681dc3
-version: 5
+version: 6
 date: '2024-12-10'
 author: Steven Dick
 status: production

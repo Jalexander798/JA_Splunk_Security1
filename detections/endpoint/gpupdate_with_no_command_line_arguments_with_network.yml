@@ -1,6 +1,6 @@
 name: GPUpdate with no Command Line Arguments with Network
 id: 2c853856-a140-11eb-a5b5-acde48001122
-version: 7
+version: 8
 date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production

@@ -1,6 +1,6 @@
 name: Windows NirSoft AdvancedRun
 id: bb4f3090-7ae4-11ec-897f-acde48001122
-version: 5
+version: 6
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production

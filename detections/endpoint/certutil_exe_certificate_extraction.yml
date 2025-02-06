@@ -1,6 +1,6 @@
 name: Certutil exe certificate extraction
 id: 337a46be-600f-11eb-ae93-0242ac130002
-version: 7
+version: 8
 date: '2024-12-10'
 author: Rod Soto, Splunk
 status: production

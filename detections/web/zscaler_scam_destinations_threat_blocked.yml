@@ -1,6 +1,6 @@
 name: Zscaler Scam Destinations Threat Blocked
 id: a0c21379-f4ba-4bac-a958-897e260f964a
-version: 4
+version: 5
 date: '2024-11-15'
 author: Gowthamaraj Rajendran, Rod Soto, Splunk
 status: production
