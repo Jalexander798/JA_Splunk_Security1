@@ -1,6 +1,6 @@
 name: Windows Impair Defense Overide Win Defender Phishing Filter
 id: 10ca081c-57b1-4a78-ba56-14a40a7e116a
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

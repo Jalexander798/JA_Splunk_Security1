@@ -1,6 +1,6 @@
 name: Monitor Registry Keys for Print Monitors
 id: f5f6af30-7ba7-4295-bfe9-07de87c01bbc
-version: 9
+version: 10
 date: '2024-12-08'
 author: Teoderick Contreras, Splunk, Steven Dick, Bhavin Patel
 status: production

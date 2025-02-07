@@ -1,6 +1,6 @@
 name: Windows Impair Defense Disable Win Defender Report Infection
 id: 201946c6-b1d5-42bb-a7e0-5f7123f47fc4
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

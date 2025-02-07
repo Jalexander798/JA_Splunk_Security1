@@ -1,6 +1,6 @@
 name: Windows Impair Defense Disable Win Defender Signature Retirement
 id: 7567a72f-bada-489d-aef1-59743fb64a66
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

@@ -1,6 +1,6 @@
 name: Windows Impair Defense Disable Defender Protocol Recognition
 id: b2215bfb-6171-4137-af17-1a02fdd8d043
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

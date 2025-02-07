@@ -1,6 +1,6 @@
 name: Windows Modify Registry wuStatusServer
 id: 073e69d0-68b2-4142-aa90-a7ee6f590676
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

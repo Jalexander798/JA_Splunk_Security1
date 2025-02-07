@@ -1,6 +1,6 @@
 name: Windows Impair Defense Disable PUA Protection
 id: fbfef407-cfee-4866-88c1-f8de1c16147c
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

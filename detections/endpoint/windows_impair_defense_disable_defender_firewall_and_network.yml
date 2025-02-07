@@ -1,6 +1,6 @@
 name: Windows Impair Defense Disable Defender Firewall And Network
 id: 8467d8cd-b0f9-46fa-ac84-a30ad138983e
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

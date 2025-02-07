@@ -1,6 +1,6 @@
 name: Windows Remote Services Allow Remote Assistance
 id: 9bce3a97-bc97-4e89-a1aa-ead151c82fbb
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

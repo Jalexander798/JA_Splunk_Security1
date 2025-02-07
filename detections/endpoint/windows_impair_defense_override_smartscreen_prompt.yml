@@ -1,6 +1,6 @@
 name: Windows Impair Defense Override SmartScreen Prompt
 id: 08058866-7987-486f-b042-275715ef6e9d
-version: 5
+version: 6
 date: '2025-01-21'
 author: Teoderick Contreras, Splunk
 status: production

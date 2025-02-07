@@ -1,6 +1,6 @@
 name: Windows Registry SIP Provider Modification
 id: 3b4e18cb-497f-4073-85ad-1ada7c2107ab
-version: 4
+version: 5
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production

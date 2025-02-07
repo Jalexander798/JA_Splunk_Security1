@@ -1,6 +1,6 @@
 name: Windows Impair Defense Disable Web Evaluation
 id: e234970c-dcf5-4f80-b6a9-3a562544ca5b
-version: 5
+version: 6
 date: '2025-01-21'
 author: Teoderick Contreras, Splunk
 status: production

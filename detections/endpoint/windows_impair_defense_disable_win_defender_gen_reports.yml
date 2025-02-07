@@ -1,6 +1,6 @@
 name: Windows Impair Defense Disable Win Defender Gen reports
 id: 93f114f6-cb1e-419b-ac3f-9e11a3045e70
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

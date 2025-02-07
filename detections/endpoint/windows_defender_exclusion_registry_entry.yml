@@ -1,6 +1,6 @@
 name: Windows Defender Exclusion Registry Entry
 id: 13395a44-4dd9-11ec-9df7-acde48001122
-version: 8
+version: 9
 date: '2024-12-08'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production

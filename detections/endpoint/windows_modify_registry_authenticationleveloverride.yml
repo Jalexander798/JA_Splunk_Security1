@@ -1,6 +1,6 @@
 name: Windows Modify Registry AuthenticationLevelOverride
 id: 6410a403-36bb-490f-a06a-11c3be7d2a41
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

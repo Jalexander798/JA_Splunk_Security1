@@ -1,6 +1,6 @@
 name: Windows Impair Defense Disable Win Defender App Guard
 id: 8b700d7e-54ad-4d7d-81cc-1456c4703306
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

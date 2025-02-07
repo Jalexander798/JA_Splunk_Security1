@@ -1,6 +1,6 @@
 name: Windows Impair Defense Configure App Install Control
 id: c54b7439-cfb1-44c3-bb35-b0409553077c
-version: 5
+version: 6
 date: '2025-01-21'
 author: Teoderick Contreras, Splunk
 status: production

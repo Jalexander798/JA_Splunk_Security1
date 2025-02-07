@@ -1,6 +1,6 @@
 name: Windows Phishing Recent ISO Exec Registry
 id: cb38ee66-8ae5-47de-bd66-231c7bbc0b2c
-version: 5
+version: 6
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

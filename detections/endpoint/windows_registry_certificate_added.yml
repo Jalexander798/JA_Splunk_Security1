@@ -1,6 +1,6 @@
 name: Windows Registry Certificate Added
 id: 5ee98b2f-8b9e-457a-8bdc-dd41aaba9e87
-version: 6
+version: 7
 date: '2025-01-21'
 author: Michael Haag, Teodeerick Contreras, Splunk
 status: production

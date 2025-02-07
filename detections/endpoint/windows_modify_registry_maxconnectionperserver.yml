@@ -1,6 +1,6 @@
 name: Windows Modify Registry MaxConnectionPerServer
 id: 064cd09f-1ff4-4823-97e0-45c2f5b087ec
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

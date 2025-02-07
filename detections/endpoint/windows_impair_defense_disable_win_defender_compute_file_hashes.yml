@@ -1,6 +1,6 @@
 name: Windows Impair Defense Disable Win Defender Compute File Hashes
 id: fe52c280-98bd-4596-b6f6-a13bbf8ac7c6
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

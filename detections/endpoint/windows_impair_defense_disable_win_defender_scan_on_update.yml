@@ -1,6 +1,6 @@
 name: Windows Impair Defense Disable Win Defender Scan On Update
 id: 0418e72f-e710-4867-b656-0688e1523e09
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

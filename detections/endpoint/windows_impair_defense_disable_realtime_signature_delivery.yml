@@ -1,6 +1,6 @@
 name: Windows Impair Defense Disable Realtime Signature Delivery
 id: ffd99aea-542f-448e-b737-091c1b417274
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
