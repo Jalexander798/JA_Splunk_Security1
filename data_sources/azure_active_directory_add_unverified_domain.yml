@@ -81,3 +81,10 @@ example_log: '{"time": "2023-07-26T13:45:54.1582053Z", "resourceId": "/tenants/f
   "newValue": "\"Name,LiveType\""}], "administrativeUnits": []}], "additionalDetails":
   [{"key": "User-Agent", "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)
   AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"}]}}'
+output_fields:
+- action
+- dest
+- user
+- src
+- vendor_account
+- vendor_product

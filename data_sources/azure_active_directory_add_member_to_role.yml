@@ -83,3 +83,10 @@ example_log: '{"time": "2023-04-28T16:39:51.9312625Z", "resourceId": "/tenants/f
   []}, {"id": "38bf5baf-7ec7-4bc2-8920-6d4044da12c2", "displayName": null, "type":
   "Role", "modifiedProperties": [], "administrativeUnits": []}], "additionalDetails":
   []}}'
+output_fields:
+- action
+- dest
+- user
+- src
+- vendor_account
+- vendor_product

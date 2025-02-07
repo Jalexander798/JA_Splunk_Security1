@@ -11,3 +11,10 @@ supported_TA:
 - name: Splunk Add-on for Microsoft Cloud Services
   url: https://splunkbase.splunk.com/app/3110
   version: 5.4.2
+output_fields:
+- action
+- dest
+- user
+- src
+- vendor_account
+- vendor_product

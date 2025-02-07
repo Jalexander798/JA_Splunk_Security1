@@ -81,3 +81,10 @@ example_log: '{"time": "2024-01-29T21:31:03.0102031Z", "resourceId": "/tenants/7
   "administrativeUnits": []}], "additionalDetails": [{"key": "User-Agent", "value":
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like
   Gecko) Chrome/120.0.0.0 Safari/537.36"}, {"key": "AppId", "value": "867f0d29-0eab-4017-b691-c4713cc7d7b0"}]}}'
+output_fields:
+- action
+- dest
+- user
+- src
+- vendor_account
+- vendor_product

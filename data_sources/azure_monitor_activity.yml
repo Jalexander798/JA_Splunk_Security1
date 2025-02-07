@@ -109,3 +109,10 @@ example_log: '{"time": "2024-04-29T13:30:28.8622000Z", "tenantId": "26db52ee-c1b
   "DeviceManagementAPIVersion", "Old": null, "New": "5024-02-13"}], "Name": null}]},
   "resultType": "Success", "resultDescription": "None", "correlationId": "949ac544-b4e5-4576-a117-915c47c0ee00",
   "identity": "brian.cove@frothlydev.onmicrosoft.com"}'
+output_fields:
+- action
+- dest
+- user
+- src
+- vendor_account
+- vendor_product

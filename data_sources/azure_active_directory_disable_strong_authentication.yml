@@ -78,3 +78,10 @@ example_log: '{"time": "2023-07-11T00:01:35.0251899Z", "resourceId": "/tenants/f
   "newValue": "[]"}, {"displayName": "Included Updated Properties", "oldValue": null,
   "newValue": "\"StrongAuthenticationRequirement\""}], "administrativeUnits": []}],
   "additionalDetails": []}}'
+output_fields:
+- action
+- dest
+- user
+- src
+- vendor_account
+- vendor_product

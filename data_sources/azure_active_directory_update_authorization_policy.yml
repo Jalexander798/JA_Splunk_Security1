@@ -82,3 +82,10 @@ example_log: '{"time": "2023-10-26T19:22:20.2814027Z", "resourceId": "/tenants/5
   Properties", "oldValue": null, "newValue": "\"AllowUserConsentForRiskyApps, PermissionGrantPolicyIdsAssignedToDefaultUserRole\""}],
   "administrativeUnits": []}], "additionalDetails": [{"key": "User-Agent", "value":
   "Swagger-Codegen/1.0.0.0/csharp/msal"}]}}'
+output_fields:
+- action
+- dest
+- user
+- src
+- vendor_account
+- vendor_product

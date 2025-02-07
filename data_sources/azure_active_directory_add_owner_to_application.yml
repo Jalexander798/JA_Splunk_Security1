@@ -88,3 +88,10 @@ example_log: '{"time": "2023-06-20T15:54:13.2420879Z", "resourceId": "/tenants/f
   "additionalDetails": [{"key": "User-Agent", "value": "Mozilla/5.0 (Macintosh; Darwin
   22.4.0 Darwin Kernel Version 22.4.0: Mon Mar  6 21:00:17 PST 2023; root:xnu-8796.101.5~3/RELEASE_X86_64;
   en-US) PowerShell/7.3.4"}]}}'
+output_fields:
+- action
+- dest
+- user
+- src
+- vendor_account
+- vendor_product

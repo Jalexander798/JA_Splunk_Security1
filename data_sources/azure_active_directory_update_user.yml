@@ -81,3 +81,10 @@ example_log: '{"time": "2023-07-24T14:28:15.2233481Z", "resourceId": "/tenants/f
   Properties", "oldValue": null, "newValue": "\"AccountEnabled\""}, {"displayName":
   "TargetId.UserType", "oldValue": null, "newValue": "\"Member\""}], "administrativeUnits":
   []}], "additionalDetails": [{"key": "UserType", "value": "Member"}]}}'
+output_fields:
+- action
+- dest
+- user
+- src
+- vendor_account
+- vendor_product
