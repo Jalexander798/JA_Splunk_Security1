@@ -1,7 +1,7 @@
 name: Registry Keys Used For Persistence
 id: f5f6af30-7aa7-4295-bfe9-07fe87c01a4b
-version: 15
-date: '2025-01-27'
+version: '16'
+date: '2025-02-07'
 author: Jose Hernandez, David Dorsey, Teoderick Contreras, Rod Soto, Splunk
 status: production
 type: TTP
@@ -77,35 +77,37 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
+  - Possible Backdoor Activity Associated With MUDCARP Espionage Campaigns
+  - MoonPeak
+  - Amadey
+  - RedLine Stealer
+  - Emotet Malware DHS Report TA18-201A
   - Chaos Ransomware
-  - Windows Persistence Techniques
-  - DHS Report TA18-074A
-  - Snake Keylogger
-  - CISA AA23-347A
   - WinDealer RAT
-  - Qakbot
   - Warzone RAT
+  - Nexus APT Threat Activity
+  - Earth Estries
+  - SnappyBee
+  - Windows Persistence Techniques
+  - Snake Keylogger
+  - Ransomware
+  - CISA AA23-347A
+  - DHS Report TA18-074A
+  - Windows Registry Abuse
+  - Sneaky Active Directory Persistence Tricks
+  - BlackSuit Ransomware
+  - Qakbot
+  - DarkGate Malware
   - IcedID
+  - Braodo Stealer
+  - Suspicious MSHTA Activity
+  - NjRAT
+  - AsyncRAT
   - Azorult
   - Suspicious Windows Registry Activities
-  - AsyncRAT
   - Derusbi
-  - Possible Backdoor Activity Associated With MUDCARP Espionage Campaigns
-  - DarkGate Malware
-  - NjRAT
   - BlackByte Ransomware
-  - Ransomware
-  - MoonPeak
-  - BlackSuit Ransomware
-  - Emotet Malware DHS Report TA18-201A
-  - Sneaky Active Directory Persistence Tricks
-  - Amadey
   - Remcos
-  - Braodo Stealer
-  - Windows Registry Abuse
-  - Nexus APT Threat Activity
-  - Suspicious MSHTA Activity
-  - RedLine Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1547.001
