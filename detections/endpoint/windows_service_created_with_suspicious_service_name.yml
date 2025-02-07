@@ -49,9 +49,9 @@ rba:
     score: 75
   threat_objects: 
   - field: process
-    type: file_name
+    type: process
   - field: object_name
-    type: object_name
+    type: signature
 tags:
   analytic_story: 
   - Active Directory Lateral Movement
