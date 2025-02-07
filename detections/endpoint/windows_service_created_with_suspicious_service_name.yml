@@ -14,7 +14,7 @@ search: |-
   | eval process_name = mvindex(split(process,"\\"),-1)
   | rename Computer as dest, ServiceName as object_name, ServiceType as object_type
   | lookup windows_suspicious_services service_name as object_name
-  | where isnotnull(tool_type)
+  | where isnotnull(tool_name)
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `windows_service_created_with_suspicious_service_name_filter`
