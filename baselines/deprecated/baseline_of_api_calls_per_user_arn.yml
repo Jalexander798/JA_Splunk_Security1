@@ -4,7 +4,7 @@ version: 1
 date: '2018-04-09'
 author: David Dorsey, Splunk
 type: Baseline
-datamodel: []
+status: deprecated
 description: This search establishes, on a per-hour basis, the average and the standard
   deviation of the number of API calls made by each user. Also recorded is the number
   of data points for each user. This table is then outputted to a lookup file to allow
@@ -28,21 +28,4 @@ tags:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - eventType
-  - userIdentity.arn
   security_domain: network
-  kill_chain_phases:
-  - Exploitation
-  confidence: 50
-  impact: 50
-  risk_score: 25
-  context:
-  - Unknown
-  message: tbd
-  observable:
-  - name: field
-    type: Unknown
-    role:
-    - Unknown

@@ -3,6 +3,7 @@ id: ced74200-8465-4bc3-bd2c-22782eec6750
 version: 2
 date: '2024-09-24'
 author: Bhavin Patel, Splunk
+status: production
 description: This analytic story contains detections that query your AWS Cloudtrail
   for activities related to privilege escalation.
 narrative: 'Amazon Web Services provides a neat feature called Identity and Access

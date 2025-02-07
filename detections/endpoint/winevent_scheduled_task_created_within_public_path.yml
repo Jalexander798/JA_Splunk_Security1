@@ -1,11 +1,10 @@
 name: WinEvent Scheduled Task Created Within Public Path
 id: 5d9c6eee-988c-11eb-8253-acde48001122
-version: '6'
-date: '2024-11-28'
+version: 8
+date: '2025-01-27'
 author: Michael Haag, Splunk
 status: production
 type: TTP
-datamodel: []
 description: The following analytic detects the creation of scheduled tasks within
   user-writable paths using Windows Security EventCode 4698. It identifies tasks registered
   via schtasks.exe or TaskService that execute commands from directories like Public,
@@ -46,45 +45,39 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A windows scheduled task was created (task name=$TaskName$) on $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 70
+  threat_objects: []
 tags:
   analytic_story:
-  - Windows Persistence Techniques
-  - Active Directory Lateral Movement
-  - CISA AA22-257A
-  - IcedID
-  - Prestige Ransomware
-  - Industroyer2
-  - Ryuk Ransomware
-  - AsyncRAT
   - Data Destruction
-  - Ransomware
+  - Windows Persistence Techniques
+  - AsyncRAT
+  - Industroyer2
   - CISA AA23-347A
+  - Ransomware
+  - Prestige Ransomware
   - Scheduled Tasks
-  - Compromised Windows Host
+  - IcedID
   - Winter Vivern
+  - Active Directory Lateral Movement
+  - Nexus APT Threat Activity
+  - Compromised Windows Host
+  - Ryuk Ransomware
+  - Earth Estries
+  - CISA AA22-257A
   asset_type: Endpoint
-  confidence: 100
-  impact: 70
-  message: A windows scheduled task was created (task name=$TaskName$) on $dest$
   mitre_attack_id:
   - T1053.005
   - T1053
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - dest
-  - Task_Name
-  - Description
-  - Command
-  risk_score: 70
   security_domain: endpoint
 tests:
 - name: True Positive Test

@@ -1,7 +1,7 @@
 name: Windows Command Shell DCRat ForkBomb Payload
 id: 2bb1a362-7aa8-444a-92ed-1987e8da83e1
-version: '4'
-date: '2024-11-28'
+version: 5
+date: '2024-12-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -56,46 +56,31 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: Multiple cmd.exe processes with child process of notepad.exe executed on
+    $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 81
+  threat_objects: []
 tags:
   analytic_story:
   - Compromised Windows Host
   - DarkCrystal RAT
   asset_type: Endpoint
-  confidence: 90
-  impact: 90
-  message: Multiple cmd.exe processes with child process of notepad.exe executed on
-    $dest$
   mitre_attack_id:
   - T1059.003
   - T1059
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.dest
-  - Processes.user
-  - Processes.parent_process_name
-  - Processes.parent_process
-  - Processes.original_file_name
-  - Processes.process_name
-  - Processes.process
-  - Processes.process_id
-  - Processes.parent_process_path
-  - Processes.process_path
-  - Processes.parent_process_id
-  risk_score: 81
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/dcrat/dcrat_forkbomb/sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/dcrat/dcrat_forkbomb/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
-    update_timestamp: true

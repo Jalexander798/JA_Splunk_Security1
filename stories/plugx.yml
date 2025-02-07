@@ -3,6 +3,7 @@ id: a2c94c99-b93b-4bc7-a749-e2198743d0d6
 version: 2
 date: '2023-10-12'
 author: Teoderick Contreras, Splunk
+status: production
 description: PlugX, also referred to as "PlugX RAT" or "Kaba," is a highly sophisticated remote access Trojan (RAT) discovered in 2012. 
   This malware is notorious for its involvement in targeted cyberattacks, primarily driven by cyber espionage objectives. 
   PlugX provides attackers with comprehensive remote control capabilities over compromised systems, 

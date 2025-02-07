@@ -1,7 +1,7 @@
 name: Unsuccessful Netbackup backups
 id: a34aae96-ccf8-4aaa-952c-3ea21444444f
-version: 3
-date: '2024-10-17'
+version: 4
+date: '2024-11-14'
 author: David Dorsey, Splunk
 status: deprecated
 type: Hunting
@@ -22,19 +22,8 @@ tags:
   analytic_story:
   - Monitor Backup Solution
   asset_type: Endpoint
-  confidence: 50
-  impact: 50
-  message: tbd
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  risk_score: 25
   security_domain: endpoint

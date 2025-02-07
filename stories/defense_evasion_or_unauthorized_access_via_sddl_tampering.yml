@@ -3,6 +3,7 @@ id: 8ccdd852-3878-4871-ae37-e5af5c67baf3
 version: 1
 date: '2024-12-06'
 author: Nasreddine Bencherchali, Michael Haag, Splunk
+status: production
 description: This analytic story focuses on detecting potential defense evasion or unauthorized access attempts through tampering with Security Descriptor Definition Language (SDDL) settings. Attackers may modify SDDL configurations to alter permissions on critical system components, such as event logs and services, to obscure their activities or gain unauthorized access. This story includes detections for changes to 'ChannelAccess' and 'CustomSD' registry values, as well as the use of tools like 'sc.exe sdset', 'icacls' and 'subinacl' to modify securable objects (files, registry, services, etc) permissions.
 narrative: Adversaries may attempt to evade detection or gain unauthorized access by modifying ACLs or Security Descriptors of different securable objects on the Windows operating system. By altering these settings, attackers can grant themselves elevated privileges or suppress logging mechanisms, thereby hindering detection and response efforts. Monitoring changes to critical registry values and the execution of specific tools used for SDDL modifications can help identify such malicious activities.
 references:

@@ -1,11 +1,14 @@
 name: Okta Failed SSO Attempts
 id: 371a6545-2618-4032-ad84-93386b8698c5
-version: 4
-date: '2024-10-17'
+version: 5
+date: '2024-11-14'
 author: Michael Haag, Rico Valdez, Splunk
 status: deprecated
 type: Anomaly
-description: '**DEPRECATION NOTE** - This search has been deprecated and replaced with this detection `Okta Unauthorized Access to Application - DM`.  The following anomaly identifies failed Okta SSO events utilizing the legacy Okta event "unauth app access attempt".'
+description: '**DEPRECATION NOTE** - This search has been deprecated and replaced
+  with this detection `Okta Unauthorized Access to Application - DM`.  The following
+  anomaly identifies failed Okta SSO events utilizing the legacy Okta event "unauth
+  app access attempt".'
 data_source: []
 search: '`okta` eventType=app.generic.unauth_app_access_attempt | stats min(_time)
   as firstTime max(_time) as lastTime values(app) as Apps count by src_user, result
@@ -17,31 +20,22 @@ known_false_positives: There may be a faulty config preventing legitmate users f
   accessing apps they should have access to.
 references:
 - https://developer.okta.com/docs/reference/api/event-types/?q=app.generic.unauth_app_access_attempt
+rba:
+  message: $src_user$ failed SSO authentication to the app.
+  risk_objects:
+  - field: src_user
+    type: user
+    score: 16
+  threat_objects: []
 tags:
   analytic_story:
   - Suspicious Okta Activity
   asset_type: Infrastructure
-  confidence: 40
-  impact: 40
-  message: $src_user$ failed SSO authentication to the app.
   mitre_attack_id:
   - T1078
   - T1078.001
-  observable:
-  - name: src_user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - displayMessage
-  - app
-  - src_user
-  - result
-  - src_ip
-  risk_score: 16
   security_domain: access

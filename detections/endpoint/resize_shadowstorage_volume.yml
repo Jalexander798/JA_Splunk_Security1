@@ -1,7 +1,7 @@
 name: Resize ShadowStorage volume
 id: bc760ca6-8336-11eb-bcbb-acde48001122
-version: '4'
-date: '2024-11-28'
+version: 5
+date: '2024-12-10'
 author: Teoderick Contreras
 status: production
 type: TTP
@@ -57,44 +57,34 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A process $parent_process_name$ attempted to resize shadow copy with commandline
+    $process$ in host $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 72
+  - field: user
+    type: user
+    score: 72
+  threat_objects: []
 tags:
   analytic_story:
   - Compromised Windows Host
   - Clop Ransomware
   - BlackByte Ransomware
   asset_type: Endpoint
-  confidence: 90
-  impact: 80
-  message: A process $parent_process_name$ attempt to resize shadow copy with commandline
-    $process$ in host $dest$
   mitre_attack_id:
   - T1490
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - Processes.process
-  - Processes.parent_process_name
-  - _time
-  - Processes.process_name
-  - Processes.parent_process
-  - Processes.dest
-  - Processes.user
-  risk_score: 72
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/clop/clop_a/windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/clop/clop_a/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

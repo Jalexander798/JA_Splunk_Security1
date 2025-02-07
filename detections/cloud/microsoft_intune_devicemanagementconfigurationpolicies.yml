@@ -3,7 +3,7 @@ id: 3c49e5ed-625c-408c-a2c7-8e2b524efb2c
 version: 1
 date: '2025-01-07'
 author: Dean Luxton
-data_sources:
+data_source:
 - Azure Monitor Activity
 type: Hunting
 status: production
@@ -31,33 +31,16 @@ tags:
   analytic_story:
   - Azure Active Directory Account Takeover
   asset_type: Azure Tenant
-  confidence: 40
-  impact: 100
-  message: Intune device management policy $TargetObjectId$ has been $action$ by user $user$
   mitre_attack_id:
   - T1072
   - T1484
   - T1021.007
   - T1562.001
   - T1562.004
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: TargetObjectId
-    type: Other
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - operationName
-  - identity
-  - properties.TargetObjectIds{}
-  risk_score: 40
   security_domain: audit
 tests:
 - name: True Positive Test

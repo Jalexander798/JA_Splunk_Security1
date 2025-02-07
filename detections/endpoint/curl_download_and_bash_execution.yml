@@ -1,7 +1,7 @@
 name: Curl Download and Bash Execution
 id: 900bc324-59f3-11ec-9fb4-acde48001122
-version: '6'
-date: '2024-11-28'
+version: 7
+date: '2024-12-10'
 author: Michael Haag, Splunk, DipsyTipsy
 status: production
 type: TTP
@@ -53,6 +53,19 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: An instance of $process_name$ was identified on endpoint $dest$ attempting
+    to download a remote file and run it with bash.
+  risk_objects:
+  - field: user
+    type: user
+    score: 80
+  - field: dest
+    type: system
+    score: 80
+  threat_objects:
+  - field: process_name
+    type: process_name
 tags:
   analytic_story:
   - Compromised Windows Host
@@ -60,44 +73,14 @@ tags:
   - Linux Living Off The Land
   - Ingress Tool Transfer
   asset_type: Endpoint
-  confidence: 100
   cve:
   - CVE-2021-44228
-  impact: 80
-  message: An instance of $process_name$ was identified on endpoint $dest$ attempting
-    to download a remote file and run it with bash.
   mitre_attack_id:
   - T1105
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: process_name
-    type: Process
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.dest
-  - Processes.user
-  - Processes.parent_process_name
-  - Processes.parent_process
-  - Processes.process_name
-  - Processes.process
-  - Processes.process_id
-  - Processes.parent_process_path
-  - Processes.process_path
-  - Processes.parent_process_id
-  risk_score: 80
   security_domain: endpoint
   manual_test: Due to current limitations in command line extraction capabilities
     with Sysmon for Linux, full CommandLine data cannot be collected for complete
@@ -105,6 +88,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/atomic_red_team/linux-sysmon_curlwget.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/atomic_red_team/linux-sysmon_curlwget.log
     source: Syslog:Linux-Sysmon/Operational
     sourcetype: sysmon:linux

@@ -1,7 +1,7 @@
 name: ConnectWise ScreenConnect Path Traversal Windows SACL
 id: 4e127857-1fc9-4c95-9d69-ba24c91d52d7
-version: '4'
-date: '2024-11-28'
+version: 5
+date: '2024-12-10'
 author: Michael Haag, Splunk
 data_source:
 - Windows Event Log Security 4663
@@ -46,35 +46,24 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A path traversal attack against ScreenConnect has been detected on $dest$.
+  risk_objects:
+  - field: dest
+    type: system
+    score: 100
+  threat_objects: []
 tags:
   analytic_story:
   - ConnectWise ScreenConnect Vulnerabilities
   - Compromised Windows Host
   asset_type: Endpoint
-  confidence: 100
-  impact: 100
-  message: A path traversal attack against ScreenConnect has been detected on $dest$.
   mitre_attack_id:
   - T1190
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - ObjectName
-  - ObjectType
-  - ProcessName
-  - AccessMask
-  - process_id
-  - EventCode
-  - Computer
-  - Caller_User_Name
-  risk_score: 100
   security_domain: endpoint
   cve:
   - CVE-2024-1708
@@ -82,6 +71,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/screenconnect/4663_connectwise_aspx_app_extensions.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/screenconnect/4663_connectwise_aspx_app_extensions.log
     sourcetype: XmlWinEventLog
     source: XmlWinEventLog:Security

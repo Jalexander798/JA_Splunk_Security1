@@ -1,7 +1,12 @@
-description: A csv of the ID and rule name for ASR, Microsoft Attack Surface Reduction rules.
-filename: asr_rules.csv
 name: asr_rules
-default_match: 'false'
-match_type: WILDCARD(ASR_Rule)
+date: 2024-12-23
+version: 2
+id: 3886d687-ae77-4a61-99eb-e745083e391e
+author: Splunk Threat Research Team
+lookup_type: csv
+description: A csv of the ID and rule name for ASR, Microsoft Attack Surface Reduction rules.
+default_match: false
+match_type: 
+- WILDCARD(ASR_Rule)
 min_matches: 1
-case_sensitive_match: 'false'
+case_sensitive_match: false

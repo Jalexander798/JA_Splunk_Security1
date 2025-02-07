@@ -27,37 +27,26 @@ drilldown_searches:
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: User $user$ from IP address $src_ip$ updated the login profile of another user
+  risk_objects: 
+  - field: user
+    type: user
+    score: 30
+  threat_objects:
+  - field: src_ip
+    type: ip_address
 tags:
   analytic_story:
   - AWS IAM Privilege Escalation
   asset_type: AWS Account
-  confidence: 60
-  impact: 50
-  message: User $user$ from IP address $src_ip$ updated the login profile of another user
   mitre_attack_id:
   - T1136.003
   - T1136
-  observable:
-  - name: src_ip
-    type: IP Address
-    role:
-    - Attacker
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - api.operation
-  - actor.user.uid
-  - actor.user.account.uid
-  - http_request.user_agent
-  - src_endpoint.ip
-  - cloud.region
-  risk_score: 30
   security_domain: threat
 tests:
 - name: True Positive Test

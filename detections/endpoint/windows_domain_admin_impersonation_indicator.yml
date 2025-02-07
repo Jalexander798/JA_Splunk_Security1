@@ -1,7 +1,7 @@
 name: Windows Domain Admin Impersonation Indicator
 id: 10381f93-6d38-470a-9c30-d25478e3bd3f
-version: '5'
-date: '2024-11-28'
+version: 6
+date: '2025-01-20'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -33,7 +33,7 @@ search: '`wineventlog_security`  EventCode=4627 LogonType=3 NOT TargetUserName I
   | fillnull value=NotDA username | search username = "NotDA" | `windows_domain_admin_impersonation_indicator_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   Authentication events across all endpoints and ingest Event Id 4627. Specifically,
-  the Audit Group Membership subcategory within the Logon Logooff category needs to
+  the Audit Group Membership subcategory within the Logon Logoff category needs to
   be enabled. Its crucial to note that the accuracy and effectiveness of this detection
   heavily rely on the users diligence in populating and regularly updating this lookup
   table.
@@ -58,6 +58,14 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: $TargetUserName$ may be impersonating a Domain Administrator through a
+    forged Kerberos ticket.
+  risk_objects:
+  - field: TargetUserName
+    type: user
+    score: 80
+  threat_objects: []
 tags:
   analytic_story:
   - Active Directory Kerberos Attacks
@@ -65,28 +73,12 @@ tags:
   - Compromised Windows Host
   - Active Directory Privilege Escalation
   asset_type: Endpoint
-  confidence: 100
-  impact: 80
-  message: $TargetUserName$ may be impersonating a Domain Administrator through a
-    forged Kerberos ticket.
   mitre_attack_id:
   - T1558
-  observable:
-  - name: TargetUserName
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  risk_score: 80
-  required_fields:
-  - _time,
-  - EventCode
-  - LogonType
-  - TargetUserName
-  - GroupMembership
   security_domain: endpoint
 tests:
 - name: True Positive Test

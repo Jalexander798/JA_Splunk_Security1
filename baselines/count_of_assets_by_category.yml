@@ -4,7 +4,7 @@ version: 1
 date: '2017-09-13'
 author: Bhavin Patel, Splunk
 type: Baseline
-datamodel: []
+status: production
 description: This search shows you every asset category you have and the assets that
   belong to those categories.
 search: '| from datamodel Identity_Management.All_Assets | stats count values(nt_host)
@@ -25,8 +25,4 @@ tags:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Identity_Management.All_Assets
-  - category
   security_domain: endpoint

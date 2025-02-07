@@ -1,7 +1,7 @@
 name: Kubernetes GCP detect sensitive object access
 id: bdb6d596-86a0-4aba-8369-418ae8b9963a
-version: 3
-date: '2024-10-17'
+version: 4
+date: '2024-11-14'
 author: Rod Soto, Splunk
 status: deprecated
 type: Hunting
@@ -22,19 +22,8 @@ tags:
   analytic_story:
   - Kubernetes Sensitive Object Access Activity
   asset_type: GCP GKE Kubernetes cluster
-  confidence: 50
-  impact: 50
-  message: tbd
-  observable:
-  - name: src_user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  risk_score: 25
   security_domain: threat

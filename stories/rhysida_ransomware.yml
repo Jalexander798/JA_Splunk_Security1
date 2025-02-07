@@ -3,6 +3,7 @@ id: 0925ee49-1185-4484-94ac-7867764a9183
 version: 1
 date: '2023-12-12'
 author: Teoderick Contreras, Splunk
+status: production
 description: Utilize analytics designed to identify and delve into atypical behaviors, 
   potentially associated with the Rhysida Ransomware. Employing these searches enables the detection of 
   irregular patterns or actions within systems or networks, serving as proactive measures to spot potential 

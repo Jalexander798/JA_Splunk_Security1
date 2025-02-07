@@ -3,6 +3,7 @@ id: f6d52454-6cf3-4759-9627-5868a3e2b2b1
 version: 2
 date: '2023-09-07'
 author: Teoderick Contreras, Splunk
+status: production
 description: NjRat is a notorious remote access trojan (RAT) predominantly wielded by malicious operators to infiltrate and wield remote control over compromised systems.
   This analytical story harnesses targeted search methodologies to uncover and investigate activities that could be indicative of NjRAT's presence. 
   These activities include tracking file write operations for dropped files, scrutinizing registry modifications aimed at establishing persistence mechanisms, 

@@ -3,6 +3,7 @@ id: 02dbfda2-45fe-4731-a659-91fa871019ba
 version: 1
 date: '2024-05-29'
 author: Teoderick Contreras, Splunk
+status: production
 description: This analytic story includes detections that help security analysts identify and investigate unusual 
   activities associated with the Gomir backdoor malware. Gomir is a sophisticated cyber threat that gains unauthorized 
   access to systems. It communicates with a remote command-and-control (C2) server to execute malicious commands, steal 

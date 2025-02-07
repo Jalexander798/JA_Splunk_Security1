@@ -1,7 +1,7 @@
 name: EC2 Instance Modified With Previously Unseen User
 id: 56f91724-cf3f-4666-84e1-e3712fb41e76
-version: 5
-date: '2024-10-17'
+version: 6
+date: '2024-11-14'
 author: David Dorsey, Splunk
 status: deprecated
 type: Anomaly
@@ -26,27 +26,21 @@ known_false_positives: It's possible that a new user will start to modify EC2 in
   when they haven't before for any number of reasons. Verify with the user that is
   modifying instances that this is the intended behavior.
 references: []
+rba:
+  message: EC2 Instance Modified for first time by $user$
+  risk_objects:
+  - field: user
+    type: user
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - Unusual AWS EC2 Modifications
   asset_type: AWS Instance
-  confidence: 50
-  impact: 50
-  message: tbd
   mitre_attack_id:
   - T1078.004
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - errorCode
-  - userIdentity.arn
-  risk_score: 25.0
   security_domain: endpoint
