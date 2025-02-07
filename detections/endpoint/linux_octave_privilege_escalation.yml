@@ -1,6 +1,6 @@
 name: Linux Octave Privilege Escalation
 id: 78f7487d-42ce-4f7f-8685-2159b25fb477
-version: 5
+version: 6
 date: '2024-11-13'
 author: Gowthamaraj Rajendran, Splunk
 status: production

@@ -1,6 +1,6 @@
 name: Windows DISM Remove Defender
 id: 8567da9e-47f0-11ec-99a9-acde48001122
-version: 6
+version: 7
 date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production

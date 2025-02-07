@@ -1,6 +1,6 @@
 name: Spoolsv Suspicious Process Access
 id: 799b606e-da81-11eb-93f8-acde48001122
-version: 5
+version: 6
 date: '2024-11-13'
 author: Mauricio Velazco, Michael Haag, Teoderick Contreras, Splunk
 status: production

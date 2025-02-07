@@ -1,6 +1,6 @@
 name: Windows Alternate DataStream - Executable Content
 id: a258bf2a-34fd-4986-8086-78f506e00206
-version: 5
+version: 6
 date: '2024-11-13'
 author: Steven Dick, Teoderick Contreras, Splunk
 status: production

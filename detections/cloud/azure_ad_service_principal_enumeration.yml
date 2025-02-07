@@ -1,6 +1,6 @@
 name: Azure AD Service Principal Enumeration
 id: 3f0647ce-add5-4436-8039-cbd1abe74563
-version: 1
+version: 2
 date: '2025-01-06'
 author: Dean Luxton
 data_source:

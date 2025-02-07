@@ -1,6 +1,6 @@
 name: Azure AD Application Administrator Role Assigned
 id: eac4de87-7a56-4538-a21b-277897af6d8d
-version: 6
+version: 7
 date: '2024-11-14'
 author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
 status: production

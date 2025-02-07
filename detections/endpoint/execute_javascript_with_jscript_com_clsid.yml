@@ -1,6 +1,6 @@
 name: Execute Javascript With Jscript COM CLSID
 id: dc64d064-d346-11eb-8588-acde48001122
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

@@ -1,6 +1,6 @@
 name: Windows Attempt To Stop Security Service
 id: 9ed27cea-4e27-4eff-b2c6-aac9e78a7517
-version: 1
+version: 2
 date: '2025-01-13'
 author: Rico Valdez, Nasreddine Bencherchali, Splunk
 status: production

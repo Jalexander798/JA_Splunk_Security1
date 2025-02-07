@@ -1,6 +1,6 @@
 name: Windows Rundll32 WebDAV Request
 id: 320099b7-7eb1-4153-a2b4-decb53267de2
-version: 5
+version: 6
 date: '2024-11-13'
 author: Michael Haag, Splunk
 type: TTP

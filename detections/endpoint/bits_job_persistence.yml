@@ -1,6 +1,6 @@
 name: BITS Job Persistence
 id: e97a5ffe-90bf-11eb-928a-acde48001122
-version: 6
+version: 7
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production

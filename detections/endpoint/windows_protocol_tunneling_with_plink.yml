@@ -1,6 +1,6 @@
 name: Windows Protocol Tunneling with Plink
 id: 8aac5e1e-0fab-4437-af0b-c6e60af23eed
-version: 6
+version: 7
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production

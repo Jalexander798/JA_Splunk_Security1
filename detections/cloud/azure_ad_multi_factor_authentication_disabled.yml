@@ -1,6 +1,6 @@
 name: Azure AD Multi-Factor Authentication Disabled
 id: 482dd42a-acfa-486b-a0bb-d6fcda27318e
-version: 5
+version: 6
 date: '2024-11-14'
 author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
 status: production

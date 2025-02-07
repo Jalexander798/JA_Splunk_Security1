@@ -1,6 +1,6 @@
 name: Excel Spawning Windows Script Host
 id: 57fe880a-9be3-11eb-9bf3-acde48001122
-version: 8
+version: 9
 date: '2025-01-13'
 author: Michael Haag, Splunk
 status: deprecated

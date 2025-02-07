@@ -1,6 +1,6 @@
 name: Azure AD Service Principal Owner Added
 id: 7ddf2084-6cf3-4a44-be83-474f7b73c701
-version: 7
+version: 8
 date: '2024-11-14'
 author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
 status: production

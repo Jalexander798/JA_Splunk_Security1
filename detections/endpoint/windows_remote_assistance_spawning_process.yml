@@ -1,6 +1,6 @@
 name: Windows Remote Assistance Spawning Process
 id: ced50492-8849-11ec-9f68-acde48001122
-version: 6
+version: 7
 date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production

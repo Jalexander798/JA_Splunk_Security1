@@ -1,6 +1,6 @@
 name: Check Elevated CMD using whoami
 id: a9079b18-1633-11ec-859c-acde48001122
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

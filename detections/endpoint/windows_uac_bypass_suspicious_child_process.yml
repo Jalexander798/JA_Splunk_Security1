@@ -1,6 +1,6 @@
 name: Windows UAC Bypass Suspicious Child Process
 id: 453a6b0f-b0ea-48fa-9cf4-20537ffdd22c
-version: 4
+version: 5
 date: '2024-11-13'
 author: Steven Dick
 status: production

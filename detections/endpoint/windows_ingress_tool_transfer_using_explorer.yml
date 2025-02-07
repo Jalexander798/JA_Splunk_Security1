@@ -1,6 +1,6 @@
 name: Windows Ingress Tool Transfer Using Explorer
 id: 76753bab-f116-4ea3-8fb9-89b638be58a9
-version: 6
+version: 7
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

@@ -1,6 +1,6 @@
 name: Windows Steal Authentication Certificates - ESC1 Authentication
 id: f0306acf-a6ab-437a-bbc6-8628f8d5c97e
-version: 5
+version: 6
 date: '2024-12-10'
 author: Steven Dick
 status: production
