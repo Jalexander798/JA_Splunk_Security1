@@ -9,13 +9,18 @@ type: TTP
 status: production
 description: This detection identifies when an Azure Service Principal elevates privileges by adding themself to a new app role assignment.
 search: >- 
-  `o365_management_activity` Operation="Add app role assignment to service principal." "Actor{}.ID"=ServicePrincipal ResultStatus=Success
-  | spath path=ModifiedProperties{} output=targetResources
-  | stats min(_time) as _time values(eval(mvfilter(match(targetResources, "AppRole.Value")))) as appRole, values(eval(mvfilter(match(targetResources, "ServicePrincipal.DisplayName")))) as targetServicePrincipal values(object) as targetAppContext values(user_agent) as user_agent values(user) as servicePrincipal values(UserId) as servicePrincipalId  by Operation InterSystemsId tenant_id
-  | spath input=appRole path=NewValue output=appRole
-  | spath input=targetServicePrincipal path=NewValue output=targetServicePrincipal
-  | where servicePrincipal=targetServicePrincipal
-  | table _time Operation servicePrincipal servicePrincipalId appRole targetAppContext user_agent tenant_id InterSystemsId
+  `o365_management_activity` Operation="Add app role assignment to service principal." "Actor{}.ID"=ServicePrincipal ResultStatus=Success 
+  | spath path=ModifiedProperties{} output=targetResources 
+  | eval src="NA" 
+  | stats min(_time) as _time values(eval(mvfilter(match(targetResources, "AppRole.Value")))) as appRole, values(eval(mvfilter(match(targetResources, "ServicePrincipal.DisplayName")))) as targetServicePrincipal values(object) as targetAppContext values(user_agent) as user_agent values(user) as servicePrincipal values(UserId) as servicePrincipalId by Operation InterSystemsId tenant_id user dest src vendor_account vendor_product 
+  | spath input=appRole path=NewValue output=appRole 
+  | spath input=targetServicePrincipal path=NewValue output=targetServicePrincipal 
+  | where servicePrincipal=targetServicePrincipal 
+  | rename Operation as action 
+  | fillnull 
+  | stats earliest(_time) as firstTime latest(_time) as lastTime by action servicePrincipal servicePrincipalId appRole targetAppContext user_agent tenant_id InterSystemsId user dest src vendor_account vendor_product 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
   | `o365_service_principal_privilege_escalation_filter`
 how_to_implement: The Splunk Add-on for Microsoft Office 365 add-on is required to ingest EntraID audit logs via the 365 API. See references for links for further details on how to onboard this log source. 
 known_false_positives: Unknown

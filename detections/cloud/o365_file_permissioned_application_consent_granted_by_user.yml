@@ -15,13 +15,18 @@ description: The following analytic identifies instances where a user in the Off
   is malicious or overly permissive. If confirmed malicious, this could lead to data
   breaches, data loss, or unauthorized data manipulation, necessitating immediate
   investigation to validate the application's legitimacy and assess potential risks.
-search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Consent
-  to application.\" ResultStatus=Success | eval admin_consent =mvindex('ModifiedProperties{}.NewValue',
-  0) | search admin_consent=False | eval permissions =mvindex('ModifiedProperties{}.NewValue',
-  4) | rex field=permissions \"Scope: (?<Scope>[^,]+)\" | makemv delim=\" \" Scope
-  | search Scope IN (\"Files.Read\", \"Files.Read.All\", \"Files.ReadWrite\", \"Files.ReadWrite.All\"\
-  , \"Files.ReadWrite.AppFolder\") | stats max(_time) as lastTime values(Scope) by
-  Operation, user, object, ObjectId | `security_content_ctime(lastTime)` | `o365_file_permissioned_application_consent_granted_by_user_filter`"
+search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Consent to application.\" ResultStatus=Success 
+  | eval admin_consent =mvindex('ModifiedProperties{}.NewValue',0) 
+  | search admin_consent=False 
+  | eval permissions =mvindex('ModifiedProperties{}.NewValue',4) 
+  | rex field=permissions \"Scope:(?<Scope>[^,]+)\" 
+  | makemv delim=\" \" Scope 
+  | search Scope IN (\"Files.Read\", \"Files.Read.All\", \"Files.ReadWrite\", \"Files.ReadWrite.All\", \"Files.ReadWrite.AppFolder\") 
+  | rename command as action 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime values(Scope) as Scope by action dest user src vendor_account vendor_product object ObjectId 
+  | `security_content_ctime(lastTime)` 
+  | `o365_file_permissioned_application_consent_granted_by_user_filter`"
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: OAuth applications that require file permissions may be legitimate,

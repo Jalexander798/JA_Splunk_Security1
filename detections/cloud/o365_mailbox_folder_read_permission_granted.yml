@@ -14,12 +14,16 @@ description: The following analytic identifies instances where read permissions 
   exposing sensitive email content. If confirmed malicious, an attacker could gain
   unauthorized access to read email communications, leading to data breaches or information
   leakage.
-search: '`o365_management_activity` Workload=Exchange (Operation="Set-MailboxFolderPermission"
-  OR Operation="Add-MailboxFolderPermission" ) | eval isReadRole=if(match(AccessRights,
-  "^(ReadItems|Author|NonEditingAuthor|Owner|PublishingAuthor|Reviewer)$"), "true",
-  "false") | search isReadRole="true" | rename UserId as user | stats count earliest(_time)
-  as firstTime latest(_time) as lastTime by Operation, user, Identity, AccessRights
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `o365_mailbox_folder_read_permission_granted_filter`'
+search: '`o365_management_activity` Workload=Exchange (Operation="Set-MailboxFolderPermission" OR Operation="Add-MailboxFolderPermission" ) 
+  | eval isReadRole=if(match(AccessRights,"^(ReadItems|Author|NonEditingAuthor|Owner|PublishingAuthor|Reviewer)$"), "true", "false") 
+  | search isReadRole="true" 
+  | rename UserId as user 
+  | rename Operation as action 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product Identity AccessRights 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `o365_mailbox_folder_read_permission_granted_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: Mailbox folder permissions may be configured for legitimate

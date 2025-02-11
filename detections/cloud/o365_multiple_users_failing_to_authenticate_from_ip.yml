@@ -16,10 +16,13 @@ description: The following analytic identifies instances where more than 10 uniq
   multiple accounts, potentially leading to unauthorized access. Immediate action
   is required to block or monitor the suspicious IP and notify affected users to enhance
   their security measures.
-search: '`o365_management_activity` Workload=AzureActiveDirectory Operation=UserLoginFailed
-  ErrorNumber=50126 |  bucket span=5m _time |  stats dc(user) as unique_accounts values(user)
-  as user values(LogonError) as LogonError values(signature) as signature values(UserAgent)
-  as UserAgent by _time, src_ip |  where unique_accounts > 10 | `o365_multiple_users_failing_to_authenticate_from_ip_filter`'
+search: '`o365_management_activity` Workload=AzureActiveDirectory Operation=UserLoginFailed ErrorNumber=50126 
+  | bucket span=5m _time 
+  | rename Operation as action 
+  | fillnull 
+  | stats dc(user) as unique_accounts values(user) as user values(LogonError) as LogonError values(signature) as signature values(UserAgent) as user_agent values(dest) as dest by _time src vendor_account vendor_product action
+  | where unique_accounts > 10 
+  | `o365_multiple_users_failing_to_authenticate_from_ip_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: A source Ip failing to authenticate with multiple users in
@@ -44,13 +47,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Source Ip $src_ip$ failed to authenticate with 20 users within 5 minutes.
+  message: Source Ip $src$ failed to authenticate with 20 users within 5 minutes.
   risk_objects:
   - field: user
     type: user
     score: 63
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:

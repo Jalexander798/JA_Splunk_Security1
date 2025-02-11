@@ -15,11 +15,14 @@ description: The following analytic detects when emails are accessed in Office 3
   emails through EWS is crucial for identifying potential abuse or unauthorized data
   access. If confirmed malicious, this activity could lead to unauthorized email access,
   data exfiltration, or further compromise of sensitive information.
-search: '`o365_management_activity` Workload=Exchange Operation=MailItemsAccessed
-  AppId=* ClientAppId=* | regex ClientInfoString="^Client=WebServices;ExchangeWebServices"
-  |  stats count earliest(_time) as firstTime latest(_time) as lastTime values(ClientIPAddress)
-  as src_ip by user ClientAppId OperationCount AppId ClientInfoString | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `o365_oauth_app_mailbox_access_via_ews_filter`'
+search: '`o365_management_activity` Workload=Exchange Operation=MailItemsAccessed AppId=* ClientAppId=* 
+  | regex ClientInfoString="^Client=WebServices;ExchangeWebServices" 
+  | rename Operation as action 
+  | fillnull 
+  | stats count earliest(_time) as firstTime latest(_time) as lastTime values(ClientIPAddress) as src by user ClientAppId OperationCount AppId vendor_account vendor_product dest action ClientInfoString 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `o365_oauth_app_mailbox_access_via_ews_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: OAuth applications may access mailboxes for legitimate purposes,

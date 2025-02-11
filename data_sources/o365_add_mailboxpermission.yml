@@ -81,3 +81,10 @@ example_log: '{"AppId": "", "ClientAppId": "", "ClientIP": "18.159.234.121:30395
   {"Name": "InheritanceType", "Value": "All"}], "RecordType": 1, "ResultStatus": "True",
   "SessionId": "2be46662-a743-4a05-8744-c2f75f886512", "UserId": "pbareiss@rodsoto.onmicrosoft.com",
   "UserKey": "10032001020A3408", "UserType": 2, "Version": 1, "Workload": "Exchange"}'
+output_fields:
+- action 
+- dest 
+- user 
+- src 
+- vendor_account 
+- vendor_product 

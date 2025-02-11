@@ -14,12 +14,12 @@ description: The following analytic identifies instances where read permissions 
   and potential information leakage. If confirmed malicious, an attacker could gain
   unauthorized access to sensitive emails, leading to data breaches and compromising
   the confidentiality of organizational communications.
-search: "`o365_management_activity` Workload=Exchange (Operation=ModifyFolderPermissions
-  OR Operation=AddFolderPermissions) Workload=Exchange object!=Calendar object!=Contacts
-  object!=PersonMetadata | eval isReadRole=if(match('Item.ParentFolder.MemberRights',
-  \"(ReadAny)\"), \"true\", \"false\")  | rename UserId as user  | stats count earliest(_time)
-  as firstTime latest(_time) as lastTime by Operation, user, object, Item.ParentFolder.MemberUpn,
-  Item.ParentFolder.MemberRights | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+search: "`o365_management_activity` Workload=Exchange (Operation=ModifyFolderPermissions OR Operation=AddFolderPermissions) Workload=Exchange object!=Calendar object!=Contacts object!=PersonMetadata 
+  | eval isReadRole=if(match('Item.ParentFolder.MemberRights',\"(ReadAny)\"), \"true\", \"false\") 
+  | rename UserId as user, Operation as action 
+  | stats count earliest(_time) as firstTime latest(_time) as lastTime by action user object dest Item.ParentFolder.MemberUpn Item.ParentFolder.MemberRights src vendor_account vendor_product 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
   | `o365_mailbox_folder_read_permission_assigned_filter`"
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.

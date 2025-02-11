@@ -106,3 +106,10 @@ example_log: '{"CreationTime": "2023-09-07T18:19:07", "Id": "ff065c17-e638-4013-
   "ParentFolder": {"Id": "LgAAAABKe+NY5HVjRYWDqaJ5IKKFAQBQ11dzmT6LS6bQbkNDtISsAAAAAAEMAAAB",
   "MemberRights": "FreeBusySimple", "MemberSid": "S-1-1-0", "MemberUpn": "Everyone",
   "Name": "Inbox", "Path": "\\Inbox"}}}'
+output_fields:
+- action 
+- dest 
+- user 
+- src 
+- vendor_account 
+- vendor_product 

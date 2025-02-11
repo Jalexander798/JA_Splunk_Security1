@@ -9,14 +9,16 @@ description: The following analytic identifies when multiple operating systems a
 data_source: 
 - Office 365 Universal Audit Log
 search: |-
-  `o365_management_activity` Operation IN (UserLoginFailed,UserLoggedIn)
-  | eval -time = _time
-  | bin _time span=15m
-  | stats values(Operation) as signature, values(ErrorNumber) as signature_id, values(OS) as os_name, dc(OS) as os_count, count, min(-time) as firstTime, max(-time) as lastTime by  ClientIP, UserId, _time
-  | where os_count >= 4
-  | eval src = ClientIP, user = UserId
+  `o365_management_activity` Operation IN (UserLoginFailed,UserLoggedIn) 
+  | eval -time = _time 
+  | bin _time span=15m 
+  | rename Operation as action 
+  | fillnull 
+  | stats values(Operation) as signature, values(ErrorNumber) as signature_id, values(OS) as os_name, dc(OS) as os_count, count, min(-time) as firstTime, max(-time) as lastTime by ClientIP, UserId, _time, action, dest, vendor_account, vendor_product
+  | where os_count >= 4 
+  | eval src = ClientIP, user = UserId 
   | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)`
+  | `security_content_ctime(lastTime)` 
   | `o365_multiple_os_vendors_authenticating_from_user_filter`
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest Office 365 management activity events. The thresholds set within the analytic (such as unique OS) are initial guidelines and should be customized based on the organization's user behavior and risk profile. Security teams are encouraged to adjust these thresholds to optimize the balance between detecting genuine threats and minimizing false positives, ensuring the detection is tailored to their specific environment.
 known_false_positives: IP or users where the usage of multiple Operating systems is expected, filter accordingly. 

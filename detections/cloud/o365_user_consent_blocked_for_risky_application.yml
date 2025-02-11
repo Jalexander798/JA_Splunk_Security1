@@ -16,11 +16,15 @@ description: The following analytic identifies instances where Office 365 has bl
   the organization. If confirmed malicious, this activity suggests that O365's security
   measures successfully prevented a harmful application from accessing organizational
   data, warranting immediate investigation.
-search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Consent
-  to application.\" ResultStatus=Failure | eval permissions =mvindex('ModifiedProperties{}.NewValue',
-  4) | eval reason =mvindex('ModifiedProperties{}.NewValue', 5) |  search reason =
-  \"Risky application detected\" | rex field=permissions \"Scope: (?<Scope>[^,]+)\"\
-  \ |  stats max(_time) as lastTime by Operation, user, reason, object, Scope | `security_content_ctime(lastTime)`
+search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Consent to application.\" ResultStatus=Failure 
+  | eval permissions =mvindex('ModifiedProperties{}.NewValue', 4) 
+  | eval reason =mvindex('ModifiedProperties{}.NewValue', 5) 
+  | search reason = \"Risky application detected\" 
+  | rex field=permissions \"Scope: (?<Scope>[^,]+)\"
+  | rename Operation as action 
+  | fillnull 
+  | stats max(_time) as lastTime by action, user, reason, object, Scope, dest, src, vendor_account, vendor_product
+  | `security_content_ctime(lastTime)` 
   | `o365_user_consent_blocked_for_risky_application_filter`"
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.

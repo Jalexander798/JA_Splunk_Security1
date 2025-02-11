@@ -114,3 +114,10 @@ example_log: '{"CreationTime": "2024-02-07T22:31:14", "Id": "f624ed92-b4a2-4d42-
   "Type": 2}, {"ID": "Malicious11", "Type": 1}, {"ID": "e06366ca-8489-4748-b6a2-d7e4332f45c1",
   "Type": 2}, {"ID": "e06366ca-8489-4748-b6a2-d7e4332f45c1", "Type": 4}], "TargetContextId":
   "75243ab2-44f8-435c-a7a6-b479385df6d4"}'
+output_fields:
+- action 
+- dest 
+- user 
+- src 
+- vendor_account 
+- vendor_product 

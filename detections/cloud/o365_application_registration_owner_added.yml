@@ -16,11 +16,15 @@ description: The following analytic identifies instances where a new owner is as
   an attacker could modify the application's settings, permissions, and behavior,
   leading to unauthorized data access, privilege escalation, or the introduction of
   malicious behavior within the application's operations.
-search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Add
-  owner to application.\" | eval app_id=mvindex('ModifiedProperties{}.NewValue', 0)
-  | eval app_displayName=mvindex('ModifiedProperties{}.NewValue', 1) | stats max(_time)
-  as lastTime values(ModifiedProperties{}.NewValue) by Operation, user, app_displayName,
-  object | `security_content_ctime(lastTime)` | `o365_application_registration_owner_added_filter`"
+search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Add owner to application.\" 
+  | eval app_id=mvindex('ModifiedProperties{}.NewValue', 0) 
+  | eval app_displayName=mvindex('ModifiedProperties{}.NewValue', 1) 
+  | rename command as action 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product app_id app_displayName object
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `o365_application_registration_owner_added_filter`"
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: Application owners may be added for legitimate reasons, filter

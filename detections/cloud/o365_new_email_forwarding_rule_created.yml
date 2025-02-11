@@ -14,13 +14,18 @@ description: The following analytic identifies the creation of new email forward
   unauthorized access to sensitive information. If confirmed malicious, attackers
   could intercept and redirect emails, potentially compromising confidential communications
   and leading to data breaches.
-search: "`o365_management_activity` (Operation=New-InboxRule OR Operation=set-InboxRule)
-  | eval match1=mvfind('Parameters{}.Name', \"ForwardTo\") | eval match2=mvfind('Parameters{}.Name',
-  \"ForwardAsAttachmentTo\") | eval match3=mvfind('Parameters{}.Name', \"RedirectTo\"\
-  ) | where match1>= 0 OR match2>= 0 OR match3>= 0 | eval ForwardTo=coalesce(ForwardTo,
-  ForwardAsAttachmentTo, RedirectTo) | stats count min(_time) as firstTime max(_time)
-  as lastTime values(Name) as Name by user Operation ForwardTo | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `o365_new_email_forwarding_rule_created_filter`"
+search: "`o365_management_activity` (Operation=New-InboxRule OR Operation=set-InboxRule) 
+  | eval match1=mvfind('Parameters{}.Name', \"ForwardTo\") 
+  | eval match2=mvfind('Parameters{}.Name', \"ForwardAsAttachmentTo\") 
+  | eval match3=mvfind('Parameters{}.Name', \"RedirectTo\") 
+  | where match1>= 0 OR match2>= 0 OR match3>= 0 
+  | eval ForwardTo=coalesce(ForwardTo, ForwardAsAttachmentTo, RedirectTo) 
+  | rename command as action 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime values(Name) as Name by action dest user src vendor_account vendor_product ForwardTo 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `o365_new_email_forwarding_rule_created_filter`"
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: Users may create email forwarding rules for legitimate purposes.

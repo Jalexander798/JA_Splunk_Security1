@@ -14,10 +14,14 @@ description: The following analytic detects when a content search is initiated w
   unauthorized data access, potential data exfiltration, and compliance violations.
   Monitoring this behavior helps ensure the integrity and security of organizational
   data.
-search: '`o365_management_activity` Workload=SecurityComplianceCenter Operation=SearchCreated
-  | rename user_id as user | stats count earliest(_time) as firstTime latest(_time)
-  as lastTime by Operation, ObjectId, ExchangeLocations, user, Query  |`security_content_ctime(firstTime)`
-  |`security_content_ctime(lastTime)` | `o365_compliance_content_search_started_filter`'
+search: '`o365_management_activity` Workload=SecurityComplianceCenter Operation=SearchCreated 
+  | rename user_id as user 
+  | rename command as action 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product ExchangeLocations Query 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `o365_compliance_content_search_started_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: Compliance content searches may be executed for legitimate

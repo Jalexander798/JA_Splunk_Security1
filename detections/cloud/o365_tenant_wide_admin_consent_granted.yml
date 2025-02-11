@@ -15,12 +15,17 @@ description: The following analytic identifies instances where admin consent is 
   data. If confirmed malicious, an attacker could gain extensive and persistent access
   to organizational data, leading to data exfiltration, espionage, further malicious
   activities, and potential compliance violations.
-search: "`o365_management_activity` Operation=\"Consent to application.\"  | eval
-  new_field=mvindex('ModifiedProperties{}.NewValue', 4) | rex field=new_field \"ConsentType:
-  (?<ConsentType>[^\\,]+)\" | rex field=new_field \"Scope: (?<Scope>[^\\,]+)\"  |
-  search  ConsentType = \"AllPrincipals\"  | stats count min(_time) as firstTime max(_time)
-  as lastTime by Operation, user, object, ObjectId, ConsentType, Scope | `security_content_ctime(firstTime)`\
-  \  | `security_content_ctime(lastTime)` | `o365_tenant_wide_admin_consent_granted_filter`"
+search: "`o365_management_activity` Operation=\"Consent to application.\" 
+  | eval new_field=mvindex('ModifiedProperties{}.NewValue', 4) 
+  | rex field=new_field \"ConsentType: (?<ConsentType>[^\\,]+)\" 
+  | rex field=new_field \"Scope: (?<Scope>[^\\,]+)\" 
+  | search ConsentType = \"AllPrincipals\" 
+  | rename Operation as action 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by action, user, object, ObjectId, ConsentType, Scope, dest, vendor_account, vendor_product
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `o365_tenant_wide_admin_consent_granted_filter`"
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: Legitimate applications may be granted tenant wide consent,

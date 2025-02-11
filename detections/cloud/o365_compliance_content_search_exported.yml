@@ -14,10 +14,14 @@ description: The following analytic identifies when the results of a content sea
   If confirmed malicious, an attacker could gain access to and exfiltrate sensitive
   information, posing a severe risk to the organization's data security and compliance
   posture.
-search: '`o365_management_activity`  Workload=SecurityComplianceCenter Operation="SearchExported"
-  | rename user_id as user | stats count earliest(_time) as firstTime latest(_time)
-  as lastTime by Operation, ObjectId, ExchangeLocations, user, Query  |`security_content_ctime(firstTime)`
-  |`security_content_ctime(lastTime)` | `o365_compliance_content_search_exported_filter`'
+search: '`o365_management_activity` Workload=SecurityComplianceCenter Operation="SearchExported" 
+  | rename user_id as user 
+  | rename command as action 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product ExchangeLocations Query
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `o365_compliance_content_search_exported_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: Compliance content searche exports may be executed for legitimate

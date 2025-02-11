@@ -11,3 +11,10 @@ supported_TA:
 - name: Splunk Add-on for Microsoft Office 365
   url: https://splunkbase.splunk.com/app/4055
   version: 4.7.0
+output_fields:
+- action 
+- dest 
+- user 
+- src 
+- vendor_account 
+- vendor_product 

@@ -14,12 +14,16 @@ description: The following analytic identifies instances where email forwarding 
   to data exfiltration and unauthorized access to sensitive information. If confirmed
   malicious, attackers could intercept and redirect emails, potentially compromising
   confidential communications and leading to data breaches.
-search: "`o365_management_activity` Operation=Set-Mailbox  | eval match1=mvfind('Parameters{}.Name',
-  \"ForwardingAddress\") | eval match2=mvfind('Parameters{}.Name', \"ForwardingSmtpAddress\"\
-  ) | where match1>= 0 OR match2>= 0 | eval ForwardTo=coalesce(ForwardingAddress,
-  ForwardingSmtpAddress) | search ForwardTo!=\"\"  | rename user_id as user | stats
-  count earliest(_time) as firstTime latest(_time) as lastTime values(ForwardTo) as
-  ForwardTo by user ObjectId |`security_content_ctime(firstTime)`  |`security_content_ctime(lastTime)`
+search: "`o365_management_activity` Operation=Set-Mailbox 
+  | eval match1=mvfind('Parameters{}.Name',\"ForwardingAddress\") 
+  | eval match2=mvfind('Parameters{}.Name', \"ForwardingSmtpAddress\") 
+  | where match1>= 0 OR match2>= 0 
+  | eval ForwardTo=coalesce(ForwardingAddress,ForwardingSmtpAddress) 
+  | search ForwardTo!=\"\" 
+  | rename user_id as user, Operation as action
+  | stats count earliest(_time) as firstTime latest(_time) as lastTime values(ForwardTo) as ForwardTo by action dest user src vendor_account vendor_product object ObjectId
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
   | `o365_mailbox_email_forwarding_enabled_filter`"
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
