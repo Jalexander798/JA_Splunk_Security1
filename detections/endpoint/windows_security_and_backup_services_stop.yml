@@ -1,7 +1,7 @@
-name: Known Services Killed by Ransomware
-id: 3070f8e0-c528-11eb-b2a0-acde48001122
-version: 7
-date: '2024-12-10'
+name: Windows Security And Backup Services Stop
+id: 9c24aef6-cad9-4931-acce-74318aa5663b
+version: 1
+date: '2025-02-07'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -15,14 +15,14 @@ description: The following analytic detects the suspicious termination of known 
   disruption and data loss.
 data_source:
 - Windows Event Log System 7036
-search: '`wineventlog_system` EventCode=7036 param1 IN ("*Volume Shadow Copy*","*VSS*",
-  "*backup*", "*sophos*", "*sql*", "*memtas*", "*mepocs*", "*veeam*", "*svc$*", "DefWatch",
-  "ccEvtMgr", "ccSetMgr", "SavRoam", "RTVscan", "QBFCService", "QBIDPService", "Intuit.QuickBooks.FCS",
-  "QBCFMonitorService", "YooBackup", "YooIT", "*Veeam*", "PDVFSService", "BackupExec*",
-  "WdBoot", "WdFilter", "WdNisDrv", "WdNisSvc", "WinDefend", "wscsvc", "Sense", "sppsvc",
-  "SecurityHealthService") param2="stopped" | stats count min(_time) as firstTime
-  max(_time) as lastTime by EventCode param1 dest | `security_content_ctime(lastTime)`
-  | `security_content_ctime(firstTime)` | `known_services_killed_by_ransomware_filter`'
+search: '`wineventlog_system` `normalized_service_binary_field` 
+  | rename param1 as display_name
+  | where param2="stopped" AND (match(display_name, "(?i)(Volume Shadow Copy|VSS|backup|sophos|sql|memtas|mepocs|veeam|svc\$|DefWatch|ccEvtMgr|ccSetMgr|SavRoam|RTVscan|QBFCService|QBIDPService|Intuit\.QuickBooks\.FCS|QBCFMonitorService|YooBackup|YooIT|Veeam|PDVFSService|BackupExec|WdBoot|WdFilter|WdNisDrv|WdNisSvc|WinDefend|wscsvc|Sense|sppsvc|SecurityHealthService)") 
+  OR match(normalized_service_name, "(?i)(Volume Shadow Copy|VSS|backup|sophos|sql|memtas|mepocs|veeam|svc\$|DefWatch|ccEvtMgr|ccSetMgr|SavRoam|RTVscan|QBFCService|QBIDPService|Intuit\.QuickBooks\.FCS|QBCFMonitorService|YooBackup|YooIT|Veeam|PDVFSService|BackupExec|WdBoot|WdFilter|WdNisDrv|WdNisSvc|WinDefend|wscsvc|Sense|sppsvc|SecurityHealthService)"))
+  | stats count min(_time) as firstTime max(_time) as lastTime by EventCode display_name dest normalized_service_name
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `windows_security_and_backup_services_stop_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the 7036 EventCode ScManager in System audit Logs from your endpoints.
 known_false_positives: Admin activities or installing related updates may do a sudden
@@ -53,7 +53,7 @@ rba:
     type: system
     score: 72
   threat_objects:
-  - field: param1
+  - field: display_name
     type: service
 tags:
   analytic_story:

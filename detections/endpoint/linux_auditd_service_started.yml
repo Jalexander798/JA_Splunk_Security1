@@ -1,10 +1,10 @@
 name: Linux Auditd Service Started
 id: b5eed06d-5c97-4092-a3a1-fa4b7e77c71a
-version: 3
-date: '2024-11-13'
+version: 4
+date: '2025-02-03'
 author: Teoderick Contreras, Splunk
 status: production
-type: TTP
+type: Anomaly
 description: The following analytic detects the suspicious service started. This behavior
   is critical for a SOC to monitor because it may indicate attempts to gain unauthorized
   access or maintain control over a system. Such actions could be signs of malicious
@@ -53,7 +53,7 @@ rba:
   risk_objects:
   - field: dest
     type: system
-    score: 64
+    score: 40
   threat_objects: []
 tags:
   analytic_story:

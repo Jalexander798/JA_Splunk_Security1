@@ -1,6 +1,6 @@
 name: Detect Remote Access Software Usage Registry
 id: 33804986-25dd-43cf-bb6b-dc14956c7cbc
-version: 2
+version: 3
 date: '2025-01-10'
 author: Steven Dick
 status: production
@@ -60,6 +60,7 @@ tags:
   - Ransomware
   - Gozi Malware
   - CISA AA24-241A
+  - Remote Monitoring and Management Software
   asset_type: Endpoint
   mitre_attack_id: 
   - T1219

@@ -1,7 +1,7 @@
-name: Suspicious Process File Path
-id: 9be25988-ad82-11eb-a14f-acde48001122
-version: 6
-date: '2024-12-10'
+name: Windows Suspicious Process File Path
+id: ecddae4e-3d4b-41e2-b3df-e46a88b38521
+version: 7
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -17,14 +17,15 @@ data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
 - CrowdStrike ProcessRollup2
-search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
-  as lastTime from datamodel=Endpoint.Processes where Processes.process_path IN("*\\windows\\fonts\\*",
-  "*\\windows\\temp\\*", "*\\users\\public\\*", "*\\windows\\debug\\*", "*\\Users\\Administrator\\Music\\*",
-  "*\\Windows\\servicing\\*", "*\\Users\\Default\\*", "*Recycle.bin*", "*\\Windows\\Media\\*",  "\\Windows\\repair\\*",
-  "*\\temp\\*" , "*\\PerfLogs\\*","*\\windows\\tasks\\*", "*:\\programdata\\*") by
-  Processes.parent_process_name Processes.parent_process Processes.process_name Processes.process_path Processes.dest
-  Processes.user | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `suspicious_process_file_path_filter`'
+search: '| tstats `security_content_summariesonly` count values(Processes.process_name)
+  as process_name values(Processes.process) as process min(_time) as firstTime max(_time)
+  as lastTime from datamodel=Endpoint.Processes 
+  where Processes.process_path IN("*\\windows\\fonts\\*", "*\\users\\public\\*", "*\\windows\\debug\\*", "*\\Users\\Administrator\\Music\\*", "*Recycle.bin*", "*\\Windows\\Media\\*","\\Windows\\repair\\*", "*\\PerfLogs\\*", "*:\\Windows\\Prefetch\\*", "*:\\Windows\\Cursors\\*", "*:\\Windows\\INF\\*") AND NOT(Processes.process_path IN ("*\\temp\\*"))
+  by Processes.parent_process_name Processes.parent_process Processes.process_path Processes.dest Processes.user 
+  | `drop_dm_object_name(Processes)` 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)`
+  | `windows_suspicious_process_file_path_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -62,50 +63,51 @@ rba:
   risk_objects:
   - field: dest
     type: system
-    score: 35
+    score: 60
   threat_objects:
   - field: process_path
     type: process_name
 tags:
   analytic_story:
-  - Volt Typhoon
-  - LockBit Ransomware
-  - Data Destruction
-  - XMRig
-  - DarkGate Malware
-  - Chaos Ransomware
   - Double Zero Destructor
-  - Hermetic Wiper
-  - Warzone RAT
-  - Phemedrone Stealer
-  - Prestige Ransomware
   - Graceful Wipe Out Attack
-  - BlackByte Ransomware
-  - IcedID
-  - Handala Wiper
-  - Meduza Stealer
-  - CISA AA23-347A
   - AsyncRAT
-  - Amadey
-  - Industroyer2
-  - ValleyRAT
-  - Rhysida Ransomware
-  - DarkCrystal RAT
-  - Crypto Stealer
-  - Azorult
-  - Swift Slicer
+  - WhisperGate
+  - Prestige Ransomware
+  - DarkGate Malware
   - AgentTesla
-  - Qakbot
-  - Remcos
-  - Trickbot
   - Brute Ratel C4
   - RedLine Stealer
+  - Rhysida Ransomware
+  - Swift Slicer
+  - IcedID
+  - DarkCrystal RAT
+  - Chaos Ransomware
   - PlugX
+  - Industroyer2
+  - Azorult
+  - Remcos
+  - XMRig
+  - Qakbot
+  - Volt Typhoon
+  - Hermetic Wiper
+  - Warzone RAT
+  - Trickbot
+  - Amadey
+  - BlackByte Ransomware
+  - LockBit Ransomware
+  - CISA AA23-347A
+  - Data Destruction
+  - Phemedrone Stealer
+  - Handala Wiper
   - MoonPeak
-  - WhisperGate
+  - ValleyRAT
+  - Meduza Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1543
+  - T1036
+  - T1036.005
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
@@ -115,6 +117,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036/suspicious_process_path/susp_path_sysmon1.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
