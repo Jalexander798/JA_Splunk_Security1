@@ -1,6 +1,6 @@
 name: Windows Process With NetExec Command Line Parameters
 id: adbff89c-c1f2-4a2e-88a4-b5e645856510
-version: 2
+version: 3
 date: '2025-01-09'
 author: Steven Dick, Github Community
 status: production
@@ -8,7 +8,7 @@ type: TTP
 description: The following analytic detects the use of NetExec (formally CrackmapExec) a toolset used for post-exploitation enumeration and attack within Active Directory environments through command line parameters. It leverages Endpoint Detection and Response (EDR) data to identify specific command-line arguments associated with actions like ticket manipulation, kerberoasting, and password spraying. This activity is significant as NetExec is used by adversaries to exploit Kerberos for privilege escalation and lateral movement. If confirmed malicious, this could lead to unauthorized access, persistence, and potential compromise of sensitive information within the network.
 data_source: 
 - Windows Security Event ID 4688
-- Sysmon Event ID 1
+- Sysmon EventID 1
 - CrowdStrike ProcessRollup2
 search: '| tstats `security_content_summariesonly` values(Processes.parent_process) as Processes.parent_process, values(Processes.process) as Processes.process values(Processes.process_current_directory) AS process_current_directory, values(Processes.process_id) as Processes.process_id, values(Processes.process_guid) as Processes.process_guid, count min(_time) AS firstTime, max(_time) AS lastTime FROM datamodel=Endpoint.Processes where Processes.process_name IN ("nxc.exe") OR Processes.original_file_name IN ("nxc.exe") OR (Processes.process IN ("* smb *","* ssh *","* ldap *","* ftp *","* wmi *","* winrm *","* rdp *","* vnc *","* mssql *","* nfs *") AND ((Processes.process = "* -p *" AND Processes.process = "* -u *") OR Processes.process IN ("* -x *","* -M *","* --*"))) BY _time span=1h Processes.user Processes.dest Processes.process_name Processes.parent_process_name  
 |`drop_dm_object_name(Processes)`
