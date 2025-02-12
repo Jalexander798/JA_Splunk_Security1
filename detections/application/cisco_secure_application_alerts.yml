@@ -19,7 +19,7 @@ description: |
   By leveraging this information, SOC teams can proactively mitigate security threats, patch vulnerable applications, and enforce security controls to prevent further exploitation.
 data_source:
 - Cisco Secure Application AppDynamics Alerts
-search: '|
+search: |-
   `appdynamics_security` blocked=false 
   | rename attackEvents{}.attackOutcome AS attackOutcome, "attackEvents{}.vulnerabilityInfo.*" AS * 
   | fields - tag::eventtype, eventtype, host, id, index, linecount, punct, source, sourcetype, splunk_server, tag, SourceType, app clientAddressType, application, tier, "attackEvents{}.*" 
@@ -42,7 +42,7 @@ search: '|
       (signature="MALIP" OR signature="SQL"), "A vulnerability is being ".attackOutcome." to be abused from ".src_category." IP address ".src_ip." and was seen connecting to server ".dest_nt_host." hosting application ".app_name.".",
       (signature="DESEREAL"), "The application ".app_name." deserializes untrusted data without sufficiently verifying that the resulting data will be valid. Data which is untrusted cannot be trusted to be well-formed. Malformed data or unexpected data could be used to abuse application logic, deny service, or execute arbitrary code, when deserialized."
       )
-   | `cisco_secure_application_alerts_filter`'
+   | `cisco_secure_application_alerts_filter`
 how_to_implement: In order to properly run this search, you need to ingest alerts data from AppD SecureApp, specifically ingesting data via HEC. You will also need to ensure that the data is going to sourcetype appdynamics_security. You will need to install the Splunk Add-on for AppDynamics. This add-on will give the needed field aliases to properly run this search. In a future update you will be able to run this detection if ingesting data via the TA.
 known_false_positives: None known at this time
 references:
@@ -79,7 +79,7 @@ tags:
   - Splunk Enterprise Security
   - Splunk Cloud
   security_domain: threat
-  manual_test: We are dynamically creating the risk_score field based on the severity of the alert in the SPL and that supersedes the risk score set in the detection. Setting these to manual test since otherwise we fail integration testing. The detection is also failing on unit-testing as some of the fields set in the observables are empty.
+  # manual_test: We are dynamically creating the risk_score field based on the severity of the alert in the SPL and that supersedes the risk score set in the detection. Setting these to manual test since otherwise we fail integration testing. The detection is also failing on unit-testing as some of the fields set in the observables are empty.
 tests:
 - name: True Positive Test
   attack_data:
