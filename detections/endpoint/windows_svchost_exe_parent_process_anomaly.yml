@@ -51,6 +51,11 @@ rba:
   - field: user
     type: user
     score: 50
+  threat_objects:
+  - field: parent_process_name
+    type: parent_process_name
+  - field: process_name
+    type: process_name
 tags:
   analytic_story:
   - SnappyBee

@@ -48,9 +48,9 @@ rba:
   - field: dest
     type: system
     score: 40
+  threat_objects:
   - field: process_path
     type: process_name
-    score: 40
 tags:
   analytic_story:
   - Nexus APT Threat Activity

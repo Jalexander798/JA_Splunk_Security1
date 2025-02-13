@@ -45,6 +45,7 @@ rba:
   - field: user
     type: user
     score: 60
+    threat_objects: []
 tags:
   analytic_story:
   - SnappyBee

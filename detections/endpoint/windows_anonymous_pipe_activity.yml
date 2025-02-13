@@ -43,6 +43,9 @@ rba:
     score: 30
   - field: user
     type: user
+  threat_objects:
+  - field: process_name
+    type: process_name
 tags:
   analytic_story:
   - SnappyBee
