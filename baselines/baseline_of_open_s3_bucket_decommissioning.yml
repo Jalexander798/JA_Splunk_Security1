@@ -1,6 +1,3 @@
-data_source: []
-mitre_attack_ids: ''
-security_domain: audit
 name: Baseline Of Open S3 Bucket Decommissioning
 id: 984e9022-b87b-499a-a260-8d0282c46ea2
 version: 1
@@ -8,8 +5,12 @@ date: '2025-02-12'
 author: Jose Hernandez
 type: Baseline
 status: production
-description: This baseline search identifies S3 buckets that were previously exposed to the public (either through bucket policies or website hosting) and have been subsequently deleted. This helps track the lifecycle of potentially risky S3 bucket configurations and their proper decommissioning.
-kind: cloud
+description: |-
+  The following analytic identifies S3 buckets that were previously exposed to the public and have been subsequently deleted. It leverages AWS CloudTrail logs to track the lifecycle of potentially risky S3 bucket configurations. This activity is crucial for ensuring that public access to sensitive data is properly managed and decommissioned. By monitoring these events, organizations can ensure that exposed buckets are promptly deleted, reducing the risk of unauthorized access. Immediate investigation is recommended to confirm the proper decommissioning of these buckets and to ensure no sensitive data remains exposed. This baseline detection creates a lookup table of decommissioned buckets.csv and their associated events which can be used by detection searches to trigger alerts when decommissioned buckets are detected.
+
+  The  following detections searches leverage this baseline search and the lookup table.
+  * Detect DNS Query to Decommissioned S3 Bucket
+  * Detect Web Access to Decommissioned S3 Bucket
 search: '`cloudtrail` eventSource="s3.amazonaws.com"  (eventName=DeleteBucket OR eventName=PutBucketPolicy OR eventName=PutBucketWebsite)
 | spath input=_raw path=requestParameters.bucketName output=bucketName
 | spath input=_raw path=requestParameters.Host output=host
@@ -36,7 +37,7 @@ search: '`cloudtrail` eventSource="s3.amazonaws.com"  (eventName=DeleteBucket OR
 | eval policy_details = if(isPublicPolicy==1, "Policy: Principal=" . mvjoin(principals, ", ") . " Effect=" . mvjoin(effects, ", ") . " Action=" . mvjoin(actions, ", "), "No Public Policy")
 | eval website_details = if(isWebsite==1, "Static Website Enabled", "No Website Hosting")
 | table bucketName, hosts, firstEvent, lastEvent, events, policy_details, website_details, accountIds, userARNs, awsRegions
-| outputlookup append=true decommissioned_buckets.csv | `baseline_of_open_s3_bucket_decommissioning_filter`'
+| outputlookup append=true decommissioned_buckets | `baseline_of_open_s3_bucket_decommissioning_filter`'
 how_to_implement: To implement this baseline, you need to have AWS CloudTrail logs being ingested into Splunk with the AWS Add-on properly configured. The search looks for S3 bucket events related to bucket policies, website hosting configuration, and bucket deletion. The results are stored in a lookup file named decommissioned_buckets.csv which tracks the history of deleted buckets that were previously exposed to the public.
 known_false_positives: Some buckets may be intentionally made public for legitimate business purposes before being decommissioned. Review the policy_details and website_details fields to understand the nature of the public access that was configured.
 references:
@@ -47,7 +48,6 @@ tags:
   analytic_story:
   - AWS S3 Bucket Security Monitoring
   - Suspicious AWS S3 Activities
-  message: An S3 bucket that was previously configured with public access has been deleted
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
