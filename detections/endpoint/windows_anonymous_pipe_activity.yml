@@ -10,8 +10,8 @@ data_source:
 - Sysmon EventID 17
 - Sysmon EventID 18
 search: '`sysmon` EventCode IN (17,18) PipeName="*Anonymous Pipe*" NOT( Image IN ("*\\Program Files\\*"))
-  | stats  min(_time) as firstTime max(_time) as lastTime count by dest user EventCode PipeName signature Image process_id process_guid EventType 
-  | rename Image as process_name 
+    | rename Image as process_name 
+  | stats  min(_time) as firstTime max(_time) as lastTime count by dest user EventCode PipeName signature process_name process_id process_guid EventType 
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
   | `windows_anonymous_pipe_activity_filter`'
