@@ -1,7 +1,7 @@
 name: Randomly Generated Scheduled Task Name
 id: 9d22a780-5165-11ec-ad4f-3e22fbd008af
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: experimental
 type: Hunting
@@ -33,7 +33,6 @@ tags:
   - Scheduled Tasks
   asset_type: Endpoint
   mitre_attack_id:
-  - T1053
   - T1053.005
   product:
   - Splunk Enterprise

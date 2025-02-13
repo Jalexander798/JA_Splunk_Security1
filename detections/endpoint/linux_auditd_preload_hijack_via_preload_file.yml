@@ -1,7 +1,7 @@
 name: Linux Auditd Preload Hijack Via Preload File
 id: c1b7abca-55cb-4a39-bdfb-e28c1c12745f
-version: 3
-date: '2024-11-13'
+version: 4
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -47,7 +47,8 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A [$type$] event has occurred on host - [$dest$] to modify the preload file.
+  message: A [$type$] event has occurred on host - [$dest$] to modify the preload
+    file.
   risk_objects:
   - field: dest
     type: system
@@ -62,7 +63,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1574.006
-  - T1574
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

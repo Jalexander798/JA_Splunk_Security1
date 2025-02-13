@@ -1,8 +1,8 @@
 name: Windows Unusual Count Of Invalid Users Fail To Auth Using Kerberos
 id: f122cb2e-d773-4f11-8399-62a3572d8dd7
 type: Anomaly
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 status: production
 author: Mauricio Velazco, Splunk
 data_source:
@@ -60,7 +60,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1110.003
-  - T1110
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

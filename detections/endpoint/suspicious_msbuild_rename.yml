@@ -1,7 +1,7 @@
 name: Suspicious MSBuild Rename
 id: 4006adac-5937-11eb-ae93-0242ac130002
-version: 7
-date: '2024-11-13'
+version: 8
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: Hunting
@@ -48,8 +48,6 @@ tags:
   - Graceful Wipe Out Attack
   asset_type: Endpoint
   mitre_attack_id:
-  - T1036
-  - T1127
   - T1036.003
   - T1127.001
   product:

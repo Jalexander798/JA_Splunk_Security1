@@ -1,7 +1,7 @@
 name: Spoolsv Spawning Rundll32
 id: 15d905f6-da6b-11eb-ab82-acde48001122
-version: 6
-date: '2024-12-10'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Michael Haag, Splunk
 status: production
 type: TTP
@@ -72,7 +72,6 @@ tags:
   - CVE-2021-34527
   mitre_attack_id:
   - T1547.012
-  - T1547
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,7 +1,7 @@
 name: Abnormally High Number Of Cloud Instances Launched
 id: f2361e9f-3928-496c-a556-120cd4223a65
-version: 6
-date: '2024-11-14'
+version: 7
+date: '2025-02-10'
 author: David Dorsey, Splunk
 status: experimental
 type: Anomaly
@@ -48,7 +48,6 @@ tags:
   asset_type: Cloud Instance
   mitre_attack_id:
   - T1078.004
-  - T1078
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

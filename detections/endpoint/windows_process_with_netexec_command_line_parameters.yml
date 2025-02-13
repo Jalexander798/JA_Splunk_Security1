@@ -1,7 +1,7 @@
 name: Windows Process With NetExec Command Line Parameters
 id: adbff89c-c1f2-4a2e-88a4-b5e645856510
 version: 3
-date: '2025-01-09'
+date: '2025-02-11'
 author: Steven Dick, Github Community
 status: production
 type: TTP
@@ -52,9 +52,7 @@ tags:
   - Active Directory Privilege Escalation
   asset_type: Endpoint
   mitre_attack_id: 
-  - T1550
   - T1550.003
-  - T1558
   - T1558.003
   - T1558.004
   product: 

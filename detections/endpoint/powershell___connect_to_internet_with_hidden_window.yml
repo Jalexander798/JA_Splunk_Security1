@@ -1,7 +1,7 @@
 name: PowerShell - Connect To Internet With Hidden Window
 id: ee18ed37-0802-4268-9435-b3b91aaa18db
-version: 11
-date: '2024-11-13'
+version: 12
+date: '2025-02-10'
 author: David Dorsey, Michael Haag Splunk
 status: production
 type: Hunting
@@ -55,7 +55,6 @@ tags:
   - CVE-2021-44228
   mitre_attack_id:
   - T1059.001
-  - T1059
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

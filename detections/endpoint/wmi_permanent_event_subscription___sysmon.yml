@@ -1,7 +1,7 @@
 name: WMI Permanent Event Subscription - Sysmon
 id: ad05aae6-3b2a-4f73-af97-57bd26cee3b9
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Rico Valdez, Michael Haag, Splunk
 status: production
 type: TTP
@@ -58,7 +58,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1546.003
-  - T1546
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
