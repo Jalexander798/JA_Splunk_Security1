@@ -38,13 +38,13 @@ search: |-
       risk_score=0 AND attackOutcome="OBSERVED", "low"
       ) 
   | eval risk_message=case(
-      (signature="API" OR signature="LOG4J" OR signature="SSRF"), "An ".attackOutcome." ".signature." vulnerability is attempted to be abused from ".src_category." IP address ".src_ip." and was seen connecting to server ".dest_nt_host." hosting application ".app_name." and possibly exfiltrating data to ".socketOut."",
-      (signature="MALIP" OR signature="SQL"), "A vulnerability is being ".attackOutcome." to be abused from ".src_category." IP address ".src_ip." and was seen connecting to server ".dest_nt_host." hosting application ".app_name.".",
-      (signature="DESEREAL"), "The application ".app_name." deserializes untrusted data without sufficiently verifying that the resulting data will be valid. Data which is untrusted cannot be trusted to be well-formed. Malformed data or unexpected data could be used to abuse application logic, deny service, or execute arbitrary code, when deserialized."
-      )
-   | `cisco_secure_application_alerts_filter`
-how_to_implement: In order to properly run this search, you need to ingest alerts data from AppD SecureApp, specifically ingesting data via HEC. You will also need to ensure that the data is going to sourcetype appdynamics_security. You will need to install the Splunk Add-on for AppDynamics. This add-on will give the needed field aliases to properly run this search. In a future update you will be able to run this detection if ingesting data via the TA.
-known_false_positives: None known at this time
+    (signature="API" OR signature="LOG4J" OR signature="SSRF"), "An attempt to exploit a ".signature." vulnerability was made from a ".src_category." IP address ".src_ip.". The server ".dest_nt_host." hosting application ".app_name." was accessed, and data may have been exfiltrated to ".socketOut.".",
+    (signature="MALIP" OR signature="SQL"), "A vulnerability is being ".attackOutcome." from a ".src_category." IP address ".src_ip.". The server ".dest_nt_host." hosting application ".app_name." was accessed.",
+    (signature="DESEREAL"), "The application ".app_name." deserializes untrusted data without sufficiently verifying that the resulting data will be valid. Data which is untrusted cannot be trusted to be well-formed. Malformed data or unexpected data could be used to abuse application logic, deny service, or execute arbitrary code, when deserialized."
+    )
+  | `cisco_secure_application_alerts_filter`
+how_to_implement: In order to properly run this search, you need to ingest alerts data from AppD SecureApp, specifically ingesting data via HEC. You will also need to ensure that the data is going to sourcetype - `appdynamics_security`. You will need to install the Splunk Add-on for AppDynamics.
+known_false_positives: None known at this time but if there are false positives, please reach filter out these using the filter macro to reduce alert fatigue
 references:
 - https://docs.appdynamics.com/appd/24.x/latest/en/application-security-monitoring/integrate-cisco-secure-application-with-splunk
 drilldown_searches:
@@ -79,7 +79,7 @@ tags:
   - Splunk Enterprise Security
   - Splunk Cloud
   security_domain: threat
-  manual_test: We are dynamically creating the risk_score field based on the severity of the alert in the SPL and that supersedes the risk score set in the detection. Setting these to manual test since otherwise we fail integration testing. The detection is also failing on unit-testing as some of the fields set in the observables are empty.
+  # manual_test: We are dynamically creating the risk_score field based on the severity of the alert in the SPL and that supersedes the risk score set in the detection. Setting these to manual test since otherwise we fail integration testing. The detection is also failing on unit-testing as some of the fields set in the observables are empty.
 tests:
 - name: True Positive Test
   attack_data:
