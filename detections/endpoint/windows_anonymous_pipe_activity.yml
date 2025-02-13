@@ -1,0 +1,63 @@
+name: Windows Anonymous Pipe Activity
+id: ee301e1e-cd81-4011-a911-e5f049b9e3d5
+version: 1
+date: '2025-02-11'
+author: Teoderick Contreras, Splunk
+status: production
+type: Anomaly
+description: The following analytic detects the creation or connection of anonymous pipes for inter-process communication (IPC) within a Windows environment. Anonymous pipes are commonly used by legitimate system processes, services, and applications to transfer data between related processes. However, adversaries frequently abuse anonymous pipes to facilitate stealthy process injection, command-and-control (C2) communication, credential theft, or privilege escalation. This detection monitors for unusual anonymous pipe activity, particularly involving non-system processes, unsigned executables, or unexpected parent-child process relationships. While legitimate use cases exist—such as Windows services, software installers, or security tools—unusual or high-frequency anonymous pipe activity should be investigated for potential malware, persistence mechanisms, or lateral movement techniques.
+data_source:
+- __UPDATE__ zero or more data_sources
+search: '`sysmon` EventCode IN (17,18) PipeName="*Anonymous Pipe*" NOT( Image IN ("*\\Program Files\\*"))
+  | stats  min(_time) as firstTime max(_time) as lastTime count by dest user EventCode PipeName signature Image process_id process_guid EventType 
+  | rename Image as process_name 
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)`
+  | `windows_anonymous_pipe_activity_filter`'
+how_to_implement:  To successfully implement this search, you need to be ingesting
+  logs with the process name and pipename from your endpoints. If you are using Sysmon,
+  you must have at least version 6.0.4 of the Sysmon TA. .
+known_false_positives: Automation tool might use anonymous pipe for task orchestration or process communication.
+references:
+- https://www.trendmicro.com/en_nl/research/24/k/earth-estries.html
+drilldown_searches:
+- name: View the detection results for - "$dest$"
+  search: '%original_detection_search% | search  dest = "$dest$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: View risk events for the last 7 days for - "$dest$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+rba:
+  message: An anonymous Pipe Channel activity on [$dest$].
+  risk_objects:
+  - field: dest
+    type: system
+    score: 30
+  - field: user
+    type: user
+tags:
+  analytic_story:
+  - SnappyBee
+  - Nexus APT Threat Activity
+  - Earth Estries
+  asset_type: Endpoint
+  mitre_attack_id:
+  - T1559
+  product:
+  - Splunk Enterprise
+  - Splunk Enterprise Security
+  - Splunk Cloud
+  security_domain: endpoint
+tests:
+- name: True Positive Test
+  attack_data:
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1559/anonymous_pipe/anonymouspipe.log
+    sourcetype: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
+    source: XmlWinEventLog
