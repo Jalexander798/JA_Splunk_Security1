@@ -50,6 +50,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/dns_decommissioned_bucket/dns.log
-    source: dns
-    sourcetype: dns 
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/s3_bucket_deletion/s3_bucket_deletion.csv
+    source: s3*
+    sourcetype: aws:cloudtrail 

@@ -54,6 +54,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/web_decommissioned_bucket/proxy.log
-    source: proxy
-    sourcetype: web_proxy 
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/s3_bucket_deletion/s3_bucket_deletion.csv
+    source: s3*
+    sourcetype: aws:cloudtrail
