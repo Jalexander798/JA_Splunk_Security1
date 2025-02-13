@@ -43,6 +43,7 @@ rba:
     score: 30
   - field: user
     type: user
+    score: 30
   threat_objects:
   - field: process_name
     type: process_name
