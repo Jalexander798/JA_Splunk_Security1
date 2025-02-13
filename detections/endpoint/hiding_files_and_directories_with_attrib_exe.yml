@@ -1,7 +1,7 @@
 name: Hiding Files And Directories With Attrib exe
 id: 6e5a3ae4-90a3-462d-9aa6-0119f638c0f1
-version: 9
-date: '2024-12-10'
+version: 10
+date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -67,7 +67,6 @@ tags:
   - Crypto Stealer
   asset_type: Endpoint
   mitre_attack_id:
-  - T1222
   - T1222.001
   product:
   - Splunk Enterprise

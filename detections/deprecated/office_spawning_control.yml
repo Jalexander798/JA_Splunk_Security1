@@ -1,19 +1,18 @@
 name: Office Spawning Control
 id: 053e027c-10c7-11ec-8437-acde48001122
-version: 11
-date: '2025-01-24'
+version: 12
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: deprecated
 type: TTP
-description: The following analytic has been deprecated.
-  The following analytic identifies instances where `control.exe` is spawned
-  by a Microsoft Office product. It leverages data from Endpoint Detection and Response
-  (EDR) agents, focusing on process and parent process relationships. This activity
-  is significant because it can indicate exploitation attempts related to CVE-2021-40444,
-  where `control.exe` is used to execute malicious .cpl or .inf files. If confirmed
-  malicious, this behavior could allow an attacker to execute arbitrary code, potentially
-  leading to system compromise, data exfiltration, or further lateral movement within
-  the network.
+description: The following analytic has been deprecated. The following analytic identifies
+  instances where `control.exe` is spawned by a Microsoft Office product. It leverages
+  data from Endpoint Detection and Response (EDR) agents, focusing on process and
+  parent process relationships. This activity is significant because it can indicate
+  exploitation attempts related to CVE-2021-40444, where `control.exe` is used to
+  execute malicious .cpl or .inf files. If confirmed malicious, this behavior could
+  allow an attacker to execute arbitrary code, potentially leading to system compromise,
+  data exfiltration, or further lateral movement within the network.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
@@ -78,7 +77,6 @@ tags:
   cve:
   - CVE-2021-40444
   mitre_attack_id:
-  - T1566
   - T1566.001
   product:
   - Splunk Enterprise

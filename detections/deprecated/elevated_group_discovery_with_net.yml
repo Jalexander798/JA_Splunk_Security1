@@ -1,19 +1,18 @@
 name: Elevated Group Discovery With Net
 id: a23a0e20-0b1b-4a07-82e5-ec5f70811e7a
-version: 6
-date: '2025-01-24'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: deprecated
 type: TTP
-description: The following analytic has been deprecated.
-  The following analytic detects the execution of `net.exe` or `net1.exe`
-  with command-line arguments used to query elevated domain groups. It leverages data
-  from Endpoint Detection and Response (EDR) agents, focusing on process names and
-  command-line executions. This activity is significant as it indicates potential
-  reconnaissance efforts by adversaries to identify high-privileged users within Active
-  Directory. If confirmed malicious, this behavior could lead to further attacks aimed
-  at compromising privileged accounts, escalating privileges, or gaining unauthorized
-  access to sensitive systems and data.
+description: The following analytic has been deprecated. The following analytic detects
+  the execution of `net.exe` or `net1.exe` with command-line arguments used to query
+  elevated domain groups. It leverages data from Endpoint Detection and Response (EDR)
+  agents, focusing on process names and command-line executions. This activity is
+  significant as it indicates potential reconnaissance efforts by adversaries to identify
+  high-privileged users within Active Directory. If confirmed malicious, this behavior
+  could lead to further attacks aimed at compromising privileged accounts, escalating
+  privileges, or gaining unauthorized access to sensitive systems and data.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
@@ -71,7 +70,6 @@ tags:
   - BlackSuit Ransomware
   asset_type: Endpoint
   mitre_attack_id:
-  - T1069
   - T1069.002
   product:
   - Splunk Enterprise

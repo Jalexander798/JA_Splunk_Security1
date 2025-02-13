@@ -1,7 +1,7 @@
 name: Windows Known Abused DLL Created
 id: ea91651a-772a-4b02-ac3d-985b364a5f07
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Steven Dick
 status: production
 type: Anomaly
@@ -87,7 +87,6 @@ tags:
   mitre_attack_id:
   - T1574.001
   - T1574.002
-  - T1574
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

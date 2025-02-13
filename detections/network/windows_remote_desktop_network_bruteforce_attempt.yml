@@ -1,7 +1,7 @@
 name: Windows Remote Desktop Network Bruteforce Attempt
 id: 908bf0d5-0983-4afd-b6a4-e9eb5d361a7d
-version: 1
-date: '2025-01-10'
+version: 2
+date: '2025-02-11'
 author: Jose Hernandez, Bhavin Patel, Splunk
 status: production
 type: Anomaly
@@ -47,7 +47,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1110.001
-  - T1110
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

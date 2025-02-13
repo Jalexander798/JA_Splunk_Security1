@@ -1,7 +1,7 @@
 name: Unloading AMSI via Reflection
 id: a21e3484-c94d-11eb-b55b-acde48001122
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -57,9 +57,8 @@ tags:
   - Data Destruction
   asset_type: Endpoint
   mitre_attack_id:
-  - T1562
   - T1059.001
-  - T1059
+  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

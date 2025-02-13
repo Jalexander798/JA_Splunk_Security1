@@ -1,7 +1,7 @@
 name: AWS Multi-Factor Authentication Disabled
 id: 374832b1-3603-420c-b456-b373e24d34c0
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -56,11 +56,9 @@ tags:
   - AWS Identity and Access Management Account Takeover
   asset_type: AWS Account
   mitre_attack_id:
-  - T1586
+  - T1556.006
   - T1586.003
   - T1621
-  - T1556
-  - T1556.006
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

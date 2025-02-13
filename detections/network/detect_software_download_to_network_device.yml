@@ -1,7 +1,7 @@
 name: Detect Software Download To Network Device
 id: cc590c66-f65f-48f2-986a-4797244762f8
-version: 4
-date: '2024-11-15'
+version: 5
+date: '2025-02-10'
 author: Mikael Bjerkeland, Splunk
 status: experimental
 type: TTP
@@ -44,7 +44,6 @@ tags:
   asset_type: Infrastructure
   mitre_attack_id:
   - T1542.005
-  - T1542
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,7 +1,7 @@
 name: Windows Non-System Account Targeting Lsass
 id: b1ce9a72-73cf-11ec-981b-acde48001122
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -66,7 +66,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1003.001
-  - T1003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

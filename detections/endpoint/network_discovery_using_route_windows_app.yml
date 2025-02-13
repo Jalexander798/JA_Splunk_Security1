@@ -1,7 +1,7 @@
 name: Network Discovery Using Route Windows App
 id: dd83407e-439f-11ec-ab8e-acde48001122
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
@@ -45,7 +45,6 @@ tags:
   - Prestige Ransomware
   asset_type: Endpoint
   mitre_attack_id:
-  - T1016
   - T1016.001
   product:
   - Splunk Enterprise

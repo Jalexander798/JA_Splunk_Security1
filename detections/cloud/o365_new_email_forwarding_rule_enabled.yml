@@ -1,7 +1,7 @@
 name: O365 New Email Forwarding Rule Enabled
 id: ac7c4d0a-06a3-4278-aa59-88a5e537f981
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 data_source: []
 type: TTP
@@ -57,7 +57,6 @@ tags:
   - Office 365 Collection Techniques
   asset_type: O365 Tenant
   mitre_attack_id:
-  - T1114
   - T1114.003
   product:
   - Splunk Enterprise

@@ -1,9 +1,9 @@
 name: Windows Unusual Count Of Invalid Users Failed To Auth Using NTLM
 id: 15603165-147d-4a6e-9778-bd0ff39e668f
 type: Anomaly
-version: 5
+version: 6
 status: production
-date: '2024-11-13'
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 data_source:
 - Windows Event Log Security 4776
@@ -64,7 +64,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1110.003
-  - T1110
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

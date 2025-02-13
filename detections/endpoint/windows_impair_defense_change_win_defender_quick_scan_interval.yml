@@ -1,7 +1,7 @@
 name: Windows Impair Defense Change Win Defender Quick Scan Interval
 id: 783f0798-f679-4c17-b3b3-187febf0b9b8
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -59,7 +59,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

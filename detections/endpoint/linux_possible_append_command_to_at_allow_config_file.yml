@@ -1,7 +1,7 @@
 name: Linux Possible Append Command To At Allow Config File
 id: 7bc20606-5f40-11ec-a586-acde48001122
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -64,7 +64,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.002
-  - T1053
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

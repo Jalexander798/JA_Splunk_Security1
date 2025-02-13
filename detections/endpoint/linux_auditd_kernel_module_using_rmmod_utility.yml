@@ -1,7 +1,7 @@
 name: Linux Auditd Kernel Module Using Rmmod Utility
 id: 31810b7a-0abe-42be-a210-0dec8106afee
-version: 3
-date: '2024-11-13'
+version: 4
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -63,7 +63,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1547.006
-  - T1547
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
