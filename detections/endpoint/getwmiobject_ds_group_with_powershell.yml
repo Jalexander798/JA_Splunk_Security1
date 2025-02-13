@@ -1,7 +1,7 @@
 name: GetWmiObject Ds Group with PowerShell
 id: df275a44-4527-443b-b884-7600e066e3eb
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -63,7 +63,6 @@ tags:
   - Active Directory Discovery
   asset_type: Endpoint
   mitre_attack_id:
-  - T1069
   - T1069.002
   product:
   - Splunk Enterprise

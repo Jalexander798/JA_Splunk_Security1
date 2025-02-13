@@ -1,7 +1,7 @@
 name: Windows Excessive Disabled Services Event
 id: c3f85976-94a5-11ec-9a58-acde48001122
-version: 7
-date: '2024-12-10'
+version: 8
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -56,7 +56,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

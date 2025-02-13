@@ -1,7 +1,7 @@
 name: Windows Impair Defense Disable Win Defender Signature Retirement
 id: 7567a72f-bada-489d-aef1-59743fb64a66
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -61,7 +61,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

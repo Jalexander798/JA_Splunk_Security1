@@ -1,19 +1,19 @@
 name: Office Product Spawning CertUtil
 id: 6925fe72-a6d5-11eb-9e17-acde48001122
-version: 9
-date: '2025-01-13'
+version: 10
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: deprecated
 type: TTP
-description: The following analytic has been deprecated in favour of a more generic approach in "Windows Office Product Spawned Uncommon Process".
-  The following analytic detects any Windows Office Product spawning `certutil.exe`,
-  a behavior often associated with malware families like TA551 and IcedID. This detection
-  leverages Endpoint Detection and Response (EDR) data, focusing on process relationships
-  and command-line executions. The significance lies in the fact that `certutil.exe`
-  is frequently used for downloading malicious payloads from remote URLs. If confirmed
-  malicious, this activity could lead to unauthorized code execution, data exfiltration,
-  or further system compromise. Immediate investigation and containment are crucial
-  to prevent potential damage.
+description: The following analytic has been deprecated in favour of a more generic
+  approach in "Windows Office Product Spawned Uncommon Process". The following analytic
+  detects any Windows Office Product spawning `certutil.exe`, a behavior often associated
+  with malware families like TA551 and IcedID. This detection leverages Endpoint Detection
+  and Response (EDR) data, focusing on process relationships and command-line executions.
+  The significance lies in the fact that `certutil.exe` is frequently used for downloading
+  malicious payloads from remote URLs. If confirmed malicious, this activity could
+  lead to unauthorized code execution, data exfiltration, or further system compromise.
+  Immediate investigation and containment are crucial to prevent potential damage.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
@@ -72,7 +72,6 @@ tags:
   - CVE-2023-36884 Office and Windows HTML RCE Vulnerability
   asset_type: Endpoint
   mitre_attack_id:
-  - T1566
   - T1566.001
   product:
   - Splunk Enterprise

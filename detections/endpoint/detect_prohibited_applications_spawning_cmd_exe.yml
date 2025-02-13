@@ -1,7 +1,7 @@
 name: Detect Prohibited Applications Spawning cmd exe
 id: dcfd6b40-42f9-469d-a433-2e53f7486664
-version: 10
-date: '2024-11-13'
+version: 11
+date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production
 type: Hunting
@@ -44,7 +44,6 @@ tags:
   - NOBELIUM Group
   asset_type: Endpoint
   mitre_attack_id:
-  - T1059
   - T1059.003
   product:
   - Splunk Enterprise

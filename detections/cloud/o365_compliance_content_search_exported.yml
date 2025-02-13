@@ -1,7 +1,7 @@
 name: O365 Compliance Content Search Exported
 id: 2ce9f31d-ab4f-4179-b2b7-c77a9652e1d8
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 data_source: []
 type: TTP
@@ -53,7 +53,6 @@ tags:
   - Office 365 Collection Techniques
   asset_type: O365 Tenant
   mitre_attack_id:
-  - T1114
   - T1114.002
   product:
   - Splunk Enterprise

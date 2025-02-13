@@ -1,7 +1,7 @@
 name: Detect mshta inline hta execution
 id: a0873b32-5b68-11eb-ae93-0242ac130002
-version: 13
-date: '2024-12-10'
+version: 14
+date: '2025-02-10'
 author: Bhavin Patel, Michael Haag, Splunk
 status: production
 type: TTP
@@ -77,7 +77,6 @@ tags:
   - Compromised Windows Host
   asset_type: Endpoint
   mitre_attack_id:
-  - T1218
   - T1218.005
   product:
   - Splunk Enterprise

@@ -1,7 +1,7 @@
 name: Non Firefox Process Access Firefox Profile Dir
 id: e6fc13b0-1609-11ec-b533-acde48001122
-version: '6'
-date: '2025-02-07'
+version: '7'
+date: '2025-02-13'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -65,7 +65,6 @@ tags:
   - FIN7
   asset_type: Endpoint
   mitre_attack_id:
-  - T1555
   - T1555.003
   product:
   - Splunk Enterprise
