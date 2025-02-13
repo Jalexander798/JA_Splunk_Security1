@@ -1,7 +1,7 @@
 name: Linux Deletion Of Init Daemon Script
 id: 729aab57-d26f-4156-b97f-ab8dda8f44b1
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -57,9 +57,8 @@ tags:
   - AcidPour
   asset_type: Endpoint
   mitre_attack_id:
-  - T1485
   - T1070.004
-  - T1070
+  - T1485
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

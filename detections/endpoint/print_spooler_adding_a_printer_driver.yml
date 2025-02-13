@@ -1,7 +1,7 @@
 name: Print Spooler Adding A Printer Driver
 id: 313681a2-da8e-11eb-adad-acde48001122
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Mauricio Velazco, Michael Haag, Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -58,7 +58,6 @@ tags:
   - CVE-2021-1675
   mitre_attack_id:
   - T1547.012
-  - T1547
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

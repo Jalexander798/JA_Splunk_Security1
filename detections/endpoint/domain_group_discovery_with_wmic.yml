@@ -1,7 +1,7 @@
 name: Domain Group Discovery With Wmic
 id: a87736a6-95cd-4728-8689-3c64d5026b3e
-version: 5
-date: '2024-12-10'
+version: 6
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: Hunting
@@ -40,7 +40,6 @@ tags:
   - Active Directory Discovery
   asset_type: Endpoint
   mitre_attack_id:
-  - T1069
   - T1069.002
   product:
   - Splunk Enterprise

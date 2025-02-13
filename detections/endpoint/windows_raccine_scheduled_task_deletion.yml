@@ -1,6 +1,6 @@
 name: Windows Raccine Scheduled Task Deletion
 id: c9f010da-57ab-11ec-82bd-acde48001122
-version: 6
+version: 7
 date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production

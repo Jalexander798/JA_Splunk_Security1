@@ -1,6 +1,6 @@
 name: Windows ESX Admins Group Creation via PowerShell
 id: f48a5557-be06-4b96-b8e8-be563e387620
-version: 3
+version: 4
 date: '2024-11-13'
 author: Michael Haag, Splunk
 data_source:

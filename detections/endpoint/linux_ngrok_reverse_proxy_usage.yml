@@ -1,6 +1,6 @@
 name: Linux Ngrok Reverse Proxy Usage
 id: bc84d574-708c-467d-b78a-4c1e20171f97
-version: 5
+version: 6
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production

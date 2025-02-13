@@ -1,7 +1,7 @@
 name: Cloud Compute Instance Created By Previously Unseen User
 id: 37a0ec8d-827e-4d6d-8025-cedf31f3a149
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Rico Valdez, Splunk
 status: experimental
 type: Anomaly
@@ -46,7 +46,6 @@ tags:
   asset_type: Cloud Compute Instance
   mitre_attack_id:
   - T1078.004
-  - T1078
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

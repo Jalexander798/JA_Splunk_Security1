@@ -1,6 +1,6 @@
 name: remote_access_software
-date: 2024-12-23
-version: 2
+date: 2025-02-10
+version: 3
 id: f3b92ff9-667c-481f-b29d-458e10d48508
 author: Splunk Threat Research Team
 lookup_type: csv

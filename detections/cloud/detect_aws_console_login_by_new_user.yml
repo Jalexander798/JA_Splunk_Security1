@@ -1,7 +1,7 @@
 name: Detect AWS Console Login by New User
 id: bc91a8cd-35e7-4bb2-6140-e756cc46fd71
-version: 6
-date: '2024-11-14'
+version: 7
+date: '2025-02-10'
 author: Rico Valdez, Splunk
 status: experimental
 type: Hunting
@@ -38,9 +38,8 @@ tags:
   - AWS Identity and Access Management Account Takeover
   asset_type: AWS Instance
   mitre_attack_id:
-  - T1586
-  - T1586.003
   - T1552
+  - T1586.003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,7 +1,7 @@
 name: Okta ThreatInsight Login Failure with High Unknown users
 id: 632663b0-4562-4aad-abe9-9f621a049738
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Okta, Inc, Michael Haag, Splunk
 type: TTP
 status: deprecated
@@ -34,7 +34,6 @@ tags:
   - Suspicious Okta Activity
   asset_type: Infrastructure
   mitre_attack_id:
-  - T1078
   - T1078.001
   - T1110.004
   product:

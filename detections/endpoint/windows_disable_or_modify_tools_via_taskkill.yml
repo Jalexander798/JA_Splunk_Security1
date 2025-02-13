@@ -1,7 +1,7 @@
 name: Windows Disable or Modify Tools Via Taskkill
 id: a43ae66f-c410-4b3d-8741-9ce1ad17ddb0
-version: 6
-date: '2024-11-22'
+version: 7
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -67,7 +67,6 @@ tags:
   - Crypto Stealer
   asset_type: Endpoint
   mitre_attack_id:
-  - T1562
   - T1562.001
   product:
   - Splunk Enterprise

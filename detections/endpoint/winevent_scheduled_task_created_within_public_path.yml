@@ -1,7 +1,7 @@
 name: WinEvent Scheduled Task Created Within Public Path
 id: 5d9c6eee-988c-11eb-8253-acde48001122
-version: 8
-date: '2025-01-27'
+version: 9
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -73,7 +73,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.005
-  - T1053
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
@@ -82,6 +81,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/winevent_scheduled_task_created_to_spawn_shell/windows-xml.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/winevent_scheduled_task_created_to_spawn_shell/windows-xml.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

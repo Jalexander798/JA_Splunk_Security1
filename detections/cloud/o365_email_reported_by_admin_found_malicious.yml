@@ -1,7 +1,7 @@
 name: O365 Email Reported By Admin Found Malicious
 id: 94396c3e-7728-422a-9956-e4b77b53dbdf
-version: 3
-date: '2024-11-14'
+version: 4
+date: '2025-02-10'
 author: Steven Dick
 status: production
 type: TTP
@@ -57,7 +57,6 @@ tags:
   - Suspicious Emails
   asset_type: O365 Tenant
   mitre_attack_id:
-  - T1566
   - T1566.001
   - T1566.002
   product:

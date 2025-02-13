@@ -1,6 +1,6 @@
 name: Zscaler Behavior Analysis Threat Blocked
 id: 289ad59f-8939-4331-b805-f2bd51d36fb8
-version: 4
+version: 5
 date: '2024-11-15'
 author: Rod Soto, Gowthamaraj Rajendran, Splunk
 status: production

@@ -1,7 +1,7 @@
 name: Windows User Execution Malicious URL Shortcut File
 id: 5c7ee6ad-baf4-44fb-b2f0-0cfeddf82dbc
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -60,7 +60,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1204.002
-  - T1204
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

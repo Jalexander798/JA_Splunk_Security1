@@ -1,7 +1,7 @@
 name: Powershell COM Hijacking InprocServer32 Modification
 id: ea61e291-af05-4716-932a-67faddb6ae6f
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -56,9 +56,8 @@ tags:
   - Malicious PowerShell
   asset_type: Endpoint
   mitre_attack_id:
-  - T1546.015
-  - T1059
   - T1059.001
+  - T1546.015
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

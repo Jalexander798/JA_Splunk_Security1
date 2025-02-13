@@ -1,7 +1,7 @@
 name: Azure AD Multi-Source Failed Authentications Spike
 id: 116e11a9-63ea-41eb-a66a-6a13bdc7d2c7
-version: 6
-date: '2024-11-14'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: Hunting
@@ -53,11 +53,9 @@ tags:
   asset_type: Azure Tenant
   atomic_guid: []
   mitre_attack_id:
-  - T1586
-  - T1586.003
-  - T1110
   - T1110.003
   - T1110.004
+  - T1586.003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

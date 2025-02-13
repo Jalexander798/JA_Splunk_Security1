@@ -1,7 +1,7 @@
 name: Allow File And Printing Sharing In Firewall
 id: ce27646e-d411-11eb-8a00-acde48001122
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -70,7 +70,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.007
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
