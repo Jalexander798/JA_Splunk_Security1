@@ -4,13 +4,6 @@ version: 5
 date: '2025-01-24'
 author: Teoderick Contreras, Splunk
 status: deprecated
-deprecation_info:
-  deprecation_date: '2025-02-26'
-  deprecation_version: 5.2.0
-  content_type: detection
-  reason: Renamed and updated logic
-  replacement_content:
-  - Linux Auditd Private Keys and Certificate Enumeration
 type: TTP
 description: The following analytic has been deprecated. The following analytic detects
   suspicious attempts to find private keys, which may indicate an attacker's effort

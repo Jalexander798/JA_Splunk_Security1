@@ -4,13 +4,6 @@ version: 9
 date: '2025-01-24'
 author: Rico Valdez, Splunk
 status: deprecated
-deprecation_info:
-  deprecation_date: '2025-02-26'
-  deprecation_version: 5.2.0
-  content_type: detection
-  reason: Renamed and updated logic
-  replacement_content:
-  - Windows Attempt To Stop Security Service
 type: TTP
 description: The following analytic has been deprecated. The following analytic detects
   attempts to stop security-related services on an endpoint, which may indicate malicious

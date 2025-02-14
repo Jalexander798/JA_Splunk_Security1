@@ -4,13 +4,6 @@ version: 7
 date: '2025-01-24'
 author: Bhavin Patel, Splunk
 status: deprecated
-deprecation_info:
-  deprecation_date: '2025-02-26'
-  deprecation_version: 5.2.0
-  content_type: detection
-  reason: Renamed and updated logic
-  replacement_content:
-  - Potential System Network Configuration Discovery Activity
 type: TTP
 description: The following analytic has been deprecated. The following analytic identifies
   the rapid execution of processes used for system network configuration discovery

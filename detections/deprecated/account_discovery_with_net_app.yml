@@ -4,16 +4,6 @@ version: 8
 date: '2025-01-13'
 author: Teoderick Contreras, Splunk, TheLawsOfChaos, Github Community
 status: deprecated
-deprecation_info:
-  deprecation_date: '2025-02-26'
-  deprecation_version: 5.2.0
-  content_type: detection
-  reason: This analytic was a TTP that focused on unrelated things and called account
-    discovery. Since there were other detection that overlapped with it. I choose
-    to deprecate it, and replace it with an updated version of 339805ce-ac30-11eb-b87d-acde48001122
-    / Windows Excessive Usage Of Net App.
-  replacement_content:
-  - Windows Excessive Usage Of Net App
 type: TTP
 description: The following analytic has been deprecated in favour of the more generic
   "45e52536-ae42-11eb-b5c6-acde48001122". The following analytic detects potential

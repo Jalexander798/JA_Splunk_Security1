@@ -4,13 +4,6 @@ version: 15
 date: '2025-01-24'
 author: Bhavin Patel, Splunk
 status: deprecated
-deprecation_info:
-  deprecation_date: '2025-02-26'
-  deprecation_version: 5.2.0
-  content_type: detection
-  reason: Renamed and updated logic
-  replacement_content:
-  - Windows Create Local Administrator Account Via Net
 type: TTP
 description: The following analytic has been deprecated. The following analytic detects
   the creation of local administrator accounts using the net.exe command. It leverages

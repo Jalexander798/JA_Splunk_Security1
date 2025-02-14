@@ -4,13 +4,6 @@ version: 4
 date: '2024-11-14'
 author: Michael Haag, Splunk
 status: deprecated
-deprecation_info:
-  deprecation_date: '2025-02-26'
-  deprecation_version: 5.2.0
-  content_type: detection
-  reason: Updated to a new detection name
-  replacement_content:
-  - Dump LSASS via procdump
 type: Hunting
 description: "Detect a renamed instance of procdump.exe dumping the lsass process.
   This query looks for both -mm and -ma usage. -mm will produce a mini dump file and

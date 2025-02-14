@@ -4,14 +4,6 @@ version: 5
 date: '2024-11-14'
 author: Michael Haag, Splunk
 status: deprecated
-deprecation_info:
-  deprecation_date: '2025-02-26'
-  deprecation_version: 5.2.0
-  content_type: detection
-  reason: Detections updated to use the new search logic and field names due to the
-    TA update
-  replacement_content:
-  - Windows DLL Search Order Hijacking Hunt with Sysmon
 type: Hunting
 description: The following hunting analytic is an experimental query built against
   a accidental feature using the latest Sysmon TA 3.0 (https://splunkbase.splunk.com/app/5709/)

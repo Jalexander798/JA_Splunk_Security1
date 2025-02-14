@@ -4,12 +4,6 @@ version: 9
 date: '2024-11-14'
 author: Bhavin Patel, Patrick Bareiss, Splunk
 status: deprecated
-deprecation_info:
-  deprecation_date: '2025-02-26'
-  deprecation_version: 5.2.0
-  content_type: detection
-  reason: ''
-  replacement_content: []
 type: Hunting
 description: This search looks for specific authentication events from the Windows
   Security Event logs to detect potential attempts at using the Pass-the-Hash technique.

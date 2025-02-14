@@ -4,14 +4,6 @@ version: 5
 date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: deprecated
-deprecation_info:
-  deprecation_date: '2025-02-26'
-  deprecation_version: 5.2.0
-  content_type: detection
-  reason: Detections updated to use the new search logic and field names due to the
-    TA update
-  replacement_content:
-  - Abnormally High Number Of Cloud Instances Launched
 type: Anomaly
 description: This search looks for AWS CloudTrail events where a user successfully
   launches an abnormally high number of instances. This search is deprecated and have

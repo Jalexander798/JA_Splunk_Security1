@@ -4,14 +4,6 @@ version: 5
 date: '2025-01-13'
 author: Michael Haag, Splunk
 status: deprecated
-deprecation_info:
-  deprecation_date: '2025-02-26'
-  deprecation_version: 5.2.0
-  content_type: detection
-  reason: Both of these analytics were deprecated in favor of c5c8e0f3-147a-43da-bf04-4cfaec27dc44
-    / Windows Group Discovery Via Net
-  replacement_content:
-  - Windows Group Discovery Via Net
 type: Hunting
 description: This search has been deprecated in favour of the more generic analytic
   "c5c8e0f3-147a-43da-bf04-4cfaec27dc44". The following analytic detects the execution

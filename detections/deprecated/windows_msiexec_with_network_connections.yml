@@ -4,13 +4,6 @@ version: 6
 date: '2025-01-24'
 author: Michael Haag, Splunk
 status: deprecated
-deprecation_info:
-  deprecation_date: '2025-02-26'
-  deprecation_version: 5.2.0
-  content_type: detection
-  reason: Renamed and updated logic
-  replacement_content:
-  - Windows HTTP Network Communication From MSIExec
 type: TTP
 description: The following analytic has been deprecated. The following analytic detects
   MSIExec making network connections over ports 443 or 80. This behavior is identified

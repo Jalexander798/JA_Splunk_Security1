@@ -4,14 +4,6 @@ version: 4
 date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: deprecated
-deprecation_info:
-  deprecation_date: '2025-02-26'
-  deprecation_version: 5.2.0
-  content_type: detection
-  reason: Detections updated to use the new search logic and field names due to the
-    TA update
-  replacement_content:
-  - Cloud API Calls From Previously Unseen User Roles
 type: Anomaly
 description: This search detects new API calls that have either never been seen before
   or that have not been seen in the previous hour, where the identity type is `AssumedRole`.

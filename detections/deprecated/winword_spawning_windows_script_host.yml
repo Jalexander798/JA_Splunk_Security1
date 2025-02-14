@@ -4,16 +4,6 @@ version: 6
 date: '2025-01-13'
 author: Michael Haag, Splunk
 status: deprecated
-deprecation_info:
-  deprecation_date: '2025-02-26'
-  deprecation_version: 5.2.0
-  content_type: detection
-  reason: "The following analytics was deprecated in favour of a more generic approach.
-    Where instead of creating specific analytic for every potentially suspicious child
-    of an office product. We group them by threat level.\nThis would ease management
-    and false positives tuning."
-  replacement_content:
-  - Windows Office Product Spawned Uncommon Process
 type: TTP
 description: The following analytic has been deprecated in favour of a more generic
   approach. The following analytic identifies instances where Microsoft Winword.exe

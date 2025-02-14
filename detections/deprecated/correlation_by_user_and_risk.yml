@@ -4,13 +4,6 @@ version: 3
 date: '2024-11-14'
 author: Patrick Bareiss, Splunk
 status: deprecated
-deprecation_info:
-  deprecation_date: '2025-02-26'
-  deprecation_version: 5.2.0
-  content_type: detection
-  reason: Detections updated to use the datamodel
-  replacement_content:
-  - Risk Rule for Dev Sec Ops by Repository
 type: Correlation
 description: |-
   The following analytic detects the correlation between the user and risk score and identifies users with a high risk score that pose a significant security risk such as unauthorized access attempts, suspicious behavior, or potential insider threats. Next, the analytic calculates the sum of the risk scores and groups the results by user, the corresponding signals, and the repository. The results are sorted in descending order based on the risk score and filtered to include records with a risk score greater than 80. Finally, the results are passed through a correlation filter specific to the user and risk. This detection is important because it identifies users who have a high risk score and helps to prioritize investigations and allocate resources. False positives might occur but the impact of such an attack can vary depending on the specific scenario such as data exfiltration, system compromise, or the disruption of critical services. Please investigate this notable event.

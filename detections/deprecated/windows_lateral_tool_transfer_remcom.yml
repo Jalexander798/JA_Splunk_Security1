@@ -5,13 +5,6 @@ date: '2024-12-10'
 author: Michael Haag, Splunk
 type: TTP
 status: deprecated
-deprecation_info:
-  deprecation_date: '2025-02-26'
-  deprecation_version: 5.2.0
-  content_type: detection
-  reason: Updated to a new detection name
-  replacement_content:
-  - Windows Service Execution RemCom
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688

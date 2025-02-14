@@ -4,14 +4,6 @@ version: 3
 date: '2024-11-14'
 author: Patrick Bareiss, Splunk
 status: deprecated
-deprecation_info:
-  deprecation_date: '2025-02-26'
-  deprecation_version: 5.2.0
-  content_type: detection
-  reason: Detections updated to use the new search logic and field names due to the
-    TA update
-  replacement_content:
-  - ASL AWS Create Access Key
 type: Hunting
 description: This detection rule monitors for the creation of AWS Identity and Access
   Management (IAM) access keys. An IAM access key consists of an access key ID and
