@@ -1,7 +1,7 @@
 name: Hosts receiving high volume of network traffic from email server
 id: 7f5fb3e1-4209-4914-90db-0ec21b556368
-version: 5
-date: '2024-11-15'
+version: 6
+date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: experimental
 type: Anomaly
@@ -51,7 +51,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1114.002
-  - T1114
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

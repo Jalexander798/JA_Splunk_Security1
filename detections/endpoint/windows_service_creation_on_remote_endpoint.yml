@@ -1,7 +1,7 @@
 name: Windows Service Creation on Remote Endpoint
 id: e0eea4fa-4274-11ec-882b-3e22fbd008af
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -66,7 +66,6 @@ tags:
   - CISA AA23-347A
   asset_type: Endpoint
   mitre_attack_id:
-  - T1543
   - T1543.003
   product:
   - Splunk Enterprise

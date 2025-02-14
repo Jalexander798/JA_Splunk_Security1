@@ -1,7 +1,7 @@
 name: Creation of lsass Dump with Taskmgr
 id: b2fbe95a-9c62-4c12-8a29-24b97e84c0cd
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -59,7 +59,6 @@ tags:
   asset_type: Windows
   mitre_attack_id:
   - T1003.001
-  - T1003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

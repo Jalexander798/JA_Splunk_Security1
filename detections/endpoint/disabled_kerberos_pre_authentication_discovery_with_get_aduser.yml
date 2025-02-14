@@ -1,7 +1,7 @@
 name: Disabled Kerberos Pre-Authentication Discovery With Get-ADUser
 id: 114c6bfe-9406-11ec-bcce-acde48001122
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -56,7 +56,6 @@ tags:
   - BlackSuit Ransomware
   asset_type: Endpoint
   mitre_attack_id:
-  - T1558
   - T1558.004
   product:
   - Splunk Enterprise

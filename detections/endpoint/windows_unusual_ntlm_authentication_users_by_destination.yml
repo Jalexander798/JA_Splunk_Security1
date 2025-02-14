@@ -1,7 +1,7 @@
 name: Windows Unusual NTLM Authentication Users By Destination
 id: 1120a204-8444-428b-8657-6ea4e1f3e840
-version: 3
-date: '2024-11-13'
+version: 4
+date: '2025-02-10'
 author: Steven Dick
 status: production
 type: Anomaly
@@ -65,7 +65,6 @@ tags:
   - Active Directory Password Spraying
   asset_type: Endpoint
   mitre_attack_id:
-  - T1110
   - T1110.003
   product:
   - Splunk Enterprise

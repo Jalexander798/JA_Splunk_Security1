@@ -1,7 +1,7 @@
 name: Detect Regasm with no Command Line Arguments
 id: c3bc1430-04e7-4178-835f-047d8e6e97df
-version: 8
-date: '2024-11-13'
+version: 9
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -75,7 +75,6 @@ tags:
   - Handala Wiper
   asset_type: Endpoint
   mitre_attack_id:
-  - T1218
   - T1218.009
   product:
   - Splunk Enterprise

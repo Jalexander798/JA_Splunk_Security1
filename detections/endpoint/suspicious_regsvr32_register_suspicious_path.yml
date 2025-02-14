@@ -1,7 +1,7 @@
 name: Suspicious Regsvr32 Register Suspicious Path
 id: 62732736-6250-11eb-ae93-0242ac130002
-version: 11
-date: '2025-01-27'
+version: 12
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -82,7 +82,6 @@ tags:
   - Living Off The Land
   asset_type: Endpoint
   mitre_attack_id:
-  - T1218
   - T1218.010
   product:
   - Splunk Enterprise
@@ -92,6 +91,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.010/atomic_red_team/windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.010/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

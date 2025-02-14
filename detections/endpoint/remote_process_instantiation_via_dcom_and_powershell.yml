@@ -1,7 +1,7 @@
 name: Remote Process Instantiation via DCOM and PowerShell
 id: d4f42098-4680-11ec-ad07-3e22fbd008af
-version: 6
-date: '2024-12-10'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -66,7 +66,6 @@ tags:
   - Compromised Windows Host
   asset_type: Endpoint
   mitre_attack_id:
-  - T1021
   - T1021.003
   product:
   - Splunk Enterprise
