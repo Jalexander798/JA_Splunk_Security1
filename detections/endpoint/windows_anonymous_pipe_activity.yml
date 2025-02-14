@@ -10,7 +10,7 @@ data_source:
 - Sysmon EventID 17
 - Sysmon EventID 18
 search: '`sysmon` EventCode IN (17,18) EventType IN ( "CreatePipe", "ConnectPipe") PipeName="*Anonymous Pipe*" NOT( Image IN ("*\\Program Files\\*"))
-  | stats  min(_time) as firstTime max(_time) as lastTime count by dest user EventCode PipeName process_id process_guid Image EventType 
+  | stats  min(_time) as firstTime max(_time) as lastTime count by dest EventCode PipeName ProcessGuid ProcessId Image EventType 
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
   | `windows_anonymous_pipe_activity_filter`'
@@ -39,9 +39,6 @@ rba:
   risk_objects:
   - field: dest
     type: system
-    score: 30
-  - field: user
-    type: user
     score: 30
   threat_objects: []
 tags:
