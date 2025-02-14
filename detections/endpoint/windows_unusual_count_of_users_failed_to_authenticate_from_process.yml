@@ -1,9 +1,9 @@
 name: Windows Unusual Count Of Users Failed To Authenticate From Process
 id: 25bdb6cb-2e49-4d34-a93c-d6c567c122fe
 type: Anomaly
-version: 5
+version: 6
 status: production
-date: '2024-11-13'
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 data_source:
 - Windows Event Log Security 4625
@@ -65,7 +65,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1110.003
-  - T1110
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

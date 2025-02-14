@@ -1,7 +1,7 @@
 name: AWS Multiple Users Failing To Authenticate From Ip
 id: 71e1fb89-dd5f-4691-8523-575420de4630
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Bhavin Patel
 status: production
 type: Anomaly
@@ -57,7 +57,6 @@ tags:
   - Compromised User Account
   asset_type: AWS Account
   mitre_attack_id:
-  - T1110
   - T1110.003
   - T1110.004
   product:

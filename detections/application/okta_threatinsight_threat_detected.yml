@@ -1,7 +1,7 @@
 name: Okta ThreatInsight Threat Detected
 id: 140504ae-5fe2-4d65-b2bc-a211813fbca6
-version: 5
-date: '2025-01-21'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Mauricio Velazco, Splunk
 status: production
 type: Anomaly
@@ -56,7 +56,6 @@ tags:
   - Okta Account Takeover
   asset_type: Infrastructure
   mitre_attack_id:
-  - T1078
   - T1078.004
   product:
   - Splunk Enterprise

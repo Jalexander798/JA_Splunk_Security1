@@ -1,7 +1,7 @@
 name: Windows Parent PID Spoofing with Explorer
 id: 17f8f69c-5d00-4c88-9c6f-493bbdef20a1
-version: 5
-date: '2024-12-10'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -62,7 +62,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1134.004
-  - T1134
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

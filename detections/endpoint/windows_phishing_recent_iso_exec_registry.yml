@@ -1,7 +1,7 @@
 name: Windows Phishing Recent ISO Exec Registry
 id: cb38ee66-8ae5-47de-bd66-231c7bbc0b2c
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
@@ -48,7 +48,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1566.001
-  - T1566
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

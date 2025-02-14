@@ -1,7 +1,7 @@
 name: Suspicious Rundll32 StartW
 id: 9319dda5-73f2-4d43-a85a-67ce961bddb7
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -73,7 +73,6 @@ tags:
   - Graceful Wipe Out Attack
   asset_type: Endpoint
   mitre_attack_id:
-  - T1218
   - T1218.011
   product:
   - Splunk Enterprise

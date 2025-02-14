@@ -1,7 +1,7 @@
 name: Gsuite Drive Share In External Email
 id: f6ee02d6-fea0-11eb-b2c2-acde48001122
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: experimental
 type: Anomaly
@@ -49,7 +49,6 @@ tags:
   asset_type: GSuite
   mitre_attack_id:
   - T1567.002
-  - T1567
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,7 +1,7 @@
 name: SMB Traffic Spike - MLTK
 id: d25773ba-9ad8-48d1-858e-07ad0bbeb828
-version: 6
-date: '2024-11-15'
+version: 7
+date: '2025-02-10'
 author: Rico Valdez, Splunk
 status: experimental
 type: Anomaly
@@ -31,11 +31,10 @@ how_to_implement: "To successfully implement this search, you will need to ensur
   should periodically re-run the support search to rebuild the model with the latest
   data available in your environment.\nThis search produces a field (Number of events,count)
   that are not yet supported by ES Incident Review and therefore cannot be viewed
-  when a finding is raised. This field contributes additional context to the
-  finding. To see the additional metadata, add the following field, if not already
-  present, to Incident Review - Event Attributes (Configure > Incident Management
-  > Incident Review Settings > Add New Entry):\n* **Label:** Number of events, **Field:**
-  count"
+  when a finding is raised. This field contributes additional context to the finding.
+  To see the additional metadata, add the following field, if not already present,
+  to Incident Review - Event Attributes (Configure > Incident Management > Incident
+  Review Settings > Add New Entry):\n* **Label:** Number of events, **Field:** count"
 known_false_positives: If you are seeing more results than desired, you may consider
   reducing the value of the threshold in the search. You should also periodically
   re-run the support search to re-build the ML model on the latest data. Please update
@@ -57,7 +56,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1021.002
-  - T1021
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

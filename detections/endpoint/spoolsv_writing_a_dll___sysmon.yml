@@ -1,7 +1,7 @@
 name: Spoolsv Writing a DLL - Sysmon
 id: 347fd388-da87-11eb-836d-acde48001122
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Mauricio Velazco, Michael Haag, Splunk
 status: production
 type: TTP
@@ -63,7 +63,6 @@ tags:
   - CVE-2021-34527
   mitre_attack_id:
   - T1547.012
-  - T1547
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

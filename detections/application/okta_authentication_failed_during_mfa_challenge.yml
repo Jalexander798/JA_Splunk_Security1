@@ -1,7 +1,7 @@
 name: Okta Authentication Failed During MFA Challenge
 id: e2b99e7d-d956-411a-a120-2b14adfdde93
-version: 4
-date: '2025-01-21'
+version: 5
+date: '2025-02-10'
 author: Bhavin Patel, Splunk
 data_source:
 - Okta
@@ -59,10 +59,8 @@ tags:
   - Okta Account Takeover
   asset_type: Okta Tenant
   mitre_attack_id:
-  - T1586
-  - T1586.003
-  - T1078
   - T1078.004
+  - T1586.003
   - T1621
   product:
   - Splunk Enterprise

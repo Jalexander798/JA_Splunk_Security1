@@ -1,7 +1,7 @@
 name: Svchost LOLBAS Execution Process Spawn
 id: 09e5c72a-4c0d-11ec-aa29-3e22fbd008af
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -75,7 +75,6 @@ tags:
   - Scheduled Tasks
   asset_type: Endpoint
   mitre_attack_id:
-  - T1053
   - T1053.005
   product:
   - Splunk Enterprise

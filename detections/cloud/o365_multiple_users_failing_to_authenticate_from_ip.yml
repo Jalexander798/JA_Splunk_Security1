@@ -1,7 +1,7 @@
 name: O365 Multiple Users Failing To Authenticate From Ip
 id: 8d486e2e-3235-4cfe-ac35-0d042e24ecb4
-version: 6
-date: '2024-11-14'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -58,11 +58,9 @@ tags:
   - NOBELIUM Group
   asset_type: O365 Tenant
   mitre_attack_id:
-  - T1586
-  - T1586.003
-  - T1110
   - T1110.003
   - T1110.004
+  - T1586.003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
