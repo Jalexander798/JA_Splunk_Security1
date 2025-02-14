@@ -48,8 +48,13 @@ tags:
   - Splunk Cloud
   security_domain: network
 tests:
-- name: True Positive Test
-  attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/dns_decommissioned_bucket/dns.log
-    source: dns
-    sourcetype: dns 
+# - name: Baseline Dataset Test
+#   attack_data:
+#   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/decommissioned_buckets/cloudtrail.json
+#     source: cloudtrail
+#     sourcetype: aws:cloudtrail 
+# - name: True Positive Test
+#   attack_data:
+#   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/decommissioned_buckets/dns.log
+#     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
+#     sourcetype: XmlWinEventLog
