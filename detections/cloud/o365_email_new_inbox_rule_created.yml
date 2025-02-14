@@ -48,7 +48,6 @@ tags:
   - Office 365 Collection Techniques
   asset_type: O365 Tenant  
   mitre_attack_id: 
-  - T1114
   - T1114.003
   - T1564.008
   product: 
