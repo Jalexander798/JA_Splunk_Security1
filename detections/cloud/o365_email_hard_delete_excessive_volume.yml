@@ -52,7 +52,6 @@ tags:
   - Data Destruction
   asset_type: O365 Tenant
   mitre_attack_id: 
-  - T1070
   - T1070.008
   - T1485
   product: 
