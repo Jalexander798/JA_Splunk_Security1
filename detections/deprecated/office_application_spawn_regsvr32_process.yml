@@ -1,7 +1,7 @@
 name: Office Application Spawn Regsvr32 process
 id: 2d9fc90c-f11f-11eb-9300-acde48001122
-version: 8
-date: '2025-01-13'
+version: 9
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: deprecated
 type: TTP
@@ -70,7 +70,6 @@ tags:
   - Qakbot
   asset_type: Endpoint
   mitre_attack_id:
-  - T1566
   - T1566.001
   product:
   - Splunk Enterprise

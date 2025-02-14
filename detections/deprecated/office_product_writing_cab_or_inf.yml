@@ -1,7 +1,7 @@
 name: Office Product Writing cab or inf
 id: f48cd1d4-125a-11ec-a447-acde48001122
-version: 10
-date: '2025-01-24'
+version: 11
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: deprecated
 type: TTP
@@ -76,7 +76,6 @@ tags:
   cve:
   - CVE-2021-40444
   mitre_attack_id:
-  - T1566
   - T1566.001
   product:
   - Splunk Enterprise

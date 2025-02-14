@@ -1,7 +1,7 @@
 name: MSHTML Module Load in Office Product
 id: 5f1c168e-118b-11ec-84ff-acde48001122
-version: 7
-date: '2025-01-24'
+version: 8
+date: '2025-02-10'
 author: Michael Haag, Mauricio Velazco, Splunk
 status: deprecated
 type: TTP
@@ -64,7 +64,6 @@ tags:
   cve:
   - CVE-2021-40444
   mitre_attack_id:
-  - T1566
   - T1566.001
   product:
   - Splunk Enterprise

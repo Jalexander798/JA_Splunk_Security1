@@ -1,7 +1,7 @@
 name: Create local admin accounts using net exe
 id: b89919ed-fe5f-492c-b139-151bb162040e
-version: 15
-date: '2025-01-24'
+version: 17
+date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: deprecated
 type: TTP
@@ -78,7 +78,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1136.001
-  - T1136
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

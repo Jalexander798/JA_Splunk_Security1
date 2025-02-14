@@ -1,7 +1,7 @@
 name: Remote Desktop Process Running On System
 id: f5939373-8054-40ad-8c64-cec478a22a4a
-version: 8
-date: '2024-11-13'
+version: 9
+date: '2025-02-10'
 author: David Dorsey, Splunk
 status: experimental
 type: Hunting
@@ -40,7 +40,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1021.001
-  - T1021
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

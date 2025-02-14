@@ -1,7 +1,7 @@
 name: Executable File Written in Administrative SMB Share
 id: f63c34fe-a435-11eb-935a-acde48001122
-version: 7
-date: '2024-12-10'
+version: 8
+date: '2025-02-10'
 author: Teoderick Contreras, Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -68,7 +68,6 @@ tags:
   - Trickbot
   asset_type: Endpoint
   mitre_attack_id:
-  - T1021
   - T1021.002
   product:
   - Splunk Enterprise

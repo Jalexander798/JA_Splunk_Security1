@@ -1,6 +1,6 @@
 name: Linux Kernel Module Enumeration
 id: 6df99886-0e04-4c11-8b88-325747419278
-version: 6
+version: 7
 date: '2024-11-17'
 author: Michael Haag, Splunk
 status: production

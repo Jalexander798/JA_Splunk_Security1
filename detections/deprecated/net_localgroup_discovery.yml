@@ -1,7 +1,7 @@
 name: Net Localgroup Discovery
 id: 54f5201e-155b-11ec-a6e2-acde48001122
-version: 5
-date: '2025-01-13'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: deprecated
 type: Hunting
@@ -52,7 +52,6 @@ tags:
   - Rhysida Ransomware
   asset_type: Endpoint
   mitre_attack_id:
-  - T1069
   - T1069.001
   product:
   - Splunk Enterprise

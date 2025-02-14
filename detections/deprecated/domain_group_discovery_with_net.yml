@@ -1,7 +1,7 @@
 name: Domain Group Discovery With Net
 id: f2f14ac7-fa81-471a-80d5-7eb65c3c7349
-version: 6
-date: '2025-01-13'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: deprecated
 type: Hunting
@@ -46,7 +46,6 @@ tags:
   - Cleo File Transfer Software
   asset_type: Endpoint
   mitre_attack_id:
-  - T1069
   - T1069.002
   product:
   - Splunk Enterprise

@@ -1,7 +1,7 @@
 name: Attempt To Stop Security Service
 id: c8e349c6-b97c-486e-8949-bd7bcd1f3910
-version: 9
-date: '2025-01-24'
+version: 11
+date: '2025-02-10'
 author: Rico Valdez, Splunk
 status: deprecated
 type: TTP
@@ -80,7 +80,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

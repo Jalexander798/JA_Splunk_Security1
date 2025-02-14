@@ -1,7 +1,7 @@
 name: Windows Get Local Admin with FindLocalAdminAccess
 id: d2988160-3ce9-4310-b59d-905334920cdd
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Gowthamaraj Rajendran, Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -58,7 +58,6 @@ tags:
   - Active Directory Discovery
   asset_type: Endpoint
   mitre_attack_id:
-  - T1087
   - T1087.002
   product:
   - Splunk Enterprise

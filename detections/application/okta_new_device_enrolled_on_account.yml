@@ -1,7 +1,7 @@
 name: Okta New Device Enrolled on Account
 id: bb27cbce-d4de-432c-932f-2e206e9130fb
-version: 6
-date: '2025-01-21'
+version: 7
+date: '2025-02-10'
 author: Michael Haag, Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -54,7 +54,6 @@ tags:
   - Okta Account Takeover
   asset_type: Okta Tenant
   mitre_attack_id:
-  - T1098
   - T1098.005
   product:
   - Splunk Enterprise

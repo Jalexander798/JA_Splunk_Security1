@@ -1,7 +1,7 @@
 name: Office Product Spawning Rundll32 with no DLL
 id: c661f6be-a38c-11eb-be57-acde48001122
-version: 10
-date: '2025-01-24'
+version: 11
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: deprecated
 type: TTP
@@ -72,7 +72,6 @@ tags:
   - Compromised Windows Host
   asset_type: Endpoint
   mitre_attack_id:
-  - T1566
   - T1566.001
   product:
   - Splunk Enterprise

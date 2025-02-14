@@ -1,7 +1,7 @@
 name: Change Default File Association
 id: 462d17d8-1f71-11ec-ad07-acde48001122
-version: 5
-date: '2025-01-24'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: deprecated
 type: TTP
@@ -67,7 +67,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1546.001
-  - T1546
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

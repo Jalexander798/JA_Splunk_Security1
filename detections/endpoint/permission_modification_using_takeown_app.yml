@@ -1,10 +1,10 @@
 name: Permission Modification using Takeown App
 id: fa7ca5c6-c9d8-11eb-bce9-acde48001122
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-01-27'
 author: Teoderick Contreras, Splunk
 status: production
-type: TTP
+type: Anomaly
 description: The following analytic detects the modification of file or directory
   permissions using the takeown.exe Windows application. It leverages data from Endpoint
   Detection and Response (EDR) agents, focusing on process execution logs that include
@@ -56,7 +56,7 @@ rba:
   risk_objects:
   - field: dest
     type: system
-    score: 56
+    score: 30
   threat_objects:
   - field: process_name
     type: process_name

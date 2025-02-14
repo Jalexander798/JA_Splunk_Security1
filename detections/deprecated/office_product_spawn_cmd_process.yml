@@ -1,7 +1,7 @@
 name: Office Product Spawn CMD Process
 id: b8b19420-e892-11eb-9244-acde48001122
-version: 8
-date: '2025-01-13'
+version: 10
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: deprecated
 type: TTP
@@ -85,7 +85,6 @@ tags:
   - NjRAT
   asset_type: Endpoint
   mitre_attack_id:
-  - T1566
   - T1566.001
   product:
   - Splunk Enterprise

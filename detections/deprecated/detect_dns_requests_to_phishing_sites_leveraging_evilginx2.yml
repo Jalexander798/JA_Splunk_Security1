@@ -31,9 +31,9 @@ how_to_implement: "You need to ingest data from your DNS logs in the Network_Res
   add the correct hostname to the \"Phantom Instance\" field in the Adaptive Response
   Actions when configuring this detection search, and set the corresponding Playbook
   to active.\n(Playbook link:`https://my.phantom.us/4.2/playbook/lets-encrypt-domain-investigate/`)"
-known_false_positives: If a known good domain is not listed in the `legit_domains`
-  lookup, then the search could give you false postives. Please update that lookup
-  file to filter out DNS requests to legitimate domains.
+known_false_positives: If a known good domain is not listed in the `legit_domains` lookup,
+  then the search could give you false postives. Please update that lookup file
+  to filter out DNS requests to legitimate domains.
 references: []
 rba:
   message: DNS Request for EvilGinx2 Phishing Site

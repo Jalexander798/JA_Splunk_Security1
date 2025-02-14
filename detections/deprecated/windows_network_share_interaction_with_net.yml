@@ -7,13 +7,13 @@ status: deprecated
 type: TTP
 data_source:
 - Sysmon EventID 1
-description: The following analytic has been deprecated. This analytic detects network
-  share discovery and collection activities performed on Windows systems using the
-  Net command. Attackers often use network share discovery to identify accessible
-  shared resources within a network, which can be a precursor to privilege escalation
-  or data exfiltration. By monitoring Windows Event Logs for the usage of the Net
-  command to list and interact with network shares, this detection helps identify
-  potential reconnaissance and collection activities.
+description: The following analytic has been deprecated.
+  This analytic detects network share discovery and collection activities
+  performed on Windows systems using the Net command. Attackers often use network
+  share discovery to identify accessible shared resources within a network, which
+  can be a precursor to privilege escalation or data exfiltration. By monitoring Windows
+  Event Logs for the usage of the Net command to list and interact with network shares,
+  this detection helps identify potential reconnaissance and collection activities.
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime values(Processes.user_category) as user_category values(Processes.user_bunit)
   as user_bunit  FROM datamodel=Endpoint.Processes WHERE `process_net` BY Processes.user

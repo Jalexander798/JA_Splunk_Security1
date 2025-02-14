@@ -1,19 +1,20 @@
 name: Detect processes used for System Network Configuration Discovery
 id: a51bfe1a-94f0-48cc-b1e4-16ae10145893
-version: 7
+version: 8
 date: '2025-01-24'
 author: Bhavin Patel, Splunk
 status: deprecated
 type: TTP
-description: The following analytic has been deprecated. The following analytic identifies
-  the rapid execution of processes used for system network configuration discovery
-  on an endpoint. It leverages data from Endpoint Detection and Response (EDR) agents,
-  focusing on process GUIDs, names, parent processes, and command-line executions.
-  This activity is significant as it may indicate an attacker attempting to map the
-  network, which is a common precursor to lateral movement or further exploitation.
-  If confirmed malicious, this behavior could allow an attacker to gain insights into
-  the network topology, identify critical systems, and plan subsequent attacks, potentially
-  leading to data exfiltration or system compromise.
+description: The following analytic has been deprecated.
+  The following analytic identifies the rapid execution of processes used
+  for system network configuration discovery on an endpoint. It leverages data from
+  Endpoint Detection and Response (EDR) agents, focusing on process GUIDs, names,
+  parent processes, and command-line executions. This activity is significant as it
+  may indicate an attacker attempting to map the network, which is a common precursor
+  to lateral movement or further exploitation. If confirmed malicious, this behavior
+  could allow an attacker to gain insights into the network topology, identify critical
+  systems, and plan subsequent attacks, potentially leading to data exfiltration or
+  system compromise.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688

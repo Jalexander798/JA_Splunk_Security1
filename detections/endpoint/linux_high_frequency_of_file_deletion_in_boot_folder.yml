@@ -1,7 +1,7 @@
 name: Linux High Frequency Of File Deletion In Boot Folder
 id: e27fbc5d-0445-4c4a-bc39-87f060d5c602
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -58,9 +58,8 @@ tags:
   - AcidPour
   asset_type: Endpoint
   mitre_attack_id:
-  - T1485
   - T1070.004
-  - T1070
+  - T1485
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

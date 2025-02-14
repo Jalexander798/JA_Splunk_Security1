@@ -1,6 +1,6 @@
 name: Detect Remote Access Software Usage FileInfo
 id: ccad96d7-a48c-4f13-8b9c-9f6a31cba454
-version: 5
+version: 6
 date: '2024-11-13'
 author: Steven Dick
 status: production
@@ -47,6 +47,10 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+- name: Investigate processes on $dest$ 
+  search: '| from datamodel:Endpoint.Processes| search dest=$dest$ process_name=$process_name$'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
 rba:
   message: A file attributes for known a remote access software [$process_name$] was
     detected on $dest$
@@ -54,15 +58,21 @@ rba:
   - field: dest
     type: system
     score: 25
+  - field: user
+    type: user
+    score: 25    
   threat_objects:
   - field: process_name
     type: process_name
+  - field: signature
+    type: signature
 tags:
   analytic_story:
   - Insider Threat
   - Command And Control
   - Ransomware
   - Gozi Malware
+  - Remote Monitoring and Management Software
   asset_type: Endpoint
   mitre_attack_id:
   - T1219

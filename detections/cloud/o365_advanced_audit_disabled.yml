@@ -1,7 +1,7 @@
 name: O365 Advanced Audit Disabled
 id: 49862dd4-9cb2-4c48-a542-8c8a588d9361
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Mauricio Velazco, Michael Haag, Splunk
 status: production
 type: TTP
@@ -58,7 +58,6 @@ tags:
   - Office 365 Persistence Mechanisms
   asset_type: O365 Tenant
   mitre_attack_id:
-  - T1562
   - T1562.008
   product:
   - Splunk Enterprise

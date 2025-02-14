@@ -5,14 +5,14 @@ date: '2025-01-24'
 author: Teoderick Contreras, Splunk
 status: deprecated
 type: Hunting
-description: The following analytic has been deprecated. The following analytic detects
-  the execution of the reg.exe process with the "save" parameter. This detection leverages
-  data from Endpoint Detection and Response (EDR) agents, focusing on process execution
-  logs and command-line arguments. This activity is significant because threat actors
-  often use the "reg save" command to dump credentials or test registry modification
-  capabilities on compromised hosts. If confirmed malicious, this behavior could allow
-  attackers to escalate privileges, persist in the environment, or access sensitive
-  information stored in the registry.
+description: The following analytic has been deprecated.
+  The following analytic detects the execution of the reg.exe process with
+  the "save" parameter. This detection leverages data from Endpoint Detection and
+  Response (EDR) agents, focusing on process execution logs and command-line arguments.
+  This activity is significant because threat actors often use the "reg save" command
+  to dump credentials or test registry modification capabilities on compromised hosts.
+  If confirmed malicious, this behavior could allow attackers to escalate privileges,
+  persist in the environment, or access sensitive information stored in the registry.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688

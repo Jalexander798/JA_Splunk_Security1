@@ -1,7 +1,7 @@
 name: PowerShell Get LocalGroup Discovery
 id: b71adfcc-155b-11ec-9413-acde48001122
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: Hunting
@@ -41,7 +41,6 @@ tags:
   - Active Directory Discovery
   asset_type: Endpoint
   mitre_attack_id:
-  - T1069
   - T1069.001
   product:
   - Splunk Enterprise

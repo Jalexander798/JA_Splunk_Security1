@@ -1,7 +1,7 @@
 name: AWS New MFA Method Registered For User
 id: 4e3c26f2-4fb9-4bd7-ab46-1b76ffa2a23b
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -56,7 +56,6 @@ tags:
   - AWS Identity and Access Management Account Takeover
   asset_type: AWS Account
   mitre_attack_id:
-  - T1556
   - T1556.006
   product:
   - Splunk Enterprise

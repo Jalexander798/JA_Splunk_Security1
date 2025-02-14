@@ -1,7 +1,7 @@
 name: Local Account Discovery with Net
 id: 5d0d4830-0133-11ec-bae3-acde48001122
-version: 6
-date: '2025-01-24'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: deprecated
 type: Hunting
@@ -41,7 +41,6 @@ tags:
   - Sandworm Tools
   asset_type: Endpoint
   mitre_attack_id:
-  - T1087
   - T1087.001
   product:
   - Splunk Enterprise

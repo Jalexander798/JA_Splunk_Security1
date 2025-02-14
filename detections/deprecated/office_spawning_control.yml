@@ -1,7 +1,7 @@
 name: Office Spawning Control
 id: 053e027c-10c7-11ec-8437-acde48001122
-version: 10
-date: '2025-01-24'
+version: 12
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: deprecated
 type: TTP
@@ -77,7 +77,6 @@ tags:
   cve:
   - CVE-2021-40444
   mitre_attack_id:
-  - T1566
   - T1566.001
   product:
   - Splunk Enterprise

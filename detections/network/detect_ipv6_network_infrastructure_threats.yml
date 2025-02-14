@@ -1,7 +1,7 @@
 name: Detect IPv6 Network Infrastructure Threats
 id: c3be767e-7959-44c5-8976-0e9c12a91ad2
-version: 4
-date: '2024-11-15'
+version: 5
+date: '2025-02-10'
 author: Mikael Bjerkeland, Splunk
 status: experimental
 type: TTP
@@ -52,7 +52,6 @@ tags:
   mitre_attack_id:
   - T1200
   - T1498
-  - T1557
   - T1557.002
   product:
   - Splunk Enterprise

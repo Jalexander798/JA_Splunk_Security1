@@ -1,7 +1,7 @@
 name: Suspicious MSBuild Spawn
 id: a115fba6-5514-11eb-ae93-0242ac130002
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -67,7 +67,6 @@ tags:
   - Living Off The Land
   asset_type: Endpoint
   mitre_attack_id:
-  - T1127
   - T1127.001
   product:
   - Splunk Enterprise

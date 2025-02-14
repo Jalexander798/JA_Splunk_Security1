@@ -1,7 +1,7 @@
 name: Office Product Spawning MSHTA
 id: 6078fa20-a6d2-11eb-b662-acde48001122
-version: 8
-date: '2025-01-13'
+version: 9
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: deprecated
 type: TTP
@@ -71,7 +71,6 @@ tags:
   - CVE-2023-36884 Office and Windows HTML RCE Vulnerability
   asset_type: Endpoint
   mitre_attack_id:
-  - T1566
   - T1566.001
   product:
   - Splunk Enterprise

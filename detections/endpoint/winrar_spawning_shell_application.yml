@@ -1,6 +1,6 @@
 name: WinRAR Spawning Shell Application
 id: d2f36034-37fa-4bd4-8801-26807c15540f
-version: 6
+version: 7
 date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production

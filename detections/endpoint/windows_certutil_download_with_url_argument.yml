@@ -1,6 +1,6 @@
 name: Windows CertUtil Download With URL Argument
 id: 4fc5ca00-4c7c-46b3-8772-c98a4b8bd944
-version: 2
+version: 3
 date: '2025-01-07'
 author: Nasreddine Bencherchali, Splunk
 status: production

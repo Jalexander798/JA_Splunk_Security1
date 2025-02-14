@@ -1,7 +1,7 @@
 name: Elevated Group Discovery With Net
 id: a23a0e20-0b1b-4a07-82e5-ec5f70811e7a
-version: 6
-date: '2025-01-24'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: deprecated
 type: TTP
@@ -70,7 +70,6 @@ tags:
   - BlackSuit Ransomware
   asset_type: Endpoint
   mitre_attack_id:
-  - T1069
   - T1069.002
   product:
   - Splunk Enterprise

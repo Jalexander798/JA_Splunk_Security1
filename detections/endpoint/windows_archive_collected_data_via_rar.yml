@@ -1,7 +1,7 @@
 name: Windows Archive Collected Data via Rar
 id: 2015de95-fe91-413d-9d62-2fe011b67e82
-version: 5
-date: '2025-01-27'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -67,7 +67,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1560.001
-  - T1560
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
@@ -76,6 +75,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1560.001/archive_utility_darkgate/rar_sys.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1560.001/archive_utility_darkgate/rar_sys.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
