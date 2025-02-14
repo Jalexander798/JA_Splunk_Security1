@@ -1,7 +1,7 @@
 name: Windows Impair Defense Override SmartScreen Prompt
 id: 08058866-7987-486f-b042-275715ef6e9d
-version: 5
-date: '2025-01-21'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -60,7 +60,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

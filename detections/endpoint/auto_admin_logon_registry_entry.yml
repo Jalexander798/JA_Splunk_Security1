@@ -1,7 +1,7 @@
 name: Auto Admin Logon Registry Entry
 id: 1379d2b8-0f18-11ec-8ca3-acde48001122
-version: 8
-date: '2024-12-08'
+version: 9
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP
@@ -60,7 +60,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1552.002
-  - T1552
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

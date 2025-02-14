@@ -1,7 +1,7 @@
 name: Detect Regasm Spawning a Process
 id: 72170ec5-f7d2-42f5-aefb-2b8be6aad15f
-version: 9
-date: '2024-12-10'
+version: 10
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -81,7 +81,6 @@ tags:
   - Snake Keylogger
   asset_type: Endpoint
   mitre_attack_id:
-  - T1218
   - T1218.009
   product:
   - Splunk Enterprise

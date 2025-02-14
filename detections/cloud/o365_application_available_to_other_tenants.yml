@@ -1,7 +1,7 @@
 name: O365 Application Available To Other Tenants
 id: 942548a3-0273-47a4-8dbd-e5202437395c
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Steven Dick
 status: production
 type: TTP
@@ -61,7 +61,6 @@ tags:
   asset_type: O365 Tenant
   mitre_attack_id:
   - T1098.003
-  - T1098
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,7 +1,7 @@
 name: AWS ECR Container Upload Unknown User
 id: 300688e4-365c-4486-a065-7c884462b31d
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Patrick Bareiss, Splunk
 status: production
 type: Anomaly
@@ -54,7 +54,6 @@ tags:
   asset_type: AWS Account
   mitre_attack_id:
   - T1204.003
-  - T1204
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

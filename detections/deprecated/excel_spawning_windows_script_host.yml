@@ -1,12 +1,12 @@
 name: Excel Spawning Windows Script Host
 id: 57fe880a-9be3-11eb-9bf3-acde48001122
-version: 9
-date: '2025-01-13'
+version: 10
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: deprecated
 type: TTP
-description: The following analytic has been deprecated in favour of a more generic approach. 
-  The following analytic identifies instances where Microsoft Excel spawns
+description: The following analytic has been deprecated in favour of a more generic
+  approach. The following analytic identifies instances where Microsoft Excel spawns
   Windows Script Host processes (`cscript.exe` or `wscript.exe`). This behavior is
   detected using Endpoint Detection and Response (EDR) telemetry, focusing on process
   creation events where the parent process is `excel.exe`. This activity is significant
@@ -75,7 +75,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1003.002
-  - T1003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
@@ -84,6 +83,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

@@ -1,7 +1,7 @@
 name: Suspicious Ticket Granting Ticket Request
 id: d77d349e-6269-11ec-9cfe-acde48001122
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: Hunting
@@ -39,7 +39,6 @@ tags:
   - Active Directory Privilege Escalation
   asset_type: Endpoint
   mitre_attack_id:
-  - T1078
   - T1078.002
   product:
   - Splunk Enterprise

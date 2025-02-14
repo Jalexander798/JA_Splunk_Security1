@@ -1,7 +1,7 @@
 name: Dump LSASS via comsvcs DLL
 id: 8943b567-f14d-4ee8-a0bb-2121d4ce3184
-version: 8
-date: '2024-12-10'
+version: 9
+date: '2025-02-10'
 author: Patrick Bareiss, Splunk
 status: production
 type: TTP
@@ -84,7 +84,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1003.001
-  - T1003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

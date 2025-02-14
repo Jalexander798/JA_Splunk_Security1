@@ -1,7 +1,7 @@
 name: Suspicious Copy on System32
 id: ce633e56-25b2-11ec-9e76-acde48001122
-version: 5
-date: '2024-12-10'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -76,7 +76,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1036.003
-  - T1036
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

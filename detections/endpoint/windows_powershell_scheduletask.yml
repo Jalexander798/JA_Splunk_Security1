@@ -1,7 +1,7 @@
 name: Windows PowerShell ScheduleTask
 id: ddf82fcb-e9ee-40e3-8712-a50b5bf323fc
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly
@@ -65,7 +65,6 @@ tags:
   mitre_attack_id:
   - T1053.005
   - T1059.001
-  - T1059
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

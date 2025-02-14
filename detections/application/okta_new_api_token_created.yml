@@ -1,7 +1,7 @@
 name: Okta New API Token Created
 id: c3d22720-35d3-4da4-bd0a-740d37192bd4
-version: 6
-date: '2025-01-21'
+version: 7
+date: '2025-02-10'
 author: Michael Haag, Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -54,7 +54,6 @@ tags:
   - Okta Account Takeover
   asset_type: Okta Tenant
   mitre_attack_id:
-  - T1078
   - T1078.001
   product:
   - Splunk Enterprise
