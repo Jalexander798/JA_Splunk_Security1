@@ -46,7 +46,6 @@ tags:
   asset_type: Windows
   mitre_attack_id:
   - T1505.001
-  - T1505
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
