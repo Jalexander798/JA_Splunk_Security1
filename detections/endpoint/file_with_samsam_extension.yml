@@ -14,9 +14,7 @@ description: The following analytic detects file writes with extensions indicati
   should include isolating affected systems, restoring files from backups, and investigating
   the attack source to prevent further incidents.
 data_source:
-- Sysmon EventID 1
-- Windows Event Log Security 4688
-- CrowdStrike ProcessRollup2
+- Sysmon EventID 11
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime values(Filesystem.user) as user values(Filesystem.dest) as dest values(Filesystem.file_path)
   as file_path from datamodel=Endpoint.Filesystem by Filesystem.file_name | `drop_dm_object_name(Filesystem)`

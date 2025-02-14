@@ -20,9 +20,12 @@ data_source:
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime  from datamodel=Endpoint.Processes where `process_reg` AND Processes.process="*
   add *" AND Processes.process="* HKCR\\*" AND Processes.process="*\\shell\\open\\command*"
-  AND  Processes.process= *Notepad.exe* by  Processes.process_name Processes.original_file_name
-  Processes.process Processes.process_id Processes.process_guid Processes.parent_process_name
-  Processes.parent_process Processes.parent_process_guid Processes.dest Processes.user
+  AND  Processes.process= *Notepad.exe* 
+  by Processes.action Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec 
+  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name 
+  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid Processes.process_hash 
+  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path 
+  Processes.user Processes.user_id Processes.vendor_product 
   | `drop_dm_object_name(Processes)` | rex field=process "Notepad\.exe (?<file_name_association>.*$)"
   | rex field=file_name_association "\.(?<extension>[^\.]*$)" | where isnull(extension)
   and isnotnull(file_name_association) | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
