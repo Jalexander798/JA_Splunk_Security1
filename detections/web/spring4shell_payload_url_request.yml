@@ -1,7 +1,7 @@
 name: Spring4Shell Payload URL Request
 id: 9d44d649-7d67-4559-95c1-8022ff49420b
-version: 4
-date: '2024-11-15'
+version: 5
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -57,10 +57,9 @@ tags:
   cve:
   - CVE-2022-22965
   mitre_attack_id:
-  - T1505.003
-  - T1505
-  - T1190
   - T1133
+  - T1190
+  - T1505.003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

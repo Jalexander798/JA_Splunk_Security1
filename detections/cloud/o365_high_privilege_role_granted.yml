@@ -1,7 +1,7 @@
 name: O365 High Privilege Role Granted
 id: e78a1037-4548-4072-bb1b-ad99ae416426
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -56,7 +56,6 @@ tags:
   - Office 365 Persistence Mechanisms
   asset_type: O365 Tenant
   mitre_attack_id:
-  - T1098
   - T1098.003
   product:
   - Splunk Enterprise

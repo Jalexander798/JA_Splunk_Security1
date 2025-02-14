@@ -1,7 +1,7 @@
 name: RunDLL Loading DLL By Ordinal
 id: 6c135f8d-5e60-454e-80b7-c56eed739833
-version: 9
-date: '2024-11-13'
+version: 10
+date: '2025-02-10'
 author: Michael Haag, David Dorsey, Splunk
 status: production
 type: TTP
@@ -72,7 +72,6 @@ tags:
   - IcedID
   asset_type: Endpoint
   mitre_attack_id:
-  - T1218
   - T1218.011
   product:
   - Splunk Enterprise

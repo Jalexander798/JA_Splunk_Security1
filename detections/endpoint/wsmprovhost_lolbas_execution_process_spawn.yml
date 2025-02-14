@@ -1,7 +1,7 @@
 name: Wsmprovhost LOLBAS Execution Process Spawn
 id: 2eed004c-4c0d-11ec-93e8-3e22fbd008af
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -75,7 +75,6 @@ tags:
   - CISA AA24-241A
   asset_type: Endpoint
   mitre_attack_id:
-  - T1021
   - T1021.006
   product:
   - Splunk Enterprise

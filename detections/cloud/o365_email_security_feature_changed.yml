@@ -1,7 +1,7 @@
 name: O365 Email Security Feature Changed
 id: 4d28013d-3a0f-4d65-a33f-4e8009fee0ae
-version: 3
-date: '2024-11-14'
+version: 4
+date: '2025-02-10'
 author: Steven Dick
 status: production
 type: TTP
@@ -51,9 +51,8 @@ tags:
   - Office 365 Account Takeover
   asset_type: O365 Tenant
   mitre_attack_id:
-  - T1562
-  - T1562.008
   - T1562.001
+  - T1562.008
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,7 +1,7 @@
 name: Windows Mail Protocol In Non-Common Process Path
 id: ac3311f5-661d-4e99-bd1f-3ec665b05441
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -57,7 +57,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1071.003
-  - T1071
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

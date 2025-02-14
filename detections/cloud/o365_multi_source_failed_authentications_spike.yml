@@ -1,7 +1,7 @@
 name: O365 Multi-Source Failed Authentications Spike
 id: ea4e2c41-dbfb-4f5f-a7b6-9ac1b7f104aa
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: Hunting
@@ -45,11 +45,9 @@ tags:
   asset_type: O365 Tenant
   atomic_guid: []
   mitre_attack_id:
-  - T1586
-  - T1586.003
-  - T1110
   - T1110.003
   - T1110.004
+  - T1586.003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,7 +1,7 @@
 name: Suspicious Rundll32 no Command Line Arguments
 id: e451bd16-e4c5-4109-8eb1-c4c6ecf048b4
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -74,7 +74,6 @@ tags:
   cve:
   - CVE-2021-34527
   mitre_attack_id:
-  - T1218
   - T1218.011
   product:
   - Splunk Enterprise

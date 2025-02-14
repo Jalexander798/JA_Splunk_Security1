@@ -1,7 +1,7 @@
 name: Detect Exchange Web Shell
 id: 8c14eeee-2af1-4a4b-bda8-228da0f4862a
-version: 9
-date: '2024-12-12'
+version: 10
+date: '2025-02-10'
 author: Michael Haag, Shannon Davis, David Dorsey, Splunk
 status: production
 type: TTP
@@ -16,18 +16,16 @@ description: The following analytic identifies the creation of suspicious .aspx 
 data_source:
 - Sysmon EventID 1 AND Sysmon EventID 11
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Processes
-    where Processes.process_name=System by _time span=1h Processes.process_guid Processes.process_name Processes.process
-    Processes.dest Processes.user 
-| `drop_dm_object_name(Processes)` 
-| join process_guid, _time 
-    [| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
-        as lastTime FROM datamodel=Endpoint.Filesystem where Filesystem.file_path IN ("*\\HttpProxy\\owa\\auth\\*",
-        "*\\inetpub\\wwwroot\\aspnet_client\\*", "*\\HttpProxy\\OAB\\*") Filesystem.file_name
-        IN( "*.aspx", "*.ashx") by _time span=1h Filesystem.process_guid Filesystem.user Filesystem.dest Filesystem.file_create_time
-        Filesystem.file_name Filesystem.file_path 
-    | `drop_dm_object_name(Filesystem)` ]
-    | dedup file_create_time 
-    | table _time dest user file_create_time file_name file_path process_name process process_guid | `detect_exchange_web_shell_filter`'
+  where Processes.process_name=System by _time span=1h Processes.process_guid Processes.process_name
+  Processes.process Processes.dest Processes.user | `drop_dm_object_name(Processes)`
+  | join process_guid, _time [| tstats `security_content_summariesonly` count min(_time)
+  as firstTime max(_time) as lastTime FROM datamodel=Endpoint.Filesystem where Filesystem.file_path
+  IN ("*\\HttpProxy\\owa\\auth\\*", "*\\inetpub\\wwwroot\\aspnet_client\\*", "*\\HttpProxy\\OAB\\*")
+  Filesystem.file_name IN( "*.aspx", "*.ashx") by _time span=1h Filesystem.process_guid
+  Filesystem.user Filesystem.dest Filesystem.file_create_time Filesystem.file_name
+  Filesystem.file_path | `drop_dm_object_name(Filesystem)` ] | dedup file_create_time
+  | table _time dest user file_create_time file_name file_path process_name process
+  process_guid | `detect_exchange_web_shell_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
   on process that include the name of the process responsible for the changes from
   your endpoints into the `Endpoint` datamodel in the `Processes` node and `Filesystem`
@@ -78,10 +76,9 @@ tags:
   - BlackByte Ransomware
   asset_type: Endpoint
   mitre_attack_id:
-  - T1505
-  - T1505.003
-  - T1190
   - T1133
+  - T1190
+  - T1505.003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

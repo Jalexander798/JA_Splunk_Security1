@@ -1,7 +1,7 @@
 name: Active Setup Registry Autostart
 id: f64579c0-203f-11ec-abcc-acde48001122
-version: 8
-date: '2024-12-08'
+version: 9
+date: '2025-02-10'
 author: Steven Dick, Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -64,7 +64,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1547.014
-  - T1547
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
