@@ -1,7 +1,7 @@
 name: Windows Registry Payload Injection
 id: c6b2d80f-179a-41a1-b95e-ce5601d7427a
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Steven Dick
 status: production
 type: TTP
@@ -77,7 +77,6 @@ tags:
   - Unusual Processes
   asset_type: Endpoint
   mitre_attack_id:
-  - T1027
   - T1027.011
   product:
   - Splunk Enterprise

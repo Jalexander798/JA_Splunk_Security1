@@ -1,7 +1,7 @@
 name: Windows AD Dangerous User ACL Modification
 id: ec5b6790-595a-4fb8-ad43-56e5b55a9617
-version: 3
-date: '2025-01-21'
+version: 4
+date: '2025-02-10'
 author: Dean Luxton
 status: production
 type: TTP
@@ -82,9 +82,8 @@ tags:
   - Sneaky Active Directory Persistence Tricks
   asset_type: Endpoint
   mitre_attack_id:
-  - T1484
-  - T1222
   - T1222.001
+  - T1484
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

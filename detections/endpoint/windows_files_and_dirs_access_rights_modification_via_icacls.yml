@@ -1,7 +1,7 @@
 name: Windows Files and Dirs Access Rights Modification Via Icacls
 id: c76b796c-27e1-4520-91c4-4a58695c749e
-version: 5
-date: '2024-12-16'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -72,7 +72,6 @@ tags:
   - 3309f53e-b22b-4eb6-8fd2-a6cf58b355a9
   mitre_attack_id:
   - T1222.001
-  - T1222
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

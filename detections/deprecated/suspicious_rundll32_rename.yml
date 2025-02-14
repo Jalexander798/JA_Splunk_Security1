@@ -1,7 +1,7 @@
 name: Suspicious Rundll32 Rename
 id: 7360137f-abad-473e-8189-acbdaa34d114
-version: 7
-date: '2024-11-14'
+version: 8
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: deprecated
 type: Hunting
@@ -40,10 +40,8 @@ tags:
   - Masquerading - Rename System Utilities
   asset_type: Endpoint
   mitre_attack_id:
-  - T1218
-  - T1036
-  - T1218.011
   - T1036.003
+  - T1218.011
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,7 +1,7 @@
 name: Windows System Binary Proxy Execution Compiled HTML File Decompile
 id: 2acf0e19-4149-451c-a3f3-39cd3c77e37d
-version: 7
-date: '2024-12-10'
+version: 8
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -72,7 +72,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1218.001
-  - T1218
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

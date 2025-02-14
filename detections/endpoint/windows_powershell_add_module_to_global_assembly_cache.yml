@@ -1,7 +1,7 @@
 name: Windows PowerShell Add Module to Global Assembly Cache
 id: 3fc16961-97e5-4a5b-a079-e4ab0d9763eb
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -54,7 +54,6 @@ tags:
   - IIS Components
   asset_type: Endpoint
   mitre_attack_id:
-  - T1505
   - T1505.004
   product:
   - Splunk Enterprise

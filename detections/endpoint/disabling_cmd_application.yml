@@ -1,7 +1,7 @@
 name: Disabling CMD Application
 id: ff86077c-9212-11eb-a1e6-acde48001122
-version: 9
-date: '2024-12-08'
+version: 10
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP
@@ -60,9 +60,8 @@ tags:
   - NjRAT
   asset_type: Endpoint
   mitre_attack_id:
-  - T1562.001
-  - T1562
   - T1112
+  - T1562.001
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

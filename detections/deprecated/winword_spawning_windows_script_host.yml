@@ -1,12 +1,12 @@
 name: Winword Spawning Windows Script Host
 id: 637e1b5c-9be1-11eb-9c32-acde48001122
-version: 6
-date: '2025-01-13'
+version: 7
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: deprecated
 type: TTP
-description: The following analytic has been deprecated in favour of a more generic approach.
-  The following analytic identifies instances where Microsoft Winword.exe
+description: The following analytic has been deprecated in favour of a more generic
+  approach. The following analytic identifies instances where Microsoft Winword.exe
   spawns Windows Script Host processes (cscript.exe or wscript.exe). This behavior
   is detected using Endpoint Detection and Response (EDR) telemetry, focusing on process
   creation events where the parent process is Winword.exe. This activity is significant
@@ -70,7 +70,6 @@ tags:
   - CVE-2023-21716 Word RTF Heap Corruption
   asset_type: Endpoint
   mitre_attack_id:
-  - T1566
   - T1566.001
   product:
   - Splunk Enterprise
@@ -80,6 +79,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon_wsh.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon_wsh.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

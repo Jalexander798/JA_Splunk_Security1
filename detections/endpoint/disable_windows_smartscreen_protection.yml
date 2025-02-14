@@ -1,7 +1,7 @@
 name: Disable Windows SmartScreen Protection
 id: 664f0fd0-91ff-11eb-a56f-acde48001122
-version: 9
-date: '2024-12-08'
+version: 10
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP
@@ -63,7 +63,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

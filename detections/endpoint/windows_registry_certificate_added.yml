@@ -1,7 +1,7 @@
 name: Windows Registry Certificate Added
 id: 5ee98b2f-8b9e-457a-8bdc-dd41aaba9e87
-version: 6
-date: '2025-01-21'
+version: 7
+date: '2025-02-10'
 author: Michael Haag, Teodeerick Contreras, Splunk
 status: production
 type: Anomaly
@@ -61,7 +61,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1553.004
-  - T1553
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

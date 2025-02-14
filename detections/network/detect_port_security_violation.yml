@@ -1,7 +1,7 @@
 name: Detect Port Security Violation
 id: 2de3d5b8-a4fa-45c5-8540-6d071c194d24
-version: 5
-date: '2024-11-15'
+version: 6
+date: '2025-02-10'
 author: Mikael Bjerkeland, Splunk
 status: experimental
 type: TTP
@@ -44,7 +44,6 @@ tags:
   mitre_attack_id:
   - T1200
   - T1498
-  - T1557
   - T1557.002
   product:
   - Splunk Enterprise

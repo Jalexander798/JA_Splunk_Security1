@@ -1,18 +1,18 @@
 name: MSHTML Module Load in Office Product
 id: 5f1c168e-118b-11ec-84ff-acde48001122
-version: 7
-date: '2025-01-24'
+version: 8
+date: '2025-02-10'
 author: Michael Haag, Mauricio Velazco, Splunk
 status: deprecated
 type: TTP
-description: The following analytic has been deprecated.
-  The following analytic detects the loading of the mshtml.dll module into
-  an Office product, which is indicative of CVE-2021-40444 exploitation. It leverages
-  Sysmon EventID 7 to monitor image loads by specific Office processes. This activity
-  is significant because it can indicate an attempt to exploit a vulnerability in
-  the MSHTML component via a malicious document. If confirmed malicious, this could
-  allow an attacker to execute arbitrary code, potentially leading to system compromise,
-  data exfiltration, or further network penetration.
+description: The following analytic has been deprecated. The following analytic detects
+  the loading of the mshtml.dll module into an Office product, which is indicative
+  of CVE-2021-40444 exploitation. It leverages Sysmon EventID 7 to monitor image loads
+  by specific Office processes. This activity is significant because it can indicate
+  an attempt to exploit a vulnerability in the MSHTML component via a malicious document.
+  If confirmed malicious, this could allow an attacker to execute arbitrary code,
+  potentially leading to system compromise, data exfiltration, or further network
+  penetration.
 data_source:
 - Sysmon EventID 7
 search: '`sysmon` EventID=7 process_name IN ("winword.exe","excel.exe","powerpnt.exe","mspub.exe","visio.exe","wordpad.exe","wordview.exe","onenote.exe","onenotem.exe","onenoteviewer.exe","onenoteim.exe",
@@ -64,7 +64,6 @@ tags:
   cve:
   - CVE-2021-40444
   mitre_attack_id:
-  - T1566
   - T1566.001
   product:
   - Splunk Enterprise

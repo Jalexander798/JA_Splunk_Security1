@@ -1,7 +1,7 @@
 name: Suspicious PlistBuddy Usage via OSquery
 id: 20ba6c32-c733-4a32-b64e-2688cf231399
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: experimental
 type: TTP
@@ -37,7 +37,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1543.001
-  - T1543
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

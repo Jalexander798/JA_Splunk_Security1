@@ -1,7 +1,7 @@
 name: Possible Browser Pass View Parameter
 id: 8ba484e8-4b97-11ec-b19a-acde48001122
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
@@ -46,7 +46,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1555.003
-  - T1555
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

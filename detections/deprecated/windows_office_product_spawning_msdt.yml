@@ -1,19 +1,18 @@
 name: Windows Office Product Spawning MSDT
 id: 127eba64-c981-40bf-8589-1830638864a7
-version: 10
-date: '2025-01-24'
+version: 11
+date: '2025-02-10'
 author: Michael Haag, Teoderick Contreras, Splunk
 status: deprecated
 type: TTP
-description: The following analytic has been deprecated.
-  The following analytic detects a Microsoft Office product spawning the
-  Windows msdt.exe process. This detection leverages data from Endpoint Detection
-  and Response (EDR) agents, focusing on process creation events where Office applications
-  are the parent process. This activity is significant as it may indicate an attempt
-  to exploit protocol handlers to bypass security controls, even if macros are disabled.
-  If confirmed malicious, this behavior could allow an attacker to execute arbitrary
-  code, potentially leading to system compromise, data exfiltration, or further lateral
-  movement within the network.
+description: The following analytic has been deprecated. The following analytic detects
+  a Microsoft Office product spawning the Windows msdt.exe process. This detection
+  leverages data from Endpoint Detection and Response (EDR) agents, focusing on process
+  creation events where Office applications are the parent process. This activity
+  is significant as it may indicate an attempt to exploit protocol handlers to bypass
+  security controls, even if macros are disabled. If confirmed malicious, this behavior
+  could allow an attacker to execute arbitrary code, potentially leading to system
+  compromise, data exfiltration, or further lateral movement within the network.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
@@ -81,7 +80,6 @@ tags:
   cve:
   - CVE-2022-30190
   mitre_attack_id:
-  - T1566
   - T1566.001
   product:
   - Splunk Enterprise
@@ -91,6 +89,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/msdt.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/msdt.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
