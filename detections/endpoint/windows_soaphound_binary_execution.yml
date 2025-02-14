@@ -1,7 +1,7 @@
 name: Windows SOAPHound Binary Execution
 id: 8e53f839-e127-4d6d-a54d-a2f67044a57f
-version: 6
-date: '2024-12-10'
+version: 7
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -70,13 +70,11 @@ tags:
   asset_type: Endpoint
   atomic_guid: []
   mitre_attack_id:
-  - T1087.002
   - T1069.001
-  - T1482
-  - T1087.001
-  - T1087
   - T1069.002
-  - T1069
+  - T1087.001
+  - T1087.002
+  - T1482
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

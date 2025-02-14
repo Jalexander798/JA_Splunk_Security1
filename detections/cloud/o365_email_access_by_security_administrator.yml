@@ -1,7 +1,7 @@
 name: O365 Email Access By Security Administrator
 id: c6998a30-fef4-4e89-97ac-3bb0123719b4
-version: 3
-date: '2024-11-14'
+version: 4
+date: '2025-02-10'
 author: Steven Dick
 status: production
 type: TTP
@@ -54,9 +54,8 @@ tags:
   - Office 365 Account Takeover
   asset_type: O365 Tenant
   mitre_attack_id:
-  - T1567
-  - T1114
   - T1114.002
+  - T1567
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -16,22 +16,9 @@ description: The following analytic detects suspicious modifications to the Even
   viewing, ingesting and interacting event logs.
 data_source:
 - Sysmon EventID 13
-search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
-  as lastTime FROM datamodel=Endpoint.Registry WHERE Registry.registry_path= "*\\Services\\Eventlog\\*"
-  AND Registry.registry_value_name=CustomSD BY Registry.dest Registry.registry_value_data
-  Registry.action Registry.process_guid Registry.process_id Registry.registry_key_name
-  Registry.user Registry.registry_value_name Registry.registry_path | `drop_dm_object_name(Registry)` | where
-  isnotnull(registry_value_data) | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `windows_new_custom_security_descriptor_set_on_eventlog_channel_filter`'
-how_to_implement: To successfully implement this search, you must be ingesting data
-  that records registry activity from your hosts to populate the endpoint data model
-  in the registry node. This is typically populated via endpoint detection-and-response
-  product, such as Carbon Black or endpoint data sources, such as Sysmon. The data
-  used for this search is typically generated via logs that report reads and writes
-  to the registry. If you are using Sysmon, you must have at least version 2.0 of
-  the official Sysmon TA. https://splunkbase.splunk.com/app/5709
-known_false_positives: None identified, setting up the "CustomSD" value is considered
-  a legacy option and shouldn't be a common activity.
+search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time) as lastTime FROM datamodel=Endpoint.Registry WHERE Registry.registry_path= "*\\Services\\Eventlog\\*" AND Registry.registry_value_name=CustomSD BY Registry.dest Registry.registry_value_data Registry.action Registry.process_guid Registry.process_id Registry.registry_key_name Registry.user Registry.registry_value_name Registry.registry_path | `drop_dm_object_name(Registry)` | where isnotnull(registry_value_data) | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_new_custom_security_descriptor_set_on_eventlog_channel_filter`'
+how_to_implement: To successfully implement this search, you must be ingesting data that records registry activity from your hosts to populate the endpoint data model in the registry node. This is typically populated via endpoint detection-and-response product, such as Carbon Black or endpoint data sources, such as Sysmon. The data used for this search is typically generated via logs that report reads and writes to the registry. If you are using Sysmon, you must have at least version 2.0 of the official Sysmon TA. https://splunkbase.splunk.com/app/5709
+known_false_positives: None identified, setting up the "CustomSD" value is considered a legacy option and shouldn't be a common activity.
 references:
 - https://learn.microsoft.com/en-us/troubleshoot/windows-server/group-policy/set-event-log-security-locally-or-via-group-policy
 - https://attack.mitre.org/techniques/T1562/002/

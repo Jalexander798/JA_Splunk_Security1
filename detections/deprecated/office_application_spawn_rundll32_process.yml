@@ -1,18 +1,19 @@
 name: Office Application Spawn rundll32 process
 id: 958751e4-9c5f-11eb-b103-acde48001122
-version: 8
-date: '2025-01-13'
+version: 9
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: deprecated
 type: TTP
-description: The following analytic has been deprecated in favour of a more generic approach in "Windows Office Product Spawned Uncommon Process".
-  The following analytic identifies instances where an Office application
-  spawns a rundll32 process, which is often indicative of macro execution or malicious
-  code. This detection leverages data from Endpoint Detection and Response (EDR) agents,
-  focusing on process creation events where the parent process is a known Office application.
-  This activity is significant because it is a common technique used by malware, such
-  as Trickbot, to initiate infections. If confirmed malicious, this behavior could
-  lead to code execution, further system compromise, and potential data exfiltration.
+description: The following analytic has been deprecated in favour of a more generic
+  approach in "Windows Office Product Spawned Uncommon Process". The following analytic
+  identifies instances where an Office application spawns a rundll32 process, which
+  is often indicative of macro execution or malicious code. This detection leverages
+  data from Endpoint Detection and Response (EDR) agents, focusing on process creation
+  events where the parent process is a known Office application. This activity is
+  significant because it is a common technique used by malware, such as Trickbot,
+  to initiate infections. If confirmed malicious, this behavior could lead to code
+  execution, further system compromise, and potential data exfiltration.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
@@ -72,7 +73,6 @@ tags:
   - Trickbot
   asset_type: Endpoint
   mitre_attack_id:
-  - T1566
   - T1566.001
   product:
   - Splunk Enterprise

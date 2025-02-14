@@ -1,7 +1,7 @@
 name: Process Creating LNK file in Suspicious Location
 id: 5d814af1-1041-47b5-a9ac-d754e82e9a26
-version: 9
-date: '2024-11-13'
+version: 10
+date: '2025-02-10'
 author: Jose Hernandez, Michael Haag, Splunk
 status: production
 type: TTP
@@ -70,7 +70,6 @@ tags:
   - Gozi Malware
   asset_type: Endpoint
   mitre_attack_id:
-  - T1566
   - T1566.002
   product:
   - Splunk Enterprise

@@ -1,7 +1,7 @@
 name: Short Lived Windows Accounts
 id: b25f6f62-0782-43c1-b403-083231ffd97d
-version: 7
-date: '2024-11-22'
+version: 8
+date: '2025-02-10'
 author: David Dorsey, Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -64,9 +64,8 @@ tags:
   - Active Directory Lateral Movement
   asset_type: Windows
   mitre_attack_id:
-  - T1136.001
-  - T1136
   - T1078.003
+  - T1136.001
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

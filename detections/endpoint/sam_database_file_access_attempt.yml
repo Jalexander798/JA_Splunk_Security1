@@ -1,7 +1,7 @@
 name: SAM Database File Access Attempt
 id: 57551656-ebdb-11eb-afdf-acde48001122
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Mauricio Velazco, Splunk
 status: production
 type: Hunting
@@ -42,7 +42,6 @@ tags:
   - CVE-2021-36934
   mitre_attack_id:
   - T1003.002
-  - T1003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

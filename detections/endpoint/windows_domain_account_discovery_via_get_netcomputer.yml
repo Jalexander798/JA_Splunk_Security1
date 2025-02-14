@@ -1,7 +1,7 @@
 name: Windows Domain Account Discovery Via Get-NetComputer
 id: a7fbbc4e-4571-424a-b627-6968e1c939e4
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -53,7 +53,6 @@ tags:
   - CISA AA23-347A
   asset_type: Endpoint
   mitre_attack_id:
-  - T1087
   - T1087.002
   product:
   - Splunk Enterprise

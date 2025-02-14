@@ -1,7 +1,7 @@
 name: Windows Access Token Manipulation SeDebugPrivilege
 id: 6ece9ed0-5f92-4315-889d-48560472b188
-version: 10
-date: '2025-01-27'
+version: 11
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -70,7 +70,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1134.002
-  - T1134
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
@@ -79,6 +78,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/sedebugprivilege_token/security-xml.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/sedebugprivilege_token/security-xml.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

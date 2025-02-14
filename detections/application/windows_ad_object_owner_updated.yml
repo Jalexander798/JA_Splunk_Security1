@@ -1,7 +1,7 @@
 name: Windows AD Object Owner Updated
 id: 4af01f6b-d8d4-4f96-8635-758a01557130
-version: 4
-date: '2025-01-21'
+version: 5
+date: '2025-02-10'
 author: Dean Luxton
 status: production
 type: TTP
@@ -66,9 +66,8 @@ tags:
   - Sneaky Active Directory Persistence Tricks
   asset_type: Endpoint
   mitre_attack_id:
-  - T1484
-  - T1222
   - T1222.001
+  - T1484
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

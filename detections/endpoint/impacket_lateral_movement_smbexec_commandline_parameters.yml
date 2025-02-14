@@ -1,7 +1,7 @@
 name: Impacket Lateral Movement smbexec CommandLine Parameters
 id: bb3c1bac-6bdf-4aa0-8dc9-068b8b712a76
-version: 5
-date: '2024-12-10'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -83,7 +83,6 @@ tags:
   asset_type: Endpoint
   atomic_guid: []
   mitre_attack_id:
-  - T1021
   - T1021.002
   - T1021.003
   - T1047

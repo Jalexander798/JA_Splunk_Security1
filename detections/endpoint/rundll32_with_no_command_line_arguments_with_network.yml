@@ -1,7 +1,7 @@
 name: Rundll32 with no Command Line Arguments with Network
 id: 35307032-a12d-11eb-835f-acde48001122
-version: 8
-date: '2024-12-10'
+version: 9
+date: '2025-02-10'
 author: Steven Dick,  Michael Haag, Splunk
 status: production
 type: TTP
@@ -78,7 +78,6 @@ tags:
   cve:
   - CVE-2021-34527
   mitre_attack_id:
-  - T1218
   - T1218.011
   product:
   - Splunk Enterprise

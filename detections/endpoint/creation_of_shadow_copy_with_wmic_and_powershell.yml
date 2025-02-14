@@ -1,7 +1,7 @@
 name: Creation of Shadow Copy with wmic and powershell
 id: 2ed8b538-d284-449a-be1d-82ad1dbd186b
-version: 8
-date: '2024-12-10'
+version: 9
+date: '2025-02-10'
 author: Patrick Bareiss, Splunk
 status: production
 type: TTP
@@ -71,7 +71,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1003.003
-  - T1003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
