@@ -1,7 +1,7 @@
 name: Suspicious Email - UBA Anomaly
 id: 56e877a6-1455-4479-ad16-0550dc1e33f8
-version: 5
-date: '2024-10-17'
+version: 6
+date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: deprecated
 type: Anomaly
@@ -25,25 +25,21 @@ known_false_positives: This detection model will alert on any sender domain that
   is to investigate and add the URL to an allow list if you determine that it is a
   legitimate sender.
 references: []
+rba:
+  message: Suspicious Email as detected by UBA for $user$
+  risk_objects:
+  - field: user
+    type: user
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - Suspicious Emails
   asset_type: Endpoint
-  confidence: 50
-  impact: 50
-  message: tbd
   mitre_attack_id:
   - T1566
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  risk_score: 25
   security_domain: threat

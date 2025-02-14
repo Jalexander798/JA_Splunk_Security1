@@ -3,6 +3,7 @@ id: 0da348a3-78a0-412e-ab27-2de9dd7f9fee
 version: 1
 date: '2021-09-06'
 author: Teoderick Contreras, Splunk
+status: production
 description: Leverage searches that allow you to detect and investigate unusual activities
   that might relate to the BlackMatter ransomware, including looking for file writes
   associated with BlackMatter, force safe mode boot, autadminlogon account registry

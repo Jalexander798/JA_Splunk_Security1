@@ -1,7 +1,7 @@
 name: Windows Hidden Schedule Task Settings
 id: 0b730470-5fe8-4b13-93a7-fe0ad014d0cc
-version: '4'
-date: '2024-11-28'
+version: 5
+date: '2024-12-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -40,6 +40,13 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A schedule task with hidden setting enable in host $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 64
+  threat_objects: []
 tags:
   analytic_story:
   - CISA AA22-257A
@@ -49,34 +56,17 @@ tags:
   - Compromised Windows Host
   - Active Directory Discovery
   asset_type: Endpoint
-  confidence: 80
-  impact: 80
-  message: A schedule task with hidden setting enable in host $dest$
   mitre_attack_id:
   - T1053
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - dest
-  - Task_Name
-  - Command
-  - Author
-  - Enabled
-  - Hidden
-  - Arguments
-  risk_score: 64
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053/hidden_schedule_task/security.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053/hidden_schedule_task/security.log
     source: WinEventLog:Security
     sourcetype: WinEventLog

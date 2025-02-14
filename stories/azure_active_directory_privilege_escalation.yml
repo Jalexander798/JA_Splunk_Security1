@@ -3,6 +3,7 @@ id: ec78e872-b79c-417d-b256-8fde902522fb
 version: 1
 date: '2023-04-24'
 author: Mauricio Velazco, Splunk
+status: production
 description: Monitor for activities and techniques associated with Privilege Escalation
   attacks within Azure Active Directory tenants.
 narrative: Privilege Escalation consists of techniques that adversaries use to gain higher-level permissions on a system or network. 

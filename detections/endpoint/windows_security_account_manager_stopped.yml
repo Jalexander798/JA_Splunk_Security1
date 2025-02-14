@@ -1,7 +1,7 @@
 name: Windows Security Account Manager Stopped
 id: 69c12d59-d951-431e-ab77-ec426b8d65e6
-version: '5'
-date: '2024-11-28'
+version: 6
+date: '2024-12-10'
 author: Rod Soto, Jose Hernandez, Splunk
 status: production
 type: TTP
@@ -49,41 +49,33 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: 'The Windows Security Account Manager (SAM) was stopped via cli by $user$
+    on $dest$ by this command: $process$'
+  risk_objects:
+  - field: dest
+    type: system
+    score: 70
+  - field: user
+    type: user
+    score: 70
+  threat_objects: []
 tags:
   analytic_story:
   - Compromised Windows Host
   - Ryuk Ransomware
   asset_type: Endpoint
-  confidence: 100
-  impact: 70
-  message: 'The Windows Security Account Manager (SAM) was stopped via cli by $user$
-    on $dest$ by this command: $process$'
   mitre_attack_id:
   - T1489
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
-  - name: user
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.process_name
-  - Processes.process
-  - Processes.dest
-  - Processes.user
-  risk_score: 70
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/ryuk/windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/ryuk/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

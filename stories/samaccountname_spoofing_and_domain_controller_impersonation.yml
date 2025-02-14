@@ -3,6 +3,7 @@ id: 0244fdee-61be-11ec-900e-acde48001122
 version: 1
 date: '2021-12-20'
 author: Mauricio Velazco, Splunk
+status: production
 description: Monitor for activities and techniques associated with the exploitation
   of the sAMAccountName Spoofing (CVE-2021-42278) and Domain Controller Impersonation
   (CVE-2021-42287) vulnerabilities.

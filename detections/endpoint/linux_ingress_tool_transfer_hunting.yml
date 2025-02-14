@@ -1,7 +1,7 @@
 name: Linux Ingress Tool Transfer Hunting
 id: 52fd468b-cb6d-48f5-b16a-92f1c9bb10cf
-version: '5'
-date: '2024-12-17'
+version: 6
+date: '2024-12-19'
 author: Michael Haag, Splunk
 status: production
 type: Hunting
@@ -43,48 +43,17 @@ tags:
   - Linux Living Off The Land
   - XorDDos
   asset_type: Endpoint
-  confidence: 10
-  impact: 10
-  message: An instance of $process_name$ was identified on endpoint $dest$ by user
-    $user$ utilizing curl or wget.
   mitre_attack_id:
   - T1105
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: process_name
-    type: Process
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.dest
-  - Processes.user
-  - Processes.parent_process_name
-  - Processes.parent_process
-  - Processes.original_file_name
-  - Processes.process_name
-  - Processes.process
-  - Processes.process_id
-  - Processes.parent_process_path
-  - Processes.process_path
-  - Processes.parent_process_id
-  risk_score: 1
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/atomic_red_team/curl-linux-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/atomic_red_team/curl-linux-sysmon.log
     source: Syslog:Linux-Sysmon/Operational
     sourcetype: sysmon:linux
-    update_timestamp: true

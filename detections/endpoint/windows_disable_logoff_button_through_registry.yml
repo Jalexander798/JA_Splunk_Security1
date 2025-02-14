@@ -5,17 +5,24 @@ date: '2024-12-08'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: Anomaly
-description: The following analytic detects a suspicious registry modification that disables the logoff feature on a Windows host. It leverages data from the Endpoint.Registry data model to identify changes to specific registry values associated with logoff functionality. This activity is significant because it can indicate ransomware attempting to make the compromised host unusable and hinder remediation efforts. If confirmed malicious, this action could prevent users from logging off, complicate incident response, and allow attackers to maintain persistence and control over the affected system.
+description: The following analytic detects a suspicious registry modification that
+  disables the logoff feature on a Windows host. It leverages data from the Endpoint.Registry
+  data model to identify changes to specific registry values associated with logoff
+  functionality. This activity is significant because it can indicate ransomware attempting
+  to make the compromised host unusable and hinder remediation efforts. If confirmed
+  malicious, this action could prevent users from logging off, complicate incident
+  response, and allow attackers to maintain persistence and control over the affected
+  system.
 data_source:
 - Sysmon EventID 12
 - Sysmon EventID 13
-search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time) as lastTime FROM datamodel=Endpoint.Registry 
-  WHERE (Registry.registry_path= "*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\*"
+search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
+  as lastTime FROM datamodel=Endpoint.Registry WHERE (Registry.registry_path= "*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\*"
   Registry.registry_value_name IN ("NoLogOff", "StartMenuLogOff") Registry.registry_value_data
-  = "0x00000001") BY Registry.dest Registry.user Registry.registry_path
-  Registry.registry_key_name Registry.registry_value_name Registry.registry_value_data
-  Registry.process_guid | `drop_dm_object_name(Registry)` | where isnotnull(registry_value_data)
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_disable_logoff_button_through_registry_filter`'
+  = "0x00000001") BY Registry.dest Registry.user Registry.registry_path Registry.registry_key_name
+  Registry.registry_value_name Registry.registry_value_data Registry.process_guid
+  | `drop_dm_object_name(Registry)` | where isnotnull(registry_value_data) | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `windows_disable_logoff_button_through_registry_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the registry value name, registry path, and registry value data from your
   endpoints. If you are using Sysmon, you must have at least version 2.0 of the official
@@ -33,41 +40,37 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$dest$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: Registry modification in "NoLogOff" on $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 49
+  threat_objects: []
 tags:
   analytic_story:
   - Ransomware
   - Windows Registry Abuse
   asset_type: Endpoint
-  confidence: 70
-  impact: 70
-  message: Registry modification in "NoLogOff" on $dest$
   mitre_attack_id:
   - T1112
-  observable:
-  - name: dest
-    type: Endpoint
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Registry.dest
-  - Registry.registry_value_name
-  - Registry.registry_key_name
-  - Registry.registry_path
-  - Registry.registry_value_data
-  - Registry.process_guid
-  risk_score: 49
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/ransomware_disable_reg/sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/ransomware_disable_reg/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

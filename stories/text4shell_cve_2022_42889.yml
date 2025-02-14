@@ -3,6 +3,7 @@ id: 95ae800d-485e-47f7-866e-8be281aa497b
 version: 1
 date: '2022-10-26'
 author: Michael Haag, Splunk
+status: production
 description: A new critical vulnerability CVE-2022-42889 a.k.a. Text4shell, similar to the old Spring4Shell and Log4Shell, was originally reported by Alvaro Munoz on the very popular Apache Commons Text library.
 narrative: Apache Commons Text is a Java library described as "a library focused on algorithms working on strings." We can see it as a general-purpose text manipulation toolkit.
   This vulnerability affects the StringSubstitutor interpolator class, which is included in the Commons Text library. A default interpolator allows for string lookups that can lead to Remote Code Execution. This is due to a logic flaw that makes the "script," "dns," and "url" lookup keys interpolated by default, as opposed to what it should be, according to the documentation of the StringLookupFactory class. Those keys allow an attacker to execute arbitrary code via lookups.

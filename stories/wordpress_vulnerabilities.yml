@@ -3,6 +3,7 @@ id: baeaee14-e439-4c95-91e8-aaedd8265c1c
 version: 1
 date: '2024-02-22'
 author: Michael Haag, Splunk
+status: production
 description: This analytic story provides a collection of analytics that detect potential exploitation of WordPress vulnerabilities. The analytics are focused on the detection of known vulnerabilities in WordPress plugins and themes.
 narrative: The following collection of analytics are focused on the detection of known vulnerabilities in WordPress plugins and themes. The analytics are focused on the detection of known vulnerabilities in WordPress plugins and themes.
 references:

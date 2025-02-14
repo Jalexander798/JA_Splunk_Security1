@@ -1,18 +1,18 @@
 name: EC2 Instance Started In Previously Unseen Region
 id: ada0f478-84a8-4641-a3f3-d82362d6fd75
-version: 3
-date: '2024-10-17'
+version: 4
+date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: deprecated
-type: Anomaly
+type: Hunting
 description: This search looks for AWS CloudTrail events where an instance is started
   in a particular region in the last one hour and then compares it to a lookup file
   of previously seen regions where an instance was started
 data_source: []
 search: '`cloudtrail` earliest=-1h StartInstances | stats earliest(_time) as earliest
-  latest(_time) as latest by awsRegion | inputlookup append=t previously_seen_aws_regions.csv
+  latest(_time) as latest by awsRegion | inputlookup append=t previously_seen_aws_regions
   | stats min(earliest) as earliest max(latest) as latest by awsRegion | outputlookup
-  previously_seen_aws_regions.csv | eval regionStatus=if(earliest >= relative_time(now(),"-1d@d"),
+  previously_seen_aws_regions | eval regionStatus=if(earliest >= relative_time(now(),"-1d@d"),
   "Instance Started in a New Region","Previously Seen Region") | `security_content_ctime(earliest)`
   | `security_content_ctime(latest)` | where regionStatus="Instance Started in a New
   Region" | `ec2_instance_started_in_previously_unseen_region_filter`'
@@ -29,22 +29,10 @@ tags:
   - AWS Cryptomining
   - Suspicious AWS EC2 Activities
   asset_type: AWS Instance
-  confidence: 50
-  impact: 50
-  message: tbd
   mitre_attack_id:
   - T1535
-  observable:
-  - name: awsRegion
-    type: Geo Location
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - awsRegion
-  risk_score: 25.0
   security_domain: network

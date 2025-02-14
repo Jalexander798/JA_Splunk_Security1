@@ -3,6 +3,7 @@ id: 10c7e01a-5743-4995-99df-a66f6b5db653
 version: 1
 date: '2023-07-26'
 author: Michael Haag, Splunk
+status: production
 description: A critical vulnerability has been discovered in ShareFile's Storage Zones Controller software (CVE-2023-24489), used by numerous organizations for file sharing and storage. The vulnerability allows unauthenticated arbitrary file upload and remote code execution due to a cryptographic bug in the software's encryption but lack of authentication system. The risk comes from a failing encryption check, allowing potential cybercriminals to upload malicious files to the server. The bug was found in the Documentum Connector's .aspx files. The security risk has a potentially large impact due to the software's wide use and the sensitivity of the stored data. Citrix has released a security update to address this issue. 
 narrative: The ShareFile Storage Zones Controller is a .NET web application running under IIS, which manages the storage of files in ShareFile's system. It was discovered that this software has a critical vulnerability (CVE-2023-24489) in the file upload functionality provided by the Documentum Connector's .aspx files. Specifically, the security flaw lies in the encryption check in the file upload process which could be bypassed, allowing for unauthenticated arbitrary file uploads and remote code execution. 
 

@@ -3,6 +3,7 @@ id: 0ca8c38e-631e-4b81-940c-f9c5450ce41e
 version: 1
 date: '2021-08-18'
 author: Patrick Bareiss, Splunk
+status: production
 description: This story is focused around detecting attacks on a DevSecOps lifeccycle
   which consists of the phases plan, code, build, test, release, deploy, operate and
   monitor.

@@ -3,6 +3,7 @@ id: af228995-f182-49d7-90b3-2a732944f00f
 version: 1
 date: '2022-02-14'
 author: Teoderick Contreras, Splunk
+status: production
 description: Leverage searches that allow you to detect and investigate unusual activities
   that might relate to the network discovery, including looking for network configuration, settings such as IP, MAC address, 
   firewall settings and many more.

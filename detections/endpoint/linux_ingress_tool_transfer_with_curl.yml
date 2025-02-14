@@ -1,7 +1,7 @@
 name: Linux Ingress Tool Transfer with Curl
 id: 8c1de57d-abc1-4b41-a727-a7a8fc5e0857
-version: '5'
-date: '2024-12-17'
+version: 6
+date: '2024-12-19'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly
@@ -50,54 +50,36 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: An instance of $process_name$ was identified on endpoint $dest$ by user
+    $user$ to download a remote file. Review activity for further details.
+  risk_objects:
+  - field: user
+    type: user
+    score: 12
+  - field: dest
+    type: system
+    score: 12
+  threat_objects:
+  - field: process_name
+    type: process_name
 tags:
   analytic_story:
   - Ingress Tool Transfer
   - Linux Living Off The Land
   - XorDDos
   asset_type: Endpoint
-  confidence: 30
-  impact: 40
-  message: An instance of $process_name$ was identified on endpoint $dest$ by user
-    $user$ to download a remote file. Review activity for further details.
   mitre_attack_id:
   - T1105
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
-  - name: process_name
-    type: Process
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - Processes.dest
-  - Processes.user
-  - Processes.parent_process_name
-  - Processes.parent_process
-  - Processes.original_file_name
-  - Processes.process_name
-  - Processes.process
-  - Processes.process_id
-  - Processes.parent_process_path
-  - Processes.process_path
-  - Processes.parent_process_id
-  risk_score: 12
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/atomic_red_team/curl-linux-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/atomic_red_team/curl-linux-sysmon.log
     source: Syslog:Linux-Sysmon/Operational
     sourcetype: sysmon:linux
-    update_timestamp: true

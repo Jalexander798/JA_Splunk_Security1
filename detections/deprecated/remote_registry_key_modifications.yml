@@ -1,7 +1,7 @@
 name: Remote Registry Key modifications
 id: c9f4b923-f8af-4155-b697-1354f5dcbc5e
-version: 5
-date: '2024-10-17'
+version: 6
+date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: deprecated
 type: TTP
@@ -21,29 +21,24 @@ how_to_implement: To successfully implement this search, you must populate the `
 known_false_positives: This technique may be legitimately used by administrators to
   modify remote registries, so it's important to filter these events out.
 references: []
+rba:
+  message: Registry remotely modified on $dest$
+  risk_objects:
+  - field: user
+    type: user
+    score: 25
+  - field: dest
+    type: system
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - Windows Defense Evasion Tactics
   - Suspicious Windows Registry Activities
   - Windows Persistence Techniques
   asset_type: Endpoint
-  confidence: 50
-  impact: 50
-  message: tbd
-  observable:
-  - name: user
-    type: User
-    role:
-    - Victim
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  risk_score: 25
   security_domain: endpoint

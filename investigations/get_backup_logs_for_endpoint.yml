@@ -4,7 +4,7 @@ version: 1
 date: '2017-09-14'
 author: David Dorsey, Splunk
 type: Investigation
-datamodel: []
+status: deprecated
 description: This search will tell you the backup status from your netbackup_logs
   of a specific endpoint for the last week.
 search: '`netbackup` COMPUTERNAME=$dest$ | rename COMPUTERNAME as dest, MESSAGE as
@@ -18,8 +18,4 @@ tags:
   - SamSam Ransomware
   product:
   - Splunk Phantom
-  required_fields:
-  - _time
-  - COMPUTERNAME
-  - MESSAGE
   security_domain: endpoint

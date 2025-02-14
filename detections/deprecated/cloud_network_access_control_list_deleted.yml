@@ -1,7 +1,7 @@
 name: Cloud Network Access Control List Deleted
 id: 021abc51-1862-41dd-ad43-43c739c0a983
-version: 3
-date: '2024-10-17'
+version: 4
+date: '2024-11-14'
 author: Peter Gael, Splunk
 status: deprecated
 type: Anomaly
@@ -22,31 +22,19 @@ how_to_implement: You must be ingesting your cloud infrastructure logs from your
 known_false_positives: It's possible that a user has legitimately deleted a network
   ACL.
 references: []
+rba:
+  message: AWS Network ACL Deleted by $userName$
+  risk_objects:
+  - field: userName
+    type: user
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - AWS Network ACL Activity
   asset_type: Instance
-  confidence: 50
-  impact: 50
-  message: tbd
-  observable:
-  - name: userName
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - eventName
-  - userIdentity.arn
-  - errorMessage
-  - errorCode
-  - userAgent
-  - src
-  - userName
-  - arn
-  risk_score: 25
   security_domain: network

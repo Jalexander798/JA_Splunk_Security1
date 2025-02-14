@@ -1,7 +1,12 @@
-description: A list of potentially abused libraries in Windows
-filename: hijacklibs.csv
 name: hijacklibs
-default_match: 'false'
-match_type: WILDCARD(library)
+date: 2024-12-23
+version: 2
+id: 00990d97-e923-4ae7-9fa0-b5033a8b0164
+author: Splunk Threat Research Team
+lookup_type: csv
+description: A list of potentially abused libraries in Windows
+default_match: false
+match_type: 
+- WILDCARD(library)
 min_matches: 1
-case_sensitive_match: 'false'
+case_sensitive_match: false

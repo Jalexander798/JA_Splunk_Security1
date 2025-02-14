@@ -4,8 +4,7 @@ version: 1
 date: '2020-09-02'
 author: David Dorsey, Splunk
 type: Baseline
-datamodel:
-- Change
+status: production
 description: This search looks for cloud compute events where a compute instance is
   started and creates a baseline of most recent time, `lastTime` and the first time
   `firstTime` we've seen this region in our dataset grouped by the region for the
@@ -28,10 +27,6 @@ tags:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - All_Changes.action
-  - All_Changes.vendor_region
   security_domain: network
 deployment:
   scheduling:

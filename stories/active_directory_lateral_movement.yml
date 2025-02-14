@@ -3,6 +3,7 @@ id: 399d65dc-1f08-499b-a259-aad9051f38ad
 version: 3
 date: '2021-12-09'
 author: David Dorsey, Mauricio Velazco Splunk
+status: production
 description: Detect and investigate tactics, techniques, and procedures around how
   attackers move laterally within an Active Directory environment. Since lateral movement
   is often a necessary step in a breach, it is important for cyber defenders to deploy
