@@ -55,7 +55,6 @@ tags:
   - Malicious PowerShell
   asset_type: Endpoint 
   mitre_attack_id: 
-  - T1059
   - T1059.001
   product: 
   - Splunk Enterprise
