@@ -42,13 +42,13 @@ drilldown_searches:
   earliest_offset: -7d
   latest_offset: now
 - name: View all high-risk events for this host
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object="$host$" starthoursago=168 | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(risk_score) as "Risk Score" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object="$dest$" starthoursago=168 | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(risk_score) as "Risk Score" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: -7d
   latest_offset: now
 rba:
-  message: SQL Server xp_cmdshell configuration was $change_type$ on host $host$, which could indicate an attempt to gain operating system command execution capabilities
+  message: SQL Server xp_cmdshell configuration was $change_type$ on host $dest$, which could indicate an attempt to gain operating system command execution capabilities
   risk_objects:
-  - field: host
+  - field: dest
     type: system
     score: 90
   - field: config_name

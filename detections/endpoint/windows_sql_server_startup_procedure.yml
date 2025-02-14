@@ -35,9 +35,9 @@ drilldown_searches:
   earliest_offset: -7d
   latest_offset: now
 rba:
-  message: A SQL Server startup procedure "$startup_procedure$" was executed on host $host$, which could indicate an attempt to establish persistence
+  message: A SQL Server startup procedure "$startup_procedure$" was executed on host $dest$, which could indicate an attempt to establish persistence
   risk_objects:
-  - field: host
+  - field: dest
     type: system
     score: 90
   - field: startup_procedure
