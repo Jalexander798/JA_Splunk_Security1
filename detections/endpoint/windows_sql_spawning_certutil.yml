@@ -53,6 +53,7 @@ rba:
     type: process_name
 tags:
   analytic_story:
+  - SQL Server Abuse
   - Flax Typhoon
   asset_type: Endpoint
   atomic_guid: []
