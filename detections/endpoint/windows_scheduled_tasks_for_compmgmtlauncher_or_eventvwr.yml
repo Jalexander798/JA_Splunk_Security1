@@ -1,7 +1,7 @@
 name: Windows Scheduled Tasks for CompMgmtLauncher or Eventvwr
 id: feb43b86-8c38-46cd-865e-20ce8a96c26c
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-17'
 author: Teoderick Contreras, Splunk
 data_source:
 - Windows Event Log Security 4698

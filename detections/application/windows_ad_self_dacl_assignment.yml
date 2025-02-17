@@ -1,7 +1,7 @@
 name: Windows AD Self DACL Assignment
 id: 16132445-da9f-4d03-ad44-56d717dcd67d
-version: 3
-date: '2025-01-21'
+version: 4
+date: '2025-02-17'
 author: Dean Luxton
 status: production
 type: TTP
