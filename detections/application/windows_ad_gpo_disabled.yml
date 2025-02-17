@@ -6,7 +6,7 @@ author: Dean Luxton
 status: production
 type: TTP
 data_source:
-- Windows Security 5136
+- Windows Event Log Security 5136
 description: This detection identifies when an Active Directory Group Policy is disabled
   using the Group Policy Management Console.
 search: '`wineventlog_security` EventCode=5136 AttributeLDAPDisplayName=flags OperationType="%%14674"

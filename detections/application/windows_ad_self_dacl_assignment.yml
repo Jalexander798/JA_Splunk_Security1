@@ -6,7 +6,7 @@ author: Dean Luxton
 status: production
 type: TTP
 data_source:
-- Windows Security 5136
+- Windows Event Log Security 5136
 description: Detect when a user creates a new DACL in AD for their own AD object.
 search: "`wineventlog_security` EventCode=5136  | stats min(_time) as _time values(eval(if(OperationType==\"\
   %%14675\",AttributeValue,null))) as old_value values(eval(if(OperationType==\"%%14674\"\

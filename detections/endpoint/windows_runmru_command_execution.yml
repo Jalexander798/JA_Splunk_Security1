@@ -4,8 +4,8 @@ version: 2
 date: '2025-01-21'
 author: Nasreddine Bencherchali, Michael Haag, Splunk
 data_source:
-- Sysmon Event ID 11
-- Sysmon Event ID 13
+- Sysmon EventID 11
+- Sysmon EventID 13
 type: Anomaly
 status: production
 description: The following analytic detects modifications to the Windows RunMRU registry

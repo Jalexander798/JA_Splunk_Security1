@@ -4,7 +4,7 @@ version: 2
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 data_source:
-- Sysmon Event ID 11
+- Sysmon EventID 11
 type: TTP
 status: production
 description: The following analytic detects the creation of archived files in a temporary
