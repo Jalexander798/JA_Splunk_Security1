@@ -1,6 +1,6 @@
 name: Azure AD FullAccessAsApp Permission Assigned
 id: ae286126-f2ad-421c-b240-4ea83bd1c43a
-version: 4
+version: 5
 date: '2024-11-14'
 author: Mauricio Velazco, Splunk
 status: production

@@ -1,6 +1,6 @@
 name: Azure AD Multiple Service Principals Created by User
 id: 32880707-f512-414e-bd7f-204c0c85b758
-version: 5
+version: 6
 date: '2024-11-14'
 author: Mauricio Velazco, Splunk
 data_source:
