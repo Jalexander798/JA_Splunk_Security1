@@ -1,6 +1,6 @@
 name: O365 File Permissioned Application Consent Granted by User
 id: 6c382336-22b8-4023-9b80-1689e799f21f
-version: 4
+version: 5
 date: '2024-11-14'
 author: Mauricio Velazco, Splunk
 status: production

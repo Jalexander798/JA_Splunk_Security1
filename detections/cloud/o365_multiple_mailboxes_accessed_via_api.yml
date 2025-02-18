@@ -1,6 +1,6 @@
 name: O365 Multiple Mailboxes Accessed via API
 id: 7cd853e9-d370-412f-965d-a2bcff2a2908
-version: 5
+version: 6
 date: '2024-11-14'
 author: Mauricio Velazco, Splunk
 data_source:

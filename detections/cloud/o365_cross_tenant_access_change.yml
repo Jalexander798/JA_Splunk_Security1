@@ -1,6 +1,6 @@
 name: O365 Cross-Tenant Access Change
 id: 7c0fa490-12b0-4d0b-b9f5-e101d1e0e06f
-version: 4
+version: 5
 date: '2024-11-14'
 author: Steven Dick
 status: production
