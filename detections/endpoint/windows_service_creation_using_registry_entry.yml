@@ -1,6 +1,6 @@
 name: Windows Service Creation Using Registry Entry
 id: 25212358-948e-11ec-ad47-acde48001122
-version: 11
+version: 12
 date: '2025-01-27'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
@@ -13,7 +13,6 @@ description: The following analytic detects the modification of registry keys th
   this could allow an attacker to maintain access, escalate privileges, or move laterally
   within the network, leading to data theft, ransomware, or other damaging outcomes.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry WHERE (Registry.registry_path="*\\SYSTEM\\CurrentControlSet\\Services*"
