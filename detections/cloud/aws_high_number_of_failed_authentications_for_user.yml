@@ -1,6 +1,6 @@
 name: AWS High Number Of Failed Authentications For User
 id: e3236f49-daf3-4b70-b808-9290912ac64d
-version: 4
+version: 5
 date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: production

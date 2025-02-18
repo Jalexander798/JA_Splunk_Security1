@@ -1,6 +1,6 @@
 name: AWS IAM Delete Policy
 id: ec3a9362-92fe-11eb-99d0-acde48001122
-version: 4
+version: 5
 date: '2024-11-14'
 author: Michael Haag, Splunk
 status: production

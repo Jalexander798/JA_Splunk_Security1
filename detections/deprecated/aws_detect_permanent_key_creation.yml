@@ -1,6 +1,6 @@
 name: aws detect permanent key creation
 id: 12d6d713-3cb4-4ffc-a064-1dca3d1cca01
-version: 4
+version: 5
 date: '2024-11-14'
 author: Rod Soto, Splunk
 status: deprecated

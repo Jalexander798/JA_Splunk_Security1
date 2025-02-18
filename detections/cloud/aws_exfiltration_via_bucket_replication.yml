@@ -1,6 +1,6 @@
 name: AWS Exfiltration via Bucket Replication
 id: eeb432d6-2212-43b6-9e89-fcd753f7da4c
-version: 4
+version: 5
 date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: production

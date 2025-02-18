@@ -1,6 +1,6 @@
 name: AWS IAM Failure Group Deletion
 id: 723b861a-92eb-11eb-93b8-acde48001122
-version: 6
+version: 7
 date: '2024-11-14'
 author: Michael Haag, Splunk
 status: production

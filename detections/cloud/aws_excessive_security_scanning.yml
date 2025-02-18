@@ -1,6 +1,6 @@
 name: AWS Excessive Security Scanning
 id: 1fdd164a-def8-4762-83a9-9ffe24e74d5a
-version: 4
+version: 5
 date: '2024-11-14'
 author: Patrick Bareiss, Splunk
 status: production

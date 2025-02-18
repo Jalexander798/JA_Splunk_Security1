@@ -1,6 +1,6 @@
 name: AWS Successful Console Authentication From Multiple IPs
 id: 395e50e1-2b87-4fa3-8632-0dfbdcbcd2cb
-version: 6
+version: 7
 date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: production
