@@ -1,7 +1,7 @@
 name: Domain Group Discovery With Dsquery
 id: f0c9d62f-a232-4edd-b17e-bc409fb133d4
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: Hunting
@@ -40,7 +40,6 @@ tags:
   - Active Directory Discovery
   asset_type: Endpoint
   mitre_attack_id:
-  - T1069
   - T1069.002
   product:
   - Splunk Enterprise

@@ -1,7 +1,7 @@
 name: Linux File Created In Kernel Driver Directory
 id: b85bbeec-6326-11ec-9311-acde48001122
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -56,7 +56,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1547.006
-  - T1547
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

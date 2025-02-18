@@ -1,7 +1,7 @@
 name: Windows Service Create Kernel Mode Driver
 id: 0b4e3b06-1b2b-4885-b752-cf06d12a90cb
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -67,9 +67,8 @@ tags:
   - CISA AA22-320A
   asset_type: Endpoint
   mitre_attack_id:
-  - T1543.003
-  - T1543
   - T1068
+  - T1543.003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,7 +1,7 @@
 name: Linux Node Privilege Escalation
 id: 2e58a4ff-398f-42f4-8fd0-e01ebfe2a8ce
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Gowthamaraj Rajendran, Splunk
 status: production
 type: Anomaly
@@ -69,7 +69,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1548.003
-  - T1548
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,7 +1,7 @@
 name: Windows LOLBAS Executed As Renamed File
 id: fd496996-7d9e-4894-8d40-bb85b6192dc6
-version: 3
-date: '2024-11-13'
+version: 4
+date: '2025-02-10'
 author: Steven Dick
 status: production
 type: TTP
@@ -74,7 +74,6 @@ tags:
   - Windows Defense Evasion Tactics
   asset_type: Endpoint
   mitre_attack_id:
-  - T1036
   - T1036.003
   - T1218.011
   product:

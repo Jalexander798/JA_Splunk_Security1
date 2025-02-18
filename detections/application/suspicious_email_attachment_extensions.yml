@@ -1,7 +1,7 @@
 name: Suspicious Email Attachment Extensions
 id: 473bd65f-06ca-4dfe-a2b8-ba04ab4a0084
-version: 6
-date: '2025-01-21'
+version: 7
+date: '2025-02-10'
 author: David Dorsey, Splunk
 status: experimental
 type: Anomaly
@@ -48,7 +48,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1566.001
-  - T1566
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,7 +1,7 @@
 name: CMD Carry Out String Command Parameter
 id: 54a6ed00-3256-11ec-b031-acde48001122
-version: 7
-date: '2024-11-13'
+version: 8
+date: '2025-02-10'
 author: Teoderick Contreras, Bhavin Patel, Splunk
 status: production
 type: Hunting
@@ -64,7 +64,6 @@ tags:
   - CVE-2021-44228
   mitre_attack_id:
   - T1059.003
-  - T1059
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,10 +1,10 @@
 name: Linux Auditd Hidden Files And Directories Creation
 id: 555cc358-bf16-4e05-9b3a-0f89c73b7261
-version: 4
-date: '2025-01-16'
+version: 5
+date: '2025-02-03'
 author: Teoderick Contreras, Splunk
 status: production
-type: TTP
+type: Anomaly
 description: The following analytic detects suspicious creation of hidden files and directories, which may indicate an attacker's attempt to conceal malicious activities or unauthorized data. Hidden files and directories are often used to evade detection by security tools and administrators, providing a stealthy means for storing malware, logs, or sensitive information. By monitoring for unusual or unauthorized creation of hidden files and directories, this analytic helps identify potential attempts to hide or unauthorized creation of hidden files and directories, this analytic helps identify potential attempts to hide malicious operations, enabling security teams to uncover and address hidden threats effectively.
 data_source:
 - Linux Auditd Execve
@@ -28,7 +28,7 @@ rba:
   risk_objects:
   - field: dest
     type: system
-    score: 64
+    score: 30
   threat_objects: []
 tags:
   analytic_story:

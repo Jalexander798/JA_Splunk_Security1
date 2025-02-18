@@ -1,7 +1,7 @@
 name: Windows Impair Defenses Disable Auto Logger Session
 id: dc6a5613-d024-47e7-9997-ab6477a483d3
-version: 2
-date: '2025-01-07'
+version: 3
+date: '2025-02-10'
 author: Nasreddine Bencherchali, Splunk
 status: production
 type: Anomaly
@@ -50,7 +50,8 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Windows Auto Logger Session or Provider registry value set to 'disabled' on $dest$
+  message: Windows Auto Logger Session or Provider registry value set to 'disabled'
+    on $dest$
   risk_objects:
   - field: dest
     type: system
@@ -63,7 +64,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,7 +1,7 @@
 name: Windows Service Create SliverC2
 id: 89dad3ee-57ec-43dc-9044-131c4edd663f
-version: 5
-date: '2024-12-10'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Splunk
 type: TTP
 status: production
@@ -53,7 +53,6 @@ tags:
   - Compromised Windows Host
   asset_type: Endpoint
   mitre_attack_id:
-  - T1569
   - T1569.002
   product:
   - Splunk Enterprise

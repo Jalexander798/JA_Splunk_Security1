@@ -1,7 +1,7 @@
 name: O365 Privileged Role Assigned
 id: db435700-4ddc-4c23-892e-49e7525d7d39
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Steven Dick
 status: production
 type: TTP
@@ -62,7 +62,6 @@ tags:
   - Azure Active Directory Persistence
   asset_type: O365 Tenant
   mitre_attack_id:
-  - T1098
   - T1098.003
   product:
   - Splunk Enterprise

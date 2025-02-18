@@ -1,7 +1,7 @@
 name: Linux Auditd At Application Execution
 id: 9f306e0a-1c36-469e-8892-968ca12470dd
-version: 3
-date: '2024-11-13'
+version: 4
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -66,7 +66,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.002
-  - T1053
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
