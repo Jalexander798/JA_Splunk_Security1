@@ -5,5 +5,5 @@
   <collection label="Dashboards">
     <view source="unclassified" match=" - "/>
   </collection>
-  <a href="http://docs.splunk.com/Documentation/ESSOC">Docs</a>
+  <a href="https://docs.splunk.com/Documentation/ESCU">Docs</a>
 </nav>
