@@ -1,7 +1,7 @@
 name: Schtasks scheduling job on remote system
 id: 1297fb80-f42a-4b4a-9c8a-88c066237cf6
-version: 11
-date: '2024-12-10'
+version: 12
+date: '2025-02-10'
 author: David Dorsey, Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -76,7 +76,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.005
-  - T1053
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,6 +1,6 @@
 name: Detect Remote Access Software Usage URL
 id: 9296f515-073c-43a5-88ec-eda5a4626654
-version: 6
+version: 7
 date: '2024-11-15'
 author: Steven Dick
 status: production
@@ -52,6 +52,10 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+- name: Investigate traffic to $url_domain$ 
+  search: '| from datamodel:Web | search src=$src$ url_domain=$url_domain$'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
 rba:
   message: A domain for a known remote access software $url_domain$ was contacted
     by $src$.
@@ -65,12 +69,15 @@ rba:
   threat_objects:
   - field: url_domain
     type: domain
+  - field: signature
+    type: signature    
 tags:
   analytic_story:
   - Insider Threat
   - Command And Control
   - Ransomware
   - CISA AA24-241A
+  - Remote Monitoring and Management Software
   asset_type: Network
   mitre_attack_id:
   - T1219

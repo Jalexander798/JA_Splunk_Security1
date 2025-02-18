@@ -1,7 +1,7 @@
 name: Suspicious Rundll32 dllregisterserver
 id: 8c00a385-9b86-4ac0-8932-c9ec3713b159
-version: 7
-date: '2024-11-13'
+version: 8
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -78,7 +78,6 @@ tags:
   - IcedID
   asset_type: Endpoint
   mitre_attack_id:
-  - T1218
   - T1218.011
   product:
   - Splunk Enterprise

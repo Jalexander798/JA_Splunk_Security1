@@ -1,7 +1,7 @@
 name: Logon Script Event Trigger Execution
 id: 4c38c264-1f74-11ec-b5fa-acde48001122
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -61,7 +61,6 @@ tags:
   - Windows Persistence Techniques
   asset_type: Endpoint
   mitre_attack_id:
-  - T1037
   - T1037.001
   product:
   - Splunk Enterprise

@@ -1,7 +1,7 @@
 name: AWS Console Login Failed During MFA Challenge
 id: 55349868-5583-466f-98ab-d3beb321961e
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -57,7 +57,6 @@ tags:
   - Compromised User Account
   asset_type: AWS Account
   mitre_attack_id:
-  - T1586
   - T1586.003
   - T1621
   product:

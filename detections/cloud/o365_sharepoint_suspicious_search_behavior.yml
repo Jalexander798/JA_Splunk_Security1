@@ -1,0 +1,67 @@
+name: O365 SharePoint Suspicious Search Behavior
+id: 6ca919db-52f3-4c95-a4e9-7b189e8a043d
+version: 1
+date: '2025-01-08'
+author: Steven Dick
+status: production
+type: Anomaly
+description: The following analytic identifies when the O365 SharePoint users search for suspicious keywords or have an excessive number of queries within a limited timeframe. This behavior may indicate malicious actor enumeration of SharePoint based data within O365.
+data_source: 
+- Office 365 Universal Audit Log
+search: |-
+  `o365_management_activity` Workload=SharePoint Operation="SearchQueryPerformed" SearchQueryText=* EventData=*search*
+  | where NOT (match(SearchQueryText, "\*") OR match(SearchQueryText,"(\*)"))
+  | eval signature_id = CorrelationId, signature=Operation, src = ClientIP, user = UserId, object_name=EventData, command = SearchQueryText, -time = _time 
+  | bin _time span=1hr
+  | stats values(object_name) as object_name values(command) as command, values(src) as src, dc(command) as count, min(-time) as firstTime, max(-time) as lastTime by user,signature,_time
+  | where count > 20 OR match(command, "(?i)password|credential|passwd|shadow|active directory|account|username|network|computer|access|MFA|bank|deposit|payroll|EFT|Electonic Funds|routing")
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)`
+  | `o365_sharepoint_suspicious_search_behavior_filter`
+how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest Office 365 management activity events. The thresholds and match terms set within the analytic are initial guidelines and should be customized based on the organization's user behavior and risk profile. Security teams are encouraged to adjust these thresholds to optimize the balance between detecting genuine threats and minimizing false positives, ensuring the detection is tailored to their specific environment.
+known_false_positives: Users searching excessively or possible false positives related to matching conditions.
+references:
+- https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-320a
+- https://attack.mitre.org/techniques/T1213/002/
+drilldown_searches:
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search user = "$user$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: Investigate search behavior by $user$ 
+  search: '`o365_management_activity` Workload=SharePoint Operation="SearchQueryPerformed" SearchQueryText=* EventData=*search* AND UserId = "$user$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+rba:
+  message: The SharePoint Online was searched suspiciously by $user$
+  risk_objects:
+  - field: user
+    type: user
+    score: 25
+  threat_objects:
+  - field: src
+    type: ip_address
+tags:
+  analytic_story: 
+  - Azure Active Directory Persistence
+  - Office 365 Account Takeover
+  - CISA AA22-320A
+  asset_type: O365 Tenant
+  mitre_attack_id: 
+  - T1213.002 
+  - T1552
+  product: 
+  - Splunk Enterprise
+  - Splunk Enterprise Security
+  - Splunk Cloud
+  security_domain: threat
+tests:
+- name: True Positive Test
+  attack_data:
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1213.002/o365_sus_sharepoint_search/o365_sus_sharepoint_search.log
+    source: o365
+    sourcetype: o365:management:activity

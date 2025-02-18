@@ -1,7 +1,7 @@
 name: Azure AD New MFA Method Registered
 id: 0488e814-eb81-42c3-9f1f-b2244973e3a3
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -62,7 +62,6 @@ tags:
   - Azure Active Directory Persistence
   asset_type: Azure Tenant
   mitre_attack_id:
-  - T1098
   - T1098.005
   product:
   - Splunk Enterprise

@@ -1,7 +1,7 @@
 name: Kerberos Service Ticket Request Using RC4 Encryption
 id: 7d90f334-a482-11ec-908c-acde48001122
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -62,7 +62,6 @@ tags:
   - Active Directory Privilege Escalation
   asset_type: Endpoint
   mitre_attack_id:
-  - T1558
   - T1558.001
   product:
   - Splunk Enterprise

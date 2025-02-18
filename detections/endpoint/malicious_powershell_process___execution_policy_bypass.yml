@@ -1,7 +1,7 @@
 name: Malicious PowerShell Process - Execution Policy Bypass
 id: 9be56c82-b1cc-4318-87eb-d138afaaca39
-version: 9
-date: '2025-01-27'
+version: 10
+date: '2025-02-10'
 author: Rico Valdez, Mauricio Velazco, Splunk
 status: production
 type: Anomaly
@@ -69,7 +69,6 @@ tags:
   - Volt Typhoon
   asset_type: Endpoint
   mitre_attack_id:
-  - T1059
   - T1059.001
   product:
   - Splunk Enterprise
@@ -79,6 +78,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/encoded_powershell/windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/encoded_powershell/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

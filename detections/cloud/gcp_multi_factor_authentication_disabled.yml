@@ -1,7 +1,7 @@
 name: GCP Multi-Factor Authentication Disabled
 id: b9bc5513-6fc1-4821-85a3-e1d81e451c83
-version: 6
-date: '2024-11-14'
+version: 7
+date: '2025-02-10'
 author: Bhavin Patel, Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -58,10 +58,8 @@ tags:
   - GCP Account Takeover
   asset_type: GCP
   mitre_attack_id:
-  - T1586
-  - T1586.003
-  - T1556
   - T1556.006
+  - T1586.003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

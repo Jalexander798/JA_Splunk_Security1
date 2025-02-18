@@ -1,7 +1,7 @@
 name: Registry Keys Used For Privilege Escalation
 id: c9f4b923-f8af-4155-b697-1354f5bcbc5e
-version: 11
-date: '2024-12-08'
+version: 12
+date: '2025-02-10'
 author: David Dorsey, Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP
@@ -67,7 +67,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1546.012
-  - T1546
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

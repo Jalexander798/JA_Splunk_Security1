@@ -1,7 +1,7 @@
 name: Okta Phishing Detection with FastPass Origin Check
 id: f4ca0057-cbf3-44f8-82ea-4e330ee901d3
-version: 4
-date: '2025-01-21'
+version: 5
+date: '2025-02-10'
 author: Okta, Inc, Michael Haag, Splunk
 type: TTP
 status: experimental
@@ -38,7 +38,6 @@ tags:
   - Okta Account Takeover
   asset_type: Infrastructure
   mitre_attack_id:
-  - T1078
   - T1078.001
   - T1556
   product:

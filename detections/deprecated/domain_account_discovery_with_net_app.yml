@@ -1,11 +1,19 @@
 name: Domain Account Discovery With Net App
 id: 98f6a534-04c2-11ec-96b2-acde48001122
-version: 5
-date: '2025-01-13'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Mauricio Velazco, Splunk
 status: deprecated
 type: TTP
-description: This following analytic has been deprecated in favour of the generic version "5d0d4830-0133-11ec-bae3-acde48001122". The following analytic detects the execution of `net.exe` or `net1.exe` with command-line arguments used to query domain users. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it may indicate an attempt by adversaries to enumerate domain users for situational awareness and Active Directory discovery. If confirmed malicious, this behavior could allow attackers to map out user accounts, potentially leading to further exploitation or lateral movement within the network.
+description: This following analytic has been deprecated in favour of the generic
+  version "5d0d4830-0133-11ec-bae3-acde48001122". The following analytic detects the
+  execution of `net.exe` or `net1.exe` with command-line arguments used to query domain
+  users. It leverages data from Endpoint Detection and Response (EDR) agents, focusing
+  on process names and command-line executions. This activity is significant as it
+  may indicate an attempt by adversaries to enumerate domain users for situational
+  awareness and Active Directory discovery. If confirmed malicious, this behavior
+  could allow attackers to map out user accounts, potentially leading to further exploitation
+  or lateral movement within the network.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
@@ -63,7 +71,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1087.002
-  - T1087
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

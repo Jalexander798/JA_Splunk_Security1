@@ -1,6 +1,6 @@
 name: Detect Remote Access Software Usage File
 id: 3bf5541a-6a45-4fdc-b01d-59b899fff961
-version: 5
+version: 6
 date: '2024-11-13'
 author: Steven Dick
 status: production
@@ -54,6 +54,10 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+- name: Investigate files on $dest$ 
+  search: '| from datamodel:Endpoint.Filesystem | search dest=$dest$ file_name=$file_name$'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
 rba:
   message: A file for known a remote access software [$file_name$] was created on
     $dest$ by $user$.
@@ -67,6 +71,8 @@ rba:
   threat_objects:
   - field: file_name
     type: file_name
+  - field: signature
+    type: signature
 tags:
   analytic_story:
   - Insider Threat
@@ -74,6 +80,7 @@ tags:
   - Ransomware
   - Gozi Malware
   - CISA AA24-241A
+  - Remote Monitoring and Management Software
   asset_type: Endpoint
   mitre_attack_id:
   - T1219

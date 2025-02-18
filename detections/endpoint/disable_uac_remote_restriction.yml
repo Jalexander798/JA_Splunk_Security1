@@ -1,7 +1,7 @@
 name: Disable UAC Remote Restriction
 id: 9928b732-210e-11ec-b65e-acde48001122
-version: 8
-date: '2024-12-08'
+version: 9
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP
@@ -63,7 +63,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1548.002
-  - T1548
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

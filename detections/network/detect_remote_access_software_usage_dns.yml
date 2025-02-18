@@ -1,6 +1,6 @@
 name: Detect Remote Access Software Usage DNS
 id: a16b797d-e309-41bd-8ba0-5067dae2e4be
-version: 5
+version: 6
 date: '2024-11-15'
 author: Steven Dick
 status: production
@@ -52,21 +52,28 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+- name: Investigate traffic to $query$ 
+  search: '| from datamodel:Network_Resolution.DNS | search src=$src$ query=$query$'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
 rba:
   message: A domain for a known remote access software $query$ was contacted by $src$.
   risk_objects:
   - field: src
     type: system
-    score: 4
+    score: 25
   threat_objects:
   - field: query
     type: domain
+  - field: signature
+    type: signature
 tags:
   analytic_story:
   - Insider Threat
   - Command And Control
   - Ransomware
   - CISA AA24-241A
+  - Remote Monitoring and Management Software
   asset_type: Endpoint
   mitre_attack_id:
   - T1219
