@@ -44,7 +44,7 @@ search: |-
     )
   | `cisco_secure_application_alerts_filter`
 how_to_implement: In order to properly run this search, you need to ingest alerts data from AppD SecureApp, specifically ingesting data via HEC. You will also need to ensure that the data is going to sourcetype - `appdynamics_security`. You will need to install the Splunk Add-on for AppDynamics.
-known_false_positives: None known false postive for this detection search. If the alerts are noisy, consider tuning this detection by using the _filter macro in this search and/or by updating the tool this alert originates from.
+known_false_positives: No known false positives for this detection. If the alerts are noisy, consider tuning this detection by using the _filter macro in this search, and/or updating the tool this alert originates from.
 references:
 - https://docs.appdynamics.com/appd/24.x/latest/en/application-security-monitoring/integrate-cisco-secure-application-with-splunk
 drilldown_searches:
