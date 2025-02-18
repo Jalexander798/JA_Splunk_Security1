@@ -1,7 +1,7 @@
 name: Azure AD Multi-Factor Authentication Disabled
 id: 482dd42a-acfa-486b-a0bb-d6fcda27318e
-version: 6
-date: '2024-11-14'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
 status: production
 type: TTP
@@ -60,10 +60,8 @@ tags:
   - Azure Active Directory Account Takeover
   asset_type: Azure Active Directory
   mitre_attack_id:
-  - T1586
-  - T1586.003
-  - T1556
   - T1556.006
+  - T1586.003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

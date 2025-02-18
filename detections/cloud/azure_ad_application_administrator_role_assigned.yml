@@ -1,7 +1,7 @@
 name: Azure AD Application Administrator Role Assigned
 id: eac4de87-7a56-4538-a21b-277897af6d8d
-version: 7
-date: '2024-11-14'
+version: 8
+date: '2025-02-10'
 author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
 status: production
 type: TTP
@@ -64,7 +64,6 @@ tags:
   asset_type: Azure Active Directory
   atomic_guid: []
   mitre_attack_id:
-  - T1098
   - T1098.003
   product:
   - Splunk Enterprise

@@ -1,7 +1,7 @@
 name: Detect Certify With PowerShell Script Block Logging
 id: f533ca6c-9440-4686-80cb-7f294c07812a
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Steven Dick
 status: production
 type: TTP
@@ -62,9 +62,8 @@ tags:
   - Malicious PowerShell
   asset_type: Endpoint
   mitre_attack_id:
-  - T1649
-  - T1059
   - T1059.001
+  - T1649
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

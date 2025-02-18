@@ -1,7 +1,7 @@
 name: CSC Net On The Fly Compilation
 id: ea73128a-43ab-11ec-9753-acde48001122
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
@@ -45,7 +45,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1027.004
-  - T1027
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

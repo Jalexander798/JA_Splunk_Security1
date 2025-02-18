@@ -1,20 +1,19 @@
 name: Attempt To Stop Security Service
 id: c8e349c6-b97c-486e-8949-bd7bcd1f3910
-version: 10
-date: '2025-01-24'
+version: 11
+date: '2025-02-10'
 author: Rico Valdez, Splunk
 status: deprecated
 type: TTP
-description: The following analytic has been deprecated.
-  The following analytic detects attempts to stop security-related services
-  on an endpoint, which may indicate malicious activity. It leverages data from Endpoint
-  Detection and Response (EDR) agents, specifically searching for processes involving
-  the "sc.exe" command with the "stop" parameter. This activity is significant because
-  disabling security services can undermine the organization's security posture, potentially
-  leading to unauthorized access, data exfiltration, or further attacks like malware
-  installation or privilege escalation. If confirmed malicious, this behavior could
-  compromise the endpoint and the entire network, necessitating immediate investigation
-  and response.
+description: The following analytic has been deprecated. The following analytic detects
+  attempts to stop security-related services on an endpoint, which may indicate malicious
+  activity. It leverages data from Endpoint Detection and Response (EDR) agents, specifically
+  searching for processes involving the "sc.exe" command with the "stop" parameter.
+  This activity is significant because disabling security services can undermine the
+  organization's security posture, potentially leading to unauthorized access, data
+  exfiltration, or further attacks like malware installation or privilege escalation.
+  If confirmed malicious, this behavior could compromise the endpoint and the entire
+  network, necessitating immediate investigation and response.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
@@ -81,7 +80,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

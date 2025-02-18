@@ -1,7 +1,7 @@
 name: Possible Lateral Movement PowerShell Spawn
 id: cb909b3e-512b-11ec-aa31-3e22fbd008af
-version: 8
-date: '2024-11-13'
+version: 9
+date: '2025-02-10'
 author: Mauricio Velazco, Michael Haag, Splunk
 status: production
 type: TTP
@@ -76,14 +76,13 @@ tags:
   - CISA AA24-241A
   asset_type: Endpoint
   mitre_attack_id:
-  - T1021
   - T1021.003
   - T1021.006
   - T1047
   - T1053.005
-  - T1543.003
   - T1059.001
   - T1218.014
+  - T1543.003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

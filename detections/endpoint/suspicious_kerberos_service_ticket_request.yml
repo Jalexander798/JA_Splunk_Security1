@@ -1,7 +1,7 @@
 name: Suspicious Kerberos Service Ticket Request
 id: 8b1297bc-6204-11ec-b7c4-acde48001122
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -61,7 +61,6 @@ tags:
   - CVE-2021-42287
   - CVE-2021-42278
   mitre_attack_id:
-  - T1078
   - T1078.002
   product:
   - Splunk Enterprise

@@ -1,7 +1,7 @@
 name: Powershell Remote Services Add TrustedHost
 id: bef21d24-297e-45e3-9b9a-c6ac45450474
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -57,7 +57,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1021.006
-  - T1021
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

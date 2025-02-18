@@ -1,7 +1,7 @@
 name: Gsuite Email With Known Abuse Web Service Link
 id: 8630aa22-042b-11ec-af39-acde48001122
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -58,7 +58,6 @@ tags:
   asset_type: GSuite
   mitre_attack_id:
   - T1566.001
-  - T1566
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

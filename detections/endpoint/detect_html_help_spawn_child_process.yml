@@ -1,7 +1,7 @@
 name: Detect HTML Help Spawn Child Process
 id: 723716de-ee55-4cd4-9759-c44e7e55ba4b
-version: 8
-date: '2024-12-10'
+version: 9
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -78,7 +78,6 @@ tags:
   - Compromised Windows Host
   asset_type: Endpoint
   mitre_attack_id:
-  - T1218
   - T1218.001
   product:
   - Splunk Enterprise

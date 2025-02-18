@@ -1,19 +1,18 @@
 name: Linux Auditd Find Private Keys
 id: 80bb9988-190b-4ee0-a3c3-509545a8f678
-version: 5
-date: '2025-01-24'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: deprecated
 type: TTP
-description: The following analytic has been deprecated.
-  The following analytic detects suspicious attempts to find private keys,
-  which may indicate an attacker's effort to access sensitive cryptographic information.
-  Private keys are crucial for securing encrypted communications and data, and unauthorized
-  access to them can lead to severe security breaches, including data decryption and
-  identity theft. By monitoring for unusual or unauthorized searches for private keys,
-  this analytic helps identify potential threats to cryptographic security, enabling
-  security teams to take swift action to protect the integrity and confidentiality
-  of encrypted information.
+description: The following analytic has been deprecated. The following analytic detects
+  suspicious attempts to find private keys, which may indicate an attacker's effort
+  to access sensitive cryptographic information. Private keys are crucial for securing
+  encrypted communications and data, and unauthorized access to them can lead to severe
+  security breaches, including data decryption and identity theft. By monitoring for
+  unusual or unauthorized searches for private keys, this analytic helps identify
+  potential threats to cryptographic security, enabling security teams to take swift
+  action to protect the integrity and confidentiality of encrypted information.
 data_source:
 - Linux Auditd Execve
 search: '`linux_auditd` `linux_auditd_normalized_execve_process` | rename host as
@@ -68,7 +67,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1552.004
-  - T1552
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

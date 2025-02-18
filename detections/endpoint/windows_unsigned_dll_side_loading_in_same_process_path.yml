@@ -1,7 +1,7 @@
 name: Windows Unsigned DLL Side-Loading In Same Process Path
 id: 3cf85c02-f9d6-4186-bf3c-e70ee99fbc7f
-version: 6
-date: '2025-01-27'
+version: 7
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 data_source:
 - Sysmon EventID 7
@@ -62,7 +62,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1574.002
-  - T1574
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
@@ -71,6 +70,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/unsigned_dll_loaded_same_process_path/unsigned_dll_process_path.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/unsigned_dll_loaded_same_process_path/unsigned_dll_process_path.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

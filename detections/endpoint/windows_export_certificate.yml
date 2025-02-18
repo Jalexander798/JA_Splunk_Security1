@@ -1,7 +1,7 @@
 name: Windows Export Certificate
 id: d8ddfa9b-b724-4df9-9dbe-f34cc0936714
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly
@@ -51,7 +51,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1552.004
-  - T1552
   - T1649
   product:
   - Splunk Enterprise

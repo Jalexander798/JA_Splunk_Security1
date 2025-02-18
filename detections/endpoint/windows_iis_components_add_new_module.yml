@@ -1,7 +1,7 @@
 name: Windows IIS Components Add New Module
 id: 38fe731c-1f13-43d4-b878-a5bbe44807e3
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly
@@ -76,7 +76,6 @@ tags:
   - IIS Components
   asset_type: Endpoint
   mitre_attack_id:
-  - T1505
   - T1505.004
   product:
   - Splunk Enterprise

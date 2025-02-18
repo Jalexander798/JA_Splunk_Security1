@@ -1,7 +1,7 @@
 name: Azure AD Successful Authentication From Different Ips
 id: be6d868d-33b6-4aaa-912e-724fb555b11a
-version: 7
-date: '2024-11-14'
+version: 8
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -61,7 +61,6 @@ tags:
   - Azure Active Directory Account Takeover
   asset_type: Azure Tenant
   mitre_attack_id:
-  - T1110
   - T1110.001
   - T1110.003
   product:

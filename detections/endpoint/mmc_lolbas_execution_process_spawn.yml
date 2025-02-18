@@ -1,7 +1,7 @@
 name: Mmc LOLBAS Execution Process Spawn
 id: f6601940-4c74-11ec-b9b7-3e22fbd008af
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -75,7 +75,6 @@ tags:
   - Living Off The Land
   asset_type: Endpoint
   mitre_attack_id:
-  - T1021
   - T1021.003
   - T1218.014
   product:
