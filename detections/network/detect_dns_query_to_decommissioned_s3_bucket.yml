@@ -49,6 +49,11 @@ tags:
   security_domain: network
   manual_test: This search needs a lookup table to be populated -decommissioned_buckets.csv by running a baseline search `Baseline Of Open S3 Bucket Decommissioning` prior to running this detection.
 tests:
+- name: Baseline Dataset Test
+  attack_data:
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/decommissioned_buckets/cloudtrail.json
+    source: cloudtrail
+    sourcetype: aws:cloudtrail
 - name: True Positive Test
   attack_data:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/decommissioned_buckets/dns.log
