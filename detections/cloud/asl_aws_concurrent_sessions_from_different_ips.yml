@@ -1,6 +1,6 @@
 name: ASL AWS Concurrent Sessions From Different Ips
 id: b3424bbe-3204-4469-887b-ec144483a336
-version: 7
+version: 6
 date: '2024-11-14'
 author: Patrick Bareiss, Splunk
 status: production

@@ -1,6 +1,6 @@
 name: AWS Detect Users creating keys with encrypt policy without MFA
 id: c79c164f-4b21-4847-98f9-cf6a9f49179e
-version: 5
+version: 4
 date: '2024-11-14'
 author: Rod Soto, Patrick Bareiss Splunk
 status: production

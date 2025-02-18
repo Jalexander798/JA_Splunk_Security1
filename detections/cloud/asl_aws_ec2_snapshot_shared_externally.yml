@@ -1,6 +1,6 @@
 name: ASL AWS EC2 Snapshot Shared Externally
 id: 00af8f7f-e004-446b-9bba-2732f717ae27
-version: 2
+version: 1
 date: '2024-12-17'
 author: Patrick Bareiss, Splunk
 status: production

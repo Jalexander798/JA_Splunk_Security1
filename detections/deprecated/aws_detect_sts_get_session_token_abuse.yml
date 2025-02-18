@@ -1,6 +1,6 @@
 name: aws detect sts get session token abuse
 id: 85d7b35f-b8b5-4b01-916f-29b81e7a0551
-version: 5
+version: 4
 date: '2024-11-14'
 author: Rod Soto, Splunk
 status: deprecated
