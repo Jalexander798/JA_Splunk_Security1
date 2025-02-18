@@ -1,7 +1,7 @@
 name: Linux Auditd Unload Module Via Modprobe
 id: 90964d6a-4b5f-409a-85bd-95e261e03fe9
-version: 4
-date: '2025-02-10'
+version: 5
+date: '2025-02-18'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -75,4 +75,4 @@ tests:
   - data: 
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.006/linux_auditd_modprobe_unload_module/linux_auditd_modprobe_unload_module.log
     source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+    sourcetype: auditd

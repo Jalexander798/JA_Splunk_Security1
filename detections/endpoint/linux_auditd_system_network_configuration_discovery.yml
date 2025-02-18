@@ -1,7 +1,7 @@
 name: Linux Auditd System Network Configuration Discovery
 id: 5db16825-81bd-4923-a8d6-d6a13a59832a
-version: 3
-date: '2024-11-13'
+version: 4
+date: '2025-02-18'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -77,4 +77,4 @@ tests:
   - data: 
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1016/linux_auditd_net_tool/linux_auditd_net_tool.log
     source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+    sourcetype: auditd

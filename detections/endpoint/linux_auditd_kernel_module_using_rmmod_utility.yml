@@ -1,7 +1,7 @@
 name: Linux Auditd Kernel Module Using Rmmod Utility
 id: 31810b7a-0abe-42be-a210-0dec8106afee
-version: 4
-date: '2025-02-10'
+version: 5
+date: '2025-02-18'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -74,4 +74,4 @@ tests:
   - data: 
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.006/linux_auditd_rmmod/linux_auditd_rmmod.log
     source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+    sourcetype: auditd

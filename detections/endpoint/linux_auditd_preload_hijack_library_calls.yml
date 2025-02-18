@@ -1,7 +1,7 @@
 name: Linux Auditd Preload Hijack Library Calls
 id: 35c50572-a70b-452f-afa9-bebdf3c3ce36
-version: 5
-date: '2025-02-10'
+version: 6
+date: '2025-02-18'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -76,4 +76,4 @@ tests:
   - data: 
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.006/linux_auditd_ldpreload/linux_auditd_ldpreload.log
     source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+    sourcetype: auditd

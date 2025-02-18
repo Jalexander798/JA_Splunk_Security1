@@ -1,7 +1,7 @@
 name: Linux Auditd Base64 Decode Files
 id: 5890ba10-4e48-4dc0-8a40-3e1ebe75e737
-version: 3
-date: '2024-11-13'
+version: 4
+date: '2025-02-18'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -76,4 +76,4 @@ tests:
   - data: 
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1140/linux_auditd_base64/linux_auditd_base64.log
     source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+    sourcetype: auditd

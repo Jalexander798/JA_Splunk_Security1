@@ -1,7 +1,7 @@
 name: Linux Auditd Setuid Using Setcap Utility
 id: 1474459a-302b-4255-8add-d82f96d14cd9
-version: 4
-date: '2025-02-10'
+version: 5
+date: '2025-02-18'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -76,4 +76,4 @@ tests:
   - data: 
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.001/linux_auditd_setuid/linux_auditd_setcap_priv.log
     source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+    sourcetype: auditd

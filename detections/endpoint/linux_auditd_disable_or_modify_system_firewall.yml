@@ -1,7 +1,7 @@
 name: Linux Auditd Disable Or Modify System Firewall
 id: 07052556-d4b5-4bae-89aa-cbdc1bb11250
-version: 4
-date: '2025-02-10'
+version: 5
+date: '2025-02-18'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -73,4 +73,4 @@ tests:
   - data: 
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.004/linux_auditd_disable_firewall/linux_auditd_disable_firewall.log
     source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+    sourcetype: auditd

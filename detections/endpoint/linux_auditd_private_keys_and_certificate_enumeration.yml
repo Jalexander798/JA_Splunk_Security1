@@ -1,7 +1,7 @@
 name: Linux Auditd Private Keys and Certificate Enumeration
 id: 892eb674-3344-4143-8e52-4775b1daf3f1
-version: 2
-date: '2025-02-10'
+version: 3
+date: '2025-02-18'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -79,4 +79,4 @@ tests:
   - data: 
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552.004/linux_auditd_find_gpg/linux_auditd_find_gpg.log
     source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+    sourcetype: auditd

@@ -1,7 +1,7 @@
 name: Linux Auditd Service Started
 id: b5eed06d-5c97-4092-a3a1-fa4b7e77c71a
-version: 4
-date: '2025-02-03'
+version: 5
+date: '2025-02-18'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -75,4 +75,4 @@ tests:
   - data: 
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1569.002/linux_service_start/linux_service_start.log
     source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+    sourcetype: auditd

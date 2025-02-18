@@ -1,7 +1,7 @@
 name: Linux Auditd Add User Account
 id: aae66dc0-74b4-4807-b480-b35f8027abb4
-version: 4
-date: '2025-02-10'
+version: 5
+date: '2025-02-18'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -72,4 +72,4 @@ tests:
   - data: 
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/linux_auditd_add_user/linux_auditd_add_user.log
     source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+    sourcetype: auditd

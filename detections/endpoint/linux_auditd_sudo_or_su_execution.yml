@@ -1,7 +1,7 @@
 name: Linux Auditd Sudo Or Su Execution
 id: 817a5c89-5b92-4818-a22d-aa35e1361afe
-version: 4
-date: '2025-02-10'
+version: 5
+date: '2025-02-18'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -73,4 +73,4 @@ tests:
   - data: 
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.003/linux_auditd_sudo_su/linux_auditd_sudo_su.log
     source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+    sourcetype: auditd
