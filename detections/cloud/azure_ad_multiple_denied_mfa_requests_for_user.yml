@@ -1,6 +1,6 @@
 name: Azure AD Multiple Denied MFA Requests For User
 id: d0895c20-de71-4fd2-b56c-3fcdb888eba1
-version: 5
+version: 6
 date: '2024-11-14'
 author: Mauricio Velazco, Splunk
 status: production
