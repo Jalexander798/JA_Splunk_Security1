@@ -1,6 +1,6 @@
 name: Windows Modify Registry Disable Restricted Admin
 id: cee573a0-7587-48e6-ae99-10e8c657e89a
-version: 5
+version: 6
 date: '2025-01-21'
 author: Teoderick Contreras, Splunk
 status: production

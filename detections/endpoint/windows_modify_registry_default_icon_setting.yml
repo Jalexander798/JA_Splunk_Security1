@@ -1,6 +1,6 @@
 name: Windows Modify Registry Default Icon Setting
 id: a7a7afdb-3c58-45b6-9bff-63e5acfd9d40
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

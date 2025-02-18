@@ -1,6 +1,6 @@
 name: Windows Modify Registry NoChangingWallPaper
 id: a2276412-e254-4e9a-9082-4d92edb6a3e0
-version: 5
+version: 6
 date: '2025-01-21'
 author: Teoderick Contreras, Splunk
 status: production

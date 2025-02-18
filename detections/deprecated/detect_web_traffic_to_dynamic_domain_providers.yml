@@ -1,6 +1,6 @@
 name: Detect web traffic to dynamic domain providers
 id: 134da869-e264-4a8f-8d7e-fcd01c18f301
-version: 5
+version: 6
 date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: deprecated

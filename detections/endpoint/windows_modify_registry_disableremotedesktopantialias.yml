@@ -1,6 +1,6 @@
 name: Windows Modify Registry DisableRemoteDesktopAntiAlias
 id: 4927c6f1-4667-42e6-bd7a-f5222116386b
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

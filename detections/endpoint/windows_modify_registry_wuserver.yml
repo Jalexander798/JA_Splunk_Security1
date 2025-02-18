@@ -1,6 +1,6 @@
 name: Windows Modify Registry WuServer
 id: a02ad386-e26d-44ce-aa97-6a46cee31439
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production

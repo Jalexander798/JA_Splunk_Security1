@@ -1,6 +1,6 @@
 name: Windows Modify Registry Disable Windows Security Center Notif
 id: 27ed3e79-6d86-44dd-b9ab-524451c97a7b
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
