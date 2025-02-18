@@ -1,12 +1,11 @@
 name: Windows Modify Registry LongPathsEnabled
 id: 36f9626c-4272-4808-aadd-267acce681c0
-version: 5
+version: 6
 date: '2025-01-21'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 description: The following analytic detects a modification to the Windows registry
   setting "LongPathsEnabled," which allows file paths longer than 260 characters.
