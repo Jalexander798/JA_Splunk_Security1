@@ -1,6 +1,6 @@
 name: O365 Mailbox Inbox Folder Shared with All Users
 id: 21421896-a692-4594-9888-5faeb8a53106
-version: 5
+version: 6
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production

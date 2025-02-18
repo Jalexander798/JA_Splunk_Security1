@@ -1,6 +1,6 @@
 name: O365 Mailbox Read Access Granted to Application
 id: 27ab61c5-f08a-438a-b4d3-325e666490b3
-version: 5
+version: 6
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production

@@ -1,6 +1,6 @@
 name: O365 Admin Consent Bypassed by Service Principal
 id: 8a1b22eb-50ce-4e26-a691-97ff52349569
-version: 4
+version: 5
 date: '2024-11-14'
 author: Mauricio Velazco, Splunk
 data_source:

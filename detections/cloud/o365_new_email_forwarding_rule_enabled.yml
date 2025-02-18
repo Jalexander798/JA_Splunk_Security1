@@ -1,6 +1,6 @@
 name: O365 New Email Forwarding Rule Enabled
 id: ac7c4d0a-06a3-4278-aa59-88a5e537f981
-version: 5
+version: 6
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 data_source: []
