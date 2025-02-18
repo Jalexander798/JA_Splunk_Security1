@@ -4,7 +4,7 @@ version: 1
 date: '2018-06-26'
 author: Bhavin Patel, Splunk
 type: Investigation
-datamodel: []
+status: deprecated
 description: This search queries AWS configuration logs and returns the information
   about a specific S3 bucket. The information returned includes the time the S3 bucket
   was created, the resource ID, the region it belongs to, the value of action performed,
@@ -22,13 +22,4 @@ tags:
   - Suspicious AWS S3 Activities
   product:
   - Splunk Phantom
-  required_fields:
-  - _time
-  - resourceId
-  - bucketName
-  - resourceCreationTime
-  - vendor_region
-  - action
-  - aws_account_id
-  - supplementaryConfiguration.AccessControlList
   security_domain: network

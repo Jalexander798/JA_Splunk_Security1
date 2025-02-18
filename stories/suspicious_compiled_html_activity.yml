@@ -1,5 +1,6 @@
 author: Michael Haag, Splunk
 date: '2021-02-11'
+status: production
 description: Monitor and detect techniques used by attackers who leverage the mshta.exe
   process to execute malicious code.
 id: a09db4d1-3827-4833-87b8-3a397e532119

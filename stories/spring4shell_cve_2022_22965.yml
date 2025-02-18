@@ -3,6 +3,7 @@ id: dcc19913-6918-4ed2-bbba-a6b484c10ef4
 version: 2
 date: '2024-09-24'
 author: Michael Haag, Splunk
+status: production
 description: Spring4Shell is the nickname given to a zero-day vulnerability in the Spring Core Framework, a programming and configuration model for Java-based enterprise applications.
 narrative: 'An attacker could exploit Spring4Shell by sending a specially crafted request to a vulnerable server. However, exploitation of Spring4Shell requires certain prerequisites, whereas the original Log4Shell vulnerability affected all versions of Log4j 2 using the default configuration. 
 

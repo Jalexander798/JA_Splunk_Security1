@@ -1,7 +1,7 @@
 name: Monitor DNS For Brand Abuse
 id: 24dd17b1-e2fb-4c31-878c-d4f746595bfa
-version: 3
-date: '2024-10-17'
+version: 4
+date: '2024-11-14'
 author: David Dorsey, Splunk
 status: deprecated
 type: TTP
@@ -21,27 +21,21 @@ how_to_implement: You need to ingest data from your DNS logs. Specifically you m
   custom command.
 known_false_positives: None at this time
 references: []
+rba:
+  message: Potential brand abuse
+  risk_objects:
+  - field: query
+    type: other
+    score: 25
+  threat_objects:
+  - field: IPs
+    type: ip_address
 tags:
   analytic_story:
   - Brand Monitoring
   asset_type: Endpoint
-  confidence: 50
-  impact: 50
-  message: tbd
-  observable:
-  - name: query
-    type: Other
-    role:
-    - Victim
-  - name: IPs
-    type: IP Address
-    role:
-    - Attacker
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  risk_score: 25
   security_domain: network

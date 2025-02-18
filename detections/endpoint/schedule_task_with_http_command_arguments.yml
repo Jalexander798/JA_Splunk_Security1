@@ -1,7 +1,7 @@
 name: Schedule Task with HTTP Command Arguments
 id: 523c2684-a101-11eb-916b-acde48001122
-version: '4'
-date: '2024-11-28'
+version: 5
+date: '2024-12-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -39,6 +39,14 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: A scheduled task process commandline arguments $Arguments$ with http string
+    in it on host $dest$
+  risk_objects:
+  - field: dest
+    type: system
+    score: 63
+  threat_objects: []
 tags:
   analytic_story:
   - Windows Persistence Techniques
@@ -47,35 +55,17 @@ tags:
   - Scheduled Tasks
   - Winter Vivern
   asset_type: Endpoint
-  confidence: 90
-  impact: 70
-  message: A schedule task process commandline arguments $Arguments$ with http string
-    on it in host $dest$
   mitre_attack_id:
   - T1053
-  observable:
-  - name: dest
-    type: Hostname
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - dest
-  - Task_Name
-  - Command
-  - Author
-  - Enabled
-  - Hidden
-  - Arguments
-  risk_score: 63
   security_domain: endpoint
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/tasksched/windows-security.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/tasksched/windows-security.log
     source: WinEventLog:Security
     sourcetype: WinEventLog

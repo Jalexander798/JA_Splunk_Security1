@@ -1,7 +1,7 @@
 name: Identify New User Accounts
 id: 475b9e27-17e4-46e2-b7e2-648221be3b89
-version: 3
-date: '2024-10-17'
+version: 4
+date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: deprecated
 type: Hunting
@@ -23,21 +23,10 @@ references: []
 tags:
   analytic_story: []
   asset_type: Domain Server
-  confidence: 50
-  impact: 50
-  message: tbd
   mitre_attack_id:
   - T1078.002
-  observable:
-  - name: identity
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  risk_score: 25
   security_domain: access

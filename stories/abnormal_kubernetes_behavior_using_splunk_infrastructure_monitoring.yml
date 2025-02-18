@@ -3,6 +3,7 @@ id: 7589023b-3d98-42b3-ab1c-bb498e68fc2d
 version: 1
 date: '2024-01-08'
 author: 'Matthew Moore, Patrick Bareiss, Splunk'
+status: production
 description: Kubernetes, a complex container orchestration system, is susceptible to a variety of security threats. 
   This story delves into the different strategies and methods adversaries employ to exploit Kubernetes environments. 
   These include attacks on the control plane, exploitation of misconfigurations, and breaches of containerized applications. 

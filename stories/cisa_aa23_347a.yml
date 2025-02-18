@@ -3,6 +3,7 @@ id: 257a2f28-fcbe-4226-8d1f-957880098331
 version: 3
 date: '2024-12-09'
 author: Teoderick Contreras, Rod Soto, Splunk
+status: production
 description: Leverage searches that allow you to detect and investigate unusual activities
   that might be related to the  SVR cyber activity tactics and techniques. While SVR followed a similar playbook in each compromise, 
   they also adjusted to each operating environment and not all presented steps or actions below were executed on every host.

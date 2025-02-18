@@ -3,6 +3,7 @@ id: e6f30f14-8daf-11eb-a017-acde48001122
 version: 1
 date: '2021-03-25'
 author: Michael Haag, Splunk
+status: production
 description: Adversaries may attempt to gather information on domain trust relationships
   that may be used to identify lateral movement opportunities in Windows multi-domain/forest
   environments.

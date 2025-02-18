@@ -1,7 +1,7 @@
 name: Web Fraud - Anomalous User Clickspeed
 id: 31337bbb-bc22-4752-b599-ef192df2dc7a
-version: 3
-date: '2024-10-17'
+version: 4
+date: '2024-11-14'
 author: Jim Apger, Splunk
 status: deprecated
 type: Anomaly
@@ -31,27 +31,21 @@ references:
 - https://en.wikipedia.org/wiki/Session_(computer_science)
 - https://en.wikipedia.org/wiki/HTTP_cookie
 - https://splunkbase.splunk.com/app/1809/
+rba:
+  message: Web sessions exhibiting unauthentic characteristics
+  risk_objects:
+  - field: session_id
+    type: other
+    score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - Web Fraud Detection
   asset_type: Account
-  confidence: 50
-  impact: 50
-  message: tbd
   mitre_attack_id:
   - T1078
-  observable:
-  - name: session_id
-    type: User
-    role:
-    - Victim
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
   - Splunk Cloud
-  required_fields:
-  - _time
-  - http_content_type
-  - cookie
-  risk_score: 25
   security_domain: threat

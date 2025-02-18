@@ -3,6 +3,7 @@ id: 0150e6e5-3171-442e-83f8-1ccd8599569b
 version: 1
 date: '2022-01-19'
 author: Teoderick Contreras, Splunk
+status: production
 description: This analytic story contains detections that allow security analysts to detect and investigate unusual activities
   that might relate to the destructive malware targeting Ukrainian organizations also known as "WhisperGate". This analytic
   story looks for suspicious process execution, command-line activity, downloads, DNS queries and more.

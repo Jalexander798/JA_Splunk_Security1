@@ -4,8 +4,7 @@ version: 2
 date: '2019-04-01'
 author: Bhavin Patel, Splunk
 type: Investigation
-datamodel:
-- Endpoint
+status: deprecated
 description: While investigating, an analyst will want to know what process and parent_process
   is responsible for generating suspicious DNS traffic. Use the following search and
   enter the value of `dest` in the search to get specific details on the process responsible
@@ -34,14 +33,4 @@ tags:
   - Command And Control
   product:
   - Splunk Phantom
-  required_fields:
-  - _time
-  - Processes.user
-  - Processes.process_id
-  - Processes.process_name
-  - Processes.dest
-  - Processes.parent_process
-  - Ports.process_id
-  - Ports.src
-  - Ports.dest_port
   security_domain: endpoint

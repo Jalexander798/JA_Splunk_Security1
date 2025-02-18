@@ -3,6 +3,7 @@ id: 817cae42-f54b-457a-8a36-fbf45521e29e
 version: 1
 date: '2021-06-04'
 author: Teoderick Contreras, Splunk
+status: production
 description: Leverage searches that allow you to detect and investigate unusual activities
   that might relate to the Revil ransomware, including looking for file writes associated
   with Revil, encrypting network shares, deleting shadow volume storage, registry
