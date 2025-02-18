@@ -1,7 +1,7 @@
 name: Windows PowerShell IIS Components WebGlobalModule Usage
 id: 33fc9f6f-0ce7-4696-924e-a69ec61a3d57
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly
@@ -58,7 +58,6 @@ tags:
   - IIS Components
   asset_type: Endpoint
   mitre_attack_id:
-  - T1505
   - T1505.004
   product:
   - Splunk Enterprise

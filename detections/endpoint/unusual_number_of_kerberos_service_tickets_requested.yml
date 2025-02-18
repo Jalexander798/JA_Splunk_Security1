@@ -1,7 +1,7 @@
 name: Unusual Number of Kerberos Service Tickets Requested
 id: eb3e6702-8936-11ec-98fe-acde48001122
-version: 7
-date: '2024-11-13'
+version: 8
+date: '2025-02-10'
 author: Mauricio Velazco, Dean Luxton, Splunk
 status: production
 type: Anomaly
@@ -64,7 +64,6 @@ tags:
   - Active Directory Kerberos Attacks
   asset_type: Endpoint
   mitre_attack_id:
-  - T1558
   - T1558.003
   product:
   - Splunk Enterprise

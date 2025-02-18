@@ -1,7 +1,7 @@
 name: Randomly Generated Windows Service Name
 id: 2032a95a-5165-11ec-a2c3-3e22fbd008af
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: experimental
 type: Hunting
@@ -30,7 +30,6 @@ tags:
   - BlackSuit Ransomware
   asset_type: Endpoint
   mitre_attack_id:
-  - T1543
   - T1543.003
   product:
   - Splunk Enterprise

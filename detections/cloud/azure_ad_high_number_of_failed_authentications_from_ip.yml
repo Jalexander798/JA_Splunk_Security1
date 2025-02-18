@@ -1,7 +1,7 @@
 name: Azure AD High Number Of Failed Authentications From Ip
 id: e5ab41bf-745d-4f72-a393-2611151afd8e
-version: 7
-date: '2024-11-14'
+version: 8
+date: '2025-02-10'
 author: Mauricio Velazco, Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -62,7 +62,6 @@ tags:
   - NOBELIUM Group
   asset_type: Azure Tenant
   mitre_attack_id:
-  - T1110
   - T1110.001
   - T1110.003
   product:

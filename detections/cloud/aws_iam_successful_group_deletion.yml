@@ -1,7 +1,7 @@
 name: AWS IAM Successful Group Deletion
 id: e776d06c-9267-11eb-819b-acde48001122
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: Hunting
@@ -36,7 +36,6 @@ tags:
   mitre_attack_id:
   - T1069.003
   - T1098
-  - T1069
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

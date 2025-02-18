@@ -1,7 +1,7 @@
 name: Windows Server Software Component GACUtil Install to GAC
 id: 7c025ef0-9e65-4c57-be39-1c13dbb1613e
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -73,7 +73,6 @@ tags:
   - IIS Components
   asset_type: Endpoint
   mitre_attack_id:
-  - T1505
   - T1505.004
   product:
   - Splunk Enterprise

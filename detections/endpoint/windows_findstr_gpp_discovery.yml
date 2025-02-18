@@ -1,7 +1,7 @@
 name: Windows Findstr GPP Discovery
 id: 1631ac2d-f2a9-42fa-8a59-d6e210d472f5
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 type: TTP
 status: production
@@ -70,7 +70,6 @@ tags:
   - Active Directory Privilege Escalation
   asset_type: Endpoint
   mitre_attack_id:
-  - T1552
   - T1552.006
   product:
   - Splunk Enterprise

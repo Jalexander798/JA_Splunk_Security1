@@ -1,7 +1,7 @@
 name: Detect Excessive User Account Lockouts
 id: 95a7f9a5-6096-437e-a19e-86f42ac609bd
-version: 8
-date: '2024-11-13'
+version: 9
+date: '2025-02-10'
 author: David Dorsey, Splunk
 status: production
 type: Anomaly
@@ -51,7 +51,6 @@ tags:
   - Active Directory Password Spraying
   asset_type: Windows
   mitre_attack_id:
-  - T1078
   - T1078.003
   product:
   - Splunk Enterprise

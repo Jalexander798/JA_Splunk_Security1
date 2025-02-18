@@ -1,7 +1,7 @@
 name: Detect AzureHound Command-Line Arguments
 id: 26f02e96-c300-11eb-b611-acde48001122
-version: 8
-date: '2024-12-10'
+version: 9
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -72,13 +72,11 @@ tags:
   - Compromised Windows Host
   asset_type: Endpoint
   mitre_attack_id:
-  - T1087.002
   - T1069.001
-  - T1482
-  - T1087.001
-  - T1087
   - T1069.002
-  - T1069
+  - T1087.001
+  - T1087.002
+  - T1482
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

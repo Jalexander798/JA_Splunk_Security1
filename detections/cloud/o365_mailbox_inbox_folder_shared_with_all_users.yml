@@ -1,7 +1,7 @@
 name: O365 Mailbox Inbox Folder Shared with All Users
 id: 21421896-a692-4594-9888-5faeb8a53106
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -59,7 +59,6 @@ tags:
   - Office 365 Persistence Mechanisms
   asset_type: O365 Tenant
   mitre_attack_id:
-  - T1114
   - T1114.002
   product:
   - Splunk Enterprise

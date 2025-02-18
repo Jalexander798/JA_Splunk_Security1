@@ -1,7 +1,7 @@
 name: Okta Successful Single Factor Authentication
 id: 98f6ad4f-4325-4096-9d69-45dc8e638e82
-version: 4
-date: '2025-01-21'
+version: 5
+date: '2025-02-10'
 author: Bhavin Patel, Splunk
 data_source:
 - Okta
@@ -55,10 +55,8 @@ tags:
   - Okta Account Takeover
   asset_type: Okta Tenant
   mitre_attack_id:
-  - T1586
-  - T1586.003
-  - T1078
   - T1078.004
+  - T1586.003
   - T1621
   product:
   - Splunk Enterprise

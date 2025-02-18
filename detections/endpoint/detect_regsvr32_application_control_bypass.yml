@@ -1,7 +1,7 @@
 name: Detect Regsvr32 Application Control Bypass
 id: 070e9b80-6252-11eb-ae93-0242ac130002
-version: 8
-date: '2024-12-10'
+version: 9
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -79,7 +79,6 @@ tags:
   - BlackByte Ransomware
   asset_type: Endpoint
   mitre_attack_id:
-  - T1218
   - T1218.010
   product:
   - Splunk Enterprise

@@ -1,7 +1,7 @@
 name: Detect Activity Related to Pass the Hash Attacks
 id: f5939373-8054-40ad-8c64-cec478a22a4b
-version: 9
-date: '2024-11-14'
+version: 10
+date: '2025-02-10'
 author: Bhavin Patel, Patrick Bareiss, Splunk
 status: deprecated
 type: Hunting
@@ -29,7 +29,6 @@ tags:
   - BlackSuit Ransomware
   asset_type: Endpoint
   mitre_attack_id:
-  - T1550
   - T1550.002
   product:
   - Splunk Enterprise
