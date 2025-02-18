@@ -1,7 +1,7 @@
 name: Azure AD Tenant Wide Admin Consent Granted
 id: dc02c0ee-6ac0-4c7f-87ba-8ce43a4e4418
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -62,7 +62,6 @@ tags:
   - NOBELIUM Group
   asset_type: Azure Tenant
   mitre_attack_id:
-  - T1098
   - T1098.003
   product:
   - Splunk Enterprise

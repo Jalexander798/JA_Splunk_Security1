@@ -1,7 +1,7 @@
 name: Windows Remote Services Allow Rdp In Firewall
 id: 9170cb54-ea15-41e1-9dfc-9f3363ce9b02
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -66,7 +66,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1021.001
-  - T1021
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

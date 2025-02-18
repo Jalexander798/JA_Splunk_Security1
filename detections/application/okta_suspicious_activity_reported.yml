@@ -1,7 +1,7 @@
 name: Okta Suspicious Activity Reported
 id: bfc840f5-c9c6-454c-aa13-b46fd0bf1e79
-version: 5
-date: '2025-01-21'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -55,7 +55,6 @@ tags:
   - Okta Account Takeover
   asset_type: Okta Tenant
   mitre_attack_id:
-  - T1078
   - T1078.001
   product:
   - Splunk Enterprise

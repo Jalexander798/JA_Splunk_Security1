@@ -1,7 +1,7 @@
 name: Ping Sleep Batch Command
 id: ce058d6c-79f2-11ec-b476-acde48001122
-version: 5
-date: '2024-12-10'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -71,7 +71,6 @@ tags:
   - Meduza Stealer
   asset_type: Endpoint
   mitre_attack_id:
-  - T1497
   - T1497.003
   product:
   - Splunk Enterprise

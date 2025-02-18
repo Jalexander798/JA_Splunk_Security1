@@ -1,6 +1,6 @@
 name: Windows Steal Authentication Certificates Export PfxCertificate
 id: 391329f3-c14b-4b8d-8b37-ac5012637360
-version: 5
+version: 6
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production

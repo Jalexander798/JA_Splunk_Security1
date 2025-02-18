@@ -101,7 +101,7 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "ec2.amazonaws.com", "eventName": "ModifyImageAttribute", "awsRegion": "us-west-2",
   "sourceIPAddress": "72.135.245.10", "userAgent": "AWS Internal", "requestParameters":
   {"imageId": "ami-06dac31db29508566", "launchPermission": {"add": {"items": [{"userId":
-  "140429656527"}]}}, "attributeType": "launchPermission"}, "responseElements": {"requestId":
+  "1111111111111111"}]}}, "attributeType": "launchPermission"}, "responseElements": {"requestId":
   "84c431ce-6268-4218-aaf8-b4cdc1cd4055", "_return": true}, "requestID": "84c431ce-6268-4218-aaf8-b4cdc1cd4055",
   "eventID": "957e1b12-ea17-4006-aefd-20677ace72b8", "readOnly": false, "eventType":
   "AwsApiCall", "managementEvent": true, "recipientAccountId": "111111111111", "eventCategory":

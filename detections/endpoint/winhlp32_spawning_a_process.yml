@@ -1,6 +1,6 @@
 name: Winhlp32 Spawning a Process
 id: d17dae9e-2618-11ec-b9f5-acde48001122
-version: 6
+version: 7
 date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production

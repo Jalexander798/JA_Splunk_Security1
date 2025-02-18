@@ -1,6 +1,6 @@
 name: Windows Ldifde Directory Object Behavior
 id: 35cd29ca-f08c-4489-8815-f715c45460d3
-version: 5
+version: 6
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production

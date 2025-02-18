@@ -1,6 +1,6 @@
 name: Windows MSIExec With Network Connections
 id: 827409a1-5393-4d8d-8da4-bbb297c262a7
-version: 6
+version: 7
 date: '2025-01-24'
 author: Michael Haag, Splunk
 status: deprecated

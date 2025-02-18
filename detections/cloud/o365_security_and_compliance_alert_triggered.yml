@@ -1,7 +1,7 @@
 name: O365 Security And Compliance Alert Triggered
 id: 5b367cdd-8dfc-49ac-a9b7-6406cf27f33e
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 data_source: []
 type: TTP
@@ -58,7 +58,6 @@ tags:
   - Office 365 Account Takeover
   asset_type: O365 Tenant
   mitre_attack_id:
-  - T1078
   - T1078.004
   product:
   - Splunk Enterprise

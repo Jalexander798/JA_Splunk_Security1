@@ -1,7 +1,7 @@
 name: Azure AD Multiple Users Failing To Authenticate From Ip
 id: 94481a6a-8f59-4c86-957f-55a71e3612a6
-version: 6
-date: '2024-11-14'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
 status: production
 type: Anomaly
@@ -60,11 +60,9 @@ tags:
   - Azure Active Directory Account Takeover
   asset_type: Azure Active Directory
   mitre_attack_id:
-  - T1586
-  - T1586.003
-  - T1110
   - T1110.003
   - T1110.004
+  - T1586.003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

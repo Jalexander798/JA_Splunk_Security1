@@ -1,7 +1,7 @@
 name: W3WP Spawning Shell
 id: 0f03423c-7c6a-11eb-bc47-acde48001122
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -79,7 +79,6 @@ tags:
   - CVE-2021-34523
   - CVE-2021-31207
   mitre_attack_id:
-  - T1505
   - T1505.003
   product:
   - Splunk Enterprise

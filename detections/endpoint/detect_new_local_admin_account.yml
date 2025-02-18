@@ -1,7 +1,7 @@
 name: Detect New Local Admin account
 id: b25f6f62-0712-43c1-b203-083231ffd97d
-version: 6
-date: '2024-12-12'
+version: 7
+date: '2025-02-10'
 author: David Dorsey, Splunk
 status: production
 type: TTP
@@ -62,7 +62,6 @@ tags:
   asset_type: Windows
   mitre_attack_id:
   - T1136.001
-  - T1136
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

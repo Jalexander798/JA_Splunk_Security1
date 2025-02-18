@@ -1,7 +1,7 @@
 name: Okta Multi-Factor Authentication Disabled
 id: 7c0348ce-bdf9-45f6-8a57-c18b5976f00a
-version: 5
-date: '2025-01-21'
+version: 6
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 data_source:
 - Okta
@@ -57,7 +57,6 @@ tags:
   - Okta Account Takeover
   asset_type: Okta Tenant
   mitre_attack_id:
-  - T1556
   - T1556.006
   product:
   - Splunk Enterprise

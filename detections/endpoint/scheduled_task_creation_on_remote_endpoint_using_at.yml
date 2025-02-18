@@ -1,7 +1,7 @@
 name: Scheduled Task Creation on Remote Endpoint using At
 id: 4be54858-432f-11ec-8209-3e22fbd008af
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -65,7 +65,6 @@ tags:
   - Scheduled Tasks
   asset_type: Endpoint
   mitre_attack_id:
-  - T1053
   - T1053.002
   product:
   - Splunk Enterprise

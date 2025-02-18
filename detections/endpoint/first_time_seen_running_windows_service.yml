@@ -1,7 +1,7 @@
 name: First Time Seen Running Windows Service
 id: 823136f2-d755-4b6d-ae04-372b486a5808
-version: 7
-date: '2024-11-13'
+version: 8
+date: '2025-02-10'
 author: David Dorsey, Splunk
 status: experimental
 type: Anomaly
@@ -46,7 +46,6 @@ tags:
   - NOBELIUM Group
   asset_type: Endpoint
   mitre_attack_id:
-  - T1569
   - T1569.002
   product:
   - Splunk Enterprise

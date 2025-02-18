@@ -1,7 +1,7 @@
 name: Wmic NonInteractive App Uninstallation
 id: bff0e7a0-317f-11ec-ab4e-acde48001122
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
@@ -44,7 +44,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
