@@ -1,6 +1,6 @@
 name: AWS IAM AccessDenied Discovery Events
 id: 3e1f1568-9633-11eb-a69c-acde48001122
-version: 5
+version: 6
 date: '2024-11-14'
 author: Michael Haag, Splunk
 status: production
