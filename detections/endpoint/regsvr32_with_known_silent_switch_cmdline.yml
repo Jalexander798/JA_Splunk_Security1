@@ -1,7 +1,7 @@
 name: Regsvr32 with Known Silent Switch Cmdline
 id: c9ef7dc4-eeaf-11eb-b2b6-acde48001122
-version: 7
-date: '2024-11-13'
+version: 8
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -76,7 +76,6 @@ tags:
   - AsyncRAT
   asset_type: Endpoint
   mitre_attack_id:
-  - T1218
   - T1218.010
   product:
   - Splunk Enterprise

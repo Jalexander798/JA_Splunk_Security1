@@ -1,7 +1,7 @@
 name: Windows Hunting System Account Targeting Lsass
 id: 1c6abb08-73d1-11ec-9ca0-acde48001122
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: Hunting
@@ -38,7 +38,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1003.001
-  - T1003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

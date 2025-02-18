@@ -1,7 +1,7 @@
 name: Okta Failed SSO Attempts
 id: 371a6545-2618-4032-ad84-93386b8698c5
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Rico Valdez, Splunk
 status: deprecated
 type: Anomaly
@@ -32,7 +32,6 @@ tags:
   - Suspicious Okta Activity
   asset_type: Infrastructure
   mitre_attack_id:
-  - T1078
   - T1078.001
   product:
   - Splunk Enterprise

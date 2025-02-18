@@ -1,7 +1,7 @@
 name: AWS Network Access Control List Deleted
 id: ada0f478-84a8-4641-a3f1-d82362d6fd75
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Bhavin Patel, Patrick Bareiss, Splunk
 status: production
 type: Anomaly
@@ -54,7 +54,6 @@ tags:
   asset_type: AWS Instance
   mitre_attack_id:
   - T1562.007
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

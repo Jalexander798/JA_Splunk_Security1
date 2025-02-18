@@ -1,7 +1,7 @@
 name: Windows DLL Search Order Hijacking Hunt
 id: 79c7d0fc-60c7-41be-a616-ccda752efe89
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: deprecated
 type: Hunting
@@ -49,7 +49,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1574.001
-  - T1574
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

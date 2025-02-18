@@ -1,7 +1,7 @@
 name: Msmpeng Application DLL Side Loading
 id: 8bb3f280-dd9b-11eb-84d5-acde48001122
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk, Sanjay Govind
 status: production
 type: TTP
@@ -58,7 +58,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1574.002
-  - T1574
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

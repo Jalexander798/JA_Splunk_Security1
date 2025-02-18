@@ -1,7 +1,7 @@
 name: Kerberos User Enumeration
 id: d82d4af4-a0bd-11ec-9445-3e22fbd008af
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: Anomaly
@@ -55,7 +55,6 @@ tags:
   - Active Directory Kerberos Attacks
   asset_type: Endpoint
   mitre_attack_id:
-  - T1589
   - T1589.002
   product:
   - Splunk Enterprise

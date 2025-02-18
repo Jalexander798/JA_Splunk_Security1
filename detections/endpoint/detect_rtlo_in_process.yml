@@ -1,7 +1,7 @@
 name: Detect RTLO In Process
 id: 22ac27b4-7189-4a4f-9375-b9017c9620d7
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Steven Dick
 status: production
 type: TTP
@@ -72,7 +72,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1036.002
-  - T1036
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

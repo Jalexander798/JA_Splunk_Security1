@@ -1,7 +1,7 @@
 name: Windows Impair Defenses Disable HVCI
 id: b061dfcc-f0aa-42cc-a6d4-a87f172acb79
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -61,7 +61,6 @@ tags:
   - 70bd71e6-eba4-4e00-92f7-617911dbe020
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

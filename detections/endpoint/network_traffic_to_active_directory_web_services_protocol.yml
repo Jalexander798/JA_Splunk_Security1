@@ -1,7 +1,7 @@
 name: Network Traffic to Active Directory Web Services Protocol
 id: 68a0056c-34cb-455f-b03d-df935ea62c4f
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: Hunting
@@ -37,13 +37,11 @@ tags:
   asset_type: Network
   atomic_guid: []
   mitre_attack_id:
-  - T1087.002
   - T1069.001
-  - T1482
-  - T1087.001
-  - T1087
   - T1069.002
-  - T1069
+  - T1087.001
+  - T1087.002
+  - T1482
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

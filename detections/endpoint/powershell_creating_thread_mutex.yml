@@ -1,7 +1,7 @@
 name: Powershell Creating Thread Mutex
 id: 637557ec-ca08-11eb-bd0a-acde48001122
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -59,7 +59,6 @@ tags:
   - Malicious PowerShell
   asset_type: Endpoint
   mitre_attack_id:
-  - T1027
   - T1027.005
   - T1059.001
   product:

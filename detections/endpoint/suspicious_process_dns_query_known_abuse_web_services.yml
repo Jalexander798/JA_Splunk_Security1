@@ -1,7 +1,7 @@
 name: Suspicious Process DNS Query Known Abuse Web Services
 id: 3cf0dc36-484d-11ec-a6bc-acde48001122
-version: 8
-date: '2024-12-10'
+version: 9
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -64,7 +64,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1059.005
-  - T1059
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,7 +1,7 @@
 name: Linux Account Manipulation Of SSH Config and Keys
 id: 73a56508-1cf5-4df7-b8d9-5737fbdc27d2
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -55,9 +55,8 @@ tags:
   - AcidRain
   asset_type: Endpoint
   mitre_attack_id:
-  - T1485
   - T1070.004
-  - T1070
+  - T1485
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

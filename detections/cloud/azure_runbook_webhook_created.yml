@@ -1,7 +1,7 @@
 name: Azure Runbook Webhook Created
 id: e98944a9-92e4-443c-81b8-a322e33ce75a
-version: 7
-date: '2024-11-14'
+version: 8
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -60,7 +60,6 @@ tags:
   - Azure Active Directory Persistence
   asset_type: Azure Tenant
   mitre_attack_id:
-  - T1078
   - T1078.004
   product:
   - Splunk Enterprise

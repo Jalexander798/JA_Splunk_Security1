@@ -1,7 +1,7 @@
 name: Okta Account Lockout Events
 id: 62b70968-a0a5-4724-8ac4-67871e6f544d
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Michael Haag, Rico Valdez, Splunk
 status: deprecated
 type: Anomaly
@@ -43,7 +43,6 @@ tags:
   - Suspicious Okta Activity
   asset_type: Infrastructure
   mitre_attack_id:
-  - T1078
   - T1078.001
   product:
   - Splunk Enterprise

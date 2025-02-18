@@ -1,7 +1,7 @@
 name: Linux Edit Cron Table Parameter
 id: 0d370304-5f26-11ec-a4bb-acde48001122
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
@@ -42,7 +42,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.003
-  - T1053
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

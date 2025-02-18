@@ -1,7 +1,7 @@
 name: Remote Process Instantiation via WinRM and PowerShell
 id: ba24cda8-4716-11ec-8009-3e22fbd008af
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -65,7 +65,6 @@ tags:
   - Active Directory Lateral Movement
   asset_type: Endpoint
   mitre_attack_id:
-  - T1021
   - T1021.006
   product:
   - Splunk Enterprise

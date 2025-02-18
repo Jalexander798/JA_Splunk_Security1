@@ -1,7 +1,7 @@
 name: GCP Multiple Users Failing To Authenticate From Ip
 id: da20828e-d6fb-4ee5-afb7-d0ac200923d5
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production
 type: Anomaly
@@ -61,11 +61,9 @@ tags:
   - GCP Account Takeover
   asset_type: Google Cloud Platform tenant
   mitre_attack_id:
-  - T1586
-  - T1586.003
-  - T1110
   - T1110.003
   - T1110.004
+  - T1586.003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

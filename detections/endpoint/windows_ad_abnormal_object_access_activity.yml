@@ -1,7 +1,7 @@
 name: Windows AD Abnormal Object Access Activity
 id: 71b289db-5f2c-4c43-8256-8bf26ae7324a
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Steven Dick
 status: production
 type: Anomaly
@@ -60,7 +60,6 @@ tags:
   - BlackSuit Ransomware
   asset_type: Endpoint
   mitre_attack_id:
-  - T1087
   - T1087.002
   product:
   - Splunk Enterprise

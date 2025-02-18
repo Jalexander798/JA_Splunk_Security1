@@ -1,7 +1,7 @@
 name: Detect Traffic Mirroring
 id: 42b3b753-5925-49c5-9742-36fa40a73990
-version: 5
-date: '2024-11-15'
+version: 6
+date: '2025-02-10'
 author: Mikael Bjerkeland, Splunk
 status: experimental
 type: TTP
@@ -41,10 +41,9 @@ tags:
   - Router and Infrastructure Security
   asset_type: Infrastructure
   mitre_attack_id:
-  - T1200
-  - T1020
-  - T1498
   - T1020.001
+  - T1200
+  - T1498
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
