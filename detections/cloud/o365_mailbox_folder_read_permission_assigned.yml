@@ -1,7 +1,7 @@
 name: O365 Mailbox Folder Read Permission Assigned
 id: 1435475e-2128-4417-a34f-59770733b0d5
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 data_source: []
 type: TTP
@@ -55,7 +55,6 @@ tags:
   - Office 365 Collection Techniques
   asset_type: O365 Tenant
   mitre_attack_id:
-  - T1098
   - T1098.002
   product:
   - Splunk Enterprise

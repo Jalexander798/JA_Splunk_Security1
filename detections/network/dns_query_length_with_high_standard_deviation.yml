@@ -1,7 +1,7 @@
 name: DNS Query Length With High Standard Deviation
 id: 1a67f15a-f4ff-4170-84e9-08cf6f75d6f5
-version: 8
-date: '2024-11-15'
+version: 9
+date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production
 type: Anomaly
@@ -56,7 +56,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1048.003
-  - T1048
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

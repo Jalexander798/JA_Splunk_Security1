@@ -1,7 +1,7 @@
 name: O365 Service Principal Privilege Escalation
 id: b686d0bd-cca7-44ca-ae07-87f6465131d9
-version: 1
-date: '2025-01-06'
+version: 2
+date: '2025-02-10'
 author: Dean Luxton
 data_source:
 - O365 Add app role assignment grant to user
@@ -22,7 +22,9 @@ search: >-
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_service_principal_privilege_escalation_filter`
-how_to_implement: The Splunk Add-on for Microsoft Office 365 add-on is required to ingest EntraID audit logs via the 365 API. See references for links for further details on how to onboard this log source. 
+how_to_implement: The Splunk Add-on for Microsoft Office 365 add-on is required to
+  ingest EntraID audit logs via the 365 API. See references for links for further
+  details on how to onboard this log source.
 known_false_positives: Unknown
 references:
 - https://splunkbase.splunk.com/app/4055
@@ -35,11 +37,17 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$servicePrincipal$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$servicePrincipal$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$servicePrincipal$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Service Principal $servicePrincipal$ has elevated privileges by adding themself to app role $appRole$
+  message: Service Principal $servicePrincipal$ has elevated privileges by adding
+    themself to app role $appRole$
   risk_objects:
   - field: servicePrincipal
     type: user
@@ -54,7 +62,6 @@ tags:
   asset_type: Azure Tenant
   mitre_attack_id:
   - T1098.003
-  - T1098
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
@@ -63,6 +70,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.003/o365_spn_privesc/o365_spn_privesc.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.003/o365_spn_privesc/o365_spn_privesc.log
     sourcetype: o365:management:activity
     source: Office 365

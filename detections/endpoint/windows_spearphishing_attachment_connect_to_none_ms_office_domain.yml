@@ -1,7 +1,7 @@
 name: Windows Spearphishing Attachment Connect To None MS Office Domain
 id: 1cb40e15-cffa-45cc-abbd-e35884a49766
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
@@ -36,7 +36,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1566.001
-  - T1566
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

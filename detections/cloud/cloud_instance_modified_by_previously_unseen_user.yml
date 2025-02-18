@@ -1,7 +1,7 @@
 name: Cloud Instance Modified By Previously Unseen User
 id: 7fb15084-b14e-405a-bd61-a6de15a40722
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Rico Valdez, Splunk
 status: experimental
 type: Anomaly
@@ -44,7 +44,6 @@ tags:
   asset_type: AWS Instance
   mitre_attack_id:
   - T1078.004
-  - T1078
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

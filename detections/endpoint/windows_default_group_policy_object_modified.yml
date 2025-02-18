@@ -1,7 +1,7 @@
 name: Windows Default Group Policy Object Modified
 id: fe6a6cc4-9e0d-4d66-bcf4-2c7f44860876
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -64,7 +64,6 @@ tags:
   - Sneaky Active Directory Persistence Tricks
   asset_type: Endpoint
   mitre_attack_id:
-  - T1484
   - T1484.001
   product:
   - Splunk Enterprise

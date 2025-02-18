@@ -1,7 +1,7 @@
 name: GetLocalUser with PowerShell Script Block
 id: 2e891cbe-0426-11ec-9c9c-acde48001122
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: Hunting
@@ -33,9 +33,8 @@ tags:
   - Malicious PowerShell
   asset_type: Endpoint
   mitre_attack_id:
-  - T1087
-  - T1087.001
   - T1059.001
+  - T1087.001
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

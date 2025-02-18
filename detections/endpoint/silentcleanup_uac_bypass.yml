@@ -1,7 +1,7 @@
 name: SilentCleanup UAC Bypass
 id: 56d7cfcc-da63-11eb-92d4-acde48001122
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Steven Dick, Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -74,7 +74,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1548.002
-  - T1548
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

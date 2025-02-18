@@ -1,11 +1,11 @@
 name: Suspicious Driver Loaded Path
 id: f880acd4-a8f1-11eb-a53b-acde48001122
-version: 4
-date: '2024-11-13'
+version: 6
+date: '2025-02-06'
 author: Teoderick Contreras, Splunk
-status: production
+status: deprecated
 type: TTP
-description: The following analytic detects the loading of drivers from suspicious
+description: This search has been deprecated in favour of - Windows Suspicious Driver Loaded Path. The following analytic detects the loading of drivers from suspicious
   paths, which is a technique often used by malicious software such as coin miners
   (e.g., xmrig). It leverages Sysmon EventCode 6 to identify drivers loaded from non-standard
   directories. This activity is significant because legitimate drivers typically reside
@@ -61,7 +61,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1543.003
-  - T1543
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,7 +1,7 @@
 name: AWS Successful Single-Factor Authentication
 id: a520b1fe-cc9e-4f56-b762-18354594c52f
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -56,10 +56,8 @@ tags:
   - AWS Identity and Access Management Account Takeover
   asset_type: AWS Account
   mitre_attack_id:
-  - T1586
-  - T1586.003
-  - T1078
   - T1078.004
+  - T1586.003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

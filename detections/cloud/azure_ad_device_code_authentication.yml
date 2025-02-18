@@ -1,7 +1,7 @@
 name: Azure AD Device Code Authentication
 id: d68d8732-6f7e-4ee5-a6eb-737f2b990b91
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Mauricio Velazco, Gowthamaraj Rajendran,  Splunk
 status: production
 type: TTP
@@ -62,7 +62,6 @@ tags:
   asset_type: Azure Tenant
   mitre_attack_id:
   - T1528
-  - T1566
   - T1566.002
   product:
   - Splunk Enterprise

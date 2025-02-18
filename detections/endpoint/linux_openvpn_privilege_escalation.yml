@@ -1,7 +1,7 @@
 name: Linux OpenVPN Privilege Escalation
 id: d25feebe-fa1c-4754-8a1e-afb03bedc0f2
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Gowthamaraj Rajendran, Splunk
 status: production
 type: Anomaly
@@ -68,7 +68,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1548.003
-  - T1548
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

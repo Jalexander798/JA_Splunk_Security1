@@ -1,7 +1,7 @@
 name: Linux At Allow Config File Creation
 id: 977b3082-5f3d-11ec-b954-acde48001122
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -58,7 +58,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.003
-  - T1053
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

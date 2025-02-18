@@ -1,7 +1,7 @@
 name: Suspicious mshta spawn
 id: 4d33a488-5b5f-11eb-ae93-0242ac130002
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -65,7 +65,6 @@ tags:
   - Living Off The Land
   asset_type: Endpoint
   mitre_attack_id:
-  - T1218
   - T1218.005
   product:
   - Splunk Enterprise

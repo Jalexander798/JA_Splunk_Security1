@@ -1,7 +1,7 @@
 name: Create Remote Thread into LSASS
 id: 67d4dbef-9564-4699-8da8-03a151529edc
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Patrick Bareiss, Splunk
 status: production
 type: TTP
@@ -59,7 +59,6 @@ tags:
   asset_type: Windows
   mitre_attack_id:
   - T1003.001
-  - T1003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

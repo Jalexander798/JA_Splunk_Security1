@@ -1,7 +1,7 @@
 name: Windows Group Policy Object Created
 id: 23add2a8-ea22-4fd4-8bc0-8c0b822373a1
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Mauricio Velazco
 status: production
 type: TTP
@@ -61,9 +61,8 @@ tags:
   - Sneaky Active Directory Persistence Tricks
   asset_type: Endpoint
   mitre_attack_id:
-  - T1484
-  - T1484.001
   - T1078.002
+  - T1484.001
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

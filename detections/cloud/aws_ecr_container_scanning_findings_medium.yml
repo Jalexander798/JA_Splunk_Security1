@@ -1,7 +1,7 @@
 name: AWS ECR Container Scanning Findings Medium
 id: 0b80e2c8-c746-4ddb-89eb-9efd892220cf
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Patrick Bareiss, Splunk
 status: production
 type: Anomaly
@@ -56,7 +56,6 @@ tags:
   asset_type: AWS Account
   mitre_attack_id:
   - T1204.003
-  - T1204
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

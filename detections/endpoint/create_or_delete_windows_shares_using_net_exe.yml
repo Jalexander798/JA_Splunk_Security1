@@ -1,7 +1,7 @@
 name: Create or delete windows shares using net exe
 id: 743a322c-9a68-4a0f-9c17-85d9cce2a27c
-version: 11
-date: '2024-12-12'
+version: 12
+date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -76,7 +76,6 @@ tags:
   - DarkGate Malware
   asset_type: Endpoint
   mitre_attack_id:
-  - T1070
   - T1070.005
   product:
   - Splunk Enterprise
