@@ -14,9 +14,11 @@ description: The following analytic detects the use of the Win32_ScheduledJob WM
   block text analysis. Monitoring this activity is crucial as it may indicate malicious
   intent, especially if the class was enabled by an attacker. If confirmed malicious,
   this could allow attackers to persist in the environment by creating scheduled tasks.
-search: '`powershell` EventCode=4104 ScriptBlockText="*win32_scheduledjob*" | stats
-  count min(_time) as firstTime max(_time) as lastTime by EventCode ScriptBlockText
-  Computer UserID | rename Computer as dest | rename UserID as user | `security_content_ctime(firstTime)`
+search: '`powershell` EventCode=4104 ScriptBlockText="*win32_scheduledjob*" 
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_powershell_wmi_win32_scheduledjob_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here

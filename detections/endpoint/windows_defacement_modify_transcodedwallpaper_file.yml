@@ -14,11 +14,10 @@ description: The following analytic identifies modifications to the TranscodedWa
   If confirmed malicious, this could be a sign of unauthorized access and tampering,
   potentially leading to further system compromise or data exfiltration.
 data_source:
-- Sysmon EventID 1
-- Windows Event Log Security 4688
-- CrowdStrike ProcessRollup2
+- Sysmon EventID 1 AND Sysmon EventID 11
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Processes
-  where Processes.process_path !="*\\Windows\\Explorer.EXE" by _time span=1h Processes.process_id
+  where Processes.process_path !="*\\Windows\\Explorer.EXE" 
+  by _time span=1h Processes.process_id
   Processes.process_name Processes.process Processes.dest Processes.process_guid  Processes.original_file_name
   | `drop_dm_object_name(Processes)` |rename process_guid as proc_guid | join proc_guid,
   _time [ | tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Filesystem

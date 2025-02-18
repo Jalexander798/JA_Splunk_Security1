@@ -16,9 +16,11 @@ description: The following analytic detects suspicious PowerShell execution indi
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104  (ScriptBlockText=*system.net.webclient* AND
-  ScriptBlockText=*frombase64string*) | stats count min(_time) as firstTime max(_time)
-  as lastTime by Opcode Computer UserID EventCode ScriptBlockText | rename UserID
-  as user | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  ScriptBlockText=*frombase64string*) 
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `detect_empire_with_powershell_script_block_logging_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here

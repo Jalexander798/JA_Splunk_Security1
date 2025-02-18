@@ -16,8 +16,10 @@ description: The following analytic detects attempts to modify or add a Componen
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText = "*Software\\Classes\\CLSID\\*\\InProcServer32*"
-  | stats count min(_time) as firstTime max(_time) as lastTime by EventCode ScriptBlockText
-  Computer UserID | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `powershell_com_hijacking_inprocserver32_modification_filter`'
 how_to_implement: The following analytic requires PowerShell operational logs to be
   imported. Modify the PowerShell macro as needed to match the sourcetype or add index.

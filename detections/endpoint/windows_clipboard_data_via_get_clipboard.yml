@@ -14,9 +14,11 @@ description: The following analytic detects the execution of the PowerShell comm
   information, potentially compromising user accounts and other critical assets.
 data_source:
 - Powershell Script Block Logging 4104
-search: '`powershell` EventCode=4104 ScriptBlockText = "*Get-Clipboard*" | stats count
-  min(_time) as firstTime max(_time) as lastTime by EventCode ScriptBlockText Computer
-  UserID | rename Computer as dest | rename UserID as user| `security_content_ctime(firstTime)`
+search: '`powershell` EventCode=4104 ScriptBlockText = "*Get-Clipboard*" 
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_clipboard_data_via_get_clipboard_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here

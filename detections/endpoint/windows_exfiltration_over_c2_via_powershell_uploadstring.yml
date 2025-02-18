@@ -16,8 +16,11 @@ description: The following analytic identifies potential data exfiltration using
   data transfer, compromising sensitive information and potentially leading to further
   exploitation of the compromised host.
 search: '`powershell` EventCode=4104 ScriptBlockText = "*Net.webclient*" AND ScriptBlockText
-  = "*.UploadString*" | stats count min(_time) as firstTime max(_time) as lastTime
-  by EventCode ScriptBlockText Computer UserID | `security_content_ctime(firstTime)`
+  = "*.UploadString*" 
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_exfiltration_over_c2_via_powershell_uploadstring_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here

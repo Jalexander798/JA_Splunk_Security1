@@ -16,9 +16,11 @@ description: The following analytic detects the execution of the `GetCurrent` me
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText = "*[System.Security.Principal.WindowsIdentity]*"  ScriptBlockText
-  = "*GetCurrent()*" | stats count min(_time) as firstTime max(_time) as lastTime
-  by EventCode ScriptBlockText Computer UserID | rename Computer as dest, UserID as
-  user | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  = "*GetCurrent()*" 
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `getcurrent_user_with_powershell_script_block_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here

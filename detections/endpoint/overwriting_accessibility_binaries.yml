@@ -21,7 +21,10 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   OR Filesystem.file_path=*\\Windows\\System32\\utilman.exe* OR Filesystem.file_path=*\\Windows\\System32\\osk.exe*
   OR Filesystem.file_path=*\\Windows\\System32\\Magnify.exe* OR Filesystem.file_path=*\\Windows\\System32\\Narrator.exe*
   OR Filesystem.file_path=*\\Windows\\System32\\DisplaySwitch.exe* OR Filesystem.file_path=*\\Windows\\System32\\AtBroker.exe*)
-  by Filesystem.file_name Filesystem.dest | `drop_dm_object_name(Filesystem)` | `security_content_ctime(lastTime)`
+  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time 
+  Filesystem.file_name Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id 
+  Filesystem.user Filesystem.vendor_product 
+  | `drop_dm_object_name(Filesystem)` | `security_content_ctime(lastTime)`
   | `security_content_ctime(firstTime)` | `overwriting_accessibility_binaries_filter`'
 how_to_implement: You must be ingesting data that records the filesystem activity
   from your hosts to populate the Endpoint file-system data model node. If you are

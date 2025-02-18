@@ -18,8 +18,13 @@ data_source:
 search: '| tstats count min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Processes
   where Processes.process IN ("*\\AppData\\Local\\Temp\\*", "*\\Olk\\Attachments\\*",
   "*\\AppData\\Local\\Microsoft\\Outlook\\*", "*\\Content.Outlook\\*", "*\\Downloads\\*")
-  AND Processes.process="*.rdp*" by Processes.process Processes.process_name Processes.user
-  Processes.dest Processes.parent_process_name Processes.parent_process | `drop_dm_object_name(Processes)`
+  AND Processes.process="*.rdp*" 
+  by Processes.action Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec 
+  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name 
+  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid Processes.process_hash 
+  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path 
+  Processes.user Processes.user_id Processes.vendor_product 
+  | `drop_dm_object_name(Processes)`
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | eval
   execution_type=case( match(process, "\\\\Temp\\\\.*\\.(zip|7z|rar|cab|tgz|gz|tar|iso|img|vhd|vhdx).*\\.*\\.rdp"),
   "temp_archive_execution", match(process, "\\\\Downloads\\\\"), "downloads_execution",

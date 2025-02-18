@@ -17,7 +17,10 @@ data_source:
 - Sysmon EventID 11
 search: '| tstats `security_content_summariesonly` count, min(_time) as firstTime,
   max(_time) as lastTime, values(Filesystem.file_path) as file_path from datamodel=Endpoint.Filesystem
-  by Filesystem.dest, Filesystem.user, Filesystem.file_name | `security_content_ctime(firstTime)`
+  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time 
+  Filesystem.file_name Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id 
+  Filesystem.user Filesystem.vendor_product 
+  | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `drop_dm_object_name(Filesystem)` | lookup
   remote_access_software remote_utility AS file_name OUTPUT isutility, description
   as signature, comment_reference as desc, category | search isutility = TRUE | `remote_access_software_usage_exceptions`

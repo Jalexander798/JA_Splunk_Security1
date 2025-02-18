@@ -22,10 +22,13 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   AND Processes.parent_process="*-k*" AND Processes.parent_process= "*netsvcs*" AND
   Processes.parent_process="*-p*" AND Processes.parent_process="*-s*" AND Processes.parent_process="*Schedule*"
   Processes.process_name IN("powershell.exe", "wscript.exe", "cscript.exe", "cmd.exe",
-  "sh.exe", "ksh.exe", "zsh.exe", "bash.exe", "scrcons.exe","pwsh.exe") by Processes.dest
-  Processes.user Processes.parent_process Processes.process_name Processes.process
-  Processes.process_id Processes.parent_process_id Processes.parent_process_name |
-  `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  "sh.exe", "ksh.exe", "zsh.exe", "bash.exe", "scrcons.exe","pwsh.exe") 
+  by Processes.action Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec 
+  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name 
+  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid Processes.process_hash 
+  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path 
+  Processes.user Processes.user_id Processes.vendor_product 
+  | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_scheduled_task_service_spawned_shell_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related

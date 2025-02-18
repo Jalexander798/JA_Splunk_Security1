@@ -19,7 +19,9 @@ search: '| tstats `security_content_summariesonly` count values(Filesystem.file_
   as file_path min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Filesystem
   where (Filesystem.file_name=*.pst OR Filesystem.file_name=*.ost) Filesystem.file_path
   != "C:\\Users\\*\\My Documents\\Outlook Files\\*"  Filesystem.file_path!="C:\\Users\\*\\AppData\\Local\\Microsoft\\Outlook*"
-  by Filesystem.action Filesystem.process_id Filesystem.file_name Filesystem.dest
+  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time 
+  Filesystem.file_name Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id 
+  Filesystem.user Filesystem.vendor_product 
   | `drop_dm_object_name("Filesystem")` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`|
   `email_files_written_outside_of_the_outlook_directory_filter`'
 how_to_implement: To successfully implement this search, you must be ingesting data

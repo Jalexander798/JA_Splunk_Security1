@@ -15,8 +15,10 @@ description: The following analytic detects the use of the Enable-PSRemoting cmd
   this activity could allow an attacker to take control of the system remotely, execute
   commands, and potentially pivot to other systems within the network, leading to
   further compromise and lateral movement.
-search: '`powershell` EventCode=4104 ScriptBlockText="*Enable-PSRemoting*" | stats
-  count min(_time) as firstTime max(_time) as lastTime by Computer EventCode ScriptBlockText
+search: '`powershell` EventCode=4104 ScriptBlockText="*Enable-PSRemoting*" 
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`| `powershell_enable_powershell_remoting_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here

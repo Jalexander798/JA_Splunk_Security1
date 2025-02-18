@@ -4,7 +4,7 @@ version: 4
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 data_source:
-- Sysmon EventID 11
+- Sysmon EventID 1 AND Sysmon EventID 11
 type: TTP
 status: production
 description: The following analytic detects the creation of a DLL file by an outlook.exe

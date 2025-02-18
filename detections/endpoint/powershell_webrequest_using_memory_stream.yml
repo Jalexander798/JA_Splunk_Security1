@@ -16,10 +16,11 @@ description: The following analytic detects the use of .NET classes in PowerShel
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104  ScriptBlockText IN ("*system.net.webclient*","*system.net.webrequest*")
-  AND ScriptBlockText="*IO.MemoryStream*" | eval Path = case(isnotnull(Path),Path,true(),"unknown")
-  | stats count min(_time) as firstTime max(_time) as lastTime list(ScriptBlockText)
-  as command values(Path) as file_name values(UserID) as user by ActivityID, Computer,
-  EventCode | rename Computer as dest, EventCode as signature_id | `security_content_ctime(firstTime)`
+  AND ScriptBlockText="*IO.MemoryStream*" 
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `powershell_webrequest_using_memory_stream_filter`'
 how_to_implement: The following analytic requires PowerShell operational logs to be
   imported. Modify the powershell macro as needed to match the sourcetype or add index.

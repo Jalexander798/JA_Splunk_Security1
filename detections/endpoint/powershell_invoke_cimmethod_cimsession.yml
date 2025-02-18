@@ -15,8 +15,10 @@ description: The following analytic detects the creation of a New-CIMSession cmd
   If confirmed malicious, this could allow an attacker to execute commands remotely,
   potentially leading to unauthorized access and control over targeted systems.
 search: '`powershell` EventCode=4104 ScriptBlockText IN ("*invoke-CIMMethod*", "*New-CimSession*")
-  | stats count min(_time) as firstTime max(_time) as lastTime by Computer EventCode
-  ScriptBlockText | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `powershell_invoke_cimmethod_cimsession_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here

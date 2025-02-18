@@ -15,9 +15,11 @@ description: The following analytic detects the execution of the `Get-DomainComp
   lead to further network enumeration and potential lateral movement within the domain.
 data_source:
 - Powershell Script Block Logging 4104
-search: '`powershell` EventCode=4104 (ScriptBlockText = "*Get-DomainComputer*") |
-  stats count min(_time) as firstTime max(_time) as lastTime by Opcode Computer UserID
-  EventCode ScriptBlockText | rename Computer as dest | rename UserID as user | `security_content_ctime(firstTime)`
+search: '`powershell` EventCode=4104 (ScriptBlockText = "*Get-DomainComputer*") 
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `getdomaincomputer_with_powershell_script_block_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here

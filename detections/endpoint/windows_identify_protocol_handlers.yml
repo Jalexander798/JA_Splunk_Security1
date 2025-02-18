@@ -18,8 +18,13 @@ data_source:
 - CrowdStrike ProcessRollup2
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime values(Processes.process) as process values(Processes.parent_process)
-  as parent_process from datamodel=Endpoint.Processes  by Processes.dest Processes.parent_process_name
-  Processes.user Processes.process_name Processes.process | `security_content_ctime(firstTime)`
+  as parent_process from datamodel=Endpoint.Processes  
+  by Processes.action Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec 
+  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name 
+  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid Processes.process_hash 
+  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path 
+  Processes.user Processes.user_id Processes.vendor_product 
+  | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `drop_dm_object_name(Processes)` | lookup
   windows_protocol_handlers handler AS process OUTPUT handler ishandler | where ishandler="TRUE"
   | `windows_identify_protocol_handlers_filter`'

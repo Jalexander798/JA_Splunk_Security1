@@ -18,9 +18,11 @@ description: The following analytic detects modifications to the Windows registr
   of undetected malware or other malicious activities.
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry where Registry.registry_path= "*\\Windows
-  Defender\\ServiceKeepAlive" Registry.registry_value_data="0x00000001" by Registry.registry_key_name
-  Registry.user Registry.registry_path Registry.registry_value_data Registry.action
-  Registry.dest | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)`
+  Defender\\ServiceKeepAlive" Registry.registry_value_data="0x00000001" 
+  by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path 
+  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name Registry.registry_value_test 
+  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product 
+  | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_impair_defense_change_win_defender_health_check_intervals_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
   on process that include the name of the process responsible for the changes from

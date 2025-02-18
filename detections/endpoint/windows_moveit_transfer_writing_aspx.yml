@@ -6,7 +6,7 @@ author: Michael Haag, Splunk
 status: experimental
 type: TTP
 data_source:
-- Sysmon EventID 11
+- Sysmon EventID 1 AND Sysmon EventID 11
 description: The following analytic detects the creation of new ASPX files in the
   MOVEit Transfer application's "wwwroot" directory. It leverages endpoint data on
   process and filesystem activity to identify processes responsible for creating these

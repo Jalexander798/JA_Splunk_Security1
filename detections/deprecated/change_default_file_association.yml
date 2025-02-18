@@ -19,9 +19,11 @@ data_source:
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count  min(_time) as firstTime
   max(_time) as lastTime FROM datamodel=Endpoint.Registry where Registry.registry_path
-  ="*\\shell\\open\\command\\*" Registry.registry_path = "*HKCR\\*" by Registry.dest  Registry.user
-  Registry.registry_path Registry.registry_key_name Registry.registry_value_name |
-  `security_content_ctime(lastTime)` | `security_content_ctime(firstTime)` | `drop_dm_object_name(Registry)`
+  ="*\\shell\\open\\command\\*" Registry.registry_path = "*HKCR\\*" 
+  by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path 
+  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name Registry.registry_value_test 
+  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product 
+  | `security_content_ctime(lastTime)` | `security_content_ctime(firstTime)` | `drop_dm_object_name(Registry)`
   | `change_default_file_association_filter`'
 how_to_implement: To successfully implement this search, you must be ingesting data
   that records registry activity from your hosts to populate the endpoint data model

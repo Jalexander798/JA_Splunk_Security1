@@ -18,8 +18,11 @@ description: The following analytic detects potential malicious activities invol
 search: '`powershell` EventCode=4104 ScriptBlockText IN ("*New-ScheduledTask*", "*New-ScheduledTaskAction*",
   "*New-ScheduledTaskSettingsSet*", "*New-ScheduledTaskTrigger*", "*Register-ClusteredScheduledTask*",
   "*Register-ScheduledTask*", "*Set-ClusteredScheduledTask*", "*Set-ScheduledTask*",
-  "*Start-ScheduledTask*", "*Enable-ScheduledTask*") | stats count min(_time) as firstTime
-  max(_time) as lastTime by EventCode ScriptBlockText Computer user_id | `security_content_ctime(firstTime)`
+  "*Start-ScheduledTask*", "*Enable-ScheduledTask*") 
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_powershell_scheduletask_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here

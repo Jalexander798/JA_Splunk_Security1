@@ -15,8 +15,10 @@ description: The following analytic identifies the use of PowerShell's Start-Ser
   to disable security services, evade detection, or disrupt essential services, leading
   to potential system downtime and compromised security.
 search: '`powershell` EventCode=4104 ScriptBlockText IN ("*start-service*", "*stop-service*")
-  | stats count min(_time) as firstTime max(_time) as lastTime by Computer EventCode
-  ScriptBlockText | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `powershell_start_or_stop_service_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here

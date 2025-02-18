@@ -16,8 +16,10 @@ description: The following analytic detects the execution of the `Get-DomainCont
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 (ScriptBlockText = "*Get-DomainController*")
-  | stats count min(_time) as firstTime max(_time) as lastTime by Opcode Computer
-  UserID EventCode ScriptBlockText | `security_content_ctime(firstTime)` | `getdomaincontroller_with_powershell_script_block_filter`'
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `getdomaincontroller_with_powershell_script_block_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
   https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.

@@ -15,8 +15,10 @@ description: The following analytic detects the execution of a COM CLSID through
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText = "*CreateInstance([type]::GetTypeFromCLSID*"
-  | stats count min(_time) as firstTime max(_time) as lastTime by EventCode ScriptBlockText
-  Computer UserID | rename Computer as dest | rename UserID as user | `security_content_ctime(firstTime)`
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `powershell_execute_com_object_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your

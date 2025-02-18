@@ -15,8 +15,10 @@ description: The following analytic detects the execution of the `Find-Interesti
   to identify privilege escalation opportunities or weak security configurations in
   Active Directory, potentially leading to unauthorized access or further exploitation.
 search: '`powershell` EventCode=4104 ScriptBlockText = "*Find-InterestingDomainAcl*"
-  | stats count min(_time) as firstTime max(_time) as lastTime by EventCode ScriptBlockText
-  Computer UserID | rename Computer as dest, UserID as user | `security_content_ctime(firstTime)`
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_find_interesting_acl_with_findinterestingdomainacl_filter`'
 how_to_implement: The following Hunting analytic requires PowerShell operational logs
   to be imported. Modify the powershell macro as needed to match the sourcetype or

@@ -15,9 +15,11 @@ description: The following analytic detects the execution of the `Find-LocalAdmi
   If confirmed malicious, this activity could allow attackers to target and compromise
   additional systems within the network, significantly increasing their control and
   access to sensitive information.
-search: '`powershell` EventCode=4104 ScriptBlockText = "*Find-LocalAdminAccess*" |
-  stats count min(_time) as firstTime max(_time) as lastTime by EventCode ScriptBlockText
-  Computer UserID | rename Computer as dest, UserID as user | `security_content_ctime(firstTime)`
+search: '`powershell` EventCode=4104 ScriptBlockText = "*Find-LocalAdminAccess*" 
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_get_local_admin_with_findlocaladminaccess_filter`'
 how_to_implement: The following Hunting analytic requires PowerShell operational logs
   to be imported. Modify the powershell macro as needed to match the sourcetype or

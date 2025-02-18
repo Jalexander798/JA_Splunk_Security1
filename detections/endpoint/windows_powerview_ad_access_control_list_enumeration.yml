@@ -15,9 +15,11 @@ description: The following analytic detects the execution of PowerView PowerShel
   Directory, potentially leading to privilege escalation. If confirmed malicious,
   attackers could exploit these permissions to gain unauthorized access or escalate
   their privileges within the network.
-search: '`powershell` EventCode=4104  (ScriptBlockText=*get-objectacl* OR ScriptBlockText=*Get-DomainObjectAcl*
-  ) | stats count min(_time) as firstTime max(_time) as lastTime by Opcode Computer
-  UserID EventCode ScriptBlockText | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+search: '`powershell` EventCode=4104  (ScriptBlockText=*get-objectacl* OR ScriptBlockText=*Get-DomainObjectAcl*) 
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_powerview_ad_access_control_list_enumeration_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here

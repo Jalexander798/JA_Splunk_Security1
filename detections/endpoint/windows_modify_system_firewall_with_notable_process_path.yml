@@ -23,9 +23,13 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   Processes.process IN ("*\\windows\\fonts\\*", "*\\windows\\temp\\*", "*\\users\\public\\*",
   "*\\windows\\debug\\*", "*\\Users\\Administrator\\Music\\*", "*\\Windows\\servicing\\*",
   "*\\Users\\Default\\*","*Recycle.bin*", "*\\Windows\\Media\\*", "\\Windows\\repair\\*",
-  "*\\temp\\*", "*\\PerfLogs\\*") by Processes.dest Processes.user Processes.parent_process_name
-  Processes.parent_process Processes.process_name Processes.process Processes.process_id
-  Processes.parent_process_id | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)`
+  "*\\temp\\*", "*\\PerfLogs\\*") 
+  by Processes.action Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec 
+  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name 
+  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid Processes.process_hash 
+  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path 
+  Processes.user Processes.user_id Processes.vendor_product 
+  | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_modify_system_firewall_with_notable_process_path_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related

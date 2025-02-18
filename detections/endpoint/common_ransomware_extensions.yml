@@ -17,13 +17,23 @@ data_source:
 - Sysmon EventID 11
 search: '| tstats `security_content_summariesonly` min(_time) as firstTime max(_time)
   as lastTime count latest(Filesystem.user) as user values(Filesystem.file_path) as
-  file_path from datamodel=Endpoint.Filesystem by Filesystem.file_name Filesystem.dest
-  _time span=1h | `drop_dm_object_name(Filesystem)` | rex field=file_name "(?<file_extension>\.[^\.]+)$"
-  | rex field=file_path "(?<true_file_path>([^\\\]*\\\)*).*" | stats min(firstTime)
-  as firstTime max(lastTime) as lastTime latest(user) as user dc(true_file_path) as
-  path_count dc(file_name) as file_count latest(true_file_path) as file_path by dest
-  file_name | `security_content_ctime(lastTime)` | `security_content_ctime(firstTime)`
-  | `ransomware_extensions` | where path_count > 1 OR file_count > 20 | `common_ransomware_extensions_filter`'
+  file_path from datamodel=Endpoint.Filesystem 
+  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time 
+  Filesystem.file_name Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id 
+  Filesystem.user Filesystem.vendor_product _time span=1h 
+  | `drop_dm_object_name(Filesystem)` 
+  | rex field=file_name "(?<file_extension>\.[^\.]+)$"
+  | rex field=file_path "(?<true_file_path>([^\\\]*\\\)*).*" 
+  | stats min(firstTime) as firstTime max(lastTime) as lastTime latest(user) as user dc(true_file_path) as
+  path_count dc(file_name) as file_count latest(true_file_path) as file_path values(action) as action values(file_access_time) as file_access_time 
+  values(file_create_time) as file_create_time values(file_hash) as file_hash values(file_modify_time) as file_modify_time values(file_acl) as file_acl 
+  values(file_size) as file_size values(process_guid) as process_guid values(process_id) as process_id values(user) as user values(vendor_product) as vendor_product 
+  by dest file_name 
+  | `security_content_ctime(lastTime)` 
+  | `security_content_ctime(firstTime)`
+  | `ransomware_extensions` 
+  | where path_count > 1 OR file_count > 20 
+  | `common_ransomware_extensions_filter`'
 how_to_implement: 'You must be ingesting data that records the filesystem activity
   from your hosts to populate the Endpoint Filesystem data model node. To see the
   additional metadata, add the following fields, if not already present, please review

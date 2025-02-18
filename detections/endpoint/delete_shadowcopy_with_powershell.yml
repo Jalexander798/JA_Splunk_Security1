@@ -15,10 +15,11 @@ description: The following analytic detects the use of PowerShell to delete shad
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText= "*ShadowCopy*" (ScriptBlockText
-  = "*Delete*" OR ScriptBlockText = "*Remove*") | stats count min(_time) as firstTime
-  max(_time) as lastTime by Opcode Computer UserID EventCode ScriptBlockText |rename
-  Computer as dest |rename UserID as user | `security_content_ctime(firstTime)` |
-  `security_content_ctime(lastTime)` | `delete_shadowcopy_with_powershell_filter`'
+  = "*Delete*" OR ScriptBlockText = "*Remove*") 
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `delete_shadowcopy_with_powershell_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the powershell logs  from your endpoints. make sure you enable needed
   registry to monitor this event.

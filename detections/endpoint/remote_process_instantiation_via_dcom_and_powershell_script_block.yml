@@ -15,8 +15,10 @@ description: The following analytic detects the execution of PowerShell commands
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 (ScriptBlockText="*Document.Application.ShellExecute*"
-  OR ScriptBlockText="*Document.ActiveView.ExecuteShellCommand*") | stats count min(_time)
-  as firstTime max(_time) as lastTime by EventCode ScriptBlockText Computer user_id
+  OR ScriptBlockText="*Document.ActiveView.ExecuteShellCommand*") 
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `remote_process_instantiation_via_dcom_and_powershell_script_block_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup instructions

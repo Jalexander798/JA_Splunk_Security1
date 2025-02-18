@@ -16,8 +16,10 @@ description: The following analytic detects the execution of suspicious PowerShe
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText IN ("*MSF.Powershell*","*MSF.Powershell.Meterpreter*","*MSF.Powershell.Meterpreter.Kiwi*","*MSF.Powershell.Meterpreter.Transport*")
-  | stats count min(_time) as firstTime max(_time) as lastTime by EventCode ScriptBlockText
-  Computer user_id | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `powershell_load_module_in_meterpreter_filter`'
 how_to_implement: The following analytic requires PowerShell operational logs to be
   imported. Modify the powershell macro as needed to match the sourcetype or add index.

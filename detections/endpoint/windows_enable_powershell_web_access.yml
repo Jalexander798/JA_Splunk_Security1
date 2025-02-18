@@ -14,8 +14,11 @@ description: The following analytic detects the enabling of PowerShell Web Acces
   PowerShell Web Access can facilitate remote execution of PowerShell commands, potentially
   allowing an attacker to gain unauthorized access to systems and networks.
 search: '`powershell` EventCode=4104 ScriptBlockText IN ("*Install-WindowsFeature*WindowsPowerShellWebAccess*","*Install-PswaWebApplication*","*Add-PswaAuthorizationRule*UserName
-  *ComputerName *") | rename Computer as dest | stats count min(_time) as firstTime
-  max(_time) as lastTime by EventCode ScriptBlockText dest UserID | `security_content_ctime(firstTime)`
+  *ComputerName *") 
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_enable_powershell_web_access_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here

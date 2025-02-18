@@ -16,8 +16,11 @@ description: The following analytic detects .cab files being written to disk. It
   review the file path and associated artifacts for further investigation.
 search: '| tstats `security_content_summariesonly` count values(Filesystem.file_path)
   as file_path min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Filesystem
-  where (Filesystem.file_name=*.cab) by Filesystem.dest Filesystem.action Filesystem.process_id
-  Filesystem.file_name | `drop_dm_object_name("Filesystem")` | `security_content_ctime(firstTime)`
+  where (Filesystem.file_name=*.cab) 
+  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time 
+  Filesystem.file_name Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id 
+  Filesystem.user Filesystem.vendor_product 
+  | `drop_dm_object_name("Filesystem")` | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_cab_file_on_disk_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
