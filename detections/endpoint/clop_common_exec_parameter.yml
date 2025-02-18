@@ -1,6 +1,6 @@
 name: Clop Common Exec Parameter
 id: 5a8a2a72-8322-11eb-9ee9-acde48001122
-version: 7
+version: 8
 date: '2024-12-10'
 author: Teoderick Contreras, Splunk
 status: production

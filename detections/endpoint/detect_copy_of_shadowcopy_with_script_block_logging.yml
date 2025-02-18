@@ -1,7 +1,7 @@
 name: Detect Copy of ShadowCopy with Script Block Logging
 id: 9251299c-ea5b-11eb-a8de-acde48001122
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -61,7 +61,6 @@ tags:
   - CVE-2021-36934
   mitre_attack_id:
   - T1003.002
-  - T1003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

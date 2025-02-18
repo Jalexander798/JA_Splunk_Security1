@@ -4,6 +4,7 @@ version: 2
 date: '2025-01-16'
 author: David Dorsey, Splunk
 type: Baseline
+status: deprecated
 description: This search builds a table of previously seen AMIs used to launch EC2
   instances
 search: '`cloudtrail` eventName=RunInstances errorCode=success | rename requestParameters.instancesSet.items{}.imageId

@@ -1,7 +1,7 @@
 name: Detect SharpHound Command-Line Arguments
 id: a0bdd2f6-c2ff-11eb-b918-acde48001122
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -67,13 +67,11 @@ tags:
   - BlackSuit Ransomware
   asset_type: Endpoint
   mitre_attack_id:
-  - T1087.002
   - T1069.001
-  - T1482
-  - T1087.001
-  - T1087
   - T1069.002
-  - T1069
+  - T1087.001
+  - T1087.002
+  - T1482
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -3,6 +3,7 @@ id: 94cff925-d05c-40cf-b925-d6c5702a2399
 version: 1
 date: '2023-06-12'
 author: Michael Haag, Splunk
+status: production
 description: The MITRE ATT&CK technique T1053 refers to Scheduled Task/Job. Adversaries might use task scheduling utilities to execute programs or scripts at a predefined date and time. This method is often used for persistence but can also be used for privilege escalation or to execute tasks under certain conditions. Scheduling tasks can be beneficial for an attacker as it can allow them to execute actions at times when the system is less likely to be monitored actively. Different operating systems have different utilities for task scheduling, for example, Unix-like systems have Cron, while Windows has Scheduled Tasks and At Jobs.
 
 narrative: MITRE ATT&CK technique T1053, labeled "Scheduled Task/Job", is a categorization of methods that adversaries use to execute malicious code by scheduling tasks or jobs on a system. This technique is widely utilized for persistence, privilege escalation, and the remote execution of tasks. The technique is applicable across various environments and platforms, including Windows, Linux, and macOS.

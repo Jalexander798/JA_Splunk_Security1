@@ -35,7 +35,7 @@ known_false_positives: This detection may generate a few false positives, such a
   legitimate software updates or legitimate system maintenance activities that modify
   the RunMRU key. However, the exclusion of MRUList value changes helps reduce the
   number of false positives by focusing only on actual command entries. Add any specific
-  false positives to the built in filter to reduce notables as needed.
+  false positives to the built in filter to reduce findings as needed.
 references:
 - https://medium.com/@ahmed.moh.farou2/fake-captcha-campaign-on-arabic-pirated-movie-sites-delivers-lumma-stealer-4f203f7adabf
 - https://medium.com/@shaherzakaria8/downloading-trojan-lumma-infostealer-through-capatcha-1f25255a0e71

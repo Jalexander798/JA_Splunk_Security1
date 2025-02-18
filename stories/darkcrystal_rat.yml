@@ -3,6 +3,7 @@ id: 639e6006-0885-4847-9394-ddc2902629bf
 version: 1
 date: '2022-07-26'
 author: Teoderick Contreras, Splunk
+status: production
 description: Leverage searches that allow you to detect and investigate unusual activities
   that might relate to the DcRat malware including ddos, spawning more process, botnet c2 communication, defense evasion and etc.
   The DcRat malware is known commercial backdoor that was first released in 2018. This tool was sold in underground forum and known to be one of the cheapest 

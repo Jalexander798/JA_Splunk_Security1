@@ -1,7 +1,7 @@
 name: Windows Service Created with Suspicious Service Path
 id: 429141be-8311-11eb-adb6-acde48001122
-version: 8
-date: '2024-11-13'
+version: 12
+date: '2025-02-10'
 author: Teoderick Contreras, Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -54,17 +54,20 @@ rba:
     type: service
 tags:
   analytic_story:
-  - Clop Ransomware
-  - Active Directory Lateral Movement
   - Brute Ratel C4
-  - Qakbot
-  - Snake Malware
   - Flax Typhoon
   - PlugX
   - CISA AA23-347A
+  - Qakbot
+  - Crypto Stealer
+  - Active Directory Lateral Movement
+  - Derusbi
+  - Nexus APT Threat Activity
+  - Snake Malware
+  - Clop Ransomware
+  - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:
-  - T1569
   - T1569.002
   product:
   - Splunk Enterprise

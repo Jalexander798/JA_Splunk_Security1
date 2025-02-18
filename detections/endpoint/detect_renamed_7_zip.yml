@@ -1,7 +1,7 @@
 name: Detect Renamed 7-Zip
 id: 4057291a-b8cf-11eb-95fe-acde48001122
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: Hunting
@@ -43,7 +43,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1560.001
-  - T1560
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

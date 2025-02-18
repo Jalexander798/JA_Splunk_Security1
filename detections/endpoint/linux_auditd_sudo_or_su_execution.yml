@@ -1,7 +1,7 @@
 name: Linux Auditd Sudo Or Su Execution
 id: 817a5c89-5b92-4818-a22d-aa35e1361afe
-version: 3
-date: '2024-11-13'
+version: 4
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -20,9 +20,9 @@ search: '`linux_auditd` `linux_auditd_normalized_proctitle_process` | rename hos
   dest | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`|
   `linux_auditd_sudo_or_su_execution_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
-  data, that consist SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
-  executions and process details on Unix/Linux systems. These logs should be ingested
-  and processed using Splunk Add-on for Unix and Linux (https://splunkbase.splunk.com/app/833),
+  data, that consists of SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures
+  command-line executions and process details on Unix/Linux systems. These logs should
+  be ingested and processed using Splunk Add-on for Unix and Linux (https://splunkbase.splunk.com/app/833),
   which is essential for correctly parsing and categorizing the data. The next step
   involves normalizing the field names  to match the field names set by the Splunk
   Common Information Model (CIM) to ensure consistency across different data sources
@@ -62,7 +62,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1548.003
-  - T1548
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

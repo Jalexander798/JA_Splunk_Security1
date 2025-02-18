@@ -3,6 +3,7 @@ id: b4453928-5a98-11ec-afcd-8de10b48fc52
 version: 1
 date: '2021-12-11'
 author: Jose Hernandez
+status: production
 description: Log4Shell or CVE-2021-44228 is a Remote Code Execution (RCE) vulnerability
   in the Apache Log4j library, a widely used and ubiquitous logging framework for
   Java. The vulnerability allows an attacker who can control log messages to execute

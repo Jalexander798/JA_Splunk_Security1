@@ -3,6 +3,7 @@ id: beae2ab0-7c3f-11eb-8b63-acde48001122
 version: 1
 date: '2021-03-03'
 author: Michael Haag, Splunk
+status: production
 description: HAFNIUM group was identified by Microsoft as exploiting 4 Microsoft Exchange
   CVEs in the wild - CVE-2021-26855, CVE-2021-26857, CVE-2021-26858 and CVE-2021-27065.
 narrative: 'On Tuesday, March 2, 2021, Microsoft released a set of security patches

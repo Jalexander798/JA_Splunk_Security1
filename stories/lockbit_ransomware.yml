@@ -3,6 +3,7 @@ id: 67e5b98d-16d6-46a6-8d00-070a3d1a5cfc
 version: 1
 date: '2023-01-16'
 author: Teoderick Contreras, Splunk
+status: production
 description: Leverage searches that allow you to detect and investigate unusual activities
   that might relate to the LockBit ransomware, including looking for file writes (file encryption and ransomware notes), 
   deleting services, terminating processes, registry key modification and more.

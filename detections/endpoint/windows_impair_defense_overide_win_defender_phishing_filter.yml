@@ -1,12 +1,11 @@
 name: Windows Impair Defense Overide Win Defender Phishing Filter
 id: 10ca081c-57b1-4a78-ba56-14a40a7e116a
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 description: The following analytic detects modifications to the Windows registry
   that disable the Windows Defender phishing filter. It leverages data from the Endpoint.Registry
@@ -61,7 +60,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

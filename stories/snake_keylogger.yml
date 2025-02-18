@@ -3,6 +3,7 @@ id: 0374f962-c66a-4a67-9a30-24b0708ef802
 version: 1
 date: '2024-02-12'
 author: Teoderick Contreras, Splunk
+status: production
 description: SnakeKeylogger is a stealthy malware designed to secretly record keystrokes on infected devices. 
   It operates covertly in the background, capturing sensitive information such as passwords and credit card details. 
   This keylogging threat poses a significant risk to user privacy and security.

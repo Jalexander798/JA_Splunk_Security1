@@ -3,6 +3,7 @@ id: dca983db-6334-4a0d-be32-80611ca1396c
 version: 2
 date: '2024-09-24'
 author: Mauricio Velazco, Splunk
+status: production
 description: Monitor for activities and techniques associated with the execution of Persistence
   techniques against Azure Active Directory tenants.
 narrative: 'Azure Active Directory (Azure AD) is Microsofts enterprise cloud-based identity and access management (IAM) service. Azure AD is the backbone of most of Azure

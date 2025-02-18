@@ -3,6 +3,7 @@ id: 4c7bef12-679f-433c-92dd-d9feccc1432b
 version: 1
 date: '2024-08-26'
 author: Michael Haag, Splunk
+status: production
 description: This analytic story covers the tactics, techniques, and procedures (TTPs) associated with BlackSuit ransomware, as observed in a December 2023 intrusion. The story encompasses the full attack lifecycle, from initial access via Cobalt Strike beacons to lateral movement, credential access, and ultimately the deployment of BlackSuit ransomware. It aims to help security teams detect and respond to similar attacks by focusing on key behaviors such as Cobalt Strike activity, use of tools like ADFind and Sharphound, and the final ransomware deployment phase.
 narrative: In December 2023, a sophisticated intrusion culminating in the deployment of BlackSuit ransomware was observed. The attack began with the execution of a Cobalt Strike beacon, which initially communicated through CloudFlare to conceal the true C2 server. The threat actors leveraged various tools throughout the intrusion, including Sharphound, Rubeus, SystemBC, and ADFind, alongside built-in Windows utilities.
 

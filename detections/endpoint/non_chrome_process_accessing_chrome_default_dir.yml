@@ -1,7 +1,7 @@
 name: Non Chrome Process Accessing Chrome Default Dir
 id: 81263de4-160a-11ec-944f-acde48001122
-version: 5
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -49,20 +49,21 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Remcos
-  - NjRAT
-  - Warzone RAT
+  - Snake Keylogger
+  - CISA AA23-347A
   - 3CX Supply Chain Attack
-  - RedLine Stealer
+  - Warzone RAT
+  - Remcos
+  - AgentTesla
+  - Phemedrone Stealer
   - FIN7
   - DarkGate Malware
-  - AgentTesla
-  - CISA AA23-347A
-  - Phemedrone Stealer
-  - Snake Keylogger
+  - Nexus APT Threat Activity
+  - Earth Estries
+  - NjRAT
+  - RedLine Stealer
   asset_type: Endpoint
   mitre_attack_id:
-  - T1555
   - T1555.003
   product:
   - Splunk Enterprise

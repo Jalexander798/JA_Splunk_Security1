@@ -1,7 +1,7 @@
 name: Linux Possible Access To Sudoers File
 id: 4479539c-71fc-11ec-b2e2-acde48001122
-version: 4
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -58,11 +58,12 @@ rba:
 tags:
   analytic_story:
   - Linux Privilege Escalation
+  - Earth Estries
+  - Nexus APT Threat Activity
   - Linux Persistence Techniques
   asset_type: Endpoint
   mitre_attack_id:
   - T1548.003
-  - T1548
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

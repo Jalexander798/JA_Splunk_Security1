@@ -1,7 +1,7 @@
 name: Linux Possible Cronjob Modification With Editor
 id: dcc89bde-5f24-11ec-87ca-acde48001122
-version: 5
-date: '2024-12-19'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
@@ -44,7 +44,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.003
-  - T1053
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

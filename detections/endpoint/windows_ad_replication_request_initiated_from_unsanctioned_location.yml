@@ -1,7 +1,7 @@
 name: Windows AD Replication Request Initiated from Unsanctioned Location
 id: 50998483-bb15-457b-a870-965080d9e3d3
-version: 7
-date: '2024-12-10'
+version: 8
+date: '2025-02-10'
 author: Dean Luxton
 type: TTP
 status: production
@@ -77,7 +77,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1003.006
-  - T1003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,7 +1,7 @@
 name: Executables Or Script Creation In Suspicious Path
 id: a7e3f0f0-ae42-11eb-b245-acde48001122
-version: 6
-date: '2024-12-10'
+version: 10
+date: '2025-01-27'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -61,41 +61,46 @@ rba:
     type: file_name
 tags:
   analytic_story:
-  - Double Zero Destructor
-  - Graceful Wipe Out Attack
-  - AsyncRAT
-  - WhisperGate
-  - DarkGate Malware
-  - AgentTesla
-  - Brute Ratel C4
-  - NjRAT
-  - RedLine Stealer
-  - Rhysida Ransomware
-  - Swift Slicer
-  - IcedID
-  - DarkCrystal RAT
   - Chaos Ransomware
-  - PlugX
-  - Industroyer2
-  - Azorult
-  - Remcos
-  - XMRig
-  - Qakbot
-  - Volt Typhoon
-  - Hermetic Wiper
-  - Warzone RAT
   - Trickbot
-  - Amadey
-  - BlackByte Ransomware
-  - LockBit Ransomware
-  - CISA AA23-347A
-  - Data Destruction
   - Snake Keylogger
-  - AcidPour
-  - Handala Wiper
-  - MoonPeak
+  - CISA AA23-347A
+  - Industroyer2
+  - WinDealer RAT
+  - Qakbot
+  - Warzone RAT
+  - IcedID
   - ValleyRAT
+  - Azorult
+  - Handala Wiper
+  - LockBit Ransomware
   - Meduza Stealer
+  - Brute Ratel C4
+  - AsyncRAT
+  - AcidPour
+  - Derusbi
+  - DarkGate Malware
+  - Graceful Wipe Out Attack
+  - NjRAT
+  - WhisperGate
+  - Data Destruction
+  - BlackByte Ransomware
+  - AgentTesla
+  - Swift Slicer
+  - Crypto Stealer
+  - Hermetic Wiper
+  - MoonPeak
+  - Double Zero Destructor
+  - XMRig
+  - PlugX
+  - Amadey
+  - DarkCrystal RAT
+  - Remcos
+  - Nexus APT Threat Activity
+  - Earth Estries
+  - Rhysida Ransomware
+  - RedLine Stealer
+  - Volt Typhoon
   asset_type: Endpoint
   mitre_attack_id:
   - T1036
@@ -107,7 +112,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

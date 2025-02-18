@@ -1,7 +1,7 @@
 name: Sc exe Manipulating Windows Services
 id: f0c693d8-2a89-4ce7-80b4-98fea4c3ea6d
-version: 7
-date: '2024-11-13'
+version: 9
+date: '2025-02-10'
 author: Rico Valdez, Splunk
 status: production
 type: TTP
@@ -64,18 +64,18 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Windows Service Abuse
-  - DHS Report TA18-074A
+  - Azorult
   - Orangeworm Attack Group
+  - Windows Drivers
+  - NOBELIUM Group
   - Windows Persistence Techniques
   - Disabling Security Tools
-  - NOBELIUM Group
-  - Azorult
-  - Windows Drivers
+  - Windows Service Abuse
+  - DHS Report TA18-074A
+  - Crypto Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1543.003
-  - T1543
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

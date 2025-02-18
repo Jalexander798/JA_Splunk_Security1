@@ -23,7 +23,7 @@ how_to_implement: To successfully implement this analytic, you will need to enab
   https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.
 known_false_positives: This behavior may be noisy, as these cmdlets are commonly used
   by system administrators or other legitimate users to manage services. Therefore,
-  it is recommended not to enable this analytic as a direct notable or TTP. Instead,
+  it is recommended not to enable this analytic as a direct finding Instead,
   it should be used as part of a broader set of security controls to detect and investigate
   potential threats.
 references:

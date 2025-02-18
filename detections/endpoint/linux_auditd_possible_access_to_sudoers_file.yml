@@ -1,7 +1,7 @@
 name: Linux Auditd Possible Access To Sudoers File
 id: 8be88f46-f7e8-4ae6-b15e-cf1b13392834
-version: 3
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -57,12 +57,13 @@ rba:
 tags:
   analytic_story:
   - Linux Privilege Escalation
-  - Linux Persistence Techniques
   - Compromised Linux Host
+  - Linux Persistence Techniques
+  - Nexus APT Threat Activity
+  - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:
   - T1548.003
-  - T1548
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

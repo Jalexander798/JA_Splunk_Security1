@@ -1,7 +1,7 @@
 name: PowerShell 4104 Hunting
 id: d6f2b006-0041-11ec-8885-acde48001122
-version: 9
-date: '2024-12-16'
+version: 11
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: Hunting
@@ -59,20 +59,21 @@ references:
 - https://adlumin.com/post/powerdrop-a-new-insidious-powershell-script-for-command-and-control-attacks-targets-u-s-aerospace-defense-industry/
 tags:
   analytic_story:
-  - Malicious PowerShell
-  - Hermetic Wiper
-  - Rhysida Ransomware
-  - DarkGate Malware
+  - Data Destruction
   - Flax Typhoon
   - CISA AA23-347A
-  - Data Destruction
-  - CISA AA24-241A
   - Braodo Stealer
-  - Lumma Stealer
   - Cleo File Transfer Software
+  - Malicious PowerShell
+  - Hermetic Wiper
+  - DarkGate Malware
+  - Lumma Stealer
+  - Nexus APT Threat Activity
+  - Earth Estries
+  - Rhysida Ransomware
+  - CISA AA24-241A
   asset_type: Endpoint
   mitre_attack_id:
-  - T1059
   - T1059.001
   product:
   - Splunk Enterprise

@@ -53,7 +53,7 @@ rba:
   - field: Computer
     type: system
     score: 64
-  - field: SubjectUsername
+  - field: SubjectUserName
     type: user
     score: 64
   threat_objects: []

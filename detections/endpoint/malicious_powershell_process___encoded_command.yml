@@ -43,17 +43,18 @@ references:
 - https://www.microsoft.com/en-us/security/blog/2023/05/24/volt-typhoon-targets-us-critical-infrastructure-with-living-off-the-land-techniques/
 tags:
   analytic_story:
-  - Hermetic Wiper
-  - Malicious PowerShell
-  - NOBELIUM Group
-  - WhisperGate
-  - DarkCrystal RAT
-  - Qakbot
   - CISA AA22-320A
+  - Hermetic Wiper
   - Sandworm Tools
-  - Data Destruction
+  - Qakbot
   - Volt Typhoon
+  - NOBELIUM Group
+  - Data Destruction
   - Lumma Stealer
+  - Malicious PowerShell
+  - DarkCrystal RAT
+  - WhisperGate
+  - Crypto Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1027

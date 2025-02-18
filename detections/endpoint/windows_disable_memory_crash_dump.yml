@@ -1,6 +1,6 @@
 name: Windows Disable Memory Crash Dump
 id: 59e54602-9680-11ec-a8a6-acde48001122
-version: 5
+version: 6
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production
@@ -14,7 +14,6 @@ description: The following analytic detects attempts to disable the memory crash
   as seen with HermeticWiper, potentially leading to significant operational disruptions
   and data loss.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Registry
   where (Registry.registry_path="*\\CurrentControlSet\\Control\\CrashControl\\CrashDumpEnabled")

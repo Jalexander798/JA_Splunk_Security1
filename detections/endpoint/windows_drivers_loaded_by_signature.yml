@@ -23,8 +23,8 @@ how_to_implement: To successfully implement this search, you need to be ingestin
   endpoints. If you are using Sysmon, you must have the latest version of the Sysmon
   TA. Most EDR products provide the ability to review driver loads, or module loads,
   and using a query as such help with hunting for malicious drivers.
-known_false_positives: This analytic is meant to assist with identifying drivers loaded
-  in the environment and not to be setup for notables off the bat.
+known_false_positives: This analytic is meant to assist with identifying and hunting drivers loaded
+  in the environment. 
 references:
 - https://redcanary.com/blog/tracking-driver-inventory-to-expose-rootkits/
 - https://attack.mitre.org/techniques/T1014/

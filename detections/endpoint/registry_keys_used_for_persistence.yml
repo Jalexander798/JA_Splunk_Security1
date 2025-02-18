@@ -1,7 +1,7 @@
 name: Registry Keys Used For Persistence
 id: f5f6af30-7aa7-4295-bfe9-07fe87c01a4b
-version: 13
-date: '2024-12-16'
+version: 16
+date: '2025-02-10'
 author: Jose Hernandez, David Dorsey, Teoderick Contreras, Rod Soto, Splunk
 status: production
 type: TTP
@@ -15,7 +15,6 @@ description: The following analytic identifies modifications to registry keys co
   control over compromised systems, posing a severe threat to system integrity and
   security.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry where (Registry.registry_path=*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce
@@ -77,36 +76,38 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - AsyncRAT
-  - Ransomware
+  - Chaos Ransomware
   - Windows Persistence Techniques
+  - DHS Report TA18-074A
+  - Snake Keylogger
+  - CISA AA23-347A
+  - WinDealer RAT
+  - Qakbot
+  - Warzone RAT
+  - IcedID
+  - Azorult
+  - Suspicious Windows Registry Activities
+  - AsyncRAT
+  - Derusbi
+  - Possible Backdoor Activity Associated With MUDCARP Espionage Campaigns
   - DarkGate Malware
   - NjRAT
-  - RedLine Stealer
-  - IcedID
-  - Sneaky Active Directory Persistence Tricks
-  - Chaos Ransomware
-  - Azorult
-  - DHS Report TA18-074A
-  - Emotet Malware DHS Report TA18-201A
-  - Remcos
-  - Windows Registry Abuse
-  - Qakbot
-  - Suspicious MSHTA Activity
-  - Suspicious Windows Registry Activities
-  - Warzone RAT
-  - Possible Backdoor Activity Associated With MUDCARP Espionage Campaigns
-  - Amadey
   - BlackByte Ransomware
-  - CISA AA23-347A
-  - Snake Keylogger
+  - Ransomware
   - MoonPeak
   - BlackSuit Ransomware
+  - Emotet Malware DHS Report TA18-201A
+  - Sneaky Active Directory Persistence Tricks
+  - Amadey
+  - Remcos
   - Braodo Stealer
+  - Windows Registry Abuse
+  - Nexus APT Threat Activity
+  - Suspicious MSHTA Activity
+  - RedLine Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1547.001
-  - T1547
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

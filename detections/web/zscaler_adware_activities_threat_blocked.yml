@@ -1,6 +1,6 @@
 name: Zscaler Adware Activities Threat Blocked
 id: 3407b250-345a-4d71-80db-c91e555a3ece
-version: 4
+version: 5
 date: '2024-11-15'
 author: Gowthamaraj Rajendran, Splunk
 status: production

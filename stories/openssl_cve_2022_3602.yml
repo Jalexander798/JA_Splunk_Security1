@@ -3,6 +3,7 @@ id: 491e00c9-998b-4c64-91bb-d8f9c79c1f4c
 version: 1
 date: '2022-11-02'
 author: Michael Haag, splunk
+status: production
 description: OpenSSL recently disclosed two vulnerabilities CVE-2022-3602 and CVE-2022-3786. CVE-2022-3602 is a X.509 Email Address 4-byte Buffer Overflow where puny code is utilized. This only affects OpenSSL 3.0.0 - 3.0.6. 
 narrative: A buffer overrun can be triggered in X.509 certificate verification,
   specifically in name constraint checking. Note that this occurs after

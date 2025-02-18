@@ -28,9 +28,9 @@ search: '| tstats `security_content_summariesonly` values(All_Risk.analyticstori
   |  search mitre_technique_id_count > 5 | `okta_risk_threshold_exceeded_filter`'
 how_to_implement: This search leverages the Risk Framework from Enterprise Security.
   Ensure that "Suspicious Okta Activity", "Okta Account Takeover", and "Okta MFA Exhaustion"
-  analytic stories are enabled. TTPs may be set to Notables for point detections;
-  anomalies should not be notables but rather risk generators. The correlation relies
-  on risk before generating a notable. Modify the value as needed.
+  analytic stories are enabled. TTPs may be set to finding for point detections;
+  anomalies should not be findings but rather intermediate findings. The correlation relies
+  on intermediate findings before generating a findings. Modify the value as needed.
 known_false_positives: False positives will be limited to the number of events generated
   by the analytics tied to the stories. Analytics will need to be tested and tuned,
   and the risk score reduced as needed based on the organization.

@@ -4,6 +4,7 @@ version: 1
 date: '2020-08-15'
 author: Rico Valdez, Splunk
 type: Baseline
+status: production
 description: This search looks for **AssumeRole** events where the requesting account
   differs from the requested account, then writes these relationships to a lookup
   file.

@@ -1,7 +1,7 @@
 name: Kerberos Pre-Authentication Flag Disabled in UserAccountControl
 id: 0cb847ee-9423-11ec-b2df-acde48001122
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -16,7 +16,8 @@ description: The following analytic detects when the Kerberos Pre-Authentication
 data_source:
 - Windows Event Log Security 4738
 search: >
-  `wineventlog_security` EventCode=4738 MSADChangedAttributes="*\'Don\'t Require Preauth\' - Enabled*" |rename Account_Name as user | table EventCode, user, dest, Security_ID,
+  `wineventlog_security` EventCode=4738 MSADChangedAttributes="*\'Don\'t Require Preauth\'
+  - Enabled*" |rename Account_Name as user | table EventCode, user, dest, Security_ID,
   MSADChangedAttributes | `kerberos_pre_authentication_flag_disabled_in_useraccountcontrol_filter`
 how_to_implement: To successfully implement this search, you need to be ingesting
   Domain Controller events. The Advanced Security Audit policy setting `User Account
@@ -53,7 +54,6 @@ tags:
   - BlackSuit Ransomware
   asset_type: Endpoint
   mitre_attack_id:
-  - T1558
   - T1558.004
   product:
   - Splunk Enterprise

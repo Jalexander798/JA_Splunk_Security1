@@ -18,7 +18,13 @@ jobs:
           
       - name: Install Python Dependencies and ContentCTL and Atomic Red Team
         run: |
-          pip install contentctl==v5.0.0-alpha.2
+          if [ -n "${{ vars.CONTENTCTL_VERSION }}" ]; then
+            echo "Installing contentctl version ${{ vars.CONTENTCTL_VERSION }}"
+            pip install contentctl==${{ vars.CONTENTCTL_VERSION }}
+          else
+            echo "Installing latest contentctl version"
+            pip install contentctl
+          fi
           git clone --depth=1 --single-branch --branch=master https://github.com/redcanaryco/atomic-red-team.git external_repos/atomic-red-team
           git clone --depth=1 --single-branch --branch=master https://github.com/mitre/cti external_repos/cti
       
@@ -28,7 +34,7 @@ jobs:
           APPINSPECTPASSWORD: "${{ secrets.APPINSPECTPASSWORD }}"
         run: |
           echo $APPINSPECTUSERNAME
-          contentctl inspect --splunk-api-username "$APPINSPECTUSERNAME" --splunk-api-password "$APPINSPECTPASSWORD" --stack_type victoria --enrichments --enable-metadata-validation --suppress-missing-content-exceptions
+          contentctl inspect --splunk-api-username "$APPINSPECTUSERNAME" --splunk-api-password "$APPINSPECTPASSWORD" --enrichments --enable-metadata-validation --suppress-missing-content-exceptions
           echo "done appinspect"
           mkdir -p artifacts/app_inspect_report
           cp -r dist/*.html artifacts/app_inspect_report

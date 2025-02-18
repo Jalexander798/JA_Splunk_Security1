@@ -1,7 +1,7 @@
 name: Windows DisableAntiSpyware Registry
 id: 23150a40-9301-4195-b802-5bb4f43067fb
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Rod Soto, Jose Hernandez, Michael Haag, Splunk
 status: production
 type: TTP
@@ -15,7 +15,6 @@ description: The following analytic detects the modification of the Windows Regi
   malicious activities such as data encryption, exfiltration, or additional system
   compromise.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime from datamodel=Endpoint.Registry where Registry.registry_value_name="DisableAntiSpyware"
@@ -64,7 +63,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

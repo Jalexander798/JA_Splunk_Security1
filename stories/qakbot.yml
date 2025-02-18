@@ -3,6 +3,7 @@ id: 0c6169b1-f126-4d86-8e4f-f7891007ebc6
 version: 2
 date: '2022-11-14'
 author: Teoderick Contreras, Splunk
+status: production
 description: QakBot is a modular banking trojan that has been used primarily by financially-motivated actors since at least 2007. QakBot is continuously maintained and developed and has evolved from an information stealer into a delivery agent for ransomware (ref. MITRE ATT&CK).
 narrative: QakBot notably has made its way on the CISA top malware list for 2021. QakBot for years has been under continious improvement when it comes to initial access, injection and post-exploitation. Multiple adversaries use QakBot to gain initial access and persist, most notably TA551. 
   The actor(s) behind QakBot possess a modular framework consisting of maldoc builders, signed loaders, and DLLs that produce initially low detection rates at the beginning of the attack, which creates opportunities to deliver additional malware such as Egregor and Cobalt Strike. (ref. Cybersecurity ATT)

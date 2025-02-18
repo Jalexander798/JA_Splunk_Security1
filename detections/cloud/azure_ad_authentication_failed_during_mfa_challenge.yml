@@ -1,7 +1,7 @@
 name: Azure AD Authentication Failed During MFA Challenge
 id: e62c9c2e-bf51-4719-906c-3074618fcc1c
-version: 7
-date: '2024-11-14'
+version: 8
+date: '2025-02-10'
 author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk, 0xC0FFEEEE
 status: production
 type: TTP
@@ -34,7 +34,7 @@ how_to_implement: You must install the latest version of Splunk Add-on for Micro
 known_false_positives: "False positives have been minimized by removing attempts that
   result in 'MFA successfully completed messages', which were found to be generated
   when a user opts to use a different MFA method than the default.\nFurther reductions
-  in notable events can be achieved through filtering 'MFA denied; duplicate authentication
+  in finding events can be achieved through filtering 'MFA denied; duplicate authentication
   attempt' messages within the auth_msg field, as they could arguably be considered
   as false positives."
 references:
@@ -70,10 +70,8 @@ tags:
   - Azure Active Directory Account Takeover
   asset_type: Azure Active Directory
   mitre_attack_id:
-  - T1586
-  - T1586.003
-  - T1078
   - T1078.004
+  - T1586.003
   - T1621
   product:
   - Splunk Enterprise

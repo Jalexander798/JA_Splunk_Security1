@@ -1,7 +1,7 @@
 name: Suspicious mshta child process
 id: 60023bb6-5500-11eb-ae93-0242ac130002
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -74,7 +74,6 @@ tags:
   - Lumma Stealer
   asset_type: Endpoint
   mitre_attack_id:
-  - T1218
   - T1218.005
   product:
   - Splunk Enterprise

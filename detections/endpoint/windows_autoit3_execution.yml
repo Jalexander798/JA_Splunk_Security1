@@ -1,6 +1,6 @@
 name: Windows AutoIt3 Execution
 id: 0ecb40d9-492b-4a57-9f87-515dd742794c
-version: 5
+version: 6
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production
@@ -67,8 +67,9 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - DarkGate Malware
+  - Crypto Stealer
   - Handala Wiper
+  - DarkGate Malware
   asset_type: Endpoint
   atomic_guid: []
   mitre_attack_id:
