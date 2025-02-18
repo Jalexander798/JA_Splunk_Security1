@@ -1,6 +1,6 @@
 name: AWS Exfiltration via EC2 Snapshot
 id: ac90b339-13fc-4f29-a18c-4abbba1f2171
-version: 4
+version: 5
 date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: production
