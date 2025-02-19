@@ -46,9 +46,9 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Possible AMSI Unloading via Reflection using PowerShell on $Computer$
+  message: Possible AMSI Unloading via Reflection using PowerShell on $dest$
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 49
   threat_objects: []

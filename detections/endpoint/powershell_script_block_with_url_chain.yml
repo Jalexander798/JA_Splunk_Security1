@@ -46,20 +46,16 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A suspicious powershell script used by $user$ on host $dest$ contains $url_count$
+  message: A suspicious powershell script used by $user_id$ on host $dest$ contains 
     URLs in an array, this is commonly used for malware.
   risk_objects:
   - field: dest
     type: system
     score: 80
-  - field: user
+  - field: user_id
     type: user
     score: 80
-  threat_objects:
-  - field: file_name
-    type: file_name
-  - field: url
-    type: url
+  threat_objects: []
 tags:
   analytic_story:
   - Malicious PowerShell

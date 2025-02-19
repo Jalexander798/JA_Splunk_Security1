@@ -44,10 +44,10 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A PowerShell script on $Computer$ is attempting to transfer files to a
+  message: A PowerShell script on $dest$ is attempting to transfer files to a
     remote URL.
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 49
   threat_objects: []

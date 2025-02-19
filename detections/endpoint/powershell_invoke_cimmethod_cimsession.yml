@@ -44,9 +44,9 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: PowerShell was identified running a Invoke-CIMMethod Invoke-CIMSession
-    on $Computer$.
+    on $dest$.
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 25
   threat_objects: []

@@ -43,9 +43,9 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Powershell Enable SMB1Protocol Feature on $Computer$
+  message: Powershell Enable SMB1Protocol Feature on $dest$
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 25
   threat_objects: []

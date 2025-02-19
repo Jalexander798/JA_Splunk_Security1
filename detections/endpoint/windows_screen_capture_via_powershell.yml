@@ -44,9 +44,9 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: A PowerShell script was identified possibly performing screen captures
-    on $Computer$.
+    on $dest$.
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 49
   threat_objects: []

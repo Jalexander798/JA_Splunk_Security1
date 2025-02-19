@@ -47,12 +47,12 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Commandlets leveraged to discover GPP credentials were executed on $Computer$
+  message: Commandlets leveraged to discover GPP credentials were executed on $dest$
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 56
-  - field: user
+  - field: user_id
     type: user
     score: 56
   threat_objects: []

@@ -43,9 +43,9 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Remote system discovery with PowerView on $Computer$ by $UserID$
+  message: Remote system discovery with PowerView on $dest$ by $user_id$
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 24
   threat_objects: []

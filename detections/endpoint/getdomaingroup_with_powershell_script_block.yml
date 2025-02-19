@@ -44,9 +44,9 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Domain group discovery enumeration using PowerView on $Computer$ by $UserID$
+  message: Domain group discovery enumeration using PowerView on $dest$ by $user_id$
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 15
   threat_objects: []

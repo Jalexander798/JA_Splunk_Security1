@@ -51,12 +51,12 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: The following behavior was identified and typically related to PowerShell-Empire
-    on $Computer$ by $user$.
+    on $dest$ by $user_id$.
   risk_objects:
-  - field: user
+  - field: user_id
     type: user
     score: 81
-  - field: Computer
+  - field: dest
     type: system
     score: 81
   threat_objects: []

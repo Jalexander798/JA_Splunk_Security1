@@ -45,10 +45,10 @@ drilldown_searches:
 rba:
   message: Powershell process with command line indicative of querying domain policy.
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 30
-  - field: user
+  - field: user_id
     type: user
     score: 30
   threat_objects: []

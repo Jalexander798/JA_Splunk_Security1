@@ -50,12 +50,12 @@ drilldown_searches:
 rba:
   message: A suspicious powershell script contains stream command in $ScriptBlockText$
     commonly for processing compressed or to decompressed binary file with EventCode
-    $EventCode$ in host $Computer$
+    $EventID$ in host $dest$
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 40
-  - field: user
+  - field: user_id
     type: user
     score: 40
   threat_objects: []

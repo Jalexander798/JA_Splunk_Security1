@@ -44,10 +44,10 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A process was started on a remote endpoint from $Computer$ by abusing WMI
+  message: A process was started on a remote endpoint from $dest$ by abusing WMI
     using PowerShell.exe
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 63
   threat_objects: []

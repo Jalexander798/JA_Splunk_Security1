@@ -42,12 +42,12 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: suspicious powershell script $ScriptBlockText$ was executed on the $Computer$
+  message: suspicious powershell script $ScriptBlockText$ was executed on the $dest$
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 90
-  - field: user
+  - field: user_id
     type: user
     score: 90
   threat_objects: []
