@@ -7,8 +7,8 @@ status: production
 type: Anomaly
 description: This analytic is used to identify when a USB removable media device is attached to a Windows host. In this scenario we are querying the Endpoint Registry data model to look for modifications to the Windows Portable Device keys HKLM\SOFTWARE\Microsoft\Windows Portable Devices\Devices\ or HKLM\System\CurrentControlSet\Enum\SWD\WPDBUSENUM\ . Adversaries and Insider Threats may use removable media devices for several malicious activities, including initial access, execution, and exfiltration.
 data_source: 
-- Sysmon Event ID 12
-- Sysmon Event ID 13
+- Sysmon EventID 12
+- Sysmon EventID 13
 search: |-
   | tstats `security_content_summariesonly` latest(Registry.registry_path) as registry_path, values(Registry.registry_value_name) as registry_value_name, min(_time) as firstTime, max(_time) as lastTime, count from datamodel=Endpoint.Registry where Registry.registry_path IN ("HKLM\\SOFTWARE\\Microsoft\\Windows Portable Devices\\Devices\\*","HKLM\\System\\CurrentControlSet\\Enum\\SWD\\WPDBUSENUM\\*") AND Registry.registry_value_name ="FriendlyName" AND Registry.registry_path="*USBSTOR*" by Registry.dest,Registry.registry_value_data 
   | `drop_dm_object_name(Registry)`

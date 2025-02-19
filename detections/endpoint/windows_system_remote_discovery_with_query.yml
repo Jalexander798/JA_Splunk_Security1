@@ -7,7 +7,7 @@ status: production
 type: Anomaly
 description: The following analytic detects the execution of `query.exe` with command-line arguments aimed at discovering data on remote devices. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as adversaries may use `query.exe` to gain situational awareness and perform Active Directory discovery on compromised endpoints. If confirmed malicious, this behavior could allow attackers to identify various details about a system, aiding in further lateral movement and privilege escalation within the network.
 data_source: 
-- Sysmon Event ID 1
+- Sysmon EventID 1
 - Windows Security Event ID 4688
 - CrowdStrike ProcessRollup2
 search: |-
