@@ -5,7 +5,6 @@ date: '2025-02-14'
 author: 0xC0FFEEEE
 type: TTP
 status: production
-enabled_by_default: true
 description: This analytic detects suspicious mailbox rule creation, a common technique used in Business Email Compromise. It uses a scoring mechanism to identify a combination of attributes often featured in mailbox rules created by attackers.
   This may indicate that an attacker has gained access to the account.
 search: '`o365_management_activity` Workload=Exchange Operation="New-InboxRule" | rename Parameters{}.*
