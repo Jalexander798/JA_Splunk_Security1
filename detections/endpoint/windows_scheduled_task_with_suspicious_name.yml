@@ -14,10 +14,10 @@ search: |-
   `wineventlog_security` EventCode IN (4698,4700,4702)
   | eval TaskContent = case(isnotnull(TaskContentNew),TaskContentNew,true(),TaskContent)
   | xmlkv TaskContent
-  | stats count min(_time) as firstTime max(_time) as lastTime latest(Arguments) as Arguments latest(Author) as Author by Computer, Task_Name, Command, Enabled, Hidden,Caller_User_Name, EventCode
-  | lookup windows_suspicious_tasks task_name as Task_Name 
+  | stats count min(_time) as firstTime max(_time) as lastTime latest(Arguments) as Arguments latest(Author) as Author by Computer, TaskName, Command, Enabled, Hidden,Caller_User_Name, EventCode
+  | lookup windows_suspicious_tasks task_name as TaskName 
   | where isnotnull(tool_type)
-  | eval command=Task_Name, process=Command+if(isnotnull(Arguments)," ".Arguments,""), src_user=Author, user = Caller_User_Name, dest = Computer
+  | eval command=TaskName, process=Command+if(isnotnull(Arguments)," ".Arguments,""), src_user=Author, user = Caller_User_Name, dest = Computer
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)`
   | `windows_scheduled_task_with_suspicious_name_filter`
@@ -38,11 +38,11 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: Investigate schedule tasks on $dest$ 
-  search: '`wineventlog_security` EventCode IN (4698,4700,4702) | xmlkv TaskContent | search dest="$dest$" AND Task_Name = "$Task_Name$"'
+  search: '`wineventlog_security` EventCode IN (4698,4700,4702) | xmlkv TaskContent | search dest="$dest$" AND TaskName = "$TaskName$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A windows scheduled task was created with known suspicious task name [$Task_Name$] on $dest$, this may be a [$tool$] indicator
+  message: A windows scheduled task was created with known suspicious task name [$TaskName$] on $dest$, this may be a [$tool$] indicator
   risk_objects: 
   - field: dest
     type: system
