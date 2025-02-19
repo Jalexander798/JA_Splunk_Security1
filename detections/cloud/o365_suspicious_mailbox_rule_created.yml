@@ -2,7 +2,7 @@ name: O365 Suspicious Mailbox Rule Created
 id: 603ebac2-f157-4df7-a6ac-34e8d0350f86
 version: 1
 date: '2025-02-14'
-author: 0xC0FFEEEE
+author: '0xC0FFEEEE, Github Community'
 type: TTP
 status: production
 description: This analytic detects suspicious mailbox rule creation, a common technique used in Business Email Compromise. It uses a scoring mechanism to identify a combination of attributes often featured in mailbox rules created by attackers.
@@ -37,6 +37,7 @@ rba:
   - field: user
     type: user
     score: 25
+  threat_objects: []
 tags:
   analytic_story:
   - Office 365 Account Takeover
