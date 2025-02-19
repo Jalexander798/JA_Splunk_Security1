@@ -7,9 +7,7 @@ status: production
 type: TTP
 description: The process $process_name$ was launched in a suspicious manner by $parent_process_name$ on host $dest$ ----- The following analytic detects the execution of CompatTelRunner.exe with parameters indicative of a process not part of the normal "Microsoft Compatibility Appraiser" telemetry collection. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, parent processes, and command-line arguments. This activity is significant because CompatTelRunner.exe and the "Microsoft Compatibility Appraiser" task always run as System and can be used to elevate privileges or establish a highly privileged persistence mechanism. If confirmed malicious, this could enable unauthorized code execution, privilege escalation, or persistent access to the compromised system.
 data_source: 
-- Sysmon Event ID 12
 - Sysmon Event ID 13
-- Sysmon Event ID 14
 search: |-
   | tstats `security_content_summariesonly` min(_time) as firstTime, max(_time) as lastTime, count FROM datamodel=Endpoint.Registry WHERE (Registry.registry_path = "*\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\TelemetryController*" AND Registry.registry_value_name="Command" NOT Registry.registry_value_data IN ("(empty)")) BY Registry.dest Registry.user Registry.registry_path Registry.registry_key_name Registry.registry_value_name Registry.registry_value_data Registry.process_guid
   | `drop_dm_object_name(Registry)`
