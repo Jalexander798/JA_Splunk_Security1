@@ -9,12 +9,32 @@ description: The search surfaces alerts from the Cisco AI Defense product for po
 data_source:
 - Cisco AI Defense Alerts
 search: |-
-  `cisco_ai_defense`| rename genai_application.application_name as application_name | rename connection.connection_name as connection_name | stats count values(event_message_type) values(event_action) values(policy.policy_name) as policy_name values(event_policy_guardrail_assocs{}.policy_guardrail_assoc.guardrail_avail_entity.guardrail_entity_name) as guardrail_entity_name values(event_policy_guardrail_assocs{}.policy_guardrail_assoc.guardrail_avail_ruleset.guardrail_ruleset_type) as guardrail_ruleset_type by connection_name application_name 
-  | eval severity=case(
-    policy_name="AI Runtime Latency Testing - Prompt Injection", "critical",
-    policy_name="AI Runtime Latency Testing - Code Detection", "high", 
-    guardrail_ruleset_type IN ("Toxicity"), "medium" ) 
-  | table severity policy_name connection_name application_name guardrail_ruleset_type guardrail_entity_name | where severity != "" |`cisco_ai_defense_security_alerts_filter`'
+  `cisco_ai_defense`
+    | rename genai_application.application_name as application_name 
+    | rename connection.connection_name as connection_name 
+    ```Aggregating data by model name, connection name, application name, application ID, and user ID```
+    | stats count 
+        values(event_message_type) as event_message_type
+        values(event_action) as event_action
+        values(policy.policy_name) as policy_name 
+        values(event_policy_guardrail_assocs{}.policy_guardrail_assoc.guardrail_avail_entity.guardrail_entity_name) as guardrail_entity_name 
+        values(event_policy_guardrail_assocs{}.policy_guardrail_assoc.guardrail_avail_ruleset.guardrail_ruleset_type) as guardrail_ruleset_type 
+        by model.model_name connection_name application_name application_id user_id
+    ```Evaluating severity based on policy name and guardrail ruleset type```
+    | eval severity=case(
+        policy_name IN ("AI Runtime Latency Testing - Prompt Injection"), "critical",
+        policy_name IN ("AI Runtime Latency Testing - Code Detection"), "high", 
+        guardrail_ruleset_type IN ("Toxicity"), "medium",
+        true(), "low"
+    ) 
+    ```Calculating risk score based on severity level```
+    | eval risk_score=case(
+        severity="critical", 100,
+        severity="high", 75,
+        severity="medium", 50,
+        severity="low", 25
+    )
+    | table model.model_name, user_id, event_action, application_id, application_name, severity, risk_score, policy_name, connection_name, guardrail_ruleset_type, guardrail_entity_name |`cisco_ai_defense_security_alerts_filter`'
 how_to_implement: To enable this detection, you need to ingest alerts from the Cisco AI Defense product. This can be done by using this app from splunkbase - Cisco Security Cloud and ingest alerts into the cisco:ai:defense sourcetype.
 known_false_positives: False positives may vary based on Cisco AI Defense configuration; monitor and filter out the alerts that are not relevant to your environment.
 references:
