@@ -1,12 +1,11 @@
 name: Windows Modify Registry Auto Update Notif
 id: 4d1409df-40c7-4b11-aec4-bd0e709dfc12
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 description: The following analytic detects a suspicious modification to the Windows
   registry that changes the auto-update notification setting to "Notify before download."
