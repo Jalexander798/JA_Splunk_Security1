@@ -1,7 +1,7 @@
 name: Windows Service Create RemComSvc
 id: 0be4b5d6-c449-4084-b945-2392b519c33b
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Michael Haag, Splunk
 type: Anomaly
 status: production
@@ -53,7 +53,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1543.003
-  - T1543
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

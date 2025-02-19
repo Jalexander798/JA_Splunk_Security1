@@ -1,7 +1,7 @@
 name: Windows Office Product Spawned Control
 id: 081c485d-ac8d-4bee-ad4c-525772fead4d
-version: 2
-date: '2025-01-14'
+version: 3
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -80,7 +80,6 @@ tags:
   cve:
   - CVE-2021-40444
   mitre_attack_id:
-  - T1566
   - T1566.001
   product:
   - Splunk Enterprise
@@ -90,6 +89,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon_control.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon_control.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

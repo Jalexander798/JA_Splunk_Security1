@@ -4,7 +4,6 @@ version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 type: TTP
 status: production

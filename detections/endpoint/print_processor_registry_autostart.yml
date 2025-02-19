@@ -1,7 +1,7 @@
 name: Print Processor Registry Autostart
 id: 1f5b68aa-2037-11ec-898e-acde48001122
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: experimental
 type: TTP
@@ -13,7 +13,6 @@ description: The following analytic detects suspicious modifications or new entr
   this could allow an attacker to execute a malicious DLL payload by restarting the
   spoolsv.exe process, leading to potential control over the compromised machine.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count  min(_time) as firstTime
   max(_time) as lastTime FROM datamodel=Endpoint.Registry where Registry.registry_path
@@ -53,7 +52,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1547.012
-  - T1547
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

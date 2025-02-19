@@ -1,7 +1,7 @@
 name: Windows Office Product Spawned MSDT
 id: a3148fad-3734-4b7f-9a71-62f08d39fab1
-version: 2
-date: '2025-01-14'
+version: 3
+date: '2025-02-10'
 author: Michael Haag, Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -83,7 +83,6 @@ tags:
   cve:
   - CVE-2022-30190
   mitre_attack_id:
-  - T1566
   - T1566.001
   product:
   - Splunk Enterprise
@@ -93,6 +92,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/msdt.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/msdt.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

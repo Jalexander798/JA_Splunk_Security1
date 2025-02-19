@@ -1,12 +1,11 @@
 name: Windows Modify Registry DisableSecuritySettings
 id: 989019b4-b7aa-418a-9a17-2293e91288b6
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 description: The following analytic detects modifications to the Windows registry
   that disable security settings for Terminal Services. It leverages the Endpoint

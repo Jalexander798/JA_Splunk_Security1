@@ -1,7 +1,7 @@
 name: Registry Keys for Creating SHIM Databases
 id: f5f6af30-7aa7-4295-bfe9-07fe87c01bbb
-version: 11
-date: '2024-12-08'
+version: 12
+date: '2025-02-10'
 author: Patrick Bareiss, Teoderick Contreras, Splunk, Steven Dick, Bhavin Patel
 status: production
 type: TTP
@@ -14,7 +14,6 @@ description: The following analytic detects registry activity related to the cre
   manipulate application behavior, posing a severe risk to the integrity and security
   of the affected systems.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry WHERE (Registry.registry_path=*CurrentVersion\\AppCompatFlags\\Custom*
@@ -65,7 +64,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1546.011
-  - T1546
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

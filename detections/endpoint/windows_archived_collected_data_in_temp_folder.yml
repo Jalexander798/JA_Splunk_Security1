@@ -1,10 +1,10 @@
 name: Windows Archived Collected Data In TEMP Folder
 id: cb56a1ea-e0b1-46d5-913f-e024cba40cbe
-version: 2
-date: '2024-11-13'
+version: 3
+date: '2025-02-17'
 author: Teoderick Contreras, Splunk
 data_source:
-- Sysmon Event ID 11
+- Sysmon EventID 11
 type: TTP
 status: production
 description: The following analytic detects the creation of archived files in a temporary

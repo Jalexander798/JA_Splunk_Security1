@@ -1,11 +1,18 @@
 name: Windows Sensitive Registry Hive Dump Via CommandLine
 id: 5aaff29d-0cce-405b-9ee8-5d06b49d045e
-version: 2
-date: '2025-01-15'
+version: 3
+date: '2025-02-10'
 author: Michael Haag, Patrick Bareiss, Nasreddine Bencherchali, Splunk
 status: production
 type: TTP
-description: The following analytic detects the use of `reg.exe` to export Windows Registry hives, which may contain sensitive credentials. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on command-line executions involving `save` or `export` actions targeting the `sam`, `system`, or `security` hives. This activity is significant as it indicates potential offline credential access attacks, often executed from untrusted processes or scripts. If confirmed malicious, attackers could gain access to credential data, enabling further compromise and lateral movement within the network.
+description: The following analytic detects the use of `reg.exe` to export Windows
+  Registry hives, which may contain sensitive credentials. This detection leverages
+  data from Endpoint Detection and Response (EDR) agents, focusing on command-line
+  executions involving `save` or `export` actions targeting the `sam`, `system`, or
+  `security` hives. This activity is significant as it indicates potential offline
+  credential access attacks, often executed from untrusted processes or scripts. If
+  confirmed malicious, attackers could gain access to credential data, enabling further
+  compromise and lateral movement within the network.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
@@ -33,7 +40,12 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$" and "$dest$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$", "$dest$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$",
+    "$dest$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
+    as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
+    Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
+    as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
+    by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
@@ -63,7 +75,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1003.002
-  - T1003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
@@ -72,6 +83,7 @@ tags:
 tests:
 - name: True Positive Test - Sysmon
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.002/atomic_red_team/windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.002/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

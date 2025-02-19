@@ -1,6 +1,6 @@
 name: Windows Service Deletion In Registry
 id: daed6823-b51c-4843-a6ad-169708f1323e
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
@@ -14,7 +14,6 @@ description: The following analytic detects the deletion of a service from the W
   allow attackers to maintain a lower profile within the environment, complicating
   detection and remediation efforts.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry where Registry.registry_path= "*\\SYSTEM\\CurrentControlSet\\Services*"

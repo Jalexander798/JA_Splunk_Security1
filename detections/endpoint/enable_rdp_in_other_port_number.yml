@@ -1,6 +1,6 @@
 name: Enable RDP In Other Port Number
 id: 99495452-b899-11eb-96dc-acde48001122
-version: 9
+version: 10
 date: '2024-12-16'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
@@ -14,7 +14,6 @@ description: The following analytic detects modifications to the registry that e
   to bypass network defenses, gain persistent access, and potentially control the
   compromised machine.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry WHERE (Registry.registry_path="*\\CurrentControlSet\\Control\\Terminal

@@ -1,7 +1,7 @@
 name: Disable Windows SmartScreen Protection
 id: 664f0fd0-91ff-11eb-a56f-acde48001122
-version: 9
-date: '2024-12-08'
+version: 10
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP
@@ -15,7 +15,6 @@ description: The following analytic detects modifications to the Windows registr
   bypass security measures, increasing the risk of successful phishing attacks and
   malware infections.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry WHERE Registry.registry_path IN ("*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\SmartScreenEnabled",
@@ -65,7 +64,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

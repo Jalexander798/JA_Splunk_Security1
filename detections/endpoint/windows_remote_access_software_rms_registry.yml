@@ -1,6 +1,6 @@
 name: Windows Remote Access Software RMS Registry
 id: e5b7b5a9-e471-4be8-8c5d-4083983ba329
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
@@ -14,7 +14,6 @@ description: The following analytic detects the creation or modification of Wind
   allow attackers to remotely control the targeted host, leading to potential data
   exfiltration, system manipulation, or further network compromise.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry where Registry.registry_path= "*\\SYSTEM\\Remote

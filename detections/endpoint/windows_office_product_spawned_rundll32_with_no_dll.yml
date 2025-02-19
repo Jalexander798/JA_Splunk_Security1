@@ -1,7 +1,7 @@
 name: Windows Office Product Spawned Rundll32 With No DLL
 id: f28e787e-69ca-480e-9f98-ab970e6d4bcc
-version: 1
-date: '2025-01-14'
+version: 2
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -77,7 +77,6 @@ tags:
   - Crypto Stealer
   asset_type: Endpoint
   mitre_attack_id:
-  - T1566
   - T1566.001
   product:
   - Splunk Enterprise
@@ -87,6 +86,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon_icedid.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon_icedid.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

@@ -1,7 +1,7 @@
 name: Batch File Write to System32
 id: 503d17cb-9eab-4cf8-a20e-01d5c6987ae3
-version: 8
-date: '2024-12-10'
+version: 9
+date: '2025-02-10'
 author: Steven Dick, Michael Haag, Rico Valdez, Splunk
 status: production
 type: TTP
@@ -71,7 +71,6 @@ tags:
   - Compromised Windows Host
   asset_type: Endpoint
   mitre_attack_id:
-  - T1204
   - T1204.002
   product:
   - Splunk Enterprise

@@ -1,7 +1,7 @@
 name: Windows User Discovery Via Net
 id: 7742987e-88c1-476b-a626-a869e088ab72
-version: 1
-date: '2025-01-13'
+version: 2
+date: '2025-02-10'
 author: Mauricio Velazco, Teoderick Contreras, Nasreddine Bencherchali, Splunk
 status: production
 type: Hunting
@@ -38,7 +38,6 @@ tags:
   - Sandworm Tools
   asset_type: Endpoint
   mitre_attack_id:
-  - T1087
   - T1087.001
   product:
   - Splunk Enterprise

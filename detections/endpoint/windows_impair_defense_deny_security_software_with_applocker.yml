@@ -1,7 +1,7 @@
 name: Windows Impair Defense Deny Security Software With Applocker
 id: e0b6ca60-9e29-4450-b51a-bba0abae2313
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -14,7 +14,6 @@ description: The following analytic detects modifications in the Windows registr
   malicious, this could allow attackers to bypass security measures, facilitating
   further malicious activities and persistence within the environment.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry where (Registry.registry_path= "*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Group
@@ -67,7 +66,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

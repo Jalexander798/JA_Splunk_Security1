@@ -1,7 +1,7 @@
 name: Disable Show Hidden Files
 id: 6f3ccfa2-91fe-11eb-8f9b-acde48001122
-version: 9
-date: '2024-12-08'
+version: 10
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: Anomaly
@@ -13,7 +13,6 @@ description: The following analytic detects modifications to the Windows registr
   behavior could allow an attacker to conceal malicious files on the system, making
   it harder for security tools and analysts to identify and remove the threat.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry WHERE (Registry.registry_path= "*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden"
@@ -60,11 +59,9 @@ tags:
   - Azorult
   asset_type: Endpoint
   mitre_attack_id:
-  - T1564.001
-  - T1562.001
-  - T1564
-  - T1562
   - T1112
+  - T1562.001
+  - T1564.001
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

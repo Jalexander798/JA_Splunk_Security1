@@ -1,12 +1,11 @@
 name: Windows Impair Defense Define Win Defender Threat Action
 id: 7215831c-8252-4ae3-8d43-db588e82f952
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 description: The following analytic detects modifications to the Windows Defender
   ThreatSeverityDefaultAction registry setting. It leverages data from the Endpoint.Registry
@@ -63,7 +62,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

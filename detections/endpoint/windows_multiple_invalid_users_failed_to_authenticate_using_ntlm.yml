@@ -1,12 +1,12 @@
 name: Windows Multiple Invalid Users Failed To Authenticate Using NTLM
 id: 57ad5a64-9df7-11eb-a290-acde48001122
 type: TTP
-version: 6
+version: 7
 author: Mauricio Velazco, Splunk
 status: production
 data_source:
 - Windows Event Log Security 4776
-date: '2024-11-13'
+date: '2025-02-10'
 description: The following analytic detects a single source endpoint failing to authenticate
   with 30 unique invalid users using the NTLM protocol. It leverages EventCode 4776
   from Domain Controller logs, focusing on error code 0xC0000064, which indicates
@@ -58,7 +58,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1110.003
-  - T1110
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

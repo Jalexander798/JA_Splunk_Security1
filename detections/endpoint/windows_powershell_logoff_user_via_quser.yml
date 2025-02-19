@@ -1,7 +1,7 @@
 name: Windows Powershell Logoff User via Quser
 id: 6d70780d-4cfe-4820-bafd-1b43941986b5
-version: 1
-date: '2024-12-12'
+version: 2
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 data_source:
 - Powershell Script Block Logging 4104
@@ -25,11 +25,17 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$dest$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Powershell process having commandline [$ScriptBlockText$] used to logoff user on [$dest$].
+  message: Powershell process having commandline [$ScriptBlockText$] used to logoff
+    user on [$dest$].
   risk_objects:
   - field: dest
     type: system
@@ -40,9 +46,8 @@ tags:
   - Crypto Stealer
   asset_type: Endpoint
   mitre_attack_id:
-  - T1531
   - T1059.001
-  - T1059
+  - T1531
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
@@ -51,6 +56,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1531/log_off_user/pwh_quser_logoff.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1531/log_off_user/pwh_quser_logoff.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

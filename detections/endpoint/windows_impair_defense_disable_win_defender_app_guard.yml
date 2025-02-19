@@ -1,12 +1,11 @@
 name: Windows Impair Defense Disable Win Defender App Guard
 id: 8b700d7e-54ad-4d7d-81cc-1456c4703306
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 description: The following analytic detects modifications to the Windows registry
   that disable Windows Defender Application Guard auditing. It leverages data from
@@ -62,7 +61,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

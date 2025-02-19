@@ -10,7 +10,7 @@ separator: event_simpleName
 supported_TA:
 - name: Splunk Add-on for CrowdStrike FDR
   url: https://splunkbase.splunk.com/app/5579
-  version: 2.0.3
+  version: 2.0.4
 fields:
 - AuthenticationId
 - AuthenticationId_meaning
@@ -96,6 +96,7 @@ field_mappings:
   mapping:
     CommandLine: Processes.process
     ImageFileName: Processes.process_path
+    ImageFileName|endswith: Processes.process_name
     ParentBaseFileName: Processes.parent_process_name
     ParentProcessId: Processes.parent_process_id
     RawProcessId: Processes.process_id

@@ -1,7 +1,7 @@
 name: Non Chrome Process Accessing Chrome Default Dir
 id: 81263de4-160a-11ec-944f-acde48001122
-version: 6
-date: '2025-01-27'
+version: 7
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -64,7 +64,6 @@ tags:
   - RedLine Stealer
   asset_type: Endpoint
   mitre_attack_id:
-  - T1555
   - T1555.003
   product:
   - Splunk Enterprise
@@ -74,6 +73,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1555/non_chrome_process_accessing_chrome_default_dir/windows-xml.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1555/non_chrome_process_accessing_chrome_default_dir/windows-xml.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

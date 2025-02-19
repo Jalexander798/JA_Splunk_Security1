@@ -1,6 +1,6 @@
 name: Windows Disable LogOff Button Through Registry
 id: b2fb6830-9ed1-11ec-9fcb-acde48001122
-version: 7
+version: 8
 date: '2024-12-08'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
@@ -14,7 +14,6 @@ description: The following analytic detects a suspicious registry modification t
   response, and allow attackers to maintain persistence and control over the affected
   system.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry WHERE (Registry.registry_path= "*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\*"

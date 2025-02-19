@@ -1,12 +1,11 @@
 name: Windows Registry BootExecute Modification
 id: eabbac3a-45aa-4659-920f-6b8cff383fb8
-version: 6
+version: 7
 date: '2024-12-16'
 author: Michael Haag, Teoderick Contreras, Splunk
 status: production
 type: TTP
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 description: The following analytic detects modifications to the BootExecute registry
   key, which manages applications and services executed during system boot. It leverages

@@ -1,7 +1,7 @@
 name: Linux Sudo OR Su Execution
 id: 4b00f134-6d6a-11ec-a90c-acde48001122
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
@@ -41,7 +41,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1548.003
-  - T1548
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

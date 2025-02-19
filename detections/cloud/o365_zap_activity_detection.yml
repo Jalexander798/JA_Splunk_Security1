@@ -1,7 +1,7 @@
 name: O365 ZAP Activity Detection
 id: 4df275fd-a0e5-4246-8b92-d3201edaef7a
-version: 3
-date: '2024-11-14'
+version: 4
+date: '2025-02-10'
 author: Steven Dick
 status: production
 type: Anomaly
@@ -58,7 +58,6 @@ tags:
   - Suspicious Emails
   asset_type: O365 Tenant
   mitre_attack_id:
-  - T1566
   - T1566.001
   - T1566.002
   product:

@@ -1,11 +1,18 @@
 name: Windows Sensitive Group Discovery With Net
 id: d9eb7cda-5622-4722-bc88-7f2442f4b5af
-version: 1
-date: '2025-01-13'
+version: 2
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: Anomaly
-description: The following analytic detects the execution of `net.exe` with command-line arguments used to query elevated domain or sensitive groups. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line executions. This activity is significant as it indicates potential reconnaissance efforts by adversaries to identify high-privileged users within Active Directory. If confirmed malicious, this behavior could lead to further attacks aimed at compromising privileged accounts, escalating privileges, or gaining unauthorized access to sensitive systems and data.
+description: The following analytic detects the execution of `net.exe` with command-line
+  arguments used to query elevated domain or sensitive groups. It leverages data from
+  Endpoint Detection and Response (EDR) agents, focusing on process names and command-line
+  executions. This activity is significant as it indicates potential reconnaissance
+  efforts by adversaries to identify high-privileged users within Active Directory.
+  If confirmed malicious, this behavior could lead to further attacks aimed at compromising
+  privileged accounts, escalating privileges, or gaining unauthorized access to sensitive
+  systems and data.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
@@ -34,7 +41,12 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$dest$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
@@ -53,7 +65,6 @@ tags:
   - IcedID
   asset_type: Endpoint
   mitre_attack_id:
-  - T1069
   - T1069.002
   product:
   - Splunk Enterprise
@@ -63,6 +74,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1069.002/AD_discovery/windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1069.002/AD_discovery/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

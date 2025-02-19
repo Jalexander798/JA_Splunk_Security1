@@ -1,7 +1,7 @@
 name: AWS Unusual Number of Failed Authentications From Ip
 id: 0b5c9c2b-e2cb-4831-b4f1-af125ceb1386
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production
 type: Anomaly
@@ -57,11 +57,9 @@ tags:
   - AWS Identity and Access Management Account Takeover
   asset_type: AWS Account
   mitre_attack_id:
-  - T1586
-  - T1586.003
-  - T1110
   - T1110.003
   - T1110.004
+  - T1586.003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

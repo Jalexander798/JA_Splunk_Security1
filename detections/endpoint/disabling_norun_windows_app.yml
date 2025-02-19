@@ -1,7 +1,7 @@
 name: Disabling NoRun Windows App
 id: de81bc46-9213-11eb-adc9-acde48001122
-version: 9
-date: '2024-12-08'
+version: 10
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP
@@ -13,7 +13,6 @@ description: The following analytic detects the modification of the Windows regi
   malicious, this action could hinder system cleaning efforts and make it more difficult
   to run essential tools, thereby aiding malware persistence.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry WHERE (Registry.registry_path= "*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\NoRun"
@@ -62,9 +61,8 @@ tags:
   - Windows Registry Abuse
   asset_type: Endpoint
   mitre_attack_id:
-  - T1562.001
-  - T1562
   - T1112
+  - T1562.001
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

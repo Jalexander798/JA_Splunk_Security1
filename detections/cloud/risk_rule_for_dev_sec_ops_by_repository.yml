@@ -1,7 +1,7 @@
 name: Risk Rule for Dev Sec Ops by Repository
 id: 161bc0ca-4651-4c13-9c27-27770660cf67
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Bhavin Patel
 status: production
 type: Correlation
@@ -47,7 +47,6 @@ tags:
   asset_type: Amazon Elastic Container Registry
   mitre_attack_id:
   - T1204.003
-  - T1204
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

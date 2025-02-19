@@ -1,6 +1,6 @@
 name: Windows Registry Delete Task SD
 id: ffeb7893-ff06-446f-815b-33ca73224e92
-version: 5
+version: 6
 date: '2025-01-21'
 author: Michael Haag, Teoderick Contreras, Splunk
 status: production
@@ -14,7 +14,6 @@ description: The following analytic detects a process attempting to delete a sch
   access trying to hide their tracks, potentially compromising system integrity and
   security. Immediate investigation is required.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry where Registry.registry_path IN ("*\\Schedule\\TaskCache\\Tree\\*")

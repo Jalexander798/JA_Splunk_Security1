@@ -1,11 +1,19 @@
 name: Windows Attempt To Stop Security Service
 id: 9ed27cea-4e27-4eff-b2c6-aac9e78a7517
-version: 2
-date: '2025-01-13'
+version: 3
+date: '2025-02-10'
 author: Rico Valdez, Nasreddine Bencherchali, Splunk
 status: production
 type: TTP
-description: The following analytic detects attempts to stop security-related services on an endpoint, which may indicate malicious activity. It leverages data from Endpoint Detection and Response (EDR) agents, specifically searching for processes involving the "sc.exe" or "net.exe" command with the "stop" parameter or the PowerShell "Stop-Service" cmdlet. This activity is significant because disabling security services can undermine the organization's security posture, potentially leading to unauthorized access, data exfiltration, or further attacks like malware installation or privilege escalation. If confirmed malicious, this behavior could compromise the endpoint and the entire network, necessitating immediate investigation and response.
+description: The following analytic detects attempts to stop security-related services
+  on an endpoint, which may indicate malicious activity. It leverages data from Endpoint
+  Detection and Response (EDR) agents, specifically searching for processes involving
+  the "sc.exe" or "net.exe" command with the "stop" parameter or the PowerShell "Stop-Service"
+  cmdlet. This activity is significant because disabling security services can undermine
+  the organization's security posture, potentially leading to unauthorized access,
+  data exfiltration, or further attacks like malware installation or privilege escalation.
+  If confirmed malicious, this behavior could compromise the endpoint and the entire
+  network, necessitating immediate investigation and response.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
@@ -33,7 +41,12 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$" and "$dest$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$", "$dest$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$",
+    "$dest$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
+    as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
+    Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
+    as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
+    by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
@@ -62,7 +75,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
@@ -71,6 +83,7 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_defend_service_stop/windows-sysmon.log
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/win_defend_service_stop/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
