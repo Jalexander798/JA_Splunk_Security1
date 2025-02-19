@@ -3,7 +3,7 @@
   <view name="feedback"/>
   <view name="search"/>
   <collection label="Dashboards">
-    <view source="unclassified" match=" - "/>
+    <view source="unclassified" match="__"/>
   </collection>
   <a href="https://docs.splunk.com/Documentation/ESCU">Docs</a>
 </nav>

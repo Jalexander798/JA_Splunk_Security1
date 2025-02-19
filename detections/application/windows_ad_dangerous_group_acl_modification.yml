@@ -6,7 +6,7 @@ author: Dean Luxton
 status: production
 type: TTP
 data_source:
-- Windows Security 5136
+- Windows Event Log Security 5136
 description: 'This detection monitors the addition of the following ACLs to an Active
   Directory group object: "Full control", "All extended rights", "All validated writes",  "Create
   all child objects", "Delete all child objects", "Delete subtree", "Delete", "Modify
