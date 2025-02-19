@@ -14,10 +14,10 @@ search: |-
   `wineventlog_security` EventCode IN (4698,4700,4702)
   | eval TaskContent = case(isnotnull(TaskContentNew),TaskContentNew,true(),TaskContent)
   | xmlkv TaskContent
-  | stats count min(_time) as firstTime max(_time) as lastTime latest(Arguments) as Arguments latest(Author) as Author by Computer, Caller_User_Name, Task_Name, Command, Enabled, Hidden, EventCode
+  | stats count min(_time) as firstTime max(_time) as lastTime latest(Arguments) as Arguments latest(Author) as Author by Computer, Caller_User_Name, TaskName, Command, Enabled, Hidden, EventCode
   | lookup windows_suspicious_tasks task_command as Command 
   | where tool == "shell command use" OR tool == "suspicious paths"
-  | eval command=Task_Name, process=Command+if(isnotnull(Arguments)," ".Arguments,""), src_user=Author, user = Caller_User_Name, dest = Computer, signature_id = EventCode 
+  | eval command=TaskName, process=Command+if(isnotnull(Arguments)," ".Arguments,""), src_user=Author, user = Caller_User_Name, dest = Computer, signature_id = EventCode 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)`
   | `windows_scheduled_task_with_suspicious_command_filter` 
@@ -42,7 +42,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A suspicious windows scheduled task named [$Task_Name$] was detected on $dest$, this may be an indicator of [$tool$]
+  message: A suspicious windows scheduled task named [$TaskName$] was detected on $dest$, this may be an indicator of [$tool$]
   risk_objects: 
   - field: dest
     type: system
