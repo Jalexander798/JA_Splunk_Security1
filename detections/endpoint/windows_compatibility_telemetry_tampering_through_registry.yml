@@ -5,7 +5,7 @@ date: '2025-02-13'
 author: Steven Dick
 status: production
 type: TTP
-description: The process $process_name$ was launched in a suspicious manner by $parent_process_name$ on host $dest$ ----- The following analytic detects the execution of CompatTelRunner.exe with parameters indicative of a process not part of the normal "Microsoft Compatibility Appraiser" telemetry collection. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, parent processes, and command-line arguments. This activity is significant because CompatTelRunner.exe and the "Microsoft Compatibility Appraiser" task always run as System and can be used to elevate privileges or establish a highly privileged persistence mechanism. If confirmed malicious, this could enable unauthorized code execution, privilege escalation, or persistent access to the compromised system.
+description: The following analytic detects the execution of CompatTelRunner.exe with parameters indicative of a process not part of the normal "Microsoft Compatibility Appraiser" telemetry collection. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, parent processes, and command-line arguments. This activity is significant because CompatTelRunner.exe and the "Microsoft Compatibility Appraiser" task always run as System and can be used to elevate privileges or establish a highly privileged persistence mechanism. If confirmed malicious, this could enable unauthorized code execution, privilege escalation, or persistent access to the compromised system.
 data_source: 
 - Sysmon Event ID 13
 search: |-
