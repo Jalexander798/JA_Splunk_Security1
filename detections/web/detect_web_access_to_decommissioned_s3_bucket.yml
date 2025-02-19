@@ -16,7 +16,7 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
 | lookup decommissioned_buckets bucketName as bucket_domain OUTPUT bucketName as match 
 | where isnotnull(match) 
 | `detect_web_access_to_decommissioned_s3_bucket_filter`'
-how_to_implement: To successfully implement this detection, you need to be ingesting web proxy logs and have them mapped to the Web data model. Additionally, ensure that the baseline search "Baseline Of Open S3 Bucket Decommissioning" is running and populating the decommissioned_buckets.csv lookup file.
+how_to_implement: To successfully implement this detection, you need to be ingesting web proxy logs and have them mapped to the Web data model. Additionally, ensure that the baseline search "Baseline Of Open S3 Bucket Decommissioning" is running and populating the decommissioned_buckets KVStore Lookup.
 known_false_positives: Some applications or web pages may continue to reference old S3 bucket URLs after they have been decommissioned. These should be investigated and updated to prevent potential security risks.
 references:
 - https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html
@@ -51,7 +51,7 @@ tags:
   - Splunk Enterprise Security
   - Splunk Cloud
   security_domain: network
-  manual_test: This search needs a lookup table to be populated - decommissioned_buckets.csv by running a baseline search `Baseline Of Open S3 Bucket Decommissioning` prior to running this detection.
+  manual_test: This search needs a lookup table to be populated the decommissioned_buckets KVStore Lookup by running a baseline search `Baseline Of Open S3 Bucket Decommissioning` prior to running this detection.
 tests:
 - name: Baseline Dataset Test
   attack_data:
