@@ -1,6 +1,6 @@
 name: Windows Modify Registry Suppress Win Defender Notif
 id: e3b42daf-fff4-429d-bec8-2a199468cea9
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
@@ -14,7 +14,6 @@ description: The following analytic detects modifications in the Windows registr
   detection, maintain persistence, and execute further malicious activities without
   alerting the user or security tools.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry where Registry.registry_path= "*\\Windows

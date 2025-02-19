@@ -6,7 +6,7 @@ author: Dean Luxton
 status: production
 type: TTP
 data_source:
-- Windows Security 5136
+- Windows Event Log Security 5136
 description: This analytic is looking for when an ACL is applied to an OU which denies
   listing the objects residing in the OU. This activity combined with modifying the
   owner of the OU will hide AD objects even from domain administrators.

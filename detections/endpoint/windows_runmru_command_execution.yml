@@ -1,11 +1,11 @@
 name: Windows RunMRU Command Execution
 id: a15aa1ab-2b79-467f-8201-65e0f32d5b1a
-version: 2
-date: '2025-01-21'
+version: 3
+date: '2025-02-17'
 author: Nasreddine Bencherchali, Michael Haag, Splunk
 data_source:
-- Sysmon Event ID 11
-- Sysmon Event ID 13
+- Sysmon EventID 11
+- Sysmon EventID 13
 type: Anomaly
 status: production
 description: The following analytic detects modifications to the Windows RunMRU registry
