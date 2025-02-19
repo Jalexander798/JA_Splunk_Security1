@@ -6,7 +6,7 @@ author: Dean Luxton
 status: production
 type: TTP
 data_source:
-- Windows Security 5136
+- Windows Event Log Security 5136
 description: AD Object Owner Updated. The owner provides Full control level privileges
   over the target AD Object. This event has significant impact alone and is also a
   precursor activity for hiding an AD object.
