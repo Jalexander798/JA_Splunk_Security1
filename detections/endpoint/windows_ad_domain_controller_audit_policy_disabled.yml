@@ -1,7 +1,7 @@
 name: Windows AD Domain Controller Audit Policy Disabled
 id: fc3ccef1-60a4-4239-bd66-b279511b4d14
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-01-28'
 author: Dean Luxton
 type: TTP
 status: production
@@ -53,7 +53,7 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Sneaky Active Directory Persistence Tricks
+  - Windows Audit Policy Tampering
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
