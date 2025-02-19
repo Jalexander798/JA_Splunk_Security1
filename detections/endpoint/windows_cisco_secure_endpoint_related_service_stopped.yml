@@ -1,6 +1,6 @@
 name: Windows Cisco Secure Endpoint Related Service Stopped
 id: df74f45f-01c8-4fd6-bcb8-f6a9ea58307a
-version: 7
+version: 1
 date: '2024-12-09'
 author: Nasreddine Bencherchali, Splunk
 status: production
@@ -31,13 +31,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Cisco Secure Endpoint Service $param1$ stopped on $dest$
+  message: Cisco Secure Endpoint Service $display_name$ stopped on $dest$
   risk_objects:
   - field: dest
     type: system
     score: 60
   threat_objects:
-  - field: param1
+  - field: display_name
     type: service
 tags:
   analytic_story:
