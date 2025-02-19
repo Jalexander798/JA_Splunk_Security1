@@ -1,12 +1,12 @@
 name: Windows AD DCShadow Privileges ACL Addition
 id: ae915743-1aa8-4a94-975c-8062ebc8b723
-version: 3
-date: '2025-01-21'
+version: 4
+date: '2025-02-17'
 author: Dean Luxton
 status: production
 type: TTP
 data_source:
-- Windows Security 5136
+- Windows Event Log Security 5136
 description: This detection identifies an Active Directory access-control list (ACL)
   modification event, which applies the minimum required extended rights to perform
   the DCShadow attack.

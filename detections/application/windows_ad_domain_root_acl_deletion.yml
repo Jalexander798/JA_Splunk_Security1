@@ -6,7 +6,7 @@ author: Dean Luxton
 status: production
 type: TTP
 data_source:
-- Windows Security 5136
+- Windows Event Log Security 5136
 description: ACL deletion performed on the domain root object, significant AD change
   with high impact. Following MS guidance all changes at this level should be reviewed.
   Drill into the logonID within EventCode 4624 for information on the source device
