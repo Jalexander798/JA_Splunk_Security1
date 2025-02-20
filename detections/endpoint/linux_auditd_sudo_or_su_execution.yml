@@ -48,7 +48,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A [$process_exec$] event occurred on host - [$dest$] to execute the sudo
+  message: A [$proctitle$] event occurred on host - [$dest$] to execute the sudo
     or su command.
   risk_objects:
   - field: dest
