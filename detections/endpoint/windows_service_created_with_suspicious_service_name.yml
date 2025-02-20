@@ -44,9 +44,6 @@ rba:
   - field: dest
     type: system
     score: 75
-  - field: user_id
-    type: user
-    score: 75
   threat_objects: 
   - field: process
     type: process
