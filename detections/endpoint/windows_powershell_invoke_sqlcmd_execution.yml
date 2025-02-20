@@ -4,7 +4,7 @@ version: 1
 date: '2025-02-03'
 author: Michael Haag, Splunk
 status: production
-type: Anomaly
+type: Hunting
 description: This detection identifies potentially suspicious usage of Invoke-Sqlcmd PowerShell cmdlet, which can be used for database operations and potential data exfiltration. The detection looks for suspicious parameter combinations and query patterns that may indicate unauthorized database access, data theft, or malicious database operations. Threat actors may prefer using PowerShell Invoke-Sqlcmd over sqlcmd.exe as it provides a more flexible programmatic interface and can better evade detection.
 data_source:
 - Powershell Script Block Logging 4104
@@ -104,7 +104,7 @@ search: '`powershell` EventCode=4104 ScriptBlockText="*invoke-sqlcmd*"
     | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`
     | `windows_powershell_invoke_sqlcmd_execution_filter`'
-how_to_implement: To successfully implement this detection, you need to be ingesting PowerShell logs with Script Block Logging and Module Logging enabled. The detection looks for Invoke-Sqlcmd usage in PowerShell scripts and evaluates the parameters and queries for suspicious patterns. Configure your PowerShell logging to capture script block execution and ensure the logs are mapped to the PowerShell node of the Endpoint data model.
+how_to_implement: To successfully implement this detection, you need to be ingesting PowerShell logs with Script Block Logging and Module Logging enabled. The detection looks for Invoke-Sqlcmd usage in PowerShell scripts and evaluates the parameters and queries for suspicious patterns. Configure your PowerShell logging to capture script block execution and ensure the logs are mapped to the PowerShell node of the Endpoint data model. The analytic will need to be tuned based on organization specific data. Currently, set to hunting to allow for tuning. Invoke-Sqlcmd is a legitimate tool for database management and scripting tasks within enterprise environments.
 known_false_positives: Database administrators and developers frequently use Invoke-Sqlcmd as a legitimate tool for various database management tasks. This includes running automated database maintenance scripts, performing ETL (Extract, Transform, Load) processes, executing data migration jobs, implementing database deployment and configuration scripts, and running monitoring and reporting tasks. To effectively manage false positives in your environment, consider implementing several mitigation strategies. First, establish a whitelist of known administrator and service accounts that regularly perform these operations. Second, create exceptions for approved script paths where legitimate database operations typically occur. Additionally, it's important to baseline your environment's normal PowerShell database interaction patterns and implement monitoring for any deviations from these established patterns. Finally, consider adjusting the risk score thresholds based on your specific environment and security requirements to achieve an optimal balance between security and operational efficiency.
 references:
 - https://learn.microsoft.com/en-us/powershell/module/sqlserver/invoke-sqlcmd
@@ -119,16 +119,6 @@ drilldown_searches:
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$", "$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-rba:
-  message: A PowerShell script contains Invoke-Sqlcmd command with EventCode $EventCode$ on host $dest$
-  risk_objects:
-  - field: dest
-    type: system
-    score: 49
-  - field: user
-    type: user
-    score: 49
-  threat_objects: []
 tags:
   analytic_story:
   - SQL Server Abuse
