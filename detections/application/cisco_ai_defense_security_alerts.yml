@@ -1,4 +1,4 @@
-name: Cisco AI Defense Security Alerts
+name: Cisco AI Defense Security Alerts by Application Name
 id: 105e4a69-ec55-49fc-be1f-902467435ea8
 version: 1
 date: '2025-02-14'
@@ -9,17 +9,18 @@ description: The search surfaces alerts from the Cisco AI Defense product for po
 data_source:
 - Cisco AI Defense Alerts
 search: |-
-  `cisco_ai_defense`
+  `cisco_ai_defense` 
     | rename genai_application.application_name as application_name 
     | rename connection.connection_name as connection_name 
     ```Aggregating data by model name, connection name, application name, application ID, and user ID```
     | stats count 
+        values(user_id) as user_id
         values(event_message_type) as event_message_type
         values(event_action) as event_action
         values(policy.policy_name) as policy_name 
         values(event_policy_guardrail_assocs{}.policy_guardrail_assoc.guardrail_avail_entity.guardrail_entity_name) as guardrail_entity_name 
         values(event_policy_guardrail_assocs{}.policy_guardrail_assoc.guardrail_avail_ruleset.guardrail_ruleset_type) as guardrail_ruleset_type 
-        by model.model_name connection_name application_name application_id user_id
+        by model.model_name connection_name application_name application_id 
     ```Evaluating severity based on policy name and guardrail ruleset type```
     | eval severity=case(
         policy_name IN ("AI Runtime Latency Testing - Prompt Injection"), "critical",
@@ -53,7 +54,7 @@ drilldown_searches:
 rba:
   message: Cisco AI Defense Security Alert has been detected for the application name - [$application_name$]
   risk_objects:
-  - field: application_id
+  - field: application_name
     type: other
     score: 10
   threat_objects: []
