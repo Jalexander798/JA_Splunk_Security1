@@ -29,7 +29,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A [$process_exec$] event occurred on host - [$dest$] to copy data from
+  message: A [$execve_command$] event occurred on host - [$dest$] to copy data from
     the clipboard.
   risk_objects:
   - field: dest

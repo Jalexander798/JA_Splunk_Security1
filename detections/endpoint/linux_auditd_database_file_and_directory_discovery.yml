@@ -29,7 +29,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A [$process_exec$] event occurred on host - [$dest$] to discover database
+  message: A [$execve_command$] event occurred on host - [$dest$] to discover database
     files and directories.
   risk_objects:
   - field: dest
