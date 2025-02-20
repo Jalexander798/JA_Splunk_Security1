@@ -51,8 +51,7 @@ tags:
   - Splunk Enterprise Security
   - Splunk Cloud
   security_domain: network
-  manual_test: This search needs a lookup table to be populated the decommissioned_buckets KVStore Lookup by running a baseline search `Baseline Of Open S3 Bucket Decommissioning` prior to running this detection.
-tests:
+ tests:
 - name: Baseline Dataset Test
   attack_data:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/decommissioned_buckets/cloudtrail.json
@@ -60,12 +59,6 @@ tests:
     sourcetype: aws:cloudtrail
 - name: True Positive Test
   attack_data:
-<<<<<<< HEAD
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/s3_bucket_deletion/s3_bucket_deletion.csv
-    source: s3*
-    sourcetype: aws:cloudtrail
-=======
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/decommissioned_buckets/web_cloudfront_access.log
     source: aws_cloudfront_accesslogs
     sourcetype: aws:cloudfront:accesslogs
->>>>>>> 7907bd82d87c9792b191ce11addb3e1397053f67
