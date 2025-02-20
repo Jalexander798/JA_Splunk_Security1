@@ -50,7 +50,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Cisco AI Defense Security Alert has been detected for the application id - [$application_id$]
+  message: Cisco AI Defense Security Alert has been detected for the application name - [$application_name$]
   risk_objects:
   - field: application_id
     type: other
@@ -71,4 +71,3 @@ tests:
     - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/cisco_ai_defense_alerts/cisco_ai_defense.log
       source: cisco_ai_defense
       sourcetype: cisco:ai:defense
-
