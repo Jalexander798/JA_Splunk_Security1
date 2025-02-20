@@ -1,7 +1,7 @@
 name: Powershell Fileless Script Contains Base64 Encoded Content
 id: 8acbc04c-c882-11eb-b060-acde48001122
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -60,7 +60,6 @@ tags:
   - IcedID
   - NjRAT
   mitre_attack_id:
-  - T1059
   - T1027
   - T1059.001
   product:

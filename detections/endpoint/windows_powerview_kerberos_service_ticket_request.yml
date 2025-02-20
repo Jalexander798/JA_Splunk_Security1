@@ -1,7 +1,7 @@
 name: Windows PowerView Kerberos Service Ticket Request
 id: 970455a1-4ac2-47e1-a9a5-9e75443ddcb9
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Gowthamaraj Rajendran, Splunk
 status: production
 type: TTP
@@ -58,7 +58,6 @@ tags:
   - Rhysida Ransomware
   asset_type: Endpoint
   mitre_attack_id:
-  - T1558
   - T1558.003
   product:
   - Splunk Enterprise

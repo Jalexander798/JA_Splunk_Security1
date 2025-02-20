@@ -1,7 +1,7 @@
 name: O365 Safe Links Detection
 id: 711d9e8c-2cb0-45cf-8813-5f191ecb9b26
-version: 3
-date: '2024-11-14'
+version: 4
+date: '2025-02-10'
 author: Steven Dick
 status: production
 type: TTP
@@ -52,7 +52,6 @@ tags:
   - Spearphishing Attachments
   asset_type: O365 Tenant
   mitre_attack_id:
-  - T1566
   - T1566.001
   product:
   - Splunk Enterprise

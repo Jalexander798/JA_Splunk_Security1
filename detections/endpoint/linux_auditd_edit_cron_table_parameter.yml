@@ -1,7 +1,7 @@
 name: Linux Auditd Edit Cron Table Parameter
 id: f4bb7321-7e64-4d1e-b1aa-21f8b019a91f
-version: 3
-date: '2024-11-13'
+version: 4
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -64,7 +64,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.003
-  - T1053
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

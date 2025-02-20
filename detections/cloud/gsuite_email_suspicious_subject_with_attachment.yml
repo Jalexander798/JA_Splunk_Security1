@@ -1,7 +1,7 @@
 name: Gsuite Email Suspicious Subject With Attachment
 id: 8ef3971e-00f2-11ec-b54f-acde48001122
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -64,7 +64,6 @@ tags:
   asset_type: GSuite
   mitre_attack_id:
   - T1566.001
-  - T1566
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

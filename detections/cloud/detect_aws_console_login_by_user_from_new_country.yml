@@ -1,7 +1,7 @@
 name: Detect AWS Console Login by User from New Country
 id: 67bd3def-c41c-4bf6-837b-ae196b4257c6
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-02-10'
 author: Bhavin Patel, Eric McGinnis Splunk
 status: production
 type: Hunting
@@ -45,9 +45,8 @@ tags:
   - Compromised User Account
   asset_type: AWS Instance
   mitre_attack_id:
-  - T1586
-  - T1586.003
   - T1535
+  - T1586.003
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

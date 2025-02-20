@@ -1,7 +1,7 @@
 name: AWS Create Policy Version to allow all resources
 id: 2a9b80d3-6340-4345-b5ad-212bf3d0dac4
-version: 7
-date: '2024-11-14'
+version: 8
+date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -58,7 +58,6 @@ tags:
   asset_type: AWS Account
   mitre_attack_id:
   - T1078.004
-  - T1078
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

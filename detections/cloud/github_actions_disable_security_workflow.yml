@@ -1,7 +1,7 @@
 name: GitHub Actions Disable Security Workflow
 id: 0459f1a5-c0ac-4987-82d6-65081209f854
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Patrick Bareiss, Splunk
 status: production
 type: Anomaly
@@ -57,7 +57,6 @@ tags:
   asset_type: GitHub
   mitre_attack_id:
   - T1195.002
-  - T1195
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

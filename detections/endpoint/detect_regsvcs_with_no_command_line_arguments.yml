@@ -1,7 +1,7 @@
 name: Detect Regsvcs with No Command Line Arguments
 id: 6b74d578-a02e-4e94-a0d1-39440d0bf254
-version: 8
-date: '2024-11-13'
+version: 9
+date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -73,7 +73,6 @@ tags:
   - Living Off The Land
   asset_type: Endpoint
   mitre_attack_id:
-  - T1218
   - T1218.009
   product:
   - Splunk Enterprise

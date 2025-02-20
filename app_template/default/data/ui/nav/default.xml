@@ -2,6 +2,8 @@
   <view name="escu_summary" default="true"/>
   <view name="feedback"/>
   <view name="search"/>
-  <view name="dashboards"/>
-  <a href="http://docs.splunk.com/Documentation/ESSOC">Docs</a>
+  <collection label="Dashboards">
+    <view source="unclassified" match="__"/>
+  </collection>
+  <a href="https://docs.splunk.com/Documentation/ESCU">Docs</a>
 </nav>

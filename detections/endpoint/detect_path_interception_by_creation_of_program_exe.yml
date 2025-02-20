@@ -1,7 +1,7 @@
 name: Detect Path Interception By Creation Of program exe
 id: cbef820c-e1ff-407f-887f-0a9240a2d477
-version: 10
-date: '2024-11-13'
+version: 11
+date: '2025-02-10'
 author: Patrick Bareiss, Splunk
 status: production
 type: TTP
@@ -72,7 +72,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1574.009
-  - T1574
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

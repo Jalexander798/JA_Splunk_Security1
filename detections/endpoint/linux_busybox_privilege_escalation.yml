@@ -1,7 +1,7 @@
 name: Linux Busybox Privilege Escalation
 id: 387c4e78-f4a4-413d-ad44-e9f7bc4642c9
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-02-10'
 author: Gowthamaraj Rajendran, Splunk
 status: production
 type: Anomaly
@@ -67,7 +67,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1548.003
-  - T1548
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

@@ -1,7 +1,7 @@
 name: Large Volume of DNS ANY Queries
 id: 8fa891f7-a533-4b3c-af85-5aa2e7c1f1eb
-version: 4
-date: '2024-11-15'
+version: 5
+date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: experimental
 type: Anomaly
@@ -35,7 +35,6 @@ tags:
   - DNS Amplification Attacks
   asset_type: DNS Servers
   mitre_attack_id:
-  - T1498
   - T1498.002
   product:
   - Splunk Enterprise

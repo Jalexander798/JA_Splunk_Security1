@@ -1,13 +1,12 @@
 name: Windows Time Based Evasion
 id: 34502357-deb1-499a-8261-ffe144abf561
-version: 4
-date: '2024-11-13'
+version: 6
+date: '2025-02-19'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
 data_source:
 - Sysmon EventID 1
-- Windows Event Log Security 4688
 - CrowdStrike ProcessRollup2
 description: The following analytic detects potentially malicious processes that initiate
   a ping delay using an invalid IP address. It leverages data from Endpoint Detection
@@ -61,7 +60,6 @@ tags:
   - NjRAT
   asset_type: Endpoint
   mitre_attack_id:
-  - T1497
   - T1497.003
   product:
   - Splunk Enterprise

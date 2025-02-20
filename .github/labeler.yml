@@ -22,3 +22,8 @@ Lookups:
 Datasource:
 - changed-files:
   - any-glob-to-any-file: data_sources/*
+
+Baselines:
+  - changed-files:
+    - any-glob-to-any-file: baselines/*
+

@@ -1,7 +1,7 @@
 name: O365 New MFA Method Registered
 id: 4e12db1f-f7c7-486d-8152-a221cad6ac2b
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -58,7 +58,6 @@ tags:
   - Office 365 Persistence Mechanisms
   asset_type: O365 Tenant
   mitre_attack_id:
-  - T1098
   - T1098.005
   product:
   - Splunk Enterprise

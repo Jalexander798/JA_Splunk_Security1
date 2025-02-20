@@ -1,7 +1,7 @@
 name: Eventvwr UAC Bypass
 id: 9cf8fe08-7ad8-11eb-9819-acde48001122
-version: 7
-date: '2024-11-13'
+version: 8
+date: '2025-02-10'
 author: Steven Dick, Michael Haag, Splunk
 status: production
 type: TTP
@@ -78,7 +78,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1548.002
-  - T1548
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

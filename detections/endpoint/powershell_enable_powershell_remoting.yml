@@ -1,7 +1,7 @@
 name: PowerShell Enable PowerShell Remoting
 id: 40e3b299-19a5-4460-96e9-e1467f714f8e
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Michael Haag, Splunk
 type: Anomaly
 status: production
@@ -53,7 +53,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1059.001
-  - T1059
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

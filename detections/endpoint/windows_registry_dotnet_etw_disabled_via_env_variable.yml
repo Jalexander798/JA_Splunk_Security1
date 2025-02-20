@@ -1,7 +1,7 @@
 name: Windows Registry Dotnet ETW Disabled Via ENV Variable
 id: 55502381-5cce-491b-9277-7cb1d10bc0df
-version: 3
-date: '2025-01-07'
+version: 4
+date: '2025-02-10'
 author: Nasreddine Bencherchali, Splunk
 status: production
 type: TTP
@@ -65,7 +65,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.006
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
