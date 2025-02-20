@@ -1,12 +1,11 @@
 name: Windows Modify Registry Do Not Connect To Win Update
 id: e09c598e-8dd0-4e73-b740-4b96b689199e
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 description: The following analytic detects a suspicious modification to the Windows
   registry that disables automatic updates. It leverages data from the Endpoint datamodel,
