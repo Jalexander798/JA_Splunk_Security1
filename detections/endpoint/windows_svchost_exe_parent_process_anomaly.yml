@@ -44,7 +44,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A svchost.exe process was spawned by an unexpected parent process [$parent_process_name$] instead of services.exe on [$dest$].
+  message: An svchost.exe process was spawned by an unexpected parent process [$parent_process_name$] instead of services.exe on [$dest$].
   risk_objects:
   - field: dest
     type: system
