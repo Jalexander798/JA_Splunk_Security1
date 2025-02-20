@@ -1,12 +1,12 @@
 name: Windows AD Hidden OU Creation
 id: 66b6ad5e-339a-40af-b721-dacefc7bdb75
-version: 3
-date: '2025-01-21'
+version: 4
+date: '2025-02-10'
 author: Dean Luxton
 status: production
 type: TTP
 data_source:
-- Windows Security 5136
+- Windows Event Log Security 5136
 description: This analytic is looking for when an ACL is applied to an OU which denies
   listing the objects residing in the OU. This activity combined with modifying the
   owner of the OU will hide AD objects even from domain administrators.
@@ -74,9 +74,8 @@ tags:
   - Sneaky Active Directory Persistence Tricks
   asset_type: Endpoint
   mitre_attack_id:
-  - T1484
-  - T1222
   - T1222.001
+  - T1484
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

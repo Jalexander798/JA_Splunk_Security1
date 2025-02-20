@@ -1,12 +1,11 @@
 name: Windows Njrat Fileless Storage via Registry
 id: a5fffbbd-271f-4980-94ed-4fbf17f0af1c
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 description: The following analytic detects suspicious registry modifications indicative
   of NjRat's fileless storage technique. It leverages the Endpoint.Registry data model
@@ -57,7 +56,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1027.011
-  - T1027
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

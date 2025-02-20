@@ -1,7 +1,7 @@
 name: Remote Desktop Network Traffic
 id: 272b8407-842d-4b3d-bead-a704584003d3
-version: 8
-date: '2024-11-15'
+version: 9
+date: '2025-02-10'
 author: David Dorsey, Splunk
 status: production
 type: Anomaly
@@ -63,7 +63,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1021.001
-  - T1021
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

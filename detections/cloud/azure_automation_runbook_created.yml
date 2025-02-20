@@ -1,7 +1,7 @@
 name: Azure Automation Runbook Created
 id: 178d696d-6dc6-4ee8-9d25-93fee34eaf5b
-version: 6
-date: '2024-11-14'
+version: 7
+date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -60,7 +60,6 @@ tags:
   - Azure Active Directory Persistence
   asset_type: Azure Tenant
   mitre_attack_id:
-  - T1136
   - T1136.003
   product:
   - Splunk Enterprise

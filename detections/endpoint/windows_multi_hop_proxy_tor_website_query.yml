@@ -1,7 +1,7 @@
 name: Windows Multi hop Proxy TOR Website Query
 id: 4c2d198b-da58-48d7-ba27-9368732d0054
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -55,7 +55,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1071.003
-  - T1071
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

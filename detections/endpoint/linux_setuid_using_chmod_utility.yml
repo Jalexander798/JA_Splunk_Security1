@@ -1,7 +1,7 @@
 name: Linux Setuid Using Chmod Utility
 id: bf0304b6-6250-11ec-9d7c-acde48001122
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -64,7 +64,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1548.001
-  - T1548
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

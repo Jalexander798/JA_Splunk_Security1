@@ -1,7 +1,7 @@
 name: Windows Command Shell DCRat ForkBomb Payload
 id: 2bb1a362-7aa8-444a-92ed-1987e8da83e1
-version: 5
-date: '2024-12-10'
+version: 7
+date: '2025-02-19'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -15,7 +15,6 @@ description: The following analytic detects the execution of a DCRat "forkbomb" 
   disruption of services.
 data_source:
 - Sysmon EventID 1
-- Windows Event Log Security 4688
 - CrowdStrike ProcessRollup2
 search: '| tstats `security_content_summariesonly` values(Processes.process) as process
   values(Processes.parent_process) as parent_process values(Processes.parent_process_id)
@@ -71,7 +70,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1059.003
-  - T1059
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

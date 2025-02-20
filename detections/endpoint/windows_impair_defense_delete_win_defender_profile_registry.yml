@@ -1,7 +1,7 @@
 name: Windows Impair Defense Delete Win Defender Profile Registry
 id: 65d4b105-ec52-48ec-ac46-289d0fbf7d96
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -14,7 +14,6 @@ description: The following analytic detects the deletion of the Windows Defender
   ability to detect and respond to further malicious activities, thereby compromising
   endpoint security.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime from datamodel=Endpoint.Registry where Registry.registry_path = "*\\Policies\\Microsoft\\Windows
@@ -60,7 +59,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

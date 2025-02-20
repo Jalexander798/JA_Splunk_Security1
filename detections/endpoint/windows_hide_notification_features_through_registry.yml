@@ -1,6 +1,6 @@
 name: Windows Hide Notification Features Through Registry
 id: cafa4bce-9f06-11ec-a7b2-acde48001122
-version: 7
+version: 8
 date: '2024-12-08'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
@@ -13,7 +13,6 @@ description: The following analytic detects suspicious registry modifications ai
   this could prevent users from noticing critical system alerts, thereby aiding the
   attacker in maintaining persistence and furthering their malicious activities undetected.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry WHERE (Registry.registry_path= "*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\*"

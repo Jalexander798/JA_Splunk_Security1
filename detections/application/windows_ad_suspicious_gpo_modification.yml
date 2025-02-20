@@ -1,13 +1,13 @@
 name: Windows AD Suspicious GPO Modification
 id: 0a2afc18-a3b5-4452-b60a-2e774214f9bf
-version: 4
-date: '2025-01-21'
+version: 5
+date: '2025-02-10'
 author: Dean Luxton
 status: experimental
 type: TTP
 data_source:
-- Windows Security 5136
-- Windows Security 5145
+- Windows Event Log Security 5136
+- Windows Event Log Security 5145
 description: This analytic looks for a the creation of potentially harmful GPO which
   could lead to persistence or code execution on remote hosts. Note, this analyic
   is looking for the absence of the corresponding 5136 events which is evidence of
@@ -70,10 +70,8 @@ tags:
   - Sneaky Active Directory Persistence Tricks
   asset_type: Endpoint
   mitre_attack_id:
-  - T1484
-  - T1484.001
-  - T1222
   - T1222.001
+  - T1484.001
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

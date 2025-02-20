@@ -1,7 +1,7 @@
 name: Linux Auditd Insert Kernel Module Using Insmod Utility
 id: bc0ca53f-dea6-4906-9b12-09c396fdf1d3
-version: 4
-date: '2024-12-19'
+version: 5
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -19,9 +19,9 @@ search: '`linux_auditd` type=SYSCALL comm=insmod | rename host as dest | stats c
   success dest | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`|
   `linux_auditd_insert_kernel_module_using_insmod_utility_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
-  data, that consists of SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
-  executions and process details on Unix/Linux systems. These logs should be ingested
-  and processed using Splunk Add-on for Unix and Linux (https://splunkbase.splunk.com/app/833),
+  data, that consists of SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures
+  command-line executions and process details on Unix/Linux systems. These logs should
+  be ingested and processed using Splunk Add-on for Unix and Linux (https://splunkbase.splunk.com/app/833),
   which is essential for correctly parsing and categorizing the data. The next step
   involves normalizing the field names  to match the field names set by the Splunk
   Common Information Model (CIM) to ensure consistency across different data sources
@@ -65,7 +65,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1547.006
-  - T1547
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

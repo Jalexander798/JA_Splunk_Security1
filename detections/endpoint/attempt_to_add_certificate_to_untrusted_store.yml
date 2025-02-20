@@ -1,7 +1,7 @@
 name: Attempt To Add Certificate To Untrusted Store
 id: 6bc5243e-ef36-45dc-9b12-f4a6be131159
-version: 12
-date: '2024-11-13'
+version: 13
+date: '2025-02-10'
 author: Patrick Bareiss, Rico Valdez, Splunk
 status: production
 type: TTP
@@ -71,7 +71,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1553.004
-  - T1553
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

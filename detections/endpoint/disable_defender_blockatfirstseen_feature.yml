@@ -1,12 +1,11 @@
 name: Disable Defender BlockAtFirstSeen Feature
 id: 2dd719ac-3021-11ec-97b4-acde48001122
-version: 8
-date: '2024-12-08'
+version: 9
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 description: The following analytic detects the modification of the Windows registry
   to disable the Windows Defender BlockAtFirstSeen feature. It leverages data from
@@ -63,7 +62,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
-  - T1562
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

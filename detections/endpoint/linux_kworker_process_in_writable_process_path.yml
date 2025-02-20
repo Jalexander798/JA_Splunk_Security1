@@ -1,7 +1,7 @@
 name: Linux Kworker Process In Writable Process Path
 id: 1cefb270-74a5-4e27-aa0c-2b6fa7c5b4ed
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
@@ -43,7 +43,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1036.004
-  - T1036
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
