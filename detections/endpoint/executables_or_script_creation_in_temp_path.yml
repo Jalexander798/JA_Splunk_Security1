@@ -48,8 +48,8 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Suspicious executable or scripts with file name $file_name$, $file_path$
-    and process_id $process_id$ executed in temp file path in Windows by $user$
+  message: Potentially suspicious executable or script with file name $file_name$, $file_path$
+    and process_id $process_id$ was created in temporary folder by $user$
   risk_objects:
   - field: user
     type: user
