@@ -1,11 +1,11 @@
-name: Windows Create Test Registry
+name: Windows SnappyBee Create Test Registry
 id: 80402396-d78a-4c6e-ade5-7697ea670adf
 version: 1
 date: '2025-02-11'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
-description: The following analytic detects modifications to the Windows registry under `SOFTWARE\Microsoft\Test`, a location rarely used by legitimate applications in a production environment. Monitoring this key is crucial, as adversaries may create or alter values here for persistence, privilege escalation, or system manipulation. The detection leverages **Sysmon Event ID 13** (Registry Value Set) to identify unauthorized changes. Analysts should investigate processes associated with these modifications, particularly unsigned executables or suspicious command-line activity, as they may indicate malware or unauthorized software behavior.
+description: The following analytic detects modifications to the Windows registry under `SOFTWARE\Microsoft\Test`, a location rarely used by legitimate applications in a production environment. Monitoring this key is crucial, as adversaries may create or alter values here for monitoring update of itself file path, updated configuration file, or system mark compromised. The detection leverages **Sysmon Event ID 13** (Registry Value Set) to identify unauthorized changes. Analysts should investigate processes associated with these modifications, particularly unsigned executables or suspicious command-line activity, as they may indicate malware or unauthorized software behavior.
 data_source:
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time) as lastTime FROM datamodel=Endpoint.Registry 
@@ -14,7 +14,7 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   | `drop_dm_object_name(Registry)` 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
-  | `windows_create_test_registry_filter`'
+  | `windows_snappybee_create_test_registry_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
   on process that include the name of the process responsible for the changes from
   your endpoints into the `Endpoint` datamodel in the `Registry` node. Also make sure

@@ -10,7 +10,9 @@ data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Processes 
-  where Processes.parent_process_name != "services.exe" AND Processes.process_name = "svchost.exe" AND Processes.process != unknown
+  where Processes.parent_process_name != "services.exe" AND Processes.process_name = "svchost.exe" AND Processes.process != unknown 
+  AND Processes.parent_process_path != "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\*\\MsMpEng.exe"
+  AND Processes.parent_process_path != "C:\\Program Files\\Windows Defender\\MsMpEng.exe"
   by Processes.parent_process_name Processes.parent_process_path Processes.parent_process Processes.process_path Processes.process Processes.original_file_name Processes.dest Processes.user 
   | `drop_dm_object_name(Processes)` 
   | `security_content_ctime(firstTime)` 
