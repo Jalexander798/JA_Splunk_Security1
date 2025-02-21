@@ -1,0 +1,16 @@
+name: NTLM Operational 8004
+id: fd08cb77-c26e-464c-a43e-2867e232127e
+version: 1
+date: '2025-02-21'
+author: Bhavin Patel, Splunk
+description: Data source object for NTLM Operational 8004
+source: XmlWinEventLog:Microsoft-Windows-NTLM/Operational
+sourcetype: XmlWinEventLog:Microsoft-Windows-NTLM/Operational
+separator: EventCode
+supported_TA:
+- name: Splunk Add-on for Microsoft Windows
+  url: https://splunkbase.splunk.com/app/742
+  version: 9.0.1
+fields:
+- _time
+example_log: |-

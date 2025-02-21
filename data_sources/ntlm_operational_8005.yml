@@ -1,0 +1,16 @@
+name: NTLM Operational 8005
+id: ad15a1cf-4b21-43de-81e4-6307c69172fb
+version: 1
+date: '2025-02-21'
+author: Bhavin Patel, Splunk
+description: Data source object for NTLM Operational 8005
+source: XmlWinEventLog:Microsoft-Windows-NTLM/Operational
+sourcetype: XmlWinEventLog:Microsoft-Windows-NTLM/Operational
+separator: EventCode
+supported_TA:
+- name: Splunk Add-on for Microsoft Windows
+  url: https://splunkbase.splunk.com/app/742
+  version: 9.0.1
+fields:
+- _time
+example_log: |-
