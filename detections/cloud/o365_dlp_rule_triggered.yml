@@ -12,7 +12,7 @@ description: The following analytic detects when Microsoft Office 365 Data Loss 
   be evaluated thoroughly to determine what, if any, security relevance the underlying
   DLP events contain.
 data_source:
-- O365 Universal Audit Log
+- Office 365 Universal Audit Log
 search: "`o365_management_activity` Operation=DLPRuleMatch | eval recipient = 'ExchangeMetaData.To{}',
   signature_id = 'ExchangeMetaData.UniqueID', signature = 'PolicyDetails{}.Rules{}.RuleName'
   , src_user = UserId, reason ='PolicyDetails{}.Rules{}.ConditionsMatched.SensitiveInformation{}.SensitiveInformationTypeName',

@@ -11,7 +11,7 @@ description: The following analytic identifies when specific O365 advanced secur
   detection. This can lead to unauthorized data access, data exfiltration, account
   compromise, or other malicious activities without leaving a detailed audit trail.
 data_source:
-- O365 Universal Audit Log
+- Office 365 Universal Audit Log
 search: '`o365_management_activity` Workload=Exchange AND Operation IN ("Set-*","Disable-*","New-*","Remove-*")
   Operation IN ("*AntiPhish*","*SafeLink*","*SafeAttachment*","*Malware*") | stats
   values(ObjectId) as object, min(_time) as firstTime, max(_time) as lastTime, count  by

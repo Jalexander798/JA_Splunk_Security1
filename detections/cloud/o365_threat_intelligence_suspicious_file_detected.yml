@@ -12,7 +12,7 @@ description: The following analytic identifies when a malicious file is detected
   and responded to appropriately. Certain premium Office 365 capabilities such as
   Safe Attachment and Safe Links further enhance these detection and response functions.
 data_source:
-- O365 Universal Audit Log
+- Office 365 Universal Audit Log
 search: '`o365_management_activity` Workload=ThreatIntelligence Operation=AtpDetection
   | stats values(DetectionMethod) as category  values(FileData.FileName) as file_name
   values(FileData.FilePath) as file_path values(FileData.FileSize) as file_size values(FileData.MalwareFamily)

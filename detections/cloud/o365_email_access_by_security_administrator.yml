@@ -10,7 +10,7 @@ description: The following analytic identifies when a user with sufficient acces
   Explorer) to directly view email. Adversaries may exploit privileged access with
   this premium feature to enumerate or exfiltrate sensitive data.
 data_source:
-- O365 Universal Audit Log
+- Office 365 Universal Audit Log
 search: '`o365_management_activity` Workload=SecurityComplianceCenter Operation=AdminMailAccess
   | stats values(Workload) as category, values(MailboxId) as user, values(Operation)
   as signature, count, min(_time) as firstTime, max(_time) as lastTime by InternetMessageId,

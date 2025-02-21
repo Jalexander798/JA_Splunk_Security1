@@ -12,7 +12,7 @@ description: The following analytic identifies when one of O365 the built-in sec
   Certain premium Office 365 capabilities further enhance these detection and response
   functions.
 data_source:
-- O365 Universal Audit Log
+- Office 365 Universal Audit Log
 search: '`o365_management_activity` Workload=SecurityComplianceCenter Operation=AlertEntityGenerated
   Name IN ("Suspicious email sending patterns detected","User restricted from sending
   email","Suspicious Email Forwarding Activity","Email sending limit exceeded") |
