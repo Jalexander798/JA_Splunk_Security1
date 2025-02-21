@@ -4,7 +4,7 @@ version: 4
 date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 status: production
-type: TTP
+type: Anomaly
 description: The following analytic detects suspicious stopping of the `osquery` service,
   which may indicate an attempt to disable monitoring and evade detection. `Osquery`
   is a powerful tool used for querying system information and detecting anomalies,
