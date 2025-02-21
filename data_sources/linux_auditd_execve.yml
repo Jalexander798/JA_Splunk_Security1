@@ -1,12 +1,7 @@
 name: Linux Auditd Execve
 id: 9ef6364d-cc67-480e-8448-3306829a6a24
-<<<<<<< HEAD
 version: 2
 date: '2025-02-20'
-=======
-version: 1
-date: '2024-09-24'
->>>>>>> 6f88528e2849855c588650d7b6bd0396b1cc384b
 author: Teoderick Contreras, Splunk
 description: Data source object for Linux Auditd Execve Type
 source: auditd
