@@ -12,7 +12,6 @@ supported_TA:
   url: https://splunkbase.splunk.com/app/742
   version: 9.0.1
 fields:
-column
 - CategoryString
 - Channel
 - Computer
