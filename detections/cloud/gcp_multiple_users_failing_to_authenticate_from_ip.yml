@@ -13,7 +13,7 @@ description: The following analytic detects a single source IP address failing t
   Platform. If confirmed malicious, this behavior could lead to unauthorized access
   to sensitive resources, data breaches, or further exploitation within the environment.
 data_source:
-- Google Workspace login_failure
+- Google Workspace
 search: '`gws_reports_login` event.type = login event.name = login_failure | bucket
   span=5m _time | stats count dc(user) AS unique_accounts values(user) as tried_accounts
   values(authentication_method) AS authentication_method earliest(_time) as firstTime
