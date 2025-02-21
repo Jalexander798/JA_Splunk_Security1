@@ -64,7 +64,7 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: An instance of $parent_process_name$ spawning $process_name$ was identified
-    on endpoint $dest$ generating a remote download from $
+    on endpoint $dest$ generating a remote download.
   risk_objects:
   - field: user
     type: user
