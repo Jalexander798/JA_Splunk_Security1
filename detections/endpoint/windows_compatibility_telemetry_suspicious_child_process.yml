@@ -7,8 +7,8 @@ status: production
 type: TTP
 description: The following analytic detects the execution of CompatTelRunner.exe with parameters indicative of a process not part of the normal "Microsoft Compatibility Appraiser" telemetry collection. It leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names, parent processes, and command-line arguments. This activity is significant because CompatTelRunner.exe and the "Microsoft Compatibility Appraiser" task always run as System and can be used to elevate privileges or establish a highly privileged persistence mechanism. If confirmed malicious, this could enable unauthorized code execution, privilege escalation, or persistent access to the compromised system.
 data_source: 
-- Windows Security Event ID 4688
-- Sysmon Event ID 1
+- Windows Event Log Security 4688
+- Sysmon EventID 1
 - CrowdStrike ProcessRollup2
 search: |-
   |  tstats `security_content_summariesonly` values(Processes.parent_process) as Processes.parent_process, values(Processes.process) as Processes.process values(Processes.process_current_directory) AS process_current_directory, values(Processes.process_id) as Processes.process_id, values(Processes.process_guid) as Processes.process_guid, count min(_time) AS firstTime, max(_time) AS lastTime FROM datamodel=Endpoint.Processes where Processes.parent_process_name = "CompatTelRunner.exe" AND Processes.process="* -cv:*" NOT Processes.process IN ("* -m:*") BY _time span=1h Processes.user Processes.dest Processes.parent_process_name Processes.process_name

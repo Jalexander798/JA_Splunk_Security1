@@ -7,7 +7,7 @@ status: production
 type: Anomaly
 description: This analytic is used to identify when a removable media device is attached to a machine and then a process is executed from the same drive letter assigned to the removable media device. Adversaries and Insider Threats may use removable media devices for several malicious activities, including initial access, execution, and exfiltration.
 data_source: 
-- Windows Security Event ID 4688
+- Windows Event Log Security 4688
 - Sysmon EventID 1
 - Sysmon EventID 12
 - Sysmon EventID 13
