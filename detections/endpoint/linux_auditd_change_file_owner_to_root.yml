@@ -4,7 +4,7 @@ version: 6
 date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 status: production
-type: TTP
+type: Anomaly
 description: The following analytic detects the use of the 'chown' command to change
   a file owner to 'root' on a Linux system. It leverages Linux Auditd telemetry, specifically
   monitoring command-line executions and process details. This activity is significant
