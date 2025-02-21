@@ -5,7 +5,15 @@ date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
-description: The following analytic detects suspicious creation of hidden files and directories, which may indicate an attacker's attempt to conceal malicious activities or unauthorized data. Hidden files and directories are often used to evade detection by security tools and administrators, providing a stealthy means for storing malware, logs, or sensitive information. By monitoring for unusual or unauthorized creation of hidden files and directories, this analytic helps identify potential attempts to hide or unauthorized creation of hidden files and directories, this analytic helps identify potential attempts to hide malicious operations, enabling security teams to uncover and address hidden threats effectively.
+description: The following analytic detects suspicious creation of hidden files and
+  directories, which may indicate an attacker's attempt to conceal malicious activities
+  or unauthorized data. Hidden files and directories are often used to evade detection
+  by security tools and administrators, providing a stealthy means for storing malware,
+  logs, or sensitive information. By monitoring for unusual or unauthorized creation
+  of hidden files and directories, this analytic helps identify potential attempts
+  to hide or unauthorized creation of hidden files and directories, this analytic
+  helps identify potential attempts to hide malicious operations, enabling security
+  teams to uncover and address hidden threats effectively.
 data_source:
 - Linux Auditd Execve
 search: '`linux_auditd` execve_command IN ("*touch *", "*mkdir *", "*vim *", "*vi *", "*nano *") AND execve_command IN ("* ./.*", "* .*", "*/.*")
@@ -26,7 +34,12 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$dest$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:

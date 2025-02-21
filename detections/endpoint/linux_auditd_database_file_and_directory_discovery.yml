@@ -5,7 +5,14 @@ date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
-description: The following analytic detects suspicious database file and directory discovery activities, which may signal an attacker attempt to locate and assess critical database assets on a compromised system. This behavior is often a precursor to data theft, unauthorized access, or privilege escalation, as attackers seek to identify valuable information stored in databases. By monitoring for unusual or unauthorized attempts to locate database files and directories, this analytic aids in early detection of potential reconnaissance or data breach efforts, enabling security teams to respond swiftly and mitigate the risk of further compromise.
+description: The following analytic detects suspicious database file and directory
+  discovery activities, which may signal an attacker attempt to locate and assess
+  critical database assets on a compromised system. This behavior is often a precursor
+  to data theft, unauthorized access, or privilege escalation, as attackers seek to
+  identify valuable information stored in databases. By monitoring for unusual or
+  unauthorized attempts to locate database files and directories, this analytic aids
+  in early detection of potential reconnaissance or data breach efforts, enabling
+  security teams to respond swiftly and mitigate the risk of further compromise.
 data_source:
 - Linux Auditd Execve
 search: '`linux_auditd` execve_command IN ("*find*", "*grep*") AND execve_command IN("*.db*", "*.sql*", "*.sqlite*", "*.mdb*", "*.accdb*", "*.mdf*", "*.ndf*", "*.ldf*", "*.frm*", "*.myd*", "*.myi*", "*.dbf*", "*.db2*", "*.dbc*", "*.fpt*", "*.ora*") 
@@ -27,7 +34,12 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$dest$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:

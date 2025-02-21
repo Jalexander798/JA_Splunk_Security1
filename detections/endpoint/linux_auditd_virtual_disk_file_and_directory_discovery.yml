@@ -5,7 +5,14 @@ date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
-description: The following analytic detects suspicious discovery of virtual disk files and directories, which may indicate an attacker's attempt to locate and access virtualized storage environments. Virtual disks can contain sensitive data or critical system configurations, and unauthorized discovery attempts could signify preparatory actions for data exfiltration or further compromise. By monitoring for unusual or unauthorized searches for virtual disk files and directories, this analytic helps identify potential reconnaissance activities, enabling security teams to respond promptly and safeguard against unauthorized access and data breaches.
+description: The following analytic detects suspicious discovery of virtual disk files
+  and directories, which may indicate an attacker's attempt to locate and access virtualized
+  storage environments. Virtual disks can contain sensitive data or critical system
+  configurations, and unauthorized discovery attempts could signify preparatory actions
+  for data exfiltration or further compromise. By monitoring for unusual or unauthorized
+  searches for virtual disk files and directories, this analytic helps identify potential
+  reconnaissance activities, enabling security teams to respond promptly and safeguard
+  against unauthorized access and data breaches.
 data_source:
 - Linux Auditd Execve
 search: '`linux_auditd` execve_command IN ("*find*", "*grep*")  AND execve_command IN ("*.vhd*", "*.vhdx*", "*.vmdk*")
@@ -26,7 +33,12 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$dest$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:

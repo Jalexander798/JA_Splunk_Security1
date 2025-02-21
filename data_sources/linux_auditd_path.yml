@@ -1,7 +1,12 @@
 name: Linux Auditd Path
 id: 3d86125c-0496-4a5a-aae3-0d355a4f3d7d
+<<<<<<< HEAD
 version: 2
 date: '2025-02-20'
+=======
+version: 1
+date: '2024-09-24'
+>>>>>>> 6f88528e2849855c588650d7b6bd0396b1cc384b
 author: Teoderick Contreras, Splunk
 description: Data source object for Linux Auditd Path Type
 source: auditd

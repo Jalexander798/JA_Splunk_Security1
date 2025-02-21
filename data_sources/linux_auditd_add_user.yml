@@ -1,7 +1,12 @@
 name: Linux Auditd Add User
 id: 30f79353-e1d2-4585-8735-1e0359559f3f
+<<<<<<< HEAD
 version: 2
 date: '2025-02-20'
+=======
+version: 1
+date: '2024-08-24'
+>>>>>>> 6f88528e2849855c588650d7b6bd0396b1cc384b
 author: Teoderick Contreras, Splunk
 description: Data source object for Linux Auditd Add User Type
 source: auditd
