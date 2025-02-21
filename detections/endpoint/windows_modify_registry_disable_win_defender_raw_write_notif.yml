@@ -1,6 +1,6 @@
 name: Windows Modify Registry Disable Win Defender Raw Write Notif
 id: 0e5e25c3-32f4-46f7-ba4a-5b95c3b90f5b
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
@@ -15,7 +15,6 @@ description: The following analytic detects modifications to the Windows registr
   to execute code, persist in the environment, and access sensitive information without
   detection.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry where Registry.registry_path= "*\\Windows
