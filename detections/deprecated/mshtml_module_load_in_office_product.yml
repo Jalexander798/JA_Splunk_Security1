@@ -18,8 +18,13 @@ data_source:
 search: '`sysmon` EventID=7 process_name IN ("winword.exe","excel.exe","powerpnt.exe","mspub.exe","visio.exe","wordpad.exe","wordview.exe","onenote.exe","onenotem.exe","onenoteviewer.exe","onenoteim.exe",
   "msaccess.exe","Graph.exe","winproj.exe") loaded_file_path IN ("*\\mshtml.dll",
   "*\\Microsoft.mshtml.dll","*\\IE.Interop.MSHTML.dll","*\\MshtmlDac.dll","*\\MshtmlDed.dll","*\\MshtmlDer.dll")
-  | stats count min(_time) as firstTime max(_time) as lastTime by user_id, dest, process_name,
-  loaded_file, loaded_file_path, original_file_name, process_guid | `security_content_ctime(firstTime)`
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by EventID FileVersion Guid Hashes 
+  Image ImageLoaded MD5 Opcode OriginalFileName ProcessGuid ProcessID ProcessId SHA256 
+  SecurityID Signature SignatureStatus Signed UserID dest loaded_file loaded_file_path original_file_name 
+  process_exec process_guid process_hash process_id process_name process_path service_dll_signature_exists 
+  service_dll_signature_verified signature signature_id user_id vendor_product
+  | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `mshtml_module_load_in_office_product_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process names and image loads from your endpoints. If you are using

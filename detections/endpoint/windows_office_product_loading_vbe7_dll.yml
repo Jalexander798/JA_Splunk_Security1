@@ -17,8 +17,13 @@ data_source:
 search: '`sysmon` EventCode=7 process_name IN ("EQNEDT32.exe", "excel.exe", "Graph.exe",
   "msaccess.exe", "mspub.exe", "onenote.exe", "onenoteim.exe", "onenotem.exe", "outlook.exe",
   "powerpnt.exe", "visio.exe", "winproj.exe", "winword.exe") loaded_file_path IN ("*\\VBE7INTL.DLL",
-  "*\\VBE7.DLL", "*\\VBEUI.DLL") | stats min(_time) as firstTime max(_time) as lastTime
-  values(loaded_file) as loaded_file count by dest EventCode process_name process_guid
+  "*\\VBE7.DLL", "*\\VBEUI.DLL") 
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by EventID FileVersion Guid Hashes 
+  Image ImageLoaded MD5 Opcode OriginalFileName ProcessGuid ProcessID ProcessId SHA256 
+  SecurityID Signature SignatureStatus Signed UserID dest loaded_file loaded_file_path original_file_name 
+  process_exec process_guid process_hash process_id process_name process_path service_dll_signature_exists 
+  service_dll_signature_verified signature signature_id user_id vendor_product
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_office_product_loading_vbe7_dll_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name and ImageLoaded (Like sysmon EventCode 7) from your endpoints.

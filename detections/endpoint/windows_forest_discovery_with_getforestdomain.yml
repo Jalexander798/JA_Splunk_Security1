@@ -50,7 +50,7 @@ rba:
   - field: dest
     type: system
     score: 25
-  - field: user
+  - field: user_id
     type: user
     score: 25
   threat_objects: []
