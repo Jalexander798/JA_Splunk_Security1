@@ -17,6 +17,8 @@ data_source:
 - Linux Auditd Execve
 search: '`linux_auditd` execve_command = "*modprobe*" AND execve_command = "*-r *"
   | rename host as dest 
+  | rename comm as process_name 
+  | rename exe as process 
   | stats count min(_time) as firstTime max(_time) as lastTime by argc execve_command dest 
   | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`
   | `linux_auditd_unload_module_via_modprobe_filter`'

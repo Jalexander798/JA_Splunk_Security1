@@ -10,6 +10,8 @@ data_source:
 - Linux Auditd Proctitle
 search: '`linux_auditd`  (proctitle = "*rm *" AND proctitle = "*-rf *" AND proctitle = "*--no-preserve-root*")  
   | rename host as dest  
+  | rename comm as process_name 
+  | rename exe as process 
   | stats count min(_time) as firstTime max(_time) as lastTime by proctitle dest
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)`

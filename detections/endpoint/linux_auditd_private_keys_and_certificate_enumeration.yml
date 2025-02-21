@@ -18,6 +18,8 @@ data_source:
 search: '`linux_auditd` execve_command IN ("*find*", "*grep*") 
   AND execve_command IN ("*.pem*", "*.cer*", "*.crt*", "*.pgp*", "*.key*", "*.gpg*", "*.ppk*", "*.p12*", "*.pfx*", "*.p7b*")
   | rename host as dest 
+  | rename comm as process_name 
+  | rename exe as process 
   | stats count min(_time) as firstTime max(_time) as lastTime by argc execve_command dest 
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `linux_auditd_private_keys_and_certificate_enumeration_filter`'

@@ -10,6 +10,8 @@ data_source:
 - Linux Auditd Execve
 search: '`linux_auditd` execve_command IN ("*find*", "*grep*") AND execve_command IN("*.db*", "*.sql*", "*.sqlite*", "*.mdb*", "*.accdb*", "*.mdf*", "*.ndf*", "*.ldf*", "*.frm*", "*.myd*", "*.myi*", "*.dbf*", "*.db2*", "*.dbc*", "*.fpt*", "*.ora*") 
   | rename host as dest 
+  | rename comm as process_name 
+  | rename exe as process 
   | stats count min(_time) as firstTime max(_time) as lastTime by argc execve_command dest 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)`

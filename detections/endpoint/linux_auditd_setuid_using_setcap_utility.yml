@@ -16,6 +16,8 @@ data_source:
 - Linux Auditd Execve
 search: '`linux_auditd` execve_command IN ("*setcap *")  AND execve_command IN ("*cap_setuid+ep*", "*cap_setuid=ep*", "*cap_net_bind_service+p*", "*cap_net_raw+ep*", "*cap_dac_read_search+ep*")
   | rename host as dest 
+  | rename comm as process_name 
+  | rename exe as process 
   | stats count min(_time) as firstTime max(_time) as lastTime by argc execve_command dest 
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `linux_auditd_setuid_using_setcap_utility_filter`'
