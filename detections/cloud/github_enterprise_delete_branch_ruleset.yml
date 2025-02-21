@@ -41,7 +41,9 @@ rba:
   - field: user
     type: user
     score: 25
-  threat_objects: []
+  threat_objects:
+  - field: user_agent
+    type: user_agent
 tags:
   analytic_story:
   - GitHub Malicious Activity
