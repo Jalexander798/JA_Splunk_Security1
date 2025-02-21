@@ -1,0 +1,16 @@
+name: Azure Active Directory MicrosoftGraphActivityLogs
+id: 63ff93ba-2bbb-4542-8773-239bf5266367
+version: 1
+date: '2025-02-21'
+author: Bhavin Patel, Splunk
+description: Data source object for Azure Active Directory MicrosoftGraphActivityLogs
+source: Azure AD
+sourcetype: azure:monitor:aad
+separator: operationName
+supported_TA:
+- name: Splunk Add-on for Microsoft Cloud Services
+  url: https://splunkbase.splunk.com/app/3110
+  version: 5.4.2
+fields:
+- _time
+example_log: |-
