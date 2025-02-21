@@ -1,7 +1,7 @@
 name: Windows InstallUtil Remote Network Connection
 id: 4fbf9270-43da-11ec-9486-acde48001122
-version: 10
-date: '2025-02-10'
+version: 11
+date: '2025-02-22'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -16,15 +16,24 @@ description: The following analytic detects the Windows InstallUtil.exe binary m
   of this activity.
 data_source:
 - Sysmon EventID 1 AND Sysmon EventID 3
-search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Processes
-  where `process_installutil` by _time span=1h  Processes.process_id Processes.process_name
-  Processes.dest Processes.user Processes.process_path Processes.process Processes.parent_process_name
-  Processes.original_file_name | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | join  process_id [| tstats `security_content_summariesonly`
-  count FROM datamodel=Network_Traffic.All_Traffic where All_Traffic.dest_port !=
-  0 by All_Traffic.process_id All_Traffic.dest All_Traffic.dest_port | `drop_dm_object_name(All_Traffic)`
-  | rename dest as C2 ] | table _time user dest parent_process_name process_name process_path
-  process process_id dest_port C2 | `windows_installutil_remote_network_connection_filter`'
+search: |-
+  | tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Processes
+    where `process_installutil` by _time span=1h Processes.process_id Processes.process_name
+    Processes.dest Processes.user Processes.process_path Processes.process Processes.parent_process_name
+    Processes.original_file_name 
+  | `drop_dm_object_name(Processes)` 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | join process_id 
+      [| tstats `security_content_summariesonly`
+          count FROM datamodel=Network_Traffic.All_Traffic where All_Traffic.dest_port !=
+          0 by All_Traffic.process_id All_Traffic.dest All_Traffic.dest_port 
+      | `drop_dm_object_name(All_Traffic)` 
+      | rename dest as C2 ] 
+  | table _time user dest parent_process_name process_name process_path process process_id dest_port C2 
+  | stats count min(_time) as firstTime max(_time) as lastTime values(process) as process values(C2) as command_and_control by user dest process_name process_id dest_port parent_process_name 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)`| `windows_installutil_remote_network_connection_filter`
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -55,7 +64,7 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: An instance of $parent_process_name$ spawning $process_name$ was identified
-    on endpoint $dest$ generating a remote download.
+    on endpoint $dest$ generating a remote download from $
   risk_objects:
   - field: user
     type: user
