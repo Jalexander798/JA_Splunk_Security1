@@ -14,7 +14,7 @@ description: The following analytic detects pull requests from unknown users on 
   reviewing the author's name, repository, head reference, and commit message, and
   investigating any related artifacts and processes.
 data_source:
-- GitHub
+- GitHub Webhooks
 search: '`github` check_suite.pull_requests{}.id=* | stats count by check_suite.head_commit.author.name
   repository.full_name check_suite.pull_requests{}.head.ref check_suite.head_commit.message
   | rename check_suite.head_commit.author.name as user repository.full_name as repository

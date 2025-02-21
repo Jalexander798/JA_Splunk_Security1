@@ -1,4 +1,4 @@
-name: GitHub Enterprise Created Self Hosted Runner
+name: GitHub Enterprise Register Self Hosted Runner
 id: b27685a2-8826-4123-ab78-2d9d0d419ed0
 version: 1
 date: '2025-01-20'
@@ -19,7 +19,7 @@ search: '`github_enterprise` action=enterprise.register_self_hosted_runner
   | stats count min(_time) as firstTime max(_time) as lastTime by actor, actor_id, actor_is_bot, actor_location.country_code, business, business_id, user_agent, action
   | eval user=actor
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` 
-  | `github_enterprise_created_self_hosted_runner_filter`'
+  | `github_enterprise_register_self_hosted_runner_filter`'
 how_to_implement: You must ingest GitHub Enterprise logs using Audit log streaming as described in this documentation https://docs.github.com/en/enterprise-cloud@latest/admin/monitoring-activity-in-your-enterprise/reviewing-audit-logs-for-your-enterprise/streaming-the-audit-log-for-your-enterprise#setting-up-streaming-to-splunk using a Splunk HTTP Event Collector.
 known_false_positives: unknown
 references:
@@ -47,6 +47,7 @@ tags:
   asset_type: GitHub
   mitre_attack_id:
   - T1562.001
+  - T1195
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

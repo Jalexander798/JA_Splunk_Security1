@@ -46,6 +46,7 @@ tags:
   asset_type: GitHub
   mitre_attack_id:
   - T1562.001
+  - T1195
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

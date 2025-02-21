@@ -13,7 +13,7 @@ description: The following analytic detects the disabling of a security workflow
   allow the attacker to introduce and persist undetected malicious code within the
   repository, potentially compromising the integrity and security of the codebase.
 data_source:
-- GitHub
+- GitHub Webhooks
 search: '`github` workflow_run.event=push OR workflow_run.event=pull_request | stats
   values(workflow_run.name) as workflow_run.name by workflow_run.head_commit.id workflow_run.event
   workflow_run.head_branch workflow_run.head_commit.author.email workflow_run.head_commit.author.name

@@ -13,7 +13,7 @@ description: The following analytic detects direct commits or pushes to the mast
   this could lead to unauthorized code execution, security vulnerabilities, or compromised
   project integrity.
 data_source:
-- GitHub
+- GitHub Webhooks
 search: '`github` branches{}.name = main OR branches{}.name = master |  stats count
   min(_time) as firstTime max(_time) as lastTime by commit.commit.author.email commit.author.login
   commit.commit.message repository.pushed_at commit.commit.committer.date repository.full_name

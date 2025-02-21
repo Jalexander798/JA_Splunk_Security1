@@ -13,7 +13,7 @@ description: The following analytic identifies the creation of GitHub Dependabot
   malicious, these vulnerabilities could be exploited by attackers to gain unauthorized
   access or cause breaches, leading to potential data loss or system compromise.
 data_source:
-- GitHub
+- GitHub Webhooks
 search: '`github` alert.id=* action=create | rename repository.full_name as repository,
   repository.html_url as repository_url sender.login as user | stats min(_time) as
   firstTime max(_time) as lastTime by action alert.affected_package_name alert.affected_range
