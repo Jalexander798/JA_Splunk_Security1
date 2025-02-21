@@ -1,12 +1,7 @@
 name: Linux Auditd Proctitle
 id: 5a25984a-2789-400a-858b-d75c923e06b1
-<<<<<<< HEAD
 version: 2
 date: '2025-02-20'
-=======
-version: 1
-date: '2024-09-24'
->>>>>>> 6f88528e2849855c588650d7b6bd0396b1cc384b
 author: Teoderick Contreras, Splunk
 description: Data source object for Linux Auditd Proctitle Type
 source: auditd
