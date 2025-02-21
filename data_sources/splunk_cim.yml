@@ -4,9 +4,8 @@ version: 1
 date: '2025-01-14'
 author: Bhavin Patel, Splunk
 description: Data source object for Splunk CIM
-source: N/A
-sourcetype: N/A
-separator: N/A
+source: not_applicable
+sourcetype: not_applicable
 supported_TA:
 - name: Splunk_SA_CIM
   url: https://splunkbase.splunk.com/app/1621
