@@ -1,6 +1,6 @@
 name: Windows Compatibility Telemetry Tampering Through Registry
 id: 43834687-cc48-4878-a2fa-f76e4271791f
-version: 1
+version: 2
 date: '2025-02-13'
 author: Steven Dick
 status: production

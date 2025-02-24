@@ -1,6 +1,6 @@
 name: Windows Multiple NTLM Null Domain Authentications
 id: c187ce2c-c88e-4cec-8a1c-607ca0dedd78
-version: 4
+version: 5
 date: '2025-02-10'
 author: Steven Dick
 status: production

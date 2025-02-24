@@ -1,6 +1,6 @@
 name: O365 Threat Intelligence Suspicious Email Delivered
 id: 605cc93a-70e4-4ee3-9a3d-1a62e8c9b6c2
-version: 4
+version: 5
 date: '2025-02-10'
 author: Steven Dick
 status: production
