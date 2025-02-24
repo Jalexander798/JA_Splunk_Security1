@@ -1,7 +1,7 @@
 name: Linux Auditd Nopasswd Entry In Sudoers File
 id: 651df959-ad17-4b73-a323-90cb96d5fa1b
-version: 5
-date: '2025-02-10'
+version: '6'
+date: '2025-02-24'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -57,9 +57,10 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
+  - China-Nexus Threat Activity
+  - Linux Persistence Techniques
   - Linux Privilege Escalation
   - Compromised Linux Host
-  - Linux Persistence Techniques
   - Nexus APT Threat Activity
   - Earth Estries
   asset_type: Endpoint
@@ -73,7 +74,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.003/linux_auditd_nopasswd/linux_auditd_nopasswd.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.003/linux_auditd_nopasswd/linux_auditd_nopasswd.log
     source: /var/log/audit/audit.log
     sourcetype: linux:audit

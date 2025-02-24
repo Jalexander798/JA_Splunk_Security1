@@ -1,7 +1,7 @@
 name: Malicious PowerShell Process - Execution Policy Bypass
 id: 9be56c82-b1cc-4318-87eb-d138afaaca39
-version: 10
-date: '2025-02-10'
+version: '11'
+date: '2025-02-24'
 author: Rico Valdez, Mauricio Velazco, Splunk
 status: production
 type: Anomaly
@@ -60,11 +60,12 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - DHS Report TA18-074A
-  - AsyncRAT
-  - DarkCrystal RAT
+  - China-Nexus Threat Activity
   - HAFNIUM Group
+  - DHS Report TA18-074A
+  - DarkCrystal RAT
   - Nexus APT Threat Activity
+  - AsyncRAT
   - Earth Estries
   - Volt Typhoon
   asset_type: Endpoint
@@ -78,7 +79,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/encoded_powershell/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/encoded_powershell/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

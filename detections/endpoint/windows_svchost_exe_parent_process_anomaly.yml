@@ -60,7 +60,7 @@ rba:
 tags:
   analytic_story:
   - SnappyBee
-  - Nexus APT Threat Activity
+  - China-Nexus Threat Activity
   - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:

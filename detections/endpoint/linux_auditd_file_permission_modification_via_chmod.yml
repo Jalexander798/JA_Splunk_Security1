@@ -1,8 +1,8 @@
 name: Linux Auditd File Permission Modification Via Chmod
 id: 5f1d2ea7-eec0-4790-8b24-6875312ad492
-version: 7
-date: '2025-02-10'
-author: Teoderick Contreras, Splunk, Ivar Nygård
+version: '8'
+date: '2025-02-24'
+author: "Teoderick Contreras, Splunk, Ivar Nyg\xE5rd"
 status: production
 type: Anomaly
 description: The following analytic detects suspicious file permission modifications
@@ -58,11 +58,12 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Linux Privilege Escalation
-  - Linux Living Off The Land
-  - Compromised Linux Host
+  - China-Nexus Threat Activity
   - Linux Persistence Techniques
   - XorDDos
+  - Linux Privilege Escalation
+  - Compromised Linux Host
+  - Linux Living Off The Land
   - Nexus APT Threat Activity
   - Earth Estries
   asset_type: Endpoint
@@ -76,7 +77,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.002/linux_auditd_chmod_exec_attrib/linux_auditd_chmod_exec_attrib.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.002/linux_auditd_chmod_exec_attrib/linux_auditd_chmod_exec_attrib.log
     source: /var/log/audit/audit.log
     sourcetype: linux:audit

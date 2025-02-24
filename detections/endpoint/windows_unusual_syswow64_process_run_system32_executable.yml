@@ -53,7 +53,7 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - Nexus APT Threat Activity
+  - China-Nexus Threat Activity
   - DarkGate Malware
   - Earth Estries
   asset_type: Endpoint
