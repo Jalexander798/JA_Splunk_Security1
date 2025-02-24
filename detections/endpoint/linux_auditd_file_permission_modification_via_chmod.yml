@@ -1,7 +1,7 @@
 name: Linux Auditd File Permission Modification Via Chmod
 id: 5f1d2ea7-eec0-4790-8b24-6875312ad492
-version: 8
-date: '2025-02-20'
+version: 9
+date: '2025-02-24'
 author: Teoderick Contreras, Splunk, Ivar Nygård
 status: production
 type: Anomaly
@@ -63,7 +63,7 @@ tags:
   - Compromised Linux Host
   - Linux Persistence Techniques
   - XorDDos
-  - Nexus APT Threat Activity
+  - China-Nexus Threat Activity
   - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:

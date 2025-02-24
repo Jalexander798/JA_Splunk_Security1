@@ -1,7 +1,7 @@
 name: Linux Auditd Preload Hijack Library Calls
 id: 35c50572-a70b-452f-afa9-bebdf3c3ce36
-version: 6
-date: '2025-02-20'
+version: 7
+date: '2025-02-24'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -62,7 +62,7 @@ tags:
   - Linux Privilege Escalation
   - Compromised Linux Host
   - Linux Persistence Techniques
-  - Nexus APT Threat Activity
+  - China-Nexus Threat Activity
   - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:
