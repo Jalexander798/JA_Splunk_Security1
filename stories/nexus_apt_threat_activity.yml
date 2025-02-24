@@ -1,7 +1,7 @@
 name: China-Nexus Threat Activity
 id: 43f8062d-4da0-4f48-8cad-6a20e108961b
-version: 1
-date: '2025-01-27'
+version: 2
+date: '2025-02-24'
 author: Teoderick Contreras, Splunk
 status: production
 description: Leverage searches that allow you to detect and investigate unusual activities that might relate to Nexus, Chinese state-nexus adversaries known for its stealth and strategic targeting of high-value sectors. Monitor for indicators such as spear-phishing campaigns, exploitation of zero-day vulnerabilities, and unauthorized lateral movement within your network. Investigate anomalous data exfiltration, encrypted communications, and behaviors aligning with their known tactics, techniques, and procedures (TTPs). Combining threat intelligence with real-time monitoring helps identify and respond to Nexus APT activity, minimizing potential damage and data loss.
