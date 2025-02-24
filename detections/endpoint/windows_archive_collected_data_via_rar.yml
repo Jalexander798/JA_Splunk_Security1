@@ -64,7 +64,6 @@ tags:
   - DarkGate Malware
   - China-Nexus Threat Activity
   - Earth Estries
-  - Nexus APT Threat Activity
   asset_type: Endpoint
   mitre_attack_id:
   - T1560.001

@@ -41,7 +41,6 @@ tags:
   - China-Nexus Threat Activity
   - CISA AA22-277A
   - Collection and Staging
-  - Nexus APT Threat Activity
   - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:

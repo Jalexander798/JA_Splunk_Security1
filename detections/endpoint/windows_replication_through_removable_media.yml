@@ -65,7 +65,6 @@ tags:
   - Chaos Ransomware
   - Derusbi
   - PlugX
-  - Nexus APT Threat Activity
   - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:

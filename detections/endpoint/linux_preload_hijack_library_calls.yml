@@ -60,7 +60,6 @@ tags:
   - China-Nexus Threat Activity
   - Linux Persistence Techniques
   - Linux Privilege Escalation
-  - Nexus APT Threat Activity
   - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:

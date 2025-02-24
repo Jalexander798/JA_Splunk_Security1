@@ -69,7 +69,6 @@ tags:
   - Command And Control
   - China-Nexus Threat Activity
   - Backdoor Pingpong
-  - Nexus APT Threat Activity
   asset_type: Endpoint
   mitre_attack_id:
   - T1095

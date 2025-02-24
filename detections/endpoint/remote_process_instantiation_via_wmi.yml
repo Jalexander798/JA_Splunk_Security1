@@ -70,7 +70,6 @@ tags:
   - Active Directory Lateral Movement
   - CISA AA23-347A
   - Suspicious WMI Use
-  - Nexus APT Threat Activity
   - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:

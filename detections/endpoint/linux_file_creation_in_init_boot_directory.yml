@@ -54,7 +54,6 @@ tags:
   - Linux Persistence Techniques
   - XorDDos
   - Linux Privilege Escalation
-  - Nexus APT Threat Activity
   asset_type: Endpoint
   mitre_attack_id:
   - T1037.004

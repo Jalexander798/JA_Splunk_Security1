@@ -70,7 +70,6 @@ tags:
   - Backdoor Pingpong
   - Cyclops Blink
   - Sandworm Tools
-  - Nexus APT Threat Activity
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.004
