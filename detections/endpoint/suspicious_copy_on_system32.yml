@@ -1,7 +1,7 @@
 name: Suspicious Copy on System32
 id: ce633e56-25b2-11ec-9e76-acde48001122
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-02-21'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -23,7 +23,7 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   AND `process_copy` AND Processes.process IN("*\\Windows\\System32\\*", "*\\Windows\\SysWow64\\*")
   AND Processes.process = "*copy*" by Processes.dest Processes.user Processes.parent_process_name
   Processes.process_name Processes.process Processes.process_id Processes.parent_process_id
-  temp | `drop_dm_object_name(Processes)` | eval splitted_commandline=split(process,"
+  | `drop_dm_object_name(Processes)` | eval splitted_commandline=split(process,"
   ") | eval first_cmdline=lower(mvindex(splitted_commandline,0)) | where NOT LIKE(first_cmdline,"%\\windows\\system32\\%")
   AND NOT LIKE(first_cmdline,"%\\windows\\syswow64\\%") | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` |`suspicious_copy_on_system32_filter`'
