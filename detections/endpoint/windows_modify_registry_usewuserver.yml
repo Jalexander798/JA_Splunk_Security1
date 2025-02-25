@@ -1,12 +1,11 @@
 name: Windows Modify Registry USeWuServer
 id: c427bafb-0b2c-4b18-ad85-c03c6fed9e75
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 description: The following analytic detects a suspicious modification to the Windows
   Update configuration registry key "UseWUServer." It leverages data from the Endpoint.Registry

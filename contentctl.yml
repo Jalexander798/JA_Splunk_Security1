@@ -41,6 +41,12 @@ apps:
   version: 3.0.0
   description: description of app
   hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-okta-identity-cloud_300.tgz
+- uid: 7404
+  title: Cisco Security Cloud
+  appid: CiscoSecurityCloud
+  version: 3.0.1
+  description: description of app
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/cisco-security-cloud_301.tgz
 - uid: 6652
   title: Add-on for Linux Sysmon
   appid: Splunk_TA_linux_sysmon
@@ -77,9 +83,9 @@ apps:
 - uid: 5579
   title: Splunk Add-on for CrowdStrike FDR
   appid: Splunk_TA_CrowdStrike_FDR
-  version: 2.0.4
+  version: 2.0.3
   description: description of app
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-crowdstrike-fdr_204.tgz
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-crowdstrike-fdr_203.tgz
 - uid: 3185
   title: Splunk Add-on for Microsoft IIS
   appid: SPLUNK_TA_FOR_IIS
@@ -206,4 +212,10 @@ apps:
   version: 4.2.2
   description: PSC for MLTK
   hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/python-for-scientific-computing-for-linux-64-bit_422.tgz
+- uid: 2882
+  title: Splunk Add-on for AppDynamics
+  appid: Splunk_TA_AppDynamics
+  version: 3.0.0
+  description: The Splunk Add-on for AppDynamics enables you to easily configure data inputs to pull data from AppDynamics' REST APIs
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-appdynamics_300.tgz
 githash: d6fac80e6d50ae06b40f91519a98489d4ce3a3fd
