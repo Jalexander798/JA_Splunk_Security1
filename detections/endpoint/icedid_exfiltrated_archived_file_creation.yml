@@ -14,12 +14,15 @@ description: The following analytic detects the creation of suspicious files nam
   allow attackers to access personal information, conduct further phishing attacks,
   or escalate their presence within the network.
 data_source:
-- Sysmon EventID 1
-- Windows Event Log Security 4688
-- CrowdStrike ProcessRollup2
-search: '`sysmon` EventCode= 11  (TargetFilename = "*\\passff.tar" OR TargetFilename
-  = "*\\cookie.tar") |stats count min(_time) as firstTime max(_time) as lastTime by
-  TargetFilename EventCode process_id  process_name dest | `security_content_ctime(firstTime)`
+- Sysmon EventID 11
+search: '| tstats `security_content_summariesonly` count values(Filesystem.file_path)
+  as file_path min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Filesystem
+  where Filesystem.file_path="*\\passff.tar" OR Filesystem.file_path="*\\cookie.tar"
+  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time 
+  Filesystem.file_name Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id 
+  Filesystem.user Filesystem.vendor_product 
+  | `drop_dm_object_name(Filesystem)`
+  | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `icedid_exfiltrated_archived_file_creation_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your

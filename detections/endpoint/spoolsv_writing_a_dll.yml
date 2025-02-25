@@ -14,10 +14,8 @@ description: The following analytic detects `spoolsv.exe` writing a `.dll` file,
   confirmed malicious, this could lead to unauthorized code execution and potential
   system compromise. Immediate endpoint isolation and further investigation are recommended.
 data_source:
-- Sysmon EventID 1
-- Windows Event Log Security 4688
-- CrowdStrike ProcessRollup2
-- Sysmon EventID 11
+- Sysmon EventID 1 AND Sysmon EventID 11
+- Windows Event Log Security 4688 AND Sysmon EventID 11
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Processes
   where Processes.process_name=spoolsv.exe by _time Processes.process_guid Processes.process_name
   Processes.dest | `drop_dm_object_name(Processes)` | join process_guid, _time [|

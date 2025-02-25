@@ -19,7 +19,7 @@ data_source:
 - Windows Event Log Security 4688
 - CrowdStrike ProcessRollup2
 search: "| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
-    as lastTime values(Processes.original_file_name) as original_file_name values(Processes.parent_process_exec) as parent_process_exec 
+    as lastTime values(Processes.original_file_name) as original_file_name values(Processes.action) as action values(Processes.parent_process_exec) as parent_process_exec 
     values(Processes.parent_process_guid) as parent_process_guid values(Processes.parent_process_id) as parent_process_id 
     values(Processes.parent_process_path) as parent_process_path 
     values(Processes.process_exec) as process_exec values(Processes.process_guid) as process_guid values(Processes.process_hash) as process_hash 

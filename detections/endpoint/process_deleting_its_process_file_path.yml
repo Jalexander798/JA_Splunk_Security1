@@ -17,8 +17,13 @@ data_source:
 - Sysmon EventID 1
 search: '`sysmon` EventCode=1 CommandLine = "* /c *" CommandLine = "* del*" Image
   = "*\\cmd.exe" | eval result = if(like(process,"%".parent_process."%"), "Found",
-  "Not Found") | stats min(_time) as firstTime max(_time) as lastTime count by dest
-  user ParentImage ParentCommandLine Image CommandLine EventCode ProcessID result
+  "Not Found") 
+  | stats min(_time) as firstTime max(_time) as lastTime count 
+  by action dest original_file_name parent_process parent_process_exec 
+  parent_process_guid parent_process_id parent_process_name 
+  parent_process_path process process_exec process_guid process_hash 
+  process_id process_integrity_level process_name process_path 
+  user user_id vendor_product 
   | where result = "Found" | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `process_deleting_its_process_file_path_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection

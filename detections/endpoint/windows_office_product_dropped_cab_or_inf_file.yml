@@ -14,8 +14,7 @@ description: The following analytic detects Office products writing .cab or .inf
   control over the affected system and potentially compromise sensitive data.
 data_source:
 - Sysmon EventID 1 AND Sysmon EventID 11
-- Windows Event Log Security 4688
-- CrowdStrike ProcessRollup2
+- Windows Event Log Security 4688 AND Sysmon EventID 11
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Processes
   where `process_office_products` by _time span=1h Processes.process_id Processes.process_name
   Processes.process Processes.dest Processes.process_guid | `drop_dm_object_name(Processes)`
