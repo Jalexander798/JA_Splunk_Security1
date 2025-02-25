@@ -28,15 +28,6 @@ references:
 - https://learn.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/general-extended-stored-procedures-transact-sql
 - https://learn.microsoft.com/en-us/previous-versions/sql/sql-server-2008-r2/ms175543(v=sql.105)
 - https://learn.microsoft.com/en-us/sql/relational-databases/extended-stored-procedures-programming/using-extended-stored-procedures
-drilldown_searches:
-- name: View DLL loading details for this host
-  search: '%original_detection_search% | search host="$dest$"'
-  earliest_offset: $info_min_time$
-  latest_offset: $info_max_time$
-- name: View all SQL Server DLL loads on this host in the last 7 days
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
-  earliest_offset: -7d
-  latest_offset: now
 tags:
   analytic_story:
   - SQL Server Abuse
