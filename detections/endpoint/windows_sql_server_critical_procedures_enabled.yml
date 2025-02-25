@@ -35,6 +35,7 @@ references:
 - https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/clr-enabled-server-configuration-option
 - https://www.netspi.com/blog/technical/network-penetration-testing/enumerating-domain-accounts-via-sql-server-using-adsi/
 - https://attack.mitre.org/techniques/T1505/001/
+- https://www.netspi.com/blog/technical-blog/adversary-simulation/attacking-sql-server-clr-assemblies/
 drilldown_searches:
 - name: View the detection results for - "$dest$"
   search: '%original_detection_search% | search  dest = "$dest$"'
