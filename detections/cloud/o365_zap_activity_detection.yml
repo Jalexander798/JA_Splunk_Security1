@@ -1,6 +1,6 @@
 name: O365 ZAP Activity Detection
 id: 4df275fd-a0e5-4246-8b92-d3201edaef7a
-version: 4
+version: 5
 date: '2025-02-10'
 author: Steven Dick
 status: production
@@ -11,7 +11,7 @@ description: The following analytic detects when the Microsoft Zero-hour Automat
   content for user inboxes. Since this is a retroactive capability, there is still
   a window in which the user may fall victim to the malicious content.
 data_source:
-- O365 Universal Audit Log
+- Office 365 Universal Audit Log
 search: '`o365_management_activity` Workload=SecurityComplianceCenter Operation=AlertEntityGenerated
   Name="*messages containing malicious*" | fromjson Data | stats count min(_time)
   as firstTime max(_time) as lastTime values(zu) as url values(zfn) as file_name values(ms)
