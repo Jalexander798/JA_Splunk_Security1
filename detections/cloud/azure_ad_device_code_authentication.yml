@@ -1,6 +1,6 @@
 name: Azure AD Device Code Authentication
 id: d68d8732-6f7e-4ee5-a6eb-737f2b990b91
-version: 6
+version: 7
 date: '2025-02-10'
 author: Mauricio Velazco, Gowthamaraj Rajendran,  Splunk
 status: production

@@ -1,6 +1,6 @@
 name: Azure Automation Account Created
 id: 860902fd-2e76-46b3-b050-ba548dab576c
-version: 7
+version: 8
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production

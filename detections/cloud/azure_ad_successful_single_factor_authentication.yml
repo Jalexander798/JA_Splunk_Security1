@@ -1,6 +1,6 @@
 name: Azure AD Successful Single-Factor Authentication
 id: a560e7f6-1711-4353-885b-40be53101fcd
-version: 7
+version: 8
 date: '2025-02-10'
 author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
 status: production

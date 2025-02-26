@@ -1,6 +1,6 @@
 name: Azure Runbook Webhook Created
 id: e98944a9-92e4-443c-81b8-a322e33ce75a
-version: 8
+version: 9
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production

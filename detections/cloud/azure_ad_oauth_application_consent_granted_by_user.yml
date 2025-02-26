@@ -1,6 +1,6 @@
 name: Azure AD OAuth Application Consent Granted By User
 id: 10ec9031-015b-4617-b453-c0c1ab729007
-version: 6
+version: 7
 date: '2024-11-14'
 author: Mauricio Velazco, Splunk
 status: production

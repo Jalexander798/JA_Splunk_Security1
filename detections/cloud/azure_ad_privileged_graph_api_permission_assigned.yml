@@ -1,6 +1,6 @@
 name: Azure AD Privileged Graph API Permission Assigned
 id: 5521f8c5-1aa3-473c-9eb7-853701924a06
-version: 6
+version: 7
 date: '2024-11-14'
 author: Mauricio Velazco, Splunk
 status: production
