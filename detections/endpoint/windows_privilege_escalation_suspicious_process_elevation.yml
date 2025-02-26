@@ -14,9 +14,7 @@ description: The following analytic detects when a process running with low or m
   attacker to execute code with higher privileges, potentially leading to full system
   compromise and persistent access.
 data_source:
-- Sysmon EventID 1
-- Windows Event Log Security 4688
-- CrowdStrike ProcessRollup2
+- Sysmon EventID 1 AND Sysmon EventID 1 
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime from
   datamodel=Endpoint.Processes where Processes.process_integrity_level IN ("low","medium","high")
   NOT Processes.user IN ("*SYSTEM","*LOCAL SERVICE","*NETWORK SERVICE","DWM-*","*$")

@@ -64,6 +64,20 @@ fields:
 - timestartpos
 - user_id
 - vendor_product
+output_fields:
+- dest 
+- signature 
+- signature_id 
+- user_id 
+- vendor_product 
+- EventID 
+- Guid 
+- Opcode 
+- Name 
+- Path 
+- ProcessID 
+- ScriptBlockId 
+- ScriptBlockText
 field_mappings:
 - data_model: cim
   data_set: Endpoint.Processes

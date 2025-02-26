@@ -14,8 +14,8 @@ description: The following analytic detects suspiciously long data written to th
   to maintain persistence, execute code, or manipulate system configurations without
   leaving a conventional file footprint.
 data_source:
-- Sysmon EventID 1 AND Sysmon EventID 12
-- Sysmon EventID 1 AND Sysmon EventID 13
+- Sysmon EventID 12
+- Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count
   from datamodel=Endpoint.Registry where Registry.registry_value_data=* 
   by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path 
@@ -54,8 +54,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: The process $process_name$ added a suspicious length of registry data on
-    $dest$.
+  message: A process added a suspicious length of registry data on $dest$.
   risk_objects:
   - field: dest
     type: system
@@ -63,11 +62,7 @@ rba:
   - field: user
     type: user
     score: 60
-  threat_objects:
-  - field: process_name
-    type: process_name
-  - field: process_name
-    type: process_name
+  threat_objects: []
 tags:
   analytic_story:
   - Unusual Processes

@@ -13,7 +13,7 @@ description: The following analytic detects the creation of files without extens
   could lead to severe system compromise, including boot sector wiping, resulting
   in potential data loss and system inoperability.
 data_source:
-- Sysmon EventID 1 AND Sysmon EventID 11
+- Sysmon EventID 11
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Filesystem where 
   Filesystem.file_path IN ("*\\System32\\drivers\\*", "*\\syswow64\\drivers\\*")
   by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time 

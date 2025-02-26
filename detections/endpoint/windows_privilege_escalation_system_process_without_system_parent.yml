@@ -16,10 +16,10 @@ data_source:
 search: '`sysmon` EventCode=1 IntegrityLevel="system" ParentUser=* NOT ParentUser
   IN ("*SYSTEM","*LOCAL SERVICE","*NETWORK SERVICE","*DWM-*","*$","-") | eval src_user
   = replace(ParentUser,"^[^\\\]+\\\\","") | stats count min(_time) as firstTime max(_time)
-  as lastTime values(process_name) as process_name values(process) as process, values(process_path)
-  as process_path, values(process_current_directory) as process_current_directory
-  values(parent_process) as parent_process by dest, user, src_user, parent_process_name,
-  parent_process_guid | `security_content_ctime(firstTime)`  | `security_content_ctime(lastTime)`
+  as lastTime by action dest original_file_name parent_process parent_process_exec parent_process_guid parent_process_id parent_process_name 
+  parent_process_path process process_exec process_guid process_hash process_id process_integrity_level process_name process_path 
+  user user_id vendor_product 
+  | `security_content_ctime(firstTime)`  | `security_content_ctime(lastTime)`
   | `windows_privilege_escalation_system_process_without_system_parent_filter`'
 how_to_implement: Target environment must ingest sysmon data, specifically Event ID
   1 with process integrity and parent user data.

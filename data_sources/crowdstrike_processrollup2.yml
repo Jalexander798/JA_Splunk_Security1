@@ -90,6 +90,27 @@ fields:
 - user
 - user_id
 - vendor_product
+output_fields:
+  - action 
+  - dest 
+  - original_file_name 
+  - parent_process 
+  - parent_process_exec 
+  - parent_process_guid 
+  - parent_process_id 
+  - parent_process_name 
+  - parent_process_path 
+  - process 
+  - process_exec 
+  - process_guid 
+  - process_hash 
+  - process_id 
+  - process_integrity_level 
+  - process_name 
+  - process_path 
+  - user 
+  - user_id
+  - vendor_product
 field_mappings:
 - data_model: cim
   data_set: Endpoint.Processes

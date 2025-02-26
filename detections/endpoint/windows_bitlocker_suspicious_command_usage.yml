@@ -11,7 +11,13 @@ data_source:
 - Windows Event Log Security 4688
 - CrowdStrike ProcessRollup2
 search: |-
-  | tstats `security_content_summariesonly` values(Processes.process) as process, values(Processes.parent_process) as parent_process min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Processes where Processes.process_name = manage-bde.exe AND Processes.process IN ("* -protectors -disable *","* -protectors -delete *","* –forcerecovery *","* -lock *") by Processes.dest Processes.user Processes.process_name Processes.parent_process_name
+  | tstats `security_content_summariesonly` min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Processes 
+  where Processes.process_name = manage-bde.exe AND Processes.process IN ("* -protectors -disable *","* -protectors -delete *","* -forcerecovery *","* -lock *") 
+  by Processes.action Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec 
+  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name 
+  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid Processes.process_hash 
+  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path 
+  Processes.user Processes.user_id Processes.vendor_product 
   | `drop_dm_object_name(Processes)` 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)`
@@ -33,8 +39,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: Investigate processes on $dest$ 
-  search: '| from datamodel Endpoint.Processes
-| search process_name = $process_name$ AND dest = "$dest$"'
+  search: '| from datamodel Endpoint.Processes | search process_name = $process_name$ AND dest = "$dest$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:

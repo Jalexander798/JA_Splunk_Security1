@@ -7,11 +7,8 @@ status: production
 type: Anomaly
 description: This analytic is used to identify when a removable media device is attached to a machine and then a process is executed from the same drive letter assigned to the removable media device. Adversaries and Insider Threats may use removable media devices for several malicious activities, including initial access, execution, and exfiltration.
 data_source: 
-- Windows Security Event ID 4688
-- Sysmon EventID 1
-- Sysmon EventID 12
-- Sysmon EventID 13
-- CrowdStrike ProcessRollup2
+- Sysmon EventID 1 AND Sysmon EventID 12
+- Sysmon EventID 1 AND Sysmon EventID 13
 search: |-
   | tstats `security_content_summariesonly` count values(Processes.process) as process min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Processes where Processes.process_current_directory=* AND NOT Processes.process_current_directory IN ("C:\\*","*\\sysvol\\*") by Processes.dest Processes.user Processes.process_name Processes.parent_process_name Processes.process_current_directory
   | `drop_dm_object_name(Processes)` 

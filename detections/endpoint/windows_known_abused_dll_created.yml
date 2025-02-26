@@ -63,7 +63,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: The file [$file_name$] was written to an unusual location by [$process_name$]
+  message: The file [$file_name$] was written to an unusual location
     on [$dest$].
   risk_objects:
   - field: dest
@@ -73,8 +73,6 @@ rba:
     type: user
     score: 10
   threat_objects:
-  - field: process_name
-    type: process_name
   - field: file_name
     type: file_name
 tags:
