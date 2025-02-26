@@ -1,6 +1,6 @@
 name: GCP Unusual Number of Failed Authentications From Ip
 id: bd8097ed-958a-4873-87d9-44f2b4d85705
-version: 5
+version: 6
 date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production
@@ -14,7 +14,7 @@ description: The following analytic identifies a single source IP failing to aut
   this could lead to unauthorized access, data breaches, or further exploitation within
   the environment.
 data_source:
-- Google Workspace login_failure
+- Google Workspace
 search: '`gws_reports_login` event.type = login event.name = login_failure| bucket
   span=5m _time | stats  dc(user_name) AS unique_accounts values(user_name) as tried_accounts
   values(authentication_method) AS authentication_method by _time, src | eventstats  avg(unique_accounts)
