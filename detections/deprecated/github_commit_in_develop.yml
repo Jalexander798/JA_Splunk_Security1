@@ -1,9 +1,9 @@
 name: Github Commit In Develop
 id: f3030cb6-0b02-11ec-8f22-acde48001122
-version: 4
+version: 5
 date: '2024-11-14'
 author: Teoderick Contreras, Splunk
-status: production
+status: deprecated
 type: Anomaly
 description: The following analytic detects commits pushed directly to the 'develop'
   or 'main' branches in a GitHub repository. It leverages GitHub logs, focusing on
@@ -13,7 +13,7 @@ description: The following analytic detects commits pushed directly to the 'deve
   to unauthorized code modifications, introducing vulnerabilities or backdoors into
   the codebase, and compromising the integrity of the development lifecycle.
 data_source:
-- GitHub
+- GitHub Webhooks
 search: '`github` branches{}.name = main OR branches{}.name = develop |  stats count
   min(_time) as firstTime max(_time) as lastTime  by commit.author.html_url commit.commit.author.email
   commit.author.login commit.commit.message repository.pushed_at commit.commit.committer.date
@@ -24,7 +24,7 @@ how_to_implement: To successfully implement this search, you need to be ingestin
   to monitor the changes in a github project.
 known_false_positives: admin can do changes directly to develop branch
 references:
-- https://www.redhat.com/en/topics/devops/what-is-devsecops
+- https://www.splunk.com/en_us/blog/tips-and-tricks/getting-github-data-with-webhooks.html
 drilldown_searches:
 - name: View the detection results for - "$commit.commit.author.email$"
   search: '%original_detection_search% | search  commit.commit.author.email = "$commit.commit.author.email$"'
