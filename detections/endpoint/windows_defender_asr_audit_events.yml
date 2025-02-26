@@ -6,7 +6,7 @@ author: Michael Haag, Splunk
 status: production
 type: Anomaly
 data_source:
-- Windows Event Log Defender 1122
+- Windows Event Log Defender 1122 
 - Windows Event Log Defender 1125
 - Windows Event Log Defender 1126
 - Windows Event Log Defender 1132

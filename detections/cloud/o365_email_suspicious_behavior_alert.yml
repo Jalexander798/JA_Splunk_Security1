@@ -1,6 +1,6 @@
 name: O365 Email Suspicious Behavior Alert
 id: 85c7555a-05af-4322-81aa-76b4ddf52baa
-version: 4
+version: 5
 date: '2025-02-10'
 author: Steven Dick
 status: production
@@ -12,7 +12,7 @@ description: The following analytic identifies when one of O365 the built-in sec
   Certain premium Office 365 capabilities further enhance these detection and response
   functions.
 data_source:
-- O365 Universal Audit Log
+- Office 365 Universal Audit Log
 search: '`o365_management_activity` Workload=SecurityComplianceCenter Operation=AlertEntityGenerated Name IN ("Suspicious email sending patterns detected","User restricted from sending email","Suspicious Email Forwarding Activity","Email sending limit exceeded") 
   | fromjson Data  
   | rename Operation as action, Name as signature, AlertId as signature_id, ObjectId as user 

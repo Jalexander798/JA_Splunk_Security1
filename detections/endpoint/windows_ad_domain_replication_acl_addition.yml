@@ -6,7 +6,7 @@ author: Dean Luxton
 type: TTP
 status: production
 data_source:
-- Windows Security 5136
+- Windows Event Log Security 5136
 description: The following analytic detects the addition of permissions required for
   a DCSync attack, specifically DS-Replication-Get-Changes, DS-Replication-Get-Changes-All,
   and DS-Replication-Get-Changes-In-Filtered-Set. It leverages EventCode 5136 from

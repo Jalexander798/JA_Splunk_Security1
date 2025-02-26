@@ -12,7 +12,7 @@ description: The following analytic identifies when the allowed domain settings 
   should be monitored by security teams as they could potentially lead to unauthorized
   access.
 data_source:
-- O365 Universal Audit Log
+- Office 365 Universal Audit Log
 search: "`o365_management_activity` Workload=SharePoint Operation=SharingPolicyChanged \"ModifiedProperties{}.Name\"=AllowDomainList 
   | eval signature_id = CorrelationId, signature=Operation, src = ClientIP, user = UserId, object_name='ModifiedProperties{}.Name', object_attrs_new = split(replace('ModifiedProperties{}.NewValue',\"\\.\\.\\.\",\"\"),\",\"), object_attrs_old = split(replace('ModifiedProperties{}.OldValue',\"\\.\\.\\.\",\"\"),\",\") 
   | rename Operation as action 

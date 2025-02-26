@@ -1,6 +1,6 @@
 name: asr_rules
-date: 2024-12-23
-version: 2
+date: 2025-01-29
+version: 3
 id: 3886d687-ae77-4a61-99eb-e745083e391e
 author: Splunk Threat Research Team
 lookup_type: csv

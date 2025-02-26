@@ -4,7 +4,7 @@ version: 3
 date: '2025-02-10'
 author: Dean Luxton
 data_source:
-- O365 Add app role assignment grant to user
+- O365 Add app role assignment grant to user.
 type: TTP
 status: production
 description: This detection identifies when an Azure Service Principal elevates privileges by adding themself to a new app role assignment.
