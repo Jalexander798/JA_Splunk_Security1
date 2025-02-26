@@ -1,6 +1,6 @@
 name: AWS Multi-Factor Authentication Disabled
 id: 374832b1-3603-420c-b456-b373e24d34c0
-version: 5
+version: 6
 date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production

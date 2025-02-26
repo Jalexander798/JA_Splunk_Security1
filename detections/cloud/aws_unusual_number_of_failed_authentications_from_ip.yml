@@ -1,6 +1,6 @@
 name: AWS Unusual Number of Failed Authentications From Ip
 id: 0b5c9c2b-e2cb-4831-b4f1-af125ceb1386
-version: 6
+version: 7
 date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production

@@ -1,6 +1,6 @@
 name: AWS Defense Evasion Impair Security Services
 id: b28c4957-96a6-47e0-a965-6c767aac1458
-version: 5
+version: 6
 date: '2025-02-10'
 author: Bhavin Patel, Gowthamaraj Rajendran, Splunk
 status: production

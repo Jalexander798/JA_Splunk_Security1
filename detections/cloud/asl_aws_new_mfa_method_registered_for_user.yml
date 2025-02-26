@@ -1,6 +1,6 @@
 name: ASL AWS New MFA Method Registered For User
 id: 33ae0931-2a03-456b-b1d7-b016c5557fbd
-version: 7
+version: 8
 date: '2025-02-10'
 author: Patrick Bareiss, Splunk
 status: experimental

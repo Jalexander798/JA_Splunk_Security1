@@ -1,6 +1,6 @@
 name: AWS IAM Successful Group Deletion
 id: e776d06c-9267-11eb-819b-acde48001122
-version: 6
+version: 7
 date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production

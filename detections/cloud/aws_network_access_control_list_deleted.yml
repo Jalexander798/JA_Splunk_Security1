@@ -1,6 +1,6 @@
 name: AWS Network Access Control List Deleted
 id: ada0f478-84a8-4641-a3f1-d82362d6fd75
-version: 6
+version: 7
 date: '2025-02-10'
 author: Bhavin Patel, Patrick Bareiss, Splunk
 status: production
