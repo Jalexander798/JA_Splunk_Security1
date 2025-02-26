@@ -1,6 +1,6 @@
 name: O365 Threat Intelligence Suspicious Email Delivered
 id: 605cc93a-70e4-4ee3-9a3d-1a62e8c9b6c2
-version: 4
+version: 5
 date: '2025-02-10'
 author: Steven Dick
 status: production
@@ -12,7 +12,7 @@ description: The following analytic identifies when a suspicious email is detect
   and responded to appropriately. Certain premium Office 365 capabilities such as
   Safe Attachment and Safe Links further enhance these detection and response functions.
 data_source:
-- O365 Universal Audit Log
+- Office 365 Universal Audit Log
 search: '`o365_management_activity` Workload=ThreatIntelligence Operation=TIMailData
   DeliveryAction!=Blocked Directionality=InBound | rename P2Sender as src_user, P1Sender
   as sender, Recipients{} as user, DeliveryAction as action | stats values(SenderIp)

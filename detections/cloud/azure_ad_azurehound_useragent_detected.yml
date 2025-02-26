@@ -1,5 +1,5 @@
 name: Azure AD AzureHound UserAgent Detected
-id: d62852db-a1f1-40db-a7fc-c3d56fa8bda3
+id: d62852db-a1f1-40db-a7fc-c3d56fa8bda3 
 version: 2
 date: '2025-01-06'
 author: Dean Luxton 
@@ -41,7 +41,7 @@ rba:
   - field: src
     type: ip_address
   - field: user_agent
-    type: http_user_agent
+    type: http_user_agent 
 tags:
   analytic_story:
   - Azure Active Directory Privilege Escalation
