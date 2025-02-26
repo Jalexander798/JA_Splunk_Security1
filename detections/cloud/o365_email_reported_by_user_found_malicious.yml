@@ -1,6 +1,6 @@
 name: O365 Email Reported By User Found Malicious
 id: 7698b945-238e-4bb9-b172-81f5ca1685a1
-version: 4
+version: 5
 date: '2025-02-10'
 author: Steven Dick
 status: production
@@ -11,7 +11,7 @@ description: The following analytic detects when an email submitted to Microsoft
   to report potentially malicious emails. This correlation looks for any submission
   that returns a Phish or Malware verdict upon submission.
 data_source:
-- O365 Universal Audit Log
+- Office 365 Universal Audit Log
 search: '`o365_management_activity` Workload=SecurityComplianceCenter  Operation=AlertEntityGenerated
   Name="Email reported by user as*" | fromjson Data | rename _raw AS temp etps AS
   _raw | extract pairdelim=";" kvdelim=":" | rename _raw AS etps temp AS _raw | search

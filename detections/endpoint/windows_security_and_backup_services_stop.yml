@@ -47,7 +47,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Known services $param1$ terminated by a potential ransomware on $dest$
+  message: Known services $display_name$ terminated by a potential ransomware on $dest$
   risk_objects:
   - field: dest
     type: system

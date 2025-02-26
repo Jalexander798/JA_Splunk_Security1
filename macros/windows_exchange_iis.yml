@@ -1,0 +1,4 @@
+definition: (sourcetype="MSWindows:2003:IIS" OR sourcetype="MSWindows:2008R2:IIS" OR sourcetype="MSWindows:2010EWS:IIS" OR sourcetype="MSWindows:2012:IIS" OR sourcetype="MSWindows:2013EWS:IIS")
+description: customer specific splunk configurations(eg- index, source, sourcetype).
+  Replace the macro definition with configurations for your Splunk Environment.
+name: windows_exchange_iis
