@@ -1,6 +1,6 @@
 name: O365 Safe Links Detection
 id: 711d9e8c-2cb0-45cf-8813-5f191ecb9b26
-version: 4
+version: 5
 date: '2025-02-10'
 author: Steven Dick
 status: production
@@ -9,7 +9,7 @@ description: The following analytic detects when any Microsoft Safe Links alerti
   is triggered. This behavior may indicate when user has interacted with a phishing
   or otherwise malicious link within the Microsoft Office ecosystem.
 data_source:
-- O365 Universal Audit Log
+- Office 365 Universal Audit Log
 search: '`o365_management_activity` Name="*a potentially malicious URL*" Operation=AlertEntityGenerated
   | fromjson Data | stats count min(_time) as firstTime max(_time) as lastTime values(ObjectId)
   as url values(od) as desc by AlertId,trc,Operation,Name,ot | rename Name as signature,
