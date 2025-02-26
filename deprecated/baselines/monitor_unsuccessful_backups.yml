@@ -1,10 +1,10 @@
 name: Monitor Unsuccessful Backups
 id: b2178fed-592f-492b-b851-74161678aa56
-version: 1
-date: '2017-09-12'
+version: 2
+date: '2025-02-27'
 author: David Dorsey, Splunk
 type: Baseline
-status: production
+status: deprecated
 description: This search is intended to give you a feel for how often backup failures
   happen in your environments.  Fluctuations in these numbers will allow you to determine
   when you should investigate.
