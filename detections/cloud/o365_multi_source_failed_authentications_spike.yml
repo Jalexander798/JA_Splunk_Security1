@@ -1,6 +1,6 @@
 name: O365 Multi-Source Failed Authentications Spike
 id: ea4e2c41-dbfb-4f5f-a7b6-9ac1b7f104aa
-version: 6
+version: 7
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
