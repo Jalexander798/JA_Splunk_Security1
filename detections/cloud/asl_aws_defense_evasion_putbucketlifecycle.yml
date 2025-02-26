@@ -1,6 +1,6 @@
 name: ASL AWS Defense Evasion PutBucketLifecycle
 id: 986565a2-7707-48ea-9590-37929cebc938
-version: 2
+version: 3
 date: '2025-02-10'
 author: Patrick Bareiss, Splunk
 status: production

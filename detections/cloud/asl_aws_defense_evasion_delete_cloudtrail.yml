@@ -1,6 +1,6 @@
 name: ASL AWS Defense Evasion Delete Cloudtrail
 id: 1f0b47e5-0134-43eb-851c-e3258638945e
-version: 7
+version: 8
 date: '2025-02-10'
 author: Patrick Bareiss, Splunk
 status: production

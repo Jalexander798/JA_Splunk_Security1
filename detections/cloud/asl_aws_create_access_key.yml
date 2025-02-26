@@ -1,6 +1,6 @@
 name: ASL AWS Create Access Key
 id: 81a9f2fe-1697-473c-af1d-086b0d8b63c8
-version: 2
+version: 3
 date: '2025-02-10'
 author: Patrick Bareiss, Splunk
 status: production

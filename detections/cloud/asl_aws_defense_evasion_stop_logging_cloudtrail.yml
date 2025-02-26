@@ -1,6 +1,6 @@
 name: ASL AWS Defense Evasion Stop Logging Cloudtrail
 id: 0b78a8f9-1d31-4d23-85c8-56ad13d5b4c1
-version: 5
+version: 6
 date: '2025-02-10'
 author: Patrick Bareiss, Splunk
 status: production
