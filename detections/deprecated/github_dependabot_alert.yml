@@ -1,6 +1,6 @@
 name: GitHub Dependabot Alert
 id: 05032b04-4469-4034-9df7-05f607d75cba
-version: 5
+version: 6
 date: '2025-02-10'
 author: Patrick Bareiss, Splunk
 status: deprecated
