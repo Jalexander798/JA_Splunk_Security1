@@ -3,7 +3,7 @@ app:
   uid: 3449
   title: ES Content Updates
   appid: DA-ESS-ContentUpdate
-  version: 5.0.0
+  version: 5.1.0
   description: Explore the Analytic Stories included with ES Content Updates.
   prefix: ESCU
   label: ESCU
@@ -30,11 +30,11 @@ splunk_api_username: null
 post_test_behavior: pause_on_failure
 apps:
 - uid: 1621
-  title: Splunk Common Information Model (CIM)
+  title: Splunk_SA_CIM
   appid: Splunk_SA_CIM
-  version: 6.0.1
+  version: 6.0.2
   description: description of app
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-common-information-model-cim_601.tgz
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-common-information-model-cim_602.tgz
 - uid: 6553
   title: Splunk Add-on for Okta Identity Cloud
   appid: Splunk_TA_okta_identity_cloud
@@ -143,9 +143,9 @@ apps:
 - uid: 1876
   title: Splunk Add-on for AWS
   appid: Splunk_TA_aws
-  version: 7.9.0
+  version: 7.9.1
   description: description of app
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-amazon-web-services-aws_790.tgz
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-amazon-web-services-aws_791.tgz
 - uid: 3088
   title: Splunk Add-on for Google Cloud Platform
   appid: SPLUNK_ADD_ON_FOR_GOOGLE_CLOUD_PLATFORM
@@ -161,9 +161,9 @@ apps:
 - uid: 3110
   title: Splunk Add-on for Microsoft Cloud Services
   appid: SPLUNK_TA_MICROSOFT_CLOUD_SERVICES
-  version: 5.4.2
+  version: 5.4.3
   description: description of app
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-microsoft-cloud-services_542.tgz
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-microsoft-cloud-services_543.tgz
 - uid: 4055
   title: Splunk Add-on for Microsoft Office 365
   appid: SPLUNK_ADD_ON_FOR_MICROSOFT_OFFICE_365
