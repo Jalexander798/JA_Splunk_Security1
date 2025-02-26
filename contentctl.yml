@@ -212,6 +212,12 @@ apps:
   version: 4.2.2
   description: PSC for MLTK
   hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/python-for-scientific-computing-for-linux-64-bit_422.tgz
+- uid: 6254
+  title: Splunk Add-on for Github
+  appid: Splunk_TA_github
+  version: 3.1.0
+  description: description of app
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-github_310.tgz
 - uid: 2882
   title: Splunk Add-on for AppDynamics
   appid: Splunk_TA_AppDynamics

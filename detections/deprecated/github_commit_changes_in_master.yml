@@ -1,9 +1,9 @@
 name: Github Commit Changes In Master
 id: c9d2bfe2-019f-11ec-a8eb-acde48001122
-version: 4
+version: 5
 date: '2024-11-14'
 author: Teoderick Contreras, Splunk
-status: production
+status: deprecated
 type: Anomaly
 description: The following analytic detects direct commits or pushes to the master
   or main branch in a GitHub repository. It leverages GitHub logs to identify events
@@ -13,7 +13,7 @@ description: The following analytic detects direct commits or pushes to the mast
   this could lead to unauthorized code execution, security vulnerabilities, or compromised
   project integrity.
 data_source:
-- GitHub
+- GitHub Webhooks
 search: '`github` branches{}.name = main OR branches{}.name = master |  stats count
   min(_time) as firstTime max(_time) as lastTime by commit.commit.author.email commit.author.login
   commit.commit.message repository.pushed_at commit.commit.committer.date repository.full_name
@@ -24,7 +24,7 @@ how_to_implement: To successfully implement this search, you need to be ingestin
   to monitor the changes in a github project.
 known_false_positives: Admin can do changes directly to master branch
 references:
-- https://www.redhat.com/en/topics/devops/what-is-devsecops
+- https://www.splunk.com/en_us/blog/tips-and-tricks/getting-github-data-with-webhooks.html
 drilldown_searches:
 - name: View the detection results for - "$commit.commit.author.email$"
   search: '%original_detection_search% | search  commit.commit.author.email = "$commit.commit.author.email$"'
