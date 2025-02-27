@@ -7,13 +7,11 @@ type: TTP
 status: production
 description: This analytic detects mailbox rule creation, a common technique used in Business Email Compromise. It uses a scoring mechanism to identify a combination of attributes often featured in mailbox rules created by attackers.
   This may indicate that an attacker has gained access to the account.
-search: '`o365_management_activity` Workload=Exchange Operation="New-InboxRule" | rename Parameters{}.*
-  as * | eval temp=mvzip(Name,Value, "<JOIN>") | fields - Name Value | mvexpand temp
-  | eval temp_name=mvindex(split(temp,"<JOIN>"),0), temp_value=mvindex(split(temp,"<JOIN>"),1)
-  | eval {temp_name}=temp_value | stats values(Name) as Name, values(MarkAsRead) as
-  MarkAsRead, values(MoveToFolder) as MoveToFolder by _time Id user | lookup ut_shannon_lookup word as Name
-  | eval entropy_score=if(ut_shannon<=2, 1, 0) | eval len_score=if(len(Name)<=3, 1,
-  0) | eval read_score=if(MarkAsRead="True", 1, 0) | eval folder_score=if(match(MoveToFolder,
+search: '`o365_management_activity` Workload=Exchange Operation="New-InboxRule" |
+  stats values(Name) as Name, values(MarkAsRead) as MarkAsRead, values(MoveToFolder)
+  as MoveToFolder by _time Id user | lookup ut_shannon_lookup word as Name | eval
+  entropy_score=if(ut_shannon<=2, 1, 0) | eval len_score=if(len(Name)<=3, 1,0) | eval
+  read_score=if(MarkAsRead="True", 1, 0) | eval folder_score=if(match(MoveToFolder,
   "^(RSS|Conversation History|Archive)"), 1, 0) | eval suspicious_score=entropy_score+len_score+read_score+folder_score
   | where suspicious_score>2 | `o365_bec_email_hiding_rule_created_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
@@ -38,7 +36,9 @@ rba:
   - field: user
     type: user
     score: 25
-  threat_objects: []
+  threat_objects:
+  - field: Name
+    type: signature
 tags:
   analytic_story:
   - Office 365 Account Takeover
