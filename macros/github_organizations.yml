@@ -1,0 +1,4 @@
+definition: sourcetype=github:cloud:audit
+description: customer specific splunk configurations(eg- index, source, sourcetype).
+  Replace the macro definition with configurations for your Splunk Environment.
+name: github_organizations
