@@ -1,7 +1,7 @@
 name: Detect Large Outbound ICMP Packets
 id: e9c102de-4d43-42a7-b1c8-8062ea297419
-version: 9
-date: '2025-01-27'
+version: '10'
+date: '2025-02-24'
 author: Rico Valdez, Dean Luxton, Splunk
 status: production
 type: TTP
@@ -66,9 +66,9 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Backdoor Pingpong
-  - Nexus APT Threat Activity
   - Command And Control
+  - China-Nexus Threat Activity
+  - Backdoor Pingpong
   asset_type: Endpoint
   mitre_attack_id:
   - T1095
