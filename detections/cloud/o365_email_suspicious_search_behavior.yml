@@ -67,4 +67,4 @@ tests:
   attack_data:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1213.002/o365_sus_sharepoint_search/o365_sus_sharepoint_search.log
     source: o365
-	sourcetype: o365:management:activity
+    sourcetype: o365:management:activity
