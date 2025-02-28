@@ -26,7 +26,7 @@ search: |-
     | bin _time span=4hr
     | eval InternetMessageId = lower(InternetMessageId), user = lower(UserId), subject = Subject
     ]
-  | stats values(ClientIPAddress) as src, values(ClientInfoString) as http_user_agent, values(ClientProcessName) as process, values(Folder.Path) as file_path, values(Operation) as signature, values(ResultStatus) as result, values(InternetMessageId) as signature_id, count, min(mailtime) as firstTime, max(deltime) as lastTime by user,subject
+  | stats values(ClientIPAddress) as src, values(ClientInfoString) as http_user_agent, values(Folder.Path) as file_path, values(Operation) as signature, values(ResultStatus) as result, values(InternetMessageId) as signature_id, count, min(mailtime) as firstTime, max(deltime) as lastTime by user,subject
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)`
   | `o365_email_receive_and_hard_delete_takeover_behavior_filter`
@@ -82,8 +82,6 @@ tests:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114/o365_suspect_email_actions/o365_exchange_suspect_events.log
     source: o365
     sourcetype: o365:management:activity
-- name: True Positive Test
-  attack_data:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114/o365_suspect_email_actions/o365_messagetrace_suspect_events.log
     source: o365_messagetrace
     sourcetype: o365:reporting:messagetrace
