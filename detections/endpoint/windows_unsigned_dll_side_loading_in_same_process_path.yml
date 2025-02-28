@@ -54,10 +54,10 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - PlugX
-  - Derusbi
   - China-Nexus Threat Activity
+  - Derusbi
   - DarkGate Malware
+  - PlugX
   - Earth Estries
   - SnappyBee
   asset_type: Endpoint
@@ -71,7 +71,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/unsigned_dll_loaded_same_process_path/unsigned_dll_process_path.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/unsigned_dll_loaded_same_process_path/unsigned_dll_process_path.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

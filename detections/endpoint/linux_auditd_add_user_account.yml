@@ -1,7 +1,7 @@
 name: Linux Auditd Add User Account
 id: aae66dc0-74b4-4807-b480-b35f8027abb4
-version: 4
-date: '2025-02-10'
+version: 5
+date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -14,11 +14,12 @@ description: The following analytic detects the creation of new user accounts on
   the system, posing a severe security risk.
 data_source:
 - Linux Auditd Proctitle
-search: '`linux_auditd` `linux_auditd_normalized_proctitle_process`| rename host as
-  dest | where LIKE (process_exec, "%useradd%") OR LIKE (process_exec, "%adduser%")
-  | stats count min(_time) as firstTime max(_time) as lastTime by process_exec proctitle
-  dest  | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`|
-  `linux_auditd_add_user_account_filter`'
+search: '`linux_auditd` proctitle IN ("*useradd*", "*adduser*")
+  | rename host as dest 
+  | stats count min(_time) as firstTime max(_time) as lastTime by proctitle dest  
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)`
+  |`linux_auditd_add_user_account_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
   data, that consist SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
   executions and process details on Unix/Linux systems. These logs should be ingested
@@ -47,7 +48,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A [$process_exec$] event occurred on host - [$dest$] to add a user account.
+  message: A [$proctitle$] event occurred on host - [$dest$] to add a user account.
   risk_objects:
   - field: dest
     type: system
@@ -70,6 +71,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/linux_auditd_add_user/linux_auditd_add_user.log
-    source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/linux_auditd_add_user/auditd_proctitle_user_add.log
+    source: auditd
+    sourcetype: auditd

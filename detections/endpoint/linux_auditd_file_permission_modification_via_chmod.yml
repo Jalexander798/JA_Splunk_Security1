@@ -1,8 +1,8 @@
 name: Linux Auditd File Permission Modification Via Chmod
 id: 5f1d2ea7-eec0-4790-8b24-6875312ad492
-version: '8'
+version: 9
 date: '2025-02-24'
-author: "Teoderick Contreras, Splunk, Ivar Nyg\xE5rd"
+author: Teoderick Contreras, Splunk, Ivar Nygård
 status: production
 type: Anomaly
 description: The following analytic detects suspicious file permission modifications
@@ -15,12 +15,12 @@ description: The following analytic detects suspicious file permission modificat
   actions on the system.
 data_source:
 - Linux Auditd Proctitle
-search: '`linux_auditd` `linux_auditd_normalized_proctitle_process` | rename host
-  as dest  | where LIKE(process_exec, "%chmod%") AND (LIKE(process_exec, "% 777 %")
-  OR LIKE(process_exec, "% 755 %") OR LIKE(process_exec, "%+%x%") OR LIKE(process_exec,
-  "% 754 %") OR LIKE(process_exec, "% 700 %")) | stats count min(_time) as firstTime
-  max(_time) as lastTime by process_exec proctitle dest | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)`| `linux_auditd_file_permission_modification_via_chmod_filter`'
+search: '`linux_auditd` proctitle="*chmod*" AND proctitle IN ("* 777 *", "* 755 *", "*+*x*", "* 754 *") 
+  | rename host as dest   
+  | stats count min(_time) as firstTime max(_time) as lastTime by proctitle dest 
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)`
+  | `linux_auditd_file_permission_modification_via_chmod_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
   data, that consists of SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures
   command-line executions and process details on Unix/Linux systems. These logs should
@@ -49,7 +49,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A $process_exec$ event occurred on host $dest$ to modify file permissions
+  message: A $proctitle$ event occurred on host $dest$ to modify file permissions
     using the "chmod" command.
   risk_objects:
   - field: dest
@@ -76,6 +76,8 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.002/linux_auditd_chmod_exec_attrib/linux_auditd_chmod_exec_attrib.log
-    source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.002/linux_auditd_chmod_exec_attrib/auditd_proctitle_chmod.log
+    source: auditd
+    sourcetype: auditd
+

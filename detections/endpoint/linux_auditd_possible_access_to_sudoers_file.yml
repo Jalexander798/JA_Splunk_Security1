@@ -1,6 +1,6 @@
 name: Linux Auditd Possible Access To Sudoers File
 id: 8be88f46-f7e8-4ae6-b15e-cf1b13392834
-version: '6'
+version: 7
 date: '2025-02-24'
 author: Teoderick Contreras, Splunk
 status: production
@@ -72,6 +72,8 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.003/linux_auditd_sudoers_access/linux_auditd_sudoers_access.log
-    source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+  - data: 
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.003/linux_auditd_sudoers_access/linux_auditd_sudoers_access.log
+    source: auditd
+    sourcetype: auditd
+

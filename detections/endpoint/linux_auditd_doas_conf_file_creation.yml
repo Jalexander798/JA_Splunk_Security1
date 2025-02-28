@@ -1,7 +1,7 @@
 name: Linux Auditd Doas Conf File Creation
 id: 61059783-574b-40d2-ac2f-69b898afd6b4
-version: 4
-date: '2025-02-10'
+version: 5
+date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -71,5 +71,5 @@ tests:
   attack_data:
   - data: 
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.003/linux_audited_doas_conf/linux_audited_doas_conf.log
-    source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+    source: auditd
+    sourcetype: auditd
