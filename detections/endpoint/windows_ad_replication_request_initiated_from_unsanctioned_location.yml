@@ -66,9 +66,10 @@ rba:
   - field: user
     type: user
     score: 100
-  threat_objects:
   - field: src_ip
-    type: ip_address
+    type: system
+    score: 100
+  threat_objects: []
 tags:
   analytic_story:
   - Compromised Windows Host
