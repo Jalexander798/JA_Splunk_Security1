@@ -1,6 +1,6 @@
 name: GCP Multiple Users Failing To Authenticate From Ip
 id: da20828e-d6fb-4ee5-afb7-d0ac200923d5
-version: 5
+version: 6
 date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production
@@ -13,7 +13,7 @@ description: The following analytic detects a single source IP address failing t
   Platform. If confirmed malicious, this behavior could lead to unauthorized access
   to sensitive resources, data breaches, or further exploitation within the environment.
 data_source:
-- Google Workspace login_failure
+- Google Workspace
 search: '`gws_reports_login` event.type = login event.name = login_failure | bucket
   span=5m _time | stats count dc(user) AS unique_accounts values(user) as tried_accounts
   values(authentication_method) AS authentication_method earliest(_time) as firstTime
