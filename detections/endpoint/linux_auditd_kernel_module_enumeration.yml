@@ -1,7 +1,7 @@
 name: Linux Auditd Kernel Module Enumeration
 id: d1b088de-c47a-4572-9339-bdcc26493b32
-version: 4
-date: '2024-12-17'
+version: 5
+date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -19,9 +19,9 @@ search: '`linux_auditd` type=SYSCALL comm=lsmod | rename host as dest  | stats c
   success dest | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`
   | `linux_auditd_kernel_module_enumeration_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
-  data, that consists of SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
-  executions and process details on Unix/Linux systems. These logs should be ingested
-  and processed using Splunk Add-on for Unix and Linux (https://splunkbase.splunk.com/app/833),
+  data, that consists of SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures
+  command-line executions and process details on Unix/Linux systems. These logs should
+  be ingested and processed using Splunk Add-on for Unix and Linux (https://splunkbase.splunk.com/app/833),
   which is essential for correctly parsing and categorizing the data. The next step
   involves normalizing the field names  to match the field names set by the Splunk
   Common Information Model (CIM) to ensure consistency across different data sources
@@ -72,5 +72,5 @@ tests:
   attack_data:
   - data: 
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1082/linux_auditd_lsmod/linux_auditd_lsmod.log
-    source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+    source: auditd
+    sourcetype: auditd
