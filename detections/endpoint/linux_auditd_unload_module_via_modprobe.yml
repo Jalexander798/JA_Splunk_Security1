@@ -1,7 +1,7 @@
 name: Linux Auditd Unload Module Via Modprobe
 id: 90964d6a-4b5f-409a-85bd-95e261e03fe9
-version: 4
-date: '2025-02-10'
+version: 5
+date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -15,11 +15,13 @@ description: The following analytic detects suspicious use of the `modprobe` com
   address possible threats to system integrity.
 data_source:
 - Linux Auditd Execve
-search: '`linux_auditd` `linux_auditd_normalized_execve_process` | rename host as
-  dest | rename comm as process_name | rename exe as process | where LIKE (process_exec,
-  "%modprobe%") AND  LIKE (process_exec, "%-r %") | stats count min(_time) as firstTime
-  max(_time) as lastTime by argc process_exec dest | `security_content_ctime(firstTime)`|
-  `security_content_ctime(lastTime)`| `linux_auditd_unload_module_via_modprobe_filter`'
+search: '`linux_auditd` execve_command = "*modprobe*" AND execve_command = "*-r *"
+  | rename host as dest 
+  | rename comm as process_name 
+  | rename exe as process 
+  | stats count min(_time) as firstTime max(_time) as lastTime by argc execve_command dest 
+  | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`
+  | `linux_auditd_unload_module_via_modprobe_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
   data, that consists of SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures
   command-line executions and process details on Unix/Linux systems. These logs should
@@ -48,7 +50,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A [$process_exec$] event occurred on host - [$dest$] to unload a kernel
+  message: A [$execve_command$] event occurred on host - [$dest$] to unload a kernel
     module via the modprobe command.
   risk_objects:
   - field: dest
@@ -73,6 +75,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.006/linux_auditd_modprobe_unload_module/linux_auditd_modprobe_unload_module.log
-    source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.006/linux_auditd_modprobe_unload_module/auditd_execve_modprobe.log
+    source: auditd
+    sourcetype: auditd
