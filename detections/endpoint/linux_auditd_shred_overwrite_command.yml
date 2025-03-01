@@ -1,7 +1,7 @@
 name: Linux Auditd Shred Overwrite Command
 id: ce2bde4d-a1d4-4452-8c87-98440e5adfb3
-version: 3
-date: '2024-11-13'
+version: 4
+date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -14,12 +14,12 @@ description: The following analytic detects the execution of the 'shred' command
   critical files, severely impacting system integrity and data availability.
 data_source:
 - Linux Auditd Proctitle
-search: '`linux_auditd` `linux_auditd_normalized_proctitle_process` | rename host
-  as dest | where LIKE (process_exec, "%shred%") AND (LIKE (process_exec, "%-n%")
-  OR LIKE (process_exec, "%-z%") OR LIKE (process_exec, "%-u%") OR LIKE (process_exec,
-  "%-s%")) | stats count min(_time) as firstTime max(_time) as lastTime by process_exec
-  proctitle normalized_proctitle_delimiter dest | `security_content_ctime(firstTime)`|
-  `security_content_ctime(lastTime)`| `linux_auditd_shred_overwrite_command_filter`'
+search: '`linux_auditd`  proctitle IN ("*shred*")  AND proctitle IN ("*-n*", "*-z*", "*-u*", "*-s*")
+  | rename host as dest  
+  | stats count min(_time) as firstTime max(_time) as lastTime by  proctitle  dest 
+  | `security_content_ctime(firstTime)`
+  |`security_content_ctime(lastTime)`
+  | `linux_auditd_shred_overwrite_command_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
   data, that consist SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
   executions and process details on Unix/Linux systems. These logs should be ingested
@@ -49,7 +49,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A [$process_exec$] event occurred on host - [$dest$] to overwrite files
+  message: A [$proctitle$] event occurred on host - [$dest$] to overwrite files
     using the shred utility.
   risk_objects:
   - field: dest
@@ -76,6 +76,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/linux_auditd_shred/linux_auditd_shred.log
-    source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/linux_auditd_shred/auditd_proctitle_shred.log
+    source: auditd
+    sourcetype: auditd
