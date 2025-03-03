@@ -1,7 +1,7 @@
 name: Windows Unsigned MS DLL Side-Loading
 id: 8d9e0e06-ba71-4dc5-be16-c1a46d58728c
-version: 7
-date: '2025-01-27'
+version: '8'
+date: '2025-02-24'
 author: Teoderick Contreras, Splunk
 data_source:
 - Sysmon EventID 7
@@ -66,9 +66,9 @@ rba:
     type: file_name
 tags:
   analytic_story:
+  - China-Nexus Threat Activity
   - Derusbi
   - APT29 Diplomatic Deceptions with WINELOADER
-  - Nexus APT Threat Activity
   - Earth Estries
   group:
   - APT29

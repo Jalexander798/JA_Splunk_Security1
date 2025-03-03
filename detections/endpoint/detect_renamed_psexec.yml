@@ -1,7 +1,7 @@
 name: Detect Renamed PSExec
 id: 683e6196-b8e8-11eb-9a79-acde48001122
-version: 11
-date: '2025-02-10'
+version: '12'
+date: '2025-02-24'
 author: Michael Haag, Splunk, Alex Oberkircher, Github Community
 status: production
 type: Hunting
@@ -42,18 +42,18 @@ references:
 - https://redcanary.com/blog/threat-hunting-psexec-lateral-movement/
 tags:
   analytic_story:
+  - China-Nexus Threat Activity
   - BlackByte Ransomware
-  - DHS Report TA18-074A
-  - DarkSide Ransomware
-  - SamSam Ransomware
-  - CISA AA22-320A
   - HAFNIUM Group
-  - Sandworm Tools
+  - DHS Report TA18-074A
+  - CISA AA22-320A
+  - DarkSide Ransomware
   - Active Directory Lateral Movement
-  - Nexus APT Threat Activity
   - DarkGate Malware
-  - Earth Estries
+  - Sandworm Tools
   - Rhysida Ransomware
+  - Earth Estries
+  - SamSam Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1569.002
@@ -65,7 +65,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1569.002/atomic_red_team/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1569.002/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

@@ -1,7 +1,7 @@
 name: Windows Service Creation Using Registry Entry
 id: 25212358-948e-11ec-ad47-acde48001122
-version: 12
-date: '2025-01-27'
+version: '13'
+date: '2025-02-24'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: Anomaly
@@ -54,16 +54,16 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Brute Ratel C4
-  - PlugX
-  - Windows Persistence Techniques
-  - CISA AA23-347A
-  - Windows Registry Abuse
-  - Suspicious Windows Registry Activities
-  - Active Directory Lateral Movement
+  - China-Nexus Threat Activity
   - Crypto Stealer
+  - Brute Ratel C4
   - Derusbi
-  - Nexus APT Threat Activity
+  - Active Directory Lateral Movement
+  - CISA AA23-347A
+  - Windows Persistence Techniques
+  - Suspicious Windows Registry Activities
+  - PlugX
+  - Windows Registry Abuse
   - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:

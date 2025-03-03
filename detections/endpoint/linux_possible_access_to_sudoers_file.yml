@@ -1,7 +1,7 @@
 name: Linux Possible Access To Sudoers File
 id: 4479539c-71fc-11ec-b2e2-acde48001122
-version: 6
-date: '2025-02-10'
+version: '7'
+date: '2025-02-24'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -61,10 +61,10 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
+  - China-Nexus Threat Activity
+  - Linux Persistence Techniques
   - Linux Privilege Escalation
   - Earth Estries
-  - Nexus APT Threat Activity
-  - Linux Persistence Techniques
   asset_type: Endpoint
   mitre_attack_id:
   - T1548.003
@@ -76,7 +76,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.008/copy_file_stdoutpipe/sysmon_linux.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.008/copy_file_stdoutpipe/sysmon_linux.log
     source: Syslog:Linux-Sysmon/Operational
     sourcetype: sysmon:linux

@@ -1,7 +1,7 @@
 name: Windows Unsigned DLL Side-Loading In Same Process Path
 id: 3cf85c02-f9d6-4186-bf3c-e70ee99fbc7f
-version: 7
-date: '2025-02-10'
+version: '8'
+date: '2025-02-24'
 author: Teoderick Contreras, Splunk
 data_source:
 - Sysmon EventID 7
@@ -56,10 +56,10 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - PlugX
+  - China-Nexus Threat Activity
   - Derusbi
-  - Nexus APT Threat Activity
   - DarkGate Malware
+  - PlugX
   - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:
@@ -72,7 +72,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/unsigned_dll_loaded_same_process_path/unsigned_dll_process_path.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/unsigned_dll_loaded_same_process_path/unsigned_dll_process_path.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
