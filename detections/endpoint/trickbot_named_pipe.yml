@@ -15,10 +15,13 @@ description: The following analytic detects the creation or connection to a name
 data_source:
 - Sysmon EventID 17
 - Sysmon EventID 18
-search: '`sysmon` EventCode IN (17,18) PipeName="\\pipe\\*lacesomepipe" | stats  min(_time)
-  as firstTime max(_time) as lastTime count by dest user_id EventCode PipeName signature
-  Image process_id | rename Image as process_name | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `trickbot_named_pipe_filter`'
+search: '`sysmon` EventCode IN (17,18) PipeName="\\pipe\\*lacesomepipe" 
+  | stats  min(_time) as firstTime max(_time) as lastTime count 
+  by dest dvc pipe_name process_exec process_guid process_id process_name process_path signature signature_id user_id vendor_product
+  Image PipeName 
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` 
+  | `trickbot_named_pipe_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name and pipename from your endpoints. If you are using Sysmon,
   you must have at least version 6.0.4 of the Sysmon TA. .

@@ -17,8 +17,12 @@ data_source:
 - Sysmon EventID 22
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime  from datamodel=Network_Resolution where DNS.query IN ("*.ngrok.com","*.ngrok.io",
-  "ngrok.*.tunnel.com", "korgn.*.lennut.com") by DNS.src DNS.query DNS.answer |  `drop_dm_object_name("DNS")`
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `ngrok_reverse_proxy_on_network_filter`'
+  "ngrok.*.tunnel.com", "korgn.*.lennut.com") 
+  by DNS.answer DNS.answer_count DNS.query DNS.query_count DNS.reply_code_id DNS.src DNS.vendor_product 
+  |  `drop_dm_object_name("DNS")`
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `ngrok_reverse_proxy_on_network_filter`'
 how_to_implement: The Network Resolution Datamodel will need to have data mapped to
   it regarding DNS queries. Modify query as needed to use another source.
 known_false_positives: False positives will be present based on organizations that

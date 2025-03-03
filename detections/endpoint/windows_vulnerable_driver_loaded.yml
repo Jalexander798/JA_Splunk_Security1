@@ -15,10 +15,14 @@ description: The following analytic detects the loading of known vulnerable Wind
   exfiltration.
 data_source:
 - Sysmon EventID 6
-search: '`sysmon` EventCode=6  | stats  min(_time) as firstTime max(_time) as lastTime
-  count by dest ImageLoaded | lookup loldrivers driver_name AS ImageLoaded OUTPUT
-  is_driver driver_description | search is_driver = TRUE | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `windows_vulnerable_driver_loaded_filter`'
+search: '`sysmon` EventCode=6  
+  | stats  min(_time) as firstTime max(_time) as lastTime count 
+  by ImageLoaded dest dvc process_hash process_path signature signature_id user_id vendor_product
+  | lookup loldrivers driver_name AS ImageLoaded OUTPUT is_driver driver_description 
+  | search is_driver = TRUE 
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` 
+  | `windows_vulnerable_driver_loaded_filter`'
 how_to_implement: Sysmon collects driver loads via EventID 6, however you may modify
   the query to utilize this lookup to identify potentially persistent drivers that
   are known to be vulnerable.

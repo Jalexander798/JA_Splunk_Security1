@@ -16,9 +16,11 @@ data_source:
 - Sysmon EventID 22
 search: '`sysmon` EventCode=22 Image IN ("*\\winword.exe","*\\excel.exe","*\\powerpnt.exe","*\\mspub.exe","*\\visio.exe","*\\wordpad.exe","*\\wordview.exe","*\\onenote.exe",
   "*\\onenotem.exe","*\\onenoteviewer.exe","*\\onenoteim.exe", "*\\msaccess.exe")
-  AND NOT(QueryName IN ("*.office.com", "*.office.net")) | stats count min(_time)
-  as firstTime max(_time) as lastTime by Image QueryName QueryResults QueryStatus
-  Computer | rename Computer as dest | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  AND NOT(QueryName IN ("*.office.com", "*.office.net")) 
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+  by answer answer_count dvc process_exec process_guid process_name query query_count reply_code_id signature signature_id src user user_id vendor_product
+  QueryName QueryResults QueryStatus 
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_spearphishing_attachment_connect_to_none_ms_office_domain_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your

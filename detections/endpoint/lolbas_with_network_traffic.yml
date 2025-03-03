@@ -28,9 +28,12 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   "*Wmic.exe", "*Runonce.exe", "*Syncappvpublishingserver.exe", "*Verclsid.exe", "*Infdefaultinstall.exe",
   "*Installutil.exe", "*Netsh.exe", "*Wab.exe", "*Dnscmd.exe", "*\\At.exe", "*Pcalua.exe",
   "*Msconfig.exe", "*makecab.exe", "*cscript.exe", "*notepad.exe", "*\\cmd.exe", "*certutil.exe",
-  "*\\powershell.exe", "*powershell_ise.exe", "*\\pwsh.exe")) by All_Traffic.app,All_Traffic.src,All_Traffic.src_ip,All_Traffic.user,All_Traffic.dest,All_Traffic.dest_ip
+  "*\\powershell.exe", "*powershell_ise.exe", "*\\pwsh.exe")) 
+  by All_Traffic.action All_Traffic.app All_Traffic.dest All_Traffic.dest_ip All_Traffic.dest_port All_Traffic.direction 
+  All_Traffic.dvc All_Traffic.protocol All_Traffic.protocol_version All_Traffic.src All_Traffic.src_ip All_Traffic.src_port 
+  All_Traffic.transport All_Traffic.user All_Traffic.vendor_product
   | `drop_dm_object_name(All_Traffic)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | rex field=app ".*\\\(?<process_name>.*)$" | rename app as process | `lolbas_with_network_traffic_filter`'
+  | rex field=app ".*\\\(?<process_name>.*)$" | `lolbas_with_network_traffic_filter`'
 how_to_implement: To successfully implement this detection you must ingest events
   into the Network traffic data model that contain the source, destination, and communicating
   process in the app field. Relevant processes must also be ingested in the Endpoint

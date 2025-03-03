@@ -14,11 +14,15 @@ description: The following analytic detects the creation of files in the /etc/pr
   the system boots, potentially leading to further compromise and data exfiltration.
 data_source:
 - Sysmon for Linux EventID 11
-search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
-  as lastTime FROM datamodel=Endpoint.Filesystem where Filesystem.file_path IN ("*/etc/profile.d/*")
-  by Filesystem.dest Filesystem.file_create_time Filesystem.file_name Filesystem.process_guid
-  Filesystem.file_path | `drop_dm_object_name(Filesystem)` | `security_content_ctime(lastTime)`
-  | `security_content_ctime(firstTime)` | `linux_file_creation_in_profile_directory_filter`'
+search: '| tstats `security_content_summariesonly` values(Filesystem.file_access_time) as file_access_time values(Filesystem.file_create_time) as file_create_time values(Filesystem.file_hash) as file_hash values(Filesystem.file_modify_time) as file_modify_time values(Filesystem.file_name) as file_name values(Filesystem.file_path) as file_path  values(Filesystem.file_acl) as file_acl values(Filesystem.file_size) as file_size values(Filesystem.process_id) as process_id values(Filesystem.user) as user dc(Filesystem.file_path)
+    as numOfDelFilePath count min(_time) as firstTime max(_time) as lastTime FROM datamodel=Endpoint.Filesystem
+    where Filesystem.action=deleted Filesystem.file_path = "/boot/*" 
+    by _time span=1h Filesystem.action Filesystem.dest Filesystem.process_guid Filesystem.vendor_product 
+  | `drop_dm_object_name(Filesystem)` 
+  | where numOfDelFilePath >= 200 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `linux_high_frequency_of_file_deletion_in_boot_folder_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the file name, file path, and process_guid executions from your endpoints.
   If you are using Sysmon, you can use the Add-on for Linux Sysmon from Splunkbase.

@@ -15,8 +15,10 @@ description: The following analytic detects suspicious file downloads by the Tel
 data_source:
 - Sysmon EventID 15
 search: '`sysmon` EventCode= 15 process_name = "telegram.exe" TargetFilename = "*:Zone.Identifier"
-  |stats count min(_time) as firstTime max(_time) as lastTime by dest EventCode process_name
-  process_id TargetFilename Hash | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+  by dest dvc file_hash file_name file_path process_exec process_guid process_id process_name process_path signature signature_id user_id vendor_product
+  Contents Image
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `download_files_using_telegram_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name and TargetFilename from your endpoints or Events that

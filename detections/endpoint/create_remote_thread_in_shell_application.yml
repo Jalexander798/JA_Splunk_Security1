@@ -16,7 +16,8 @@ description: The following analytic detects suspicious process injection in comm
 data_source:
 - Sysmon EventID 8
 search: '`sysmon` EventCode=8 TargetImage IN ("*\\cmd.exe", "*\\powershell*", "*\\pwsh.exe")
-  | stats count min(_time) as firstTime max(_time) as lastTime by EventID Guid NewThreadId ProcessID SecurityID SourceImage 
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+  by EventID Guid NewThreadId ProcessID SecurityID SourceImage 
   SourceProcessGuid SourceProcessId StartAddress StartFunction StartModule TargetImage TargetProcessGuid TargetProcessId UserID 
   dest parent_process_exec parent_process_guid parent_process_id parent_process_name parent_process_path process_exec 
   process_guid process_id process_name process_path signature signature_id user_id vendor_product

@@ -13,14 +13,14 @@ description: The following analytic detects changes to the PowerShell ExecutionP
   confirmed malicious, this could enable an attacker to execute arbitrary code, leading
   to further compromise of the system and potential escalation of privileges.
 data_source:
-- Sysmon EventID 1 AND Sysmon EventID 12
-- Sysmon EventID 1 AND Sysmon EventID 13
+- Sysmon EventID 12
+- Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Registry
   WHERE (Registry.registry_path=*Software\\Microsoft\\Powershell\\1\\ShellIds\\Microsoft.PowerShell*
   Registry.registry_value_name=ExecutionPolicy (Registry.registry_value_data=Unrestricted
   OR Registry.registry_value_data=Bypass)) 
   by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path 
-  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name Registry.registry_value_test 
+  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name  
   Registry.registry_value_type Registry.status Registry.user Registry.vendor_product 
   | `drop_dm_object_name(Registry)`
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` 

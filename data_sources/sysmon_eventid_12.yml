@@ -97,7 +97,6 @@ output_fields:
 - registry_key_name 
 - registry_value_data 
 - registry_value_name 
-- registry_value_test 
 - registry_value_type 
 - status 
 - user 

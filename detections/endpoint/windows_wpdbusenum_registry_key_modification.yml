@@ -14,7 +14,7 @@ search: |-
   where Registry.registry_path IN ("HKLM\\SOFTWARE\\Microsoft\\Windows Portable Devices\\Devices\\*","HKLM\\System\\CurrentControlSet\\Enum\\SWD\\WPDBUSENUM\\*") 
   AND Registry.registry_value_name ="FriendlyName" AND Registry.registry_path="*USBSTOR*" 
   by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path 
-  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name Registry.registry_value_test 
+  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name  
   Registry.registry_value_type Registry.status Registry.user Registry.vendor_product 
   | `drop_dm_object_name(Registry)`
   | eval object_handle = registry_value_data, object_name = replace(mvindex(split(mvindex(split(registry_path, "??"),1),"&amp;"),2),"PROD_","")

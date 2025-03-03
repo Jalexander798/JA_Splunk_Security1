@@ -14,9 +14,14 @@ description: The following analytic identifies a high frequency of process termi
   file encryption and significant data loss.
 data_source:
 - Sysmon EventID 5
-search: '`sysmon` EventCode=5 |bin _time span=3s |stats values(Image) as proc_terminated
-  min(_time) as firstTime max(_time) as lastTime  count by _time dest EventCode ProcessID
-  | where count >= 15 | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`
+search: '`sysmon` EventCode=5 
+  | bin _time span=3s 
+  | stats values(process) as process values(process_exec) as process_exec values(process_guid) as process_guid values(process_id) as process_id 
+  values(process_name) as process_name values(process_path) as process_path values(user_id) as user_id min(_time) as firstTime max(_time) as lastTime count 
+  by _time dest EventCode ProcessID signature signature_id vendor_product 
+  | where count >= 15 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
   | `high_process_termination_frequency_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the Image (process full path of terminated process) from your endpoints.
@@ -40,15 +45,12 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: High frequency process termination (more than 15 processes within 3s) detected
-    on host $dest$
+  message: High frequency process termination (more than 15 processes within 3s) detected on host $dest$
   risk_objects:
   - field: dest
     type: system
     score: 72
-  threat_objects:
-  - field: proc_terminated
-    type: process
+  threat_objects: []
 tags:
   analytic_story:
   - LockBit Ransomware

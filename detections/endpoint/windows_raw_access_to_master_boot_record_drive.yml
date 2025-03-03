@@ -15,9 +15,9 @@ description: The following analytic detects suspicious raw access reads to the d
 data_source:
 - Sysmon EventID 9
 search: '`sysmon` EventCode=9 Device = \\Device\\Harddisk0\\DR0 NOT (Image IN("*\\Windows\\System32\\*",
-  "*\\Windows\\SysWOW64\\*")) | stats count min(_time) as firstTime max(_time) as
-  lastTime by Computer Image Device ProcessGuid ProcessId EventDescription EventCode
-  | rename Computer as dest | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  "*\\Windows\\SysWOW64\\*")) | stats count min(_time) as firstTime max(_time) as lastTime by 
+  dest dvc process_exec process_guid process_id process_name process_path signature signature_id user_id vendor_product Device Image 
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_raw_access_to_master_boot_record_drive_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the raw access read event (like sysmon eventcode 9), process name and

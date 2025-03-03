@@ -12,7 +12,7 @@ data_source:
 search: '| tstats `security_content_summariesonly` latest(Registry.process_guid) as process_guid  count min(_time) as firstTime max(_time) as lastTime FROM datamodel=Endpoint.Registry 
   where (Registry.registry_path="*\\Microsoft\\Windows\\CurrentVersion\\Run*" OR (Registry.registry_path="*\\SYSTEM\\CurrentControlSet\\Services\\*" AND Registry.registry_value_name="ImagePath")) 
   by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path 
-  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name Registry.registry_value_test 
+  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name  
   Registry.registry_value_type Registry.status Registry.user Registry.vendor_product 
   | `drop_dm_object_name(Registry)` 
   | `security_content_ctime(firstTime)` 

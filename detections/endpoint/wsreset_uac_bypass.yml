@@ -21,7 +21,7 @@ search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint
   AND (Registry.registry_value_name = "(Default)" OR Registry.registry_value_name
   = "DelegateExecute") 
   by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path 
-  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name Registry.registry_value_test 
+  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name  
   Registry.registry_value_type Registry.status Registry.user Registry.vendor_product 
   | `drop_dm_object_name(Registry)` 
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` 

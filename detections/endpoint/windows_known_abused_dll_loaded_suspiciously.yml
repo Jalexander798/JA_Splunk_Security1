@@ -22,8 +22,12 @@ search: '`sysmon` ImageLoaded EventCode=7 NOT ImageLoaded IN ("*\\Program Files*
   user = case(NOT user IN ("-"), replace(user, "(.*)\\\(.+)$","\2")) | lookup hijacklibs_loaded
   library AS loaded_file OUTPUT islibrary comment as desc | lookup hijacklibs_loaded
   library AS loaded_file excludes as loaded_file_path OUTPUT islibrary as excluded
-  | search islibrary = TRUE AND excluded = false | stats values(*) as * by dest, process_name,
-  process, process_guid, loaded_file, loaded_file_path | `security_content_ctime(firstTime)`
+  | search islibrary = TRUE AND excluded = false 
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+  by Image ImageLoaded dest loaded_file loaded_file_path original_file_name 
+  process_exec process_guid process_hash process_id process_name process_path service_dll_signature_exists 
+  service_dll_signature_verified signature signature_id user_id vendor_product
+  | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_known_abused_dll_loaded_suspiciously_filter`'
 how_to_implement: The following analytic requires Sysmon operational logs to be imported,
   with EID7 being mapped to the process_name field. Modify the sysmon macro as needed

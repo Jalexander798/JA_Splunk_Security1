@@ -15,9 +15,12 @@ description: The following analytic identifies the creation of WMI Event Subscri
   posing a severe threat to the environment.
 data_source:
 - Sysmon EventID 20
-search: '`sysmon` EventID=20 | stats count min(_time) as firstTime max(_time) as lastTime
-  by Computer User Destination | rename Computer as dest | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `detect_wmi_event_subscription_persistence_filter`'
+search: '`sysmon` EventID=20 
+  | stats count min(_time) as firstTime max(_time) as lastTime
+  by dest dvc object object_category object_path signature signature_id src status user user_id vendor_product
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` 
+  | `detect_wmi_event_subscription_persistence_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with that provide WMI Event Subscription from your endpoints. If you are using
   Sysmon, you must have at least version 6.0.4 of the Sysmon TA and have enabled EventID

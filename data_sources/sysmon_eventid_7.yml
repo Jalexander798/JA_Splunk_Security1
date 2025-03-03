@@ -100,6 +100,25 @@ fields:
 - user
 - user_id
 - vendor_product
+output_fields:
+- Image 
+- ImageLoaded 
+- dest 
+- loaded_file 
+- loaded_file_path 
+- original_file_name 
+- process_exec 
+- process_guid 
+- process_hash 
+- process_id 
+- process_name 
+- process_path 
+- service_dll_signature_exists 
+- service_dll_signature_verified 
+- signature 
+- signature_id 
+- user_id 
+- vendor_product
 example_log: <Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider
   Name='Microsoft-Windows-Sysmon' Guid='{5770385F-C22A-43E0-BF4C-06F5698FFBD9}'/><EventID>7</EventID><Version>3</Version><Level>4</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated
   SystemTime='2023-09-12T08:06:31.445185300Z'/><EventRecordID>45273</EventRecordID><Correlation/><Execution

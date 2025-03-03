@@ -14,12 +14,16 @@ description: The following analytic detects the writing of data with an IMPHASH 
   privileges within the environment.
 data_source:
 - Sysmon EventID 15
-search: '`sysmon` EventCode=15 IMPHASH!=00000000000000000000000000000000 | regex TargetFilename="(?<!\/)\b\w+(\.\w+)?:\w+(\.\w+)?$"
+search: '`sysmon` EventCode=15 IMPHASH!=00000000000000000000000000000000 
+  | regex TargetFilename="(?<!\/)\b\w+(\.\w+)?:\w+(\.\w+)?$"
   | eval file_name = replace(TargetFilename,"(.*\\\)",""), process = Image , file_path
-  = TargetFilename, file_hash = coalesce(SHA256,SHA1,MD5,Hash) | stats count min(_time)
-  as firstTime max(_time) as lastTime values(user) as user by dest, process, process_guid,
-  file_name, file_path, file_hash, IMPHASH | `security_content_ctime(firstTime)` |
-  `security_content_ctime(lastTime)` | `windows_alternate_datastream___executable_content_filter`'
+  = TargetFilename, file_hash = coalesce(SHA256,SHA1,MD5,Hash) 
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+  by dest dvc file_hash file_name file_path process_exec process_guid process_id process_name process_path signature signature_id user_id vendor_product
+  Contents Image
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `windows_alternate_datastream___executable_content_filter`'
 how_to_implement: Target environment must ingest Sysmon data, specifically Event ID
   15, and import hashing/imphash must be enabled within Sysmon.
 known_false_positives: Unknown

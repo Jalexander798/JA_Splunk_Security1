@@ -17,11 +17,13 @@ description: The following analytic detects suspicious usage of BitLockerToGo.ex
   active data theft campaign targeting cryptocurrency wallets, browser credentials,
   and password manager archives. The detection focuses on identifying BitLockerToGo.exe
   execution patterns that deviate from normal system behavior.
-search: '`sysmon` EventCode=22 process_name="bitlockertogo.exe" | stats count min(_time)
-  as firstTime max(_time) as lastTime values(query) as query values(answer) as answer
-  values(QueryResults) as query_results values(QueryStatus) as query_status by process_name
-  process_guid Computer | rename Computer as dest | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `windows_bitlockertogo_with_network_activity_filter`'
+search: '`sysmon` EventCode=22 process_name="bitlockertogo.exe" 
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+  by answer answer_count dvc process_exec process_guid process_name query query_count reply_code_id signature signature_id src user user_id vendor_product
+  QueryName QueryResults QueryStatus 
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` 
+  | `windows_bitlockertogo_with_network_activity_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name and eventcode = 22 dnsquery executions from your endpoints.
   If you are using Sysmon, you must have at least version 6.0.4 of the Sysmon TA.

@@ -18,7 +18,7 @@ data_source:
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry where Registry.registry_path IN ("*\\CurrentControlSet\\Services\\NTDS\\DirectoryServiceExtPt","*\\CurrentControlSet\\Services\\NTDS\\LsaDbExtPt")
   by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path 
-  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name Registry.registry_value_test 
+  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name  
   Registry.registry_value_type Registry.status Registry.user Registry.vendor_product 
   | `drop_dm_object_name(Registry)`
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_autostart_execution_lsass_driver_registry_modification_filter`'

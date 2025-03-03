@@ -15,9 +15,12 @@ description: The following analytic identifies DNS queries from internal hosts t
   access to the network.
 data_source:
 - Sysmon EventID 22
-search: '| tstats `security_content_summariesonly` count values(DNS.answer) as answer
-  min(_time) as firstTime from datamodel=Network_Resolution by DNS.query host | `drop_dm_object_name("DNS")`
-  | `security_content_ctime(firstTime)` | `dynamic_dns_providers` | `detect_hosts_connecting_to_dynamic_domain_providers_filter`'
+search: '| tstats `security_content_summariesonly` count min(_time) as firstTime from datamodel=Network_Resolution 
+  by DNS.answer DNS.answer_count DNS.query DNS.query_count DNS.reply_code_id DNS.src DNS.vendor_product
+  | `drop_dm_object_name("DNS")`
+  | `security_content_ctime(firstTime)` 
+  | `dynamic_dns_providers` 
+  | `detect_hosts_connecting_to_dynamic_domain_providers_filter`'
 how_to_implement: "First, you'll need to ingest data from your DNS operations. This
   can be done by ingesting logs from your server or data, collected passively by Splunk
   Stream or a similar solution. Specifically, data that contains the domain that is
@@ -51,8 +54,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A dns query $query$ from your infra connecting to suspicious domain in
-    host  $host$
+  message: A dns query $query$ from your infra connecting to suspicious domain
   risk_objects:
   - field: host
     type: system

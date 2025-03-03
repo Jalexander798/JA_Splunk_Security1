@@ -14,11 +14,18 @@ description: The following analytic detects the suspicious loading of DLLs by sp
   and persistent access within the environment, posing a severe security risk.
 data_source:
 - Sysmon EventID 7
-search: '`sysmon` EventCode=7 Image ="*\\spoolsv.exe" ImageLoaded="*\\Windows\\System32\\spool\\drivers\\x64\\*"
-  ImageLoaded = "*.dll" | stats dc(ImageLoaded) as countImgloaded values(ImageLoaded)
-  as ImageLoaded count min(_time) as firstTime max(_time) as lastTime by Image Computer
-  ProcessId EventCode | rename Computer as dest | where countImgloaded >= 3 | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `spoolsv_suspicious_loaded_modules_filter`'
+search: '`sysmon` EventCode=7 Image ="*\\spoolsv.exe" ImageLoaded="*\\Windows\\System32\\spool\\drivers\\x64\\*" ImageLoaded = "*.dll" 
+  | stats dc(ImageLoaded) as countImgloaded values(ImageLoaded) as ImageLoaded values(loaded_file) as loaded_file values(loaded_file_path) as loaded_file_path 
+  values(original_file_name) as original_file_name values(process_exec) as process_exec values(process_guid) as process_guid values(process_hash) as process_hash
+  values(process_id) as process_id values(process_name) as process_name values(process_path) as process_path values(service_dll_signature_exists) as service_dll_signature_exists 
+  values(service_dll_signature_verified) as service_dll_signature_verified values(signature) as signature values(signature_id) as signature_id values(user_id) as user_id 
+  values(vendor_product) as vendor_product
+  count min(_time) as firstTime max(_time) as lastTime 
+  by process_path dest process_id 
+  | where countImgloaded >= 3 
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` 
+  | `spoolsv_suspicious_loaded_modules_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name and imageloaded executions from your endpoints. If you
   are using Sysmon, you must have at least version 6.0.4 of the Sysmon TA.
@@ -40,7 +47,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: $Image$ with process id $ProcessId$ has loaded a driver from $ImageLoaded$
+  message: $Image$ with process id $process_id$ has loaded a driver from $ImageLoaded$
     on endpoint $dest$. This behavior is suspicious and related to PrintNightmare.
   risk_objects:
   - field: dest
