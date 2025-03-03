@@ -3,9 +3,10 @@ id: 4fc5ca00-4c7c-46b3-8772-c98a4b8bd944
 version: 5
 date: '2025-04-16'
 author: Nasreddine Bencherchali, Splunk
-status: production
+status: deprecated
 type: TTP
-description: The following analytic detects the use of `certutil.exe` to download
+description: This analytic has been deprecated in favor of "Windows CertUtil Download".
+  The following analytic detects the use of `certutil.exe` to download
   files using the `-URL` arguments. This behavior is identified by monitoring command-line
   executions for these specific arguments via Endpoint Detection and Response (EDR)
   telemetry. This activity is significant because `certutil.exe` is a legitimate tool
