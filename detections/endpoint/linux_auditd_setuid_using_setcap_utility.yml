@@ -1,7 +1,7 @@
 name: Linux Auditd Setuid Using Setcap Utility
 id: 1474459a-302b-4255-8add-d82f96d14cd9
-version: 4
-date: '2025-02-10'
+version: 5
+date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -14,14 +14,13 @@ description: The following analytic detects the execution of the 'setcap' utilit
   commands with elevated permissions, and potentially compromise the entire system.
 data_source:
 - Linux Auditd Execve
-search: '`linux_auditd` `linux_auditd_normalized_execve_process` | rename host as
-  dest | rename comm as process_name | rename exe as process | where LIKE (process_exec,
-  "%setcap %") AND (LIKE (process_exec, "% cap_setuid+ep %") OR LIKE (process_exec,
-  "% cap_setuid=ep %") OR LIKE (process_exec, "% cap_net_bind_service+p %") OR LIKE
-  (process_exec, "% cap_net_raw+ep %") OR LIKE (process_exec, "% cap_dac_read_search+ep
-  %")) | stats count min(_time) as firstTime max(_time) as lastTime by argc process_exec
-  dest | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`|
-  `linux_auditd_setuid_using_setcap_utility_filter`'
+search: '`linux_auditd` execve_command IN ("*setcap *")  AND execve_command IN ("*cap_setuid+ep*", "*cap_setuid=ep*", "*cap_net_bind_service+p*", "*cap_net_raw+ep*", "*cap_dac_read_search+ep*")
+  | rename host as dest 
+  | rename comm as process_name 
+  | rename exe as process 
+  | stats count min(_time) as firstTime max(_time) as lastTime by argc execve_command dest 
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `linux_auditd_setuid_using_setcap_utility_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
   data, that consists of SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures
   command-line executions and process details on Unix/Linux systems. These logs should
@@ -50,7 +49,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A [$process_exec$] event occurred on host - [$dest$] to set the SUID or
+  message: A [$execve_command$] event occurred on host - [$dest$] to set the SUID or
     SGID bit on files using the setcap utility.
   risk_objects:
   - field: dest
@@ -74,6 +73,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.001/linux_auditd_setuid/linux_auditd_setcap_priv.log
-    source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.001/linux_auditd_setuid/auditd_execve_setcap.log
+    source: auditd
+    sourcetype: auditd

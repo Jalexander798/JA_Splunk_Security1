@@ -1,7 +1,7 @@
 name: Linux Auditd Unix Shell Configuration Modification
 id: 66f737c6-3f7f-46ed-8e9b-cc0e5bf01f04
-version: 4
-date: '2025-02-10'
+version: 5
+date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -79,5 +79,5 @@ tests:
   attack_data:
   - data: 
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.004/linux_auditd_unix_shell_mod_config/linux_auditd_unix_shell_mod_config.log
-    source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+    source: auditd
+    sourcetype: auditd
