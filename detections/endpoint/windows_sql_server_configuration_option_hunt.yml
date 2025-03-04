@@ -7,7 +7,7 @@ status: production
 type: Hunting
 description: This detection helps hunt for changes to SQL Server configuration options that could indicate malicious activity. It monitors for modifications to any SQL Server configuration settings, allowing analysts to identify potentially suspicious changes that may be part of an attack, such as enabling dangerous features or modifying security-relevant settings.
 data_source:
-- Windows Event Log Application
+- Windows Event Log Application 15457
 search: '`wineventlog_application` EventCode=15457 
     | rex field=EventData_Xml "<Data>(?<config_name>[^<]+)</Data><Data>(?<new_value>[^<]+)</Data><Data>(?<old_value>[^<]+)</Data>"
     | rename host as dest
