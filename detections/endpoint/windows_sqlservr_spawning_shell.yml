@@ -36,16 +36,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A command shell ($process_name$) was spawned by sqlservr.exe on host $dest$ by user $user$. This may indicate unauthorized command execution.
+  message: A command shell was spawned by sqlservr.exe on host $dest$ by user $user$. This may indicate unauthorized command execution.
   risk_objects:
   - field: dest
     type: system
     score: 90
   - field: user
     type: user
-    score: 90
-  - field: process
-    type: other
     score: 90
   threat_objects:
   - field: parent_process_name
