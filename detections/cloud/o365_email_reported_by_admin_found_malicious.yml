@@ -1,6 +1,6 @@
 name: O365 Email Reported By Admin Found Malicious
 id: 94396c3e-7728-422a-9956-e4b77b53dbdf
-version: 4
+version: 5
 date: '2025-02-10'
 author: Steven Dick
 status: production
@@ -11,7 +11,7 @@ description: The following analytic detects when an email manually submitted to 
   users to report potentially malicious emails. This correlation looks for any submission
   that returns a Phish or Malware verdict upon submission.
 data_source:
-- O365 Universal Audit Log
+- Office 365 Universal Audit Log
 search: '`o365_management_activity` Workload=SecurityComplianceCenter Operation=AdminSubmission
   | search RescanVerdict IN (Phish,Malware) | stats values(Subject) as subject, values(RescanVerdict)
   as result, values(SenderIP) as src, values(P2Sender) as sender, values(P1Sender)

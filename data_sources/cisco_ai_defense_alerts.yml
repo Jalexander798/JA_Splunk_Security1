@@ -6,9 +6,9 @@ author: Bhavin Patel
 description: Data source object for Cisco AI Defense Alerts
 source: cisco_ai_defense
 sourcetype: cisco:ai:defense
-separator: 
+separator: null
 supported_TA:
 - name: Cisco Security Cloud
   url: https://splunkbase.splunk.com/app/7404
-  version: 3.0.1
-fields:
+  version: 3.1.1
+fields: null

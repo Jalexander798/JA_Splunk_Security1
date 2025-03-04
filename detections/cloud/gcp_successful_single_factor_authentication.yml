@@ -1,6 +1,6 @@
 name: GCP Successful Single-Factor Authentication
 id: 40e17d88-87da-414e-b253-8dc1e4f9555b
-version: 6
+version: 7
 date: '2025-02-10'
 author: Bhavin Patel, Mauricio Velazco, Splunk
 status: production
@@ -14,7 +14,7 @@ description: The following analytic identifies a successful single-factor authen
   to data breaches, service disruptions, or further exploitation within the cloud
   environment.
 data_source:
-- Google Workspace login_success
+- Google Workspace
 search: '`gws_reports_login` event.name=login_success NOT `gws_login_mfa_methods`
   | stats count min(_time) as firstTime max(_time) as lastTime by user, src_ip,  login_challenge_method,
   app, event.name, vendor_account, action |`security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`|

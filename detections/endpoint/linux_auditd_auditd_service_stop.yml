@@ -1,7 +1,7 @@
 name: Linux Auditd Auditd Service Stop
 id: 6cb9d0e1-eabe-41de-a11a-5efade354e9d
-version: 3
-date: '2024-11-13'
+version: 4
+date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -71,5 +71,5 @@ tests:
   attack_data:
   - data: 
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1489/linux_auditd_auditd_service_stop/linux_auditd_auditd_service_stop.log
-    source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+    source: auditd
+    sourcetype: auditd
