@@ -897,6 +897,426 @@ detections:
       TA update
     replacement_content:
     - Okta Multiple Failed MFA Requests For User
-baselines: []
-investigations: []
-stories: []
+  - deprecated_content: Excel Spawning Windows Script Host
+    deprecated_in_version: 5.3.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: GitHub Actions Disable Security Workflow
+    deprecated_in_version: 5.3.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Github Commit Changes In Master
+    deprecated_in_version: 5.3.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Github Commit In Develop
+    deprecated_in_version: 5.3.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: GitHub Dependabot Alert
+    deprecated_in_version: 5.3.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: GitHub Pull Request from Unknown User
+    deprecated_in_version: 5.3.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Known Services Killed by Ransomware
+    deprecated_in_version: 5.3.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Remote Desktop Network Bruteforce
+    deprecated_in_version: 5.3.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Suspicious Driver Loaded Path
+    deprecated_in_version: 5.3.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Suspicious Event Log Service Behavior
+    deprecated_in_version: 5.3.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Suspicious Process File Path
+    deprecated_in_version: 5.3.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Windows Service Stop Via Net  and SC Application
+    deprecated_in_version: 5.3.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+baselines:
+  - deprecated_content: Add Prohibited Processes to Enterprise Security
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+    replacement_content: []
+  - deprecated_content: Baseline of API Calls per User ARN
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+    replacement_content: []
+  - deprecated_content: Baseline of Excessive AWS Instances Launched by User - MLTK
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+    replacement_content: []
+  - deprecated_content: Baseline of Excessive AWS Instances Terminated by User - MLTK
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+    replacement_content: []
+  - deprecated_content: Previously seen API call per user roles in CloudTrail
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+    replacement_content: []
+  - deprecated_content: Previously Seen AWS Provisioning Activity Sources
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+    replacement_content: []
+  - deprecated_content: Previously Seen EC2 AMIs
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+    replacement_content: []
+  - deprecated_content: Previously Seen EC2 Instance Types
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+    replacement_content: []
+  - deprecated_content: Previously Seen EC2 Launches By User
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+    replacement_content: []
+  - deprecated_content: Previously seen users in CloudTrail
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+    replacement_content: []
+  - deprecated_content: Update previously seen users in CloudTrail
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+    replacement_content: []
+investigations: 
+  - deprecated_content: All backup logs for host
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Amazon EKS Kubernetes activity by src ip
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: AWS Investigate Security Hub alerts by dest
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: AWS Investigate User Activities By AccessKeyId
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: AWS Investigate User Activities By ARN
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: AWS Network ACL Details from ID
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: AWS Network Interface details via resourceId
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: AWS S3 Bucket details via bucketName
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: GCP Kubernetes activity by src ip
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get All AWS Activity From City
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get All AWS Activity From Country
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get All AWS Activity From IP Address
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get All AWS Activity From Region
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get Backup Logs For Endpoint
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get Certificate logs for a domain
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get DNS Server History for a host
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get DNS traffic ratio
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get EC2 Instance Details by instanceId
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get EC2 Launch Details
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get Email Info
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get Emails From Specific Sender
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get First Occurrence and Last Occurrence of a MAC Address
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get History Of Email Sources
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get Logon Rights Modifications For Endpoint
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get Logon Rights Modifications For User
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get Notable History
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get Outbound Emails to Hidden Cobra Threat Actors
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get Parent Process Info
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get Process File Activity
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get Process Info
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get Process Information For Port Activity
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get Process Responsible For The DNS Traffic
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get Sysmon WMI Activity for Host
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Get Web Session Information via session id
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Investigate AWS activities via region name
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Investigate AWS User Activities by user field
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Investigate Failed Logins for Multiple Destinations
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Investigate Network Traffic From src ip
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Investigate Okta Activity by app
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Investigate Okta Activity by IP Address
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Investigate Pass the Hash Attempts
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Investigate Pass the Ticket Attempts
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Investigate Previous Unseen User
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Investigate Successful Remote Desktop Authentications
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Investigate Suspicious Strings in HTTP Header
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Investigate User Activities In Okta
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+  - deprecated_content: Investigate Web POSTs From src
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
+    replacement_content: []
+stories:
+  - deprecated_content: AWS Cryptomining
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: AWS Suspicious Provisioning Activities
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Common Phishing Frameworks
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Container Implantation Monitoring and Investigation
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Host Redirection
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Kubernetes Sensitive Role Activity
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Lateral Movement
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Monitor Backup Solution
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Monitor for Unauthorized Software
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Office 365 Detections
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Spectre And Meltdown Vulnerabilities
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Suspicious AWS EC2 Activities
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Unusual AWS EC2 Modifications
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
+  - deprecated_content: Web Fraud Detection
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: ''
+    replacement_content: []
