@@ -95,6 +95,8 @@ fields:
 - user_group
 - vendor
 - vendor_product
+output_fields:
+- dest
 example_log: <Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider
   Name='Microsoft-Windows-Security-Auditing' Guid='{54849625-5478-4994-a5ba-3e3b0328c30d}'/><EventID>4769</EventID><Version>0</Version><Level>0</Level><Task>14337</Task><Opcode>0</Opcode><Keywords>0x8020000000000000</Keywords><TimeCreated
   SystemTime='2024-04-09T01:00:49.143003800Z'/><EventRecordID>148521</EventRecordID><Correlation/><Execution

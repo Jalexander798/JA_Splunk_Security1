@@ -40,12 +40,12 @@ known_false_positives: Some users and applications may leverage Dynamic DNS to r
   however this activity must be verified.
 references: []
 drilldown_searches:
-- name: View the detection results for - "$host$"
-  search: '%original_detection_search% | search  host = "$host$"'
+- name: View the detection results for - "$src$"
+  search: '%original_detection_search% | search  src = "$src$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$host$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$host$")
+- name: View risk events for the last 7 days for - "$src$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$src$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -56,7 +56,7 @@ drilldown_searches:
 rba:
   message: A dns query $query$ from your infra connecting to suspicious domain
   risk_objects:
-  - field: host
+  - field: src
     type: system
     score: 56
   threat_objects: []

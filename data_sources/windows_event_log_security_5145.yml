@@ -96,6 +96,8 @@ fields:
 - timestartpos
 - vendor
 - vendor_product
+output_fields:
+- dest
 field_mappings:
 - data_model: custom_cim
   data_set: Endpoint.Processes

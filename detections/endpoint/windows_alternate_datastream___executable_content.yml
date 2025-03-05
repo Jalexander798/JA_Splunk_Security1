@@ -16,8 +16,7 @@ data_source:
 - Sysmon EventID 15
 search: '`sysmon` EventCode=15 IMPHASH!=00000000000000000000000000000000 
   | regex TargetFilename="(?<!\/)\b\w+(\.\w+)?:\w+(\.\w+)?$"
-  | eval file_name = replace(TargetFilename,"(.*\\\)",""), process = Image , file_path
-  = TargetFilename, file_hash = coalesce(SHA256,SHA1,MD5,Hash) 
+  | eval file_name = replace(TargetFilename,"(.*\\\)",""), process = Image , file_path = TargetFilename, file_hash = coalesce(SHA256,SHA1,MD5,Hash) 
   | stats count min(_time) as firstTime max(_time) as lastTime 
   by dest dvc file_hash file_name file_path process_exec process_guid process_id process_name process_path signature signature_id user_id vendor_product
   Contents Image
@@ -32,21 +31,21 @@ references:
 - https://blogs.juniper.net/en-us/threat-research/bitpaymer-ransomware-hides-behind-windows-alternate-data-streams
 - https://twitter.com/0xrawsec/status/1002478725605273600?s=21
 drilldown_searches:
-- name: View the detection results for - "$dest$" and "$user$"
-  search: '%original_detection_search% | search  dest = "$dest$" user = "$user$"'
+- name: View the detection results for - "$dest$"
+  search: '%original_detection_search% | search  dest = "$dest$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$dest$" and "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$",
-    "$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
-    as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
-    Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
-    as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
-    by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+- name: View risk events for the last 7 days for - "$dest$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Base64 content written to an NTFS alternate data stream by $user$, see
+  message: Base64 content written to an NTFS alternate data stream in $dest$, see
     command field for details.
   risk_objects:
   - field: dest

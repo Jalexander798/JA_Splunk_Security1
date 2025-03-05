@@ -92,6 +92,8 @@ fields:
 - timestartpos
 - vendor
 - vendor_product
+output_fields:
+- dest
 field_mappings:
 - data_model: ocsf
   mapping:

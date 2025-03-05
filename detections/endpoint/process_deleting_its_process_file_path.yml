@@ -23,7 +23,7 @@ search: '`sysmon` EventCode=1 CommandLine = "* /c *" CommandLine = "* del*" Imag
   parent_process_guid parent_process_id parent_process_name 
   parent_process_path process process_exec process_guid process_hash 
   process_id process_integrity_level process_name process_path 
-  user user_id vendor_product 
+  user user_id vendor_product result
   | where result = "Found" | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `process_deleting_its_process_file_path_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection

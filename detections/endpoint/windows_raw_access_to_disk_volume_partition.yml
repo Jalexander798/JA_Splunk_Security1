@@ -15,9 +15,9 @@ description: The following analytic detects suspicious raw access reads to the d
   loss, or compromised boot integrity.
 data_source:
 - Sysmon EventID 9
-search: '`sysmon` EventCode=9 Device = \\Device\\HarddiskVolume* NOT (Image IN("*\\Windows\\System32\\*",
-  "*\\Windows\\SysWOW64\\*")) | stats count min(_time) as firstTime max(_time) as
-  lastTime by dest signature signature_id process_guid process_name process_path Device
+search: '`sysmon` EventCode=9 Device = \\Device\\HarddiskVolume* NOT (Image IN("*\\Windows\\System32\\*", "*\\Windows\\SysWOW64\\*")) 
+  | stats count min(_time) as firstTime max(_time) as lastTime by
+  dest dvc process_exec process_guid process_id process_name process_path signature signature_id user_id vendor_product Device Image 
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_raw_access_to_disk_volume_partition_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the raw access read event (like sysmon eventcode 9), process name and

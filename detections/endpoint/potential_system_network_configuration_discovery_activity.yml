@@ -16,7 +16,7 @@ search: '| tstats `security_content_summariesonly` count values(Processes.proces
   Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name 
   Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid Processes.process_hash 
   Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path 
-  Processes.user Processes.user_id Processes.vendor_product 
+  Processes.user Processes.user_id Processes.vendor_product _time
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` 
   | `drop_dm_object_name(Processes)` 
   | search `system_network_configuration_discovery_tools` 

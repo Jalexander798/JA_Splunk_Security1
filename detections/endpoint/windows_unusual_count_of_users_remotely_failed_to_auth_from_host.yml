@@ -43,10 +43,13 @@ drilldown_searches:
   latest_offset: $info_max_time$
 search: '`wineventlog_security`  EventCode=4625 Logon_Type=3 IpAddress!="-" | bucket
   span=2m _time | stats dc(TargetUserName) AS unique_accounts values(TargetUserName)
-  as tried_accounts by _time, IpAddress, Computer | eventstats avg(unique_accounts)
-  as comp_avg , stdev(unique_accounts) as comp_std by IpAddress, Computer | eval upperBound=(comp_avg+comp_std*3)
+  as tried_accounts values(dest) as dest values(src) as src values(user) as user 
+  by _time, IpAddress, Computer, action, app, authentication_method, signature, signature_id  
+  | eventstats avg(unique_accounts) as comp_avg , stdev(unique_accounts) as comp_std by IpAddress, Computer 
+  | eval upperBound=(comp_avg+comp_std*3)
   | eval isOutlier=if(unique_accounts > 10 and unique_accounts >= upperBound, 1, 0)
-  | search isOutlier=1 | `windows_unusual_count_of_users_remotely_failed_to_auth_from_host_filter`'
+  | search isOutlier=1 
+  | `windows_unusual_count_of_users_remotely_failed_to_auth_from_host_filter`'
 rba:
   message: Potential password spraying attack on $Computer$
   risk_objects:

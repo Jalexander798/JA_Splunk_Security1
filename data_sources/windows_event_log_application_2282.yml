@@ -62,6 +62,8 @@ fields:
 - timeendpos
 - timestartpos
 - vendor_product
+output_fields:
+- dest
 example_log: <Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider
   Name='Microsoft-Windows-IIS-W3SVC-WP' Guid='{670080D9-742A-4187-8D16-41143D1290BD}'
   EventSourceName='W3SVC-WP'/><EventID Qualifiers='49152'>2282</EventID><Version>0</Version><Level>2</Level><Task>0</Task><Opcode>0</Opcode><Keywords>0x80000000000000</Keywords><TimeCreated

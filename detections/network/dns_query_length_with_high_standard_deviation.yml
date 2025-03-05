@@ -17,7 +17,7 @@ data_source:
 - Sysmon EventID 22
 search: '| tstats `security_content_summariesonly` count from datamodel=Network_Resolution
   where NOT DNS.record_type IN("Pointer","PTR") 
-  by DNS.answer DNS.answer_count DNS.query DNS.query_count DNS.reply_code_id DNS.src DNS.vendor_product
+  by DNS.answer DNS.answer_count DNS.query DNS.query_count DNS.reply_code_id DNS.src DNS.vendor_product host
   | `drop_dm_object_name("DNS")`
   | eval tlds=split(query,".") 
   | eval tld=mvindex(tlds,-1) 

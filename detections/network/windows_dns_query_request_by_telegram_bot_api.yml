@@ -17,7 +17,7 @@ description: The following analytic detects the execution of a DNS query by a pr
   of suspicious or malicious activity within a network.
 search: '`sysmon` EventCode=22  query = "api.telegram.org" process_name != "telegram.exe"
   | stats count min(_time) as firstTime max(_time) as lastTime 
-  by answer answer_count dvc process_exec process_guid process_name query query_count reply_code_id signature signature_id src user user_id vendor_product
+  by answer answer_count dvc process_exec process_guid process_name query query_count reply_code_id signature signature_id src user_id vendor_product
   QueryName QueryResults QueryStatus 
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` 

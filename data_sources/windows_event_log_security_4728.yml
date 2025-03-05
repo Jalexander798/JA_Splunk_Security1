@@ -13,4 +13,6 @@ supported_TA:
   version: 9.0.1
 fields:
 - _time
+output_fields:
+- dest
 example_log: |-

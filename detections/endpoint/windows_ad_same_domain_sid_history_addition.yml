@@ -20,7 +20,7 @@ search: '`wineventlog_security` (EventCode=4742 OR EventCode=4738) NOT SidHistor
   | rex field=TargetSid "^(?P<TargetSidmatch>.*)(\-|\\\)" | where SidHistoryMatch=TargetSidmatch
   OR SidHistoryMatch=TargetDomainName | rename TargetSid as userSid, TargetDomainName
   as userDomainName | table _time action status host user userSid userDomainName SidHistory
-  Logon_ID src_user | `windows_ad_same_domain_sid_history_addition_filter`'
+  Logon_ID src_user dest | `windows_ad_same_domain_sid_history_addition_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   eventcodes `4738` and `4742`. The Advanced Security Audit policy settings `Audit
   User Account Management` and  `Audit Computer Account Management` within `Account

@@ -20,7 +20,7 @@ search: '`sysmon` EventCode=22  QueryName IN ("*wtfismyip.com", "*checkip.*", "*
   "*dnsbl-1.uceprotect.net", "*spam.dnsbl.sorbs.net", "*iplogger.org*", "*ip-api.com*",
   "*geoip.*", "*icanhazip.*") 
   |  stats  min(_time) as firstTime max(_time) as lastTime count 
-  by answer answer_count dvc process_exec process_guid process_name query query_count reply_code_id signature signature_id src user user_id vendor_product
+  by answer answer_count dvc process_exec process_guid process_name query query_count reply_code_id signature signature_id src user_id vendor_product
   QueryName QueryResults QueryStatus 
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_gather_victim_network_info_through_ip_check_web_services_filter`'

@@ -59,7 +59,7 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: The user $user$ launched the process $process_name$ which spawned a system
-    level integrity process $system_process$ .
+    level integrity process.
   risk_objects:
   - field: dest
     type: system

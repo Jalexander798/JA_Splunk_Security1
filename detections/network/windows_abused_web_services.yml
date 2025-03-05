@@ -17,7 +17,7 @@ description: The following analytic detects a suspicious process making DNS quer
 search: '`sysmon` EventCode=22 QueryName IN ("*pastebin*",""*textbin*"", "*ngrok.io*",
   "*discord*", "*duckdns.org*", "*pasteio.com*") 
   | stats count min(_time) as firstTime max(_time) as lastTime 
-  by answer answer_count dvc process_exec process_guid process_name query query_count reply_code_id signature signature_id src user user_id vendor_product
+  by answer answer_count dvc process_exec process_guid process_name query query_count reply_code_id signature signature_id src user_id vendor_product
   QueryName QueryResults QueryStatus 
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_abused_web_services_filter`'

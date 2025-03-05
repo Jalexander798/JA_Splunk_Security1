@@ -18,7 +18,7 @@ description: The following analytic detects a source computer accessing Windows 
 search: '`wineventlog_security` EventCode=5140 OR EventCode=5145 (ShareName="\\\\*\\ADMIN$"
   OR ShareName="\\\\*\\IPC$" OR ShareName="\\\\*\\C$") | bucket span=5m _time | stats
   dc(Computer) AS unique_targets values(Computer) as host_targets values(ShareName)
-  as shares by _time, IpAddress, SubjectUserName, EventCode | where unique_targets
+  as shares values(dest) as dest by _time, IpAddress, SubjectUserName, EventCode | where unique_targets
   > 30 | `windows_administrative_shares_accessed_on_multiple_hosts_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   file share events. The Advanced Security Audit policy setting `Audit Detailed File

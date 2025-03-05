@@ -19,7 +19,7 @@ description: The following analytic detects suspicious usage of BitLockerToGo.ex
   execution patterns that deviate from normal system behavior.
 search: '`sysmon` EventCode=22 process_name="bitlockertogo.exe" 
   | stats count min(_time) as firstTime max(_time) as lastTime 
-  by answer answer_count dvc process_exec process_guid process_name query query_count reply_code_id signature signature_id src user user_id vendor_product
+  by answer answer_count dvc process_exec process_guid process_name query query_count reply_code_id signature signature_id src user_id vendor_product
   QueryName QueryResults QueryStatus 
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` 

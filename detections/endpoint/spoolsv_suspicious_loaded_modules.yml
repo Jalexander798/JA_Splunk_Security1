@@ -17,7 +17,7 @@ data_source:
 search: '`sysmon` EventCode=7 Image ="*\\spoolsv.exe" ImageLoaded="*\\Windows\\System32\\spool\\drivers\\x64\\*" ImageLoaded = "*.dll" 
   | stats dc(ImageLoaded) as countImgloaded values(ImageLoaded) as ImageLoaded values(loaded_file) as loaded_file values(loaded_file_path) as loaded_file_path 
   values(original_file_name) as original_file_name values(process_exec) as process_exec values(process_guid) as process_guid values(process_hash) as process_hash
-  values(process_id) as process_id values(process_name) as process_name values(process_path) as process_path values(service_dll_signature_exists) as service_dll_signature_exists 
+  values(process_name) as process_name values(service_dll_signature_exists) as service_dll_signature_exists 
   values(service_dll_signature_verified) as service_dll_signature_verified values(signature) as signature values(signature_id) as signature_id values(user_id) as user_id 
   values(vendor_product) as vendor_product
   count min(_time) as firstTime max(_time) as lastTime 

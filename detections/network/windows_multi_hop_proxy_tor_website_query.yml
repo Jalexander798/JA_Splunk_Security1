@@ -17,7 +17,7 @@ data_source:
 - Sysmon EventID 22
 search: '`sysmon` EventCode=22 QueryName IN ("*.torproject.org", "www.theonionrouter.com")
   | stats count min(_time) as firstTime max(_time) as lastTime 
-  by answer answer_count dvc process_exec process_guid process_name query query_count reply_code_id signature signature_id src user user_id vendor_product
+  by answer answer_count dvc process_exec process_guid process_name query query_count reply_code_id signature signature_id src user_id vendor_product
   QueryName QueryResults QueryStatus 
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` 

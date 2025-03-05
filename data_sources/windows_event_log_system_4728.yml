@@ -97,3 +97,5 @@ fields:
 - user_name
 - vendor
 - vendor_product
+output_fields:
+- dest

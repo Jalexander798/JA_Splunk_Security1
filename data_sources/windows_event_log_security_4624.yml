@@ -116,6 +116,15 @@ fields:
 - user_group
 - vendor
 - vendor_product
+output_fields:
+- action 
+- app 
+- authentication_method 
+- dest 
+- signature 
+- signature_id 
+- src  
+- user 
 example_log: <Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider
   Name='Microsoft-Windows-Security-Auditing' Guid='{54849625-5478-4994-A5BA-3E3B0328C30D}'/><EventID>4624</EventID><Version>2</Version><Level>0</Level><Task>12544</Task><Opcode>0</Opcode><Keywords>0x8020000000000000</Keywords><TimeCreated
   SystemTime='2023-03-23T19:15:28.337312500Z'/><EventRecordID>371886</EventRecordID><Correlation
