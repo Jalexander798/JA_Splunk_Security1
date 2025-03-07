@@ -1,7 +1,7 @@
 name: Linux Auditd Service Started
 id: b5eed06d-5c97-4092-a3a1-fa4b7e77c71a
-version: 4
-date: '2025-02-03'
+version: 5
+date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -14,12 +14,12 @@ description: The following analytic detects the suspicious service started. This
   prevent potential security incidents.
 data_source:
 - Linux Auditd Proctitle
-search: '`linux_auditd` `linux_auditd_normalized_proctitle_process` | rename host
-  as dest | where (LIKE(process_exec, "%systemctl %") OR LIKE(process_exec, "%service
-  %") ) AND(LIKE(process_exec, "% start %") OR LIKE(process_exec, "% enable %")) |
-  stats count min(_time) as firstTime max(_time) as lastTime by process_exec proctitle
-  normalized_proctitle_delimiter dest | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`|
-  `linux_auditd_service_started_filter`'
+search: '`linux_auditd`  proctitle IN ("*systemctl *", "*service *") AND proctitle IN ("*start*", "*enable*")
+  | rename host as dest  
+  | stats count min(_time) as firstTime max(_time) as lastTime by  proctitle  dest 
+  | `security_content_ctime(firstTime)`
+  |`security_content_ctime(lastTime)`
+  | `linux_auditd_service_started_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
   data, that consist SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
   executions and process details on Unix/Linux systems. These logs should be ingested
@@ -48,7 +48,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A [$process_exec$] event occurred on host - [$dest$] to start or enable
+  message: A [$proctitle$] event occurred on host - [$dest$] to start or enable
     a service.
   risk_objects:
   - field: dest
@@ -73,6 +73,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1569.002/linux_service_start/linux_service_start.log
-    source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1569.002/linux_service_start/auditd_proctitle_service_start.log
+    source: auditd
+    sourcetype: auditd
