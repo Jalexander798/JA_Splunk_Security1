@@ -16,7 +16,7 @@ command,toolkit,match,description
 *Invoke-TokenManipulation*,PowerSploit,Invoke-TokenManipulation,"Lists available logon tokens. Creates processes with other users logon tokens, and impersonates logon tokens in the current thread."
 *Invoke-CredentialInjection*,PowerSploit,Invoke-CredentialInjection,Create logons with clear-text credentials without triggering a suspicious Event ID 4648 (Explicit Credential Logon).
 *Invoke-NinjaCopy*,PowerSploit,Invoke-NinjaCopy,Copies a file from an NTFS partitioned volume by reading the raw volume and parsing the NTFS structures.
-*Invoke-Mimikatz*,PowerSploit,Invoke-Mimikatz,Reflectively loads Mimikatz 2.0 in memory using PowerShell. Can be used to dump credentials without writing anything to disk. Can be used for any functionality provided with Mimikatz.
+*Invoke-Mimikatz*,PowerSploit,Invoke-Mimikatz,Reflectively loads Mimikatz 2.0 in memory using PowerShell. Can be used to extract sensitive credentials without writing anything to disk. Can be used for any functionality provided with Mimikatz.
 *Get-Keystrokes*,PowerSploit,Get-Keystrokes,"Logs keys pressed, time and the active window."
 *Get-GPPPassword*,PowerSploit,Get-GPPPassword,Retrieves the plaintext password and other information for accounts pushed through Group Policy Preferences.
 *Get-GPPAutologon*,PowerSploit,Get-GPPAutologon,Retrieves autologon username and password from registry.xml if pushed through Group Policy Preferences.
