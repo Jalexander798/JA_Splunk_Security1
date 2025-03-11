@@ -23,7 +23,7 @@ search: '`sysmon` EventCode=7 Signed=false SignatureStatus != Valid NOT (Image I
   | stats count min(_time) as firstTime max(_time) as lastTime 
   by Image ImageLoaded dest loaded_file loaded_file_path 
   process_exec process_guid process_hash process_id process_name process_path service_dll_signature_exists 
-  service_dll_signature_verified signature signature_id user_id vendor_product
+  service_dll_signature_verified signature signature_id user_id vendor_product original_file_name
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_unsigned_dll_side_loading_in_same_process_path_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting

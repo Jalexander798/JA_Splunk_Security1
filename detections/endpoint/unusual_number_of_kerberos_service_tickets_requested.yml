@@ -18,7 +18,7 @@ search: >-
   `wineventlog_security` EventCode=4769 ServiceName!="*$" TicketEncryptionType=0x17
   | bucket span=2m _time  | stats dc(ServiceName) AS unique_services values(ServiceName)
   as requested_services values(user_category) as user_category values(src_category)
-  as src_category by _time, user, src
+  as src_category values(dest) as dest by _time, user, src
   | eventstats avg(unique_services) as comp_avg , stdev(unique_services) as comp_std
   by user, src
   | eval upperBound=(comp_avg+comp_std*3)  | eval isOutlier=if(unique_services > 2

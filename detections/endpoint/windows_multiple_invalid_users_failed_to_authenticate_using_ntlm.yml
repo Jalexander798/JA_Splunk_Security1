@@ -43,7 +43,7 @@ drilldown_searches:
   latest_offset: $info_max_time$
 search: '`wineventlog_security` EventCode=4776 TargetUserName!=*$ Status=0xc0000064
   | bucket span=5m _time | stats dc(TargetUserName) AS unique_accounts values(TargetUserName)
-  as tried_accounts by _time, Workstation | where unique_accounts > 30 | `windows_multiple_invalid_users_failed_to_authenticate_using_ntlm_filter`'
+  as tried_accounts values(dest) as dest by _time, Workstation | where unique_accounts > 30 | `windows_multiple_invalid_users_failed_to_authenticate_using_ntlm_filter`'
 rba:
   message: Potential NTLM based password spraying attack from $Workstation$
   risk_objects:

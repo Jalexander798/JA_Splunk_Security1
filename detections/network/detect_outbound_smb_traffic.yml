@@ -21,7 +21,9 @@ search: >-
   All_Traffic.dest_port=139 OR All_Traffic.dest_port=445 OR All_Traffic.app="smb")
   AND All_Traffic.src_ip IN ("10.0.0.0/8","172.16.0.0/12","192.168.0.0/16") AND NOT
   All_Traffic.dest_ip IN ("10.0.0.0/8","172.16.0.0/12","192.168.0.0/16","100.64.0.0/10")
-  by All_Traffic.src_ip  All_Traffic.dest_ip All_Traffic.dest_port
+  by All_Traffic.action All_Traffic.app All_Traffic.bytes All_Traffic.bytes_in All_Traffic.bytes_out All_Traffic.dest 
+  All_Traffic.dest_ip All_Traffic.dest_port All_Traffic.dvc All_Traffic.protocol All_Traffic.protocol_version
+  All_Traffic.src All_Traffic.src_ip All_Traffic.src_port All_Traffic.transport All_Traffic.user All_Traffic.vendor_product
   | `drop_dm_object_name("All_Traffic")`  | `security_content_ctime(start_time)`  |
   `security_content_ctime(end_time)`  | iplocation dest_ip
   | `detect_outbound_smb_traffic_filter`

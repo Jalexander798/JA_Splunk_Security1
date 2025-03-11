@@ -33,7 +33,7 @@ search: "`wineventlog_security` EventCode=5136 ObjectClass=organizationalUnit | 
   values(aceFlags) as aceFlags values(aceControlAccessRights) as aceControlAccessRights
   values(aceAccessRights) as aceAccessRights values(new_ace) as new_ace values(aceInheritedTypeGuid)
   as aceInheritedTypeGuid by _time ObjectClass ObjectDN src_user SubjectLogonId user
-  OpCorrelationID | eval aceControlAccessRights=if(mvcount(aceControlAccessRights)=1
+  OpCorrelationID dest | eval aceControlAccessRights=if(mvcount(aceControlAccessRights)=1
   AND aceControlAccessRights=\"\",\"All rights\",'aceControlAccessRights') | search
   aceType IN (\"Access denied\",D) AND aceAccessRights IN (\"List contents\",\"List
   objects\",LC,LO) | `windows_ad_hidden_ou_creation_filter`"

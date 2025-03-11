@@ -16,9 +16,14 @@ description: The following analytic detects `spoolsv.exe` writing a `.dll` file,
 data_source:
 - Sysmon EventID 11
 search: '`sysmon` EventID=11 process_name=spoolsv.exe file_path="*\\spool\\drivers\\x64\\*"
-  file_name=*.dll | stats count min(_time) as firstTime max(_time) as lastTime by
-  dest, UserID, process_name, file_path, file_name, TargetFilename, process_id | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `spoolsv_writing_a_dll___sysmon_filter`'
+  file_name=*.dll 
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+  by action dest file_access_time file_create_time file_hash file_modify_time 
+  file_name file_path file_acl file_size process_guid process_id 
+  user vendor_product 
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` 
+  | `spoolsv_writing_a_dll___sysmon_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your
   endpoints. If you are using Sysmon, you must have at least version 6.0.4 of the

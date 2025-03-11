@@ -24,7 +24,7 @@ search: >-
       [| map search="search `wineventlog_security` EventCode=4624 TargetLogonId=$TargetLogonId$" | fields - status] 
   | table attack_time, AuthenticationPackageName, LogonProcessName, LogonType, TargetUserSid, Target_Domain, user, Computer, TargetLogonId, status, src_ip, src_category, ObjectName, ObjectServer, ObjectType, OperationType 
   | stats min(attack_time) as _time values(TargetUserSid) as TargetUserSid, values(Target_Domain) as Target_Domain, values(user) as user, values(Computer) as Computer, values(status) as status, values(src_category) as
-      src_category, values(src_ip) as src_ip by TargetLogonId 
+      src_category, values(src_ip) as src_ip by TargetLogonId  dest
   | `windows_ad_replication_request_initiated_by_user_account_filter`
 how_to_implement: To successfully implement this search, you need to be ingesting
   eventcode `4662`. The Advanced Security Audit policy settings `Audit Directory Services

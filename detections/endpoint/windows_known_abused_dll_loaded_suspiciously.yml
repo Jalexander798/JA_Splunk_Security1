@@ -14,13 +14,11 @@ data_source:
 - Sysmon EventID 7
 search: '`sysmon` ImageLoaded EventCode=7 NOT ImageLoaded IN ("*\\Program Files*","*\\system32\\*",
     "*\\syswow64\\*","*\\winsxs\\*","*\\wbem\\*") 
-  | stats latest(ProcessGuid) as process_guid,
-    count, min(_time) as firstTime, max(_time) as lastTime by User Computer Image
-    ImageLoaded  
-    process_exec process_hash process_id process_path service_dll_signature_exists 
-    service_dll_signature_verified signature signature_id user_id vendor_product 
-  | rename User as user, Computer as dest, Image as process, ImageLoaded
-    as loaded_file 
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+    by Image ImageLoaded dest loaded_file loaded_file_path original_file_name 
+    process_exec process_guid process_hash process_id process_name process_path service_dll_signature_exists 
+    service_dll_signature_verified signature signature_id user_id vendor_product Image
+  | rename Image as process
   | eval process_name = case(isnotnull(process),replace(process,"(.*\\\)(?=.*(\.\w*)$|(\w+)$)","")),
     loaded_file_path = case(isnotnull(loaded_file), replace(loaded_file, "(:[\w\. ]+)",
     "")), loaded_file = case(isnotnull(loaded_file),replace(loaded_file,"(.*\\\)(?=.*(\.\w*)$|(\w+)$)","")),

@@ -19,10 +19,14 @@ data_source:
 search: '`sysmon` EventCode =13  (TargetObject IN ("*\\Control Panel\\Desktop\\Wallpaper","*\\Control
   Panel\\Desktop\\WallpaperStyle") AND Image != "*\\explorer.exe") OR (TargetObject
   IN ("*\\Control Panel\\Desktop\\Wallpaper","*\\Control Panel\\Desktop\\WallpaperStyle")
-  AND Details IN ("*\\temp\\*", "*\\users\\public\\*")) | stats count min(_time) as
-  firstTime max(_time) as lastTime by EventCode Image TargetObject Details Computer
-  process_guid process_id user_id | rename Computer as dest | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `modification_of_wallpaper_filter`'
+  AND Details IN ("*\\temp\\*", "*\\users\\public\\*")) 
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+  by action dest process_guid process_id registry_hive registry_path 
+  registry_key_name registry_value_data registry_value_name  
+  registry_value_type status user vendor_product 
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` 
+  | `modification_of_wallpaper_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the Image, TargetObject registry key, registry Details from your endpoints.
   If you are using Sysmon, you must have at least version 6.0.4 of the Sysmon TA.

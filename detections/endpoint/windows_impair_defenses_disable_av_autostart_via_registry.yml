@@ -21,9 +21,11 @@ search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint
   "*\\kingsoft\\antivirus\\Windhunter\\*" ,"*\\Tencent\\QQPCMgr\\*") AND ((Registry.registry_value_name
   IN("autostart","kxesc", "WindhunterSwitch") AND Registry.registry_value_data = "0x00000000")
   OR (Registry.registry_value_name = "WindhunterLevel" AND Registry.registry_value_data
-  = "0x00000004")) BY Registry.dest Registry.user Registry.registry_path Registry.registry_key_name
-  Registry.registry_value_name Registry.registry_value_data Registry.registry_hive
-  Registry.process_guid | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)`
+  = "0x00000004")) 
+  by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path 
+  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name  
+  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product 
+  | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_impair_defenses_disable_av_autostart_via_registry_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the registry value name, registry path, and registry value data from your

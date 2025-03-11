@@ -36,7 +36,7 @@ search: "`wineventlog_security` EventCode=5136 ObjectClass=user  | stats min(_ti
   values(aceFlags) as aceFlags values(aceControlAccessRights) as aceControlAccessRights
   values(aceAccessRights) as aceAccessRights values(new_ace) as new_ace values(aceInheritedTypeGuid)
   as aceInheritedTypeGuid by _time ObjectClass ObjectDN src_user SubjectLogonId user
-  OpCorrelationID | eval aceControlAccessRights=if(mvcount(aceControlAccessRights)=1
+  OpCorrelationID dest | eval aceControlAccessRights=if(mvcount(aceControlAccessRights)=1
   AND aceControlAccessRights=\"\",\"All rights\",'aceControlAccessRights') | search
   NOT aceType IN (*denied*,D,OD,XD) AND aceAccessRights IN (\"Full control\",\"All
   extended rights\",\"All validated writes\",\"Create all child objects\",\"Delete

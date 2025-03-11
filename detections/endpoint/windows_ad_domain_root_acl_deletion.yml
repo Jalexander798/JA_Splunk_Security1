@@ -33,7 +33,7 @@ search: "`wineventlog_security` EventCode=5136 ObjectClass=domainDNS  | stats mi
   user=coalesce(user, group, builtin_group, aceSid) | stats values(aceType) as aceType
   values(aceFlags) as aceFlags(inheritance) values(aceControlAccessRights) as aceControlAccessRights
   values(aceAccessRights) as aceAccessRights values(old_values) as old_values by _time
-  ObjectClass ObjectDN src_user SubjectLogonId user OpCorrelationID | eval aceControlAccessRights=if(mvcount(aceControlAccessRights)=1
+  ObjectClass ObjectDN src_user SubjectLogonId user OpCorrelationID dest | eval aceControlAccessRights=if(mvcount(aceControlAccessRights)=1
   AND aceControlAccessRights=\"\",\"All rights\",'aceControlAccessRights') | `windows_ad_domain_root_acl_deletion_filter`"
 how_to_implement: Ensure you are ingesting Active Directory audit logs - specifically
   event 5136. See lantern article in references for further on how to onboard AD audit

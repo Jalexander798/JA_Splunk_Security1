@@ -19,7 +19,7 @@ search: '`wineventlog_security` EventCode=4703 EnabledPrivilegeList = "*SeDebugP
   "*\\SysWOW64\\svchost.exe*", "*\\System32\\svchost.exe*")) | stats count min(_time)
   as firstTime max(_time) as lastTime by Computer ProcessName ProcessId SubjectDomainName
   SubjectUserName SubjectUserSid TargetUserName TargetLogonId TargetDomainName EnabledPrivilegeList
-  action | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  action dest | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_access_token_manipulation_sedebugprivilege_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   Windows Security Event Logs with 4703 EventCode enabled. The Windows TA is also

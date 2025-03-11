@@ -16,9 +16,12 @@ description: The following analytic detects an application attempting to connect
 data_source:
 - Sysmon EventID 11
 search: '`sysmon` EventCode=11  TargetFilename = "*\\Windows\\SchCache\\*" TargetFilename
-  = "*.sch*" NOT (Image IN ("*\\Windows\\system32\\mmc.exe")) |stats count min(_time)
-  as firstTime max(_time) as lastTime by Image TargetFilename EventCode process_id  process_name
-  dest | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  = "*.sch*" NOT (Image IN ("*\\Windows\\system32\\mmc.exe")) 
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+  by action dest file_access_time file_create_time file_hash file_modify_time 
+  file_name file_path file_acl file_size process_guid process_id 
+  user vendor_product 
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `schcache_change_by_app_connect_and_create_adsi_object_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your

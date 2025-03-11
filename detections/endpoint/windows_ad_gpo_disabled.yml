@@ -17,7 +17,7 @@ search: '`wineventlog_security` EventCode=5136 AttributeLDAPDisplayName=flags Op
   | eval ObjectDN=upper(distinguishedName) | stats latest(displayName) as displayName
   by ObjectDN ] | stats min(_time) as _time values(AttributeValue) as AttributeValue
   values(AttributeValueExp) as AttributeValueExp values(OpCorrelationID) as OpCorrelationID
-  values(displayName) as policyName values(src_user) as src_user by ObjectDN SubjectLogonId
+  values(displayName) as policyName values(src_user) as src_user by ObjectDN SubjectLogonId dest
   | `windows_ad_gpo_disabled_filter`'
 how_to_implement: Ensure you are ingesting Active Directory audit logs - specifically
   event 5136, admon data is also used to display the display name of the GPO. See

@@ -24,7 +24,7 @@ search: '`wineventlog_security` EventCode=5136 ObjectClass=groupPolicyContainer 
   | stats latest(displayName) as displayName by distinguishedName | eval ObjectDN=upper(distinguishedName)]
   | stats values(OpCorrelationID) as OpCorrelationID values(src_user) as src_user
   values(SubjectLogonId) as SubjectLogonId values(newPolicy) as newPolicy values(displayName)
-  as policyName by ObjectDN | `windows_ad_gpo_new_cse_addition_filter`'
+  as policyName by ObjectDN dest | `windows_ad_gpo_new_cse_addition_filter`'
 how_to_implement: Ensure you are ingesting Active Directory audit logs - specifically
   event 5136, admon data is also used to display the display name of the GPO. See
   lantern article in references for further on how to onboard AD audit data. Ensure

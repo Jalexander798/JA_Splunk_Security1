@@ -38,7 +38,7 @@ search: "`wineventlog_security` EventCode=5136 ObjectClass=container ObjectDN=\"
   as aceType values(aceFlags) as aceFlags(inheritance) values(aceControlAccessRights)
   as aceControlAccessRights values(aceAccessRights) as aceAccessRights values(new_ace)
   as new_ace values(SubjectLogonId) as SubjectLogonId by ObjectClass ObjectDN src_user
-  user | eval aceControlAccessRights=if(mvcount(aceControlAccessRights)=1 AND aceControlAccessRights=\"\
+  user dest | eval aceControlAccessRights=if(mvcount(aceControlAccessRights)=1 AND aceControlAccessRights=\"\
   \",\"All rights\",'aceControlAccessRights') | search NOT aceType IN (*denied*,D,OD,XD)
   AND aceAccessRights IN (\"Full control\",\"All extended rights\",\"All validated
   writes\",\"Create all child objects\",\"Delete all child objects\",\"Delete subtree\"\

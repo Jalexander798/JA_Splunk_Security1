@@ -26,7 +26,7 @@ search: '`wineventlog_security` EventCode=5136 | stats min(_time) as _time value
   new_owner_group_builtin_group, new_owner), previousOwner=coalesce(old_owner_user,
   old_owner_group, old_owner_group_builtin_group, old_owner) | stats values(previousOwner)
   as previousOwner values(user) as user values(SubjectLogonId) as SubjectLogonId by
-  _time ObjectClass ObjectDN src_user OpCorrelationID DSName | `windows_ad_object_owner_updated_filter`'
+  _time ObjectClass ObjectDN src_user OpCorrelationID DSName dest | `windows_ad_object_owner_updated_filter`'
 how_to_implement: Ensure you are ingesting Active Directory audit logs - specifically
   event 5136. See lantern article in references for further on how to onboard AD audit
   data. Ensure the wineventlog_security macro is configured with the correct indexes

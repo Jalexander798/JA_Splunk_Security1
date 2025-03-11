@@ -24,9 +24,13 @@ search: '`sysmon` EventCode=11 Image="*\\mshta.exe" TargetFilename IN ("*\\Windo
   and Desktop Connections Update\\*", "*\\Windows\\SysWOW64\\Tasks\\*", "*\\Windows\\SysWOW64\\Com\\dmp\\*",
   "*\\Windows\\SysWOW64\\Tasks\\Microsoft\\Windows\\PLA\\*", "*\\Windows\\SysWOW64\\Tasks\\Microsoft\\Windows\\RemoteApp
   and Desktop Connections Update\\*", "*\\Windows\\SysWOW64\\Tasks\\Microsoft\\Windows\\PLA\\System\\*")
-  | rename Computer as dest, User as user | stats count min(_time) as firstTime max(_time)
-  as lastTime by dest, user, Image, TargetFilename | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `windows_mshta_writing_to_world_writable_path_filter`'
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+  by action dest file_access_time file_create_time file_hash file_modify_time 
+  file_name file_path file_acl file_size process_guid process_id 
+  user vendor_product 
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` 
+  | `windows_mshta_writing_to_world_writable_path_filter`'
 how_to_implement: The analytic is designed to be run against Sysmon event logs collected
   from endpoints. The analytic requires the Sysmon event logs to be ingested into
   Splunk. The search focuses on EventCode 11 where the Image is `mshta.exe` and the

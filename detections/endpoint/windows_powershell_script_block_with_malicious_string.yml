@@ -10,8 +10,9 @@ data_source:
 - Powershell Script Block Logging 4104
 search: |-
   `powershell` ScriptBlockText EventCode=4104
-  | stats count min(_time) as firstTime max(_time) as lastTime list(ScriptBlockText) as command Values(OpCode) as reason values(Path) as file_name values(UserID) as user by ActivityID, Computer, EventCode 
-  | eval command = mvjoin(command,"\n"), dest = Computer, signature = EventCode, signature_id = ActivityID
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | eval command = mvjoin(command,"\n")
   | lookup malicious_powershell_strings command  
   | where isnotnull(match)
   | `security_content_ctime(firstTime)` 

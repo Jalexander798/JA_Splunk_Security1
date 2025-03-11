@@ -17,8 +17,11 @@ data_source:
 - Palo Alto Network Traffic
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime values(All_Traffic.dest_port) as dest_port latest(user) as user from
-  datamodel=Network_Traffic by All_Traffic.src All_Traffic.dest, All_Traffic.app |
-  `drop_dm_object_name("All_Traffic")` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  datamodel=Network_Traffic 
+  by All_Traffic.action All_Traffic.app All_Traffic.bytes All_Traffic.bytes_in All_Traffic.bytes_out All_Traffic.dest 
+  All_Traffic.dest_ip All_Traffic.dest_port All_Traffic.dvc All_Traffic.protocol All_Traffic.protocol_version
+  All_Traffic.src All_Traffic.src_ip All_Traffic.src_port All_Traffic.transport All_Traffic.user All_Traffic.vendor_product
+  | `drop_dm_object_name("All_Traffic")` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | lookup remote_access_software remote_appid AS app OUTPUT isutility, description
   as signature, comment_reference as desc, category | search isutility = True | `remote_access_software_usage_exceptions`
   | `detect_remote_access_software_usage_traffic_filter`'
