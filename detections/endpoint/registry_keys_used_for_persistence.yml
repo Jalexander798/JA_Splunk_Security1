@@ -1,7 +1,7 @@
 name: Registry Keys Used For Persistence
 id: f5f6af30-7aa7-4295-bfe9-07fe87c01a4b
-version: 16
-date: '2025-02-10'
+version: '17'
+date: '2025-02-24'
 author: Jose Hernandez, David Dorsey, Teoderick Contreras, Rod Soto, Splunk
 status: production
 type: TTP
@@ -76,35 +76,35 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Chaos Ransomware
-  - Windows Persistence Techniques
+  - BlackByte Ransomware
   - DHS Report TA18-074A
   - Snake Keylogger
-  - CISA AA23-347A
-  - WinDealer RAT
-  - Qakbot
-  - Warzone RAT
-  - IcedID
-  - Azorult
-  - Suspicious Windows Registry Activities
-  - AsyncRAT
-  - Derusbi
-  - Possible Backdoor Activity Associated With MUDCARP Espionage Campaigns
-  - DarkGate Malware
-  - NjRAT
-  - BlackByte Ransomware
-  - Ransomware
-  - MoonPeak
-  - BlackSuit Ransomware
   - Emotet Malware DHS Report TA18-201A
   - Sneaky Active Directory Persistence Tricks
-  - Amadey
-  - Remcos
-  - Braodo Stealer
-  - Windows Registry Abuse
-  - Nexus APT Threat Activity
+  - Warzone RAT
+  - NjRAT
   - Suspicious MSHTA Activity
+  - Suspicious Windows Registry Activities
+  - Braodo Stealer
+  - AsyncRAT
+  - Windows Registry Abuse
+  - Chaos Ransomware
+  - Derusbi
+  - Windows Persistence Techniques
+  - WinDealer RAT
   - RedLine Stealer
+  - Remcos
+  - Possible Backdoor Activity Associated With MUDCARP Espionage Campaigns
+  - China-Nexus Threat Activity
+  - Qakbot
+  - IcedID
+  - Ransomware
+  - BlackSuit Ransomware
+  - MoonPeak
+  - CISA AA23-347A
+  - DarkGate Malware
+  - Azorult
+  - Amadey
   asset_type: Endpoint
   mitre_attack_id:
   - T1547.001
@@ -116,7 +116,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.001/atomic_red_team/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.001/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

@@ -1,7 +1,7 @@
 name: Executables Or Script Creation In Suspicious Path
 id: a7e3f0f0-ae42-11eb-b245-acde48001122
-version: 10
-date: '2025-01-27'
+version: '11'
+date: '2025-02-24'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -61,46 +61,46 @@ rba:
     type: file_name
 tags:
   analytic_story:
-  - Chaos Ransomware
+  - BlackByte Ransomware
+  - Brute Ratel C4
   - Trickbot
   - Snake Keylogger
-  - CISA AA23-347A
-  - Industroyer2
-  - WinDealer RAT
-  - Qakbot
-  - Warzone RAT
-  - IcedID
-  - ValleyRAT
-  - Azorult
-  - Handala Wiper
-  - LockBit Ransomware
-  - Meduza Stealer
-  - Brute Ratel C4
-  - AsyncRAT
-  - AcidPour
-  - Derusbi
-  - DarkGate Malware
   - Graceful Wipe Out Attack
-  - NjRAT
-  - WhisperGate
-  - Data Destruction
-  - BlackByte Ransomware
-  - AgentTesla
-  - Swift Slicer
-  - Crypto Stealer
-  - Hermetic Wiper
-  - MoonPeak
-  - Double Zero Destructor
-  - XMRig
   - PlugX
-  - Amadey
-  - DarkCrystal RAT
-  - Remcos
-  - Nexus APT Threat Activity
+  - Handala Wiper
   - Earth Estries
-  - Rhysida Ransomware
-  - RedLine Stealer
+  - Warzone RAT
+  - ValleyRAT
+  - NjRAT
+  - LockBit Ransomware
+  - Double Zero Destructor
+  - Swift Slicer
+  - DarkCrystal RAT
+  - AsyncRAT
   - Volt Typhoon
+  - Chaos Ransomware
+  - Hermetic Wiper
+  - Derusbi
+  - XMRig
+  - AgentTesla
+  - WinDealer RAT
+  - RedLine Stealer
+  - Remcos
+  - Rhysida Ransomware
+  - China-Nexus Threat Activity
+  - Crypto Stealer
+  - Qakbot
+  - IcedID
+  - Meduza Stealer
+  - AcidPour
+  - MoonPeak
+  - CISA AA23-347A
+  - DarkGate Malware
+  - Industroyer2
+  - Azorult
+  - Data Destruction
+  - Amadey
+  - WhisperGate
   asset_type: Endpoint
   mitre_attack_id:
   - T1036
