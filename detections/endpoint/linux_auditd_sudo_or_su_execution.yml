@@ -1,7 +1,7 @@
 name: Linux Auditd Sudo Or Su Execution
 id: 817a5c89-5b92-4818-a22d-aa35e1361afe
-version: 4
-date: '2025-02-10'
+version: 5
+date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -14,11 +14,12 @@ description: The following analytic detects the execution of the "sudo" or "su" 
   to severe security breaches, data exfiltration, or further system compromise.
 data_source:
 - Linux Auditd Proctitle
-search: '`linux_auditd` `linux_auditd_normalized_proctitle_process` | rename host
-  as dest | where LIKE(process_exec, "%sudo %") OR LIKE(process_exec, "%su %") | stats
-  count min(_time) as firstTime max(_time) as lastTime by process_exec proctitle normalized_proctitle_delimiter
-  dest | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`|
-  `linux_auditd_sudo_or_su_execution_filter`'
+search: '`linux_auditd`  proctitle IN ("*sudo *", "*su *")
+  | rename host as dest  
+  | stats count min(_time) as firstTime max(_time) as lastTime by  proctitle  dest 
+  | `security_content_ctime(firstTime)`
+  |`security_content_ctime(lastTime)`
+  | `linux_auditd_sudo_or_su_execution_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
   data, that consists of SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures
   command-line executions and process details on Unix/Linux systems. These logs should
@@ -47,7 +48,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A [$process_exec$] event occurred on host - [$dest$] to execute the sudo
+  message: A [$proctitle$] event occurred on host - [$dest$] to execute the sudo
     or su command.
   risk_objects:
   - field: dest
@@ -71,6 +72,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.003/linux_auditd_sudo_su/linux_auditd_sudo_su.log
-    source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.003/linux_auditd_sudo_su/auditd_proctitle_sudo.log
+    source: auditd
+    sourcetype: auditd

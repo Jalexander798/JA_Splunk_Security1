@@ -1,7 +1,7 @@
 name: Windows Process With NetExec Command Line Parameters
 id: adbff89c-c1f2-4a2e-88a4-b5e645856510
-version: 4
-date: '2025-02-11'
+version: 5
+date: '2025-03-03'
 author: Steven Dick, Github Community
 status: production
 type: TTP
@@ -10,7 +10,7 @@ data_source:
 - Windows Event Log Security 4688
 - Sysmon EventID 1
 - CrowdStrike ProcessRollup2
-search: '| tstats `security_content_summariesonly` values(Processes.parent_process) as Processes.parent_process, values(Processes.process) as Processes.process values(Processes.process_current_directory) AS process_current_directory, values(Processes.process_id) as Processes.process_id, values(Processes.process_guid) as Processes.process_guid, count min(_time) AS firstTime, max(_time) AS lastTime FROM datamodel=Endpoint.Processes where Processes.process_name IN ("nxc.exe") OR Processes.original_file_name IN ("nxc.exe") OR (Processes.process IN ("* smb *","* ssh *","* ldap *","* ftp *","* wmi *","* winrm *","* rdp *","* vnc *","* mssql *","* nfs *") AND ((Processes.process = "* -p *" AND Processes.process = "* -u *") OR Processes.process IN ("* -x *","* -M *","* --*"))) BY _time span=1h Processes.user Processes.dest Processes.process_name Processes.parent_process_name  
+search: '| tstats `security_content_summariesonly` values(Processes.parent_process) as Processes.parent_process, values(Processes.process) as Processes.process values(Processes.process_current_directory) AS process_current_directory, values(Processes.process_id) as Processes.process_id, values(Processes.process_guid) as Processes.process_guid, count min(_time) AS firstTime, max(_time) AS lastTime FROM datamodel=Endpoint.Processes where NOT Processes.os="Linux" Processes.process_name IN ("nxc.exe") OR Processes.original_file_name IN ("nxc.exe") OR (Processes.process IN ("* smb *","* ssh *","* ldap *","* ftp *","* wmi *","* winrm *","* rdp *","* vnc *","* mssql *","* nfs *") AND ((Processes.process = "* -p *" AND Processes.process = "* -u *") OR Processes.process IN ("* -x *","* -M *","* --*"))) BY _time span=1h Processes.user Processes.dest Processes.process_name Processes.parent_process_name  
 |`drop_dm_object_name(Processes)`
 | `security_content_ctime(firstTime)`
 | `security_content_ctime(lastTime)`
