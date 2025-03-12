@@ -56,7 +56,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: The module [$loaded_file$] was loaded from an unusual location by [$process$]
+  message: The module [$loaded_file$] was loaded from an unusual location.
   risk_objects:
   - field: dest
     type: system
@@ -64,9 +64,7 @@ rba:
   - field: user
     type: user
     score: 10
-  threat_objects:
-  - field: process
-    type: process
+  threat_objects: []
 tags:
   analytic_story:
   - Windows Defense Evasion Tactics

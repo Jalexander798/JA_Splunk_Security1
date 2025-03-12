@@ -47,15 +47,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: $process_name$ has been identified writing dll's to $file_path$ on endpoint
+  message: A process has been identified writing dll's to $file_path$ on endpoint
     $dest$. This behavior is suspicious and related to PrintNightmare.
   risk_objects:
   - field: dest
     type: system
     score: 72
   threat_objects:
-  - field: process_name
-    type: process_name
   - field: file_name
     type: file_name
 tags:
