@@ -16,7 +16,7 @@ description: 'This detection monitors the addition of the following ACLs to an A
 search: "`wineventlog_security` EventCode=5136 ObjectClass=user  | stats min(_time)
   as _time values(eval(if(OperationType==\"%%14675\",AttributeValue,null))) as old_value
   values(eval(if(OperationType==\"%%14674\",AttributeValue,null))) as new_value values(OperationType)
-  as OperationType by ObjectClass ObjectDN OpCorrelationID src_user SubjectLogonId\
+  as OperationType values(dest) as dest by ObjectClass ObjectDN OpCorrelationID src_user SubjectLogonId\
   \  | rex field=old_value max_match=10000 \"\\((?P<old_values>.*?)\\)\"  | rex field=new_value
   max_match=10000 \"\\((?P<new_ace>.*?)\\)\"  | mvexpand new_ace  | where NOT new_ace
   IN (old_values)  | rex field=new_ace \"(?P<aceType>.*?);(?P<aceFlags>.*?);(?P<aceAccessRights>.*?);(?P<aceObjectGuid>.*?);(?P<aceInheritedTypeGuid>.*?);(?P<aceSid>.*?)$\"\
@@ -36,7 +36,7 @@ search: "`wineventlog_security` EventCode=5136 ObjectClass=user  | stats min(_ti
   values(aceFlags) as aceFlags values(aceControlAccessRights) as aceControlAccessRights
   values(aceAccessRights) as aceAccessRights values(new_ace) as new_ace values(aceInheritedTypeGuid)
   as aceInheritedTypeGuid by _time ObjectClass ObjectDN src_user SubjectLogonId user
-  OpCorrelationID dest | eval aceControlAccessRights=if(mvcount(aceControlAccessRights)=1
+  OpCorrelationID | eval aceControlAccessRights=if(mvcount(aceControlAccessRights)=1
   AND aceControlAccessRights=\"\",\"All rights\",'aceControlAccessRights') | search
   NOT aceType IN (*denied*,D,OD,XD) AND aceAccessRights IN (\"Full control\",\"All
   extended rights\",\"All validated writes\",\"Create all child objects\",\"Delete

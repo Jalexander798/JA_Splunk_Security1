@@ -11,7 +11,7 @@ data_source:
 search: |-
   `powershell` ScriptBlockText EventCode=4104
   | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
-  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText command
   | eval command = mvjoin(command,"\n")
   | lookup malicious_powershell_strings command  
   | where isnotnull(match)

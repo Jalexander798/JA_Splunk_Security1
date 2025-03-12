@@ -10,9 +10,7 @@ status: production
 description: The following analytic detects the creation of RAR Self-Extracting (SFX) files by monitoring the generation of file related to rar sfx .tmp file creation during sfx installation. This method leverages a heuristic to identify RAR SFX archives based on specific markers that indicate a combination of executable code and compressed RAR data. By tracking such activity, the analytic helps pinpoint potentially unauthorized or suspicious file creation events, which are often associated with malware packaging or data exfiltration. Legitimate usage may include custom installers or compressed file delivery.
 search: '`sysmon` EventCode=11 TargetFilename IN ("*__tmp_rar_sfx_access_check*") 
   | stats count min(_time) as firstTime max(_time) as lastTime 
-  by action dest file_access_time file_create_time file_hash file_modify_time 
-  file_name file_path file_acl file_size process_guid process_id 
-  user vendor_product 
+  by action dest file_name file_path  process_guid process_id user user_id vendor_product 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `windows_obfuscated_files_or_information_via_rar_sfx_filter`'

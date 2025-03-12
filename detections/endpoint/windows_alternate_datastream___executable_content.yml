@@ -51,9 +51,6 @@ rba:
   - field: dest
     type: system
     score: 80
-  - field: user
-    type: user
-    score: 80
   threat_objects:
   - field: file_name
     type: file_name

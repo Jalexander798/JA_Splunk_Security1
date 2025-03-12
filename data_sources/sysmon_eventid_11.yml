@@ -87,18 +87,12 @@ fields:
 output_fields:
 - action 
 - dest 
-- file_access_time 
-- file_create_time 
-- file_hash 
-- file_modify_time 
 - file_name 
 - file_path 
-- file_acl 
-- file_size 
 - process_guid 
 - process_id 
 - user 
-- vendor_product
+- vendor_product 
 field_mappings:
 - data_model: cim
   data_set: Endpoint.Filesystem

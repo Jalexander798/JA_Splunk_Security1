@@ -23,7 +23,7 @@ search: '`sysmon` EventCode =13  (TargetObject IN ("*\\Control Panel\\Desktop\\W
   | stats count min(_time) as firstTime max(_time) as lastTime 
   by action dest process_guid process_id registry_hive registry_path 
   registry_key_name registry_value_data registry_value_name  
-  registry_value_type status user vendor_product 
+  status user_id vendor_product 
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` 
   | `modification_of_wallpaper_filter`'

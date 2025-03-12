@@ -25,9 +25,7 @@ search: '`sysmon` EventCode=11 Image="*\\mshta.exe" TargetFilename IN ("*\\Windo
   "*\\Windows\\SysWOW64\\Tasks\\Microsoft\\Windows\\PLA\\*", "*\\Windows\\SysWOW64\\Tasks\\Microsoft\\Windows\\RemoteApp
   and Desktop Connections Update\\*", "*\\Windows\\SysWOW64\\Tasks\\Microsoft\\Windows\\PLA\\System\\*")
   | stats count min(_time) as firstTime max(_time) as lastTime 
-  by action dest file_access_time file_create_time file_hash file_modify_time 
-  file_name file_path file_acl file_size process_guid process_id 
-  user vendor_product 
+  by action dest file_name file_path  process_guid process_id user user_id vendor_product Image TargetFilename
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` 
   | `windows_mshta_writing_to_world_writable_path_filter`'

@@ -106,7 +106,6 @@ output_fields:
 - dest 
 - loaded_file 
 - loaded_file_path 
-- original_file_name 
 - process_exec 
 - process_guid 
 - process_hash 

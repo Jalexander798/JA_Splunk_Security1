@@ -16,9 +16,8 @@ data_source:
 - Sysmon EventID 11
 search: '`sysmon` EventCode=11 Image="*rundll32.exe" TargetFilename IN ("*.exe", "*.dll")
   | stats count min(_time) as firstTime max(_time) as lastTime 
-    by action dest file_access_time file_create_time file_hash file_modify_time 
-    file_name file_path file_acl file_size process_guid process_id 
-    user vendor_product 
+    by action dest file_name file_path process_guid process_id 
+    user_id vendor_product 
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` 
   | `rundll32_process_creating_exe_dll_files_filter`'
