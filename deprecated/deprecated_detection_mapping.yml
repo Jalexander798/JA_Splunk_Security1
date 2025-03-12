@@ -1320,3 +1320,8 @@ stories:
     deprecated_date: 2025-03-12
     reason: The detection does not work as expected and is now deprecated
     replacement_content: []
+  - deprecated_content: Nexus APT Threat Activity
+    deprecated_in_version: 5.2.0
+    deprecated_date: 2025-03-12
+    reason: The detection does not work as expected and is now deprecated
+    replacement_content: []
