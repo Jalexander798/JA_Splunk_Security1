@@ -2,7 +2,7 @@ detections:
   - deprecated_content: ASL AWS Excessive Security Scanning
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: AWS Cloud Provisioning From Previously Unseen Region
     deprecated_in_version: 5.2.0
@@ -14,27 +14,27 @@ detections:
   - deprecated_content: First time seen command line argument
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Windows connhost exe started forcefully
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Detect Mimikatz Using Loaded Images
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Kubernetes Azure detect sensitive role access
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Web Fraud - Anomalous User Clickspeed
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: EC2 Instance Started With Previously Unseen Instance Type
     deprecated_in_version: 5.2.0
@@ -53,13 +53,13 @@ detections:
   - deprecated_content: Domain Group Discovery With Net
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content:
     - Windows Group Discovery Via Net
   - deprecated_content: Kubernetes AWS detect sensitive role access
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Winword Spawning Windows Script Host
     deprecated_in_version: 5.2.0
@@ -73,7 +73,7 @@ detections:
   - deprecated_content: Winword Spawning PowerShell
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Attempted Credential Dump From Registry via Reg exe
@@ -131,27 +131,27 @@ detections:
   - deprecated_content: Detect AWS API Activities From Unapproved Accounts
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Monitor DNS For Brand Abuse
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Kubernetes GCP detect sensitive object access
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Kubernetes Azure scan fingerprint
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: ASL AWS Password Policy Changes
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: O365 Suspicious Admin Email Forwarding
     deprecated_in_version: 5.2.0
@@ -170,12 +170,12 @@ detections:
   - deprecated_content: Kubernetes AWS detect service accounts forbidden failure access
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Osquery pack - ColdRoot detection
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Windows Modify Registry Reg Restore
     deprecated_in_version: 5.2.0
@@ -186,7 +186,7 @@ detections:
   - deprecated_content: Kubernetes GCP detect most active service accounts by pod
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Scheduled tasks used in BadRabbit ransomware
     deprecated_in_version: 5.2.0
@@ -197,7 +197,7 @@ detections:
   - deprecated_content: Suspicious Rundll32 Rename
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Remote System Discovery with Net
     deprecated_in_version: 5.2.0
@@ -211,23 +211,23 @@ detections:
   - deprecated_content: Remote System Discovery with Net
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content:
     - Windows Sensitive Group Discovery With Net
   - deprecated_content: DNS Query Requests Resolved by Unauthorized DNS Servers
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Suspicious Changes to File Associations
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: GCP Detect high risk permissions by resource and account
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Office Product Writing cab or inf
     deprecated_in_version: 5.2.0
@@ -238,12 +238,12 @@ detections:
   - deprecated_content: Identify New User Accounts
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Office Product Spawn CMD Process
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Windows DLL Search Order Hijacking Hunt
@@ -263,7 +263,7 @@ detections:
   - deprecated_content: Okta ThreatInsight Login Failure with High Unknown users
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Detect Spike in Security Group Activity
     deprecated_in_version: 5.2.0
@@ -275,7 +275,7 @@ detections:
   - deprecated_content: Office Product Spawning BITSAdmin
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Create local admin accounts using net exe
@@ -287,7 +287,7 @@ detections:
   - deprecated_content: Abnormally High AWS Instances Terminated by User - MLTK
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Windows Office Product Spawning MSDT
     deprecated_in_version: 5.2.0
@@ -298,18 +298,18 @@ detections:
   - deprecated_content: Detect Spike in AWS API Activity
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Office Product Spawning Windows Script Host
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Prohibited Software On Endpoint
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content:
     - Attacker Tools On Endpoint
   - deprecated_content: AWS Cloud Provisioning From Previously Unseen Country
@@ -332,19 +332,19 @@ detections:
   - deprecated_content: Detect Critical Alerts from Security Tools
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content:
     - Microsoft Defender Incident Alerts
   - deprecated_content: Excel Spawning PowerShell
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Office Application Spawn rundll32 process
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Excessive Usage Of Net App
@@ -374,7 +374,7 @@ detections:
   - deprecated_content: Suspicious Email - UBA Anomaly
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Detect web traffic to dynamic domain providers
     deprecated_in_version: 5.2.0
@@ -392,17 +392,17 @@ detections:
   - deprecated_content: Kubernetes AWS detect RBAC authorization by account
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Kubernetes Azure detect service accounts forbidden failure access
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Remote Registry Key modifications
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: O365 Suspicious User Email Forwarding
     deprecated_in_version: 5.2.0
@@ -414,13 +414,13 @@ detections:
   - deprecated_content: Office Product Spawning MSHTA
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Kubernetes AWS detect most active service accounts by pod
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Correlation by Repository and Risk
     deprecated_in_version: 5.2.0
@@ -431,12 +431,12 @@ detections:
   - deprecated_content: Kubernetes Azure detect RBAC authorization by account
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Clients Connecting to Multiple DNS Servers
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Excessive Service Stop Attempt
     deprecated_in_version: 5.2.0
@@ -454,7 +454,7 @@ detections:
   - deprecated_content: Suspicious writes to System Volume Information
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Detect new user AWS Console Login
     deprecated_in_version: 5.2.0
@@ -475,12 +475,12 @@ detections:
   - deprecated_content: Detection of DNS Tunnels
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Detect DNS requests to Phishing Sites leveraging EvilGinx2
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Office Document Creating Schedule Task
     deprecated_in_version: 5.2.0
@@ -498,7 +498,7 @@ detections:
   - deprecated_content: Unsuccessful Netbackup backups
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Detect Mimikatz Via PowerShell And EventCode 4703
     deprecated_in_version: 5.2.0
@@ -509,7 +509,7 @@ detections:
   - deprecated_content: Winword Spawning Cmd
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: GCP Kubernetes cluster scan detection
@@ -522,12 +522,12 @@ detections:
   - deprecated_content: Kubernetes GCP detect suspicious kubectl calls
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: gcp detect oauth token abuse
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Correlation by User and Risk
     deprecated_in_version: 5.2.0
@@ -544,7 +544,7 @@ detections:
   - deprecated_content: Office Product Spawning Wmic
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Extraction of Registry Hives
@@ -588,17 +588,17 @@ detections:
   - deprecated_content: Abnormally High AWS Instances Launched by User - MLTK
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Reg exe used to hide files directories via registry keys
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Detect Long DNS TXT Record Response
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Password Policy Discovery with Net
     deprecated_in_version: 5.2.0
@@ -622,12 +622,12 @@ detections:
   - deprecated_content: Kubernetes Azure detect suspicious kubectl calls
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Kubernetes GCP detect sensitive role access
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Detect Webshell Exploit Behavior
     deprecated_in_version: 5.2.0
@@ -638,17 +638,17 @@ detections:
   - deprecated_content: DNS record changed
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Unsigned Image Loaded by LSASS
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Detect USB device insertion
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Windows Network Share Interaction With Net
     deprecated_in_version: 5.2.0
@@ -713,7 +713,7 @@ detections:
   - deprecated_content: Windows hosts file modification
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: MSHTML Module Load in Office Product
     deprecated_in_version: 5.2.0
@@ -731,7 +731,7 @@ detections:
   - deprecated_content: Web Fraud - Account Harvesting
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Office Spawning Control
     deprecated_in_version: 5.2.0
@@ -742,7 +742,7 @@ detections:
   - deprecated_content: Detect Activity Related to Pass the Hash Attacks
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Deleting Of Net Users
     deprecated_in_version: 5.2.0
@@ -753,7 +753,7 @@ detections:
   - deprecated_content: Suspicious File Write
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: AWS EKS Kubernetes cluster sensitive object access
     deprecated_in_version: 5.2.0
@@ -765,7 +765,7 @@ detections:
   - deprecated_content: Spectre and Meltdown Vulnerable Systems
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: EC2 Instance Started With Previously Unseen User
     deprecated_in_version: 5.2.0
@@ -777,13 +777,13 @@ detections:
   - deprecated_content: Office Product Spawning CertUtil
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Kubernetes GCP detect RBAC authorizations by account
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Office Application Drop Executable
     deprecated_in_version: 5.2.0
@@ -794,12 +794,12 @@ detections:
   - deprecated_content: Kubernetes Azure active service accounts by pod namespace
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Kubernetes Azure pod scan fingerprint
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Detect Spike in Network ACL Activity
     deprecated_in_version: 5.2.0
@@ -811,13 +811,13 @@ detections:
   - deprecated_content: Suspicious Powershell Command-Line Arguments
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content:
     - Malicious PowerShell Process - Encoded Command
   - deprecated_content: Office Application Spawn Regsvr32 process
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Detect API activity from users without MFA
@@ -830,12 +830,12 @@ detections:
   - deprecated_content: Kubernetes Azure detect sensitive object access
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Web Fraud - Password Sharing Across Accounts
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Disabling Net User Account
     deprecated_in_version: 5.2.0
@@ -846,17 +846,17 @@ detections:
   - deprecated_content: GCP Detect accounts with high risk roles by project
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Kubernetes GCP detect service accounts forbidden failure access
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Extended Period Without Successful Netbackup Backups
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Office Product Spawning Rundll32 with no DLL
     deprecated_in_version: 5.2.0
@@ -881,7 +881,7 @@ detections:
   - deprecated_content: Uncommon Processes On Endpoint
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content:
     - Attacker Tools On Endpoint
   - deprecated_content: Dump LSASS via procdump Rename
@@ -900,62 +900,62 @@ detections:
   - deprecated_content: Excel Spawning Windows Script Host
     deprecated_in_version: 5.3.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: GitHub Actions Disable Security Workflow
     deprecated_in_version: 5.3.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Github Commit Changes In Master
     deprecated_in_version: 5.3.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Github Commit In Develop
     deprecated_in_version: 5.3.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: GitHub Dependabot Alert
     deprecated_in_version: 5.3.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: GitHub Pull Request from Unknown User
     deprecated_in_version: 5.3.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Known Services Killed by Ransomware
     deprecated_in_version: 5.3.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Remote Desktop Network Bruteforce
     deprecated_in_version: 5.3.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Suspicious Driver Loaded Path
     deprecated_in_version: 5.3.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Suspicious Event Log Service Behavior
     deprecated_in_version: 5.3.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Suspicious Process File Path
     deprecated_in_version: 5.3.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Windows Service Stop Via Net  and SC Application
     deprecated_in_version: 5.3.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
 baselines:
   - deprecated_content: Add Prohibited Processes to Enterprise Security
@@ -1253,70 +1253,70 @@ stories:
   - deprecated_content: AWS Cryptomining
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: AWS Suspicious Provisioning Activities
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Common Phishing Frameworks
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Container Implantation Monitoring and Investigation
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Host Redirection
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Kubernetes Sensitive Role Activity
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Lateral Movement
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Monitor Backup Solution
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Monitor for Unauthorized Software
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Office 365 Detections
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Spectre And Meltdown Vulnerabilities
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Suspicious AWS EC2 Activities
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Unusual AWS EC2 Modifications
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
   - deprecated_content: Web Fraud Detection
     deprecated_in_version: 5.2.0
     deprecated_date: 2025-03-12
-    reason: ''
+    reason: The detection does not work as expected and is now deprecated
     replacement_content: []
