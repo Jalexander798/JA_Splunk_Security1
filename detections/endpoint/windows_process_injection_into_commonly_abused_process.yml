@@ -20,7 +20,7 @@ search: '`sysmon` EventCode=10 TargetImage IN ("*\\notepad.exe", "*\\wordpad.exe
   | eval CallTrace=split(CallTrace, "|")
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
-  | `windows_process_injection_into_notepad_filter`'
+  | `windows_process_injection_into_commonly_abused_process_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your
   endpoints. If you are using Sysmon, you must have at least version 6.0.4 of the
