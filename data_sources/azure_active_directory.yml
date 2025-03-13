@@ -12,7 +12,6 @@ supported_TA:
   url: https://splunkbase.splunk.com/app/3110
   version: 5.4.3
 output_fields:
-- action
 - dest
 - user
 - src

@@ -88,7 +88,6 @@ example_log:
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like
   Gecko) Chrome/121.0.0.0 Safari/537.36"}, {"key": "AppId", "value": "e06366ca-8489-4748-b6a2-d7e4332f45c1"}]}}'
 output_fields:
-- action
 - dest
 - user
 - src

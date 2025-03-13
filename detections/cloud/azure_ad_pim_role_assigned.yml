@@ -16,9 +16,8 @@ description: The following analytic detects the assignment of an Azure AD Privil
   data breaches, or further compromise of the environment.
 search: '`azure_monitor_aad` operationName="Add eligible member to role in PIM completed*" 
   | rename properties.* as * 
-  | rename operationName as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product signature
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `azure_ad_pim_role_assigned_filter`'

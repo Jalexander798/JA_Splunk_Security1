@@ -17,9 +17,9 @@ data_source:
 search: '`azure_monitor_aad` category=SignInLogs properties.status.errorCode=50126 properties.authenticationDetails{}.succeeded=false 
   | rename properties.* as * 
   | bucket span=5m _time 
-  | rename operationName as action, userAgent as user_agent 
+  | rename userAgent as user_agent 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime dc(user) as unique_user values(action) as action values(dest) as dest values(user) as user values(user_agent) as user_agent values(vendor_account) as vendor_account values(vendor_product) as vendor_product by src 
+  | stats count min(_time) as firstTime max(_time) as lastTime dc(user) as unique_user values(dest) as dest values(user) as user values(user_agent) as user_agent values(vendor_account) as vendor_account values(vendor_product) as vendor_product by src signature
   | where unique_user > 30 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 

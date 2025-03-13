@@ -23,9 +23,8 @@ search: "`azure_monitor_aad` category=AuditLogs operationName=\"Update applicati
       =\"06b708a9-e830-4db3-a914-8e69da51d44f\" OR \"{}.RequiredAppPermissions{}.EntitlementId\"
       =\"9e3f62cf-ca93-4989-b6ce-bf83c28f9fe8\" 
   | eval Permissions = '{}.RequiredAppPermissions{}.EntitlementId' 
-  | rename operationName as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product Permissions
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product Permissions signature
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `azure_ad_privileged_graph_api_permission_assigned_filter`"

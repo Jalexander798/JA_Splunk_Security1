@@ -33,9 +33,8 @@ search: "`azure_monitor_aad` operationName=\"Consent to application\" properties
   | rex field=permissions \"\
       Scope: (?<Scope> 
       [ ^,]+)\" 
-  | rename operationName as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product reason Scope 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product reason Scope signature
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `azure_ad_user_consent_blocked_for_risky_application_filter`"

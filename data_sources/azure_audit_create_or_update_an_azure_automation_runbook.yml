@@ -137,7 +137,6 @@ example_log:
   "2022-08-22T19:07:34.1346086Z", "submissionTimestamp": "2022-08-22T19:08:54.1547383Z",
   "subscriptionId": "1aee0e3d-b75b-440a-a927-76f0552a14e6"}'
 output_fields:
-- action
 - dest
 - user
 - src

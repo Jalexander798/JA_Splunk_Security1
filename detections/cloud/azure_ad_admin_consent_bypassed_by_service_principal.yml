@@ -22,9 +22,9 @@ search: "`azure_monitor_aad` (operationName=\"Add app role assignment to service
   | eval roleValue = mvindex('targetResources{}.modifiedProperties{}.newValue',1) 
   | eval roleDescription = mvindex('targetResources{}.modifiedProperties{}.newValue',2) 
   | eval user_id = mvindex('targetResources{}.id', 0), user=coalesce(user,mvindex('targetResources{}.displayName',0))
-  | rename initiatedBy.app.displayName as src_user, operationName as action, userAgent as user_agent
+  | rename initiatedBy.app.displayName as src_user, userAgent as user_agent
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product src_user user_id roleId roleValue roleDescription user_agent
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product src_user user_id roleId roleValue roleDescription user_agent signature
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `azure_ad_admin_consent_bypassed_by_service_principal_filter`"
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft

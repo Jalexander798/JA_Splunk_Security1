@@ -18,9 +18,8 @@ description: The following analytic identifies instances where a user has denied
   enhance user awareness.
 search: '`azure_monitor_aad` operationName="Sign-in activity" properties.status.errorCode=65004 
   | rename properties.* as * 
-  | rename operationName as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product appDisplayName status.failureReason 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product appDisplayName status.failureReason signature
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `azure_ad_user_consent_denied_for_oauth_application_filter`'

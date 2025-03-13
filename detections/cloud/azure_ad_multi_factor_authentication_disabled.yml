@@ -18,9 +18,9 @@ search: '`azure_monitor_aad` category=AuditLogs operationName="Disable Strong Au
   | rename properties.* as * 
   | rename targetResources{}.type as type 
   | rename initiatedBy.user.userPrincipalName as initiatedBy 
-  | rename operationName as action, userAgent as user_agent 
+  | rename userAgent as user_agent 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product user_agent initiatedBy 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product user_agent initiatedBy signature
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `azure_ad_multi_factor_authentication_disabled_filter`'

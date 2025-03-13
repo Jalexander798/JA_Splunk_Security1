@@ -23,9 +23,8 @@ search: "`azure_monitor_aad` operationName=\"Consent to application\" properties
   | eval permissions = mvindex('targetResources{}.modifiedProperties{}.newValue',permissions_index) 
   | rex field=permissions \"Scope: (?<Scope> 
       [ ^,]+)\" 
-  | rename operationName as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product Scope 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product Scope signature
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `azure_ad_oauth_application_consent_granted_by_user_filter`"

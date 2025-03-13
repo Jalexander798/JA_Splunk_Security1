@@ -19,9 +19,8 @@ search: '`azure_monitor_aad` operationName="Add service principal" properties.in
   | rename properties.* as * 
   | rename targetResources{}.displayName as displayName 
   | rename targetResources{}.type as type 
-  | rename operationName as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product displayName result 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product displayName result signature
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `azure_ad_service_principal_created_filter`'

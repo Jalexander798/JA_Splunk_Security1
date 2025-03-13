@@ -13,10 +13,10 @@ search: >-
   `azure_monitor_aad` category=AuditLogs operationName="Add app role assignment to service principal" properties.initiatedBy.app.displayName=* properties.result=Success 
   | spath path=properties{}.targetResources{}.modifiedProperties{} output=targetResources 
   | rename properties.* as * 
-  | rename operationName as action 
   | eval user="NA" 
   | eval src="NA" 
-  | stats min(_time) as firstTime max(_time) as lastTime values(eval(mvfilter(match(targetResources, "AppRole.Value")))) as appRole, values(eval(mvfilter(match(targetResources, "ServicePrincipal.DisplayName")))) as targetServicePrincipal values(eval(mvindex('properties.targetResources{}.displayName',0))) as targetAppContext values(user_agent) as user_agent values(identity) as servicePrincipal values(properties.initiatedBy.app.servicePrincipalId) as servicePrincipalId by action dest user src vendor_account vendor_product 
+  | stats min(_time) as firstTime max(_time) as lastTime values(eval(mvfilter(match(targetResources, "AppRole.Value")))) as appRole, values(eval(mvfilter(match(targetResources, "ServicePrincipal.DisplayName")))) as targetServicePrincipal values(eval(mvindex('properties.targetResources{}.displayName',0))) as targetAppContext 
+  values(user_agent) as user_agent values(identity) as servicePrincipal values(properties.initiatedBy.app.servicePrincipalId) as servicePrincipalId by dest user src vendor_account vendor_product signature
   | spath input=appRole path=newValue output=appRole 
   | spath input=targetServicePrincipal path=newValue output=targetServicePrincipal 
   | eval appRole=trim(replace(appRole, "\"", "")), targetServicePrincipal=trim(replace(targetServicePrincipal, "\"", "")) 

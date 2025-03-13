@@ -136,7 +136,6 @@ example_log:
   "", "localizedValue": ""}, "eventTimestamp": "2022-08-22T15:09:21.8694806Z", "submissionTimestamp":
   "2022-08-22T15:10:51.152208Z", "subscriptionId": "67165197-75ea-4ca3-96a5-3e23868eacd0"}'
 output_fields:
-- action
 - dest
 - user
 - src

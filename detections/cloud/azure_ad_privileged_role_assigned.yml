@@ -19,9 +19,8 @@ search: '`azure_monitor_aad` "operationName"="Add member to role"
   | rename initiatedBy.user.userPrincipalName as initiatedBy 
   | rename targetResources{}.modifiedProperties{}.newValue as roles 
   | eval role=mvindex(roles,1) 
-  | rename operationName as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product initiatedBy result role 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product initiatedBy result role signature
   | lookup privileged_azure_ad_roles azureadrole AS role OUTPUT isprvilegedadrole description 
   | search isprvilegedadrole = True 
   | `security_content_ctime(firstTime)` 

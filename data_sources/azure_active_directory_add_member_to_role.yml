@@ -85,7 +85,6 @@ example_log:
   "Role", "modifiedProperties": [], "administrativeUnits": []}], "additionalDetails":
   []}}'
 output_fields:
-- action
 - dest
 - user
 - src

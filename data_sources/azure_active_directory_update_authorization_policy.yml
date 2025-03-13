@@ -84,7 +84,6 @@ example_log:
   "administrativeUnits": []}], "additionalDetails": [{"key": "User-Agent", "value":
   "Swagger-Codegen/1.0.0.0/csharp/msal"}]}}'
 output_fields:
-- action
 - dest
 - user
 - src

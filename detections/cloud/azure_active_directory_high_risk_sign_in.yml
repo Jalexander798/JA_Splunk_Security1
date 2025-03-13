@@ -15,9 +15,8 @@ description: The following analytic detects high-risk sign-in attempts against A
 data_source:
 - Azure Active Directory
 search: '`azure_monitor_aad` `azure_monitor_aad` category=UserRiskEvents properties.riskLevel=high
-  | rename category as action
   | fillnull
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product category
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `azure_active_directory_high_risk_sign_in_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).

@@ -17,9 +17,9 @@ data_source:
 search: '`azure_monitor_aad` category=AuditLogs operationName="User registered security info" properties.operationType=Add 
   | rename properties.* as * 
   | rename targetResources{}.* as * 
-  | rename operationName as action, userAgent as user_agent 
+  | rename userAgent as user_agent 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product user_agent result resultDescription
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product user_agent result resultDescription signature
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `azure_ad_new_mfa_method_registered_for_user_filter`'

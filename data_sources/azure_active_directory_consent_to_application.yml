@@ -98,7 +98,6 @@ example_log:
   "administrativeUnits": []}], "additionalDetails": [{"key": "User-Agent", "value":
   "EvoSTS"}, {"key": "AppId", "value": "96f6a3d6-d5aa-4af5-a77a-9319b5283712"}]}}'
 output_fields:
-- action
 - dest
 - user
 - src

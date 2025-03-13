@@ -17,9 +17,8 @@ data_source:
 search: '`azure_monitor_aad` properties.authenticationDetails{}.succeeded=true category=SignInLogs 
   | rename properties.* as * 
   | bucket span=30m _time 
-  | rename operationName as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime dc(src) AS unique_ips values(action) as action values(dest) as dest values(src) as src by user vendor_account vendor_product
+  | stats count min(_time) as firstTime max(_time) as lastTime dc(src) AS unique_ips values(dest) as dest values(src) as src by user vendor_account vendor_product signature
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | where unique_ips > 1 

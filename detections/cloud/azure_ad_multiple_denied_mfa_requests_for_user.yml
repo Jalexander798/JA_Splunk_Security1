@@ -19,9 +19,9 @@ search: '`azure_monitor_aad` category=SignInLogs operationName="Sign-in activity
   | rename properties.* as * 
   | search status.errorCode=500121 status.additionalDetails="MFA denied; user declined the authentication" 
   | bucket span=10m _time 
-  | rename operationName as action, userAgent as user_agent 
+  | rename userAgent as user_agent 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime values(action) as action values(dest) as dest values(user_agent) as user_agent values(src) as src by user, status.additionalDetails
+  | stats count min(_time) as firstTime max(_time) as lastTime values(dest) as dest values(user_agent) as user_agent values(src) as src by user status.additionalDetails vendor_account vendor_product signature
   | where count > 9 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 

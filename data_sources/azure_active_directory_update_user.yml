@@ -83,7 +83,6 @@ example_log:
   "TargetId.UserType", "oldValue": null, "newValue": "\"Member\""}], "administrativeUnits":
   []}], "additionalDetails": [{"key": "UserType", "value": "Member"}]}}'
 output_fields:
-- action
 - dest
 - user
 - src

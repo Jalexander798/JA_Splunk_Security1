@@ -19,9 +19,8 @@ search: '`azure_monitor_aad` operationName="Update user" properties.targetResour
   | rename properties.* as * 
   | rename initiatedBy.user.userPrincipalName as initiatedBy 
   | rename targetResources{}.modifiedProperties{}.newValue as modifiedProperties 
-  | rename operationName as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product initiatedBy 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product initiatedBy signature
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `azure_ad_user_immutableid_attribute_updated_filter`'

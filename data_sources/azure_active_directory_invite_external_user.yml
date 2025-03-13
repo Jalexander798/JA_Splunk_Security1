@@ -82,7 +82,6 @@ example_log:
   "value": "65c7d12f-c6f3-44f0-8fad-4f57a1020484"}, {"key": "invitedUserEmailAddress",
   "value": "oops360@gmail.com"}]}}'
 output_fields:
-- action
 - dest
 - user
 - src

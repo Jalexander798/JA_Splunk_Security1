@@ -15,9 +15,8 @@ search: '`azure_monitor_aad` category IN (MicrosoftGraphActivityLogs) TERM(servi
   | rex field="properties.requestUri" "https\:\/\/graph.microsoft.com\/beta\/servicePrincipals\/(?P<servicePrincipalb>.*?)\/" 
   | rex field="properties.requestUri" "https\:\/\/graph.microsoft.com\/v1.0\/servicePrincipals\/(?P<servicePrincipalv1>.*?)\/" 
   | eval spn=coalesce(servicePrincipalb,servicePrincipalv1) 
-  | rename operationName as action 
   | fillnull 
-  | stats count min(_time) as _time dc(spn) as spn_count values(user_id) as user_id by action dest user src vendor_account vendor_product
+  | stats count min(_time) as _time dc(spn) as spn_count values(user_id) as user_id by dest user src vendor_account vendor_product signature
   | where spn_count>9 
   | `azure_ad_service_principal_enumeration_filter`'
 how_to_implement: >-

@@ -161,7 +161,6 @@ example_log:
   "rngcStatus": 0, "signInTokenProtectionStatus": "none", "originalTransferMethod":
   "none"}}'
 output_fields:
-- action
 - dest
 - user
 - src

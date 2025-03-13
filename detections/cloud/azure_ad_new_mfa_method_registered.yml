@@ -25,9 +25,8 @@ search: "`azure_monitor_aad` operationName=\"Update user\"
   | rex field=oldvalue max_match=0 \"(?i)(?<old_method_type>\\\"MethodType\\\")\" 
   | eval count_new_method_type = coalesce(mvcount(new_method_type), 0) 
   | eval count_old_method_type = coalesce(mvcount(old_method_type), 0) 
-  | rename operationName as action
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product newvalue oldvalue 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product newvalue oldvalue signature
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `azure_ad_new_mfa_method_registered_filter`"

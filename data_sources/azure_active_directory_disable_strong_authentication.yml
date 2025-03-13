@@ -80,7 +80,6 @@ example_log:
   "newValue": "\"StrongAuthenticationRequirement\""}], "administrativeUnits": []}],
   "additionalDetails": []}}'
 output_fields:
-- action
 - dest
 - user
 - src

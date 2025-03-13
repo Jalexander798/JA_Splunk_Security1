@@ -16,9 +16,9 @@ data_source:
 - Azure Active Directory
 search: '`azure_monitor_aad` category=SignInLogs properties.authenticationRequirement=singleFactorAuthentication properties.authenticationDetails{}.succeeded=true 
   | rename properties.* as * 
-  | rename operationName as action, userAgent as user_agent 
+  | rename userAgent as user_agent 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product user_agent 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product user_agent signature
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `azure_ad_successful_single_factor_authentication_filter`'

@@ -20,7 +20,7 @@ search: '`azure_monitor_aad` category=SignInLogs properties.status.errorCode=501
   | rename properties.* as * 
   | bucket span=5m _time 
   | eval uniqueIPUserCombo = src_ip . "-" . user 
-  | rename operationName as action, userAgent as user_agent 
+  | rename userAgent as user_agent 
   | fillnull 
   | stats count min(_time) as firstTime max(_time) as lastTime dc(uniqueIPUserCombo) as uniqueIpUserCombinations, dc(user) as uniqueUsers, dc(src_ip) as uniqueIPs, dc(user_agent) as uniqueUserAgents, dc(location.countryOrRegion) as uniqueCountries values(location.countryOrRegion) as countries  values(action) as action values(dest) as dest values(user) as user values(src) as src values(vendor_account) as vendor_account values(vendor_product) as vendor_product values(user_agent) as user_agent
   | where uniqueIpUserCombinations > 20 AND uniqueUsers > 20 AND uniqueIPs > 20 AND uniqueUserAgents = 1 

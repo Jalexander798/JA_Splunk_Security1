@@ -21,9 +21,9 @@ search: "`azure_monitor_aad` operationName=\"Update authorization policy\"
   | search index_number >= 0  
   | eval AllowUserConsentForRiskyApps = mvindex('targetResources{}.modifiedProperties{}.newValue',index_number)
   | search AllowUserConsentForRiskyApps = \"[true]\"
-  | rename operationName as action, userAgent as user_agent
+  | rename userAgent as user_agent
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product user_agent
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product user_agent signature
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `azure_ad_block_user_consent_for_risky_apps_disabled_filter`"
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).

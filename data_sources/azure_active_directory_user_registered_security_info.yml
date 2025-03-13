@@ -79,7 +79,6 @@ example_log:
   "displayName": "User30", "type": "User", "userPrincipalName": "User30@splunkresearch.com",
   "modifiedProperties": [], "administrativeUnits": []}], "additionalDetails": []}}'
 output_fields:
-- action
 - dest
 - user
 - src

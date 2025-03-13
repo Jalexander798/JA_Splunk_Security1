@@ -21,9 +21,9 @@ search: '`azure_monitor_aad` operationName="Add service principal" properties.in
   | rename targetResources{}.displayName as displayName 
   | rename targetResources{}.type as type 
   | rename initiatedBy.app.displayName as src_user 
-  | rename operationName as action, userAgent as user_agent 
+  | rename userAgent as user_agent 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime dc(displayName) as unique_apps values(displayName) as displayName values(action) as action values(dest) as dest values(src) as src values(user) as user values(user_agent) as user_agent by src_user 
+  | stats count min(_time) as firstTime max(_time) as lastTime dc(displayName) as unique_apps values(displayName) as displayName values(dest) as dest values(src) as src values(user) as user values(user_agent) as user_agent by src_user vendor_account vendor_product signature
   | where unique_apps > 3 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
