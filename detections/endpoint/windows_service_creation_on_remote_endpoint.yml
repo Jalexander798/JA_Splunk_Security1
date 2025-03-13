@@ -1,7 +1,7 @@
 name: Windows Service Creation on Remote Endpoint
 id: e0eea4fa-4274-11ec-882b-3e22fbd008af
-version: 6
-date: '2025-02-10'
+version: '7'
+date: '2025-02-13'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -62,8 +62,11 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Active Directory Lateral Movement
+  - SnappyBee
   - CISA AA23-347A
+  - Active Directory Lateral Movement
+  - China-Nexus Threat Activity
+  - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:
   - T1543.003
@@ -75,7 +78,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1543.003/lateral_movement/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1543.003/lateral_movement/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
