@@ -1,7 +1,7 @@
 name: Windows Process With NetExec Command Line Parameters
 id: adbff89c-c1f2-4a2e-88a4-b5e645856510
-version: 4
-date: '2025-02-11'
+version: 5
+date: '2025-03-03'
 author: Steven Dick, Github Community
 status: production
 type: TTP
@@ -11,7 +11,7 @@ data_source:
 - Sysmon EventID 1
 - CrowdStrike ProcessRollup2
 search: '| tstats `security_content_summariesonly` count min(_time) AS firstTime, max(_time) AS lastTime FROM datamodel=Endpoint.Processes 
-  where Processes.process_name IN ("nxc.exe") OR Processes.original_file_name IN ("nxc.exe") OR (Processes.process IN ("* smb *","* ssh *","* ldap *","* ftp *","* wmi *","* winrm *","* rdp *","* vnc *","* mssql *","* nfs *")
+  where NOT Processes.os="Linux" Processes.process_name IN ("nxc.exe") OR Processes.original_file_name IN ("nxc.exe") OR (Processes.process IN ("* smb *","* ssh *","* ldap *","* ftp *","* wmi *","* winrm *","* rdp *","* vnc *","* mssql *","* nfs *") 
   AND ((Processes.process = "* -p *" AND Processes.process = "* -u *") OR Processes.process IN ("* -x *","* -M *","* --*"))) 
   by Processes.action Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec 
   Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name 

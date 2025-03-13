@@ -1,0 +1,14 @@
+name: Zeek Conn
+id: 01dff429-9c29-4181-87ae-ea19cde20031
+version: 1
+date: '2025-03-12'
+author: Patrick Bareiss, Splunk
+description: Data source object for Zeek connection logs
+source: bro:conn:json
+sourcetype: bro:conn:json
+supported_TA: 
+- name: TA for Zeek
+  url: https://splunkbase.splunk.com/app/5466
+  version: 1.0.8
+fields:
+-
