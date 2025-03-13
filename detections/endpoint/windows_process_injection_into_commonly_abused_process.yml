@@ -25,7 +25,7 @@ how_to_implement: To successfully implement this search, you need to be ingestin
   logs with the process name, parent process, and command-line executions from your
   endpoints. If you are using Sysmon, you must have at least version 6.0.4 of the
   Sysmon TA.
-known_false_positives: False positives may be present based on SourceImage paths.
+known_false_positives: False positives may be present based on SourceImage paths, particularly those with a legitimate reason for accessing lsass.exe or regsvr32.exe.
   If removing the paths is important, realize svchost and many native binaries inject
   into processes consistently. Restrict or tune as needed.
 references:
