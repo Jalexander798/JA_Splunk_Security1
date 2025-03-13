@@ -58,12 +58,12 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Linux Privilege Escalation
-  - Linux Living Off The Land
-  - Compromised Linux Host
+  - China-Nexus Threat Activity
   - Linux Persistence Techniques
   - XorDDos
-  - China-Nexus Threat Activity
+  - Linux Privilege Escalation
+  - Compromised Linux Host
+  - Linux Living Off The Land
   - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:
@@ -80,3 +80,4 @@ tests:
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1222.002/linux_auditd_chmod_exec_attrib/auditd_proctitle_chmod.log
     source: auditd
     sourcetype: auditd
+
