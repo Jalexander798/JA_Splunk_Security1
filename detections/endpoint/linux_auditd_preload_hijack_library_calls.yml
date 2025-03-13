@@ -59,10 +59,10 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
+  - China-Nexus Threat Activity
+  - Linux Persistence Techniques
   - Linux Privilege Escalation
   - Compromised Linux Host
-  - Linux Persistence Techniques
-  - China-Nexus Threat Activity
   - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:
@@ -79,3 +79,4 @@ tests:
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.006/linux_auditd_ldpreload/auditd_execve_ldpreload.log
     source: auditd
     sourcetype: auditd
+
