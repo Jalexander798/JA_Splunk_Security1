@@ -17,7 +17,7 @@ description: The following analytic identifies attempts by users to access Okta 
 search: '| tstats values(Authentication.app) as app values(Authentication.action)
   as action values(Authentication.user) as user values(Authentication.reason) as reason
   from datamodel=Authentication where Authentication.signature=app.generic.unauth_app_access_attempt
-  Authentication.action="failure" by _time Authentication.src Authentication.user
+  Authentication.action="failure" by _time Authentication.src Authentication.user Authentication.dest
   | `drop_dm_object_name("Authentication")` | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | iplocation src | `okta_unauthorized_access_to_application_filter`'
 how_to_implement: This detection utilizes logs from Okta Identity Management (IM)

@@ -21,7 +21,7 @@ search: '`okta` eventType IN (policy.evaluate_sign_on) outcome.result IN (ALLOW,
   as city, values(client.userAgent.browser) as userAgentBrowser_list, values(device.os_platform)
   as okta_device_os, dc(client.userAgent.browser) as dc_userAgentBrowser, dc(client.userAgent.os)
   as dc_userAgentOS, dc(client.ipAddress) as dc_src_ip, values(outcome.reason) as
-  reason by debugContext.debugData.dtHash, user | where dc_src_ip>1 AND (dc_userAgentOS>1
+  reason values(dest) as dest by debugContext.debugData.dtHash, user | where dc_src_ip>1 AND (dc_userAgentOS>1
   OR dc_userAgentBrowser>1) | `okta_suspicious_use_of_a_session_cookie_filter`'
 how_to_implement: This detection utilizes logs from Okta Identity Management (IM)
   environments. It requires the ingestion of OktaIm2 logs through the Splunk Add-on

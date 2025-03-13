@@ -13,7 +13,8 @@ description: The following analytic detects outbound SMB (Server Message Block) 
   a key step in lateral movement and privilege escalation. If confirmed malicious,
   this activity could lead to unauthorized access to sensitive data and potential
   full system compromise.
-data_source: []
+data_source: 
+- Zeek Conn
 search: >-
   | tstats `security_content_summariesonly` earliest(_time) as start_time latest(_time)
   as end_time values(All_Traffic.action) as action values(All_Traffic.app) as app
