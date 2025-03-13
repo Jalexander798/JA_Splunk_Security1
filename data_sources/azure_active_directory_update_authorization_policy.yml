@@ -83,3 +83,9 @@ example_log:
   Properties", "oldValue": null, "newValue": "\"AllowUserConsentForRiskyApps, PermissionGrantPolicyIdsAssignedToDefaultUserRole\""}],
   "administrativeUnits": []}], "additionalDetails": [{"key": "User-Agent", "value":
   "Swagger-Codegen/1.0.0.0/csharp/msal"}]}}'
+output_fields:
+- dest
+- user
+- src
+- vendor_account
+- vendor_product

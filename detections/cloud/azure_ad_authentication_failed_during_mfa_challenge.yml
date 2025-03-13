@@ -1,6 +1,6 @@
 name: Azure AD Authentication Failed During MFA Challenge
 id: e62c9c2e-bf51-4719-906c-3074618fcc1c
-version: 8
+version: 9
 date: '2025-02-10'
 author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk, 0xC0FFEEEE
 status: production
@@ -14,18 +14,17 @@ description: The following analytic identifies failed authentication attempts ag
   to unauthorized access and further compromise of the affected account.
 data_source:
 - Azure Active Directory
-search: "`azure_monitor_aad` category=SignInLogs properties.status.errorCode=500121
-  | rename properties.* as *, authenticationDetails{}.* as * | eval time=strptime(authenticationStepDateTime,
-  \"%Y-%m-%dT%H:%M:%S\") | eval auth_detail=mvzip(strftime(time, \"%Y-%m-%dT%H:%M:%S\"\
-  ),authenticationStepResultDetail,\" - \"), auth_msg=mvappend('status.additionalDetails',
-  authenticationStepResultDetail) | eval auth_method=mvmap(authenticationMethod, if(isnull(mvfind('mfaDetail.authMethod',
-  authenticationMethod)), authenticationMethod, null())) | stats min(_time) as firstTime,
-  max(_time) as lastTime, values(user) as user, values(src_ip) as src_ip, values(mfaDetail.authMethod)
-  as mfa_method, values(auth_method) as auth_method, values(auth_detail) as auth_detail,
-  values(auth_msg) as auth_msg, values(appDisplayName) as appDisplayName, values(user_agent)
-  as user_agent by tenantId originalRequestId | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | search NOT auth_msg=\"MFA successfully completed\"\
-  \ | sort 0 - firstTime | `azure_ad_authentication_failed_during_mfa_challenge_filter`"
+search: "`azure_monitor_aad` category=SignInLogs properties.status.errorCode=500121 
+  | rename properties.* as *, authenticationDetails{}.* as * 
+  | eval time=strptime(authenticationStepDateTime,\"%Y-%m-%dT%H:%M:%S\") 
+  | eval auth_detail=mvzip(strftime(time, \"%Y-%m-%dT%H:%M:%S\"),authenticationStepResultDetail,\" - \"), auth_msg=mvappend('status.additionalDetails',
+      authenticationStepResultDetail)   
+  | eval auth_method=mvmap(authenticationMethod, if(isnull(mvfind('mfaDetail.authMethod',authenticationMethod)), authenticationMethod, null())) 
+  | search NOT auth_msg=\"MFA successfully completed\" 
+  | rename userAgent as user_agent
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product auth_method auth_msg user_agent signature
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `azure_ad_authentication_failed_during_mfa_challenge_filter`"
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment
@@ -63,7 +62,7 @@ rba:
     type: user
     score: 54
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:

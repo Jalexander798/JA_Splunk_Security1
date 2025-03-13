@@ -147,3 +147,7 @@ example_log:
   "Succeeded"}, "subStatus": {"value": "Created", "localizedValue": "Created (HTTP
   Status Code: 201)"}, "eventTimestamp": "2022-08-23T20:57:22.2707386Z", "submissionTimestamp":
   "2022-08-23T20:58:54.2071536Z", "subscriptionId": "e0c00901-96b2-4151-80f7-746e24c03e98"}'
+output_fields:
+- dest
+- user
+- src

@@ -1,6 +1,6 @@
 name: Azure AD Tenant Wide Admin Consent Granted
 id: dc02c0ee-6ac0-4c7f-87ba-8ce43a4e4418
-version: 6
+version: 7
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
@@ -15,12 +15,17 @@ description: The following analytic identifies instances where admin consent is 
   data. If confirmed malicious, an attacker could gain extensive and persistent access
   to sensitive data, leading to data exfiltration, espionage, further malicious activities,
   and potential compliance violations.
-search: "`azure_monitor_aad` operationName=\"Consent to application\" | eval new_field=mvindex('properties.targetResources{}.modifiedProperties{}.newValue',
-  4) | rename properties.* as *  | rex field=new_field \"ConsentType: (?<ConsentType>[^\\\
-  ,]+)\" | rex field=new_field \"Scope: (?<Scope>[^\\,]+)\"  | search  ConsentType
-  = \"AllPrincipals\"  | stats count min(_time) as firstTime max(_time) as lastTime
-  by operationName, user, targetResources{}.displayName, targetResources{}.id, ConsentType,
-  Scope | `security_content_ctime(firstTime)`  | `security_content_ctime(lastTime)`
+search: "`azure_monitor_aad` operationName=\"Consent to application\" 
+  | eval new_field=mvindex('properties.targetResources{}.modifiedProperties{}.newValue',4) 
+  | rename properties.* as * 
+  | rex field=new_field \"ConsentType:(?<ConsentType> [^\\,]+)\" 
+  | rex field=new_field \"Scope:(?<Scope> [^\\,]+)\" 
+  | search ConsentType = \"*AllPrincipals*\" 
+  | rename userAgent as user_agent 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product ConsentType Scope signature
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
   | `azure_ad_tenant_wide_admin_consent_granted_filter`"
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
