@@ -1,6 +1,6 @@
 name: AWS New MFA Method Registered For User
 id: 4e3c26f2-4fb9-4bd7-ab46-1b76ffa2a23b
-version: 6
+version: 7
 date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production
@@ -14,10 +14,11 @@ description: The following analytic detects the registration of a new Multi-Fact
   potentially leading to further unauthorized activities and data breaches.
 data_source:
 - AWS CloudTrail CreateVirtualMFADevice
-search: '`cloudtrail` eventName=CreateVirtualMFADevice | stats count values(requestParameters.virtualMFADeviceName)
-  as virtualMFADeviceName min(_time) as firstTime max(_time) as lastTime by eventSource
-  aws_account_id errorCode userAgent eventID awsRegion userIdentity.principalId user_arn
-  src_ip | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+search: '`cloudtrail` eventName=CreateVirtualMFADevice 
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region, requestParameters.virtualMFADeviceName as virtualMFADeviceName
+  | eval vendor_product = "AWS"
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product virtualMFADeviceName
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `aws_new_mfa_method_registered_for_user_filter`'
 how_to_implement: You must install Splunk AWS add on and Splunk App for AWS. This
   search works when AWS CloudTrail logs.
@@ -29,12 +30,12 @@ references:
 - https://attack.mitre.org/techniques/T1556/006/
 - https://twitter.com/jhencinski/status/1618660062352007174
 drilldown_searches:
-- name: View the detection results for - "$user_arn$"
-  search: '%original_detection_search% | search  user_arn = "$user_arn$"'
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search  user = "$user$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$user_arn$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user_arn$")
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -43,13 +44,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A new virtual device $virtualMFADeviceName$ is added to user $user_arn$
+  message: A new virtual device $virtualMFADeviceName$ is added to user $user$
   risk_objects:
-  - field: user_arn
+  - field: user
     type: user
     score: 64
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:

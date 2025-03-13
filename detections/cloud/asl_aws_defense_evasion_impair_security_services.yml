@@ -1,6 +1,6 @@
 name: ASL AWS Defense Evasion Impair Security Services
 id: 5029b681-0462-47b7-82e7-f7e3d37f5a2d
-version: 6
+version: 7
 date: '2025-02-10'
 author: Patrick Bareiss, Bhavin Patel, Gowthamaraj Rajendran, Splunk
 status: production
@@ -15,21 +15,14 @@ description: The following analytic detects the deletion of critical AWS Securit
   within the AWS environment.
 data_source:
 - ASL AWS CloudTrail
-search: '`amazon_security_lake` api.operation IN ("DeleteLogStream","DeleteDetector","DeleteIPSet","DeleteWebACL","DeleteRule","DeleteRuleGroup","DeleteLoggingConfiguration","DeleteAlarms")
-  | fillnull | stats count min(_time) as firstTime max(_time) as lastTime by api.operation
-  actor.user.uid actor.user.account.uid http_request.user_agent src_endpoint.ip cloud.region
-  | rename actor.user.uid as user, src_endpoint.ip as src_ip, cloud.region as region,
-  http_request.user_agent as user_agent, actor.user.account_uid as aws_account_id
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `asl_aws_defense_evasion_impair_security_services_filter`'
-how_to_implement: The detection is based on Amazon Security Lake events from Amazon
-  Web Services (AWS), which is a centralized data lake that provides security-related
-  data from AWS services. To use this detection, you must ingest CloudTrail logs from
-  Amazon Security Lake into Splunk. To run this search, ensure that you ingest events
-  using the latest version of Splunk Add-on for Amazon Web Services (https://splunkbase.splunk.com/app/1876)
-  or the Federated Analytics App.
-known_false_positives: While this search has no known false positives, it is possible
-  that it is a legitimate admin activity. Please consider filtering out these noisy
-  events using userAgent, user_arn field names.
+search: '`amazon_security_lake` api.operation IN ("DeleteLogStream","DeleteDetector","DeleteIPSet","DeleteWebACL","DeleteRule","DeleteRuleGroup","DeleteLoggingConfiguration","DeleteAlarms") 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by actor.user.uid api.operation api.service.name http_request.user_agent src_endpoint.ip actor.user.account.uid cloud.provider cloud.region
+  | rename actor.user.uid as user api.operation as action api.service.name as dest http_request.user_agent as user_agent src_endpoint.ip as src actor.user.account.uid as vendor_account cloud.provider as vendor_product cloud.region as vendor_region 
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` 
+  | `asl_aws_defense_evasion_impair_security_services_filter`'
+how_to_implement: The detection is based on Amazon Security Lake events from Amazon Web Services (AWS), which is a centralized data lake that provides security-related data from AWS services. To use this detection, you must ingest CloudTrail logs from Amazon Security Lake into Splunk. To run this search, ensure that you ingest events using the latest version of Splunk Add-on for Amazon Web Services (https://splunkbase.splunk.com/app/1876) or the Federated Analytics App.
+known_false_positives: While this search has no known false positives, it is possible that it is a legitimate admin activity. Please consider filtering out these noisy events using userAgent, user_arn field names.
 references:
 - https://docs.aws.amazon.com/cli/latest/reference/guardduty/index.html
 - https://docs.aws.amazon.com/cli/latest/reference/waf/index.html

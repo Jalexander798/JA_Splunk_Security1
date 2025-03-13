@@ -1,6 +1,6 @@
 name: AWS Network Access Control List Deleted
 id: ada0f478-84a8-4641-a3f1-d82362d6fd75
-version: 6
+version: 7
 date: '2025-02-10'
 author: Bhavin Patel, Patrick Bareiss, Splunk
 status: production
@@ -15,9 +15,11 @@ description: The following analytic detects the deletion of AWS Network Access C
 data_source:
 - AWS CloudTrail DeleteNetworkAclEntry
 search: '`cloudtrail` eventName=DeleteNetworkAclEntry requestParameters.egress=false
-  | fillnull | stats count min(_time) as firstTime max(_time) as lastTime by user_arn
-  userIdentity.principalId eventName requestParameters.egress src userAgent | `security_content_ctime(firstTime)`|
-  `security_content_ctime(lastTime)` | `aws_network_access_control_list_deleted_filter`'
+  | fillnull 
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
+  | eval vendor_product = "AWS"
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `aws_network_access_control_list_deleted_filter`'
 how_to_implement: You must install the AWS App for Splunk (version 5.1.0 or later)
   and Splunk Add-on for AWS (version 4.4.0 or later), then configure your AWS CloudTrail
   inputs.
@@ -25,12 +27,12 @@ known_false_positives: It's possible that a user has legitimately deleted a netw
   ACL.
 references: []
 drilldown_searches:
-- name: View the detection results for - "$user_arn$"
-  search: '%original_detection_search% | search  user_arn = "$user_arn$"'
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search  user = "$user$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$user_arn$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user_arn$")
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -39,10 +41,10 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: User $user_arn$ from $src$ has sucessfully deleted network ACLs entry (eventName=
+  message: User $user$ from $src$ has sucessfully deleted network ACLs entry (eventName=
     $eventName$), such that the instance is accessible from anywhere
   risk_objects:
-  - field: user_arn
+  - field: user
     type: user
     score: 5
   threat_objects:

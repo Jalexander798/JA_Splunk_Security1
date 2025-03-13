@@ -1,6 +1,6 @@
 name: AWS ECR Container Scanning Findings Medium
 id: 0b80e2c8-c746-4ddb-89eb-9efd892220cf
-version: 6
+version: 7
 date: '2025-02-10'
 author: Patrick Bareiss, Splunk
 status: production
@@ -16,13 +16,14 @@ description: The following analytic identifies medium-severity findings from AWS
 data_source:
 - AWS CloudTrail DescribeImageScanFindings
 search: '`cloudtrail` eventSource=ecr.amazonaws.com eventName=DescribeImageScanFindings
-  | spath path=responseElements.imageScanFindings.findings{} output=findings | mvexpand
-  findings | spath input=findings| search severity=MEDIUM | rename name as finding_name,
-  description as finding_description, requestParameters.imageId.imageDigest as imageDigest,
-  requestParameters.repositoryName as repository, userIdentity.principalId as user|
-  eval finding = finding_name.", ".finding_description | eval phase="release" | eval
-  severity="medium" | stats min(_time) as firstTime max(_time) as lastTime by awsRegion,
-  eventName, eventSource, imageDigest, repository, user, src_ip, finding, phase, severity
+  | spath path=responseElements.imageScanFindings.findings{} output=findings 
+  | mvexpand findings 
+  | spath input=findings
+  | search severity=MEDIUM 
+  | rename name as finding_name, description as finding_description, requestParameters.imageId.imageDigest as imageDigest, requestParameters.repositoryName as repository
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
+  | eval vendor_product = "AWS"
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product finding_name finding_description imageDigest repository 
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `aws_ecr_container_scanning_findings_medium_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
   search works with AWS CloudTrail logs.
@@ -30,12 +31,12 @@ known_false_positives: unknown
 references:
 - https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html
 drilldown_searches:
-- name: View the detection results for - "$repository$"
-  search: '%original_detection_search% | search  repository = "$repository$"'
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search  user = "$user$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$repository$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$repository$")
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -44,7 +45,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Vulnerabilities with severity $severity$ found in repository $repository$
+  message: Vulnerabilities with severity medium found in repository $repository$
   risk_objects:
   - field: user
     type: user

@@ -1,6 +1,6 @@
 name: AWS Exfiltration via Anomalous GetObject API Activity
 id: e4384bbf-5835-4831-8d85-694de6ad2cc6
-version: 4
+version: 5
 date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: production
@@ -14,9 +14,13 @@ description: The following analytic identifies anomalous GetObject API activity 
   within a 10-minute window. This activity is significant as it may indicate unauthorized
   data access or exfiltration from S3 buckets. If confirmed malicious, attackers could
   exfiltrate sensitive data, leading to data breaches and compliance violations.
-search: '`cloudtrail` eventName=GetObject | bin _time span=10m |  stats count values(requestParameters.bucketName)
-  as bucketName by _time src_ip aws_account_id user_type user_arn userIdentity.principalId
-  | anomalydetection "count" "user_type" "user_arn" action=annotate | search probable_cause=*
+search: '`cloudtrail` eventName=GetObject 
+  | bin _time span=10m 
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
+  | eval vendor_product = "AWS"
+  | stats count values(requestParameters.bucketName) as bucketName by action dest user user_agent src vendor_account vendor_region vendor_product
+  | anomalydetection "count" "user" action=annotate 
+  | search probable_cause=*
   |`aws_exfiltration_via_anomalous_getobject_api_activity_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
   search works with AWS CloudTrail logs.
@@ -28,12 +32,12 @@ references:
 - https://docs.splunk.com/Documentation/Splunk/9.0.4/SearchReference/Anomalydetection
 - https://www.vectra.ai/blogpost/abusing-the-replicator-silently-exfiltrating-data-with-the-aws-s3-replication-service
 drilldown_searches:
-- name: View the detection results for - "$aws_account_id$"
-  search: '%original_detection_search% | search  aws_account_id = "$aws_account_id$"'
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search  user = "$user$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$aws_account_id$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$aws_account_id$")
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -42,13 +46,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Anomalous S3 activities detected by user $user_arn$ from $src_ip$
+  message: Anomalous S3 activities detected by user $user$ from $src$
   risk_objects:
-  - field: user_arn
+  - field: user
     type: user
     score: 64
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:
