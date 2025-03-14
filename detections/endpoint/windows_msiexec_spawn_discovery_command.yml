@@ -1,7 +1,7 @@
 name: Windows MSIExec Spawn Discovery Command
 id: e9d05aa2-32f0-411b-930c-5b8ca5c4fcee
-version: 7
-date: '2024-12-10'
+version: '8'
+date: '2025-03-14'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -71,6 +71,7 @@ rba:
 tags:
   analytic_story:
   - Windows System Binary Proxy Execution MSIExec
+  - Medusa Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1218.007
@@ -82,7 +83,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.007/atomic_red_team/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.007/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

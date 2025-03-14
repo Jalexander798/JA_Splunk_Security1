@@ -1,7 +1,7 @@
 name: High Process Termination Frequency
 id: 17cd75b2-8666-11eb-9ab4-acde48001122
-version: 6
-date: '2024-11-13'
+version: '7'
+date: '2025-03-14'
 author: Teoderick Contreras
 status: production
 type: Anomaly
@@ -51,12 +51,13 @@ rba:
     type: process
 tags:
   analytic_story:
-  - LockBit Ransomware
-  - Clop Ransomware
-  - Snake Keylogger
-  - Rhysida Ransomware
   - BlackByte Ransomware
+  - Rhysida Ransomware
+  - LockBit Ransomware
+  - Medusa Ransomware
   - Crypto Stealer
+  - Snake Keylogger
+  - Clop Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1486
@@ -68,7 +69,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/clop/clop_a/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/clop/clop_a/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

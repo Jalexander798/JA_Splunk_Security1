@@ -1,7 +1,7 @@
 name: System Information Discovery Detection
 id: 8e99f89e-ae58-4ebc-bf52-ae0b1a277e72
-version: 7
-date: '2024-12-16'
+version: '8'
+date: '2025-03-14'
 author: Patrick Bareiss, Splunk
 status: production
 type: TTP
@@ -65,6 +65,7 @@ tags:
   analytic_story:
   - Windows Discovery Techniques
   - Gozi Malware
+  - Medusa Ransomware
   - BlackSuit Ransomware
   - Cleo File Transfer Software
   asset_type: Windows
@@ -78,7 +79,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1082/atomic_red_team/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1082/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

@@ -1,7 +1,7 @@
 name: Windows Suspicious Child Process Spawned From WebServer
 id: 2d4470ef-7158-4b47-b68b-1f7f16382156
-version: 2
-date: '2025-02-10'
+version: '3'
+date: '2025-03-14'
 author: Steven Dick
 status: production
 type: TTP
@@ -74,17 +74,18 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - ProxyNotShell
+  - Flax Typhoon
+  - BlackByte Ransomware
   - CISA AA22-257A
   - HAFNIUM Group
-  - Citrix ShareFile RCE CVE-2023-24489
-  - ProxyShell
-  - Flax Typhoon
   - CISA AA22-264A
+  - ProxyShell
   - SysAid On-Prem Software CVE-2023-47246 Vulnerability
-  - Compromised Windows Host
+  - ProxyNotShell
+  - Medusa Ransomware
   - WS FTP Server Critical Vulnerabilities
-  - BlackByte Ransomware
+  - Compromised Windows Host
+  - Citrix ShareFile RCE CVE-2023-24489
   asset_type: Endpoint
   mitre_attack_id:
   - T1505.003
@@ -96,7 +97,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.003/generic_webshell_exploit/generic_webshell_exploit.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.003/generic_webshell_exploit/generic_webshell_exploit.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

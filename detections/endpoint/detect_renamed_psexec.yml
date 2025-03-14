@@ -1,7 +1,7 @@
 name: Detect Renamed PSExec
 id: 683e6196-b8e8-11eb-9a79-acde48001122
-version: '12'
-date: '2025-02-24'
+version: '13'
+date: '2025-03-14'
 author: Michael Haag, Splunk, Alex Oberkircher, Github Community
 status: production
 type: Hunting
@@ -39,18 +39,19 @@ references:
 - https://redcanary.com/blog/threat-hunting-psexec-lateral-movement/
 tags:
   analytic_story:
-  - China-Nexus Threat Activity
+  - DHS Report TA18-074A
+  - Active Directory Lateral Movement
   - BlackByte Ransomware
   - HAFNIUM Group
-  - DHS Report TA18-074A
-  - CISA AA22-320A
-  - DarkSide Ransomware
-  - Active Directory Lateral Movement
-  - DarkGate Malware
-  - Sandworm Tools
   - Rhysida Ransomware
+  - Medusa Ransomware
+  - DarkSide Ransomware
   - Earth Estries
   - SamSam Ransomware
+  - DarkGate Malware
+  - CISA AA22-320A
+  - Sandworm Tools
+  - China-Nexus Threat Activity
   asset_type: Endpoint
   mitre_attack_id:
   - T1569.002

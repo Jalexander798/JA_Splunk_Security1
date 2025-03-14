@@ -1,7 +1,7 @@
 name: Allow Inbound Traffic By Firewall Rule Registry
 id: 0a46537c-be02-11eb-92ca-acde48001122
-version: 10
-date: '2025-02-10'
+version: '11'
+date: '2025-03-14'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP
@@ -57,11 +57,12 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Prohibited Traffic Allowed or Protocol Mismatch
   - Windows Registry Abuse
-  - Azorult
   - NjRAT
   - PlugX
+  - Prohibited Traffic Allowed or Protocol Mismatch
+  - Medusa Ransomware
+  - Azorult
   asset_type: Endpoint
   mitre_attack_id:
   - T1021.001
@@ -73,7 +74,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/honeypots/casper/datasets1/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/honeypots/casper/datasets1/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

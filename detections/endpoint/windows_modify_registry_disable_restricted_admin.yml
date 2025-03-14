@@ -1,7 +1,7 @@
 name: Windows Modify Registry Disable Restricted Admin
 id: cee573a0-7587-48e6-ae99-10e8c657e89a
-version: 6
-date: '2025-01-21'
+version: '7'
+date: '2025-03-14'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -55,6 +55,7 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
+  - Medusa Ransomware
   - CISA AA23-347A
   asset_type: Endpoint
   mitre_attack_id:
@@ -67,7 +68,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.004/NoLMHash/lsa-reg-settings-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1003.004/NoLMHash/lsa-reg-settings-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

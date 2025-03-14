@@ -1,7 +1,7 @@
 name: WinEvent Scheduled Task Created to Spawn Shell
 id: 203ef0ea-9bd8-11eb-8201-acde48001122
-version: '10'
-date: '2025-02-24'
+version: '11'
+date: '2025-03-14'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -54,16 +54,17 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - China-Nexus Threat Activity
-  - CISA AA22-257A
   - Windows Error Reporting Service Elevation of Privilege Vulnerability
-  - Compromised Windows Host
+  - CISA AA22-257A
   - Ransomware
+  - Medusa Ransomware
   - Windows Persistence Techniques
-  - Ryuk Ransomware
-  - Scheduled Tasks
   - Earth Estries
+  - Scheduled Tasks
+  - Compromised Windows Host
+  - Ryuk Ransomware
   - Winter Vivern
+  - China-Nexus Threat Activity
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.005

@@ -1,7 +1,7 @@
 name: Scheduled Task Deleted Or Created via CMD
 id: d5af132c-7c17-439c-9d31-13d55340f36c
-version: '13'
-date: '2025-02-24'
+version: '14'
+date: '2025-03-14'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -66,32 +66,33 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - DHS Report TA18-074A
-  - Trickbot
-  - NOBELIUM Group
   - Prestige Ransomware
+  - Medusa Ransomware
   - Earth Estries
+  - Scheduled Tasks
+  - RedLine Stealer
+  - Azorult
+  - Living Off The Land
+  - Sandworm Tools
+  - Trickbot
   - ShrinkLocker
-  - NjRAT
+  - MoonPeak
+  - Winter Vivern
+  - AsyncRAT
+  - AgentTesla
+  - CISA AA22-257A
+  - NOBELIUM Group
+  - CISA AA23-347A
+  - Qakbot
+  - Windows Persistence Techniques
   - CISA AA24-241A
   - DarkCrystal RAT
-  - Sandworm Tools
-  - Living Off The Land
-  - AsyncRAT
-  - Scheduled Tasks
-  - AgentTesla
-  - Windows Persistence Techniques
-  - RedLine Stealer
-  - Rhysida Ransomware
-  - Winter Vivern
-  - China-Nexus Threat Activity
-  - Qakbot
-  - CISA AA22-257A
-  - MoonPeak
-  - CISA AA23-347A
-  - Phemedrone Stealer
-  - Azorult
   - Amadey
+  - Rhysida Ransomware
+  - DHS Report TA18-074A
+  - NjRAT
+  - Phemedrone Stealer
+  - China-Nexus Threat Activity
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.005

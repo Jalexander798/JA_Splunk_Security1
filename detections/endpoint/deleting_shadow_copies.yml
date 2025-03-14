@@ -1,7 +1,7 @@
 name: Deleting Shadow Copies
 id: b89919ed-ee5f-492c-b139-95dbb162039e
-version: 10
-date: '2024-12-10'
+version: '11'
+date: '2025-03-14'
 author: David Dorsey, Splunk
 status: production
 type: TTP
@@ -69,17 +69,18 @@ rba:
     type: process_name
 tags:
   analytic_story:
+  - CISA AA22-264A
   - Chaos Ransomware
-  - Rhysida Ransomware
-  - Windows Log Manipulation
   - Prestige Ransomware
   - Ransomware
-  - SamSam Ransomware
-  - CISA AA22-264A
-  - DarkGate Malware
   - LockBit Ransomware
-  - Compromised Windows Host
   - Clop Ransomware
+  - Medusa Ransomware
+  - Compromised Windows Host
+  - Windows Log Manipulation
+  - SamSam Ransomware
+  - DarkGate Malware
+  - Rhysida Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1490
@@ -91,7 +92,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1490/atomic_red_team/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1490/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

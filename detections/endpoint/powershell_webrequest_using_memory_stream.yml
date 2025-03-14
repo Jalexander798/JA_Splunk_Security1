@@ -1,7 +1,7 @@
 name: PowerShell WebRequest Using Memory Stream
 id: 103affa6-924a-4b53-aff4-1d5075342aab
-version: 4
-date: '2024-11-13'
+version: '5'
+date: '2025-03-14'
 author: Steven Dick
 status: production
 type: TTP
@@ -58,8 +58,9 @@ rba:
     type: file_name
 tags:
   analytic_story:
-  - Malicious PowerShell
   - MoonPeak
+  - Medusa Ransomware
+  - Malicious PowerShell
   asset_type: Endpoint
   mitre_attack_id:
   - T1059.001
@@ -73,7 +74,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/gootloader/partial_ttps/windows-powershell-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/gootloader/partial_ttps/windows-powershell-xml.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

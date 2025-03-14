@@ -1,7 +1,7 @@
 name: Domain Controller Discovery with Nltest
 id: 41243735-89a7-4c83-bcdd-570aa78f00a1
-version: 5
-date: '2024-12-10'
+version: '6'
+date: '2025-03-14'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -60,8 +60,9 @@ tags:
   analytic_story:
   - Active Directory Discovery
   - CISA AA23-347A
-  - Rhysida Ransomware
+  - Medusa Ransomware
   - BlackSuit Ransomware
+  - Rhysida Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1018
@@ -73,7 +74,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1018/AD_discovery/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1018/AD_discovery/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

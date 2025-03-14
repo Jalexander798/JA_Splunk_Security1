@@ -1,7 +1,7 @@
 name: Powershell Fileless Script Contains Base64 Encoded Content
 id: 8acbc04c-c882-11eb-b060-acde48001122
-version: 7
-date: '2025-02-10'
+version: '8'
+date: '2025-03-14'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -52,13 +52,14 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Hermetic Wiper
-  - Malicious PowerShell
-  - Winter Vivern
   - AsyncRAT
-  - Data Destruction
-  - IcedID
   - NjRAT
+  - Data Destruction
+  - Medusa Ransomware
+  - Hermetic Wiper
+  - IcedID
+  - Winter Vivern
+  - Malicious PowerShell
   mitre_attack_id:
   - T1027
   - T1059.001
@@ -71,7 +72,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/frombase64string.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/frombase64string.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

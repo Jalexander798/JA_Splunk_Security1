@@ -1,7 +1,7 @@
 name: Network Connection Discovery With Netstat
 id: 2cf5cc25-f39a-436d-a790-4857e5995ede
-version: 4
-date: '2024-11-13'
+version: '5'
+date: '2025-03-14'
 author: Mauricio Velazco, Splunk
 status: production
 type: Hunting
@@ -37,14 +37,15 @@ references:
 - https://www.microsoft.com/en-us/security/blog/2023/05/24/volt-typhoon-targets-us-critical-infrastructure-with-living-off-the-land-techniques/
 tags:
   analytic_story:
-  - Volt Typhoon
-  - Active Directory Discovery
-  - Prestige Ransomware
-  - Windows Post-Exploitation
-  - Qakbot
   - CISA AA22-277A
+  - Windows Post-Exploitation
+  - Active Directory Discovery
   - CISA AA23-347A
+  - Prestige Ransomware
+  - Qakbot
   - PlugX
+  - Medusa Ransomware
+  - Volt Typhoon
   asset_type: Endpoint
   mitre_attack_id:
   - T1049
@@ -56,7 +57,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1049/AD_discovery/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1049/AD_discovery/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

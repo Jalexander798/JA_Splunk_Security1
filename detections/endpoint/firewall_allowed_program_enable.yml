@@ -1,7 +1,7 @@
 name: Firewall Allowed Program Enable
 id: 9a8f63a8-43ac-11ec-904c-acde48001122
-version: 5
-date: '2025-02-10'
+version: '6'
+date: '2025-03-14'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -62,11 +62,12 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Windows Defense Evasion Tactics
-  - Azorult
   - BlackByte Ransomware
   - NjRAT
   - PlugX
+  - Windows Defense Evasion Tactics
+  - Medusa Ransomware
+  - Azorult
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.004
@@ -78,7 +79,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/vilsel/sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/vilsel/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

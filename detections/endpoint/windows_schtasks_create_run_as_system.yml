@@ -1,7 +1,7 @@
 name: Windows Schtasks Create Run As System
 id: 41a0e58e-884c-11ec-9976-acde48001122
-version: 6
-date: '2025-02-10'
+version: '7'
+date: '2025-03-14'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -65,6 +65,7 @@ rba:
     type: process_name
 tags:
   analytic_story:
+  - Medusa Ransomware
   - Windows Persistence Techniques
   - Qakbot
   - Scheduled Tasks
@@ -79,7 +80,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/schtask_system/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/schtask_system/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

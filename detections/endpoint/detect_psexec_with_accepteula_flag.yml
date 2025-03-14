@@ -1,7 +1,7 @@
 name: Detect PsExec With accepteula Flag
 id: 27c3a83d-cada-47c6-9042-67baf19d2574
-version: 10
-date: '2025-02-10'
+version: '11'
+date: '2025-03-14'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -69,18 +69,19 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - SamSam Ransomware
   - DHS Report TA18-074A
-  - HAFNIUM Group
-  - DarkSide Ransomware
   - Active Directory Lateral Movement
+  - BlackByte Ransomware
+  - HAFNIUM Group
+  - Rhysida Ransomware
+  - Medusa Ransomware
+  - DarkSide Ransomware
+  - SamSam Ransomware
+  - DarkGate Malware
   - CISA AA22-320A
   - Sandworm Tools
-  - Volt Typhoon
   - IcedID
-  - BlackByte Ransomware
-  - DarkGate Malware
-  - Rhysida Ransomware
+  - Volt Typhoon
   asset_type: Endpoint
   mitre_attack_id:
   - T1021.002
@@ -92,7 +93,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.002/atomic_red_team/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.002/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

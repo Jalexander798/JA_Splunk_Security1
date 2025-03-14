@@ -1,7 +1,7 @@
 name: Common Ransomware Notes
 id: ada0f478-84a8-4641-a3f1-d82362d6bd71
-version: 7
-date: '2024-11-13'
+version: '8'
+date: '2025-03-14'
 author: David Dorsey, Splunk
 status: production
 type: Hunting
@@ -29,13 +29,14 @@ known_false_positives: It's possible that a legitimate file could be created wit
 references: []
 tags:
   analytic_story:
-  - SamSam Ransomware
-  - Ransomware
-  - Ryuk Ransomware
-  - Clop Ransomware
   - Chaos Ransomware
-  - LockBit Ransomware
   - Rhysida Ransomware
+  - Ransomware
+  - LockBit Ransomware
+  - Medusa Ransomware
+  - SamSam Ransomware
+  - Clop Ransomware
+  - Ryuk Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1485
@@ -47,7 +48,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/ransomware_notes/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/ransomware_notes/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

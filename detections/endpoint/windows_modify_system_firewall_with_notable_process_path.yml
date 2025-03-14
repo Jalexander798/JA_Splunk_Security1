@@ -1,7 +1,7 @@
 name: Windows Modify System Firewall with Notable Process Path
 id: cd6d7410-9146-4471-a418-49edba6dadc4
-version: 6
-date: '2025-02-10'
+version: '7'
+date: '2025-03-14'
 author: Teoderick Contreras, Will Metcalf, Splunk
 status: production
 type: TTP
@@ -64,6 +64,7 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
+  - Medusa Ransomware
   - NjRAT
   - Compromised Windows Host
   asset_type: Endpoint
@@ -77,7 +78,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.004/njrat_add_firewall_rule/njrat_firewall_sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.004/njrat_add_firewall_rule/njrat_firewall_sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
