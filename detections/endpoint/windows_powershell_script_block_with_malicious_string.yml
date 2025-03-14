@@ -9,9 +9,8 @@ description: The following analytic detects the execution of multiple offensive 
 data_source: 
 - Powershell Script Block Logging 4104
 search: |-
-  `powershell` ScriptBlockText EventCode=4104
-  | stats count min(_time) as firstTime max(_time) as lastTime list(ScriptBlockText) as command by dest signature 
-  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText 
+  `powershell` ScriptBlockText=* EventCode=4104
+  | stats count min(_time) as firstTime max(_time) as lastTime list(ScriptBlockText) as command values(Guid) as Guid values(Opcode) as Opcode values(Name) as Name values(Path) as Path values(ProcessID) as ProcessID values(ScriptBlockId) as ScriptBlockId values(ScriptBlockText) as ScriptBlockText by dest signature signature_id user_id vendor_product 
   | eval command = mvjoin(command,"\n")
   | lookup malicious_powershell_strings command  
   | where isnotnull(match)
@@ -32,10 +31,6 @@ drilldown_searches:
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$dest$"
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
-  latest_offset: $info_max_time$
-- name: Investigate PowerShell on $dest$ 
-  search: '`powershell` ScriptBlockText EventCode=4104 Computer=$dest|s$ "*$match$*"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:

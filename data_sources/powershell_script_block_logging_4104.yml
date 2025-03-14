@@ -70,7 +70,6 @@ output_fields:
 - signature_id 
 - user_id 
 - vendor_product 
-- EventID 
 - Guid 
 - Opcode 
 - Name 

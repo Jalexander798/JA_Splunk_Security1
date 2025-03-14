@@ -61,9 +61,6 @@ rba:
   - field: dest
     type: system
     score: 10
-  - field: user
-    type: user
-    score: 10
   threat_objects: []
 tags:
   analytic_story:
