@@ -1,6 +1,6 @@
 name: Azure AD User Consent Blocked for Risky Application
 id: 06b8ec9a-d3b5-4882-8f16-04b4d10f5eab
-version: 4
+version: 7
 date: '2024-11-14'
 author: Mauricio Velazco, Splunk
 status: production
@@ -16,17 +16,27 @@ description: The following analytic detects instances where Azure AD has blocked
   confirmed malicious, this activity suggests that Azure's security measures successfully
   prevented a harmful application from accessing organizational data, warranting immediate
   investigation to understand the context and take preventive measures.
-search: "`azure_monitor_aad` operationName=\"Consent to application\" properties.result=failure
-  | rename properties.* as *  | eval reason_index = if(mvfind('targetResources{}.modifiedProperties{}.displayName',
-  \"ConsentAction.Reason\") >= 0, mvfind('targetResources{}.modifiedProperties{}.displayName',
-  \"ConsentAction.Reason\"), -1) | eval permissions_index = if(mvfind('targetResources{}.modifiedProperties{}.displayName',
-  \"ConsentAction.Permissions\") >= 0, mvfind('targetResources{}.modifiedProperties{}.displayName',
-  \"ConsentAction.Permissions\"), -1) | search reason_index >= 0  | eval reason =
-  mvindex('targetResources{}.modifiedProperties{}.newValue',reason_index) | eval permissions
-  = mvindex('targetResources{}.modifiedProperties{}.newValue',permissions_index) |
-  search reason = \"\\\"Risky application detected\\\"\" | rex field=permissions \"\
-  Scope: (?<Scope>[^,]+)\" | stats count min(_time) as firstTime max(_time) as lastTime
-  by operationName, user, reason, Scope | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+search: "`azure_monitor_aad` operationName=\"Consent to application\" properties.result=failure 
+  | rename properties.* as * 
+  | eval reason_index = if(mvfind('targetResources{}.modifiedProperties{}.displayName',
+      \"ConsentAction.Reason\") >= 0, mvfind('targetResources{}.modifiedProperties{}.displayName',
+      \"ConsentAction.Reason\"), -1) 
+  | eval permissions_index = if(mvfind('targetResources{}.modifiedProperties{}.displayName',
+      \"ConsentAction.Permissions\") >= 0, mvfind('targetResources{}.modifiedProperties{}.displayName',
+      \"ConsentAction.Permissions\"), -1) 
+  | search reason_index >= 0 
+  | eval reason =
+      mvindex('targetResources{}.modifiedProperties{}.newValue',reason_index) 
+  | eval permissions
+      = mvindex('targetResources{}.modifiedProperties{}.newValue',permissions_index) 
+  | search reason = \"\\\"Risky application detected\\\"\" 
+  | rex field=permissions \"\
+      Scope: (?<Scope> 
+      [ ^,]+)\" 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product reason Scope signature
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
   | `azure_ad_user_consent_blocked_for_risky_application_filter`"
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).

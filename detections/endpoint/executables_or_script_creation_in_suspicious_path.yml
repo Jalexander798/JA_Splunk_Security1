@@ -102,6 +102,7 @@ tags:
   - Azorult
   - Data Destruction
   - Amadey
+  - SnappyBee
   - WhisperGate
   asset_type: Endpoint
   mitre_attack_id:
@@ -114,6 +115,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036/executables_suspicious_file_path/exec_susp_path2.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

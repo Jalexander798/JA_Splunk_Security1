@@ -1,7 +1,7 @@
 name: Detect Rare Executables
 id: 44fddcb2-8d3b-454c-874e-7c6de5a4f7ac
-version: 8
-date: '2024-11-13'
+version: '8'
+date: '2025-02-07'
 author: Bhavin Patel, Splunk
 status: production
 type: Anomaly
@@ -68,9 +68,12 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Unusual Processes
+  - SnappyBee
   - Rhysida Ransomware
+  - China-Nexus Threat Activity
   - Crypto Stealer
+  - Earth Estries
+  - Unusual Processes
   asset_type: Endpoint
   mitre_attack_id:
   - T1204

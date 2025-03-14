@@ -1,6 +1,6 @@
 name: AWS Exfiltration via DataSync Task
 id: 05c4b09f-ea28-4c7c-a7aa-a246f665c8a2
-version: 4
+version: 5
 date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: production
@@ -15,10 +15,11 @@ description: The following analytic detects the creation of an AWS DataSync task
   this could result in unauthorized access to sensitive information, causing severe
   data breaches and compliance violations.
 search: '`cloudtrail` eventName = CreateTask eventSource="datasync.amazonaws.com"
-  | rename  requestParameters.*  as *  | stats count min(_time) as firstTime max(_time)
-  as lastTime by src_ip aws_account_id awsRegion eventName destinationLocationArn
-  sourceLocationArn userAgent user_arn userIdentity.principalId  errorCode | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `aws_exfiltration_via_datasync_task_filter`'
+  | rename  requestParameters.*  as *  
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
+  | eval vendor_product = "AWS"
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product destinationLocationArn sourceLocationArn
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `aws_exfiltration_via_datasync_task_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
   search works with AWS CloudTrail logs.
 known_false_positives: It is possible that an AWS Administrator has legitimately created
@@ -29,11 +30,11 @@ references:
 - https://www.shehackske.com/how-to/data-exfiltration-on-cloud-1606/
 drilldown_searches:
 - name: View the detection results for - "$aws_account_id$"
-  search: '%original_detection_search% | search  aws_account_id = "$aws_account_id$"'
+  search: '%original_detection_search% | search  user = "$user$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$aws_account_id$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$aws_account_id$")
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -42,14 +43,14 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: DataSync task created on account id - $aws_account_id$ by user $user_arn$
-    from src_ip $src_ip$
+  message: DataSync task created on account id - $vendor_account$ by user $user$
+    from src_ip $src$
   risk_objects:
-  - field: user_arn
+  - field: user
     type: user
     score: 64
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:

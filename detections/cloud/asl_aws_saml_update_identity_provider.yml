@@ -1,6 +1,6 @@
 name: ASL AWS SAML Update identity provider
 id: 635c26cc-0fd1-4098-8ec9-824bf9544b11
-version: 1
+version: 2
 date: '2025-01-09'
 author: Patrick Bareiss, Splunk
 status: production
@@ -10,8 +10,8 @@ data_source:
 - ASL AWS CloudTrail
 search: '`amazon_security_lake` api.operation=UpdateSAMLProvider 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by api.operation actor.user.uid actor.user.account.uid http_request.user_agent src_endpoint.ip cloud.region 
-  | rename actor.user.uid as user, src_endpoint.ip as src_ip, cloud.region as region, http_request.user_agent as user_agent  
+  | stats count min(_time) as firstTime max(_time) as lastTime by actor.user.uid api.operation api.service.name http_request.user_agent src_endpoint.ip actor.user.account.uid cloud.provider cloud.region
+  | rename actor.user.uid as user api.operation as action api.service.name as dest http_request.user_agent as user_agent src_endpoint.ip as src actor.user.account.uid as vendor_account cloud.provider as vendor_product cloud.region as vendor_region 
   | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)` | `asl_aws_saml_update_identity_provider_filter`'
 how_to_implement: The detection is based on Amazon Security Lake events from Amazon Web Services (AWS), which is a centralized data lake that provides security-related data from AWS services. To use this detection, you must ingest CloudTrail logs from Amazon Security Lake into Splunk. To run this search, ensure that you ingest events using the latest version of Splunk Add-on for Amazon Web Services (https://splunkbase.splunk.com/app/1876) or the Federated Analytics App.
 known_false_positives: Updating a SAML provider or creating a new one may not necessarily be malicious however it needs to be closely monitored.
@@ -30,13 +30,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: User $user$ from IP address $src_ip$ updated the SAML provider
+  message: User $user$ from IP address $src$ updated the SAML provider
   risk_objects:
   - field: user
     type: user
     score: 64
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:

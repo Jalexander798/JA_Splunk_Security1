@@ -1,6 +1,6 @@
 name: Azure AD Unusual Number of Failed Authentications From Ip
 id: 3d8d3a36-93b8-42d7-8d91-c5f24cec223d
-version: 7
+version: 8
 date: '2025-02-10'
 author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
 status: production
@@ -15,13 +15,15 @@ description: The following analytic identifies a single source IP failing to aut
   compromise of sensitive information.
 data_source:
 - Azure Active Directory
-search: '`azure_monitor_aad`  category=SignInLogs properties.status.errorCode=50126
-  properties.authenticationDetails{}.succeeded=false | rename properties.* as * |
-  bucket span=5m _time | stats  dc(userPrincipalName) AS unique_accounts values(userPrincipalName)
-  as userPrincipalName by _time, ipAddress | eventstats  avg(unique_accounts) as ip_avg,
-  stdev(unique_accounts) as ip_std by ipAddress | eval  upperBound=(ip_avg+ip_std*3)
-  | eval  isOutlier=if(unique_accounts > 10 and unique_accounts >= upperBound, 1,0)
-  | where isOutlier = 1 | `azure_ad_unusual_number_of_failed_authentications_from_ip_filter`'
+search: '`azure_monitor_aad` category=SignInLogs properties.status.errorCode=50126 properties.authenticationDetails{}.succeeded=false 
+  | rename properties.* as * 
+  | bucket span=5m _time 
+  | stats dc(userPrincipalName) AS unique_accounts values(userPrincipalName) as userPrincipalName values(dest) as dest  values(user) as user by _time, src, vendor_account, vendor_product
+  | eventstats avg(unique_accounts) as ip_avg, stdev(unique_accounts) as ip_std by src
+  | eval upperBound=(ip_avg+ip_std*3) 
+  | eval isOutlier=if(unique_accounts > 10 and unique_accounts >= upperBound, 1,0) 
+  | where isOutlier = 1 
+  | `azure_ad_unusual_number_of_failed_authentications_from_ip_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment
@@ -49,13 +51,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Possible Password Spraying attack against Azure AD from source ip $ipAddress$
+  message: Possible Password Spraying attack against Azure AD from source ip $src$
   risk_objects:
   - field: userPrincipalName
     type: user
     score: 54
   threat_objects:
-  - field: ipAddress
+  - field: src
     type: ip_address
 tags:
   analytic_story:

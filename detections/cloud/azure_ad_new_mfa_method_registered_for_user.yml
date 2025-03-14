@@ -1,6 +1,6 @@
 name: Azure AD New MFA Method Registered For User
 id: 2628b087-4189-403f-9044-87403f777a1b
-version: 7
+version: 8
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
@@ -14,10 +14,14 @@ description: The following analytic detects the registration of a new Multi-Fact
   escalate their privileges within the environment.
 data_source:
 - Azure Active Directory User registered security info
-search: '`azure_monitor_aad` category=AuditLogs operationName="User registered security
-  info" properties.operationType=Add | rename properties.* as * | rename targetResources{}.*
-  as * | stats count min(_time) as firstTime max(_time) as lastTime by user, resultDescription,
-  result, src_ip | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+search: '`azure_monitor_aad` category=AuditLogs operationName="User registered security info" properties.operationType=Add 
+  | rename properties.* as * 
+  | rename targetResources{}.* as * 
+  | rename userAgent as user_agent 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product user_agent result resultDescription signature
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
   | `azure_ad_new_mfa_method_registered_for_user_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
@@ -52,7 +56,7 @@ rba:
     type: user
     score: 64
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:

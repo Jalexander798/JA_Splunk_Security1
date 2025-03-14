@@ -1,7 +1,7 @@
 name: Windows Unsigned DLL Side-Loading In Same Process Path
 id: 3cf85c02-f9d6-4186-bf3c-e70ee99fbc7f
-version: '8'
-date: '2025-02-24'
+version: 8
+date: '2025-02-26'
 author: Teoderick Contreras, Splunk
 data_source:
 - Sysmon EventID 7
@@ -61,6 +61,7 @@ tags:
   - DarkGate Malware
   - PlugX
   - Earth Estries
+  - SnappyBee
   asset_type: Endpoint
   mitre_attack_id:
   - T1574.002
