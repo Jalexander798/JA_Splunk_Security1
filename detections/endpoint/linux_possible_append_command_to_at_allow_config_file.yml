@@ -1,6 +1,6 @@
 name: Linux Possible Append Command To At Allow Config File
 id: 7bc20606-5f40-11ec-a586-acde48001122
-version: 6
+version: 7
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -17,11 +17,11 @@ data_source:
 - Sysmon for Linux EventID 1
 search: '| tstats `security_content_summariesonly` count from datamodel=Endpoint.Processes
   where Processes.process = "*echo*" AND Processes.process IN("*/etc/at.allow", "*/etc/at.deny")
-  by Processes.action Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec 
-  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name 
-  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid Processes.process_hash 
-  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path 
-  Processes.user Processes.user_id Processes.vendor_product  
+  by Processes.action Processes.dest Processes.original_file_name Processes.parent_process
+  Processes.parent_process_exec Processes.parent_process_guid Processes.parent_process_id
+  Processes.parent_process_name Processes.parent_process_path Processes.process Processes.process_exec
+  Processes.process_guid Processes.process_hash Processes.process_id Processes.process_integrity_level
+  Processes.process_name Processes.process_path Processes.user Processes.user_id Processes.vendor_product
   | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `linux_possible_append_command_to_at_allow_config_file_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
@@ -75,7 +75,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.002/at_execution/sysmon_linux.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.002/at_execution/sysmon_linux.log
     source: Syslog:Linux-Sysmon/Operational
     sourcetype: sysmon:linux

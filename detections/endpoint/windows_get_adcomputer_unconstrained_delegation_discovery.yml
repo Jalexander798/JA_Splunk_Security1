@@ -1,6 +1,6 @@
 name: Windows Get-AdComputer Unconstrained Delegation Discovery
 id: c8640777-469f-4638-ab44-c34a3233ffac
-version: 6
+version: 7
 date: '2024-11-13'
 author: Mauricio Velazco, Splunk
 status: production
@@ -16,12 +16,10 @@ description: The following analytic detects the use of the Get-ADComputer cmdlet
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 (ScriptBlockText = "*Get-ADComputer*" AND ScriptBlockText
-  = "*TrustedForDelegation*") 
-  | fillnull
-  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
-  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `windows_get_adcomputer_unconstrained_delegation_discovery_filter`'
+  = "*TrustedForDelegation*") | fillnull | stats count min(_time) as firstTime max(_time)
+  as lastTime by dest signature signature_id user_id vendor_product EventID Guid Opcode
+  Name Path ProcessID ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `windows_get_adcomputer_unconstrained_delegation_discovery_filter`'
 how_to_implement: The following  analytic requires PowerShell operational logs to
   be imported. Modify the powershell macro as needed to match the sourcetype or add
   index. This analytic is specific to 4104, or PowerShell Script Block Logging.
@@ -71,7 +69,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1018/windows_get_adcomputer_unconstrained_delegation_discovery/windows-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1018/windows_get_adcomputer_unconstrained_delegation_discovery/windows-xml.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

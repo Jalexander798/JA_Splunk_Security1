@@ -1,6 +1,6 @@
 name: Windows Impair Defense Set Win Defender Smart Screen Level To Warn
 id: cc2a3425-2703-47e7-818f-3dca1b0bc56f
-version: 5
+version: 6
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -17,12 +17,11 @@ description: The following analytic detects modifications to the Windows registr
   risk of successful malware deployment and subsequent system compromise.
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry where Registry.registry_path= "*\\Microsoft\\Windows\\System\\ShellSmartScreenLevel"
-  Registry.registry_value_data="Warn" 
-  by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path 
-  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name  
-  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product 
-  | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `windows_impair_defense_set_win_defender_smart_screen_level_to_warn_filter`'
+  Registry.registry_value_data="Warn" by Registry.action Registry.dest Registry.process_guid
+  Registry.process_id Registry.registry_hive Registry.registry_path Registry.registry_key_name
+  Registry.registry_value_data Registry.registry_value_name Registry.registry_value_type
+  Registry.status Registry.user Registry.vendor_product | `drop_dm_object_name(Registry)`
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_impair_defense_set_win_defender_smart_screen_level_to_warn_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
   on process that include the name of the process responsible for the changes from
   your endpoints into the `Endpoint` datamodel in the `Registry` node.
@@ -69,7 +68,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable-windows-security-defender-features/windefender-bypas-2-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable-windows-security-defender-features/windefender-bypas-2-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

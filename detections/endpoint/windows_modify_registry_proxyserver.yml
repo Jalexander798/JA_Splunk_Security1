@@ -1,6 +1,6 @@
 name: Windows Modify Registry ProxyServer
 id: 12bdaa0b-3c59-4489-aae1-bff6d67746ef
-version: 5
+version: 6
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
@@ -16,13 +16,11 @@ description: The following analytic detects modifications to the Windows registr
   channels for data exfiltration or further exploitation of the compromised host.
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime from datamodel=Endpoint.Registry where Registry.registry_path = "*\\Internet
-  Settings\\ProxyServer" 
-  by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path 
-  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name  
-  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product 
-  | `drop_dm_object_name(Registry)`
-  | where isnotnull(registry_value_data) | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `windows_modify_registry_proxyserver_filter`'
+  Settings\\ProxyServer" by Registry.action Registry.dest Registry.process_guid Registry.process_id
+  Registry.registry_hive Registry.registry_path Registry.registry_key_name Registry.registry_value_data
+  Registry.registry_value_name Registry.registry_value_type Registry.status Registry.user
+  Registry.vendor_product | `drop_dm_object_name(Registry)` | where isnotnull(registry_value_data)
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_modify_registry_proxyserver_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
   on process that include the name of the process responsible for the changes from
   your endpoints into the `Endpoint` datamodel in the `Registry` node. Also make sure
@@ -66,7 +64,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/proxy_server/ProxyServer_sys.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/proxy_server/ProxyServer_sys.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

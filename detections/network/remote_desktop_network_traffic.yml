@@ -1,6 +1,6 @@
 name: Remote Desktop Network Traffic
 id: 272b8407-842d-4b3d-bead-a704584003d3
-version: 9
+version: 10
 date: '2025-02-10'
 author: David Dorsey, Splunk
 status: production
@@ -13,7 +13,7 @@ description: The following analytic detects unusual Remote Desktop Protocol (RDP
   to control networked systems, leading to data theft, ransomware deployment, or further
   network compromise. If confirmed malicious, this activity could result in significant
   data breaches or complete system and network control loss.
-data_source: 
+data_source:
 - Zeek Conn
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime from datamodel=Network_Traffic where All_Traffic.dest_port=3389 AND
@@ -74,7 +74,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.001/remote_desktop_connection/zeek_conn.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.001/remote_desktop_connection/zeek_conn.log
     sourcetype: bro:conn:json
     source: conn.log

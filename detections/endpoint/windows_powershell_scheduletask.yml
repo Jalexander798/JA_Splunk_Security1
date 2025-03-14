@@ -1,6 +1,6 @@
 name: Windows PowerShell ScheduleTask
 id: ddf82fcb-e9ee-40e3-8712-a50b5bf323fc
-version: 5
+version: 6
 date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
@@ -18,11 +18,9 @@ description: The following analytic detects potential malicious activities invol
 search: '`powershell` EventCode=4104 ScriptBlockText IN ("*New-ScheduledTask*", "*New-ScheduledTaskAction*",
   "*New-ScheduledTaskSettingsSet*", "*New-ScheduledTaskTrigger*", "*Register-ClusteredScheduledTask*",
   "*Register-ScheduledTask*", "*Set-ClusteredScheduledTask*", "*Set-ScheduledTask*",
-  "*Start-ScheduledTask*", "*Enable-ScheduledTask*") 
-  | fillnull
-  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
-  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
-  | `security_content_ctime(firstTime)`
+  "*Start-ScheduledTask*", "*Enable-ScheduledTask*") | fillnull | stats count min(_time)
+  as firstTime max(_time) as lastTime by dest signature signature_id user_id vendor_product
+  EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_powershell_scheduletask_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
@@ -76,7 +74,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/atomic_red_team/pwsh_scheduledtask.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.005/atomic_red_team/pwsh_scheduledtask.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

@@ -1,6 +1,6 @@
 name: Windows Remote Access Software RMS Registry
 id: e5b7b5a9-e471-4be8-8c5d-4083983ba329
-version: 5
+version: 6
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
@@ -17,12 +17,11 @@ data_source:
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry where Registry.registry_path= "*\\SYSTEM\\Remote
-  Manipulator System*" 
-  by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path 
-  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name  
-  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product 
-  | `drop_dm_object_name(Registry)`
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_remote_access_software_rms_registry_filter`'
+  Manipulator System*" by Registry.action Registry.dest Registry.process_guid Registry.process_id
+  Registry.registry_hive Registry.registry_path Registry.registry_key_name Registry.registry_value_data
+  Registry.registry_value_name Registry.registry_value_type Registry.status Registry.user
+  Registry.vendor_product | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `windows_remote_access_software_rms_registry_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
   on process that include the name of the process responsible for the changes from
   your endpoints into the `Endpoint` datamodel in the `Registry` node. Also make sure
@@ -67,7 +66,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/azorult/sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/azorult/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

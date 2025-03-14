@@ -1,6 +1,6 @@
 name: PowerShell Invoke WmiExec Usage
 id: 0734bd21-2769-4972-a5f1-78bb1e011224
-version: 4
+version: 5
 date: '2024-11-13'
 author: Michael Haag, Splunk
 type: TTP
@@ -14,10 +14,9 @@ description: The following analytic detects the execution of the Invoke-WMIExec 
   using WMI commands with NTLMv2 pass-the-hash authentication. If confirmed malicious,
   this activity could allow an attacker to execute commands remotely on target systems,
   potentially leading to further compromise and lateral spread within the network.
-search: '`powershell` EventCode=4104 ScriptBlockText IN ("*invoke-wmiexec*") 
-  | fillnull
-  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
-  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+search: '`powershell` EventCode=4104 ScriptBlockText IN ("*invoke-wmiexec*") | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature signature_id
+  user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `powershell_invoke_wmiexec_usage_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
@@ -62,7 +61,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1047/atomic_red_team/invokewmiexec_windows-powershell.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1047/atomic_red_team/invokewmiexec_windows-powershell.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

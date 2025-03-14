@@ -1,6 +1,6 @@
 name: Sdclt UAC Bypass
 id: d71efbf6-da63-11eb-8c6e-acde48001122
-version: 7
+version: 8
 date: '2025-02-10'
 author: Steven Dick, Teoderick Contreras, Splunk
 status: production
@@ -19,12 +19,11 @@ data_source:
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Registry
   WHERE ((Registry.registry_path= "*\\Windows\\CurrentVersion\\App Paths\\control.exe*"
   OR Registry.registry_path= "*\\exefile\\shell\\runas\\command\\*") (Registry.registry_value_name
-  = "(Default)" OR Registry.registry_value_name = "IsolatedCommand")) 
-  by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path 
-  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name  
-  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product 
-  | `drop_dm_object_name(Registry)` 
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` 
+  = "(Default)" OR Registry.registry_value_name = "IsolatedCommand")) by Registry.action
+  Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path
+  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name
+  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product
+  | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `sdclt_uac_bypass_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
@@ -77,7 +76,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548/uac_bypass/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548/uac_bypass/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

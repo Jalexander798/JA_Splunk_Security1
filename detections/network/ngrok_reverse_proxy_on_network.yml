@@ -1,6 +1,6 @@
 name: Ngrok Reverse Proxy on Network
 id: 5790a766-53b8-40d3-a696-3547b978fcf0
-version: 4
+version: 5
 date: '2024-11-15'
 author: Michael Haag, Splunk
 status: production
@@ -17,12 +17,9 @@ data_source:
 - Sysmon EventID 22
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime  from datamodel=Network_Resolution where DNS.query IN ("*.ngrok.com","*.ngrok.io",
-  "ngrok.*.tunnel.com", "korgn.*.lennut.com") 
-  by DNS.answer DNS.answer_count DNS.query DNS.query_count DNS.reply_code_id DNS.src DNS.vendor_product 
-  |  `drop_dm_object_name("DNS")`
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)` 
-  | `ngrok_reverse_proxy_on_network_filter`'
+  "ngrok.*.tunnel.com", "korgn.*.lennut.com") by DNS.answer DNS.answer_count DNS.query
+  DNS.query_count DNS.reply_code_id DNS.src DNS.vendor_product |  `drop_dm_object_name("DNS")`
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `ngrok_reverse_proxy_on_network_filter`'
 how_to_implement: The Network Resolution Datamodel will need to have data mapped to
   it regarding DNS queries. Modify query as needed to use another source.
 known_false_positives: False positives will be present based on organizations that
@@ -68,7 +65,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1572/ngrok/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1572/ngrok/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

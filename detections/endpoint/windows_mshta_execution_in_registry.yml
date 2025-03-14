@@ -1,6 +1,6 @@
 name: Windows Mshta Execution In Registry
 id: e13ceade-b673-4d34-adc4-4d9c01729753
-version: 5
+version: 6
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
@@ -18,11 +18,11 @@ data_source:
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry where Registry.registry_value_data
   = "*mshta*" OR Registry.registry_value_data IN ("*javascript:*", "*vbscript:*","*WScript.Shell*")
-  by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path 
-  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name  
-  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product 
-  | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `windows_mshta_execution_in_registry_filter`'
+  by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive
+  Registry.registry_path Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name
+  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product
+  | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `windows_mshta_execution_in_registry_filter`'
 how_to_implement: To successfully implement this search, you must be ingesting data
   that records registry activity from your hosts to populate the endpoint data model
   in the registry node. This is typically populated via endpoint detection-and-response
@@ -72,7 +72,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.005/mshta_in_registry/sysmon3.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.005/mshta_in_registry/sysmon3.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

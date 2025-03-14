@@ -1,6 +1,6 @@
 name: Windows Raw Access To Disk Volume Partition
 id: a85aa37e-9647-11ec-90c5-acde48001122
-version: 5
+version: 6
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -15,10 +15,11 @@ description: The following analytic detects suspicious raw access reads to the d
   loss, or compromised boot integrity.
 data_source:
 - Sysmon EventID 9
-search: '`sysmon` EventCode=9 Device = \\Device\\HarddiskVolume* NOT (Image IN("*\\Windows\\System32\\*", "*\\Windows\\SysWOW64\\*")) 
-  | stats count min(_time) as firstTime max(_time) as lastTime by
-  dest dvc process_exec process_guid process_id process_name process_path signature signature_id user_id vendor_product Device Image 
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_raw_access_to_disk_volume_partition_filter`'
+search: '`sysmon` EventCode=9 Device = \\Device\\HarddiskVolume* NOT (Image IN("*\\Windows\\System32\\*",
+  "*\\Windows\\SysWOW64\\*")) | stats count min(_time) as firstTime max(_time) as
+  lastTime by dest dvc process_exec process_guid process_id process_name process_path
+  signature signature_id user_id vendor_product Device Image | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `windows_raw_access_to_disk_volume_partition_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the raw access read event (like sysmon eventcode 9), process name and
   process guid from your endpoints. If you are using Sysmon, you must have at least
@@ -69,7 +70,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/hermetic_wiper/sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/hermetic_wiper/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

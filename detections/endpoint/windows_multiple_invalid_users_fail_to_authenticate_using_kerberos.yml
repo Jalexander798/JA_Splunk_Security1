@@ -1,7 +1,7 @@
 name: Windows Multiple Invalid Users Fail To Authenticate Using Kerberos
 id: 001266a6-9d5b-11eb-829b-acde48001122
 date: '2025-02-10'
-version: 6
+version: 7
 type: TTP
 status: production
 author: Mauricio Velazco, Splunk
@@ -40,7 +40,8 @@ drilldown_searches:
   latest_offset: $info_max_time$
 search: '`wineventlog_security` EventCode=4768 TargetUserName!=*$ Status=0x6 | bucket
   span=5m _time | stats dc(TargetUserName) AS unique_accounts values(TargetUserName)
-  as user values(dest) as dest by _time, IpAddress | where unique_accounts > 30 | `windows_multiple_invalid_users_fail_to_authenticate_using_kerberos_filter`'
+  as user values(dest) as dest by _time, IpAddress | where unique_accounts > 30 |
+  `windows_multiple_invalid_users_fail_to_authenticate_using_kerberos_filter`'
 rba:
   message: Potential Kerberos based password spraying attack from $IpAddress$
   risk_objects:
@@ -65,8 +66,7 @@ tags:
   security_domain: endpoint
 tests:
 - attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_invalid_users_kerberos_xml/windows-security.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_invalid_users_kerberos_xml/windows-security.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog
   name: True Positive Test

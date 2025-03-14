@@ -1,6 +1,6 @@
 name: Potentially malicious code on commandline
 id: 9c53c446-757e-11ec-871d-acde48001122
-version: 4
+version: 5
 date: '2024-11-13'
 author: Michael Hart, Splunk
 status: production
@@ -18,26 +18,22 @@ data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
 - CrowdStrike ProcessRollup2
-search: "| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
-    as lastTime values(Processes.original_file_name) as original_file_name values(Processes.action) as action values(Processes.parent_process_exec) as parent_process_exec 
-    values(Processes.parent_process_guid) as parent_process_guid values(Processes.parent_process_id) as parent_process_id 
-    values(Processes.parent_process_path) as parent_process_path 
-    values(Processes.process_exec) as process_exec values(Processes.process_guid) as process_guid values(Processes.process_hash) as process_hash 
-    values(Processes.process_id) as process_id values(Processes.process_integrity_level) as process_integrity_level values(Processes.process_name) as process_name
-    values(Processes.process_path) as process_path values(Processes.user) as user  values(Processes.user_id) as user_id 
-    values(Processes.vendor_product) as vendor_product
- from datamodel=\"Endpoint.Processes\" by Processes.parent_process_name
-    Processes.process_name Processes.process Processes.user Processes.dest 
-  | `drop_dm_object_name(Processes)`
-  | where len(process) > 200 
-  | `potentially_malicious_code_on_cmdline_tokenize_score` 
-  | apply unusual_commandline_detection 
-  | eval score='predicted(unusual_cmdline_logits)', process=orig_process 
-  | fields - unusual_cmdline* predicted(unusual_cmdline_logits) orig_process 
-  | where score > 0.5 
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)` 
-  | `potentially_malicious_code_on_commandline_filter`"
+search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
+  as lastTime values(Processes.original_file_name) as original_file_name values(Processes.action)
+  as action values(Processes.parent_process_exec) as parent_process_exec values(Processes.parent_process_guid)
+  as parent_process_guid values(Processes.parent_process_id) as parent_process_id
+  values(Processes.parent_process_path) as parent_process_path values(Processes.process_exec)
+  as process_exec values(Processes.process_guid) as process_guid values(Processes.process_hash)
+  as process_hash values(Processes.process_id) as process_id values(Processes.process_integrity_level)
+  as process_integrity_level values(Processes.process_name) as process_name values(Processes.process_path)
+  as process_path values(Processes.user) as user  values(Processes.user_id) as user_id
+  values(Processes.vendor_product) as vendor_product from datamodel="Endpoint.Processes"
+  by Processes.parent_process_name Processes.process_name Processes.process Processes.user
+  Processes.dest | `drop_dm_object_name(Processes)` | where len(process) > 200 | `potentially_malicious_code_on_cmdline_tokenize_score`
+  | apply unusual_commandline_detection | eval score=''predicted(unusual_cmdline_logits)'',
+  process=orig_process | fields - unusual_cmdline* predicted(unusual_cmdline_logits)
+  orig_process | where score > 0.5 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `potentially_malicious_code_on_commandline_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -93,7 +89,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/malicious_cmd_line_samples/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/malicious_cmd_line_samples/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

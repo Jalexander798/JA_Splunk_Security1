@@ -1,6 +1,6 @@
 name: Remote Process Instantiation via WinRM and PowerShell Script Block
 id: 7d4c618e-4716-11ec-951c-3e22fbd008af
-version: 6
+version: 7
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
@@ -15,15 +15,13 @@ description: The following analytic detects the execution of PowerShell commands
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 (ScriptBlockText="*Invoke-Command*" AND ScriptBlockText="*-ComputerName*")
-  | fillnull
-  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
-  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | fillnull | stats count min(_time) as firstTime max(_time) as lastTime by dest
+  signature signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID
+  ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `remote_process_instantiation_via_winrm_and_powershell_script_block_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup instructions
-  can be found 
-  https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.
+  can be found https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.
 known_false_positives: Administrators may leverage WinRM and `Invoke-Command` to start
   a process on remote systems for system administration or automation use cases. This
   activity is usually limited to a small set of hosts or users. In certain environments,
@@ -67,7 +65,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.006/lateral_movement_psh/windows-powershell-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.006/lateral_movement_psh/windows-powershell-xml.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

@@ -1,6 +1,6 @@
 name: Windows Scheduled Task DLL Module Loaded
 id: bc5b2304-f241-419b-874a-e927f667b7b6
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 data_source:
@@ -19,12 +19,10 @@ search: '`sysmon` EventCode=7 Image IN ("*\\windows\\fonts\\*", "*\\windows\\tem
   "*\\users\\public\\*", "*\\windows\\debug\\*", "*\\Users\\Administrator\\Music\\*",
   "*\\Windows\\servicing\\*", "*\\Users\\Default\\*", "*Recycle.bin*", "*\\Windows\\Media\\*",
   "\\Windows\\repair\\*", "*\\temp\\*", "*\\PerfLogs\\*") ImageLoaded = "*\\taskschd.dll"
-  | fillnull
-  | stats count min(_time) as firstTime max(_time) as lastTime 
-  by Image ImageLoaded dest loaded_file loaded_file_path original_file_name 
-  process_exec process_guid process_hash process_id process_name process_path service_dll_signature_exists 
-  service_dll_signature_verified signature signature_id user_id vendor_product
-  | `security_content_ctime(firstTime)`
+  | fillnull | stats count min(_time) as firstTime max(_time) as lastTime by Image
+  ImageLoaded dest loaded_file loaded_file_path original_file_name process_exec process_guid
+  process_hash process_id process_name process_path service_dll_signature_exists service_dll_signature_verified
+  signature signature_id user_id vendor_product | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_scheduled_task_dll_module_loaded_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name and imageloaded executions from your endpoints. If you
@@ -69,7 +67,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053/taskschd_dll/taskschd_dll.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053/taskschd_dll/taskschd_dll.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

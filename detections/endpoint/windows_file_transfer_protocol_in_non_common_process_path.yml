@@ -1,6 +1,6 @@
 name: Windows File Transfer Protocol In Non-Common Process Path
 id: 0f43758f-1fe9-470a-a9e4-780acc4d5407
-version: 5
+version: 6
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -16,11 +16,10 @@ description: The following analytic detects FTP connections initiated by process
 data_source:
 - Sysmon EventID 3
 search: '`sysmon` EventCode=3 NOT(Image IN("*\\program files*", "*\\windows\\system32\\*","*\\windows\\SysWOW64\\*"))
-  (DestinationPortName="ftp" OR DestinationPort=21) 
-  | stats count min(_time) as firstTime max(_time) as lastTime 
-  by action app dest dest_ip dest_port direction dvc protocol protocol_version src src_ip src_port transport user vendor_product process_name process_exec process_guid process_id
-  | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` 
+  (DestinationPortName="ftp" OR DestinationPort=21) | stats count min(_time) as firstTime
+  max(_time) as lastTime by action app dest dest_ip dest_port direction dvc protocol
+  protocol_version src src_ip src_port transport user vendor_product process_name
+  process_exec process_guid process_id | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_file_transfer_protocol_in_non_common_process_path_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name and sysmon eventcode = 3 connection events from your
@@ -66,7 +65,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/agent_tesla/agent_tesla_ftp/sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/agent_tesla/agent_tesla_ftp/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

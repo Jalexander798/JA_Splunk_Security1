@@ -1,6 +1,6 @@
 name: Windows Modify Registry DisableRemoteDesktopAntiAlias
 id: 4927c6f1-4667-42e6-bd7a-f5222116386b
-version: 5
+version: 6
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
@@ -18,11 +18,11 @@ description: The following analytic detects modifications to the Windows registr
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime from datamodel=Endpoint.Registry where Registry.registry_path = "*\\Terminal
   Services\\DisableRemoteDesktopAntiAlias"  Registry.registry_value_data = 0x00000001
-  by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path 
-  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name  
-  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product 
-  | `drop_dm_object_name(Registry)`
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_modify_registry_disableremotedesktopantialias_filter`'
+  by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive
+  Registry.registry_path Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name
+  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product
+  | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `windows_modify_registry_disableremotedesktopantialias_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
   on process that include the name of the process responsible for the changes from
   your endpoints into the `Endpoint` datamodel in the `Registry` node. Also make sure
@@ -67,7 +67,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/DisableRemoteDesktopAntiAlias/disable_remote_alias.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/DisableRemoteDesktopAntiAlias/disable_remote_alias.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

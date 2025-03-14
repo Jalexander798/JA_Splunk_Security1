@@ -1,6 +1,6 @@
 name: Common Ransomware Notes
 id: ada0f478-84a8-4641-a3f1-d82362d6bd71
-version: 7
+version: 8
 date: '2024-11-13'
 author: David Dorsey, Splunk
 status: production
@@ -16,13 +16,12 @@ data_source:
 - Sysmon EventID 11
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime values(Filesystem.user) as user values(Filesystem.dest) as dest values(Filesystem.file_path)
-  as file_path from datamodel=Endpoint.Filesystem 
-  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time 
-  Filesystem.file_name Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id 
-  Filesystem.user Filesystem.vendor_product 
-  | `drop_dm_object_name(Filesystem)`
-  | `security_content_ctime(lastTime)` | `security_content_ctime(firstTime)` | `ransomware_notes`
-  | `common_ransomware_notes_filter`'
+  as file_path from datamodel=Endpoint.Filesystem by Filesystem.action Filesystem.dest
+  Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time
+  Filesystem.file_name Filesystem.file_path Filesystem.file_acl Filesystem.file_size
+  Filesystem.process_guid Filesystem.process_id Filesystem.user Filesystem.vendor_product
+  | `drop_dm_object_name(Filesystem)` | `security_content_ctime(lastTime)` | `security_content_ctime(firstTime)`
+  | `ransomware_notes` | `common_ransomware_notes_filter`'
 how_to_implement: You must be ingesting data that records file-system activity from
   your hosts to populate the Endpoint Filesystem data-model node. This is typically
   populated via endpoint detection-and-response product, such as Carbon Black, or
@@ -51,7 +50,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/ransomware_notes/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1485/ransomware_notes/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

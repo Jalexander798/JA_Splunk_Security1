@@ -1,6 +1,6 @@
 name: Windows ESX Admins Group Creation via PowerShell
 id: f48a5557-be06-4b96-b8e8-be563e387620
-version: 4
+version: 5
 date: '2024-11-13'
 author: Michael Haag, Splunk
 data_source:
@@ -13,12 +13,10 @@ description: This analytic detects attempts to create an "ESX Admins" group usin
   Attackers can use this method to gain unauthorized access to ESXi hosts by recreating
   the 'ESX Admins' group after its deletion from Active Directory.
 search: '`powershell` EventCode=4104 (ScriptBlockText="*New-ADGroup*" OR ScriptBlockText="*New-LocalGroup*")
-  ScriptBlockText="*ESX Admins*" 
-  | fillnull
-  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
-  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `windows_esx_admins_group_creation_via_powershell_filter`'
+  ScriptBlockText="*ESX Admins*" | fillnull | stats count min(_time) as firstTime
+  max(_time) as lastTime by dest signature signature_id user_id vendor_product EventID
+  Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `windows_esx_admins_group_creation_via_powershell_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. You can find additional
   setup instructions in the Splunk documentation for configuring PowerShell logging.
@@ -70,7 +68,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/windows-powershell-esxadmins.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/windows-powershell-esxadmins.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

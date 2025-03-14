@@ -1,6 +1,6 @@
 name: Powershell Remote Services Add TrustedHost
 id: bef21d24-297e-45e3-9b9a-c6ac45450474
-version: 5
+version: 6
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -16,12 +16,10 @@ description: The following analytic detects the execution of a PowerShell script
   to establish persistent remote connections, bypass security protocols, and gain
   unauthorized access to sensitive systems and data.
 search: '`powershell` EventCode=4104  ScriptBlockText = "*WSMan:\\localhost\\Client\\TrustedHosts*"
-  ScriptBlockText IN ("* -Value *", "* -Concatenate *") 
-  | fillnull
-  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
-  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `powershell_remote_services_add_trustedhost_filter`'
+  ScriptBlockText IN ("* -Value *", "* -Concatenate *") | fillnull | stats count min(_time)
+  as firstTime max(_time) as lastTime by dest signature signature_id user_id vendor_product
+  EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `powershell_remote_services_add_trustedhost_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
   https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.
@@ -67,7 +65,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.006/wsman_trustedhost/wsman_pwh.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.006/wsman_trustedhost/wsman_pwh.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

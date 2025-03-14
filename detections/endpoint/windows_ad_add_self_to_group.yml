@@ -1,6 +1,6 @@
 name: Windows AD add Self to Group
 id: 065f2701-b7ea-42f5-9ec4-fbc2261165f9
-version: 3
+version: 4
 date: '2025-01-21'
 author: Dean Luxton
 status: production
@@ -56,7 +56,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/account_manipulation/xml-windows-security.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/account_manipulation/xml-windows-security.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

@@ -1,6 +1,6 @@
 name: Kerberos User Enumeration
 id: d82d4af4-a0bd-11ec-9445-3e22fbd008af
-version: 7
+version: 8
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
@@ -16,8 +16,8 @@ data_source:
 - Windows Event Log Security 4768
 search: '`wineventlog_security` EventCode=4768 Status=0x6 TargetUserName!="*$" | bucket
   span=2m _time | stats dc(TargetUserName) AS unique_accounts values(TargetUserName)
-  as tried_accounts values(dest) as dest by _time, src_ip | eventstats avg(unique_accounts) as comp_avg
-  , stdev(unique_accounts) as comp_std by src_ip | eval upperBound=(comp_avg+comp_std*3)
+  as tried_accounts values(dest) as dest by _time, src_ip | eventstats avg(unique_accounts)
+  as comp_avg , stdev(unique_accounts) as comp_std by src_ip | eval upperBound=(comp_avg+comp_std*3)
   | eval isOutlier=if(unique_accounts > 10 and unique_accounts >= upperBound, 1, 0)
   | search isOutlier=1| `kerberos_user_enumeration_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
@@ -64,7 +64,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1589.002/kerberos_user_enumeration/windows-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1589.002/kerberos_user_enumeration/windows-xml.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

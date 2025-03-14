@@ -1,6 +1,6 @@
 name: Windows Command and Scripting Interpreter Hunting Path Traversal
 id: d0026380-b3c4-4da0-ac8e-02790063ff6b
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Michael Haag, Splunk
 status: production
@@ -18,16 +18,15 @@ data_source:
 - Windows Event Log Security 4688
 - CrowdStrike ProcessRollup2
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
-  as lastTime FROM datamodel=Endpoint.Processes  
-  by Processes.action Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec 
-  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name 
-  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid Processes.process_hash 
-  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path 
-  Processes.user Processes.user_id Processes.vendor_product 
-  | `drop_dm_object_name("Processes")`
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | eval
-  count_of_pattern1 = (mvcount(split(process,"/.."))-1) | eval count_of_pattern2 =
-  (mvcount(split(process,"\.."))-1) | eval count_of_pattern3 = (mvcount(split(process,"\\.."))-1)
+  as lastTime FROM datamodel=Endpoint.Processes by Processes.action Processes.dest
+  Processes.original_file_name Processes.parent_process Processes.parent_process_exec
+  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name
+  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid
+  Processes.process_hash Processes.process_id Processes.process_integrity_level Processes.process_name
+  Processes.process_path Processes.user Processes.user_id Processes.vendor_product
+  | `drop_dm_object_name("Processes")` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | eval count_of_pattern1 = (mvcount(split(process,"/.."))-1) | eval count_of_pattern2
+  = (mvcount(split(process,"\.."))-1) | eval count_of_pattern3 = (mvcount(split(process,"\\.."))-1)
   | eval count_of_pattern4 = (mvcount(split(process,"//.."))-1) | search count_of_pattern1
   > 1 OR count_of_pattern2 > 1 OR count_of_pattern3 > 1 OR count_of_pattern4 > 1 |
   `windows_command_and_scripting_interpreter_hunting_path_traversal_filter`'
@@ -59,7 +58,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/path_traversal/sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/path_traversal/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

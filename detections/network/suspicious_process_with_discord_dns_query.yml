@@ -1,6 +1,6 @@
 name: Suspicious Process With Discord DNS Query
 id: 4d4332ae-792c-11ec-89c1-acde48001122
-version: 7
+version: 8
 date: '2025-02-10'
 author: Teoderick Contreras, Mauricio Velazco, Splunk
 status: production
@@ -15,13 +15,11 @@ description: The following analytic identifies a process making a DNS query to D
 data_source:
 - Sysmon EventID 22
 search: '`sysmon` EventCode=22 QueryName IN ("*discord*") Image != "*\\AppData\\Local\\Discord\\*"
-  AND Image != "*\\Program Files*" AND Image != "discord.exe" 
-  | stats count min(_time) as firstTime max(_time) as lastTime 
-  by answer answer_count dvc process_exec process_guid process_name query query_count reply_code_id signature signature_id src user_id vendor_product
-  QueryName QueryResults QueryStatus 
-  | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` 
-  | `suspicious_process_with_discord_dns_query_filter`'
+  AND Image != "*\\Program Files*" AND Image != "discord.exe" | stats count min(_time)
+  as firstTime max(_time) as lastTime by answer answer_count dvc process_exec process_guid
+  process_name query query_count reply_code_id signature signature_id src user_id
+  vendor_product QueryName QueryResults QueryStatus | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `suspicious_process_with_discord_dns_query_filter`'
 how_to_implement: his detection relies on sysmon logs with the Event ID 22, DNS Query.
 known_false_positives: Noise and false positive can be seen if the following instant
   messaging is allowed to use within corporate network. In this case, a filter is
@@ -69,7 +67,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.005/discord_dnsquery/sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.005/discord_dnsquery/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

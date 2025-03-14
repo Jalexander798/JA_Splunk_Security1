@@ -1,6 +1,6 @@
 name: Ransomware Notes bulk creation
 id: eff7919a-8330-11eb-83f8-acde48001122
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras
 status: production
@@ -14,18 +14,15 @@ description: The following analytic identifies the bulk creation of ransomware n
   files inaccessible and potentially causing significant operational disruption.
 data_source:
 - Sysmon EventID 11
-search: '`sysmon` EventCode=11 file_name IN ("*\.txt","*\.html","*\.hta") 
-  | bin _time span=10s 
-  | stats min(_time) as firstTime max(_time) as lastTime dc(TargetFilename)
-  as unique_readme_path_count values(TargetFilename) as list_of_readme_path 
-  values(action) as action values(file_access_time) as file_access_time 
-  values(file_create_time) as file_create_time values(file_hash) as file_hash values(file_modify_time) as file_modify_time 
-  values(file_path) as file_path values(file_acl) as file_acl values(file_size) as file_size values(process_guid) as process_guid 
-  values(process_id) as process_id values(user) as user values(vendor_product) as vendor_product
-  by dest file_name 
-  | where unique_readme_path_count >= 15
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)` 
+search: '`sysmon` EventCode=11 file_name IN ("*\.txt","*\.html","*\.hta") | bin _time
+  span=10s | stats min(_time) as firstTime max(_time) as lastTime dc(TargetFilename)
+  as unique_readme_path_count values(TargetFilename) as list_of_readme_path values(action)
+  as action values(file_access_time) as file_access_time values(file_create_time)
+  as file_create_time values(file_hash) as file_hash values(file_modify_time) as file_modify_time
+  values(file_path) as file_path values(file_acl) as file_acl values(file_size) as
+  file_size values(process_guid) as process_guid values(process_id) as process_id
+  values(user) as user values(vendor_product) as vendor_product by dest file_name
+  | where unique_readme_path_count >= 15 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `ransomware_notes_bulk_creation_filter`'
 how_to_implement: You must be ingesting data that records the filesystem activity
   from your hosts to populate the Endpoint file-system data model node. If you are
@@ -76,7 +73,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/clop/clop_a/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/clop/clop_a/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

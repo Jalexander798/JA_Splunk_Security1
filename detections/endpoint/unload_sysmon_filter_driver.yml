@@ -1,6 +1,6 @@
 name: Unload Sysmon Filter Driver
 id: e5928ff3-23eb-4d8b-b8a4-dcbc844fdfbe
-version: 8
+version: 9
 date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production
@@ -18,12 +18,12 @@ data_source:
 - CrowdStrike ProcessRollup2
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime values(Processes.process)
   as process max(_time) as lastTime from datamodel=Endpoint.Processes where Processes.process_name=fltMC.exe
-  AND Processes.process=*unload* AND Processes.process=*SysmonDrv*  
-  by Processes.action Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec 
-  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name 
-  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid Processes.process_hash 
-  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path 
-  Processes.user Processes.user_id Processes.vendor_product 
+  AND Processes.process=*unload* AND Processes.process=*SysmonDrv* by Processes.action
+  Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec
+  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name
+  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid
+  Processes.process_hash Processes.process_id Processes.process_integrity_level Processes.process_name
+  Processes.process_path Processes.user Processes.user_id Processes.vendor_product
   | `drop_dm_object_name("Processes")` | `security_content_ctime(firstTime)`|`security_content_ctime(lastTime)`
   | table firstTime lastTime dest user count process_name process_id parent_process_name
   process | `unload_sysmon_filter_driver_filter`'
@@ -75,7 +75,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/unload_sysmon/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/unload_sysmon/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

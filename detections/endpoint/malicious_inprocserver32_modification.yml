@@ -1,6 +1,6 @@
 name: Malicious InProcServer32 Modification
 id: 127c8d08-25ff-11ec-9223-acde48001122
-version: 5
+version: 6
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production
@@ -15,12 +15,12 @@ description: The following analytic detects a process modifying the registry wit
 data_source:
 - Sysmon EventID 12
 - Sysmon EventID 13
-search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Registry where Registry.registry_path="*\\CLSID\\{89565275-A714-4a43-912E-978B935EDCCC}\\InProcServer32\\(Default)" 
-  by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path 
-  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name  
-  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product 
-  | `drop_dm_object_name(Registry)` 
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` 
+search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Registry
+  where Registry.registry_path="*\\CLSID\\{89565275-A714-4a43-912E-978B935EDCCC}\\InProcServer32\\(Default)"
+  by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive
+  Registry.registry_path Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name
+  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product
+  | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `malicious_inprocserver32_modification_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
@@ -54,8 +54,8 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A process identified on endpoint $dest$ modifying the registry
-    with a known malicious clsid under InProcServer32.
+  message: A process identified on endpoint $dest$ modifying the registry with a known
+    malicious clsid under InProcServer32.
   risk_objects:
   - field: dest
     type: system
@@ -77,7 +77,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/remcos/remcos/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/remcos/remcos/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

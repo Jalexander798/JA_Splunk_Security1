@@ -1,7 +1,7 @@
 name: Windows Unusual Count Of Users Failed To Authenticate Using NTLM
 id: 6f6c8fd7-6a6b-4af9-a0e9-57cfc47a58b4
 type: Anomaly
-version: 6
+version: 7
 status: production
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
@@ -43,8 +43,8 @@ drilldown_searches:
   latest_offset: $info_max_time$
 search: '`wineventlog_security`  EventCode=4776 TargetUserName!=*$ Status=0xC000006A
   | bucket span=2m _time | stats dc(TargetUserName) AS unique_accounts values(TargetUserName)
-  as tried_accounts values(dest) as dest by _time, Workstation | eventstats avg(unique_accounts) as comp_avg
-  , stdev(unique_accounts) as comp_std by Workstation | eval upperBound=(comp_avg+comp_std*3)
+  as tried_accounts values(dest) as dest by _time, Workstation | eventstats avg(unique_accounts)
+  as comp_avg , stdev(unique_accounts) as comp_std by Workstation | eval upperBound=(comp_avg+comp_std*3)
   | eval isOutlier=if(unique_accounts > 10 and unique_accounts >= upperBound, 1, 0)
   | search isOutlier=1 | `windows_unusual_count_of_users_failed_to_authenticate_using_ntlm_filter`'
 rba:
@@ -68,8 +68,7 @@ tags:
   security_domain: endpoint
 tests:
 - attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_valid_users_ntlm_xml/windows-security.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_valid_users_ntlm_xml/windows-security.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog
   name: True Positive Test

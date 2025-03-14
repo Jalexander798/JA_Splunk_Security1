@@ -1,6 +1,6 @@
 name: Windows ISO LNK File Creation
 id: d7c2c09b-9569-4a9e-a8b6-6a39a99c1d32
-version: 6
+version: 7
 date: '2025-02-10'
 author: Michael Haag, Teoderick Contreras, Splunk
 status: production
@@ -16,12 +16,12 @@ data_source:
 - Sysmon EventID 11
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Filesystem where Filesystem.file_path IN ("*\\Microsoft\\Windows\\Recent\\*")
-  Filesystem.file_name IN ("*.iso.lnk", "*.img.lnk", "*.vhd.lnk", "*vhdx.lnk") 
-  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time 
-  Filesystem.file_name Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id 
-  Filesystem.user Filesystem.vendor_product 
-  | `drop_dm_object_name(Filesystem)` | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `windows_iso_lnk_file_creation_filter`'
+  Filesystem.file_name IN ("*.iso.lnk", "*.img.lnk", "*.vhd.lnk", "*vhdx.lnk") by
+  Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time
+  Filesystem.file_hash Filesystem.file_modify_time Filesystem.file_name Filesystem.file_path
+  Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id
+  Filesystem.user Filesystem.vendor_product | `drop_dm_object_name(Filesystem)` |
+  `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_iso_lnk_file_creation_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
   on process that include the name of the process responsible for the changes from
   your endpoints into the `Endpoint` datamodel in the `Filesystem` node. In addition,
@@ -59,7 +59,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556.001/atomic_red_team/iso_windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556.001/atomic_red_team/iso_windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

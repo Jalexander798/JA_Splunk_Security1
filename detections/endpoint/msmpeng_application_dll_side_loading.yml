@@ -1,6 +1,6 @@
 name: Msmpeng Application DLL Side Loading
 id: 8bb3f280-dd9b-11eb-84d5-acde48001122
-version: 7
+version: 8
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk, Sanjay Govind
 status: production
@@ -18,11 +18,11 @@ search: '|tstats `security_content_summariesonly` values(Filesystem.file_path) a
   file_path count min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Filesystem
   where (Filesystem.file_name = "msmpeng.exe" OR Filesystem.file_name = "mpsvc.dll")  AND
   NOT (Filesystem.file_path IN ("*\\Program Files\\windows defender\\*","*\\WinSxS\\*defender-service*","*\\WinSxS\\Temp\\*defender-service*"))
-  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time 
-  Filesystem.file_name Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id 
-  Filesystem.user Filesystem.vendor_product 
-  | `drop_dm_object_name(Filesystem)` | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `msmpeng_application_dll_side_loading_filter`'
+  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time
+  Filesystem.file_hash Filesystem.file_modify_time Filesystem.file_name Filesystem.file_path
+  Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id
+  Filesystem.user Filesystem.vendor_product | `drop_dm_object_name(Filesystem)` |
+  `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `msmpeng_application_dll_side_loading_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
   on process that include the name of the Filesystem responsible for the changes from
   your endpoints into the `Endpoint` datamodel in the `Filesystem` node.
@@ -66,7 +66,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets//malware/revil/msmpeng_side/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets//malware/revil/msmpeng_side/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

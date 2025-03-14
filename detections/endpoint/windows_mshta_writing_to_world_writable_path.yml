@@ -1,6 +1,6 @@
 name: Windows MSHTA Writing to World Writable Path
 id: efbcf8ee-bc75-47f1-8985-a5c638c4faf0
-version: 4
+version: 5
 date: '2024-11-13'
 author: Michael Haag, Splunk
 data_source:
@@ -24,11 +24,9 @@ search: '`sysmon` EventCode=11 Image="*\\mshta.exe" TargetFilename IN ("*\\Windo
   and Desktop Connections Update\\*", "*\\Windows\\SysWOW64\\Tasks\\*", "*\\Windows\\SysWOW64\\Com\\dmp\\*",
   "*\\Windows\\SysWOW64\\Tasks\\Microsoft\\Windows\\PLA\\*", "*\\Windows\\SysWOW64\\Tasks\\Microsoft\\Windows\\RemoteApp
   and Desktop Connections Update\\*", "*\\Windows\\SysWOW64\\Tasks\\Microsoft\\Windows\\PLA\\System\\*")
-  | stats count min(_time) as firstTime max(_time) as lastTime 
-  by action dest file_name file_path  process_guid process_id user user_id vendor_product Image TargetFilename
-  | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` 
-  | `windows_mshta_writing_to_world_writable_path_filter`'
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest file_name
+  file_path  process_guid process_id user user_id vendor_product Image TargetFilename
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_mshta_writing_to_world_writable_path_filter`'
 how_to_implement: The analytic is designed to be run against Sysmon event logs collected
   from endpoints. The analytic requires the Sysmon event logs to be ingested into
   Splunk. The search focuses on EventCode 11 where the Image is `mshta.exe` and the
@@ -87,7 +85,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.005/atomic_red_team/mshta_tasks_windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.005/atomic_red_team/mshta_tasks_windows-sysmon.log
     sourcetype: XmlWinEventLog
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational

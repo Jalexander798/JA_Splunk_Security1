@@ -1,6 +1,6 @@
 name: AdsiSearcher Account Discovery
 id: de7fcadc-04f3-11ec-a241-acde48001122
-version: 6
+version: 7
 date: '2025-02-10'
 author: Teoderick Contreras, Mauricio Velazco, Splunk
 status: production
@@ -16,13 +16,10 @@ description: The following analytic detects the use of the `[Adsisearcher]` type
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText = "*[adsisearcher]*" ScriptBlockText
-  = "*objectcategory=user*" ScriptBlockText = "*.findAll()*" 
-  | fillnull
-  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
-  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
-  | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` 
-  | `adsisearcher_account_discovery_filter`'
+  = "*objectcategory=user*" ScriptBlockText = "*.findAll()*" | fillnull | stats count
+  min(_time) as firstTime max(_time) as lastTime by dest signature signature_id user_id
+  vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `adsisearcher_account_discovery_filter`'
 how_to_implement: The following Hunting analytic requires PowerShell operational logs
   to be imported. Modify the powershell macro as needed to match the sourcetype or
   add index. This analytic is specific to 4104, or PowerShell Script Block Logging.
@@ -72,7 +69,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087.002/AD_discovery/adsisearcher_powershell.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087.002/AD_discovery/adsisearcher_powershell.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

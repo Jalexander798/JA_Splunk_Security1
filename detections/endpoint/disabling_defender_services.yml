@@ -1,6 +1,6 @@
 name: Disabling Defender Services
 id: 911eacdc-317f-11ec-ad30-acde48001122
-version: 9
+version: 10
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
@@ -19,12 +19,11 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   as lastTime FROM datamodel=Endpoint.Registry WHERE (Registry.registry_path = "*\\System\\CurrentControlSet\\Services\\*"
   AND (Registry.registry_path IN("*WdBoot*", "*WdFilter*", "*WdNisDrv*", "*WdNisSvc*","*WinDefend*",
   "*SecurityHealthService*")) AND Registry.registry_value_name = Start Registry.registry_value_data
-  = 0x00000004) 
-  by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path 
-  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name  
-  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product 
-  | `drop_dm_object_name(Registry)`| where isnotnull(registry_value_data) | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `disabling_defender_services_filter`'
+  = 0x00000004) by Registry.action Registry.dest Registry.process_guid Registry.process_id
+  Registry.registry_hive Registry.registry_path Registry.registry_key_name Registry.registry_value_data
+  Registry.registry_value_name Registry.registry_value_type Registry.status Registry.user
+  Registry.vendor_product | `drop_dm_object_name(Registry)`| where isnotnull(registry_value_data)
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `disabling_defender_services_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the registry value name, registry path, and registry value data from your
   endpoints. If you are using Sysmon, you must have at least version 2.0 of the official
@@ -72,7 +71,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/icedid/disable_av/sysmon2.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/icedid/disable_av/sysmon2.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

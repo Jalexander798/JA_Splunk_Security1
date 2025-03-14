@@ -1,6 +1,6 @@
 name: Windows Rapid Authentication On Multiple Hosts
 id: 62606c77-d53d-4182-9371-b02cdbbbcef7
-version: 5
+version: 6
 date: '2024-11-13'
 author: Mauricio Velazco, Splunk
 type: TTP
@@ -16,10 +16,9 @@ description: The following analytic detects a source computer authenticating to 
   sensitive data and escalating privileges within the network.
 search: '`wineventlog_security` EventCode=4624 LogonType=3 TargetUserName!="ANONYMOUS
   LOGON" TargetUserName!="*$" | bucket span=5m _time | stats dc(Computer) AS unique_targets
-  values(Computer) as host_targets values(dest) as dest values(src) as src values(user) as user 
-  by _time, IpAddress, TargetUserName, action, app, authentication_method, signature, signature_id 
-  | where unique_targets > 30 
-  | `windows_rapid_authentication_on_multiple_hosts_filter`'
+  values(Computer) as host_targets values(dest) as dest values(src) as src values(user)
+  as user by _time, IpAddress, TargetUserName, action, app, authentication_method,
+  signature, signature_id | where unique_targets > 30 | `windows_rapid_authentication_on_multiple_hosts_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   Windows Event Logs from domain controllers as well as member servers and workstations.
   The Advanced Security Audit policy setting `Audit Logon` within `Logon/Logoff` needs
@@ -69,7 +68,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1135/rapid_authentication_multiple_hosts/windows-security.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1135/rapid_authentication_multiple_hosts/windows-security.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

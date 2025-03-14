@@ -1,6 +1,6 @@
 name: 7zip CommandLine To SMB Share Path
 id: 01d29b48-ff6f-11eb-b81e-acde48001123
-version: 6
+version: 7
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -21,11 +21,12 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   OR Processes.process_name = "7za.exe" OR Processes.process_name = "7zr.exe" OR Processes.original_file_name
   = "7z.exe" OR Processes.original_file_name =  "7za.exe" OR Processes.original_file_name
   =  "7zr.exe") AND (Processes.process="*\\C$\\*" OR Processes.process="*\\Admin$\\*"
-  OR Processes.process="*\\IPC$\\*") 
-  by Processes.action Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name 
-  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid Processes.process_hash Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path 
-  Processes.user Processes.user_id Processes.vendor_product 
-  | `drop_dm_object_name(Processes)`
+  OR Processes.process="*\\IPC$\\*") by Processes.action Processes.dest Processes.original_file_name
+  Processes.parent_process Processes.parent_process_exec Processes.parent_process_guid
+  Processes.parent_process_id Processes.parent_process_name Processes.parent_process_path
+  Processes.process Processes.process_exec Processes.process_guid Processes.process_hash
+  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path
+  Processes.user Processes.user_id Processes.vendor_product | `drop_dm_object_name(Processes)`
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `7zip_commandline_to_smb_share_path_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
@@ -53,7 +54,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/conti/conti_leak/windows-sysmon_7z.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/conti/conti_leak/windows-sysmon_7z.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

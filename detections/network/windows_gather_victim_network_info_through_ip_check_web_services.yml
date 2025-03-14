@@ -1,6 +1,6 @@
 name: Windows Gather Victim Network Info Through Ip Check Web Services
 id: 70f7c952-0758-46d6-9148-d8969c4481d1
-version: 9
+version: 10
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -18,11 +18,10 @@ search: '`sysmon` EventCode=22  QueryName IN ("*wtfismyip.com", "*checkip.*", "*
   "*ipinfo.io", "*api.ipify.org", "*icanhazip.com", "*ip.anysrc.com","*api.ip.sb",
   "ident.me", "www.myexternalip.com", "*zen.spamhaus.org", "*cbl.abuseat.org", "*b.barracudacentral.org",
   "*dnsbl-1.uceprotect.net", "*spam.dnsbl.sorbs.net", "*iplogger.org*", "*ip-api.com*",
-  "*geoip.*", "*icanhazip.*") 
-  |  stats  min(_time) as firstTime max(_time) as lastTime count 
-  by answer answer_count dvc process_exec process_guid process_name query query_count reply_code_id signature signature_id src user_id vendor_product
-  QueryName QueryResults QueryStatus 
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  "*geoip.*", "*icanhazip.*") |  stats  min(_time) as firstTime max(_time) as lastTime
+  count by answer answer_count dvc process_exec process_guid process_name query query_count
+  reply_code_id signature signature_id src user_id vendor_product QueryName QueryResults
+  QueryStatus | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_gather_victim_network_info_through_ip_check_web_services_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, dns query name process path , and query ststus from
@@ -52,7 +51,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/azorult/sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/azorult/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

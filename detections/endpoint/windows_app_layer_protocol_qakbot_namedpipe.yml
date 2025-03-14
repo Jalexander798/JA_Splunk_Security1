@@ -1,6 +1,6 @@
 name: Windows App Layer Protocol Qakbot NamedPipe
 id: 63a2c15e-9448-43c5-a4a8-9852266aaada
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
@@ -18,13 +18,10 @@ data_source:
 search: '`sysmon` EventCode IN (17, 18) EventType IN ( "CreatePipe", "ConnectPipe")
   Image IN ("*\\calc.exe", "*\\notepad.exe", "*\\rdpclip.exe", "*\\explorer.exe",
   "*\\wermgr.exe", "*\\ping.exe", "*\\OneDriveSetup.exe", "*\\dxdiag.exe", "*\\mobsync.exe",
-  "*\\msra.exe", "*\\xwizard.exe") 
-  | regex PipeName="^\\\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{8}"
-  | stats  min(_time) as firstTime max(_time) as lastTime count 
-  by dest dvc pipe_name process_exec process_guid process_id process_name process_path signature signature_id user_id vendor_product
-  Image PipeName 
-  | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` 
+  "*\\msra.exe", "*\\xwizard.exe") | regex PipeName="^\\\{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{8}"
+  | stats  min(_time) as firstTime max(_time) as lastTime count by dest dvc pipe_name
+  process_exec process_guid process_id process_name process_path signature signature_id
+  user_id vendor_product Image PipeName | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_app_layer_protocol_qakbot_namedpipe_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, pipename, processguid and named pipe event type from
@@ -70,7 +67,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/qakbot/sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/qakbot/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

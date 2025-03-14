@@ -1,6 +1,6 @@
 name: Windows PowerView Unconstrained Delegation Discovery
 id: fbf9e47f-e531-4fea-942d-5c95af7ed4d6
-version: 5
+version: 6
 date: '2024-11-13'
 author: Mauricio Velazco, Splunk
 status: production
@@ -17,11 +17,10 @@ data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 (ScriptBlockText = "*Get-DomainComputer*" OR
   ScriptBlockText = "*Get-NetComputer*") AND (ScriptBlockText = "*-Unconstrained*")
-  | fillnull
-  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
-  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
-  | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `windows_powerview_unconstrained_delegation_discovery_filter`'
+  | fillnull | stats count min(_time) as firstTime max(_time) as lastTime by dest
+  signature signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID
+  ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `windows_powerview_unconstrained_delegation_discovery_filter`'
 how_to_implement: The following  analytic requires PowerShell operational logs to
   be imported. Modify the powershell macro as needed to match the sourcetype or add
   index. This analytic is specific to 4104, or PowerShell Script Block Logging.
@@ -73,7 +72,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1018/windows_powerview_constrained_delegation_discovery/windows-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1018/windows_powerview_constrained_delegation_discovery/windows-xml.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

@@ -1,6 +1,6 @@
 name: ConnectWise ScreenConnect Path Traversal
 id: 56a3ac65-e747-41f7-b014-dff7423c1dda
-version: 4
+version: 5
 date: '2024-11-13'
 author: Michael Haag, Splunk
 data_source:
@@ -18,10 +18,10 @@ description: The following analytic detects attempts to exploit the ConnectWise 
   a severe security risk.
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime from datamodel=Endpoint.Filesystem where Filesystem.file_path IN ("*\\ScreenConnect\\App_Extensions\\*")
-  Filesystem.file_name IN ("*.aspx","*.ashx") 
-  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time 
-  Filesystem.file_name Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id 
-  Filesystem.user Filesystem.vendor_product 
+  Filesystem.file_name IN ("*.aspx","*.ashx") by Filesystem.action Filesystem.dest
+  Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time
+  Filesystem.file_name Filesystem.file_path Filesystem.file_acl Filesystem.file_size
+  Filesystem.process_guid Filesystem.process_id Filesystem.user Filesystem.vendor_product
   | `drop_dm_object_name(Filesystem)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `connectwise_screenconnect_path_traversal_filter`'
 how_to_implement: This analytic utilizes the Endpoint datamodel Filesystem node to
@@ -75,7 +75,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/screenconnect/sysmon_app_extensions.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/screenconnect/sysmon_app_extensions.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

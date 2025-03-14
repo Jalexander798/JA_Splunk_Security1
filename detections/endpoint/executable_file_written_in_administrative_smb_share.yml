@@ -1,6 +1,6 @@
 name: Executable File Written in Administrative SMB Share
 id: f63c34fe-a435-11eb-935a-acde48001122
-version: 8
+version: 9
 date: '2025-02-10'
 author: Teoderick Contreras, Mauricio Velazco, Splunk
 status: production
@@ -18,8 +18,8 @@ data_source:
 search: '`wineventlog_security` EventCode=5145 RelativeTargetName IN ("*.exe","*.dll")
   ObjectType=File ShareName IN ("\\\\*\\C$","\\\\*\\IPC$","\\\\*\\admin$") AccessMask=
   "0x2" | stats min(_time) as firstTime max(_time) as lastTime count by EventCode
-  ShareName RelativeTargetName ObjectType AccessMask src_user src_port IpAddress dest |
-  `security_content_ctime(firstTime)`  | `executable_file_written_in_administrative_smb_share_filter`'
+  ShareName RelativeTargetName ObjectType AccessMask src_user src_port IpAddress dest
+  | `security_content_ctime(firstTime)`  | `executable_file_written_in_administrative_smb_share_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   Windows Security Event Logs with 5145 EventCode enabled. The Windows TA is also
   required. Also enable the object Audit access success/failure in your group policy.
@@ -77,7 +77,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/trickbot/exe_smbshare/windows-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/trickbot/exe_smbshare/windows-xml.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

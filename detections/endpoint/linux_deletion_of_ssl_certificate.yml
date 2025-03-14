@@ -1,6 +1,6 @@
 name: Linux Deletion of SSL Certificate
 id: 839ab790-a60a-4f81-bfb3-02567063f615
-version: 6
+version: 7
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -17,11 +17,11 @@ data_source:
 - Sysmon for Linux EventID 11
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Filesystem where Filesystem.action=deleted Filesystem.file_path
-  = "/etc/ssl/certs/*" Filesystem.file_path IN ("*.pem", "*.crt") 
-  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time 
-  Filesystem.file_name Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id 
-  Filesystem.user Filesystem.vendor_product 
-  | `drop_dm_object_name(Filesystem)` | `security_content_ctime(firstTime)`
+  = "/etc/ssl/certs/*" Filesystem.file_path IN ("*.pem", "*.crt") by Filesystem.action
+  Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash
+  Filesystem.file_modify_time Filesystem.file_name Filesystem.file_path Filesystem.file_acl
+  Filesystem.file_size Filesystem.process_guid Filesystem.process_id Filesystem.user
+  Filesystem.vendor_product | `drop_dm_object_name(Filesystem)` | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`| `linux_deletion_of_ssl_certificate_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your
@@ -70,7 +70,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/acidrain/sysmon_linux.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/acidrain/sysmon_linux.log
     source: Syslog:Linux-Sysmon/Operational
     sourcetype: sysmon:linux

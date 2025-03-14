@@ -1,6 +1,6 @@
 name: Windows Exfiltration Over C2 Via Invoke RestMethod
 id: 06ade821-f6fa-40d0-80af-15bc1d45b3ba
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
@@ -17,11 +17,9 @@ description: The following analytic detects potential data exfiltration using Po
   intent and scope of the activity.
 search: '`powershell` EventCode=4104 ScriptBlockText = "*Invoke-RestMethod *" AND
   ScriptBlockText = "* -Uri *" AND ScriptBlockText = "* -Method *" AND ScriptBlockText
-  = "* Post *" AND ScriptBlockText = "* -InFile *" 
-  | fillnull
-  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature 
-  signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
-  | `security_content_ctime(firstTime)`
+  = "* Post *" AND ScriptBlockText = "* -InFile *" | fillnull | stats count min(_time)
+  as firstTime max(_time) as lastTime by dest signature signature_id user_id vendor_product
+  EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_exfiltration_over_c2_via_invoke_restmethod_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
@@ -45,8 +43,8 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A PowerShell script on $dest$ is attempting to transfer files to a
-    remote URL.
+  message: A PowerShell script on $dest$ is attempting to transfer files to a remote
+    URL.
   risk_objects:
   - field: dest
     type: system
@@ -66,7 +64,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winter-vivern/pwh_exfiltration/windows-powershell-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winter-vivern/pwh_exfiltration/windows-powershell-xml.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

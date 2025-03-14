@@ -1,6 +1,6 @@
 name: Windows Known Abused DLL Created
 id: ea91651a-772a-4b02-ac3d-985b364a5f07
-version: 5
+version: 6
 date: '2025-02-10'
 author: Steven Dick
 status: production
@@ -17,16 +17,14 @@ data_source:
 - Sysmon EventID 11
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Filesystem
   where Filesystem.file_path IN ("*\\users\\*","*\\Windows\Temp\\*","*\\programdata\\*")
-  Filesystem.file_name="*.dll" 
-  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time 
-  Filesystem.file_name Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id 
-  Filesystem.user Filesystem.vendor_product 
-  | `drop_dm_object_name(Filesystem)`
-  | lookup hijacklibs_loaded library AS file_name OUTPUT islibrary, ttp, comment as desc 
-  | lookup hijacklibs_loaded library AS file_name excludes as file_path OUTPUT islibrary as excluded 
-  | search islibrary = TRUE AND excluded != TRUE 
-  | where isnotnull(file_name) | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` |  `windows_known_abused_dll_created_filter`'
+  Filesystem.file_name="*.dll" by Filesystem.action Filesystem.dest Filesystem.file_access_time
+  Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time Filesystem.file_name
+  Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid
+  Filesystem.process_id Filesystem.user Filesystem.vendor_product | `drop_dm_object_name(Filesystem)`
+  | lookup hijacklibs_loaded library AS file_name OUTPUT islibrary, ttp, comment as
+  desc | lookup hijacklibs_loaded library AS file_name excludes as file_path OUTPUT
+  islibrary as excluded | search islibrary = TRUE AND excluded != TRUE | where isnotnull(file_name)
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` |  `windows_known_abused_dll_created_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -63,8 +61,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: The file [$file_name$] was written to an unusual location
-    on [$dest$].
+  message: The file [$file_name$] was written to an unusual location on [$dest$].
   risk_objects:
   - field: dest
     type: system
@@ -91,7 +88,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/hijacklibs/hijacklibs_sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/hijacklibs/hijacklibs_sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

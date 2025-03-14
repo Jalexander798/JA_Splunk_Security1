@@ -1,6 +1,6 @@
 name: Suspicious Process DNS Query Known Abuse Web Services
 id: 3cf0dc36-484d-11ec-a6bc-acde48001122
-version: 9
+version: 10
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -17,11 +17,10 @@ data_source:
 search: '`sysmon` EventCode=22 QueryName IN ("*pastebin*", "*discord*", "*api.telegram*","*t.me*")
   process_name IN ("cmd.exe", "*powershell*", "pwsh.exe", "wscript.exe","cscript.exe")
   OR Image IN ("*\\users\\public\\*", "*\\programdata\\*", "*\\temp\\*", "*\\Windows\\Tasks\\*",
-  "*\\appdata\\*", "*\\perflogs\\*") 
-  | stats count min(_time) as firstTime max(_time) as lastTime 
-  by answer answer_count dvc process_exec process_guid process_name query query_count reply_code_id signature signature_id src user_id vendor_product
-  QueryName QueryResults QueryStatus 
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  "*\\appdata\\*", "*\\perflogs\\*") | stats count min(_time) as firstTime max(_time)
+  as lastTime by answer answer_count dvc process_exec process_guid process_name query
+  query_count reply_code_id signature signature_id src user_id vendor_product QueryName
+  QueryResults QueryStatus | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `suspicious_process_dns_query_known_abuse_web_services_filter`'
 how_to_implement: This detection relies on sysmon logs with the Event ID 22, DNS Query.
   We suggest you run this detection at least once a day over the last 14 days.
@@ -74,7 +73,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/remcos/remcos_pastebin_download/sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/remcos/remcos_pastebin_download/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

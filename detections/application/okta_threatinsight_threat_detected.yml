@@ -1,6 +1,6 @@
 name: Okta ThreatInsight Threat Detected
 id: 140504ae-5fe2-4d65-b2bc-a211813fbca6
-version: 6
+version: 7
 date: '2025-02-10'
 author: Michael Haag, Mauricio Velazco, Splunk
 status: production
@@ -16,9 +16,9 @@ data_source:
 - Okta
 search: '`okta` eventType = security.threat.detected | rename client.geographicalContext.country
   as country, client.geographicalContext.state as state, client.geographicalContext.city
-  as city | stats count min(_time) as firstTime max(_time) as lastTime by app src_ip dest
-  signature eventType displayMessage client.device city state country user_agent outcome.reason
-  outcome.result severity | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  as city | stats count min(_time) as firstTime max(_time) as lastTime by app src_ip
+  dest signature eventType displayMessage client.device city state country user_agent
+  outcome.reason outcome.result severity | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `okta_threatinsight_threat_detected_filter`'
 how_to_implement: This detection utilizes logs from Okta Identity Management (IM)
   environments. It requires the ingestion of OktaIm2 logs through the Splunk Add-on
@@ -65,7 +65,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.004/okta_threatinsight_threat_detected/okta_threatinsight_threat_detected.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078.004/okta_threatinsight_threat_detected/okta_threatinsight_threat_detected.log
     source: Okta
     sourcetype: OktaIM2:log

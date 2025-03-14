@@ -1,6 +1,6 @@
 name: Windows Office Product Loading VBE7 DLL
 id: 7cfec906-2697-43f7-898b-83634a051d9a
-version: 2
+version: 3
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -17,13 +17,11 @@ data_source:
 search: '`sysmon` EventCode=7 process_name IN ("EQNEDT32.exe", "excel.exe", "Graph.exe",
   "msaccess.exe", "mspub.exe", "onenote.exe", "onenoteim.exe", "onenotem.exe", "outlook.exe",
   "powerpnt.exe", "visio.exe", "winproj.exe", "winword.exe") loaded_file_path IN ("*\\VBE7INTL.DLL",
-  "*\\VBE7.DLL", "*\\VBEUI.DLL") 
-  | fillnull
-  | stats count min(_time) as firstTime max(_time) as lastTime 
-  by Image ImageLoaded dest loaded_file loaded_file_path original_file_name 
-  process_exec process_guid process_hash process_id process_name process_path service_dll_signature_exists 
-  service_dll_signature_verified signature signature_id user_id vendor_product
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_office_product_loading_vbe7_dll_filter`'
+  "*\\VBE7.DLL", "*\\VBEUI.DLL") | fillnull | stats count min(_time) as firstTime
+  max(_time) as lastTime by Image ImageLoaded dest loaded_file loaded_file_path original_file_name
+  process_exec process_guid process_hash process_id process_name process_path service_dll_signature_exists
+  service_dll_signature_verified signature signature_id user_id vendor_product | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `windows_office_product_loading_vbe7_dll_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name and ImageLoaded (Like sysmon EventCode 7) from your endpoints.
   If you are using Sysmon, you must have at least version 6.0.4 of the Sysmon TA.
@@ -83,7 +81,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/datasets/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/datasets/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

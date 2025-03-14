@@ -1,6 +1,6 @@
 name: MS Scripting Process Loading Ldap Module
 id: 0b0c40dc-14a6-11ec-b267-acde48001122
-version: 5
+version: 6
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -15,13 +15,11 @@ description: The following analytic detects the execution of MS scripting proces
 data_source:
 - Sysmon EventID 7
 search: '`sysmon` EventCode =7 Image IN ("*\\wscript.exe", "*\\cscript.exe") ImageLoaded
-  IN ("*\\Wldap32.dll", "*\\adsldp.dll", "*\\adsldpc.dll") 
-  | fillnull
-  | stats count min(_time) as firstTime max(_time) as lastTime 
-  by Image ImageLoaded dest loaded_file loaded_file_path original_file_name 
-  process_exec process_guid process_hash process_id process_name process_path service_dll_signature_exists 
-  service_dll_signature_verified signature signature_id user_id vendor_product
-  | `security_content_ctime(firstTime)`
+  IN ("*\\Wldap32.dll", "*\\adsldp.dll", "*\\adsldpc.dll") | fillnull | stats count
+  min(_time) as firstTime max(_time) as lastTime by Image ImageLoaded dest loaded_file
+  loaded_file_path original_file_name process_exec process_guid process_hash process_id
+  process_name process_path service_dll_signature_exists service_dll_signature_verified
+  signature signature_id user_id vendor_product | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `ms_scripting_process_loading_ldap_module_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your
@@ -67,7 +65,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/fin7/fin7_js_2/sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/fin7/fin7_js_2/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

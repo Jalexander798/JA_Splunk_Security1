@@ -1,6 +1,6 @@
 name: Detect Remote Access Software Usage DNS
 id: a16b797d-e309-41bd-8ba0-5067dae2e4be
-version: 6
+version: 7
 date: '2024-11-15'
 author: Steven Dick
 status: production
@@ -15,16 +15,12 @@ description: The following analytic detects DNS queries to domains associated wi
 data_source:
 - Sysmon EventID 22
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
-  as lastTime from datamodel=Network_Resolution 
-  by DNS.answer DNS.answer_count DNS.query DNS.query_count DNS.reply_code_id DNS.src DNS.vendor_product
-  | `drop_dm_object_name("DNS")` 
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)` 
-  | lookup remote_access_software remote_domain AS query OUTPUT isutility, description as signature, comment_reference as desc, category 
-  | eval dest = query 
-  | search isutility = True 
-  | `remote_access_software_usage_exceptions`
-  | `detect_remote_access_software_usage_dns_filter`'
+  as lastTime from datamodel=Network_Resolution by DNS.answer DNS.answer_count DNS.query
+  DNS.query_count DNS.reply_code_id DNS.src DNS.vendor_product | `drop_dm_object_name("DNS")`
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | lookup
+  remote_access_software remote_domain AS query OUTPUT isutility, description as signature,
+  comment_reference as desc, category | eval dest = query | search isutility = True
+  | `remote_access_software_usage_exceptions` | `detect_remote_access_software_usage_dns_filter`'
 how_to_implement: To implement this search, you must ingest logs that contain the
   DNS query and the source of the query. These logs must be processed using the appropriate
   Splunk Technology Add-ons that are specific to the DNS logs. The logs must also
@@ -56,7 +52,7 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: Investigate traffic to $query$ 
+- name: Investigate traffic to $query$
   search: '| from datamodel:Network_Resolution.DNS | search src=$src$ query=$query$'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
@@ -90,7 +86,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1219/screenconnect/screenconnect_sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1219/screenconnect/screenconnect_sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

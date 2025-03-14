@@ -1,6 +1,6 @@
 name: Windows Domain Admin Impersonation Indicator
 id: 10381f93-6d38-470a-9c30-d25478e3bd3f
-version: 6
+version: 7
 date: '2025-01-20'
 author: Mauricio Velazco, Splunk
 status: production
@@ -26,13 +26,12 @@ description: The following analytic identifies potential Kerberos ticket forging
   validated as a true positive, this indicates that an attacker has successfully forged
   a Kerberos ticket and may have gained unauthorized access to critical resources,
   potentially with elevated privileges.
-search: '`wineventlog_security` EventCode=4627 LogonType=3 NOT TargetUserName IN ("*$", "SYSTEM", "DWM-*","LOCAL SERVICE","NETWORK SERVICE", "ANONYMOUS LOGON", "UMFD-*") 
-  | where match(GroupMembership, "Domain Admins") 
-  | stats count by _time TargetUserName GroupMembership action app dest signature_id user vendor_product
-  | lookup domain_admins username as TargetUserName OUTPUT username 
-  | fillnull value=NotDA username 
-  | search username = "NotDA" 
-  | `windows_domain_admin_impersonation_indicator_filter`'
+search: '`wineventlog_security` EventCode=4627 LogonType=3 NOT TargetUserName IN ("*$",
+  "SYSTEM", "DWM-*","LOCAL SERVICE","NETWORK SERVICE", "ANONYMOUS LOGON", "UMFD-*")
+  | where match(GroupMembership, "Domain Admins") | stats count by _time TargetUserName
+  GroupMembership action app dest signature_id user vendor_product | lookup domain_admins
+  username as TargetUserName OUTPUT username | fillnull value=NotDA username | search
+  username = "NotDA" | `windows_domain_admin_impersonation_indicator_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   Authentication events across all endpoints and ingest Event Id 4627. Specifically,
   the Audit Group Membership subcategory within the Logon Logoff category needs to

@@ -1,6 +1,6 @@
 name: Windows MSExchange Management Mailbox Cmdlet Usage
 id: 396de86f-25e7-4b0e-be09-a330be35249d
-version: 5
+version: 6
 date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
@@ -64,7 +64,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/exchange/msexchangemanagement.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/exchange/msexchangemanagement.log
     source: WinEventLog:MSExchange Management
     sourcetype: MSExchange:management

@@ -1,6 +1,6 @@
 name: Wbemprox COM Object Execution
 id: 9d911ce0-c3be-11eb-b177-acde48001122
-version: 5
+version: 6
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -17,14 +17,12 @@ data_source:
 - Sysmon EventID 7
 search: '`sysmon` EventCode=7  ImageLoaded IN ("*\\fastprox.dll", "*\\wbemprox.dll",
   "*\\wbemcomn.dll") NOT (process_name IN ("wmiprvse.exe", "WmiApSrv.exe", "unsecapp.exe"))
-  NOT(Image IN("*\\windows\\*","*\\program files*", "*\\wbem\\*")) 
-  | fillnull
-  | stats count min(_time) as firstTime max(_time) as lastTime 
-  by Image ImageLoaded dest loaded_file loaded_file_path original_file_name 
-  process_exec process_guid process_hash process_id process_name process_path service_dll_signature_exists 
-  service_dll_signature_verified signature signature_id user_id vendor_product
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `wbemprox_com_object_execution_filter`'
+  NOT(Image IN("*\\windows\\*","*\\program files*", "*\\wbem\\*")) | fillnull | stats
+  count min(_time) as firstTime max(_time) as lastTime by Image ImageLoaded dest loaded_file
+  loaded_file_path original_file_name process_exec process_guid process_hash process_id
+  process_name process_path service_dll_signature_exists service_dll_signature_verified
+  signature signature_id user_id vendor_product | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `wbemprox_com_object_execution_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name and imageloaded executions from your endpoints. If you
   are using Sysmon, you must have at least version 6.0.4 of the Sysmon TA.
@@ -70,7 +68,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/revil/inf2/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/revil/inf2/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

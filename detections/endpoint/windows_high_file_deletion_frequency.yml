@@ -1,6 +1,6 @@
 name: Windows High File Deletion Frequency
 id: 45b125c4-866f-11eb-a95a-acde48001122
-version: 5
+version: 6
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
@@ -19,13 +19,13 @@ search: '`sysmon` EventCode IN ("23","26") TargetFilename IN ("*.cmd", "*.ini","
   "*.jpg", "*.jpeg", "*.db", "*.ps1", "*.doc", "*.docx", "*.xls", "*.xlsx", "*.ppt",
   "*.pptx", "*.bmp","*.zip", "*.rar", "*.7z", "*.chm", "*.png", "*.log", "*.vbs",
   "*.js", "*.vhd", "*.bak", "*.wbcat", "*.bkf" , "*.backup*", "*.dsk", "*.win") NOT
-  TargetFilename IN ("*\\INetCache\\Content.Outlook\\*") 
-  | stats count min(_time) as firstTime, max(_time) as lastTime values(file_path) as file_path values(file_hash) as file_hash values(file_name) as file_name
-  values(file_modify_time) as file_modify_time values(process_name) as process_name values(process_path) as process_path values(process_guid) as process_guid 
-  values(process_id) as process_id values(process_exec) as process_exec by 
-  action dest dvc signature signature_id user user_id vendor_product
-  | where count >=100 
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  TargetFilename IN ("*\\INetCache\\Content.Outlook\\*") | stats count min(_time)
+  as firstTime, max(_time) as lastTime values(file_path) as file_path values(file_hash)
+  as file_hash values(file_name) as file_name values(file_modify_time) as file_modify_time
+  values(process_name) as process_name values(process_path) as process_path values(process_guid)
+  as process_guid values(process_id) as process_id values(process_exec) as process_exec
+  by action dest dvc signature signature_id user user_id vendor_product | where count
+  >=100 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_high_file_deletion_frequency_filter`'
 how_to_implement: To successfully implement this search, you need to ingest logs that
   include the deleted target file name, process name, and process ID from your endpoints.
@@ -84,7 +84,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/clop/clop_a/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/clop/clop_a/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

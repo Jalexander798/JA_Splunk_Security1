@@ -1,6 +1,6 @@
 name: Okta Multiple Failed MFA Requests For User
 id: 826dbaae-a1e6-4c8c-b384-d16898956e73
-version: 5
+version: 6
 date: '2025-01-21'
 author: Mauricio Velazco, Splunk
 data_source:
@@ -17,8 +17,8 @@ description: The following analytic identifies multiple failed multi-factor auth
 search: '`okta` eventType=user.authentication.auth_via_mfa outcome.result=FAILURE
   debugContext.debugData.factor!=PASSWORD_AS_FACTOR | bucket _time span=5m | stats
   count min(_time) as firstTime max(_time) as lastTime values(displayMessage) values(src_ip)
-  as src_ip values(debugContext.debugData.factor) values(dest) as dest by _time src_user | where count
-  >= 10 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  as src_ip values(debugContext.debugData.factor) values(dest) as dest by _time src_user
+  | where count >= 10 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `okta_multiple_failed_mfa_requests_for_user_filter`'
 how_to_implement: The analytic leverages Okta OktaIm2 logs to be ingested using the
   Splunk Add-on for Okta Identity Cloud (https://splunkbase.splunk.com/app/6553).
@@ -63,7 +63,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1621/okta_multiple_failed_mfa_requests/okta_multiple_failed_mfa_requests.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1621/okta_multiple_failed_mfa_requests/okta_multiple_failed_mfa_requests.log
     source: Okta
     sourcetype: OktaIM2:log

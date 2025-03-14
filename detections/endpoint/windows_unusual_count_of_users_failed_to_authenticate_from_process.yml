@@ -1,7 +1,7 @@
 name: Windows Unusual Count Of Users Failed To Authenticate From Process
 id: 25bdb6cb-2e49-4d34-a93c-d6c567c122fe
 type: Anomaly
-version: 6
+version: 7
 status: production
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
@@ -43,13 +43,11 @@ drilldown_searches:
   latest_offset: $info_max_time$
 search: '`wineventlog_security`  EventCode=4625 Logon_Type=2 ProcessName!="-" | bucket
   span=2m _time | stats dc(TargetUserName) AS unique_accounts values(TargetUserName)
-  as user values(dest) as dest values(src) as src 
-  by _time, ProcessName, SubjectUserName, Computer, action, app, authentication_method, signature, signature_id 
-  | eventstats avg(unique_accounts) as comp_avg , stdev(unique_accounts) as comp_std by ProcessName, SubjectUserName, Computer 
-  | eval upperBound=(comp_avg+comp_std*3) 
-  | eval isOutlier=if(unique_accounts > 10 and unique_accounts >= upperBound, 1, 0) 
-  | search isOutlier=1 
-  | `windows_unusual_count_of_users_failed_to_authenticate_from_process_filter`'
+  as user values(dest) as dest values(src) as src by _time, ProcessName, SubjectUserName,
+  Computer, action, app, authentication_method, signature, signature_id | eventstats
+  avg(unique_accounts) as comp_avg , stdev(unique_accounts) as comp_std by ProcessName,
+  SubjectUserName, Computer | eval upperBound=(comp_avg+comp_std*3) | eval isOutlier=if(unique_accounts
+  > 10 and unique_accounts >= upperBound, 1, 0) | search isOutlier=1 | `windows_unusual_count_of_users_failed_to_authenticate_from_process_filter`'
 rba:
   message: Potential password spraying attack from $Computer$
   risk_objects:
@@ -75,8 +73,7 @@ tags:
   security_domain: endpoint
 tests:
 - attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_multiple_users_from_process_xml/windows-security.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_multiple_users_from_process_xml/windows-security.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog
   name: True Positive Test

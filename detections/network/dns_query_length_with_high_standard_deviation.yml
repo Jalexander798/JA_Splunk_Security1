@@ -1,6 +1,6 @@
 name: DNS Query Length With High Standard Deviation
 id: 1a67f15a-f4ff-4170-84e9-08cf6f75d6f5
-version: 9
+version: 10
 date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production
@@ -16,18 +16,12 @@ description: The following analytic identifies DNS queries with unusually large 
 data_source:
 - Sysmon EventID 22
 search: '| tstats `security_content_summariesonly` count from datamodel=Network_Resolution
-  where NOT DNS.record_type IN("Pointer","PTR") 
-  by DNS.answer DNS.answer_count DNS.query DNS.query_count DNS.reply_code_id DNS.src DNS.vendor_product host
-  | `drop_dm_object_name("DNS")`
-  | eval tlds=split(query,".") 
-  | eval tld=mvindex(tlds,-1) 
-  | eval tld_len=len(tld)
-  | search tld_len<=24 
-  | eval query_length = len(query) 
-  | table host query query_length record_type count 
-  | eventstats stdev(query_length) AS stdev avg(query_length) AS avg p50(query_length) AS p50
-  | where query_length>(avg+stdev*2) 
-  | eval z_score=(query_length-avg)/stdev
+  where NOT DNS.record_type IN("Pointer","PTR") by DNS.answer DNS.answer_count DNS.query
+  DNS.query_count DNS.reply_code_id DNS.src DNS.vendor_product host | `drop_dm_object_name("DNS")`
+  | eval tlds=split(query,".") | eval tld=mvindex(tlds,-1) | eval tld_len=len(tld)
+  | search tld_len<=24 | eval query_length = len(query) | table host query query_length
+  record_type count | eventstats stdev(query_length) AS stdev avg(query_length) AS
+  avg p50(query_length) AS p50 | where query_length>(avg+stdev*2) | eval z_score=(query_length-avg)/stdev
   | `dns_query_length_with_high_standard_deviation_filter`'
 how_to_implement: To successfully implement this search, you will need to ensure that
   DNS data is populating the Network_Resolution data model.
@@ -71,7 +65,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1048.003/long_dns_queries/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1048.003/long_dns_queries/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
