@@ -1,69 +1,50 @@
 detections:
   - deprecated_content: ASL AWS Excessive Security Scanning
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: AWS Cloud Provisioning From Previously Unseen Region
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Cloud Provisioning Activity From Previously Unseen Region
   - deprecated_content: First time seen command line argument
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Windows connhost exe started forcefully
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Detect Mimikatz Using Loaded Images
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Kubernetes Azure detect sensitive role access
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Web Fraud - Anomalous User Clickspeed
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: EC2 Instance Started With Previously Unseen Instance Type
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Cloud Compute Instance Created With Previously Unseen Instance Type
   - deprecated_content: EC2 Instance Started With Previously Unseen AMI
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Cloud Compute Instance Created With Previously Unseen Image
   - deprecated_content: Domain Group Discovery With Net
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content:
     - Windows Group Discovery Via Net
   - deprecated_content: Kubernetes AWS detect sensitive role access
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Winword Spawning Windows Script Host
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: "The following analytics was deprecated in favour of a more generic approach.
       Where instead of creating specific analytic for every potentially suspicious child
       of an office product. We group them by threat level.\nThis would ease management
@@ -72,13 +53,11 @@ detections:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Winword Spawning PowerShell
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Attempted Credential Dump From Registry via Reg exe
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: This analytic had some overlap with another one, hence the deprecation.
       It was replaced by 8bbb7d58-b360-11eb-ba21-acde48001122 / Windows Sensitive Registry
       Hive Dump Via CommandLine
@@ -86,122 +65,92 @@ detections:
     - Windows Sensitive Registry Hive Dump Via CommandLine
   - deprecated_content: Detect processes used for System Network Configuration Discovery
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Potential System Network Configuration Discovery Activity
   - deprecated_content: Execution of File With Spaces Before Extension
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Updated to a new detection name
     replacement_content:
     - Execution of File with Multiple Extensions
   - deprecated_content: EC2 Instance Started In Previously Unseen Region
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Cloud Compute Instance Created In Previously Unused Region
   - deprecated_content: Office Document Spawned Child Process To Download
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Office Product Spawned Child Process For Download
   - deprecated_content: Detect new API calls from user roles
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Cloud API Calls From Previously Unseen User Roles
   - deprecated_content: Cmdline Tool Not Executed In CMD Shell
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Cmdline Tool Execution From Non-Shell Process
   - deprecated_content: Linux Auditd Find Private Keys
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Linux Auditd Private Keys and Certificate Enumeration
   - deprecated_content: Detect AWS API Activities From Unapproved Accounts
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Monitor DNS For Brand Abuse
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Kubernetes GCP detect sensitive object access
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Kubernetes Azure scan fingerprint
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: ASL AWS Password Policy Changes
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: O365 Suspicious Admin Email Forwarding
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - O365 Mailbox Email Forwarding Enabled
   - deprecated_content: AWS Cloud Provisioning From Previously Unseen City
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Cloud Provisioning Activity From Previously Unseen City
   - deprecated_content: Kubernetes AWS detect service accounts forbidden failure access
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Osquery pack - ColdRoot detection
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Windows Modify Registry Reg Restore
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Registry Entries Restored Via Reg
   - deprecated_content: Kubernetes GCP detect most active service accounts by pod
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Scheduled tasks used in BadRabbit ransomware
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Updated to a new detection name
     replacement_content:
     - Scheduled Task Deleted Or Created via CMD
   - deprecated_content: Suspicious Rundll32 Rename
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Remote System Discovery with Net
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: "This analytic was focusing on 2 separate and unrelated type of threats
       or actions. It was split into other analytics, namely:\r\n\r\nWindows Network
       Share Interaction With Net / 4dc3951f-b3f8-4f46-b412-76a483f72277\r\nWindows Sensitive
@@ -210,118 +159,91 @@ detections:
     - Windows Network Share Interaction With Net
   - deprecated_content: Remote System Discovery with Net
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content:
     - Windows Sensitive Group Discovery With Net
   - deprecated_content: DNS Query Requests Resolved by Unauthorized DNS Servers
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Suspicious Changes to File Associations
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: GCP Detect high risk permissions by resource and account
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Office Product Writing cab or inf
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Office Product Dropped Cab or Inf File
   - deprecated_content: Identify New User Accounts
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Office Product Spawn CMD Process
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Windows DLL Search Order Hijacking Hunt
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Windows DLL Search Order Hijacking Hunt with Sysmon
   - deprecated_content: ASL AWS CreateAccessKey
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - ASL AWS Create Access Key
   - deprecated_content: Okta ThreatInsight Login Failure with High Unknown users
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Detect Spike in Security Group Activity
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Abnormally High Number Of Cloud Security Group API Calls
   - deprecated_content: Office Product Spawning BITSAdmin
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Create local admin accounts using net exe
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Create Local Administrator Account Via Net
   - deprecated_content: Abnormally High AWS Instances Terminated by User - MLTK
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Windows Office Product Spawning MSDT
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Office Product Spawned MSDT
   - deprecated_content: Detect Spike in AWS API Activity
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Office Product Spawning Windows Script Host
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Prohibited Software On Endpoint
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content:
     - Attacker Tools On Endpoint
   - deprecated_content: AWS Cloud Provisioning From Previously Unseen Country
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Cloud Provisioning Activity From Previously Unseen Country
   - deprecated_content: Detect Critical Alerts from Security Tools
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: As discussed internally, this analytic was too generic for an analyst to
       do anything with it. It was deprecated in favor of the more specific approach
       provided by analytics such as Microsoft Defender ATP Alerts and Microsoft Defender
@@ -331,141 +253,109 @@ detections:
     - Microsoft Defender ATP Alerts
   - deprecated_content: Detect Critical Alerts from Security Tools
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content:
     - Microsoft Defender Incident Alerts
   - deprecated_content: Excel Spawning PowerShell
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Office Application Spawn rundll32 process
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Excessive Usage Of Net App
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Excessive Usage Of Net App
   - deprecated_content: Elevated Group Discovery With Net
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Sensitive Group Discovery With Net
   - deprecated_content: Local Account Discovery with Net
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows User Discovery Via Net
   - deprecated_content: Windows Command Shell Fetch Env Variables
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows List ENV Variables Via SET Command From Uncommon Parent
   - deprecated_content: Suspicious Email - UBA Anomaly
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Detect web traffic to dynamic domain providers
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Updated to use a different log source
     replacement_content:
     - Detect hosts connecting to dynamic domain providers
   - deprecated_content: Okta Failed SSO Attempts
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Okta Unauthorized Access to Application
   - deprecated_content: Kubernetes AWS detect RBAC authorization by account
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Kubernetes Azure detect service accounts forbidden failure access
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Remote Registry Key modifications
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: O365 Suspicious User Email Forwarding
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - O365 Mailbox Email Forwarding Enabled
   - deprecated_content: Office Product Spawning MSHTA
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Kubernetes AWS detect most active service accounts by pod
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Correlation by Repository and Risk
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the datamodel
     replacement_content:
     - Risk Rule for Dev Sec Ops by Repository
   - deprecated_content: Kubernetes Azure detect RBAC authorization by account
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Clients Connecting to Multiple DNS Servers
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Excessive Service Stop Attempt
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Excessive Service Stop Attempt
   - deprecated_content: Multiple Okta Users With Invalid Credentials From The Same IP
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Okta Multiple Users Failing To Authenticate From Ip
   - deprecated_content: Suspicious writes to System Volume Information
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Detect new user AWS Console Login
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Detect AWS Console Login by New User
   - deprecated_content: Domain Account Discovery With Net App
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: "This analytic was a TTP that looked only for commands that tries to query
       info about the users via net user /do. This had a couple of issues, such as triggering
       on creation of users via the /add flag etc..\nIt was deprecated in favor of a
@@ -474,191 +364,145 @@ detections:
     - Windows User Discovery Via Net
   - deprecated_content: Detection of DNS Tunnels
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Detect DNS requests to Phishing Sites leveraging EvilGinx2
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Office Document Creating Schedule Task
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Office Product Loading Taskschd DLL
   - deprecated_content: Okta Account Locked Out
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Okta Multiple Accounts Locked Out
   - deprecated_content: Unsuccessful Netbackup backups
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Detect Mimikatz Via PowerShell And EventCode 4703
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Updated to a new detection name
     replacement_content:
     - Detect Mimikatz With PowerShell Script Block Logging
   - deprecated_content: Winword Spawning Cmd
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: GCP Kubernetes cluster scan detection
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Kubernetes Scanning by Unauthenticated IP Address
   - deprecated_content: Kubernetes GCP detect suspicious kubectl calls
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: gcp detect oauth token abuse
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Correlation by User and Risk
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the datamodel
     replacement_content:
     - Risk Rule for Dev Sec Ops by Repository
   - deprecated_content: Processes created by netsh
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Updated to a new detection name
     replacement_content:
     - Processes launching netsh
   - deprecated_content: Office Product Spawning Wmic
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Extraction of Registry Hives
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Sensitive Registry Hive Dump Via CommandLine
   - deprecated_content: Attempt To Stop Security Service
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Attempt To Stop Security Service
   - deprecated_content: Windows MSIExec With Network Connections
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows HTTP Network Communication From MSIExec
   - deprecated_content: Windows Query Registry Reg Save
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Registry Entries Exported Via Reg
   - deprecated_content: Cloud Network Access Control List Deleted
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - AWS Network Access Control List Deleted
   - deprecated_content: O365 Suspicious Rights Delegation
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - O365 Elevated Mailbox Permission Assigned
   - deprecated_content: Abnormally High AWS Instances Launched by User - MLTK
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Reg exe used to hide files directories via registry keys
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Detect Long DNS TXT Record Response
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Password Policy Discovery with Net
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Password Policy Discovery with Net
   - deprecated_content: AWS Cloud Provisioning From Previously Unseen IP Address
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Cloud Provisioning Activity From Previously Unseen IP Address
   - deprecated_content: Network Connection Discovery With Net
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Network Connection Discovery Via Net
   - deprecated_content: Kubernetes Azure detect suspicious kubectl calls
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Kubernetes GCP detect sensitive role access
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Detect Webshell Exploit Behavior
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Suspicious Child Process Spawned From WebServer
   - deprecated_content: DNS record changed
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Unsigned Image Loaded by LSASS
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Detect USB device insertion
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Windows Network Share Interaction With Net
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Network Share Interaction Via Net
   - deprecated_content: Account Discovery With Net App
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: This analytic was a TTP that focused on unrelated things and called account
       discovery. Since there were other detection that overlapped with it. I choose
       to deprecate it, and replace it with an updated version of 339805ce-ac30-11eb-b87d-acde48001122
@@ -667,670 +511,457 @@ detections:
     - Windows Excessive Usage Of Net App
   - deprecated_content: Change Default File Association
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows New Default File Association Value Set
   - deprecated_content: Windows Lateral Tool Transfer RemCom
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Updated to a new detection name
     replacement_content:
     - Windows Service Execution RemCom
   - deprecated_content: Office Document Executing Macro Code
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Office Product Loading VBE7 DLL
   - deprecated_content: Okta Account Lockout Events
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Okta Multiple Accounts Locked Out
   - deprecated_content: Abnormally High AWS Instances Launched by User
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Abnormally High Number Of Cloud Instances Launched
   - deprecated_content: EC2 Instance Modified With Previously Unseen User
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Cloud API Calls From Previously Unseen User Roles
   - deprecated_content: Windows Valid Account With Never Expires Password
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Set Account Password Policy To Unlimited Via Net
   - deprecated_content: Windows hosts file modification
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: MSHTML Module Load in Office Product
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Office Product Loaded MSHTML Module
   - deprecated_content: Abnormally High AWS Instances Terminated by User
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Abnormally High Number Of Cloud Instances Destroyed
   - deprecated_content: Web Fraud - Account Harvesting
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Office Spawning Control
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Office Product Spawned Control
   - deprecated_content: Detect Activity Related to Pass the Hash Attacks
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Deleting Of Net Users
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows User Deletion Via Net
   - deprecated_content: Suspicious File Write
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: AWS EKS Kubernetes cluster sensitive object access
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Kubernetes Abuse of Secret by Unusual Location
   - deprecated_content: Spectre and Meltdown Vulnerable Systems
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: EC2 Instance Started With Previously Unseen User
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Cloud Compute Instance Created By Previously Unseen User
   - deprecated_content: Office Product Spawning CertUtil
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Kubernetes GCP detect RBAC authorizations by account
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Office Application Drop Executable
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Office Product Dropped Uncommon File
   - deprecated_content: Kubernetes Azure active service accounts by pod namespace
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Kubernetes Azure pod scan fingerprint
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Detect Spike in Network ACL Activity
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Abnormally High Number Of Cloud Infrastructure API Calls
   - deprecated_content: Suspicious Powershell Command-Line Arguments
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content:
     - Malicious PowerShell Process - Encoded Command
   - deprecated_content: Office Application Spawn Regsvr32 process
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content:
     - Windows Office Product Spawned Uncommon Process
   - deprecated_content: Detect API activity from users without MFA
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - AWS Successful Single-Factor Authentication
   - deprecated_content: Kubernetes Azure detect sensitive object access
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Web Fraud - Password Sharing Across Accounts
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Disabling Net User Account
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows User Disabled Via Net
   - deprecated_content: GCP Detect accounts with high risk roles by project
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Kubernetes GCP detect service accounts forbidden failure access
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Extended Period Without Successful Netbackup Backups
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Office Product Spawning Rundll32 with no DLL
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Renamed and updated logic
     replacement_content:
     - Windows Office Product Spawned Rundll32 With No DLL
   - deprecated_content: Okta ThreatInsight Suspected PasswordSpray Attack
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Okta ThreatInsight Threat Detected
   - deprecated_content: Net Localgroup Discovery
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Both of these analytics were deprecated in favor of c5c8e0f3-147a-43da-bf04-4cfaec27dc44
       / Windows Group Discovery Via Net
     replacement_content:
     - Windows Group Discovery Via Net
   - deprecated_content: Uncommon Processes On Endpoint
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content:
     - Attacker Tools On Endpoint
   - deprecated_content: Dump LSASS via procdump Rename
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Updated to a new detection name
     replacement_content:
     - Dump LSASS via procdump
   - deprecated_content: Okta Two or More Rejected Okta Pushes
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: Detections updated to use the new search logic and field names due to the
       TA update
     replacement_content:
     - Okta Multiple Failed MFA Requests For User
   - deprecated_content: Excel Spawning Windows Script Host
     deprecated_in_version: 5.4.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: GitHub Actions Disable Security Workflow
     deprecated_in_version: 5.4.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Github Commit Changes In Master
     deprecated_in_version: 5.4.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Github Commit In Develop
     deprecated_in_version: 5.4.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: GitHub Dependabot Alert
     deprecated_in_version: 5.4.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: GitHub Pull Request from Unknown User
     deprecated_in_version: 5.4.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Known Services Killed by Ransomware
     deprecated_in_version: 5.4.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Remote Desktop Network Bruteforce
     deprecated_in_version: 5.4.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Suspicious Driver Loaded Path
     deprecated_in_version: 5.4.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Suspicious Event Log Service Behavior
     deprecated_in_version: 5.4.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Suspicious Process File Path
     deprecated_in_version: 5.4.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
   - deprecated_content: Windows Service Stop Via Net  and SC Application
     deprecated_in_version: 5.4.0
-    deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content: []
 baselines:
   - deprecated_content: Add Prohibited Processes to Enterprise Security
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
-    replacement_content: []
   - deprecated_content: Baseline of API Calls per User ARN
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
-    replacement_content: []
   - deprecated_content: Baseline of Excessive AWS Instances Launched by User - MLTK
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
-    replacement_content: []
   - deprecated_content: Baseline of Excessive AWS Instances Terminated by User - MLTK
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
-    replacement_content: []
   - deprecated_content: Previously seen API call per user roles in CloudTrail
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
-    replacement_content: []
   - deprecated_content: Previously Seen AWS Provisioning Activity Sources
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
-    replacement_content: []
   - deprecated_content: Previously Seen EC2 AMIs
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
-    replacement_content: []
   - deprecated_content: Previously Seen EC2 Instance Types
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
-    replacement_content: []
   - deprecated_content: Previously Seen EC2 Launches By User
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
-    replacement_content: []
   - deprecated_content: Previously seen users in CloudTrail
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
-    replacement_content: []
   - deprecated_content: Update previously seen users in CloudTrail
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
-    replacement_content: []
 investigations: 
   - deprecated_content: All backup logs for host
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Amazon EKS Kubernetes activity by src ip
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: AWS Investigate Security Hub alerts by dest
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: AWS Investigate User Activities By AccessKeyId
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: AWS Investigate User Activities By ARN
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: AWS Network ACL Details from ID
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: AWS Network Interface details via resourceId
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: AWS S3 Bucket details via bucketName
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: GCP Kubernetes activity by src ip
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get All AWS Activity From City
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get All AWS Activity From Country
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get All AWS Activity From IP Address
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get All AWS Activity From Region
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get Backup Logs For Endpoint
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get Certificate logs for a domain
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get DNS Server History for a host
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get DNS traffic ratio
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get EC2 Instance Details by instanceId
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get EC2 Launch Details
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get Email Info
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get Emails From Specific Sender
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get First Occurrence and Last Occurrence of a MAC Address
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get History Of Email Sources
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get Logon Rights Modifications For Endpoint
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get Logon Rights Modifications For User
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get Notable History
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get Outbound Emails to Hidden Cobra Threat Actors
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get Parent Process Info
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get Process File Activity
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get Process Info
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get Process Information For Port Activity
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get Process Responsible For The DNS Traffic
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get Sysmon WMI Activity for Host
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Get Web Session Information via session id
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Investigate AWS activities via region name
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Investigate AWS User Activities by user field
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Investigate Failed Logins for Multiple Destinations
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Investigate Network Traffic From src ip
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Investigate Okta Activity by app
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Investigate Okta Activity by IP Address
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Investigate Pass the Hash Attempts
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Investigate Pass the Ticket Attempts
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Investigate Previous Unseen User
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Investigate Successful Remote Desktop Authentications
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Investigate Suspicious Strings in HTTP Header
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Investigate User Activities In Okta
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
   - deprecated_content: Investigate Web POSTs From src
     deprecated_in_version: 5.2.0
-    deprecated_date: 2025-03-12
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
-    replacement_content: []
 stories:
     - deprecated_content: AWS Cryptomining
       deprecated_in_version: 5.2.0
-      deprecated_date: 2025-03-12
-      reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
       replacement_content:
       - Cloud Cryptomining
     - deprecated_content: AWS Suspicious Provisioning Activities
       deprecated_in_version: 5.2.0
-      deprecated_date: 2025-03-12
-      reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
       replacement_content:
       - Suspicious Cloud Provisioning Activities
     - deprecated_content: Common Phishing Frameworks
       deprecated_in_version: 5.2.0
-      deprecated_date: 2025-03-12
-      reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content: []
-    - deprecated_content: Container Implantation Monitoring and Investigation
+        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+      - deprecated_content: Container Implantation Monitoring and Investigation
       deprecated_in_version: 5.2.0
-      deprecated_date: 2025-03-12
-      reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
       replacement_content:
       - Kubernetes Security
     - deprecated_content: Host Redirection
       deprecated_in_version: 5.2.0
-      deprecated_date: 2025-03-12
-      reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content: []
-    - deprecated_content: Kubernetes Sensitive Role Activity
+        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+      - deprecated_content: Kubernetes Sensitive Role Activity
       deprecated_in_version: 5.2.0
-      deprecated_date: 2025-03-12
-      reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
       replacement_content:
       - Kubernetes Security
     - deprecated_content: Lateral Movement
       deprecated_in_version: 5.2.0
-      deprecated_date: 2025-03-12
-      reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
       replacement_content:
       - Compromised User Account
     - deprecated_content: Monitor Backup Solution
       deprecated_in_version: 5.2.0
-      deprecated_date: 2025-03-12
-      reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content: []
-    - deprecated_content: Monitor for Unauthorized Software
+        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+      - deprecated_content: Monitor for Unauthorized Software
       deprecated_in_version: 5.2.0
-      deprecated_date: 2025-03-12
-      reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content: []
-    - deprecated_content: Office 365 Detections
+        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+      - deprecated_content: Office 365 Detections
       deprecated_in_version: 5.2.0
-      deprecated_date: 2025-03-12
-      reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
       replacement_content:
       - Office 365 Account Takeover
     - deprecated_content: Spectre And Meltdown Vulnerabilities
       deprecated_in_version: 5.2.0
-      deprecated_date: 2025-03-12
-      reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content: []
-    - deprecated_content: Suspicious AWS EC2 Activities
+        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+      - deprecated_content: Suspicious AWS EC2 Activities
       deprecated_in_version: 5.2.0
-      deprecated_date: 2025-03-12
-      reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
       replacement_content:
       - Suspicious Cloud Instance Activities
     - deprecated_content: Unusual AWS EC2 Modifications
       deprecated_in_version: 5.2.0
-      deprecated_date: 2025-03-12
-      reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
       replacement_content:
       - Suspicious Cloud Instance Activities
     - deprecated_content: Web Fraud Detection
       deprecated_in_version: 5.2.0
-      deprecated_date: 2025-03-12
-      reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content: []
-    - deprecated_content: Nexus APT Threat Activity
+        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+      - deprecated_content: Nexus APT Threat Activity
       deprecated_in_version: 5.4.0
-      deprecated_date: 2025-03-12
-      reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
       replacement_content:
       - China-Nexus Threat Activity
