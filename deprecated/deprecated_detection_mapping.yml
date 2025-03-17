@@ -898,62 +898,62 @@ detections:
     replacement_content:
     - Okta Multiple Failed MFA Requests For User
   - deprecated_content: Excel Spawning Windows Script Host
-    deprecated_in_version: 5.3.0
+    deprecated_in_version: 5.4.0
     deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content: []
   - deprecated_content: GitHub Actions Disable Security Workflow
-    deprecated_in_version: 5.3.0
+    deprecated_in_version: 5.4.0
     deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content: []
   - deprecated_content: Github Commit Changes In Master
-    deprecated_in_version: 5.3.0
+    deprecated_in_version: 5.4.0
     deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content: []
   - deprecated_content: Github Commit In Develop
-    deprecated_in_version: 5.3.0
+    deprecated_in_version: 5.4.0
     deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content: []
   - deprecated_content: GitHub Dependabot Alert
-    deprecated_in_version: 5.3.0
+    deprecated_in_version: 5.4.0
     deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content: []
   - deprecated_content: GitHub Pull Request from Unknown User
-    deprecated_in_version: 5.3.0
+    deprecated_in_version: 5.4.0
     deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content: []
   - deprecated_content: Known Services Killed by Ransomware
-    deprecated_in_version: 5.3.0
+    deprecated_in_version: 5.4.0
     deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content: []
   - deprecated_content: Remote Desktop Network Bruteforce
-    deprecated_in_version: 5.3.0
+    deprecated_in_version: 5.4.0
     deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content: []
   - deprecated_content: Suspicious Driver Loaded Path
-    deprecated_in_version: 5.3.0
+    deprecated_in_version: 5.4.0
     deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content: []
   - deprecated_content: Suspicious Event Log Service Behavior
-    deprecated_in_version: 5.3.0
+    deprecated_in_version: 5.4.0
     deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content: []
   - deprecated_content: Suspicious Process File Path
-    deprecated_in_version: 5.3.0
+    deprecated_in_version: 5.4.0
     deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content: []
   - deprecated_content: Windows Service Stop Via Net  and SC Application
-    deprecated_in_version: 5.3.0
+    deprecated_in_version: 5.4.0
     deprecated_date: 2025-03-12
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
     replacement_content: []
