@@ -109,6 +109,7 @@ tags:
   - Derusbi
   - BlackByte Ransomware
   - Remcos
+  - PHP-CGI RCE Attack on Japanese Organizations
   asset_type: Endpoint
   mitre_attack_id:
   - T1547.001

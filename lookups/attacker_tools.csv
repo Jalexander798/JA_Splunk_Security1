@@ -29,3 +29,10 @@ advanced_port_scanner.exe,Advanced Port Scanner is a free network scanner allowi
 mimikatz.exe,utility Mimikatz is an open-source application that allows users to view and save authentication credentials such as Kerberos tickets.
 certify.exe,A tool used to enumerate and abuse misconfigurations in Active Directory Certificate Services (AD CS)
 certipy.exe,A tool used to enumerate and abuse misconfigurations in Active Directory Certificate Services (AD CS)
+ladon.exe, ref https://github.com/k8gege/Aggressor/blob/master/Ladon.cna
+sharpTask.exe,SharpTask is a tool that allows you to create scheduled tasks on a Windows system.
+SharpHide.exe,SharpHide is a tool that allows you to hide a process from the task manager.
+SharpStay.exe,SharpStay is a tool that allows you to stay hidden from the task manager.
+seatbelt.exe, a tool used to collect detailed information about a system—such as remote access configurations, network shares, and other security-relevant data on victim machine
+SharpGPOAbuse.exe, SharpGPOAbuse is a tool that allows you to abuse and enumerate GPOs on a Windows system.
+fscan.exe, Fscan is a tool used to scan for open ports and services on a network.
