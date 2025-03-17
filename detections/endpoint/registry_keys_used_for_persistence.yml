@@ -1,7 +1,7 @@
 name: Registry Keys Used For Persistence
 id: f5f6af30-7aa7-4295-bfe9-07fe87c01a4b
-version: '17'
-date: '2025-02-24'
+version: '18'
+date: '2025-02-28'
 author: Jose Hernandez, David Dorsey, Teoderick Contreras, Rod Soto, Splunk
 status: production
 type: TTP
@@ -103,6 +103,8 @@ tags:
   - NjRAT
   - AsyncRAT
   - Azorult
+  - Amadey
+  - SystemBC
   - Suspicious Windows Registry Activities
   - Derusbi
   - BlackByte Ransomware
