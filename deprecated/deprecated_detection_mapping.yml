@@ -1254,12 +1254,14 @@ stories:
       deprecated_in_version: 5.2.0
       deprecated_date: 2025-03-12
       reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content: []
+      replacement_content:
+      - Cloud Cryptomining
     - deprecated_content: AWS Suspicious Provisioning Activities
       deprecated_in_version: 5.2.0
       deprecated_date: 2025-03-12
       reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content: []
+      replacement_content:
+      - Suspicious Cloud Provisioning Activities
     - deprecated_content: Common Phishing Frameworks
       deprecated_in_version: 5.2.0
       deprecated_date: 2025-03-12
@@ -1269,7 +1271,8 @@ stories:
       deprecated_in_version: 5.2.0
       deprecated_date: 2025-03-12
       reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content: []
+      replacement_content:
+      - Kubernetes Security
     - deprecated_content: Host Redirection
       deprecated_in_version: 5.2.0
       deprecated_date: 2025-03-12
@@ -1279,12 +1282,14 @@ stories:
       deprecated_in_version: 5.2.0
       deprecated_date: 2025-03-12
       reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content: []
+      replacement_content:
+      - Kubernetes Security
     - deprecated_content: Lateral Movement
       deprecated_in_version: 5.2.0
       deprecated_date: 2025-03-12
       reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content: []
+      replacement_content:
+      - Compromised User Account
     - deprecated_content: Monitor Backup Solution
       deprecated_in_version: 5.2.0
       deprecated_date: 2025-03-12
@@ -1299,7 +1304,8 @@ stories:
       deprecated_in_version: 5.2.0
       deprecated_date: 2025-03-12
       reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content: []
+      replacement_content:
+      - Office 365 Account Takeover
     - deprecated_content: Spectre And Meltdown Vulnerabilities
       deprecated_in_version: 5.2.0
       deprecated_date: 2025-03-12
@@ -1309,12 +1315,14 @@ stories:
       deprecated_in_version: 5.2.0
       deprecated_date: 2025-03-12
       reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content: []
+      replacement_content:
+      - Suspicious Cloud Instance Activities
     - deprecated_content: Unusual AWS EC2 Modifications
       deprecated_in_version: 5.2.0
       deprecated_date: 2025-03-12
       reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content: []
+      replacement_content:
+      - Suspicious Cloud Instance Activities
     - deprecated_content: Web Fraud Detection
       deprecated_in_version: 5.2.0
       deprecated_date: 2025-03-12
@@ -1324,4 +1332,5 @@ stories:
       deprecated_in_version: 5.4.0
       deprecated_date: 2025-03-12
       reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content: []  
+      replacement_content:
+      - China-Nexus Threat Activity
