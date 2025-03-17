@@ -902,66 +902,66 @@ investigations:
     deprecated_in_version: 5.2.0
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
 stories:
-    - deprecated_content: AWS Cryptomining
-      deprecated_in_version: 5.2.0
-        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content:
-      - Cloud Cryptomining
-    - deprecated_content: AWS Suspicious Provisioning Activities
-      deprecated_in_version: 5.2.0
-        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content:
-      - Suspicious Cloud Provisioning Activities
-    - deprecated_content: Common Phishing Frameworks
-      deprecated_in_version: 5.2.0
-        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      - deprecated_content: Container Implantation Monitoring and Investigation
-      deprecated_in_version: 5.2.0
-        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content:
-      - Kubernetes Security
-    - deprecated_content: Host Redirection
-      deprecated_in_version: 5.2.0
-        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      - deprecated_content: Kubernetes Sensitive Role Activity
-      deprecated_in_version: 5.2.0
-        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content:
-      - Kubernetes Security
-    - deprecated_content: Lateral Movement
-      deprecated_in_version: 5.2.0
-        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content:
-      - Compromised User Account
-    - deprecated_content: Monitor Backup Solution
-      deprecated_in_version: 5.2.0
-        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      - deprecated_content: Monitor for Unauthorized Software
-      deprecated_in_version: 5.2.0
-        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      - deprecated_content: Office 365 Detections
-      deprecated_in_version: 5.2.0
-        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content:
-      - Office 365 Account Takeover
-    - deprecated_content: Spectre And Meltdown Vulnerabilities
-      deprecated_in_version: 5.2.0
-        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      - deprecated_content: Suspicious AWS EC2 Activities
-      deprecated_in_version: 5.2.0
-        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content:
-      - Suspicious Cloud Instance Activities
-    - deprecated_content: Unusual AWS EC2 Modifications
-      deprecated_in_version: 5.2.0
-        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content:
-      - Suspicious Cloud Instance Activities
-    - deprecated_content: Web Fraud Detection
-      deprecated_in_version: 5.2.0
-        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      - deprecated_content: Nexus APT Threat Activity
-      deprecated_in_version: 5.4.0
-        reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-      replacement_content:
-      - China-Nexus Threat Activity
+  - deprecated_content: AWS Cryptomining
+    deprecated_in_version: 5.2.0
+    reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+    replacement_content:
+    - Cloud Cryptomining
+  - deprecated_content: AWS Suspicious Provisioning Activities
+    deprecated_in_version: 5.2.0
+    reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+    replacement_content:
+    - Suspicious Cloud Provisioning Activities
+  - deprecated_content: Common Phishing Frameworks
+    deprecated_in_version: 5.2.0
+    reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+  - deprecated_content: Container Implantation Monitoring and Investigation
+    deprecated_in_version: 5.2.0
+    reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+    replacement_content:
+    - Kubernetes Security
+  - deprecated_content: Host Redirection
+    deprecated_in_version: 5.2.0
+    reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+  - deprecated_content: Kubernetes Sensitive Role Activity
+    deprecated_in_version: 5.2.0
+    reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+    replacement_content:
+    - Kubernetes Security
+  - deprecated_content: Lateral Movement
+    deprecated_in_version: 5.2.0
+    reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+    replacement_content:
+    - Compromised User Account
+  - deprecated_content: Monitor Backup Solution
+    deprecated_in_version: 5.2.0
+    reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+  - deprecated_content: Monitor for Unauthorized Software
+    deprecated_in_version: 5.2.0
+    reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+  - deprecated_content: Office 365 Detections
+    deprecated_in_version: 5.2.0
+    reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+    replacement_content:
+    - Office 365 Account Takeover
+  - deprecated_content: Spectre And Meltdown Vulnerabilities
+    deprecated_in_version: 5.2.0
+    reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+  - deprecated_content: Suspicious AWS EC2 Activities
+    deprecated_in_version: 5.2.0
+    reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+    replacement_content:
+    - Suspicious Cloud Instance Activities
+  - deprecated_content: Unusual AWS EC2 Modifications
+    deprecated_in_version: 5.2.0
+    reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+    replacement_content:
+    - Suspicious Cloud Instance Activities
+  - deprecated_content: Web Fraud Detection
+    deprecated_in_version: 5.2.0
+    reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+  - deprecated_content: Nexus APT Threat Activity
+    deprecated_in_version: 5.4.0
+    reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+    replacement_content:
+    - China-Nexus Threat Activity
