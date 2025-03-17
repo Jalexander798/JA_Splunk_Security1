@@ -17,9 +17,8 @@ description: The following analytic identifies an O365 account experiencing more
   access and data breaches.
 search: '`o365_management_activity` Operation=UserLoginFailed record_type=AzureActiveDirectoryStsLogon Workload=AzureActiveDirectory 
   | bucket span=5m _time 
-  | rename command as action 
   | fillnull 
-  | stats dc(_raw) AS failed_attempts values(src_ip) as src by action user _time dest vendor_account vendor_product 
+  | stats dc(_raw) AS failed_attempts values(src_ip) as src by signature user _time dest vendor_account vendor_product 
   | where failed_attempts > 10 
   | `o365_high_number_of_failed_authentications_for_user_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest

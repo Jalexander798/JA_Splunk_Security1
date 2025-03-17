@@ -112,7 +112,6 @@ example_log: '{"CreationTime": "2023-10-20T19:32:59", "Id": "d06df1c6-b3f2-4595-
   "victim@splunkresearch1.onmicrosoft.com", "Type": 5}, {"ID": "10032002CC029AE9",
   "Type": 3}], "TargetContextId": "99825d50-9544-4061-8e46-68923805cbf2"}'
 output_fields:
-- action 
 - dest 
 - user 
 - src 

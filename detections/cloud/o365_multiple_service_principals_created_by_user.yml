@@ -21,7 +21,8 @@ search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Ad
   | eval userType = mvindex('Actor{}.ID',len-1) 
   | search userType = \"User\" 
   | eval displayName = object 
-  | stats count earliest(_time) as firstTime latest(_time) as lastTime values(displayName) as displayName dc(displayName) as unique_apps values(user) as user values(src) as src by src_user vendor_account vendor_product dest action 
+  | stats count earliest(_time) as firstTime latest(_time) as lastTime values(displayName) as displayName dc(displayName) as unique_apps values(user) as user values(src) as src 
+  by src_user vendor_account vendor_product dest signature
   | where unique_apps > 3 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 

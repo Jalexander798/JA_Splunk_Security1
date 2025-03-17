@@ -15,7 +15,6 @@ data_source:
 - Office 365 Universal Audit Log
 search: "`o365_management_activity` Workload=SharePoint Operation=SharingPolicyChanged \"ModifiedProperties{}.Name\"=AllowDomainList 
   | eval signature_id = CorrelationId, signature=Operation, src = ClientIP, user = UserId, object_name='ModifiedProperties{}.Name', object_attrs_new = split(replace('ModifiedProperties{}.NewValue',\"\\.\\.\\.\",\"\"),\",\"), object_attrs_old = split(replace('ModifiedProperties{}.OldValue',\"\\.\\.\\.\",\"\"),\",\") 
-  | rename Operation as action 
   | fillnull 
   | stats values(object_attrs_new) as object_attrs_new, values(object_attrs_old) as object_attrs_old, values(src) as src, count, min(_time) as firstTime, max(_time) as lastTime by user,signature,signature_id,object_name,dest,action,vendor_account,vendor_product
   | eval diff_add=mvmap(object_attrs_new,if(isnull(mvfind(object_attrs_old,object_attrs_new)),object_attrs_new,null)) 

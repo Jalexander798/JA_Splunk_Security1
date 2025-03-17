@@ -19,7 +19,6 @@ search: "`o365_management_activity` Operation=DLPRuleMatch
       , src_user = UserId, reason ='PolicyDetails{}.Rules{}.ConditionsMatched.SensitiveInformation{}.SensitiveInformationTypeName',
       result='PolicyDetails{}.Rules{}.Actions{}', file_name=case(NOT match('PolicyDetails{}.Rules{}.ConditionsMatched.SensitiveInformation{}.Location',\"\
       Message Body\"),'PolicyDetails{}.Rules{}.ConditionsMatched.SensitiveInformation{}.Location') 
-  | rename command as action 
   | fillnull 
   | stats count min(_time) as firstTime max(_time) as lastTime values(signature) as signature values(file_name) as file_name values(ExchangeMetaData.Subject) AS subject values(Workload) as app values(result) as result by action dest user src vendor_account vendor_product src_user recipient signature_id reason 
   | `security_content_ctime(firstTime)`

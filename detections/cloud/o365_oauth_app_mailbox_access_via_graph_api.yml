@@ -15,9 +15,8 @@ description: The following analytic detects when emails are accessed in Office 3
   attackers could exfiltrate sensitive information, compromise user accounts, and
   further infiltrate the organization's network.
 search: '`o365_management_activity` Workload=Exchange Operation=MailItemsAccessed AppId=* AppId=00000003-0000-0000-c000-000000000000 
-  | rename Operation as action 
   | fillnull 
-  | stats count earliest(_time) as firstTime latest(_time) as lastTime values(ClientIPAddress) as src by user ClientAppId OperationCount AppId vendor_account vendor_product dest action 
+  | stats count earliest(_time) as firstTime latest(_time) as lastTime values(ClientIPAddress) as src by user ClientAppId OperationCount AppId vendor_account vendor_product dest signature
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_oauth_app_mailbox_access_via_graph_api_filter`'

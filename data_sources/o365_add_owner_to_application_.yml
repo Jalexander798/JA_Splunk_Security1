@@ -106,7 +106,6 @@ example_log: '{"CreationTime": "2023-09-07T13:42:04", "Id": "6e2c723b-8f6e-47f4-
   "Type": 2}, {"ID": "user2@contoso.onmicrosoft.com", "Type": 5}, {"ID": "10032002CC029AE9",
   "Type": 3}], "TargetContextId": "48203edf-5d2c-45f2-8123-a368cc8b0e51"}'
 output_fields:
-- action 
 - dest 
 - user 
 - src 

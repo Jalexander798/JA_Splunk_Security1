@@ -14,9 +14,8 @@ description: The following analytic identifies an excessive number of authentica
   within the environment.
 data_source: []
 search: '`o365_management_activity` Workload=AzureActiveDirectory UserAuthenticationMethod=* status=failure 
-  | rename Operation as action 
   | stats count earliest(_time) AS firstTime latest(_time) AS lastTime values(UserAuthenticationMethod) AS UserAuthenticationMethod values(UserAgent) AS
-      user_agent values(status) AS status values(src_ip) AS src values(action) as action by user vendor_account vendor_product dest 
+      user_agent values(status) AS status values(src_ip) AS src values(signature) as signature by user vendor_account vendor_product dest 
   | where count > 10 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 

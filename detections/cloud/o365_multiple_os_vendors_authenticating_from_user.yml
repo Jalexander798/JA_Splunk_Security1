@@ -12,9 +12,8 @@ search: |-
   `o365_management_activity` Operation IN (UserLoginFailed,UserLoggedIn) 
   | eval -time = _time 
   | bin _time span=15m 
-  | rename Operation as action 
   | fillnull 
-  | stats values(Operation) as signature, values(ErrorNumber) as signature_id, values(OS) as os_name, dc(OS) as os_count, count, min(-time) as firstTime, max(-time) as lastTime by ClientIP, UserId, _time, action, dest, vendor_account, vendor_product
+  | stats values(Operation) as signature, values(ErrorNumber) as signature_id, values(OS) as os_name, dc(OS) as os_count, count, min(-time) as firstTime, max(-time) as lastTime by ClientIP, UserId, _time, dest, vendor_account, vendor_product
   | where os_count >= 4 
   | eval src = ClientIP, user = UserId 
   | `security_content_ctime(firstTime)` 

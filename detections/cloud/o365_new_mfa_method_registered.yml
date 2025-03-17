@@ -24,9 +24,8 @@ search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Up
   | eval count_new_method_type = coalesce(mvcount(new_method_type), 0) 
   | eval count_old_method_type = coalesce(mvcount(old_method_type), 0) 
   | where count_new_method_type > count_old_method_type 
-  | rename Operation as action 
   | fillnull 
-  | stats earliest(_time) as firstTime latest(_time) as lastTime values(propertyName) by user newvalue oldvalue vendor_account vendor_product dest action src 
+  | stats earliest(_time) as firstTime latest(_time) as lastTime values(propertyName) by user newvalue oldvalue vendor_account vendor_product dest signature src 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_new_mfa_method_registered_filter`"

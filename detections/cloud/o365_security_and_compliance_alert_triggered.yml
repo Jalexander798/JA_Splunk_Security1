@@ -24,9 +24,8 @@ search: '`o365_management_activity` Workload=SecurityComplianceCenter Category=T
   | spath input=Data path=lon output=operation_name 
   | spath input=Data path=an output=alert_name 
   | spath input=Data path=sev output=severity 
-  | rename operation as action 
   | fillnull 
-  | stats count earliest(_time) as firstTime latest(_time) as lastTime by user, Name, action, rule_id, alert_description, alert_name, severity, dest, src, vendor_account, vendor_product
+  | stats count earliest(_time) as firstTime latest(_time) as lastTime by user, Name, rule_id, alert_description, alert_name, severity, dest, src, vendor_account, vendor_product, signature
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_security_and_compliance_alert_triggered_filter`'

@@ -17,9 +17,9 @@ description: The following analytic identifies instances where Multi-Factor Auth
 data_source:
 - O365 Disable Strong Authentication.
 search: '`o365_management_activity` Operation="Disable Strong Authentication." 
-  | rename command as action UserId as user object as src_user
+  | rename UserId as user object as src_user
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product src_user
+  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user src vendor_account vendor_product src_user
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_disable_mfa_filter`'
@@ -44,7 +44,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: User $src_user$ has executed an operation $action$ for user $user$
+  message: User $src_user$ has executed an operation $signature$ for user $user$
   risk_objects:
   - field: user
     type: user

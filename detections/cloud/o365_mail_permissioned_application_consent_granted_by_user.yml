@@ -23,9 +23,8 @@ search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Co
   | rex field=permissions \"Scope:(?<Scope>[^,]+)\" 
   | makemv delim=\" \" Scope 
   | search Scope IN (\"Mail.Read\", \"Mail.ReadBasic\", \"Mail.ReadWrite\", \"Mail.Read.Shared\", \"Mail.ReadWrite.Shared\", \"Mail.Send\", \"Mail.Send.Shared\") 
-  | rename command as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime values(Scope) as Scope by action dest user src vendor_account vendor_product object ObjectId
+  | stats count min(_time) as firstTime max(_time) as lastTime values(Scope) as Scope by signature dest user src vendor_account vendor_product object ObjectId
   | `security_content_ctime(lastTime)` 
   | `o365_mail_permissioned_application_consent_granted_by_user_filter`"
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest

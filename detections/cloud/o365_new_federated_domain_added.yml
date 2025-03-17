@@ -16,10 +16,9 @@ description: The following analytic identifies the addition of a new federated d
 data_source:
 - O365
 search: '`o365_management_activity` Operation IN ("*add*", "*new*") AND Operation="*domain*" 
-  | rename Operation as action
   | eval src="NA"
   | fillnull
-  | stats count values(ModifiedProperties{}.NewValue) as new_value by user user_agent authentication_service action Workload src vendor_account vendor_product dest 
+  | stats count values(ModifiedProperties{}.NewValue) as new_value by user user_agent authentication_service signature Workload src vendor_account vendor_product dest 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_new_federated_domain_added_filter`'

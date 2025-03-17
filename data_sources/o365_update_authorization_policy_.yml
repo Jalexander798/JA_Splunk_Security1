@@ -98,7 +98,6 @@ example_log: '{"CreationTime": "2023-10-26T19:22:20", "Id": "83774e72-313f-4d1f-
   2}, {"ID": "24484114-1daa-4700-aaf7-44ee5cbe5678", "Type": 2}, {"ID": "Other", "Type":
   2}, {"ID": "Authorization Policy", "Type": 1}], "TargetContextId": "a417c578-c7ee-480d-a225-d48057e74df5"}'
 output_fields:
-- action 
 - dest 
 - user 
 - src 

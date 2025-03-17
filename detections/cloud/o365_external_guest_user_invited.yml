@@ -24,9 +24,8 @@ search: "`o365_management_activity` Workload=AzureActiveDirectory AND Operation=
       [ \\w-]+\\. 
       [ \\w-]{2,4})\" 
   | rename Operation as signature, Id as signature_id 
-  | rename command as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product signature signature_id src_user
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product signature signature_id src_user
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_external_guest_user_invited_filter`"

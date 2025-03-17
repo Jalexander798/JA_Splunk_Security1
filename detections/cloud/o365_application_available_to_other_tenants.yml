@@ -19,9 +19,8 @@ search: "`o365_management_activity` Workload=AzureActiveDirectory Operation IN (
       User\"),mvindex('Actor{}.ID',0),match(mvindex('Actor{}.ID',-1),\"ServicePrincipal\"\
       ),mvindex('Actor{}.ID',3),true(),mvindex('Actor{}.ID',0)) 
   | search result = \"added\" 
-  | rename command as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product object_attrs object_name
+  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user src vendor_account vendor_product object_attrs object_name
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_application_available_to_other_tenants_filter`"

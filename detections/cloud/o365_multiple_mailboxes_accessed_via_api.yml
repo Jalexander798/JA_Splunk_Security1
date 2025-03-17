@@ -20,9 +20,8 @@ search: '`o365_management_activity` Workload=Exchange Operation=MailItemsAccesse
   | bucket span=10m _time 
   | eval matchRegex=if(match(ClientInfoString,"^Client=WebServices;ExchangeWebServices"), 1, 0) 
   | search (AppId="00000003-0000-0000-c000-000000000000" OR matchRegex=1) 
-  | rename Operation as action 
   | fillnull 
-  | stats values(ClientIPAddress) as src dc(user) as unique_mailboxes values(user) as user by _time ClientAppId ClientInfoString vendor_account vendor_product dest action
+  | stats values(ClientIPAddress) as src dc(user) as unique_mailboxes values(user) as user by _time ClientAppId ClientInfoString vendor_account vendor_product dest signature
   | where unique_mailboxes > 5 
   | `o365_multiple_mailboxes_accessed_via_api_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest

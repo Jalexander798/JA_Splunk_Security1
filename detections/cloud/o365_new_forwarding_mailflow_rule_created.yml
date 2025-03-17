@@ -21,9 +21,8 @@ search: "`o365_management_activity` Workload=Exchange Operation=\"New-TransportR
   | eval ForwardTo=coalesce(BlindCopyTo, CopyTo, RedirectMessageTo) 
   | search ForwardTo!=\"\" 
   | rename UserId as user 
-  | rename Operation as action 
   | fillnull 
-  | stats count earliest(_time) as firstTime latest(_time) as lastTime by user, Name, ForwardTo, vendor_account, vendor_product, dest, action 
+  | stats count earliest(_time) as firstTime latest(_time) as lastTime by user, Name, ForwardTo, vendor_account, vendor_product, dest, signature
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_new_forwarding_mailflow_rule_created_filter`"

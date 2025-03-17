@@ -16,9 +16,8 @@ description: The following analytic identifies user sessions in Office 365 acces
 data_source:
 - O365 UserLoggedIn
 search: '`o365_management_activity` Workload=AzureActiveDirectory Operation=UserLoggedIn 
-  | rename command as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime values(src) as src by action dest user vendor_account vendor_product 
+  | stats count min(_time) as firstTime max(_time) as lastTime values(src) as src by signature dest user vendor_account vendor_product 
   | where mvcount(src) > 1 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 

@@ -11,8 +11,8 @@ data_source:
 search: |-
   `o365_management_activity` Workload=Exchange AND Operation IN ("Set-*","Disable-*","New-*","Remove-*") AND Operation="*TransportRule" 
   | eval object_name = case('Parameters{}.Name'=="Name",mvindex('Parameters{}.Value',mvfind('Parameters{}.Name',"^Name$")),true(),ObjectId), object_id = case('Parameters{}.Name'=="Identity",mvindex('Parameters{}.Value',mvfind('Parameters{}.Name',"^Identity$")),true(),Id)
-  | stats values(object_name) as object_name, min(_time) as firstTime, max(_time) as lastTime, count by object_id, UserId, Operation
-  | rename UserId as user, Operation as signature
+  | stats values(object_name) as object_name, min(_time) as firstTime, max(_time) as lastTime, count by object_id, UserId, Operation, signature
+  | rename UserId as user
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)`
   | `o365_email_transport_rule_changed_filter`

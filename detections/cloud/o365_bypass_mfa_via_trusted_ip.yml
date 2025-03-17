@@ -22,9 +22,8 @@ search: '`o365_management_activity` Operation="Set Company Information." Modifie
   | eval ip_addresses_old=if(isnotnull(ip_addresses_old),ip_addresses_old,"0") 
   | mvexpand ip_addresses_new_added 
   | where isnull(mvfind(ip_addresses_old,ip_addresses_new_added)) 
-  | rename command as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime values(ip_addresses_old) as ip_addresses_old by action dest user src vendor_account vendor_product ip_addresses_new_added
+  | stats count min(_time) as firstTime max(_time) as lastTime values(ip_addresses_old) as ip_addresses_old by signature dest user src vendor_account vendor_product ip_addresses_new_added
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_bypass_mfa_via_trusted_ip_filter`'

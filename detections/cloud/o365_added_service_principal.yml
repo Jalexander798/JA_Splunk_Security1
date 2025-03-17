@@ -16,9 +16,8 @@ description: The following analytic detects the addition of new service principa
 data_source:
 - O365
 search: '`o365_management_activity` Workload=AzureActiveDirectory Operation="*Add service principal*" OR (Operation = "*principal*" AND action = "created") 
-  | rename command as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product
+  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user src vendor_account vendor_product
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_added_service_principal_filter`'

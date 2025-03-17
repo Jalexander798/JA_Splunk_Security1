@@ -14,9 +14,9 @@ data_source:
 - Office 365 Universal Audit Log
 search: '`o365_management_activity` Workload=SecurityComplianceCenter Operation=AdminSubmission 
   | search RescanVerdict IN (Phish,Malware) 
-  | rename Operation as action, Id as signature_id, SenderIP as src, Recipients{} as dest_user, P1Sender as src_user
+  | rename Id as signature_id, SenderIP as src, Recipients{} as dest_user, P1Sender as src_user
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product signature signature_id dest_user src_user Subject SubmissionContent
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product signature signature_id dest_user src_user Subject SubmissionContent
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_email_reported_by_admin_found_malicious_filter`'

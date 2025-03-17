@@ -16,9 +16,11 @@ description: The following analytic identifies instances where a user has denied
   or unfamiliar applications. If confirmed malicious, it suggests an attempt by a
   potentially harmful application to gain unauthorized access, which was proactively
   blocked by the user.
-search: '`o365_graph` status.errorCode=65004 | rename userPrincipalName as user |
-  rename ipAddress as src_ip | stats max(_time) as lastTime by user src_ip appDisplayName
-  status.failureReason | `security_content_ctime(lastTime)` | `o365_user_consent_denied_for_oauth_application_filter`'
+search: '`o365_graph` status.errorCode=65004 
+  | rename userPrincipalName as user 
+  | rename ipAddress as src_ip 
+  | stats max(_time) as lastTime by user src_ip appDisplayName status.failureReason dest vendor_account vendor_product
+  | `security_content_ctime(lastTime)` | `o365_user_consent_denied_for_oauth_application_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 events.
 known_false_positives: OAuth applications that require mail permissions may be legitimate,

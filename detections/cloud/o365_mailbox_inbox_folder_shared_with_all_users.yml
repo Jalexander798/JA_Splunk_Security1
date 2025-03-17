@@ -18,9 +18,9 @@ description: The following analytic detects instances where the inbox folder of 
 search: "`o365_management_activity` Operation=ModifyFolderPermissions Workload=Exchange object=Inbox Item.ParentFolder.MemberUpn=Everyone 
   | eval isReadRole=if(match('Item.ParentFolder.MemberRights',\"(ReadAny)\"), \"true\", \"false\") 
   | search isReadRole = \"true\" 
-  | rename Operation as action, UserId as user
+  | rename UserId as user
   | fillnull 
-  | stats count earliest(_time) as firstTime latest(_time) as lastTime by action, user, dest, vendor_account, vendor_product, object, MailboxOwnerUPN, Item.ParentFolder.MemberUpn, Item.ParentFolder.MemberRights 
+  | stats count earliest(_time) as firstTime latest(_time) as lastTime by signature, user, dest, vendor_account, vendor_product, object, MailboxOwnerUPN, Item.ParentFolder.MemberUpn, Item.ParentFolder.MemberRights, src
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_mailbox_inbox_folder_shared_with_all_users_filter`"

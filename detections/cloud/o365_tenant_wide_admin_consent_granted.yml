@@ -20,9 +20,8 @@ search: "`o365_management_activity` Operation=\"Consent to application.\"
   | rex field=new_field \"ConsentType: (?<ConsentType>[^\\,]+)\" 
   | rex field=new_field \"Scope: (?<Scope>[^\\,]+)\" 
   | search ConsentType = \"AllPrincipals\" 
-  | rename Operation as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action, user, object, ObjectId, ConsentType, Scope, dest, vendor_account, vendor_product
+  | stats count min(_time) as firstTime max(_time) as lastTime by user, object, ObjectId, ConsentType, Scope, dest, vendor_account, vendor_product, signature, src
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_tenant_wide_admin_consent_granted_filter`"

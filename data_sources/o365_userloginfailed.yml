@@ -112,7 +112,6 @@ example_log: '{"CreationTime": "2023-10-10T17:08:65", "Id": "4593aac8-855f-4341-
   "IsCompliantAndManaged", "Value": "False"}], "ErrorNumber": "50126", "LogonError":
   "InvalidUserNameOrPassword"}'
 output_fields:
-- action 
 - dest 
 - user 
 - src 

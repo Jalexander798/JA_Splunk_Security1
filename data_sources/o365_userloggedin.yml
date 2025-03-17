@@ -102,7 +102,6 @@ example_log: '{"CreationTime": "2023-12-04T20:42:05", "Id": "52d72a62-132b-487b-
   "Windows10"}, {"Name": "BrowserType", "Value": "Firefox"}, {"Name": "SessionId",
   "Value": "15e27956-79a0-45b2-9d02-60f48349f692"}], "ErrorNumber": "0"}'
 output_fields:
-- action 
 - dest 
 - user 
 - src 

@@ -93,7 +93,6 @@ example_log: '{"CreationTime": "2024-02-01T16:07:34", "Id": "9cef02e9-4bfa-4c73-
   "SizeInBytes": 245068}], "Id": "LgAAAAC0AxwgOj/BRq9Bs1bhMPw/AQDh+UNSDzeHSLWfq+fr83BDAAAAAAEMAAAB",
   "Path": "\\Inbox"}], "OperationCount": 4}'
 output_fields:
-- action 
 - dest 
 - user 
 - src 

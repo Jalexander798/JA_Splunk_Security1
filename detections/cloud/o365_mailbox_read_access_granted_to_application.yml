@@ -22,9 +22,8 @@ search: "`o365_management_activity` Operation=\"Update application.\"
   | spath input=json_data path=RequiredAppPermissions{}.EntitlementId output=EntitlementIds 
   | eval match_found=mvfind(EntitlementIds, \"810c84a8-4a9e-49e6-bf7d-12d183f40d01\") 
   | where isnotnull(match_found) 
-  | rename Operation as action
   | fillnull 
-  | stats count earliest(_time) as firstTime max(_time) as lastTime values(EntitlementIds) as EntitlementIds by action, user, dest, vendor_account, vendor_product, object 
+  | stats count earliest(_time) as firstTime max(_time) as lastTime values(EntitlementIds) as EntitlementIds by signature, user, dest, vendor_account, vendor_product, object, src
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_mailbox_read_access_granted_to_application_filter`"

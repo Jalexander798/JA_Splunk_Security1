@@ -26,9 +26,8 @@ search: "`o365_management_activity` Workload=Exchange Operation=UpdateInboxRules
   | eval ForwardTo=if(match(valueExtracted,\"^[^@]+@[^@]+\\\\.[^@]+$\"), valueExtracted, null) 
   | dedup ForwardTo 
   | where isnotnull(ForwardTo) 
-  | rename Operation as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime values(Name) as Name by action dest user src vendor_account vendor_product ForwardTo 
+  | stats count min(_time) as firstTime max(_time) as lastTime values(Name) as Name by signature dest user src vendor_account vendor_product ForwardTo 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_new_email_forwarding_rule_enabled_filter`"

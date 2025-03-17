@@ -20,9 +20,8 @@ search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Up
   | search index_number >= 0 
   | eval AllowUserConsentForRiskyApps = mvindex('ModifiedProperties{}.NewValue',index_number) 
   | where AllowUserConsentForRiskyApps like \"%true%\" 
-  | rename command as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product AllowUserConsentForRiskyApps
+  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user src vendor_account vendor_product AllowUserConsentForRiskyApps
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_block_user_consent_for_risky_apps_disabled_filter`"

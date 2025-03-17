@@ -14,9 +14,8 @@ description: The following analytic detects accounts experiencing a high number 
   movement within the organization.
 data_source:
 - O365 UserLoginFailed
-search: '`o365_management_activity` Workload=AzureActiveDirectory LogonError=*Sso* Operation=UserLoginFailed 
-  | rename Operation as action 
-  | stats count min(_time) as firstTime max(_time) as lastTime values(user) as user by src vendor_account vendor_product dest action user_agent
+search: '`o365_management_activity` Workload=AzureActiveDirectory LogonError=*Sso* Operation=UserLoginFailed  
+  | stats count min(_time) as firstTime max(_time) as lastTime values(user) as user by src vendor_account vendor_product dest signature user_agent
   | where count >= 5 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 

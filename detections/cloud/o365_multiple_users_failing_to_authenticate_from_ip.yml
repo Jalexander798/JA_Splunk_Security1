@@ -18,9 +18,8 @@ description: The following analytic identifies instances where more than 10 uniq
   their security measures.
 search: '`o365_management_activity` Workload=AzureActiveDirectory Operation=UserLoginFailed ErrorNumber=50126 
   | bucket span=5m _time 
-  | rename Operation as action 
   | fillnull 
-  | stats dc(user) as unique_accounts values(user) as user values(LogonError) as LogonError values(signature) as signature values(UserAgent) as user_agent values(dest) as dest by _time src vendor_account vendor_product action
+  | stats dc(user) as unique_accounts values(user) as user values(LogonError) as LogonError values(signature) as signature values(UserAgent) as user_agent values(dest) as dest by _time src vendor_account vendor_product
   | where unique_accounts > 10 
   | `o365_multiple_users_failing_to_authenticate_from_ip_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest

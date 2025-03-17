@@ -13,9 +13,9 @@ description: The following analytic identifies when specific O365 advanced secur
 data_source:
 - Office 365 Universal Audit Log
 search: '`o365_management_activity` Workload=Exchange AND Operation IN ("Set-*","Disable-*","New-*","Remove-*") Operation IN ("*AntiPhish*","*SafeLink*","*SafeAttachment*","*Malware*") 
-  | rename Operation as action, Id as object_id, UserId as user, Operation as signature, ObjectId as object
+  | rename Id as object_id, UserId as user, Operation as signature, ObjectId as object
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product signature object_id object
+  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user src vendor_account vendor_product signature object_id object
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_email_security_feature_changed_filter`'

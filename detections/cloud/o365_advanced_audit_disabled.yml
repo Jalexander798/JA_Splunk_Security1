@@ -22,10 +22,9 @@ search: "`o365_management_activity` Operation=\"Change user license.\"
   | eval split_value=split(additionalDetails,\"NewValue\") 
   | eval possible_plan=mvindex(split_value, 1) 
   | rex field=\"possible_plan\" \"DisabledPlans=\\[(?P<DisabledPlans>[^\\]]+)\\]\" 
-  | search DisabledPlans IN (\"*M365_ADVANCED_AUDITING*\") 
-  | rename command as action 
+  | search DisabledPlans IN (\"*M365_ADVANCED_AUDITING*\")  
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product DisabledPlans object
+  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user src vendor_account vendor_product DisabledPlans object
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_advanced_audit_disabled_filter`"

@@ -91,7 +91,6 @@ example_log: '{"AppId": "", "ClientAppId": "", "ClientIP": "18.192.200.190:52816
   "True", "SessionId": "86a7cd7c-3f42-4b68-b670-4024b5461a80", "UserId": "pbareiss@rodsoto.onmicrosoft.com",
   "UserKey": "10032001020A3408", "UserType": 2, "Version": 1, "Workload": "Exchange"}'
 output_fields:
-- action 
 - dest 
 - user 
 - src 

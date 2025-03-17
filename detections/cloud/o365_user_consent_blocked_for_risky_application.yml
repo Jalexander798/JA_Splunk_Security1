@@ -21,9 +21,8 @@ search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Co
   | eval reason =mvindex('ModifiedProperties{}.NewValue', 5) 
   | search reason = \"Risky application detected\" 
   | rex field=permissions \"Scope: (?<Scope>[^,]+)\"
-  | rename Operation as action 
   | fillnull 
-  | stats max(_time) as lastTime by action, user, reason, object, Scope, dest, src, vendor_account, vendor_product
+  | stats max(_time) as lastTime by user, reason, object, Scope, dest, src, vendor_account, vendor_product, signature
   | `security_content_ctime(lastTime)` 
   | `o365_user_consent_blocked_for_risky_application_filter`"
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest

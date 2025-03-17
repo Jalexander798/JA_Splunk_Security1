@@ -17,9 +17,8 @@ description: The following analytic detects instances where a user has initiated
 data_source:
 - O365
 search: '`o365_management_activity` Category=ThreatManagement Name="eDiscovery search started or exported" 
-  | rename Operation as action 
   | fillnull 
-  | stats count earliest(_time) as firstTime latest(_time) as lastTime by Source Severity AlertEntityId action Name user src vendor_account vendor_product dest
+  | stats count earliest(_time) as firstTime latest(_time) as lastTime by Source Severity AlertEntityId Name user src vendor_account vendor_product dest signature
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_pst_export_alert_filter`'
@@ -45,7 +44,7 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: User $user$ has exported a PST file from the search using this operation-
-    $action$ with a severity of $Severity$
+    $signature$ with a severity of $Severity$
   risk_objects:
   - field: user
     type: user

@@ -19,9 +19,8 @@ search: "`o365_management_activity` Operation=\"Add member to role.\" Workload=A
   | eval role_id = mvindex('ModifiedProperties{}.NewValue',2) 
   | eval role_name = mvindex('ModifiedProperties{}.NewValue',1) 
   | where role_id IN (\"29232cdf-9323-42fd-ade2-1d097af3e4de\", \"f28a1f50-f6e7-4571-818b-6a12f2af6b6c\", \"62e90394-69f5-4237-9190-012177145e10\") 
-  | rename command as action 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user src vendor_account vendor_product ObjectId role_name role_id
+  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user src vendor_account vendor_product ObjectId role_name role_id
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_high_privilege_role_granted_filter`"

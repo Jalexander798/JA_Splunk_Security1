@@ -16,9 +16,8 @@ search: >-
   | spath input=appRole path=NewValue output=appRole 
   | spath input=targetServicePrincipal path=NewValue output=targetServicePrincipal 
   | where servicePrincipal=targetServicePrincipal 
-  | rename Operation as action 
   | fillnull 
-  | stats earliest(_time) as firstTime latest(_time) as lastTime by action servicePrincipal servicePrincipalId appRole targetAppContext user_agent tenant_id InterSystemsId user dest src vendor_account vendor_product 
+  | stats earliest(_time) as firstTime latest(_time) as lastTime by servicePrincipal servicePrincipalId appRole targetAppContext user_agent tenant_id InterSystemsId user dest src vendor_account vendor_product signature
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_service_principal_privilege_escalation_filter`

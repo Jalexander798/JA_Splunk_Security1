@@ -107,7 +107,6 @@ example_log: '{"Actor": [{"ID": "rodsoto@rodsoto.onmicrosoft.com", "Type": 5}, {
   "rodsoto@rodsoto.onmicrosoft.com", "UserKey": "10037FFEA938FB92@rodsoto.onmicrosoft.com",
   "UserType": 0, "Version": 1, "Workload": "AzureActiveDirectory"}'
 output_fields:
-- action 
 - dest 
 - user 
 - src 
