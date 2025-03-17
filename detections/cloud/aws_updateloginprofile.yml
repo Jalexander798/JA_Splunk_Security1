@@ -17,9 +17,10 @@ data_source:
 - AWS CloudTrail UpdateLoginProfile
 search: '`cloudtrail` eventName = UpdateLoginProfile userAgent !=console.amazonaws.com
   errorCode = success | eval match=if(match(userIdentity.userName,requestParameters.userName),
-  1,0) | search match=0 | stats count min(_time) as firstTime max(_time) as lastTime
-  by requestParameters.userName src eventName eventSource aws_account_id errorCode
-  userAgent eventID awsRegion userIdentity.userName user_arn | `security_content_ctime(firstTime)`
+  1,0) | search match=0 
+  | stats count min(_time) as firstTime max(_time) as lastTime by actor.user.uid api.operation api.service.name http_request.user_agent src_endpoint.ip actor.user.account.uid cloud.provider cloud.region
+  | rename actor.user.uid as user api.operation as action api.service.name as dest http_request.user_agent as user_agent src_endpoint.ip as src actor.user.account.uid as vendor_account cloud.provider as vendor_product cloud.region as vendor_region 
+  | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `aws_updateloginprofile_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
   search works with AWS CloudTrail logs.
@@ -29,12 +30,12 @@ references:
 - https://bishopfox.com/blog/privilege-escalation-in-aws
 - https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation-part-2/
 drilldown_searches:
-- name: View the detection results for - "$user_arn$"
-  search: '%original_detection_search% | search  user_arn = "$user_arn$"'
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search  user = "$user$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$user_arn$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user_arn$")
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -43,11 +44,11 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: From IP address $src$, user agent $userAgent$ has trigged an event $eventName$
-    for updating the existing login profile, potentially giving user $user_arn$ more
+  message: From IP address $src$, user agent $userAgent$ has trigged an event UpdateLoginProfile
+    for updating the existing login profile, potentially giving user $user$ more
     access privilleges
   risk_objects:
-  - field: user_arn
+  - field: user
     type: user
     score: 30
   threat_objects:

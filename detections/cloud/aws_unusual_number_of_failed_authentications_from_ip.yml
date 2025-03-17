@@ -16,7 +16,8 @@ data_source:
 - AWS CloudTrail ConsoleLogin
 search: '`cloudtrail` eventName=ConsoleLogin action=failure 
   | bucket span=10m _time
-  | stats  dc(_raw) AS distinct_attempts values(user_name) as tried_accounts by _time, src_ip 
+  | stats  dc(_raw) AS distinct_attempts values(user_name) as tried_accounts values(action) as action values(dest) as dest 
+  values(vendor_account) as vendor_account values(vendor_region) as vendor_region values(vendor_product) as vendor_product values(user_agent) as user_agent by _time, src_ip 
   | eventstats avg(distinct_attempts) as avg_attempts , stdev(distinct_attempts) as ip_std by _time 
   | eval upperBound=(avg_attempts+ip_std*3) 
   | eval  isOutlier=if(distinct_attempts > 10 and distinct_attempts >= upperBound, 1, 0) 
@@ -47,13 +48,13 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: 'Unusual number of failed console login attempts (Count: $distinct_attempts$)
-    against users from IP Address - $src_ip$'
+    against users from IP Address - $src$'
   risk_objects:
   - field: tried_accounts
     type: user
     score: 54
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:
