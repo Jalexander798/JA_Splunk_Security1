@@ -80,3 +80,9 @@ example_log:
   "newValue": "[true]"}, {"displayName": "Included Updated Properties", "oldValue":
   null, "newValue": "\"AccountEnabled\""}], "administrativeUnits": []}], "additionalDetails":
   []}}'
+output_fields:
+- dest
+- user
+- src
+- vendor_account
+- vendor_product

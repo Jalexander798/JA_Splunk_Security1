@@ -56,16 +56,17 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
+  - SnappyBee
   - ValleyRAT
-  - China-Nexus Threat Activity
   - Brute Ratel C4
-  - Derusbi
+  - WinDealer RAT
   - Meduza Stealer
   - CISA AA23-347A
-  - DarkGate Malware
-  - WinDealer RAT
-  - PlugX
   - AsyncRAT
+  - Derusbi
+  - PlugX
+  - China-Nexus Threat Activity
+  - DarkGate Malware
   - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:

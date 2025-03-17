@@ -104,6 +104,9 @@ tags:
   - ValleyRAT
   - Meduza Stealer
   - SystemBC
+  - China-Nexus Threat Activity
+  - Earth Estries
+  - SnappyBee
   asset_type: Endpoint
   mitre_attack_id:
   - T1543

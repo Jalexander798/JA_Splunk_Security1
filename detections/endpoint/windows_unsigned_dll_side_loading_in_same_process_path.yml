@@ -1,7 +1,7 @@
 name: Windows Unsigned DLL Side-Loading In Same Process Path
 id: 3cf85c02-f9d6-4186-bf3c-e70ee99fbc7f
-version: '8'
-date: '2025-02-24'
+version: 8
+date: '2025-02-26'
 author: Teoderick Contreras, Splunk
 data_source:
 - Sysmon EventID 7
@@ -15,15 +15,15 @@ description: This detection identifies unsigned DLLs loaded through DLL side-loa
   potential security breaches. Regular security assessments, thorough monitoring,
   and implementing security best practices are essential in safeguarding systems from
   such threats.
-search: '`sysmon` EventCode=7 Signed=false SignatureStatus != Valid NOT (Image IN
-  ("*:\\windows\\system32\\*", "*:\\windows\\syswow64\\*", "c:\\Program Files*"))
-  NOT (ImageLoaded IN ("*:\\windows\\system32\\*", "*:\\windows\\syswow64\\*", "c:\\Program
-  Files*")) |  rex field=Image "(?<ImageFolderPath>.+\\\)" |  rex field=ImageLoaded
-  "(?<ImageLoadedFolderPath>.+\\\)" |  where ImageFolderPath = ImageLoadedFolderPath
-  | stats count min(_time) as firstTime max(_time) as lastTime by Image ProcessGuid
-  ImageLoaded user Computer EventCode ImageFolderPath ImageLoadedFolderPath Company
-  Description Product Signed SignatureStatus |  rename Computer as dest | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `windows_unsigned_dll_side_loading_in_same_process_path_filter`'
+search: '`sysmon` EventCode=7 Signed=false SignatureStatus != Valid NOT (Image IN ("*:\\windows\\system32\\*", "*:\\windows\\syswow64\\*", "c:\\Program Files*")) NOT (ImageLoaded IN ("*:\\windows\\system32\\*", "*:\\windows\\syswow64\\*", "c:\\Program Files*"))  ImageLoaded = *.dll
+  | rex field=Image "(?<ImageFolderPath>.+\\\)"
+  | rex field=ImageLoaded "(?<ImageLoadedFolderPath>.+\\\)"
+  | where ImageFolderPath = ImageLoadedFolderPath
+  | stats count min(_time) as firstTime max(_time) as lastTime by Image ProcessGuid ImageLoaded user Computer EventCode ImageFolderPath ImageLoadedFolderPath Company Description Product Signed SignatureStatus
+  | rename Computer as dest
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)`
+  | `windows_unsigned_dll_side_loading_in_same_process_path_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name and imageloaded executions from your endpoints. If you
   are using Sysmon, you must have at least version 6.0.4 of the Sysmon TA.
@@ -59,6 +59,7 @@ tags:
   - DarkGate Malware
   - PlugX
   - Earth Estries
+  - SnappyBee
   asset_type: Endpoint
   mitre_attack_id:
   - T1574.002

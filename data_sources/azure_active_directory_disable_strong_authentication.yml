@@ -79,3 +79,9 @@ example_log:
   "newValue": "[]"}, {"displayName": "Included Updated Properties", "oldValue": null,
   "newValue": "\"StrongAuthenticationRequirement\""}], "administrativeUnits": []}],
   "additionalDetails": []}}'
+output_fields:
+- dest
+- user
+- src
+- vendor_account
+- vendor_product

@@ -76,36 +76,39 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - BlackByte Ransomware
-  - DHS Report TA18-074A
-  - Snake Keylogger
-  - Emotet Malware DHS Report TA18-201A
-  - Sneaky Active Directory Persistence Tricks
-  - Warzone RAT
-  - NjRAT
-  - Suspicious MSHTA Activity
-  - Suspicious Windows Registry Activities
-  - Braodo Stealer
-  - AsyncRAT
-  - Windows Registry Abuse
-  - Chaos Ransomware
-  - Derusbi
-  - Windows Persistence Techniques
-  - WinDealer RAT
-  - RedLine Stealer
-  - Remcos
   - Possible Backdoor Activity Associated With MUDCARP Espionage Campaigns
-  - China-Nexus Threat Activity
-  - Qakbot
-  - IcedID
-  - Ransomware
-  - BlackSuit Ransomware
   - MoonPeak
+  - Amadey
+  - RedLine Stealer
+  - Emotet Malware DHS Report TA18-201A
+  - Chaos Ransomware
+  - WinDealer RAT
+  - Warzone RAT
+  - China-Nexus Threat Activity
+  - Earth Estries
+  - SnappyBee
+  - Windows Persistence Techniques
+  - Snake Keylogger
+  - Ransomware
   - CISA AA23-347A
+  - DHS Report TA18-074A
+  - Windows Registry Abuse
+  - Sneaky Active Directory Persistence Tricks
+  - BlackSuit Ransomware
+  - Qakbot
   - DarkGate Malware
+  - IcedID
+  - Braodo Stealer
+  - Suspicious MSHTA Activity
+  - NjRAT
+  - AsyncRAT
   - Azorult
   - Amadey
   - SystemBC
+  - Suspicious Windows Registry Activities
+  - Derusbi
+  - BlackByte Ransomware
+  - Remcos
   asset_type: Endpoint
   mitre_attack_id:
   - T1547.001

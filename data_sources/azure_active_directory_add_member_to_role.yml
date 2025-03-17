@@ -84,3 +84,9 @@ example_log:
   []}, {"id": "38bf5baf-7ec7-4bc2-8920-6d4044da12c2", "displayName": null, "type":
   "Role", "modifiedProperties": [], "administrativeUnits": []}], "additionalDetails":
   []}}'
+output_fields:
+- dest
+- user
+- src
+- vendor_account
+- vendor_product
