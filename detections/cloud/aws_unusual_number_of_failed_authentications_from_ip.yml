@@ -17,7 +17,7 @@ data_source:
 search: '`cloudtrail` eventName=ConsoleLogin action=failure 
   | bucket span=10m _time
   | stats  dc(_raw) AS distinct_attempts values(user_name) as tried_accounts values(action) as action values(dest) as dest 
-  values(vendor_account) as vendor_account values(vendor_region) as vendor_region values(vendor_product) as vendor_product values(user_agent) as user_agent by _time, src_ip 
+  values(vendor_account) as vendor_account values(vendor_region) as vendor_region values(vendor_product) as vendor_product values(user_agent) as user_agent by _time, src 
   | eventstats avg(distinct_attempts) as avg_attempts , stdev(distinct_attempts) as ip_std by _time 
   | eval upperBound=(avg_attempts+ip_std*3) 
   | eval  isOutlier=if(distinct_attempts > 10 and distinct_attempts >= upperBound, 1, 0) 
