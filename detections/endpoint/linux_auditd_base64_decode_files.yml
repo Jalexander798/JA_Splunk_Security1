@@ -1,7 +1,7 @@
 name: Linux Auditd Base64 Decode Files
 id: 5890ba10-4e48-4dc0-8a40-3e1ebe75e737
-version: 3
-date: '2024-11-13'
+version: 4
+date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -15,11 +15,14 @@ description: The following analytic detects suspicious Base64 decode operations 
   risks associated with encoded malware or unauthorized data access.
 data_source:
 - Linux Auditd Execve
-search: '`linux_auditd` `linux_auditd_normalized_execve_process` | rename host as
-  dest | where LIKE(process_exec, "%base64%") AND (LIKE(process_exec, "%-d %") OR
-  LIKE(process_exec, "% --d%")) | stats count min(_time) as firstTime max(_time) as
-  lastTime by argc process_exec dest | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`|
-  `linux_auditd_base64_decode_files_filter`'
+search: '`linux_auditd` execve_command = "*base64*" AND execve_command IN ("*-d*", "* --d*")
+  | rename host as dest
+  | rename comm as process_name 
+  | rename exe as process  
+  | stats count min(_time) as firstTime max(_time) as lastTime by argc execve_command dest 
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)`
+  |`linux_auditd_base64_decode_files_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
   data, that consist SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
   executions and process details on Unix/Linux systems. These logs should be ingested
@@ -49,7 +52,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A [$process_exec$] event occurred on host - [$dest$] to decode a file using
+  message: A [$execve_command$] event occurred on host - [$dest$] to decode a file using
     base64.
   risk_objects:
   - field: dest
@@ -74,6 +77,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1140/linux_auditd_base64/linux_auditd_base64.log
-    source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1140/linux_auditd_base64/auditd_execve_base64.log
+    source: auditd
+    sourcetype: auditd

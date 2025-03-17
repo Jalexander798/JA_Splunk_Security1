@@ -1,6 +1,6 @@
 name: Azure AD Multiple Failed MFA Requests For User
 id: 264ea131-ab1f-41b8-90e0-33ad1a1888ea
-version: 8
+version: 9
 date: '2025-02-10'
 author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
 status: production
@@ -15,12 +15,16 @@ description: The following analytic identifies multiple failed multi-factor auth
   within the environment.
 data_source:
 - Azure Active Directory Sign-in activity
-search: '`azure_monitor_aad` category=SignInLogs operationName="Sign-in activity"
-  properties.status.errorCode=500121 properties.status.additionalDetails!="MFA denied;
-  user declined the authentication" | rename properties.* as * | bucket span=10m _time
-  | stats count min(_time) as firstTime max(_time) as lastTime by user, status.additionalDetails,
-  appDisplayName, user_agent | where count > 10 | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `azure_ad_multiple_failed_mfa_requests_for_user_filter`'
+search: '`azure_monitor_aad` category=SignInLogs operationName="Sign-in activity" properties.status.errorCode=500121 properties.status.additionalDetails!="MFA denied; user declined the authentication" 
+  | rename properties.* as * 
+  | bucket span=10m _time 
+  | rename userAgent as user_agent 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime values(dest) as dest values(src) as src by user, status.additionalDetails, appDisplayName, user_agent, vendor_account, vendor_product, signature
+  | where count > 10 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `azure_ad_multiple_failed_mfa_requests_for_user_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment

@@ -1,6 +1,6 @@
 name: Azure AD FullAccessAsApp Permission Assigned
 id: ae286126-f2ad-421c-b240-4ea83bd1c43a
-version: 4
+version: 6
 date: '2024-11-14'
 author: Mauricio Velazco, Splunk
 status: production
@@ -15,13 +15,16 @@ description: The following analytic detects the assignment of the 'full_access_a
   access and data exfiltration.
 data_source:
 - Azure Active Directory Update application
-search: "`azure_monitor_aad` category=AuditLogs operationName=\"Update application\"\
-  \  | eval newvalue = mvindex('properties.targetResources{}.modifiedProperties{}.newValue',0)
-  | spath input=newvalue  | search \"{}.ResourceAppId\"=\"00000002-0000-0ff1-ce00-000000000000\"\
-  \  \"{}.RequiredAppPermissions{}.EntitlementId\"=\"dc890d15-9560-4a4c-9b7f-a736ec74ec40\"\
-  \ | eval Permissions = '{}.RequiredAppPermissions{}.EntitlementId' | stats count
-  earliest(_time) as firstTime latest(_time) as lastTime values(Permissions) by user,
-  object, user_agent, operationName | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+search: "`azure_monitor_aad` category=AuditLogs operationName=\"Update application\" 
+  | eval newvalue = mvindex('properties.targetResources{}.modifiedProperties{}.newValue',0) 
+  | spath input=newvalue 
+  | search \"{}.ResourceAppId\"=\"00000002-0000-0ff1-ce00-000000000000\" \"{}.RequiredAppPermissions{}.EntitlementId\"=\"dc890d15-9560-4a4c-9b7f-a736ec74ec40\" 
+  | eval Permissions = '{}.RequiredAppPermissions{}.EntitlementId' 
+  | rename properties.userAgent as user_agent 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product user_agent Permissions object signature
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
   | `azure_ad_fullaccessasapp_permission_assigned_filter`"
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase(https://splunkbase.splunk.com/app/3110/#/details).
