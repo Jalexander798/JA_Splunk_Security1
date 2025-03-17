@@ -1,6 +1,6 @@
 name: AWS Excessive Security Scanning
 id: 1fdd164a-def8-4762-83a9-9ffe24e74d5a
-version: 4
+version: 5
 date: '2024-11-14'
 author: Patrick Bareiss, Splunk
 status: production
@@ -14,11 +14,13 @@ description: The following analytic identifies excessive security scanning activ
   exploitation of your cloud infrastructure.
 data_source:
 - AWS CloudTrail
-search: '`cloudtrail` eventName=Describe* OR eventName=List* OR eventName=Get*  |
-  stats dc(eventName) as dc_events min(_time) as firstTime max(_time) as lastTime
-  values(eventName) as command values(src) as src values(userAgent) as userAgent by
-  user userIdentity.arn | where dc_events > 50 | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)`|`aws_excessive_security_scanning_filter`'
+search: '`cloudtrail` eventName=Describe* OR eventName=List* OR eventName=Get*  
+  | fillnull
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
+  | eval vendor_product = "AWS"
+  | stats dc(action) as dc_events min(_time) as firstTime max(_time) as lastTime values(action) as action values(dest) as dest values(user_agent) as user_agent values(src) as src values(vendor_account) as vendor_account values(vendor_region) as vendor_region by user 
+  | where dc_events > 50 
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`|`aws_excessive_security_scanning_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
   search works with AWS CloudTrail logs.
 known_false_positives: While this search has no known false positives.
@@ -40,7 +42,7 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: User $user$ has excessive number of api calls $dc_events$ from these IP
-    addresses $src$, violating the threshold of 50, using the following commands $command$.
+    addresses $src$, violating the threshold of 50, using the following actions $action$.
   risk_objects:
   - field: user
     type: user

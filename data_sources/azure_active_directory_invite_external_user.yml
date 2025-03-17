@@ -81,3 +81,9 @@ example_log:
   {"key": "wids", "value": "62e90394-69f5-4237-9190-012177145e10"}, {"key": "InvitationId",
   "value": "65c7d12f-c6f3-44f0-8fad-4f57a1020484"}, {"key": "invitedUserEmailAddress",
   "value": "oops360@gmail.com"}]}}'
+output_fields:
+- dest
+- user
+- src
+- vendor_account
+- vendor_product

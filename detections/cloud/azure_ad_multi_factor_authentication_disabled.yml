@@ -1,6 +1,6 @@
 name: Azure AD Multi-Factor Authentication Disabled
 id: 482dd42a-acfa-486b-a0bb-d6fcda27318e
-version: 7
+version: 8
 date: '2025-02-10'
 author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
 status: production
@@ -14,11 +14,16 @@ description: The following analytic detects attempts to disable multi-factor aut
   and prolonged undetected presence in the environment.
 data_source:
 - Azure Active Directory Disable Strong Authentication
-search: '`azure_monitor_aad` category=AuditLogs operationName="Disable Strong Authentication"
-  | rename properties.* as * | rename targetResources{}.type as type | rename initiatedBy.user.userPrincipalName
-  as initiatedBy | stats count min(_time) as firstTime max(_time) as lastTime by user,
-  type, operationName, initiatedBy, result | `security_content_ctime(firstTime)` |
-  `security_content_ctime(lastTime)` | `azure_ad_multi_factor_authentication_disabled_filter`'
+search: '`azure_monitor_aad` category=AuditLogs operationName="Disable Strong Authentication" 
+  | rename properties.* as * 
+  | rename targetResources{}.type as type 
+  | rename initiatedBy.user.userPrincipalName as initiatedBy 
+  | rename userAgent as user_agent 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product user_agent initiatedBy signature
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `azure_ad_multi_factor_authentication_disabled_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment
@@ -49,9 +54,6 @@ rba:
   message: MFA disabled for User $user$ initiated by $initiatedBy$
   risk_objects:
   - field: user
-    type: user
-    score: 45
-  - field: initiatedBy
     type: user
     score: 45
   threat_objects: []

@@ -1,6 +1,6 @@
 name: Azure Runbook Webhook Created
 id: e98944a9-92e4-443c-81b8-a322e33ce75a
-version: 8
+version: 9
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
@@ -15,11 +15,14 @@ description: The following analytic detects the creation of a new Automation Run
   control over Azure resources.
 data_source:
 - Azure Audit Create or Update an Azure Automation webhook
-search: '`azure_audit` operationName.localizedValue="Create or Update an Azure Automation
-  webhook" status.value=Succeeded | dedup object | rename claims.ipaddr as src_ip
-  | rename caller as user | stats count min(_time) as firstTime max(_time) as lastTime
-  by object user, src_ip, resourceGroupName, object_path | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `azure_runbook_webhook_created_filter`'
+search: '`azure_audit` operationName.localizedValue="Create or Update an Azure Automation webhook" status.value=Succeeded 
+  | dedup object 
+  | rename claims.ipaddr as src_ip
+  | rename caller as user 
+  | stats count min(_time) as firstTime max(_time) as lastTime values(dest) as dest by object user, src_ip, resourceGroupName, object_path
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` 
+  | `azure_runbook_webhook_created_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Audit events into your Splunk environment. Specifically,
