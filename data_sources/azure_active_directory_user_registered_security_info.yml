@@ -78,3 +78,9 @@ example_log:
   "roles": []}}, "targetResources": [{"id": "40b61050-e814-4ae5-8ffe-66b6f0c53998",
   "displayName": "User30", "type": "User", "userPrincipalName": "User30@splunkresearch.com",
   "modifiedProperties": [], "administrativeUnits": []}], "additionalDetails": []}}'
+output_fields:
+- dest
+- user
+- src
+- vendor_account
+- vendor_product

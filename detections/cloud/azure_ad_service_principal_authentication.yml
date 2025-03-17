@@ -1,6 +1,6 @@
 name: Azure AD Service Principal Authentication
 id: 5a2ec401-60bb-474e-b936-1e66e7aa4060
-version: 5
+version: 7
 date: '2024-11-14'
 author: Mauricio Velazco, Splunk
 data_source:
@@ -16,10 +16,13 @@ description: The following analytic identifies authentication events of service 
   or malicious activities. If confirmed malicious, attackers could gain unauthorized
   access to resources, leading to data breaches or further exploitation within the
   environment.
-search: '`azure_monitor_aad` operationName="Sign-in activity" category=ServicePrincipalSignInLogs
-  | rename properties.* as * | stats count earliest(_time) as firstTime latest(_time)
-  as lastTime by user, user_id, src_ip, resourceDisplayName, resourceId | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `azure_ad_service_principal_authentication_filter`'
+search: '`azure_monitor_aad` operationName="Sign-in activity" category=ServicePrincipalSignInLogs 
+  | rename properties.* as * 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product resourceDisplayName resourceId signature
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `azure_ad_service_principal_authentication_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment
@@ -47,13 +50,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Service Principal $user$ authenticated from $src_ip$
+  message: Service Principal $user$ authenticated from $src$
   risk_objects:
   - field: user
     type: user
     score: 25
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:

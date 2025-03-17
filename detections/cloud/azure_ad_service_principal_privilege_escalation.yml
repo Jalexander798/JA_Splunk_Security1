@@ -1,6 +1,6 @@
 name: Azure AD Service Principal Privilege Escalation
 id: 29eb39d3-2bc8-49cc-99b3-35593191a588
-version: 2
+version: 4
 date: '2025-02-10'
 author: Dean Luxton
 data_source:
@@ -10,22 +10,19 @@ status: production
 description: This detection identifies when an Azure Service Principal elevates privileges
   by adding themself to a new app role assignment.
 search: >-
-  `azure_monitor_aad` category=AuditLogs operationName="Add app role assignment to
-  service principal" properties.initiatedBy.app.displayName=* properties.result=Success  |
-  spath path=properties{}.targetResources{}.modifiedProperties{} output=targetResources
-  | stats min(_time) as _time values(eval(mvfilter(match(targetResources, "AppRole.Value"))))
-  as appRole, values(eval(mvfilter(match(targetResources, "ServicePrincipal.DisplayName"))))
-  as targetServicePrincipal values(eval(mvindex('properties.targetResources{}.displayName',0)))
-  as targetAppContext values(user_agent) as user_agent values(identity) as servicePrincipal
-  values(properties.initiatedBy.app.servicePrincipalId) as servicePrincipalId by operationName
-  tenantId correlationId
-  | spath input=appRole path=newValue output=appRole
-  | spath input=targetServicePrincipal path=newValue output=targetServicePrincipal
-  | eval appRole=trim(replace(appRole, "\"", "")), targetServicePrincipal=trim(replace(targetServicePrincipal,
-  "\"", ""))
-  | where servicePrincipal=targetServicePrincipal
-  | table _time operationName servicePrincipal servicePrincipalId appRole targetAppContext
-  user_agent tenantId correlationId
+  `azure_monitor_aad` category=AuditLogs operationName="Add app role assignment to service principal" properties.initiatedBy.app.displayName=* properties.result=Success 
+  | spath path=properties{}.targetResources{}.modifiedProperties{} output=targetResources 
+  | rename properties.* as * 
+  | eval user="NA" 
+  | eval src="NA" 
+  | stats min(_time) as firstTime max(_time) as lastTime values(eval(mvfilter(match(targetResources, "AppRole.Value")))) as appRole, values(eval(mvfilter(match(targetResources, "ServicePrincipal.DisplayName")))) as targetServicePrincipal values(eval(mvindex('properties.targetResources{}.displayName',0))) as targetAppContext 
+  values(user_agent) as user_agent values(identity) as servicePrincipal values(properties.initiatedBy.app.servicePrincipalId) as servicePrincipalId by dest user src vendor_account vendor_product signature
+  | spath input=appRole path=newValue output=appRole 
+  | spath input=targetServicePrincipal path=newValue output=targetServicePrincipal 
+  | eval appRole=trim(replace(appRole, "\"", "")), targetServicePrincipal=trim(replace(targetServicePrincipal, "\"", "")) 
+  | where servicePrincipal=targetServicePrincipal 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)`
   | `azure_ad_service_principal_privilege_escalation_filter`
 how_to_implement: The Splunk Add-on for Microsoft Cloud Services add-on is required
   to ingest EntraID audit logs via Azure EventHub. See reference for links for further

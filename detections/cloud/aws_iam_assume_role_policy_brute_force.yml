@@ -1,6 +1,6 @@
 name: AWS IAM Assume Role Policy Brute Force
 id: f19e09b0-9308-11eb-b7ec-acde48001122
-version: 4
+version: 5
 date: '2024-11-14'
 author: Michael Haag, Splunk
 status: production
@@ -15,12 +15,12 @@ description: The following analytic detects multiple failed attempts to assume a
   data and services.
 data_source:
 - AWS CloudTrail
-search: '`cloudtrail` (errorCode=MalformedPolicyDocumentException) status=failure
-  (userAgent!=*.amazonaws.com) | stats count min(_time) as firstTime max(_time) as
-  lastTime values(requestParameters.policyName) as policy_name by src eventName eventSource
-  aws_account_id errorCode requestParameters.policyDocument userAgent eventID awsRegion
-  userIdentity.principalId user_arn | where count >= 2 | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `aws_iam_assume_role_policy_brute_force_filter`'
+search: '`cloudtrail` (errorCode=MalformedPolicyDocumentException) status=failure (userAgent!=*.amazonaws.com) 
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
+  | eval vendor_product = "AWS"
+  | stats count min(_time) as firstTime max(_time) as lastTime values(requestParameters.policyName) as policy_name by src, user, vendor_account vendor_region, vendor_product, action, dest, errorCode
+  | where count >= 2 
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `aws_iam_assume_role_policy_brute_force_filter`'
 how_to_implement: The Splunk AWS Add-on and Splunk App for AWS is required to utilize
   this data. The search requires AWS CloudTrail logs. Set the `where count` greater
   than a value to identify suspicious activity in your environment.
@@ -32,12 +32,12 @@ references:
 - https://rhinosecuritylabs.com/aws/assume-worst-aws-assume-role-enumeration/
 - https://www.elastic.co/guide/en/security/current/aws-iam-brute-force-of-assume-role-policy.html
 drilldown_searches:
-- name: View the detection results for - "$user_arn$"
-  search: '%original_detection_search% | search  user_arn = "$user_arn$"'
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search  user = "$user$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$user_arn$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user_arn$")
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -46,10 +46,10 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: User $user_arn$ has caused multiple failures with errorCode $errorCode$,
+  message: User $user$ has caused multiple failures with errorCode $errorCode$,
     which potentially means adversary is attempting to identify a role name.
   risk_objects:
-  - field: user_arn
+  - field: user
     type: user
     score: 28
   threat_objects:

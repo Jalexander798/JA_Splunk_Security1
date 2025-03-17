@@ -111,3 +111,10 @@ example_log:
   "DeviceManagementAPIVersion", "Old": null, "New": "5024-02-13"}], "Name": null}]},
   "resultType": "Success", "resultDescription": "None", "correlationId": "949ac544-b4e5-4576-a117-915c47c0ee00",
   "identity": "brian.cove@frothlydev.onmicrosoft.com"}'
+output_fields:
+- action
+- dest
+- user
+- src
+- vendor_account
+- vendor_product
