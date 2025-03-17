@@ -1,7 +1,7 @@
 name: Spoolsv Writing a DLL
 id: d5bf5cf2-da71-11eb-92c2-acde48001122
-version: 7
-date: '2025-02-10'
+version: '8'
+date: '2025-03-03'
 author: Mauricio Velazco, Michael Haag, Splunk
 status: production
 type: TTP
@@ -65,6 +65,7 @@ tags:
   analytic_story:
   - PrintNightmare CVE-2021-34527
   - Compromised Windows Host
+  - Black Basta Ransomware
   asset_type: Endpoint
   cve:
   - CVE-2021-34527
@@ -78,7 +79,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.012/printnightmare/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.012/printnightmare/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

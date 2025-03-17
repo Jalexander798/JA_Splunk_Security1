@@ -1,6 +1,6 @@
 name: AWS Defense Evasion PutBucketLifecycle
 id: ce1c0e2b-9303-4903-818b-0d9002fc6ea4
-version: 5
+version: 6
 date: '2025-02-10'
 author: Bhavin Patel
 status: production
@@ -15,11 +15,12 @@ description: The following analytic detects `PutBucketLifecycle` events in AWS C
 data_source:
 - AWS CloudTrail PutBucketLifecycle
 search: '`cloudtrail` eventName=PutBucketLifecycle user_type=IAMUser errorCode=success
-  |  spath path=requestParameters{}.LifecycleConfiguration{}.Rule{}.Expiration{}.Days
-  output=expiration_days |  spath path=requestParameters{}.bucketName output=bucket_name
-  | stats count min(_time) as firstTime max(_time) as lastTime  by src region eventName
-  userAgent user_arn aws_account_id expiration_days  bucket_name user_type| `security_content_ctime(firstTime)`
-  |  `security_content_ctime(lastTime)` | where expiration_days < 3 | `aws_defense_evasion_putbucketlifecycle_filter`'
+  | spath path=requestParameters{}.LifecycleConfiguration{}.Rule{}.Expiration{}.Days output=expiration_days 
+  | spath path=requestParameters{}.bucketName output=bucket_name
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
+  | eval vendor_product = "AWS"
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product bucket_name expiration_days
+  | `security_content_ctime(firstTime)` |  `security_content_ctime(lastTime)` | `aws_defense_evasion_putbucketlifecycle_filter`'
 how_to_implement: You must install Splunk AWS Add on and enable CloudTrail logs in
   your AWS Environment. We recommend our users to set the expiration days value according
   to your company's log retention policies.

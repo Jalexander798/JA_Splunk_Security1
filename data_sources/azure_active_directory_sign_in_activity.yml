@@ -160,3 +160,9 @@ example_log:
   "ropc", "appServicePrincipalId": null, "resourceServicePrincipalId": "56ad242f-e13b-47fc-8de8-19e3bf6f6575",
   "rngcStatus": 0, "signInTokenProtectionStatus": "none", "originalTransferMethod":
   "none"}}'
+output_fields:
+- dest
+- user
+- src
+- vendor_account
+- vendor_product

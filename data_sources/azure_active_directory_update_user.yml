@@ -82,3 +82,9 @@ example_log:
   Properties", "oldValue": null, "newValue": "\"AccountEnabled\""}, {"displayName":
   "TargetId.UserType", "oldValue": null, "newValue": "\"Member\""}], "administrativeUnits":
   []}], "additionalDetails": [{"key": "UserType", "value": "Member"}]}}'
+output_fields:
+- dest
+- user
+- src
+- vendor_account
+- vendor_product

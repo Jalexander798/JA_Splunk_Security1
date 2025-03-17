@@ -1,6 +1,6 @@
 name: Azure AD Service Principal Created
 id: f8ba49e7-ffd3-4b53-8f61-e73974583c5d
-version: 4
+version: 6
 date: '2024-11-14'
 author: Gowthamaraj Rajendran, Mauricio Velazco, Splunk
 status: production
@@ -15,11 +15,15 @@ description: The following analytic detects the creation of a Service Principal 
   and prolonged undetected activity.
 data_source:
 - Azure Active Directory Add service principal
-search: '`azure_monitor_aad`  operationName="Add service principal" properties.initiatedBy.user.id=*
-  | rename properties.* as * | rename targetResources{}.displayName as displayName
-  | rename targetResources{}.type as type | stats count min(_time) as firstTime max(_time)
-  as lastTime values(displayName) as displayName by type, user, result, operationName
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `azure_ad_service_principal_created_filter`'
+search: '`azure_monitor_aad` operationName="Add service principal" properties.initiatedBy.user.id=* 
+  | rename properties.* as * 
+  | rename targetResources{}.displayName as displayName 
+  | rename targetResources{}.type as type 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product displayName result signature
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `azure_ad_service_principal_created_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase(https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment

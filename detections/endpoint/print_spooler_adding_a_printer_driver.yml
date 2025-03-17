@@ -1,7 +1,7 @@
 name: Print Spooler Adding A Printer Driver
 id: 313681a2-da8e-11eb-adad-acde48001122
-version: 5
-date: '2025-02-10'
+version: '6'
+date: '2025-03-03'
 author: Mauricio Velazco, Michael Haag, Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -52,6 +52,7 @@ rba:
 tags:
   analytic_story:
   - PrintNightmare CVE-2021-34527
+  - Black Basta Ransomware
   asset_type: Endpoint
   cve:
   - CVE-2021-34527
@@ -66,7 +67,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.012/printnightmare/windows-printservice_operational.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.012/printnightmare/windows-printservice_operational.log
     source: WinEventLog:Microsoft-Windows-PrintService/Operational
     sourcetype: WinEventLog

@@ -1,6 +1,6 @@
 name: Azure Automation Account Created
 id: 860902fd-2e76-46b3-b050-ba548dab576c
-version: 7
+version: 8
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
@@ -15,11 +15,11 @@ description: The following analytic detects the creation of a new Azure Automati
   on virtual machines, posing a significant security risk.
 data_source:
 - Azure Audit Create or Update an Azure Automation account
-search: '`azure_audit` operationName.localizedValue="Create or Update an Azure Automation
-  account" status.value=Succeeded | dedup object | rename claims.ipaddr as src_ip
-  | rename caller as user | stats count min(_time) as firstTime max(_time) as lastTime
-  values(object) as object by user, src_ip, resourceGroupName, object_path | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `azure_automation_account_created_filter`'
+search: '`azure_audit` operationName.localizedValue="Create or Update an Azure Automation account" status.value=Succeeded 
+  | dedup object 
+  | rename claims.ipaddr as src, subscriptionId as vendor_account, operationName.localizedValue as signature
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product object object_path signature
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `azure_automation_account_created_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Audit events into your Splunk environment. Specifically,

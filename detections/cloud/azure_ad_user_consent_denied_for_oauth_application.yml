@@ -1,6 +1,6 @@
 name: Azure AD User Consent Denied for OAuth Application
 id: bb093c30-d860-4858-a56e-cd0895d5b49c
-version: 6
+version: 9
 date: '2024-11-14'
 author: Mauricio Velazco, Splunk
 status: production
@@ -16,10 +16,13 @@ description: The following analytic identifies instances where a user has denied
   to gain access, potentially leading to data breaches or unauthorized actions within
   the environment. Understanding these denials helps refine security policies and
   enhance user awareness.
-search: '`azure_monitor_aad` operationName="Sign-in activity" properties.status.errorCode=65004
-  | rename properties.* as * | stats count min(_time) as firstTime max(_time) as lastTime
-  by operationName, user, appDisplayName, status.failureReason | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `azure_ad_user_consent_denied_for_oauth_application_filter`'
+search: '`azure_monitor_aad` operationName="Sign-in activity" properties.status.errorCode=65004 
+  | rename properties.* as * 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product appDisplayName status.failureReason signature
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `azure_ad_user_consent_denied_for_oauth_application_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment

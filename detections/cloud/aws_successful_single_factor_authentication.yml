@@ -1,6 +1,6 @@
 name: AWS Successful Single-Factor Authentication
 id: a520b1fe-cc9e-4f56-b762-18354594c52f
-version: 5
+version: 6
 date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: production
@@ -15,9 +15,10 @@ description: The following analytic identifies a successful Console Login authen
 data_source:
 - AWS CloudTrail ConsoleLogin
 search: '`cloudtrail` eventName= ConsoleLogin errorCode=success "additionalEventData.MFAUsed"=No
-  | stats count min(_time) as firstTime max(_time) as lastTime by src eventName eventSource
-  aws_account_id errorCode additionalEventData.MFAUsed userAgent eventID awsRegion
-  user_name userIdentity.arn | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
+  | eval vendor_product = "AWS"
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `aws_successful_single_factor_authentication_filter`'
 how_to_implement: The Splunk AWS Add-on is required to utilize this data. The search
   requires AWS CloudTrail logs.
@@ -28,12 +29,12 @@ references:
 - https://attack.mitre.org/techniques/T1078/004/
 - https://aws.amazon.com/what-is/mfa/
 drilldown_searches:
-- name: View the detection results for - "$user_name$"
-  search: '%original_detection_search% | search  user_name = "$user_name$"'
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search  user = "$user$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$user_name$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user_name$")
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -42,10 +43,10 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: User $user_name$ has successfully logged into an AWS Console without Multi-Factor
+  message: User $user$ has successfully logged into an AWS Console without Multi-Factor
     Authentication from $src$
   risk_objects:
-  - field: user_name
+  - field: user
     type: user
     score: 64
   threat_objects:
