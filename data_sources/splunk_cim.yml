@@ -1,0 +1,12 @@
+name: Splunk CIM
+id: d3dd8270-7e1c-4bcd-8f3a-e5ec4a0e740a
+version: 1
+date: '2025-01-14'
+author: Bhavin Patel, Splunk
+description: Data source object for Splunk CIM
+source: not_applicable
+sourcetype: not_applicable
+supported_TA:
+- name: Splunk_SA_CIM
+  url: https://splunkbase.splunk.com/app/1621
+  version: 6.0.2

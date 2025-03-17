@@ -11,7 +11,7 @@ separator: operationName
 supported_TA:
 - name: Splunk Add-on for Microsoft Cloud Services
   url: https://splunkbase.splunk.com/app/3110
-  version: 5.4.2
+  version: 5.4.3
 fields:
 - _time
 - Level
@@ -118,3 +118,10 @@ example_log: '{"time": "2024-02-08T21:49:53.7643129Z", "resourceId": "/tenants/7
   "Mozilla/5.0 (Macintosh; Darwin 23.3.0 Darwin Kernel Version 23.3.0: Wed Dec 20
   21:28:58 PST 2023; root:xnu-10002.81.5~7/RELEASE_X86_64; en-US) PowerShell/7.3.4"},
   {"key": "AppId", "value": "00000002-0000-0ff1-ce00-000000000000"}]}}'
+output_fields:
+- dest
+- user
+- src
+- vendor_account
+- vendor_product
+

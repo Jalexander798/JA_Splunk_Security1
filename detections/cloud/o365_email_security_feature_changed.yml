@@ -1,6 +1,6 @@
 name: O365 Email Security Feature Changed
 id: 4d28013d-3a0f-4d65-a33f-4e8009fee0ae
-version: 4
+version: 5
 date: '2025-02-10'
 author: Steven Dick
 status: production
@@ -11,7 +11,7 @@ description: The following analytic identifies when specific O365 advanced secur
   detection. This can lead to unauthorized data access, data exfiltration, account
   compromise, or other malicious activities without leaving a detailed audit trail.
 data_source:
-- O365 Universal Audit Log
+- Office 365 Universal Audit Log
 search: '`o365_management_activity` Workload=Exchange AND Operation IN ("Set-*","Disable-*","New-*","Remove-*")
   Operation IN ("*AntiPhish*","*SafeLink*","*SafeAttachment*","*Malware*") | stats
   values(ObjectId) as object, min(_time) as firstTime, max(_time) as lastTime, count  by

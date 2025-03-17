@@ -10,7 +10,7 @@ separator: eventName
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
-  version: 7.9.0
+  version: 7.9.1
 fields:
 - _time
 - action
@@ -185,3 +185,12 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "requestID": "83d621ad-5b33-4ff0-acf4-0043cb432844", "eventID": "51b6d859-0cc4-4591-ba76-3494f3f43832",
   "readOnly": false, "eventType": "AwsApiCall", "managementEvent": true, "eventCategory":
   "Management", "recipientAccountId": "111111111111"}'
+output_fields:
+- action
+- dest
+- user
+- user_agent
+- src
+- vendor_account
+- vendor_region
+- vendor_product

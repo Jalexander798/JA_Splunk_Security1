@@ -1,7 +1,7 @@
 name: Linux Auditd Possible Access Or Modification Of Sshd Config File
 id: acb3ea33-70f7-47aa-b335-643b3aebcb2f
-version: 4
-date: '2025-02-10'
+version: 5
+date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -74,5 +74,5 @@ tests:
   attack_data:
   - data: 
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.004/linux_auditd_nopasswd/linux_auditd_ssh_config.log
-    source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+    source: auditd
+    sourcetype: auditd

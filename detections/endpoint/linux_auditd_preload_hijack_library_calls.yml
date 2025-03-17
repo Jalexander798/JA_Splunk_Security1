@@ -1,7 +1,7 @@
 name: Linux Auditd Preload Hijack Library Calls
 id: 35c50572-a70b-452f-afa9-bebdf3c3ce36
-version: 5
-date: '2025-02-10'
+version: 7
+date: '2025-02-24'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -15,11 +15,13 @@ description: The following analytic detects the use of the LD_PRELOAD environmen
   access to the system.
 data_source:
 - Linux Auditd Execve
-search: '`linux_auditd` `linux_auditd_normalized_execve_process` | rename host as
-  dest | rename comm as process_name | rename exe as process | where LIKE (process_exec,
-  "%LD_PRELOAD%")| stats count min(_time) as firstTime max(_time) as lastTime by argc
-  process_exec dest | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`|
-  `linux_auditd_preload_hijack_library_calls_filter`'
+search: '`linux_auditd` execve_command = "*LD_PRELOAD*"
+  | rename host as dest
+  | rename comm as process_name 
+  | rename exe as process  
+  | stats count min(_time) as firstTime max(_time) as lastTime by argc execve_command dest 
+  | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`
+  | `linux_auditd_preload_hijack_library_calls_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
   data, that consists of SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures
   command-line executions and process details on Unix/Linux systems. These logs should
@@ -48,7 +50,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A [$process_exec$] event occurred on host - [$dest$] to hijack or hook
+  message: A [$execve_command$] event occurred on host - [$dest$] to hijack or hook
     library functions using the LD_PRELOAD environment variable.
   risk_objects:
   - field: dest
@@ -57,10 +59,10 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
+  - China-Nexus Threat Activity
+  - Linux Persistence Techniques
   - Linux Privilege Escalation
   - Compromised Linux Host
-  - Linux Persistence Techniques
-  - Nexus APT Threat Activity
   - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:
@@ -74,6 +76,7 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.006/linux_auditd_ldpreload/linux_auditd_ldpreload.log
-    source: /var/log/audit/audit.log
-    sourcetype: linux:audit
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.006/linux_auditd_ldpreload/auditd_execve_ldpreload.log
+    source: auditd
+    sourcetype: auditd
+

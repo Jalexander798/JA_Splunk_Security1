@@ -1,6 +1,6 @@
 name: Azure AD Admin Consent Bypassed by Service Principal
 id: 9d4fea43-9182-4c5a-ada8-13701fd5615d
-version: 5
+version: 8
 date: '2024-11-14'
 author: Mauricio Velazco, Splunk
 data_source:
@@ -16,16 +16,17 @@ description: The following analytic identifies instances where a service princip
   activity could allow attackers to exploit automation to assign sensitive permissions
   without proper oversight, potentially compromising the security of the Azure AD
   environment.
-search: "`azure_monitor_aad` (operationName=\"Add app role assignment to service principal\"\
-  \ OR operationName=\"Add member to role*\") src_user_type=servicePrincipal  | rename
-  properties.* as *   | eval roleId = mvindex('targetResources{}.modifiedProperties{}.newValue',
-  0)  | eval roleValue = mvindex('targetResources{}.modifiedProperties{}.newValue',
-  1)  | eval roleDescription = mvindex('targetResources{}.modifiedProperties{}.newValue',
-  2)  | eval user_id = mvindex('targetResources{}.id', 0), user=coalesce(user,mvindex('targetResources{}.displayName',
-  0)) | rename initiatedBy.app.displayName as src_user  | stats count earliest(_time)
-  as firstTime latest(_time) as lastTime by src_user user user_id roleId roleValue
-  roleDescription | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`\
-  \  | `azure_ad_admin_consent_bypassed_by_service_principal_filter`"
+search: "`azure_monitor_aad` (operationName=\"Add app role assignment to service principal\" OR operationName=\"Add member to role*\") src_user_type=servicePrincipal 
+  | rename properties.* as * 
+  | eval roleId = mvindex('targetResources{}.modifiedProperties{}.newValue',0) 
+  | eval roleValue = mvindex('targetResources{}.modifiedProperties{}.newValue',1) 
+  | eval roleDescription = mvindex('targetResources{}.modifiedProperties{}.newValue',2) 
+  | eval user_id = mvindex('targetResources{}.id', 0), user=coalesce(user,mvindex('targetResources{}.displayName',0))
+  | rename initiatedBy.app.displayName as src_user, userAgent as user_agent
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product src_user user_id roleId roleValue roleDescription user_agent signature
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `azure_ad_admin_consent_bypassed_by_service_principal_filter`"
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase(https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment.
@@ -36,14 +37,13 @@ known_false_positives: Service Principals are sometimes configured to legitimate
 references:
 - https://attack.mitre.org/techniques/T1098/003/
 drilldown_searches:
-- name: View the detection results for - "$user$" and "$src_user$"
-  search: '%original_detection_search% | search  user = "$user$" src_user = "$src_user$"'
+- name: View the detection results for - "$dest$"
+  search: '%original_detection_search% | search  dest = "$dest$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$user$" and "$src_user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$",
-    "$src_user$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
-    as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
+- name: View risk events for the last 7 days for - "$dest$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$") starthoursago=168  
+    | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
     Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
     as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
