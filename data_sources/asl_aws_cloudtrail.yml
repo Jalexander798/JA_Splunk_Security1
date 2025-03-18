@@ -25,7 +25,6 @@ supported_TA:
   url: https://splunkbase.splunk.com/app/1876
   version: 7.9.1
 output_fields:
-- action
 - dest
 - user
 - user_agent

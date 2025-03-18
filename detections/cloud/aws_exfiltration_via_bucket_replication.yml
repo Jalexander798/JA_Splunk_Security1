@@ -15,9 +15,8 @@ description: The following analytic detects API calls to enable S3 bucket replic
   could replicate sensitive data to external accounts, leading to data breaches and
   compliance violations.
 search: '`cloudtrail`  eventName = PutBucketReplication eventSource = s3.amazonaws.com
-  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region, requestParameters.bucketName as bucket_name
-  | eval vendor_product = "AWS"
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product bucket_name
+  | rename user_name as user, requestParameters.ReplicationConfiguration.Rule.Destination.Bucket as bucket_name
+  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user user_agent src vendor_account vendor_region vendor_product bucket_name
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `aws_exfiltration_via_bucket_replication_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
   search works with AWS CloudTrail logs.
