@@ -1,4 +1,10 @@
 detections:
+  - deprecated_content: Open Redirect in Splunk Web
+    deprecated_in_version: 5.2.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+  - deprecated_content: Splunk Enterprise Information Disclosure
+    deprecated_in_version: 5.2.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
   - deprecated_content: ASL AWS Excessive Security Scanning
     deprecated_in_version: 5.2.0
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
