@@ -3,7 +3,7 @@ id: 80bb9988-190b-4ee0-a3c3-509545a8f678
 version: 6
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic has been deprecated. The following analytic detects
   suspicious attempts to find private keys, which may indicate an attacker's effort

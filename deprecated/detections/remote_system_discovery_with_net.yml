@@ -3,7 +3,7 @@ id: 9df16706-04a2-41e2-bbfe-9b38b34409d3
 version: 5
 date: '2025-01-13'
 author: Mauricio Velazco, Splunk
-status: deprecated
+status: removed
 type: Hunting
 description: The following analytic has been deprecated in favour of two dedicated analytics "4dc3951f-b3f8-4f46-b412-76a483f72277" and "a23a0e20-0b1b-4a07-82e5-ec5f70811e7a" .The following analytic identifies the execution of `net.exe` or `net1.exe` with command-line arguments used to discover remote systems, such as `domain computers /domain`. This detection leverages data from Endpoint Detection and Response (EDR) agents, focusing on process names and command-line arguments. This activity is significant as it indicates potential reconnaissance efforts by adversaries or Red Teams to map out networked systems and Active Directory structures. If confirmed malicious, this behavior could lead to further network exploitation, privilege escalation, or lateral movement within the environment.
 data_source:

@@ -3,7 +3,7 @@ id: 98f6a534-04c2-11ec-96b2-acde48001122
 version: 6
 date: '2025-02-10'
 author: Teoderick Contreras, Mauricio Velazco, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: This following analytic has been deprecated in favour of the generic
   version "5d0d4830-0133-11ec-bae3-acde48001122". The following analytic detects the

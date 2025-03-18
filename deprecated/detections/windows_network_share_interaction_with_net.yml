@@ -3,7 +3,7 @@ id: 4dc3951f-b3f8-4f46-b412-76a483f72277
 version: 6
 date: '2025-01-24'
 author: Dean Luxton
-status: deprecated
+status: removed
 type: TTP
 data_source:
 - Sysmon EventID 1

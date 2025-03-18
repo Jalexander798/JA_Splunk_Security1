@@ -3,7 +3,7 @@ id: f8dfe015-dbb3-4569-ba75-b13787e06aa4
 version: 5
 date: '2025-02-10'
 author: Patrick Bareiss, Splunk
-status: deprecated
+status: removed
 type: Anomaly
 description: '**DEPRECATION NOTE** - This search has been deprecated and replaced
   with `O365 Mailbox Email Forwarding Enabled`. The following analytic detects when

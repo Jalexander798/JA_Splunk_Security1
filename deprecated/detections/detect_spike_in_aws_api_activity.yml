@@ -3,7 +3,7 @@ id: ada0f478-84a8-4641-a3f1-d32362d4bd55
 version: 5
 date: '2024-11-14'
 author: David Dorsey, Splunk
-status: deprecated
+status: removed
 type: Anomaly
 description: This search will detect users creating spikes of API activity in your
   AWS environment.  It will also update the cache file that factors in the latest

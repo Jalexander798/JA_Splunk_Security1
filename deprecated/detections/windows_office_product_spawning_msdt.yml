@@ -3,7 +3,7 @@ id: 127eba64-c981-40bf-8589-1830638864a7
 version: 11
 date: '2025-02-10'
 author: Michael Haag, Teoderick Contreras, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic has been deprecated. The following analytic detects
   a Microsoft Office product spawning the Windows msdt.exe process. This detection

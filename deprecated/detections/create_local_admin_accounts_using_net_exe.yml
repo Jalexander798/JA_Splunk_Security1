@@ -3,7 +3,7 @@ id: b89919ed-fe5f-492c-b139-151bb162040e
 version: 17
 date: '2025-02-10'
 author: Bhavin Patel, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic has been deprecated. The following analytic detects
   the creation of local administrator accounts using the net.exe command. It leverages

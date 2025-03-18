@@ -3,7 +3,7 @@ id: 4d46e8bd-4072-48e4-92db-0325889ef894
 version: 4
 date: '2024-11-14'
 author: Bhavin Patel, Splunk
-status: deprecated
+status: removed
 type: Hunting
 description: This search looks for AWS CloudTrail events where a user logged into
   the AWS account, is making API calls and has not enabled Multi Factor authentication.

@@ -3,7 +3,7 @@ id: 54f5201e-155b-11ec-a6e2-acde48001122
 version: 6
 date: '2025-02-10'
 author: Michael Haag, Splunk
-status: deprecated
+status: removed
 type: Hunting
 description: This search has been deprecated in favour of the more generic analytic
   "c5c8e0f3-147a-43da-bf04-4cfaec27dc44". The following analytic detects the execution

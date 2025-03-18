@@ -3,7 +3,7 @@ id: 4b6d1ba8-0000-4cec-87e6-6cbbd71651b5
 version: 4
 date: '2024-11-14'
 author: Rod Soto, Splunk
-status: deprecated
+status: removed
 type: Hunting
 description: This search provides information on rare Kubectl calls with IP, verb
   namespace and object access context

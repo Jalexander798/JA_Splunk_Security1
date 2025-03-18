@@ -3,7 +3,7 @@ id: 6fed27d2-9ec7-11eb-8fe4-aa665a019aa3
 version: 11
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic has been deprecated. The following analytic identifies
   Office applications spawning child processes to download content via HTTP/HTTPS.

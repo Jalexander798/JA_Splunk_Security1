@@ -3,7 +3,7 @@ id: 1bba382b-07fd-4ffa-b390-8002739b76e8
 version: 4
 date: '2024-11-14'
 author: Rod Soto, Splunk
-status: deprecated
+status: removed
 type: Hunting
 description: This search provides information on Kubernetes accounts accessing sensitve
   objects such as configmpas or secrets

@@ -3,7 +3,7 @@ id: 371a6545-2618-4032-ad84-93386b8698c5
 version: 6
 date: '2025-02-10'
 author: Michael Haag, Rico Valdez, Splunk
-status: deprecated
+status: removed
 type: Anomaly
 description: '**DEPRECATION NOTE** - This search has been deprecated and replaced
   with this detection `Okta Unauthorized Access to Application - DM`.  The following

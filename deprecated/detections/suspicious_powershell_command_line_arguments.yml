@@ -3,7 +3,7 @@ id: 2cdb91d2-542c-497f-b252-be495e71f38c
 version: 9
 date: '2024-11-14'
 author: David Dorsey, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: This search looks for PowerShell processes started with a base64 encoded
   command-line passed to it, with parameters to modify the execution policy for the

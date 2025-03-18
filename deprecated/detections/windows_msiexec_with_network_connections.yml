@@ -3,7 +3,7 @@ id: 827409a1-5393-4d8d-8da4-bbb297c262a7
 version: 7
 date: '2025-01-24'
 author: Michael Haag, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic has been deprecated.
   The following analytic detects MSIExec making network connections over

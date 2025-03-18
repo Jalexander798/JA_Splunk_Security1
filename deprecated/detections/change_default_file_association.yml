@@ -3,7 +3,7 @@ id: 462d17d8-1f71-11ec-ad07-acde48001122
 version: 6
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic has been deprecated. The following analytic detects
   suspicious registry modifications that change the default file association to execute

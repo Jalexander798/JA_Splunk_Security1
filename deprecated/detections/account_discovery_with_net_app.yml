@@ -3,7 +3,7 @@ id: 339805ce-ac30-11eb-b87d-acde48001122
 version: 9
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk, TheLawsOfChaos, Github Community
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic has been deprecated in favour of the more generic
   "45e52536-ae42-11eb-b5c6-acde48001122". The following analytic detects potential

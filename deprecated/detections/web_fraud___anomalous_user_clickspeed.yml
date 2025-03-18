@@ -3,7 +3,7 @@ id: 31337bbb-bc22-4752-b599-ef192df2dc7a
 version: 4
 date: '2024-11-14'
 author: Jim Apger, Splunk
-status: deprecated
+status: removed
 type: Anomaly
 description: This search is used to examine web sessions to identify those where the
   clicks are occurring too quickly for a human or are occurring with a near-perfect

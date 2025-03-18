@@ -4,7 +4,7 @@ version: 6
 date: '2024-12-10'
 author: Michael Haag, Splunk
 type: TTP
-status: deprecated
+status: removed
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688

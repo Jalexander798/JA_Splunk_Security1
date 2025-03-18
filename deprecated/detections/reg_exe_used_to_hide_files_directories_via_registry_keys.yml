@@ -3,7 +3,7 @@ id: 61a7d1e6-f5d4-41d9-a9be-39a1ffe69459
 version: 5
 date: '2024-11-14'
 author: Bhavin Patel, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The search looks for command-line arguments used to hide a file or directory
   using the reg add command.

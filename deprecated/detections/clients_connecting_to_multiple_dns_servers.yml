@@ -3,7 +3,7 @@ id: 74ec6f18-604b-4202-a567-86b2066be3ce
 version: 6
 date: '2024-11-14'
 author: David Dorsey, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: This search allows you to identify the endpoints that have connected
   to more than five DNS servers and made DNS Queries over the time frame of the search.

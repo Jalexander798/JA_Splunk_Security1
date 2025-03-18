@@ -3,7 +3,7 @@ id: a34aae96-ccf8-4aaa-952c-3ea21444444f
 version: 4
 date: '2024-11-14'
 author: David Dorsey, Splunk
-status: deprecated
+status: removed
 type: Hunting
 description: This search gives you the hosts where a backup was attempted and then
   failed.

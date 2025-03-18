@@ -3,7 +3,7 @@ id: a51bfe1a-94f0-48cc-b1e4-16ae10145893
 version: 8
 date: '2025-01-24'
 author: Bhavin Patel, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic has been deprecated.
   The following analytic identifies the rapid execution of processes used

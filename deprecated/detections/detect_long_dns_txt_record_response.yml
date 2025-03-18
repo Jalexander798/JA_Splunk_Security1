@@ -3,7 +3,7 @@ id: 05437c07-62f5-452e-afdc-04dd44815bb9
 version: 5
 date: '2024-11-14'
 author: Rico Valdez, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: This search is used to detect attempts to use DNS tunneling, by calculating
   the length of responses to DNS TXT queries. Endpoints using DNS as a method of transmission

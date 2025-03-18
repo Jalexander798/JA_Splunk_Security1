@@ -3,7 +3,7 @@ id: ae8d3f4a-acd7-11eb-8846-acde48001122
 version: 7
 date: '2025-01-24'
 author: Teoderick Contreras, Splunk
-status: deprecated
+status: removed
 type: Anomaly
 description: The following analytic has been deprecated.
   The following analytic detects multiple attempts to stop or delete services

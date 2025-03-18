@@ -3,7 +3,7 @@ id: 344a1778-0b25-490c-adb1-de8beddf59cd
 version: 5
 date: '2024-11-14'
 author: David Dorsey, Splunk
-status: deprecated
+status: removed
 type: Anomaly
 description: This search looks for AWS provisioning activities from previously unseen
   cities.  Provisioning activities are defined broadly as any event that begins with

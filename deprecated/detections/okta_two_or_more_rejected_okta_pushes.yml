@@ -3,7 +3,7 @@ id: d93f785e-4c2c-4262-b8c7-12b77a13fd39
 version: 4
 date: '2024-11-14'
 author: Michael Haag, Marissa Bower, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: '**DEPRECATION NOTE** - This search has been deprecated and replaced
   with `Okta Multiple Failed MFA Requests For User`. The following analytic identifies

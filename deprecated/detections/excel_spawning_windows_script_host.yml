@@ -3,7 +3,7 @@ id: 57fe880a-9be3-11eb-9bf3-acde48001122
 version: 10
 date: '2025-02-10'
 author: Michael Haag, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic has been deprecated in favour of a more generic
   approach. The following analytic identifies instances where Microsoft Excel spawns

@@ -3,7 +3,7 @@ id: f48cd1d4-125a-11ec-a447-acde48001122
 version: 11
 date: '2025-02-10'
 author: Michael Haag, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic has been deprecated. The following analytic detects
   Office products writing .cab or .inf files, indicative of CVE-2021-40444 exploitation.

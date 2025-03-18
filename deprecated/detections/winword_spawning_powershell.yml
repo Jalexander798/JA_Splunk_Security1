@@ -3,7 +3,7 @@ id: b2c950b8-9be2-11eb-8658-acde48001122
 version: 8
 date: '2025-02-10'
 author: Michael Haag, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic has been deprecated in favour of a more generic
   approach in "Windows Office Product Spawned Uncommon Process". The following analytic

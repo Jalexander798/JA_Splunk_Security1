@@ -4,7 +4,7 @@ version: 2
 date: '2025-02-27'
 author: David Dorsey, Splunk
 type: Baseline
-status: deprecated
+status: removed
 description: This search builds a table of previously seen ARNs that have launched
   a EC2 instance.
 search: '`cloudtrail` `ec2_modification_api_calls` errorCode=success | spath output=arn

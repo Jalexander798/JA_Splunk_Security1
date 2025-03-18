@@ -3,7 +3,7 @@ id: 62b70968-a0a5-4724-8ac4-67871e6f544d
 version: 5
 date: '2025-02-10'
 author: Michael Haag, Rico Valdez, Splunk
-status: deprecated
+status: removed
 type: Anomaly
 description: '**DEPRECATION NOTE** - This search has been deprecated and replaced
   with `Okta Multiple Accounts Locked Out`. The following anomaly will generate based

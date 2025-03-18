@@ -3,7 +3,7 @@ id: 1c02b86a-cd85-473e-a50b-014a9ac8fe3e
 version: 5
 date: '2024-11-14'
 author: Jason Brewer, Splunk
-status: deprecated
+status: removed
 type: Anomaly
 description: This search looks for AWS CloudTrail events where a user successfully
   terminates an abnormally high number of instances. This search is deprecated and

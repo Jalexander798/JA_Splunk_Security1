@@ -3,7 +3,7 @@ id: bf1d7b5c-df2f-4249-a401-c09fdc221ddf
 version: 4
 date: '2024-11-14'
 author: Jim Apger, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: This search is used to identify the creation of multiple user accounts
   using the same email domain name.

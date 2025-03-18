@@ -3,7 +3,7 @@ id: 021abc51-1862-41dd-ad43-43c739c0a983
 version: 4
 date: '2024-11-14'
 author: Peter Gael, Splunk
-status: deprecated
+status: removed
 type: Anomaly
 description: Enforcing network-access controls is one of the defensive mechanisms
   used by cloud administrators to restrict access to a cloud instance. After the attacker

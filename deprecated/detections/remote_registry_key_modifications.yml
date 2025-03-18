@@ -3,7 +3,7 @@ id: c9f4b923-f8af-4155-b697-1354f5dcbc5e
 version: 6
 date: '2024-11-14'
 author: Bhavin Patel, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: This search monitors for remote modifications to registry keys.
 data_source:

@@ -3,7 +3,7 @@ id: cc8b7b74-9d0f-11eb-8342-acde48001122
 version: 11
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic has been deprecated. The following analytic detects
   an Office document creating a scheduled task, either through a macro VBA API or

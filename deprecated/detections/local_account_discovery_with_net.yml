@@ -3,7 +3,7 @@ id: 5d0d4830-0133-11ec-bae3-acde48001122
 version: 7
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
-status: deprecated
+status: removed
 type: Hunting
 description: The following analytic has been deprecated. The following analytic detects
   the execution of `net.exe` or `net1.exe` with command-line arguments `user` or `users`

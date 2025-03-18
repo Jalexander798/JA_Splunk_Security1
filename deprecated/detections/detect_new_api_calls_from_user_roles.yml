@@ -3,7 +3,7 @@ id: 22773e84-bac0-4595-b086-20d3f335b4f1
 version: 4
 date: '2024-11-14'
 author: Bhavin Patel, Splunk
-status: deprecated
+status: removed
 type: Anomaly
 description: This search detects new API calls that have either never been seen before
   or that have not been seen in the previous hour, where the identity type is `AssumedRole`.

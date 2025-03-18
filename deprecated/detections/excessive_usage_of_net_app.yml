@@ -3,7 +3,7 @@ id: 45e52536-ae42-11eb-b5c6-acde48001122
 version: 7
 date: '2025-01-24'
 author: Teoderick Contreras, Splunk
-status: deprecated
+status: removed
 type: Anomaly
 description: The following analytic has been deprecated.
   The following analytic detects excessive usage of `net.exe` or `net1.exe`

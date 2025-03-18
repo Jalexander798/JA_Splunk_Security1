@@ -3,7 +3,7 @@ id: b25d2973-303e-47c8-bacd-52b61604c6a7
 version: 5
 date: '2025-02-10'
 author: Patrick Bareiss, Mauricio Velazco, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: '**DEPRECATION NOTE** - This search has been deprecated and replaced
   with `O365 Elevated Mailbox Permission Assigned`. This analytic identifies instances

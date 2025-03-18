@@ -3,7 +3,7 @@ id: 483e8a68-f2f7-45be-8fc9-bf725f0e22fd
 version: 2
 date: '2025-01-13'
 author: Gowthamaraj Rajendran, Patrick Bareiss, Bhavin Patel, Bryan Pluta, Splunk
-status: deprecated
+status: removed
 type: TTP
 data_source:
 - Windows Defender Alerts

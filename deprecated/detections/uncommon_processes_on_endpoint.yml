@@ -3,7 +3,7 @@ id: 29ccce64-a10c-4389-a45f-337cb29ba1f7
 version: 7
 date: '2024-11-14'
 author: David Dorsey, Splunk
-status: deprecated
+status: removed
 type: Hunting
 description: This search looks for applications on the endpoint that you have marked
   as uncommon.

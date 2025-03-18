@@ -3,7 +3,7 @@ id: 8bbb7d58-b360-11eb-ba21-acde48001122
 version: 8
 date: '2025-02-10'
 author: Michael Haag, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic has been deprecated. The following analytic detects
   the use of `reg.exe` to export Windows Registry hives, which may contain sensitive

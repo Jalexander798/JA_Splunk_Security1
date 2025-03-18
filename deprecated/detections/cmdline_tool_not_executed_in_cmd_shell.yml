@@ -3,7 +3,7 @@ id: 6c3f7dd8-153c-11ec-ac2d-acde48001122
 version: 9
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic identifies instances where `ipconfig.exe`, `systeminfo.exe`,
   or similar tools are executed by a non-standard parent process, excluding CMD, PowerShell,

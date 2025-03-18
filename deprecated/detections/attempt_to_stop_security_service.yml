@@ -3,7 +3,7 @@ id: c8e349c6-b97c-486e-8949-bd7bcd1f3910
 version: 11
 date: '2025-02-10'
 author: Rico Valdez, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic has been deprecated. The following analytic detects
   attempts to stop security-related services on an endpoint, which may indicate malicious

@@ -3,7 +3,7 @@ id: 99487de3-7192-4b41-939d-fbe9acfb1340
 version: 4
 date: '2024-11-14'
 author: Rod Soto, Splunk
-status: deprecated
+status: removed
 type: Hunting
 description: This search provides information on Kubernetes RBAC authorizations by
   accounts, this search can be modified by adding top to see both extremes of RBAC

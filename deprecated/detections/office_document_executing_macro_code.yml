@@ -3,7 +3,7 @@ id: b12c89bc-9d06-11eb-a592-acde48001122
 version: 10
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic has been deprecated. The following analytic identifies
   office documents executing macro code. It leverages Sysmon EventCode 7 to detect

@@ -3,7 +3,7 @@ id: 104658f4-afdc-499f-9719-17a43f9826f4
 version: 5
 date: '2024-11-14'
 author: Bhavin Patel, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: "This search is used to detect DNS tunneling, by calculating the sum
   of the length of DNS queries and DNS answers. The search also filters out potential

@@ -3,7 +3,7 @@ id: c0325326-acd6-11eb-98c2-acde48001122
 version: 8
 date: '2025-01-24'
 author: Teoderick Contreras, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic has been deprecated.
   The following analytic detects the use of the `net.exe` utility to disable

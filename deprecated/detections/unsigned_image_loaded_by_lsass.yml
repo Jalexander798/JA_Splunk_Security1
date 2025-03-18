@@ -3,7 +3,7 @@ id: 56ef054c-76ef-45f9-af4a-a634695dcd65
 version: 4
 date: '2024-11-14'
 author: Patrick Bareiss, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: This search detects loading of unsigned images by LSASS. Deprecated because
   too noisy.

@@ -3,7 +3,7 @@ id: 7360137f-abad-473e-8189-acbdaa34d114
 version: 8
 date: '2025-02-10'
 author: Michael Haag, Splunk
-status: deprecated
+status: removed
 type: Hunting
 description: The following hunting analytic identifies renamed instances of rundll32.exe
   executing. rundll32.exe is natively found in C:\Windows\system32 and C:\Windows\syswow64.

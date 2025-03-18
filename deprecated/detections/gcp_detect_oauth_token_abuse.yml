@@ -3,7 +3,7 @@ id: a7e9f7bb-8901-4ad0-8d88-0a4ab07b1972
 version: 4
 date: '2024-11-14'
 author: Rod Soto, Splunk
-status: deprecated
+status: removed
 type: Hunting
 description: This search provides detection of possible GCP Oauth token abuse. GCP
   Oauth token without time limit can be exfiltrated and reused for keeping access
