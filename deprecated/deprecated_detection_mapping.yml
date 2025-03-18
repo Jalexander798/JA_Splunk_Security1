@@ -690,7 +690,7 @@ detections:
     replacement_content:
     - Okta Multiple Failed MFA Requests For User
   - deprecated_content: Excel Spawning Windows Script Host
-    deprecated_in_version: 5.4.0
+    deprecated_in_version: 5.2.0
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
   - deprecated_content: GitHub Actions Disable Security Workflow
     deprecated_in_version: 5.4.0
@@ -723,6 +723,27 @@ detections:
     deprecated_in_version: 5.4.0
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
   - deprecated_content: Windows Service Stop Via Net  and SC Application
+    deprecated_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+  - deprecated_content: AWS Cross Account Activity From Previously Unseen Account
+    deprecated_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+  - deprecated_content: aws detect attach to role policy
+    deprecated_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+  - deprecated_content: aws detect permanent key creation
+    deprecated_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+  - deprecated_content: aws detect role creation
+    deprecated_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+  - deprecated_content: aws detect sts assume role abuse
+    deprecated_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+  - deprecated_content: aws detect sts get session token abuse
+    deprecated_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+  - deprecated_content: AWS SAML Access by Provider User and Principal
     deprecated_in_version: 5.4.0
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
 baselines:
