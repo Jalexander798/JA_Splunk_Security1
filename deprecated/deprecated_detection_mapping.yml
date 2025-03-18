@@ -689,6 +689,9 @@ detections:
       TA update
     replacement_content:
     - Okta Multiple Failed MFA Requests For User
+  - deprecated_content: Windows Service Stop Via Net  and SC Application
+    deprecated_in_version: 5.2.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
   - deprecated_content: Excel Spawning Windows Script Host
     deprecated_in_version: 5.2.0
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
@@ -720,9 +723,6 @@ detections:
     deprecated_in_version: 5.4.0
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
   - deprecated_content: Suspicious Process File Path
-    deprecated_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - deprecated_content: Windows Service Stop Via Net  and SC Application
     deprecated_in_version: 5.4.0
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
   - deprecated_content: AWS Cross Account Activity From Previously Unseen Account
