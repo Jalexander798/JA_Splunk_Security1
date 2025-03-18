@@ -1,12 +1,19 @@
 name: Windows Event Log Security 5145
 id: 0746479b-7b82-4d7e-8811-0b35da00f798
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log Security 5145
+description: Logs detailed information about access to a network share, including
+  the user, share path, accessed file, and access permissions.
+mitre_components:
+- Network Share Access
+- File Access
+- User Account Metadata
+- Application Log Content
 source: XmlWinEventLog:Security
 sourcetype: xmlwineventlog
 separator: EventCode
+separator_value: '5145'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

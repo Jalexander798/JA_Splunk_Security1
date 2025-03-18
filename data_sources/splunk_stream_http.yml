@@ -1,9 +1,16 @@
 name: Splunk Stream HTTP
 id: b0070a33-92ed-49e5-8f38-576cdf300710
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Splunk Stream HTTP
+description: Logs HTTP traffic captured by Splunk Stream, including details such as
+  request methods, URLs, headers, response codes, and client-server interactions.
+mitre_components:
+- Network Traffic Content
+- Network Traffic Flow
+- Response Content
+- Response Metadata
+- Application Log Content
 source: stream:http
 sourcetype: stream:http
 supported_TA:

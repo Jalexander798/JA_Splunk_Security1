@@ -1,12 +1,19 @@
 name: AWS CloudTrail DeleteAlarms
 id: b0730ac8-0992-4de8-b000-2c7d0fc7a61f
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Bhavin Patel, Splunk
-description: Data source object for AWS CloudTrail DeleteAlarms
+description: Logs the deletion of CloudWatch alarms, including details about the alarm
+  names and associated monitoring configurations.
+mitre_components:
+- Cloud Service Modification
+- Cloud Service Metadata
+- Application Log Content
+- Host Status
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: DeleteAlarms
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876

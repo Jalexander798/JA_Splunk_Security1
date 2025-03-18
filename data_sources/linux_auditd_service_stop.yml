@@ -3,7 +3,16 @@ id: 0643483c-bc62-455c-8d6e-1630e5f0e00d
 version: 2
 date: '2025-02-20'
 author: Teoderick Contreras, Splunk
-description: Data source object for Linux Auditd Service Stop Type
+description: Logs events related to the stoppage of a service on a Linux system, including
+  details about the service name, the process initiating the stop, and associated
+  timestamps.
+mitre_components:
+- Service Modification
+- Service Metadata
+- OS API Execution
+- Application Log Content
+separator: type
+separator_value: SERVICE_STOP
 source: auditd
 sourcetype: auditd
 configuration: https://github.com/Neo23x0/auditd/blob/master/audit.rules
