@@ -1,7 +1,7 @@
 name: Azure Audit Create or Update an Azure Automation Runbook
 id: 2bd83221-7a8b-436f-9b2b-efa1d44d009e
 version: 2
-date: "2025-01-23"
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs an event when a new Azure Automation Runbook is created or an existing
   one is updated.

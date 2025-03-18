@@ -1,7 +1,7 @@
 name: O365 Add member to role.
 id: 8b949f7c-4b5d-404f-9694-d7403c4ec096
 version: 2
-date: "2025-01-23"
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs the addition of a member to a role in Microsoft 365, including details
   about the role, the added member, and the user or administrator performing the action.

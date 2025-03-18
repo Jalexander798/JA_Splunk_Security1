@@ -1,7 +1,7 @@
 name: O365 Add app role assignment to service principal.
 id: 785ba57a-ba7b-474e-97c8-9474e6e00b3a
 version: 2
-date: "2025-01-23"
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs the assignment of an application role to a service principal in
   Microsoft 365, including details about the role, service principal, and application

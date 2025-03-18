@@ -1,7 +1,7 @@
 name: Google Workspace login_failure
 id: cabec7cf-4008-4899-b47e-39c34a9a1255
 version: 2
-date: "2025-01-23"
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs failed login attempts to Google Workspace accounts, including details
   about the user, IP address, and reason for failure.

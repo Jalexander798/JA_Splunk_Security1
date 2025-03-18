@@ -1,7 +1,7 @@
 name: Azure Active Directory User registered security info
 id: b63240de-8a01-4ba8-8987-89d18d4b375d
 version: 2
-date: "2025-01-23"
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs an event when a user registers or updates their security information
   in Azure Active Directory.

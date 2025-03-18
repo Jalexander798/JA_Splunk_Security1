@@ -1,7 +1,7 @@
 name: O365 Add owner to application.
 id: da012cbf-af6e-40ee-a1ba-32a5f8da8f8a
 version: 2
-date: "2025-01-23"
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs the addition of an owner to an application in Microsoft 365, including
   details about the application, the new owner, and the user or administrator performing

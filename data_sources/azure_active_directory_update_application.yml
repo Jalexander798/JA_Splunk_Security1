@@ -1,7 +1,7 @@
 name: Azure Active Directory Update application
 id: 2c08188a-ba25-496e-87c7-803cf28b6c90
 version: 2
-date: "2025-01-23"
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs an event when an application in Azure Active Directory is updated,
   such as changes to its settings or permissions.

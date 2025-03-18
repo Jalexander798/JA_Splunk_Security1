@@ -1,7 +1,7 @@
 name: Azure Active Directory Consent to application
 id: 4c5d6c49-53e3-4980-a4de-c63e26291ed0
 version: 2
-date: "2025-01-23"
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs user or admin consent to an application's permissions in Azure Active
   Directory, including details about the application, granted permissions, and the

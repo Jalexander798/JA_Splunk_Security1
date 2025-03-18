@@ -1,7 +1,7 @@
 name: G Suite Drive
 id: 5f79120f-a235-4468-bd0d-55203758ac22
 version: 2
-date: "2025-01-23"
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs activities related to Google Drive in G Suite, including file creation,
   modification, sharing, and access details.

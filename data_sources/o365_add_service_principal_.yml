@@ -1,7 +1,7 @@
 name: O365 Add service principal.
 id: 9c1ef9f5-bc30-4a47-a1bd-cb34484ee778
 version: 2
-date: "2025-01-23"
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs the addition of a new service principal in Microsoft 365, including
   details about the associated application and the action initiator.

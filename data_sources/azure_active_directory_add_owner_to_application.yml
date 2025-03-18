@@ -1,7 +1,7 @@
 name: Azure Active Directory Add owner to application
 id: e895ed56-7be4-4b3a-b782-ecd0f594ec4c
 version: 2
-date: "2025-01-23"
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs the addition of an owner to an application in Azure Active Directory,
   including details about the application, the owner added, and the user or process

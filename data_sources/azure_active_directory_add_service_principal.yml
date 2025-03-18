@@ -1,7 +1,7 @@
 name: Azure Active Directory Add service principal
 id: fd89d337-e4c0-4162-ad13-bca36f096fe6
 version: 2
-date: "2025-01-23"
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs the creation of a new service principal in Azure Active Directory,
   including details about the service principal, associated application, and the user

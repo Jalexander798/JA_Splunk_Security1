@@ -1,7 +1,7 @@
 name: Google Workspace login_success
 id: bffe8013-9cdf-4fe6-9c1b-6784391a4951
 version: 2
-date: "2025-01-23"
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs successful login attempts to Google Workspace accounts, including
   details about the user, IP address, and session metadata.

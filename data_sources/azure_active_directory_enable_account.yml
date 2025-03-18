@@ -1,7 +1,7 @@
 name: Azure Active Directory Enable account
 id: cb49f3cd-04ad-415c-a5ed-9b27b2829fa7
 version: 2
-date: "2025-01-23"
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs an event when an Azure Active Directory account is enabled.
 mitre_components:

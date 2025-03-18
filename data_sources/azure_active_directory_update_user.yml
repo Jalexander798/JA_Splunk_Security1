@@ -1,7 +1,7 @@
 name: Azure Active Directory Update user
 id: 5495c90a-047c-4b8e-b2fe-1db6282d3872
 version: 2
-date: "2025-01-23"
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs an event when a user account is updated in Azure Active Directory.
 mitre_components:

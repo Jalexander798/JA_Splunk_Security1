@@ -1,7 +1,7 @@
 name: O365 Add-MailboxPermission
 id: 9c0babdb-bb15-449e-abba-0a9cdb3fc061
 version: 2
-date: "2025-01-23"
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
 description: Logs the addition of mailbox permissions in Microsoft 365, including
   details about the mailbox, granted permissions, and the user or administrator performing
