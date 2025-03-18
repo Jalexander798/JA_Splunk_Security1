@@ -18,7 +18,7 @@ search: "`o365_management_activity` Workload=AzureActiveDirectory Operation IN (
   | eval user = case(match(mvindex('Actor{}.ID',-1),\"User\"),mvindex('Actor{}.ID',0),match(mvindex('Actor{}.ID',-1),\"\
       ServicePrincipal\"),mvindex('Actor{}.ID',3),true(),mvindex('Actor{}.ID',0)) 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by sigature dest user src vendor_account vendor_product signature signature_id 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product signature signature_id 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `o365_cross_tenant_access_change_filter`"
