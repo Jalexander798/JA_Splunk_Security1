@@ -1,12 +1,17 @@
 name: Windows Event Log Security 4624
 id: 08682968-0366-4882-9559-fe4fe018a846
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log Security 4624
+description: Logs an event when an account successfully logs on to a system.
+mitre_components:
+- Logon Session Creation
+- User Account Authentication
+- Logon Session Metadata
 source: XmlWinEventLog:Security
 sourcetype: xmlwineventlog
 separator: EventCode
+separator_value: '4624'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

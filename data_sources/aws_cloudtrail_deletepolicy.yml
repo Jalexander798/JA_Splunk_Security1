@@ -1,12 +1,17 @@
 name: AWS CloudTrail DeletePolicy
 id: d190d23a-2c59-4a0e-9c55-a53ebef28ee5
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail DeletePolicy
+description: Logs the deletion of an IAM policy in AWS, including details about the
+  policy name and its associated roles or users.
+mitre_components:
+- Cloud Service Modification
+- Cloud Service Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: DeletePolicy
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876

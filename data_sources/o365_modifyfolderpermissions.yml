@@ -1,12 +1,19 @@
 name: O365 ModifyFolderPermissions
 id: 0a8c1080-68c2-46d7-8324-2e7d97bb6e2f
-version: 1
-date: "2024-07-18"
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for O365 ModifyFolderPermissions
+description: Logs modifications to folder permissions in Microsoft 365, including
+  updates to access levels, user assignments, and sharing settings.
+mitre_components:
+- User Account Modification
+- File Access
+- Active Directory Object Modification
+- Application Log Content
 source: o365
 sourcetype: o365:management:activity
 separator: Operation
+separator_value: ModifyFolderPermissions
 supported_TA:
   - name: Splunk Add-on for Microsoft Office 365
     url: https://splunkbase.splunk.com/app/4055
