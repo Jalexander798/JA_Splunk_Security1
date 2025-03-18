@@ -16,9 +16,8 @@ data_source:
 - AWS CloudTrail
 search: '`cloudtrail` eventName=Describe* OR eventName=List* OR eventName=Get*  
   | fillnull
-  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
-  | eval vendor_product = "AWS"
-  | stats dc(action) as dc_events min(_time) as firstTime max(_time) as lastTime values(action) as action values(dest) as dest values(user_agent) as user_agent values(src) as src values(vendor_account) as vendor_account values(vendor_region) as vendor_region by user 
+  | rename user_name as user
+  | stats dc(signature) as dc_events min(_time) as firstTime max(_time) as lastTime values(signature) as signature values(dest) as dest values(user_agent) as user_agent values(src) as src values(vendor_account) as vendor_account values(vendor_region) as vendor_region by user 
   | where dc_events > 50 
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`|`aws_excessive_security_scanning_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
@@ -42,7 +41,7 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: User $user$ has excessive number of api calls $dc_events$ from these IP
-    addresses $src$, violating the threshold of 50, using the following actions $action$.
+    addresses $src$, violating the threshold of 50, using the following actions $signature$.
   risk_objects:
   - field: user
     type: user
