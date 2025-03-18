@@ -1,6 +1,6 @@
 name: AWS Exfiltration via EC2 Snapshot
 id: ac90b339-13fc-4f29-a18c-4abbba1f2171
-version: 4
+version: 5
 date: '2024-11-14'
 author: Bhavin Patel, Splunk
 status: production
@@ -18,12 +18,14 @@ description: The following analytic detects a series of AWS API calls related to
   externally. If confirmed malicious, the attacker could gain access to sensitive
   information stored in the snapshots, leading to data breaches and potential compliance
   violations.
-search: '`cloudtrail` eventName IN ("CreateSnapshot", "DescribeSnapshotAttribute",
-  "ModifySnapshotAttribute", "DeleteSnapshot") src_ip !="guardduty.amazonaws.com"
-  |  bin _time span=5m |  stats count dc(eventName) as distinct_api_calls values(eventName)  values(requestParameters.attributeType)
-  as attributeType values(requestParameters.createVolumePermission.add.items{}.userId)
-  as aws_account_id_added values(userAgent) as userAgent by _time userName src_ip
-  aws_account_id | where distinct_api_calls >= 2 | `aws_exfiltration_via_ec2_snapshot_filter`'
+search: '`cloudtrail` eventName IN ("CreateSnapshot", "DescribeSnapshotAttribute", "ModifySnapshotAttribute", "DeleteSnapshot") src_ip !="guardduty.amazonaws.com"
+  |  bin _time span=5m 
+  | eval vendor_product = "AWS"
+  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
+  |  stats count dc(action) as distinct_api_calls values(action) as action values(dest) as dest values(requestParameters.attributeType) as attributeType values(requestParameters.createVolumePermission.add.items{}.userId) as aws_account_id_added values(user_agent) as user_agent by _time user src vendor_account vendor_region vendor_product
+  | where distinct_api_calls >= 2 
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `aws_exfiltration_via_ec2_snapshot_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
   search works with AWS CloudTrail logs. We have intentionally removed `guardduty.amazonaws.com`
   from src_ip to remove false positives caused by guard duty. We recommend you adjust
@@ -37,12 +39,12 @@ references:
 - https://bleemb.medium.com/data-exfiltration-with-native-aws-s3-features-c94ae4d13436
 - https://stratus-red-team.cloud/attack-techniques/list/
 drilldown_searches:
-- name: View the detection results for - "$aws_account_id$"
-  search: '%original_detection_search% | search  aws_account_id = "$aws_account_id$"'
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search  user = "$user$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$aws_account_id$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$aws_account_id$")
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -51,14 +53,14 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Potential AWS EC2 Exfiltration detected on account id - $aws_account_id$
-    by user $userName$ from src_ip $src_ip$
+  message: Potential AWS EC2 Exfiltration detected on account id - $vendor_account$
+    by user $user$ from src_ip $src$
   risk_objects:
-  - field: userName
+  - field: user
     type: user
     score: 64
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:

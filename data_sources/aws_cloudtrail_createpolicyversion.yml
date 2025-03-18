@@ -17,7 +17,7 @@ separator_value: CreatePolicyVersion
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
-  version: 7.9.0
+  version: 7.9.1
 fields:
 - _time
 - action
@@ -111,3 +111,12 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "IAMUser", "prin
   "eventID": "33149175-90fd-4cff-a43b-408e4f848c1c", "readOnly": false, "eventType":
   "AwsApiCall", "managementEvent": true, "eventCategory": "Management", "recipientAccountId":
   "111111111111"}'
+output_fields:
+- action
+- dest
+- user
+- user_agent
+- src
+- vendor_account
+- vendor_region
+- vendor_product

@@ -17,7 +17,7 @@ separator_value: DeleteDetector
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
-  version: 7.9.0
+  version: 7.9.1
 fields:
 - _time
 - app
@@ -103,3 +103,12 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "IAMUser", "prin
   "requestID": "1e832076-d7a8-432b-b0df-54ba62f6b62c", "eventID": "c1367a2f-8910-4e64-9256-a854d2e9f37d",
   "readOnly": false, "eventType": "AwsApiCall", "managementEvent": true, "recipientAccountId":
   "111111111111", "eventCategory": "Management"}'
+output_fields:
+- action
+- dest
+- user
+- user_agent
+- src
+- vendor_account
+- vendor_region
+- vendor_product

@@ -1,6 +1,6 @@
 name: Azure AD Device Code Authentication
 id: d68d8732-6f7e-4ee5-a6eb-737f2b990b91
-version: 6
+version: 7
 date: '2025-02-10'
 author: Mauricio Velazco, Gowthamaraj Rajendran,  Splunk
 status: production
@@ -15,10 +15,14 @@ description: The following analytic identifies Azure Device Code Phishing attack
   If confirmed malicious, attackers could gain unauthorized access to Azure AD, Exchange
   mailboxes, and Outlook Web Application (OWA), leading to potential data breaches
   and unauthorized data access.
-search: '`azure_monitor_aad` category=SignInLogs "properties.authenticationProtocol"=deviceCode
-  | rename properties.* as * | stats count min(_time) as firstTime max(_time) as lastTime
-  by user src_ip, appDisplayName, userAgent | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `azure_ad_device_code_authentication_filter`'
+search: '`azure_monitor_aad` category=SignInLogs "properties.authenticationProtocol"=deviceCode 
+  | rename properties.* as * 
+  | rename userAgent as user_agent 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product user_agent category
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `azure_ad_device_code_authentication_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment
@@ -48,13 +52,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Device code requested for $user$ from $src_ip$
+  message: Device code requested for $user$ from $src$
   risk_objects:
   - field: user
     type: user
     score: 35
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:

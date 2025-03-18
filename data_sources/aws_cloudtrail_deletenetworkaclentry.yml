@@ -16,7 +16,7 @@ separator_value: DeleteNetworkAclEntry
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
-  version: 7.9.0
+  version: 7.9.1
 fields:
 - _time
 - action
@@ -114,3 +114,12 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "_return": true}, "requestID": "607474bb-836b-46be-be4a-351ebbef67d6", "eventID":
   "b9e05770-e9b0-4ba1-91e8-6537097e06e7", "readOnly": false, "eventType": "AwsApiCall",
   "managementEvent": true, "eventCategory": "Management", "recipientAccountId": "111111111111"}'
+output_fields:
+- action
+- dest
+- user
+- user_agent
+- src
+- vendor_account
+- vendor_region
+- vendor_product

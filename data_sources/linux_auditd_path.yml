@@ -1,7 +1,7 @@
 name: Linux Auditd Path
 id: 3d86125c-0496-4a5a-aae3-0d355a4f3d7d
 version: 2
-date: '2025-01-23'
+date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 description: Logs file system access events on a Linux system, including details about
   file paths, permissions, and associated processes.
@@ -11,8 +11,8 @@ mitre_components:
 - Process Metadata
 - OS API Execution
 - Application Log Content
-source: /var/log/audit/audit.log
-sourcetype: linux:audit
+source: auditd
+sourcetype: auditd
 separator: type
 separator_value: PATH
 configuration: https://github.com/Neo23x0/auditd/blob/master/audit.rules

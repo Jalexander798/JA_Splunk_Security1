@@ -1,7 +1,7 @@
 name: Linux Auditd Syscall
 id: 4dff7047-0d43-4096-bb3f-b756c889bbad
 version: 2
-date: '2025-01-23'
+date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 description: Logs system calls made by processes on a Linux system, including details
   about the syscall number, arguments, return values, and associated process metadata.
@@ -10,8 +10,8 @@ mitre_components:
 - Process Metadata
 - Application Log Content
 - Host Status
-source: /var/log/audit/audit.log
-sourcetype: linux:audit
+source: auditd
+sourcetype: auditd
 separator: type
 separator_value: syscall
 configuration: https://github.com/Neo23x0/auditd/blob/master/audit.rules

@@ -1,7 +1,7 @@
 name: Linux Auditd Proctitle
 id: 5a25984a-2789-400a-858b-d75c923e06b1
 version: 2
-date: '2025-01-23'
+date: '2025-02-20'
 author: Teoderick Contreras, Splunk
 description: Logs the full command-line arguments of a process execution on a Linux
   system, providing visibility into the executed command and its parameters.
@@ -12,8 +12,8 @@ mitre_components:
 - Application Log Content
 separator: type
 separator_value: PROCTITLE
-source: /var/log/audit/audit.log
-sourcetype: linux:audit
+source: auditd
+sourcetype: auditd
 configuration: https://github.com/Neo23x0/auditd/blob/master/audit.rules
 supported_TA:
 - name: Splunk Add-on for Unix and Linux

@@ -1,12 +1,12 @@
 name: Windows AD GPO Disabled
 id: 72793bc0-c0cd-400e-9e60-fdf36f278917
-version: 3
-date: '2025-01-21'
+version: 4
+date: '2025-02-17'
 author: Dean Luxton
 status: production
 type: TTP
 data_source:
-- Windows Security 5136
+- Windows Event Log Security 5136
 description: This detection identifies when an Active Directory Group Policy is disabled
   using the Group Policy Management Console.
 search: '`wineventlog_security` EventCode=5136 AttributeLDAPDisplayName=flags OperationType="%%14674"

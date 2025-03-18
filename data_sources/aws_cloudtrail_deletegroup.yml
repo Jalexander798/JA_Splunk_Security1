@@ -17,7 +17,7 @@ separator_value: DeleteGroup
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
-  version: 7.9.0
+  version: 7.9.1
 fields:
 - _time
 - action
@@ -107,3 +107,12 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "IAMUser", "prin
   null, "requestID": "15684d3b-a8c5-4334-a996-16619e901c17", "eventID": "ab65dca3-3d28-41f4-9f99-443606cc49fe",
   "readOnly": false, "eventType": "AwsApiCall", "managementEvent": true, "eventCategory":
   "Management", "recipientAccountId": "121522247101"}'
+output_fields:
+- action
+- dest
+- user
+- user_agent
+- src
+- vendor_account
+- vendor_region
+- vendor_product

@@ -1,7 +1,7 @@
 name: Executables Or Script Creation In Suspicious Path
 id: a7e3f0f0-ae42-11eb-b245-acde48001122
-version: 10
-date: '2025-01-27'
+version: '12'
+date: '2025-02-28'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -15,15 +15,14 @@ description: The following analytic identifies the creation of executables or sc
   a significant security threat.
 data_source:
 - Sysmon EventID 11
-search: '| tstats `security_content_summariesonly` values(Filesystem.file_path) as
-  file_path count min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Filesystem
-  where Filesystem.file_name IN ("*.exe", "*.dll", "*.sys", "*.com", "*.vbs", "*.vbe",
-  "*.js", "*.ps1", "*.bat", "*.cmd", "*.pif") AND Filesystem.file_path IN ("*\\windows\\fonts\\*",
-  "*\\windows\\temp\\*", "*\\users\\public\\*", "*\\windows\\debug\\*", "*\\Users\\Administrator\\Music\\*",
-  "*\\Windows\\servicing\\*", "*\\Users\\Default\\*", "*Recycle.bin*", "*\\Windows\\Media\\*",
-  "*\\Windows\\repair\\*", "*\\AppData\\Local\\Temp*", "*\\PerfLogs\\*", "*:\\temp\\*")
+search: '| tstats `security_content_summariesonly` values(Filesystem.file_path) as file_path count min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Filesystem
+  where Filesystem.file_name IN ("*.exe", "*.dll", "*.sys", "*.com", "*.vbs", "*.vbe", "*.js", "*.ps1", "*.bat", "*.cmd", "*.pif") 
+  AND Filesystem.file_path IN ("*\\windows\\fonts\\*", "*\\users\\public\\*", "*\\windows\\debug\\*", "*\\Users\\Administrator\\Music\\*", "*\\Windows\\servicing\\*", "*\\Users\\Default\\*", "*Recycle.bin*", "*\\Windows\\Media\\*",
+  "*\\Windows\\repair\\*", "*\\PerfLogs\\*") AND NOT(Filesystem.file_path IN("*\\temp\\*"))
   by Filesystem.file_create_time Filesystem.process_id Filesystem.file_name Filesystem.user
-  | `drop_dm_object_name(Filesystem)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `drop_dm_object_name(Filesystem)` 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)`
   | `executables_or_script_creation_in_suspicious_path_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
   on process that include the name of the Filesystem responsible for the changes from
@@ -61,46 +60,48 @@ rba:
     type: file_name
 tags:
   analytic_story:
-  - Chaos Ransomware
+  - BlackByte Ransomware
+  - Brute Ratel C4
   - Trickbot
   - Snake Keylogger
-  - CISA AA23-347A
-  - Industroyer2
-  - WinDealer RAT
-  - Qakbot
-  - Warzone RAT
-  - IcedID
-  - ValleyRAT
-  - Azorult
-  - Handala Wiper
-  - LockBit Ransomware
-  - Meduza Stealer
-  - Brute Ratel C4
-  - AsyncRAT
-  - AcidPour
-  - Derusbi
-  - DarkGate Malware
   - Graceful Wipe Out Attack
-  - NjRAT
-  - WhisperGate
-  - Data Destruction
-  - BlackByte Ransomware
-  - AgentTesla
-  - Swift Slicer
-  - Crypto Stealer
-  - Hermetic Wiper
-  - MoonPeak
-  - Double Zero Destructor
-  - XMRig
   - PlugX
-  - Amadey
-  - DarkCrystal RAT
-  - Remcos
-  - Nexus APT Threat Activity
+  - Handala Wiper
   - Earth Estries
-  - Rhysida Ransomware
-  - RedLine Stealer
+  - Warzone RAT
+  - ValleyRAT
+  - NjRAT
+  - LockBit Ransomware
+  - Double Zero Destructor
+  - Swift Slicer
+  - DarkCrystal RAT
+  - AsyncRAT
   - Volt Typhoon
+  - Chaos Ransomware
+  - Hermetic Wiper
+  - Derusbi
+  - XMRig
+  - AgentTesla
+  - WinDealer RAT
+  - RedLine Stealer
+  - Remcos
+  - Rhysida Ransomware
+  - China-Nexus Threat Activity
+  - Crypto Stealer
+  - Qakbot
+  - IcedID
+  - Meduza Stealer
+  - AcidPour
+  - MoonPeak
+  - CISA AA23-347A
+  - DarkGate Malware
+  - Industroyer2
+  - Azorult
+  - Data Destruction
+  - Amadey
+  - SnappyBee
+  - WhisperGate
+  - SystemBC
   asset_type: Endpoint
   mitre_attack_id:
   - T1036
@@ -112,6 +113,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036/executables_suspicious_file_path/exec_susp_path2.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

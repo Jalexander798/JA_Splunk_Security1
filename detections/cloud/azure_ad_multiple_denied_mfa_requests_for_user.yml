@@ -1,6 +1,6 @@
 name: Azure AD Multiple Denied MFA Requests For User
 id: d0895c20-de71-4fd2-b56c-3fcdb888eba1
-version: 5
+version: 7
 date: '2024-11-14'
 author: Mauricio Velazco, Splunk
 status: production
@@ -15,12 +15,17 @@ description: The following analytic detects an unusually high number of denied M
   This behavior is significant as it may indicate a targeted attack or account compromise
   attempt, with the user actively declining unauthorized access. If confirmed malicious,
   it could lead to data exfiltration, lateral movement, or further malicious activities.
-search: '`azure_monitor_aad` category=SignInLogs operationName="Sign-in activity"
-  | rename properties.* as * | search status.errorCode=500121 status.additionalDetails="MFA
-  denied; user declined the authentication" | bucket span=10m _time | stats count
-  min(_time) as firstTime max(_time) as lastTime by user, status.additionalDetails,
-  appDisplayName, user_agent | where count > 9 | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `azure_ad_multiple_denied_mfa_requests_for_user_filter`'
+search: '`azure_monitor_aad` category=SignInLogs operationName="Sign-in activity" 
+  | rename properties.* as * 
+  | search status.errorCode=500121 status.additionalDetails="MFA denied; user declined the authentication" 
+  | bucket span=10m _time 
+  | rename userAgent as user_agent 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime values(dest) as dest values(user_agent) as user_agent values(src) as src by user status.additionalDetails vendor_account vendor_product signature
+  | where count > 9 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `azure_ad_multiple_denied_mfa_requests_for_user_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment
