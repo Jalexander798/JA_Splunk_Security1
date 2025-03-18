@@ -151,7 +151,6 @@ example_log: '{"eventVersion": "1.09", "userIdentity": {"type": "AssumedRole", "
   "managementEvent": true, "recipientAccountId": "11111111111111", "eventCategory":
   "Management", "sessionCredentialFromConsole": "true"}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

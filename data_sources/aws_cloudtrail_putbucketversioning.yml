@@ -132,7 +132,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "Management", "tlsDetails": {"tlsVersion": "TLSv1.2", "cipherSuite": "ECDHE-RSA-AES128-GCM-SHA256",
   "clientProvidedHostHeader": "s3.us-west-2.amazonaws.com"}}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

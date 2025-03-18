@@ -109,7 +109,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "IAMUser", "acco
   "Management", "tlsDetails": {"tlsVersion": "TLSv1.2", "cipherSuite": "ECDHE-RSA-AES128-GCM-SHA256",
   "clientProvidedHostHeader": "signin.aws.amazon.com"}}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

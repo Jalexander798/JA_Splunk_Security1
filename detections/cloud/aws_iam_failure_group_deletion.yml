@@ -16,9 +16,8 @@ description: The following analytic identifies failed attempts to delete AWS IAM
 data_source:
 - AWS CloudTrail DeleteGroup
 search: '`cloudtrail` eventSource=iam.amazonaws.com eventName=DeleteGroup errorCode IN (NoSuchEntityException,DeleteConflictException, AccessDenied) (userAgent!=*.amazonaws.com)
-  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
-  | eval vendor_product = "AWS"
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product
+  | rename user_name as user
+  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user user_agent src vendor_account vendor_region vendor_product
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `aws_iam_failure_group_deletion_filter`'
 how_to_implement: The Splunk AWS Add-on and Splunk App for AWS is required to utilize
   this data. The search requires AWS CloudTrail logs.
