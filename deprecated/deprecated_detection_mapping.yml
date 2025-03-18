@@ -795,6 +795,12 @@ baselines:
   - deprecated_content: Systems Ready for Spectre-Meltdown Windows Patch
     deprecated_in_version: 5.2.0
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+  - deprecated_content: Previously Seen AWS Cross Account Activity - Initial
+    deprecated_in_version: 5.4.0
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+  - deprecated_content: Previously Seen AWS Cross Account Activity - Update
+    deprecated_in_version: 5.4.0
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
 investigations: 
   - deprecated_content: All backup logs for host
     deprecated_in_version: 5.2.0
