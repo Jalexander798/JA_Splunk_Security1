@@ -99,7 +99,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "Root", "princip
   "readOnly": false, "eventType": "AwsApiCall", "managementEvent": true, "recipientAccountId":
   "140429656527", "eventCategory": "Management", "sessionCredentialFromConsole": "true"}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

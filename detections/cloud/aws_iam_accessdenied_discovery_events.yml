@@ -16,9 +16,8 @@ data_source:
 - AWS CloudTrail
 search: '`cloudtrail` (errorCode = "AccessDenied") user_type=IAMUser (userAgent!=*.amazonaws.com)
   | bucket _time span=1h 
-  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
-  | eval vendor_product = "AWS"
-  | stats count as failures min(_time) as firstTime max(_time) as lastTime, dc(action) as methods, dc(dest) as sources values(action) as action values(dest) as dest by src, user, vendor_account vendor_region, vendor_product
+  | rename user_name as user
+  | stats count as failures min(_time) as firstTime max(_time) as lastTime, dc(signature) as methods, dc(dest) as sources values(signature) as signature values(dest) as dest by src, user, vendor_account vendor_region, vendor_product
   | where failures >= 5 and methods >= 1 and sources >= 1 
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` 
   | `aws_iam_accessdenied_discovery_events_filter`'
