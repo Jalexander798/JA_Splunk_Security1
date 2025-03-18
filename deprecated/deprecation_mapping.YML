@@ -158,14 +158,7 @@ detections:
   - deprecated_content: Remote System Discovery with Net
     deprecated_in_version: 5.2.0
     reason: "This analytic was focusing on 2 separate and unrelated type of threats
-      or actions. It was split into other analytics, namely:\r\n\r\nWindows Network
-      Share Interaction With Net / 4dc3951f-b3f8-4f46-b412-76a483f72277\r\nWindows Sensitive
-      Group Discovery With Net / a23a0e20-0b1b-4a07-82e5-ec5f70811e7a"
-    replacement_content:
-    - Windows Network Share Interaction With Net
-  - deprecated_content: Remote System Discovery with Net
-    deprecated_in_version: 5.2.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+      or actions. PLease use the replacement content"
     replacement_content:
     - Windows Sensitive Group Discovery With Net
   - deprecated_content: DNS Query Requests Resolved by Unauthorized DNS Servers
