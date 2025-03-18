@@ -73,3 +73,5 @@ tests:
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/aws_createloginprofile/aws_cloudtrail_events.json
     sourcetype: aws:cloudtrail
     source: aws_cloudtrail
+
+    
