@@ -780,6 +780,21 @@ baselines:
   - deprecated_content: Update previously seen users in CloudTrail
     deprecated_in_version: 5.2.0
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+  - deprecated_content: Monitor Successful Backups
+    deprecated_in_version: 5.2.0
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+  - deprecated_content: Monitor Unsuccessful Backups
+    deprecated_in_version: 5.2.0
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+  - deprecated_content: Previously Seen AWS Regions
+    deprecated_in_version: 5.2.0
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+  - deprecated_content: Previously Seen EC2 Modifications By User
+    deprecated_in_version: 5.2.0
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+  - deprecated_content: Systems Ready for Spectre-Meltdown Windows Patch
+    deprecated_in_version: 5.2.0
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
 investigations: 
   - deprecated_content: All backup logs for host
     deprecated_in_version: 5.2.0
