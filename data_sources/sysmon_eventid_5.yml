@@ -1,12 +1,19 @@
 name: Sysmon EventID 5
 id: 556471bf-44fa-44e6-97e2-eb25416aeb6d
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Sysmon EventID 5
+description: Logs the termination of a process, including details about the process
+  name, process ID, parent process, and associated metadata.
+mitre_components:
+- Process Termination
+- Process Metadata
+- Application Log Content
+- OS API Execution
 source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
 sourcetype: xmlwineventlog
 separator: EventID
+separator_value: '5'
 configuration: https://github.com/SwiftOnSecurity/sysmon-config
 supported_TA:
 - name: Splunk Add-on for Sysmon

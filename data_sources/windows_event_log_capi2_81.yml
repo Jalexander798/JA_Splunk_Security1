@@ -1,12 +1,20 @@
 name: Windows Event Log CAPI2 81
 id: 463ff898-8135-4c0e-811e-f8629dfc5027
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log CAPI2 81
+description: Logs an error when attempting to verify the digital signature of a file,
+  including details about the file path, signature failure, and the process involved.
+mitre_components:
+- File Access
+- File Metadata
+- Malware Metadata
+- Application Log Content
+- Process Metadata
 source: XmlWinEventLog:Microsoft-Windows-CAPI2/Operational
 sourcetype: xmlwineventlog
 separator: EventCode
+separator_value: '81'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

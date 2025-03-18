@@ -1,9 +1,16 @@
 name: Nginx Access
 id: c716a418-eab3-4df5-9dff-5420174e3068
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Nginx Access
+description: Logs HTTP/S access events on an Nginx server, including details such
+  as client IP, request method, URI, response status, and user agent.
+mitre_components:
+- Network Traffic Content
+- Network Traffic Flow
+- Response Metadata
+- Application Log Content
+- User Account Metadata
 source: /var/log/nginx/access.log
 sourcetype: nginx:plus:kv
 supported_TA:

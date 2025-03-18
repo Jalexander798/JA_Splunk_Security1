@@ -1,12 +1,19 @@
 name: AWS CloudTrail DeleteDetector
 id: 5d8bd475-c8bc-4447-b27f-efa508728b90
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail DeleteDetector
+description: Logs the deletion of an Amazon GuardDuty detector, including details
+  about the detector ID and associated configurations.
+mitre_components:
+- Cloud Service Modification
+- Cloud Service Metadata
+- Host Status
+- Application Log Content
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: DeleteDetector
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
