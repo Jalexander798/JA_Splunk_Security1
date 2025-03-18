@@ -16,9 +16,9 @@ data_source:
 - AWS CloudTrail DeleteNetworkAclEntry
 search: '`cloudtrail` eventName=DeleteNetworkAclEntry requestParameters.egress=false
   | fillnull 
-  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
+  | rename eventName as signature, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
   | eval vendor_product = "AWS"
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product
+  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product signature
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `aws_network_access_control_list_deleted_filter`'
 how_to_implement: You must install the AWS App for Splunk (version 5.1.0 or later)
   and Splunk Add-on for AWS (version 4.4.0 or later), then configure your AWS CloudTrail
@@ -41,8 +41,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: User $user$ from $src$ has sucessfully deleted network ACLs entry (eventName=
-    $eventName$), such that the instance is accessible from anywhere
+  message: User $user$ from $src$ has sucessfully deleted network ACLs entry, such that the instance is accessible from anywhere
   risk_objects:
   - field: user
     type: user
