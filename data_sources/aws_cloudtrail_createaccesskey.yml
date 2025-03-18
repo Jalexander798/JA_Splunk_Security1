@@ -102,7 +102,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "IAMUser", "prin
   "AwsApiCall", "managementEvent": true, "eventCategory": "Management", "recipientAccountId":
   "121521347698"}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

@@ -894,7 +894,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "readOnly": true, "eventType": "AwsApiCall", "managementEvent": true, "recipientAccountId":
   "111111111111", "eventCategory": "Management"}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

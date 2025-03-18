@@ -17,9 +17,8 @@ data_source:
 - AWS CloudTrail DescribeEventAggregates
 search: '`cloudtrail` eventName = DescribeEventAggregates src_ip!="AWS Internal" 
   | bin span=5m _time 
-  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
-  | eval vendor_product = "AWS"
-  | stats min(_time) as firstTime max(_time) as lastTime values(user_agent) as user_agent values(action) as action values(src) as src values(dest) as dest dc(src) as distinct_ip_count by _time user vendor_account vendor_region vendor_product
+  | rename user_name as user
+  | stats min(_time) as firstTime max(_time) as lastTime values(user_agent) as user_agent values(signature) as signature values(src) as src values(dest) as dest dc(src) as distinct_ip_count by _time user vendor_account vendor_region vendor_product
   | where distinct_ip_count > 1 
   |  `security_content_ctime(firstTime)` |`security_content_ctime(lastTime)`
   | `aws_concurrent_sessions_from_different_ips_filter`'
