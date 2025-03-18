@@ -1,12 +1,19 @@
 name: Windows Event Log Security 4887
 id: 994c7b19-a623-4231-9818-f00e453b9a75
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log Security 4887
+description: Logs cryptographic operations performed by a Windows system, including
+  details about the certificate or key used and the operation type.
+mitre_components:
+- Certificate Registration
+- User Account Metadata
+- Application Log Content
+- OS API Execution
 source: XmlWinEventLog:Security
 sourcetype: xmlwineventlog
 separator: EventCode
+separator_value: '4887'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

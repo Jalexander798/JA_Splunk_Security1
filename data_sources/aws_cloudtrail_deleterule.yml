@@ -1,12 +1,19 @@
 name: AWS CloudTrail DeleteRule
 id: b5760623-f3ca-492d-a372-d5c2b3567dfc
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail DeleteRule
+description: Logs the deletion of an event rule in AWS EventBridge, including details
+  about the rule name and its associated targets or schedules.
+mitre_components:
+- Cloud Service Modification
+- Cloud Service Metadata
+- Scheduled Job Modification
+- Application Log Content
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: DeleteRule
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876

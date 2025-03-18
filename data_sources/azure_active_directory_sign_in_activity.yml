@@ -1,12 +1,18 @@
 name: Azure Active Directory Sign-in activity
 id: f9ed0a3a-9e20-4198-a035-d0a29593fbe0
-version: 1
-date: "2024-07-18"
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Azure Active Directory Sign-in activity
+description: Logs an event when a user attempts to sign into Azure Active Directory,
+  capturing authentication details and outcomes.
+mitre_components:
+- User Account Authentication
+- Logon Session Creation
+- User Account Metadata
 source: Azure AD
 sourcetype: azure:monitor:aad
 separator: operationName
+separator_value: Sign-in activity
 supported_TA:
   - name: Splunk Add-on for Microsoft Cloud Services
     url: https://splunkbase.splunk.com/app/3110

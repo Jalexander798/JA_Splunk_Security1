@@ -1,9 +1,10 @@
 name: AWS CloudTrail PutKeyPolicy
 id: 9c54c86b-43b9-4bb8-915d-6838beb7f07c
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail PutKeyPolicy
+description: Logs changes made to AWS Key Management Service (KMS) key policies, including
+  updates and permission assignments.
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
@@ -94,6 +95,8 @@ fields:
 - vendor_account
 - vendor_product
 - vendor_region
+mitre_components:
+- Cloud Service Modification
 example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "principalId":
   "AROAIJIESMXKGCJRCTPR6:pbareiss@splunk.local", "arn": "arn:aws:sts::111111111111:assumed-role/okta_adm_role/pbareiss@splunk.local",
   "accountId": "111111111111", "accessKeyId": "ASIAYTOGP2RLK74OPBDR", "sessionContext":

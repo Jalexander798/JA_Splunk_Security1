@@ -3,7 +3,15 @@ id: 5a25984a-2789-400a-858b-d75c923e06b1
 version: 2
 date: '2025-02-20'
 author: Teoderick Contreras, Splunk
-description: Data source object for Linux Auditd Proctitle Type
+description: Logs the full command-line arguments of a process execution on a Linux
+  system, providing visibility into the executed command and its parameters.
+mitre_components:
+- Command Execution
+- Process Metadata
+- OS API Execution
+- Application Log Content
+separator: type
+separator_value: PROCTITLE
 source: auditd
 sourcetype: auditd
 configuration: https://github.com/Neo23x0/auditd/blob/master/audit.rules

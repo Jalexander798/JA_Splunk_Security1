@@ -1,12 +1,16 @@
 name: AWS CloudTrail JobCreated
 id: 6473289b-d097-4c86-a837-3cc5ae408155
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail JobCreated
+description: Logs an event when a new job is created in AWS CloudTrail.
+mitre_components:
+- Scheduled Job Creation
+- Cloud Service Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: JobCreated
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876

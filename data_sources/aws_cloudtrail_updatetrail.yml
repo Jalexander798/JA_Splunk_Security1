@@ -1,12 +1,17 @@
 name: AWS CloudTrail UpdateTrail
 id: d5b7a1eb-711a-4c96-aa93-235fe3c8a939
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail UpdateTrail
+description: Logs an event when an AWS CloudTrail trail is updated, typically involving
+  changes to settings or configuration.
+mitre_components:
+- Cloud Service Modification
+- Cloud Service Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: UpdateTrail
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
