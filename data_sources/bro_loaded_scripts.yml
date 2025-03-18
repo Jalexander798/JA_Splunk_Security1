@@ -12,4 +12,7 @@ mitre_components:
 - OS API Execution
 source: bro:loaded_scripts:json
 sourcetype: bro:loaded_scripts:json
-supported_TA: []
+supported_TA:
+- name: TA for Zeek
+  url: https://splunkbase.splunk.com/app/5466
+  version: 1.0.8

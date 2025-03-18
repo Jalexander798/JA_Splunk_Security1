@@ -12,4 +12,7 @@ mitre_components:
 - Application Log Content
 source: bro:ntp:json
 sourcetype: bro:ntp:json
-supported_TA: []
+supported_TA:
+- name: TA for Zeek
+  url: https://splunkbase.splunk.com/app/5466
+  version: 1.0.8
