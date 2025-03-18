@@ -13,7 +13,7 @@ mitre_components:
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
-separator_values: CopyObject
+separator_value: CopyObject
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876

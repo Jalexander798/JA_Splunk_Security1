@@ -14,7 +14,7 @@ mitre_components:
 source: XmlWinEventLog:Microsoft-Windows-CAPI2/Operational
 sourcetype: xmlwineventlog
 separator: EventCode
-separator_value: 81
+separator_value: '81'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

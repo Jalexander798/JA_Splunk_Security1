@@ -13,7 +13,7 @@ mitre_components:
 source: IIS:Configuration:Operational
 sourcetype: IIS:Configuration:Operational
 separator: EventID
-separator_value: 29
+separator_value: '29'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

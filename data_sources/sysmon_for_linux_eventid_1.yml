@@ -14,7 +14,7 @@ mitre_components:
 source: Syslog:Linux-Sysmon/Operational
 sourcetype: sysmon:linux
 separator: EventID
-separator_value: 1
+separator_value: '1'
 supported_TA:
 - name: Splunk Add-on for Sysmon for Linux
   url: https://splunkbase.splunk.com/app/6652

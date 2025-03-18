@@ -11,7 +11,7 @@ mitre_components:
 source: WinEventLog:Microsoft-Windows-TerminalServices-RemoteConnectionManager/Operational
 sourcetype: wineventlog
 separator: EventCode
-separator_value: 1149
+separator_value: '1149'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

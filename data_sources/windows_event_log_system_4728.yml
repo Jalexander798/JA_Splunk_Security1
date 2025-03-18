@@ -13,7 +13,7 @@ mitre_components:
 source: XmlWinEventLog:System
 sourcetype: xmlwineventlog
 separator: EventCode
-separator_value: 4728
+separator_value: '4728'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

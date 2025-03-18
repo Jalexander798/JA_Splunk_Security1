@@ -13,7 +13,7 @@ mitre_components:
 source: XmlWinEventLog:Application
 sourcetype: XmlWinEventLog
 separator: EventCode
-separator_value: 3000
+separator_value: '3000'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

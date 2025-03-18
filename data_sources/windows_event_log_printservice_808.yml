@@ -12,7 +12,7 @@ mitre_components:
 source: WinEventLog:Microsoft-Windows-PrintService/Admin
 sourcetype: WinEventLog
 separator: EventCode
-separator_value: 808
+separator_value: '808'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

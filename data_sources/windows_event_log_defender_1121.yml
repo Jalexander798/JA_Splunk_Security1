@@ -12,7 +12,7 @@ mitre_components:
 source: WinEventLog:Microsoft-Windows-Windows Defender/Operational
 sourcetype: xmlwineventlog
 separator: EventCode
-separator_value: 1121
+separator_value: '1121'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

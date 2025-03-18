@@ -13,7 +13,7 @@ mitre_components:
 source: WinEventLog:Microsoft-Windows-TaskScheduler/Operational
 sourcetype: wineventlog
 separator: EventCode
-separator_value: 200
+separator_value: '200'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742
