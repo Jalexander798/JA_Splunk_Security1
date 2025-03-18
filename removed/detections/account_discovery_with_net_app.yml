@@ -1,29 +1,30 @@
-name: Attacker Tools On Endpoint
-id: a51bfe1a-94f0-48cc-b4e4-16a110145893
+name: Account Discovery With Net App
+id: 339805ce-ac30-11eb-b87d-acde48001122
 version: 9
-date: '2025-02-27'
-author: Bhavin Patel, Splunk
-status: production
+date: '2025-02-10'
+author: Teoderick Contreras, Splunk, TheLawsOfChaos, Github Community
+status: removed
 type: TTP
-description: The following analytic detects the execution of tools commonly exploited
-  by cybercriminals, such as those used for unauthorized access, network scanning,
-  or data exfiltration. It leverages process activity data from Endpoint Detection
-  and Response (EDR) agents, focusing on known attacker tool names. This activity
-  is significant because it serves as an early warning system for potential security
-  incidents, enabling prompt response. If confirmed malicious, this activity could
-  lead to unauthorized access, data theft, or further network compromise, posing a
-  severe threat to the organization's security infrastructure.
+description: The following analytic has been deprecated in favour of the more generic
+  "45e52536-ae42-11eb-b5c6-acde48001122". The following analytic detects potential
+  account discovery activities using the 'net' command, commonly employed by malware
+  like Trickbot for reconnaissance. It leverages Endpoint Detection and Response (EDR)
+  data, focusing on specific command-line patterns and process relationships. This
+  activity is significant as it often precedes further malicious actions, such as
+  lateral movement or privilege escalation. If confirmed malicious, attackers could
+  gain valuable information about user accounts, enabling them to escalate privileges
+  or move laterally within the network, posing a significant security risk.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
 - CrowdStrike ProcessRollup2
-search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
-  as lastTime values(Processes.process) as process values(Processes.parent_process)
-  as parent_process from datamodel=Endpoint.Processes where Processes.dest!=unknown
-  Processes.user!=unknown by Processes.dest Processes.user Processes.process_name
-  Processes.process | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `drop_dm_object_name(Processes)` | lookup attacker_tools attacker_tool_names AS
-  process_name OUTPUT description | search description !=false| `attacker_tools_on_endpoint_filter`'
+search: '| tstats `security_content_summariesonly` values(Processes.process) as process
+  values(Processes.parent_process) as parent_process values(Processes.process_id)
+  as process_id count min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Processes
+  where `process_net` AND (Processes.process="* user *" OR  Processes.process="*config*"
+  OR Processes.process="*view /all*") by  Processes.process_name Processes.dest Processes.user
+  Processes.parent_process_name | where count >=4 | `drop_dm_object_name(Processes)`
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `account_discovery_with_net_app_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -33,9 +34,11 @@ how_to_implement: The detection is based on data that originates from Endpoint D
   the EDR product. The logs must also be mapped to the `Processes` node of the `Endpoint`
   data model. Use the Splunk Common Information Model (CIM) to normalize the field
   names and speed up the data modeling process.
-known_false_positives: Some administrator activity can be potentially triggered, please
-  add those users to the filter macro.
-references: []
+known_false_positives: Admin or power user may used this series of command.
+references:
+- https://labs.vipre.com/trickbot-and-its-modules/
+- https://whitehat.eu/incident-response-case-study-featuring-ryuk-and-trickbot-part-2/
+- https://app.any.run/tasks/48414a33-3d66-4a46-afe5-c2003bb55ccf/
 drilldown_searches:
 - name: View the detection results for - "$user$" and "$dest$"
   search: '%original_detection_search% | search  user = "$user$" dest = "$dest$"'
@@ -51,30 +54,24 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: An attacker tool $process_name$, listed in attacker_tools.csv is executed
-    on host $dest$ by User $user$. This process $process_name$ is known to do- $description$
+  message: Suspicious $process_name$ usage detected on endpoint $dest$ by user $user$.
   risk_objects:
   - field: user
     type: user
-    score: 64
+    score: 5
   - field: dest
     type: system
-    score: 64
+    score: 5
   threat_objects:
   - field: process_name
     type: process_name
 tags:
   analytic_story:
-  - XMRig
-  - Unusual Processes
-  - SamSam Ransomware
-  - CISA AA22-264A
-  - Compromised Windows Host
+  - Trickbot
+  - IcedID
   asset_type: Endpoint
   mitre_attack_id:
-  - T1003
-  - T1036.005
-  - T1595
+  - T1087.002
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
@@ -84,6 +81,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1595/attacker_scan_tools/windows-sysmon.log
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/trickbot/infection/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
