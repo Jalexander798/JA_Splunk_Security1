@@ -218,11 +218,11 @@ apps:
   version: 3.1.0
   description: description of app
   hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-github_310.tgz
-- uid: 2882
+- uid: 3471
   title: Splunk Add-on for AppDynamics
   appid: Splunk_TA_AppDynamics
-  version: 3.1.0
+  version: 3.0.0
   description: The Splunk Add-on for AppDynamics enables you to easily configure data
     inputs to pull data from AppDynamics' REST APIs
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/cisco-splunk-add-on-for-appdynamics_310.tgz
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/cisco-splunk-add-on-for-appdynamics_300.tgz
 githash: d6fac80e6d50ae06b40f91519a98489d4ce3a3fd

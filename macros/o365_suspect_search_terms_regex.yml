@@ -1,0 +1,3 @@
+definition: "\"(?i)password|credential|login|passwd|shadow|active directory|account|username|network|computer|access|MFA|bank|deposit|payroll|EFT|Electonic Funds|routing\""
+description: A regex used with match statements preloaded with generic suspicious terms or phrases. Is used to detect malicious actor or insider threat searches, replace/modify these terms to suit your organization.
+name: o365_suspect_search_terms_regex
