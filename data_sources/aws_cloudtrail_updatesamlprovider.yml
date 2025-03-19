@@ -1,12 +1,17 @@
 name: AWS CloudTrail UpdateSAMLProvider
 id: e5eb628d-711e-499c-87d9-8fa5dee419ec
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail UpdateSAMLProvider
+description: Logs an event when a SAML provider is updated in AWS.
+mitre_components:
+- Cloud Service Modification
+- User Account Modification
+- Cloud Service Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: UpdateSAMLProvider
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
@@ -96,7 +101,7 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "AROAYTOGP2RLKFUVAQAIJ:rodsoto@rodsoto.onmicrosoft.com", "arn": "arn:aws:sts::111111111111:assumed-role/rodonmicrotestrole/rodsoto@rodsoto.onmicrosoft.com",
   "accountId": "111111111111", "accessKeyId": "ASIAYTOGP2RLMZGPIW6C", "sessionContext":
   {"sessionIssuer": {"type": "Role", "principalId": "AROAYTOGP2RLKFUVAQAIJ", "arn":
-  "arn:aws:iam::111111111111:role/rodonmicrotestrole", "accountId": "111111111111",
+  "arn:aws:iam::111111111111:role/rodonmicrotestrole", "accountId" : "111111111111",
   "userName": "rodonmicrotestrole"}, "webIdFederationData": {}, "attributes": {"mfaAuthenticated":
   "false", "creationDate": "2021-01-20T03:10:32Z"}}}, "eventTime": "2021-01-20T03:12:39Z",
   "eventSource": "iam.amazonaws.com", "eventName": "UpdateSAMLProvider", "awsRegion":
@@ -186,7 +191,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "readOnly": false, "eventType": "AwsApiCall", "managementEvent": true, "eventCategory":
   "Management", "recipientAccountId": "111111111111"}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

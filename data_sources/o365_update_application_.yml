@@ -1,12 +1,19 @@
 name: O365 Update application.
 id: 62159133-911b-4c63-9e30-a6a8c89195ca
-version: 1
-date: "2024-07-18"
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for O365 Update application.
+description: Logs updates made to applications in Microsoft 365, including changes
+  to configurations, permissions, and role assignments.
+mitre_components:
+- Cloud Service Modification
+- Configuration Modification
+- Cloud Service Metadata
+- Application Log Content
 source: o365
 sourcetype: o365:management:activity
 separator: Operation
+separator_value: Update application.
 supported_TA:
   - name: Splunk Add-on for Microsoft Office 365
     url: https://splunkbase.splunk.com/app/4055

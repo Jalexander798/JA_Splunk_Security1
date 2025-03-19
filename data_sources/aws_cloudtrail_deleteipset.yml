@@ -1,12 +1,18 @@
 name: AWS CloudTrail DeleteIPSet
 id: ebdeeb63-77a0-4808-a6fe-549956731377
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail DeleteIPSet
+description: Logs the deletion of an IP set in AWS WAF or GuardDuty, including details
+  about the IP set ID and its associated configurations.
+mitre_components:
+- Cloud Service Modification
+- Cloud Service Metadata
+- Firewall Rule Modification
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: DeleteIPSet
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
@@ -98,7 +104,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "IAMUser", "prin
   "readOnly": false, "eventType": "AwsApiCall", "managementEvent": true, "recipientAccountId":
   "111111111111", "eventCategory": "Management"}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

@@ -1,9 +1,15 @@
 name: GitHub Webhooks
 id: 88aa4632-3c3e-43f6-a00a-998d71f558e3
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for GitHub Webooks 
+description: Data source object for GitHub Webooks
+mitre_components:
+- User Account Authentication
+- Configuration Modification
+- Application Log Content
+- User Account Metadata
+- Scheduled Job Metadata
 source: github
 sourcetype: aws:firehose:json
 supported_TA: []

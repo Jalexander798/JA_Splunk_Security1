@@ -1,12 +1,18 @@
 name: AWS CloudTrail GetObject
 id: 5063cb10-84c0-44af-ade4-ab9ecad11dfe
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail GetObject
+description: Logs an event when a request is made to access an object stored in an
+  AWS S3 bucket.
+mitre_components:
+- Cloud Storage Access
+- Cloud Storage Metadata
+- Cloud Storage Enumeration
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: GetObject
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
@@ -112,7 +118,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "IAMUser", "prin
   "eventCategory": "Data", "tlsDetails": {"tlsVersion": "TLSv1.2", "cipherSuite":
   "ECDHE-RSA-AES128-GCM-SHA256", "clientProvidedHostHeader": "security-content.s3.us-west-2.amazonaws.com"}}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

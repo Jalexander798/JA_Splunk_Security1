@@ -1,12 +1,19 @@
 name: AWS CloudTrail CreateSnapshot
 id: 514135a2-f4b2-4d32-8f31-d87824887f9f
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail CreateSnapshot
+description: Logs the creation of a new snapshot of a cloud resource, such as an Amazon
+  EBS volume, including details about the snapshot ID and resource type.
+mitre_components:
+- Snapshot Creation
+- Snapshot Metadata
+- Volume Metadata
+- Cloud Service Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: CreateSnapshot
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
@@ -117,7 +124,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "IAMUser", "prin
   "111111111111", "eventCategory": "Management", "tlsDetails": {"tlsVersion": "TLSv1.2",
   "cipherSuite": "ECDHE-RSA-AES128-GCM-SHA256", "clientProvidedHostHeader": "ec2.us-west-2.amazonaws.com"}}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

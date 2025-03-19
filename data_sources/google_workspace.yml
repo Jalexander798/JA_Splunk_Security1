@@ -1,7 +1,7 @@
 name: Google Workspace
 id: f1a044e3-113a-4e4d-84f2-b153ade83087
 version: 1
-date: "2025-02-21"
+date: '2025-02-21'
 author: Bhavin Patel, Splunk
 description: Data source object for Google Workspace
 source: google_workspace

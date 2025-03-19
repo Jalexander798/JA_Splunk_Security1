@@ -1,12 +1,19 @@
 name: O365 Add member to role.
 id: 8b949f7c-4b5d-404f-9694-d7403c4ec096
-version: 1
-date: "2024-07-18"
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for O365 Add member to role.
+description: Logs the addition of a member to a role in Microsoft 365, including details
+  about the role, the added member, and the user or administrator performing the action.
+mitre_components:
+- Group Modification
+- Group Metadata
+- User Account Metadata
+- Cloud Service Modification
 source: o365
 sourcetype: o365:management:activity
 separator: Operation
+separator_value: Add member to role.
 supported_TA:
   - name: Splunk Add-on for Microsoft Office 365
     url: https://splunkbase.splunk.com/app/4055

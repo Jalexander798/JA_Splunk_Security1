@@ -1,12 +1,20 @@
 name: AWS CloudTrail AssumeRoleWithSAML
 id: 1e28f2a6-2db9-405f-b298-18734a293f77
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail AssumeRoleWithSAML
+description: Logs attempts to assume roles via SAML authentication in AWS, including
+  details of identity provider and role mapping.
+mitre_components:
+- User Account Authentication
+- Logon Session Creation
+- User Account Metadata
+- Cloud Service Metadata
+- Instance Modification
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: AssumeRoleWithSAML
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
@@ -125,7 +133,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "SAMLUser", "pri
   "eventType": "AwsApiCall", "managementEvent": true, "eventCategory": "Management",
   "recipientAccountId": "111111111111"}'
 output_fields:
-- action
 - dest
 - user
 - user_agent
