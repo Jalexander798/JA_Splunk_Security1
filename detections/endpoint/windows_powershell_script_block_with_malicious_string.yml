@@ -14,14 +14,14 @@ description: The following analytic detects the execution of multiple offensive 
   information within the environment.
 data_source:
 - Powershell Script Block Logging 4104
-search: "`powershell` ScriptBlockText=* EventCode=4104\n| stats count min(_time) as\
-  \ firstTime max(_time) as lastTime list(ScriptBlockText) as command values(Guid)\
-  \ as Guid values(Opcode) as Opcode values(Name) as Name values(Path) as Path values(ProcessID)\
-  \ as ProcessID values(ScriptBlockId) as ScriptBlockId values(ScriptBlockText) as\
-  \ ScriptBlockText by dest signature signature_id user_id vendor_product \n| eval\
-  \ command = mvjoin(command,\"\\n\")\n| lookup malicious_powershell_strings command\
-  \  \n| where isnotnull(match)\n| `security_content_ctime(firstTime)` \n| `security_content_ctime(lastTime)`\n\
-  | `windows_powershell_script_block_with_malicious_string_filter`"
+search: '`powershell` ScriptBlockText=* EventCode=4104
+  | stats count min(_time) as firstTime max(_time) as lastTime list(ScriptBlockText) as command values(Guid) as Guid values(Opcode) as Opcode values(Name) as Name values(Path) as Path values(ProcessID) as ProcessID values(ScriptBlockId) as ScriptBlockId values(ScriptBlockText) as ScriptBlockText by dest signature signature_id user_id vendor_product 
+  | eval command = mvjoin(command,"\n")
+  | lookup malicious_powershell_strings command
+  | where isnotnull(match)
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)`
+  | `windows_powershell_script_block_with_malicious_string_filter`'
 how_to_implement: The following analytic requires PowerShell operational logs to be
   imported. Modify the powershell macro as needed to match the sourcetype or add index.
   This analytic is specific to 4104, or PowerShell Script Block Logging.
