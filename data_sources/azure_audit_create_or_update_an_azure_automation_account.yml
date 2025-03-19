@@ -1,14 +1,17 @@
 name: Azure Audit Create or Update an Azure Automation account
 id: 2ab182e7-feda-4249-9418-32710b55a885
-version: 1
-date: "2024-07-18"
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description:
-  Data source object for Azure Audit Create or Update an Azure Automation
-  account
+description: Logs an event when an Azure Automation account is created or updated.
+mitre_components:
+- Cloud Service Creation
+- Cloud Service Modification
+- Cloud Service Metadata
 source: mscs:azure:audit
 sourcetype: mscs:azure:audit
 separator: operationName.localizedValue
+separator_value: Create or Update an Azure Automation account
 supported_TA:
   - name: Splunk Add-on for Microsoft Cloud Services
     url: https://splunkbase.splunk.com/app/3110

@@ -3,7 +3,7 @@ id: e8ace6db-1dbd-4c72-a1fb-334684619a38
 version: 1
 date: '2024-07-24'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail
+description: All AWS CloudTrail events
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
@@ -11,12 +11,3 @@ supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
   version: 7.9.1
-output_fields:
-- action
-- dest
-- user
-- user_agent
-- src
-- vendor_account
-- vendor_region
-- vendor_product

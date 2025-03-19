@@ -1,12 +1,20 @@
 name: Azure Active Directory Consent to application
 id: 4c5d6c49-53e3-4980-a4de-c63e26291ed0
-version: 1
-date: "2024-07-18"
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Azure Active Directory Consent to application
+description: Logs user or admin consent to an application's permissions in Azure Active
+  Directory, including details about the application, granted permissions, and the
+  consenting user or process.
+mitre_components:
+- User Account Modification
+- Cloud Service Modification
+- Cloud Service Metadata
+- Configuration Modification
 source: Azure AD
 sourcetype: azure:monitor:aad
 separator: operationName
+separator_value: Consent to application
 supported_TA:
   - name: Splunk Add-on for Microsoft Cloud Services
     url: https://splunkbase.splunk.com/app/3110

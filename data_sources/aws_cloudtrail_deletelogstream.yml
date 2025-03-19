@@ -1,12 +1,19 @@
 name: AWS CloudTrail DeleteLogStream
 id: 6f8bb808-89f8-465e-a34d-229df2f46402
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail DeleteLogStream
+description: Logs the deletion of a log stream within a CloudWatch log group, including
+  details about the stream name and associated log group.
+mitre_components:
+- Cloud Service Modification
+- Cloud Service Metadata
+- Application Log Content
+- Host Status
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: DeleteLogStream
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
@@ -100,7 +107,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "IAMUser", "prin
   "111111111111", "eventCategory": "Management", "tlsDetails": {"tlsVersion": "TLSv1.2",
   "cipherSuite": "ECDHE-RSA-AES128-GCM-SHA256", "clientProvidedHostHeader": "logs.us-west-2.amazonaws.com"}}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

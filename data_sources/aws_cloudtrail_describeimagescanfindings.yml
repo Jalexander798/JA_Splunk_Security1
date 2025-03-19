@@ -1,12 +1,18 @@
 name: AWS CloudTrail DescribeImageScanFindings
 id: 688ea789-9ba2-4970-90a2-17e541e273c9
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail DescribeImageScanFindings
+description: Logs an event when findings from an image vulnerability scan are described
+  using the DescribeImageScanFindings operation in AWS CloudTrail.
+mitre_components:
+- Image Metadata
+- Image Modification
+- Malware Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: DescribeImageScanFindings
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
@@ -112,15 +118,15 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "accountId": "111111111111", "accessKeyId": "AKIAIOSFODNN7EXAMPLE", "sessionContext":
   {"sessionIssuer": {"type": "Role", "principalId": "AKIAIOSFODNN7EXAMPLE", "arn":
   "arn:aws:iam::111111111111:role/aws-reserved/test/region/group", "accountId": "111111111111",
-  "userName": "test"}, "webIdFederationData": {}, "attributes": {"creationDate": "2021-08-11T09:42:53Z",
-  "mfaAuthenticated": "false"}}}, "eventTime": "2021-08-11T11:52:27Z", "eventSource":
-  "ecr.amazonaws.com", "eventName": "DescribeImageScanFindings", "awsRegion": "eu-central-1",
-  "sourceIPAddress": "154.16.165.133", "userAgent": "aws-internal/3 aws-sdk-java/1.11.1030
-  Linux/4.9.273-0.1.ac.226.84.332.metal1.x86_64 OpenJDK_64-Bit_Server_VM/25.302-b08
+  "userName": "test"}, "webIdFederationData" : {}, "attributes": {"creationDate":
+  "2021-08-11T09:42:53Z", "mfaAuthenticated": "false"}}}, "eventTime": "2021-08-11T11:52:27Z",
+  "eventSource": "ecr.amazonaws.com", "eventName": "DescribeImageScanFindings", "awsRegion":
+  "eu-central-1" , "sourceIPAddress": "154.16.165.133", "userAgent": "aws-internal/3
+  aws-sdk-java/1.11.1030 Linux/4.9.273-0.1.ac.226.84.332.metal1.x86_64 OpenJDK_64-Bit_Server_VM/25.302-b08
   java/1.8.0_302 vendor/Oracle_Corporation cfg/retry-mode/legacy", "requestParameters":
   {"repositoryName": "devsecops/cat_dog_client", "imageId": {"imageDigest": "sha256:a27d73188718a511a1ec1ec788826674b21e097f29873dde734a4dedfbfab1c6"},
   "maxResults": 1000}, "responseElements": {"registryId": "111111111111", "repositoryName":
-  "devsecops/cat_dog_client", "imageId": {"imageDigest": "sha256:a27d73188718a511a1ec1ec788826674b21e097f29873dde734a4dedfbfab1c6"},
+  "devsecops/cat_dog_client", "imageId": {"imageDigest" : "sha256:a27d73188718a511a1ec1ec788826674b21e097f29873dde734a4dedfbfab1c6"},
   "imageScanStatus": {"status": "COMPLETE", "description": "The scan was completed
   successfully."}, "imageScanFindings": {"imageScanCompletedAt": "Aug 11, 2021, 11:30:16
   AM", "vulnerabilitySourceUpdatedAt": "Aug 11, 2021, 1:17:52 AM", "findings": [{"name":
@@ -376,7 +382,7 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   able to disclose sensitive information or cause a denial of service condition on
   the client system when a user connects to the server.", "uri": "https://security-tracker.debian.org/tracker/CVE-2019-17498",
   "severity": "LOW", "attributes": [{"key": "package_version", "value": "1.8.0-2.1"},
-  {"key": "package_name", "value": "libssh2"}, {"key": "CVSS2_VECTOR", "value": "AV:N/AC:M/Au:N/C:P/I:N/A:P"},
+  {"key": "package_name", "value": "libssh2"}, {"key" : "CVSS2_VECTOR", "value": "AV:N/AC:M/Au:N/C:P/I:N/A:P"},
   {"key": "CVSS2_SCORE", "value": "5.8"}]}, {"name": "CVE-2019-17543", "description":
   "LZ4 before 1.9.2 has a heap-based buffer overflow in LZ4_write32 (related to LZ4_compress_destSize),
   affecting applications that call LZ4_compress_fast with a large input. (This issue
@@ -409,7 +415,7 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "AV:N/AC:L/Au:N/C:P/I:P/A:P"}, {"key": "CVSS2_SCORE", "value": "7.5"}]}, {"name":
   "CVE-2011-3374", "description": "It was found that apt-key in apt, all versions,
   do not correctly validate gpg keys with the master keyring, leading to a potential
-  man-in-the-middle attack.", "uri": "https://security-tracker.debian.org/tracker/CVE-2011-3374",
+  man-in-the-middle attack.", "uri" : "https://security-tracker.debian.org/tracker/CVE-2011-3374",
   "severity": "INFORMATIONAL", "attributes": [{"key": "package_version", "value":
   "1.8.2.3"}, {"key": "package_name", "value": "apt"}, {"key": "CVSS2_VECTOR", "value":
   "AV:N/AC:M/Au:N/C:N/I:P/A:N"}, {"key": "CVSS2_SCORE", "value": "4.3"}]}, {"name":
@@ -564,7 +570,7 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   other artifacts of the database as we know that a Kerberos database dump file contains
   trusted data.", "uri": "https://security-tracker.debian.org/tracker/CVE-2018-5709",
   "severity": "INFORMATIONAL", "attributes": [{"key": "package_version", "value":
-  "1.17-3+deb10u1"}, {"key": "package_name", "value": "krb5"}, {"key": "CVSS2_VECTOR",
+  "1.17-3+deb10u1"}, {"key": "package_name", "value": "krb5"}, {"key" : "CVSS2_VECTOR",
   "value": "AV:N/AC:L/Au:N/C:N/I:P/A:N"}, {"key": "CVSS2_SCORE", "value": "5"}]},
   {"name": "CVE-2021-36222", "description": "ec_verify in kdc/kdc_preauth_ec.c in
   the Key Distribution Center (KDC) in MIT Kerberos 5 (aka krb5) before 1.18.4 and
@@ -651,7 +657,7 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "severity": "INFORMATIONAL", "attributes": [{"key": "package_version", "value":
   "1.1.32-2.2~deb10u1"}, {"key": "package_name", "value": "libxslt"}, {"key": "CVSS2_VECTOR",
   "value": "AV:N/AC:L/Au:N/C:P/I:N/A:N"}, {"key": "CVSS2_SCORE", "value": "5"}]},
-  {"name": "CVE-2009-4487", "description": "nginx 0.7.64 writes data to a log file
+  {"name": "CVE-2009-4487" , "description": "nginx 0.7.64 writes data to a log file
   without sanitizing non-printable characters, which might allow remote attackers
   to modify a window''s title, or possibly execute arbitrary commands or overwrite
   files, via an HTTP request containing an escape sequence for a terminal emulator.",
@@ -666,7 +672,7 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "severity": "INFORMATIONAL", "attributes": [{"key": "package_version", "value":
   "2.4.47+dfsg-3+deb10u6"}, {"key": "package_name", "value": "openldap"}, {"key":
   "CVSS2_VECTOR", "value": "AV:N/AC:H/Au:N/C:P/I:P/A:N"}, {"key": "CVSS2_SCORE", "value":
-  "4"}]}, {"name": "CVE-2015-3276", "description": "The nss_parse_ciphers function
+  "4"}]}, {"name": "CVE-2015-3276" , "description": "The nss_parse_ciphers function
   in libraries/libldap/tls_m.c in OpenLDAP does not properly parse OpenSSL-style multi-keyword
   mode cipher strings, which might cause a weaker than intended cipher to be used
   and allow remote attackers to have unspecified impact via unknown vectors.", "uri":
@@ -689,7 +695,7 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "severity": "INFORMATIONAL", "attributes": [{"key": "package_version", "value":
   "2.4.47+dfsg-3+deb10u6"}, {"key": "package_name", "value": "openldap"}, {"key":
   "CVSS2_VECTOR", "value": "AV:N/AC:L/Au:N/C:N/I:N/A:P"}, {"key": "CVSS2_SCORE", "value":
-  "5"}]}, {"name": "CVE-2010-0928", "description": "OpenSSL 0.9.8i on the Gaisler
+  "5"}]}, {"name": "CVE-2010-0928" , "description": "OpenSSL 0.9.8i on the Gaisler
   Research LEON3 SoC on the Xilinx Virtex-II Pro FPGA uses a Fixed Width Exponentiation
   (FWE) algorithm for certain signature calculations, and does not verify the signature
   before providing it to a caller, which makes it easier for physically proximate
@@ -744,10 +750,10 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "2:8.39-12"}, {"key": "package_name", "value": "pcre3"}, {"key": "CVSS2_VECTOR",
   "value": "AV:N/AC:L/Au:N/C:N/I:N/A:C"}, {"key": "CVSS2_SCORE", "value": "7.8"}]},
   {"name": "CVE-2011-4116", "description": "_is_safe in the File::Temp module for
-  Perl does not properly handle symlinks.", "uri": "https://security-tracker.debian.org/tracker/CVE-2011-4116",
+  Perl does not properly handle symlinks.", "uri" : "https://security-tracker.debian.org/tracker/CVE-2011-4116",
   "severity": "INFORMATIONAL", "attributes": [{"key": "package_version", "value":
-  "5.28.1-6+deb10u1"}, {"key": "package_name", "value": "perl"}, {"key": "CVSS2_VECTOR",
-  "value": "AV:N/AC:L/Au:N/C:N/I:P/A:N"}, {"key": "CVSS2_SCORE", "value": "5"}]},
+  "5.28.1-6+deb10u1"}, {"key": "package_name", "value": "perl"}, {"key": "CVSS2_VECTOR"
+  , "value": "AV:N/AC:L/Au:N/C:N/I:P/A:N"}, {"key": "CVSS2_SCORE", "value": "5"}]},
   {"name": "CVE-2019-19882", "description": "shadow 4.8, in certain circumstances
   affecting at least Gentoo, Arch Linux, and Void Linux, allows local users to obtain
   root access because setuid programs are misconfigured. Specifically, this affects
@@ -771,8 +777,8 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "1:4.5-1.1"}, {"key": "package_name", "value": "shadow"}, {"key": "CVSS2_VECTOR",
   "value": "AV:L/AC:L/Au:N/C:C/I:N/A:N"}, {"key": "CVSS2_SCORE", "value": "4.9"}]},
   {"name": "CVE-2013-4235", "description": "shadow: TOCTOU (time-of-check time-of-use)
-  race condition when copying and removing directory trees", "uri": "https://security-tracker.debian.org/tracker/CVE-2013-4235",
-  "severity": "INFORMATIONAL", "attributes": [{"key": "package_version", "value":
+  race condition when copying and removing directory trees", "uri": "https://security-tracker.debian.org/tracker/CVE-2013-4235"
+  , "severity": "INFORMATIONAL", "attributes": [{"key": "package_version", "value":
   "1:4.5-1.1"}, {"key": "package_name", "value": "shadow"}, {"key": "CVSS2_VECTOR",
   "value": "AV:L/AC:M/Au:N/C:N/I:P/A:P"}, {"key": "CVSS2_SCORE", "value": "3.3"}]},
   {"name": "CVE-2020-13529", "description": "An exploitable denial-of-service vulnerability
@@ -817,7 +823,7 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   {"name": "CVE-2021-20193", "description": "A flaw was found in the src/list.c of
   tar 1.33 and earlier. This flaw allows an attacker who can submit a crafted input
   file to tar to cause uncontrolled consumption of memory. The highest threat from
-  this vulnerability is to system availability.", "uri": "https://security-tracker.debian.org/tracker/CVE-2021-20193",
+  this vulnerability is to system availability." , "uri": "https://security-tracker.debian.org/tracker/CVE-2021-20193",
   "severity": "INFORMATIONAL", "attributes": [{"key": "package_version", "value":
   "1.30+dfsg-6"}, {"key": "package_name", "value": "tar"}, {"key": "CVSS2_VECTOR",
   "value": "AV:N/AC:M/Au:N/C:N/I:N/A:P"}, {"key": "CVSS2_SCORE", "value": "4.3"}]},
@@ -839,19 +845,19 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   crafted TIFF image that is mishandled by the TIFFWriteScanline function in tif_write.c,
   as demonstrated by tiffdither.", "uri": "https://security-tracker.debian.org/tracker/CVE-2014-8130",
   "severity": "INFORMATIONAL", "attributes": [{"key": "package_version", "value":
-  "4.1.0+git191117-2~deb10u2"}, {"key": "package_name", "value": "tiff"}, {"key":
+  "4.1.0+git191117-2~deb10u2"}, {"key": "package_name", "value": "tiff" }, {"key":
   "CVSS2_VECTOR", "value": "AV:N/AC:M/Au:N/C:N/I:N/A:P"}, {"key": "CVSS2_SCORE", "value":
   "4.3"}]}, {"name": "CVE-2017-5563", "description": "LibTIFF version 4.0.7 is vulnerable
   to a heap-based buffer over-read in tif_lzw.c resulting in DoS or code execution
-  via a crafted bmp image to tools/bmp2tiff.", "uri": "https://security-tracker.debian.org/tracker/CVE-2017-5563",
+  via a crafted bmp image to tools/bmp2tiff." , "uri": "https://security-tracker.debian.org/tracker/CVE-2017-5563",
   "severity": "INFORMATIONAL", "attributes": [{"key": "package_version", "value":
-  "4.1.0+git191117-2~deb10u2"}, {"key": "package_name", "value": "tiff"}, {"key":
+  "4.1.0+git191117-2~deb10u2"}, {"key": "package_name", "value": "tiff" }, {"key":
   "CVSS2_VECTOR", "value": "AV:N/AC:M/Au:N/C:P/I:P/A:P"}, {"key": "CVSS2_SCORE", "value":
   "6.8"}]}, {"name": "CVE-2020-35522", "description": "In LibTIFF, there is a memory
   malloc failure in tif_pixarlog.c. A crafted TIFF document can lead to an abort,
   resulting in a remote denial of service attack.", "uri": "https://security-tracker.debian.org/tracker/CVE-2020-35522",
   "severity": "INFORMATIONAL", "attributes": [{"key": "package_version", "value":
-  "4.1.0+git191117-2~deb10u2"}, {"key": "package_name", "value": "tiff"}, {"key":
+  "4.1.0+git191117-2~deb10u2"}, {"key": "package_name", "value": "tiff" }, {"key":
   "CVSS2_VECTOR", "value": "AV:N/AC:M/Au:N/C:N/I:N/A:P"}, {"key": "CVSS2_SCORE", "value":
   "4.3"}]}, {"name": "CVE-2017-9117", "description": "In LibTIFF 4.0.7, the program
   processes BMP images without verifying that biWidth and biHeight in the bitmap-information
@@ -881,7 +887,7 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   comparison also didn''t include the ''issuer cert'' which a transfer can setto qualify
   how to verify the server certificate.", "uri": "https://security-tracker.debian.org/tracker/CVE-2021-22924",
   "severity": "UNDEFINED", "attributes": [{"key": "package_version", "value": "7.64.0-4+deb10u2"},
-  {"key": "package_name", "value": "curl"}]}, {"name": "CVE-2021-38115", "description":
+  {"key": "package_name", "value": "curl" }]}, {"name": "CVE-2021-38115", "description":
   "read_header_tga in gd_tga.c in the GD Graphics Library (aka LibGD) through 2.3.2
   allows remote attackers to cause a denial of service (out-of-bounds read) via a
   crafted TGA file.", "uri": "https://security-tracker.debian.org/tracker/CVE-2021-38115",
@@ -894,7 +900,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "readOnly": true, "eventType": "AwsApiCall", "managementEvent": true, "recipientAccountId":
   "111111111111", "eventCategory": "Management"}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

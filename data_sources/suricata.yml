@@ -1,9 +1,16 @@
 name: Suricata
 id: 64b245d4-a4d1-4865-a718-c83d3b939f2e
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Suricata
+description: Logs network traffic and security events detected by Suricata, including
+  details about connections, protocol metadata, and potential threats.
+mitre_components:
+- Network Traffic Content
+- Network Traffic Flow
+- Network Connection Creation
+- Malware Metadata
+- Application Log Content
 source: suricata
 sourcetype: suricata
 supported_TA:

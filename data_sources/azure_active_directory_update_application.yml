@@ -1,12 +1,18 @@
 name: Azure Active Directory Update application
 id: 2c08188a-ba25-496e-87c7-803cf28b6c90
-version: 1
-date: "2024-07-18"
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Azure Active Directory Update application
+description: Logs an event when an application in Azure Active Directory is updated,
+  such as changes to its settings or permissions.
+mitre_components:
+- Service Modification
+- User Account Modification
+- Cloud Service Modification
 source: Azure AD
 sourcetype: azure:monitor:aad
 separator: operationName
+separator_value: Update application
 supported_TA:
   - name: Splunk Add-on for Microsoft Cloud Services
     url: https://splunkbase.splunk.com/app/3110

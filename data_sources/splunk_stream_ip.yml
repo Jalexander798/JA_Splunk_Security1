@@ -1,9 +1,16 @@
 name: Splunk Stream IP
 id: c96f5906-f601-4f32-a26c-482535159bc2
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Splunk Stream IP
+description: Logs IP traffic captured by Splunk Stream, including details about source
+  and destination IPs, protocols, and packet metadata.
+mitre_components:
+- Network Traffic Content
+- Network Traffic Flow
+- Network Connection Creation
+- Response Metadata
+- Application Log Content
 source: stream:ip
 sourcetype: stream:ip
 supported_TA:

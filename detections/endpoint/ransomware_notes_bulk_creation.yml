@@ -52,11 +52,12 @@ rba:
 tags:
   analytic_story:
   - BlackMatter Ransomware
+  - DarkSide Ransomware
   - Chaos Ransomware
   - Rhysida Ransomware
   - LockBit Ransomware
-  - DarkSide Ransomware
   - Medusa Ransomware
+  - Black Basta Ransomware
   - Clop Ransomware
   asset_type: Endpoint
   mitre_attack_id:

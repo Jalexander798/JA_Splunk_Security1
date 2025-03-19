@@ -69,18 +69,19 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - CISA AA22-264A
-  - Chaos Ransomware
+  - Rhysida Ransomware
   - Prestige Ransomware
-  - Ransomware
+  - CISA AA22-264A
   - LockBit Ransomware
+  - SamSam Ransomware
+  - Chaos Ransomware
+  - Black Basta Ransomware
+  - DarkGate Malware
+  - Ransomware
+  - Windows Log Manipulation
+  - Compromised Windows Host
   - Clop Ransomware
   - Medusa Ransomware
-  - Compromised Windows Host
-  - Windows Log Manipulation
-  - SamSam Ransomware
-  - DarkGate Malware
-  - Rhysida Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1490
