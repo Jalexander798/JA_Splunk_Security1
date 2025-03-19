@@ -1,12 +1,17 @@
 name: Windows Event Log RemoteConnectionManager 1149
 id: 08f9edb4-f95f-40be-b1dd-bc3a1cd95aaf
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log RemoteConnectionManager 1149
+description: Logs an event when a Remote Desktop Service session is initialized.
+mitre_components:
+- Network Connection Creation
+- Logon Session Creation
+- Logon Session Metadata
 source: WinEventLog:Microsoft-Windows-TerminalServices-RemoteConnectionManager/Operational
 sourcetype: wineventlog
 separator: EventCode
+separator_value: '1149'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

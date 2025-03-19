@@ -1,7 +1,7 @@
 name: Change To Safe Mode With Network Config
 id: 81f1dce0-0f18-11ec-a5d7-acde48001122
-version: 4
-date: '2024-11-13'
+version: '5'
+date: '2025-03-03'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -61,6 +61,7 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
+  - Black Basta Ransomware
   - BlackMatter Ransomware
   asset_type: Endpoint
   mitre_attack_id:
@@ -73,7 +74,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552.002/autoadminlogon/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1552.002/autoadminlogon/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

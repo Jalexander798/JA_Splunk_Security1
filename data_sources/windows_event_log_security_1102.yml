@@ -1,12 +1,17 @@
 name: Windows Event Log Security 1102
 id: 8db7b91a-6d7a-40e7-bfac-06f8e901a9cb
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log Security 1102
+description: Logs an event when the audit log is cleared.
+mitre_components:
+- User Account Modification
+- Logon Session Metadata
+- File Deletion
 source: XmlWinEventLog:Security
 sourcetype: xmlwineventlog
 separator: EventCode
+separator_value: '1102'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

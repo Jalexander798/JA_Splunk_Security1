@@ -71,6 +71,7 @@ tags:
   - Ryuk Ransomware
   - Winter Vivern
   - China-Nexus Threat Activity
+  - SystemBC
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.005

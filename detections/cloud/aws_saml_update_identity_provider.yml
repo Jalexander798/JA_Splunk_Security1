@@ -16,9 +16,8 @@ description: The following analytic detects updates to the SAML provider in AWS.
 data_source:
 - AWS CloudTrail UpdateSAMLProvider
 search: '`cloudtrail` eventName=UpdateSAMLProvider 
-  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
-  | eval vendor_product = "AWS"
-  | stats count min(_time) as firstTime max(_time) as lastTime by action dest user user_agent src vendor_account vendor_region vendor_product 
+  | rename user_name as user
+  | stats count min(_time) as firstTime max(_time) as lastTime values(requestParameters.sAMLProviderArn) as request_parameters by signature dest user user_agent src vendor_account vendor_region vendor_product 
   | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`
   |`aws_saml_update_identity_provider_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
@@ -46,7 +45,7 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: User $user$ from IP address $src$ has trigged
-    an event $eventName$ to update the SAML provider to $requestParameters.sAMLProviderArn$
+    an event $signature$ to update the SAML provider to $request_parameters$
   risk_objects:
   - field: user
     type: user

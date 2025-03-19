@@ -1,12 +1,19 @@
 name: AWS CloudTrail CreateVirtualMFADevice
 id: 13e6e952-0dad-4190-865c-fb5911725f7a
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail CreateVirtualMFADevice
+description: Logs the creation of a new virtual multi-factor authentication (MFA)
+  device, including details about the associated user and configuration.
+mitre_components:
+- User Account Creation
+- User Account Metadata
+- Cloud Service Creation
+- Cloud Service Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: CreateVirtualMFADevice
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
@@ -99,7 +106,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "Root", "princip
   "readOnly": false, "eventType": "AwsApiCall", "managementEvent": true, "recipientAccountId":
   "140429656527", "eventCategory": "Management", "sessionCredentialFromConsole": "true"}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

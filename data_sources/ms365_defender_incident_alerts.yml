@@ -1,9 +1,16 @@
 name: MS365 Defender Incident Alerts
 id: 12345678-90ab-cdef-1234-567890abcdef
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Bhavin Patel, Splunk
-description: Data source object for MS365 Defender Incident Alerts
+description: Logs security incidents and correlated alerts in Microsoft 365 Defender,
+  including details about affected assets, threat types, and remediation steps.
+mitre_components:
+- Host Status
+- User Account Metadata
+- Application Log Content
+- Malware Metadata
+- Active Directory Object Access
 source: ms365_defender_incident_alerts
 sourcetype: ms365:defender:incident:alerts
 supported_TA:
