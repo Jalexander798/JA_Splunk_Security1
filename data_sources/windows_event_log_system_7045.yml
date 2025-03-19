@@ -1,12 +1,19 @@
 name: Windows Event Log System 7045
 id: 614dedc8-8a14-4393-ba9b-6f093cbcd293
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log System 7045
+description: Logs the successful installation of a new Windows service, including
+  details about the service name, executable path, and service type.
+mitre_components:
+- Service Creation
+- Service Metadata
+- OS API Execution
+- Process Metadata
 source: XmlWinEventLog:System
 sourcetype: xmlwineventlog
 separator: EventCode
+separator_value: '7045'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

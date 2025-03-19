@@ -1,12 +1,16 @@
 name: AWS CloudTrail PutBucketReplication
 id: 0e1362eb-e592-419f-8fa5-556d3a122417
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail PutBucketReplication
+description: Logs an event when replication configurations are added or modified for
+  an S3 bucket.
+mitre_components:
+- Cloud Storage Modification
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: PutBucketReplication
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
@@ -140,7 +144,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "Management", "tlsDetails": {"tlsVersion": "TLSv1.2", "cipherSuite": "ECDHE-RSA-AES128-GCM-SHA256",
   "clientProvidedHostHeader": "s3.us-west-2.amazonaws.com"}}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

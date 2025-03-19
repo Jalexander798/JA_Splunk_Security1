@@ -1,12 +1,20 @@
 name: Sysmon EventID 15
 id: 95785e02-93b4-47e2-81f1-be326295348e
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Sysmon EventID 15
+description: Logs the creation of a new file stream, including details about the file
+  stream's hash, path, and associated process metadata.
+mitre_components:
+- File Creation
+- File Metadata
+- Process Metadata
+- Application Log Content
+- OS API Execution
 source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
 sourcetype: xmlwineventlog
 separator: EventID
+separator_value: '15'
 configuration: https://github.com/SwiftOnSecurity/sysmon-config
 supported_TA:
 - name: Splunk Add-on for Sysmon

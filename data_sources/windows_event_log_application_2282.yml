@@ -1,9 +1,15 @@
 name: Windows Event Log Application 2282
 id: 4490537e-5e0c-46f7-9209-f56f852aa237
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log Application 2282
+description: Logs an event in IIS when a module DLL fails to load due to a configuration
+  issue, including details about the module and error message.
+mitre_components:
+- Service Modification
+- Configuration Modification
+- Application Log Content
+- Service Metadata
 source: XmlWinEventLog:Application
 sourcetype: XmlWinEventLog
 separator: EventCode

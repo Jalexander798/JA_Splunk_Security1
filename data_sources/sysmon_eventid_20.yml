@@ -1,9 +1,15 @@
 name: Sysmon EventID 20
 id: aeee5374-3203-4286-b744-a8cc4ad1cd7e
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Sysmon EventID 20
+description: Logs WMI (Windows Management Instrumentation) consumer activity, including
+  details about the WMI event consumer, associated process, and event data.
+mitre_components:
+- WMI Creation
+- Process Metadata
+- Application Log Content
+- OS API Execution
 source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
 sourcetype: xmlwineventlog
 separator: EventID

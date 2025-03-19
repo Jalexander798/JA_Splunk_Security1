@@ -1,12 +1,15 @@
 name: Sysmon EventID 17
 id: 08924246-c8e8-4c95-a9fc-633c43cc82df
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Sysmon EventID 17
+description: Sysmon EventID 17 logs details about the detection of a named pipe.
+mitre_components:
+- Named Pipe Metadata
 source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
 sourcetype: xmlwineventlog
 separator: EventID
+separator_value: '17'
 configuration: https://github.com/SwiftOnSecurity/sysmon-config
 supported_TA:
 - name: Splunk Add-on for Sysmon

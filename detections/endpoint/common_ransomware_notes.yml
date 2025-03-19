@@ -1,7 +1,7 @@
 name: Common Ransomware Notes
 id: ada0f478-84a8-4641-a3f1-d82362d6bd71
-version: 8
-date: '2024-11-13'
+version: '8'
+date: '2025-03-03'
 author: David Dorsey, Splunk
 status: production
 type: Hunting
@@ -32,13 +32,14 @@ known_false_positives: It's possible that a legitimate file could be created wit
 references: []
 tags:
   analytic_story:
-  - SamSam Ransomware
-  - Ransomware
-  - Ryuk Ransomware
-  - Clop Ransomware
-  - Chaos Ransomware
-  - LockBit Ransomware
   - Rhysida Ransomware
+  - LockBit Ransomware
+  - Ryuk Ransomware
+  - SamSam Ransomware
+  - Chaos Ransomware
+  - Black Basta Ransomware
+  - Ransomware
+  - Clop Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1485

@@ -1,7 +1,7 @@
 name: Modification Of Wallpaper
 id: accb0712-c381-11eb-8e5b-acde48001122
-version: 5
-date: '2024-11-13'
+version: '5'
+date: '2025-03-03'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -55,13 +55,14 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Ransomware
   - Revil Ransomware
-  - BlackMatter Ransomware
-  - Windows Registry Abuse
-  - Brute Ratel C4
-  - LockBit Ransomware
   - Rhysida Ransomware
+  - LockBit Ransomware
+  - BlackMatter Ransomware
+  - Brute Ratel C4
+  - Windows Registry Abuse
+  - Black Basta Ransomware
+  - Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1491

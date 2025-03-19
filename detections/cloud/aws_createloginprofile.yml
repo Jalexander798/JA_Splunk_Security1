@@ -20,10 +20,9 @@ search: '`cloudtrail` eventName = CreateLoginProfile
   | join new_login_profile src_ip 
   [| search `cloudtrail` eventName = ConsoleLogin 
   | rename userIdentity.userName  as new_login_profile 
-  | stats count values(eventName) min(_time) as firstTime max(_time) as lastTime by eventSource aws_account_id errorCode userAgent eventID awsRegion userIdentity.principalId user_arn new_login_profile src_ip 
+  | stats count values(eventName) min(_time) as firstTime max(_time) as lastTime by eventSource aws_account_id errorCode user_agent eventID awsRegion userIdentity.principalId user_arn new_login_profile src_ip dest vendor_account vendor_region vendor_product
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`]
-  | rename eventName as action, eventSource as dest, user_arn as user, userAgent as user_agent, src_ip as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
-  | eval vendor_product = "AWS"
+  | rename user_arn as user
   | `aws_createloginprofile_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
   search works with AWS CloudTrail logs.
@@ -48,13 +47,13 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: User $user$ is attempting to create a login profile for $new_login_profile$
-    and did a console login from this IP $src$
+    and did a console login from this IP $src_ip$
   risk_objects:
   - field: user
     type: user
     score: 72
   threat_objects:
-  - field: src
+  - field: src_ip
     type: ip_address
 tags:
   analytic_story:
@@ -74,3 +73,5 @@ tests:
       https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/aws_createloginprofile/aws_cloudtrail_events.json
     sourcetype: aws:cloudtrail
     source: aws_cloudtrail
+
+    

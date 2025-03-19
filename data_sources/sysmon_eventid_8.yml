@@ -1,12 +1,19 @@
 name: Sysmon EventID 8
 id: df7a786c-ade0-48f0-8596-26f10d169f7d
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Sysmon EventID 8
+description: Logs the creation of a new thread in a process, including details about
+  the thread ID, start address, and source process.
+mitre_components:
+- Process Modification
+- Process Metadata
+- Application Log Content
+- OS API Execution
 source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
 sourcetype: xmlwineventlog
 separator: EventID
+separator_value: '8'
 configuration: https://github.com/SwiftOnSecurity/sysmon-config
 supported_TA:
 - name: Splunk Add-on for Sysmon

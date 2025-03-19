@@ -1,12 +1,17 @@
 name: Windows Event Log Security 4648
 id: 6a367f8b-1ee0-463d-94a7-029757c6cd02
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log Security 4648
+description: Logged when an account logon is attempted by a process by explicitly
+  specifying the credentials of that account
+mitre_components:
+- User Account Authentication
+- Logon Session Creation
 source: XmlWinEventLog:Security
 sourcetype: xmlwineventlog
 separator: EventCode
+separator_value: '4648'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

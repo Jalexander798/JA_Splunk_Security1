@@ -1,12 +1,17 @@
 name: AWS CloudTrail SetDefaultPolicyVersion
 id: 06e0b5a0-8d36-485e-befc-4ae79d77ef6c
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail SetDefaultPolicyVersion
+description: Logs an event when the default version of a resource policy in AWS is
+  set or changed.
+mitre_components:
+- Cloud Service Modification
+- Cloud Service Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: SetDefaultPolicyVersion
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
@@ -98,7 +103,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "IAMUser", "prin
   "AwsApiCall", "managementEvent": true, "eventCategory": "Management", "recipientAccountId":
   "111111111111"}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

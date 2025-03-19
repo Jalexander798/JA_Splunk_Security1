@@ -1,7 +1,7 @@
 name: Spoolsv Spawning Rundll32
 id: 15d905f6-da6b-11eb-ab82-acde48001122
-version: 8
-date: '2025-02-10'
+version: '8'
+date: '2025-03-03'
 author: Mauricio Velazco, Michael Haag, Splunk
 status: production
 type: TTP
@@ -70,6 +70,7 @@ tags:
   analytic_story:
   - PrintNightmare CVE-2021-34527
   - Compromised Windows Host
+  - Black Basta Ransomware
   asset_type: Endpoint
   cve:
   - CVE-2021-34527

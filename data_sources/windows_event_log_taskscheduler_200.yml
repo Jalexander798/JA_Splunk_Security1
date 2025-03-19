@@ -1,12 +1,19 @@
 name: Windows Event Log TaskScheduler 200
 id: f8c777f8-e88a-4bba-ae8a-79b250212f23
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log TaskScheduler 200
+description: Logs the successful registration of a new scheduled task in Windows Task
+  Scheduler, including task details and configurations.
+mitre_components:
+- Scheduled Job Creation
+- Scheduled Job Metadata
+- Service Creation
+- OS API Execution
 source: WinEventLog:Microsoft-Windows-TaskScheduler/Operational
 sourcetype: wineventlog
 separator: EventCode
+separator_value: '200'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

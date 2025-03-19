@@ -1,12 +1,19 @@
 name: AWS CloudTrail CreateTask
 id: 6501e4fe-05b2-45f1-bd51-9e06a94fa7d9
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail CreateTask
+description: Logs the creation of a new task in AWS services, such as ECS, including
+  details about the task definition and resource allocation.
+mitre_components:
+- Scheduled Job Creation
+- Scheduled Job Metadata
+- Cloud Service Metadata
+- Instance Creation
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: CreateTask
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
@@ -120,7 +127,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "cipherSuite": "ECDHE-RSA-AES128-GCM-SHA256", "clientProvidedHostHeader": "datasync.us-west-2.amazonaws.com"},
   "sessionCredentialFromConsole": "true"}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

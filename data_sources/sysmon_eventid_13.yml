@@ -1,12 +1,19 @@
 name: Sysmon EventID 13
 id: 19cd00ee-f65f-48ca-bb08-64aac28638ce
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Sysmon EventID 13
+description: Logs changes to a registry key, including details about the modified
+  key, value, and associated process.
+mitre_components:
+- Windows Registry Key Modification
+- Process Metadata
+- Application Log Content
+- OS API Execution
 source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
 sourcetype: xmlwineventlog
 separator: EventID
+separator_value: '13'
 configuration: https://github.com/SwiftOnSecurity/sysmon-config
 supported_TA:
 - name: Splunk Add-on for Sysmon
