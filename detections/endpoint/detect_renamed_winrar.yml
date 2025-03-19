@@ -1,7 +1,7 @@
 name: Detect Renamed WinRAR
 id: 1b7bfb2c-b8e6-11eb-99ac-acde48001122
-version: '10'
-date: '2025-02-24'
+version: '11'
+date: '2025-03-19'
 author: Michael Haag, Splunk
 status: production
 type: Hunting
@@ -39,9 +39,9 @@ references:
 tags:
   analytic_story:
   - China-Nexus Threat Activity
-  - CISA AA22-277A
   - Collection and Staging
-  - Earth Estries
+  - CISA AA22-277A
+  - Salt Typhoon
   asset_type: Endpoint
   mitre_attack_id:
   - T1560.001

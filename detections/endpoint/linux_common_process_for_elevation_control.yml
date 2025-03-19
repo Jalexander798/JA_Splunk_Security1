@@ -1,7 +1,7 @@
 name: Linux Common Process For Elevation Control
 id: 66ab15c0-63d0-11ec-9e70-acde48001122
-version: '7'
-date: '2025-02-24'
+version: '8'
+date: '2025-03-19'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
@@ -44,11 +44,11 @@ references:
 - https://github.com/microsoft/MSTIC-Sysmon/blob/main/linux/configs/attack-based/privilege_escalation/T1548.001_ElevationControl_CommonProcesses.xml
 tags:
   analytic_story:
-  - China-Nexus Threat Activity
   - Linux Persistence Techniques
-  - Linux Privilege Escalation
+  - China-Nexus Threat Activity
   - Linux Living Off The Land
-  - Earth Estries
+  - Salt Typhoon
+  - Linux Privilege Escalation
   asset_type: Endpoint
   mitre_attack_id:
   - T1548.001

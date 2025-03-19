@@ -1,7 +1,7 @@
 name: Windows Suspicious Process File Path
 id: ecddae4e-3d4b-41e2-b3df-e46a88b38521
-version: 8
-date: '2025-02-28'
+version: '9'
+date: '2025-03-19'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -19,13 +19,13 @@ data_source:
 - CrowdStrike ProcessRollup2
 search: '| tstats `security_content_summariesonly` count values(Processes.process_name)
   as process_name values(Processes.process) as process min(_time) as firstTime max(_time)
-  as lastTime from datamodel=Endpoint.Processes 
-  where Processes.process_path IN("*\\windows\\fonts\\*", "*\\users\\public\\*", "*\\windows\\debug\\*", "*\\Users\\Administrator\\Music\\*", "*Recycle.bin*", "*\\Windows\\Media\\*","\\Windows\\repair\\*", "*\\PerfLogs\\*", "*:\\Windows\\Prefetch\\*", "*:\\Windows\\Cursors\\*", "*:\\Windows\\INF\\*") AND NOT(Processes.process_path IN ("*\\temp\\*"))
-  by Processes.parent_process_name Processes.parent_process Processes.process_path Processes.dest Processes.user 
-  | `drop_dm_object_name(Processes)` 
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)`
-  | `windows_suspicious_process_file_path_filter`'
+  as lastTime from datamodel=Endpoint.Processes where Processes.process_path IN("*\\windows\\fonts\\*",
+  "*\\users\\public\\*", "*\\windows\\debug\\*", "*\\Users\\Administrator\\Music\\*",
+  "*Recycle.bin*", "*\\Windows\\Media\\*","\\Windows\\repair\\*", "*\\PerfLogs\\*",
+  "*:\\Windows\\Prefetch\\*", "*:\\Windows\\Cursors\\*", "*:\\Windows\\INF\\*") AND
+  NOT(Processes.process_path IN ("*\\temp\\*")) by Processes.parent_process_name Processes.parent_process
+  Processes.process_path Processes.dest Processes.user | `drop_dm_object_name(Processes)`
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_suspicious_process_file_path_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -69,44 +69,44 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - Double Zero Destructor
-  - Graceful Wipe Out Attack
-  - AsyncRAT
-  - WhisperGate
-  - Prestige Ransomware
-  - DarkGate Malware
-  - AgentTesla
-  - Brute Ratel C4
-  - RedLine Stealer
-  - Rhysida Ransomware
-  - Swift Slicer
-  - IcedID
-  - DarkCrystal RAT
-  - Chaos Ransomware
-  - PlugX
-  - Industroyer2
-  - Azorult
-  - Remcos
-  - XMRig
-  - Qakbot
-  - Volt Typhoon
-  - Hermetic Wiper
-  - Warzone RAT
-  - Trickbot
-  - Amadey
-  - BlackByte Ransomware
-  - LockBit Ransomware
-  - CISA AA23-347A
-  - Data Destruction
-  - Phemedrone Stealer
-  - Handala Wiper
-  - MoonPeak
-  - ValleyRAT
-  - Meduza Stealer
   - SystemBC
   - China-Nexus Threat Activity
-  - Earth Estries
+  - Remcos
+  - LockBit Ransomware
+  - AsyncRAT
+  - DarkCrystal RAT
+  - DarkGate Malware
+  - ValleyRAT
+  - PlugX
+  - Data Destruction
+  - Qakbot
+  - CISA AA23-347A
+  - Hermetic Wiper
+  - Volt Typhoon
+  - Double Zero Destructor
+  - AgentTesla
+  - Trickbot
+  - Meduza Stealer
+  - Phemedrone Stealer
   - SnappyBee
+  - Azorult
+  - WhisperGate
+  - Warzone RAT
+  - Swift Slicer
+  - Rhysida Ransomware
+  - Brute Ratel C4
+  - Prestige Ransomware
+  - BlackByte Ransomware
+  - Graceful Wipe Out Attack
+  - Chaos Ransomware
+  - Handala Wiper
+  - RedLine Stealer
+  - Salt Typhoon
+  - XMRig
+  - MoonPeak
+  - Industroyer2
+  - Amadey
+  - IcedID
   asset_type: Endpoint
   mitre_attack_id:
   - T1543
@@ -119,7 +119,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036/suspicious_process_path/susp_path_sysmon1.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036/suspicious_process_path/susp_path_sysmon1.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

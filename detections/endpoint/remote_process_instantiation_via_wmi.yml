@@ -1,7 +1,7 @@
 name: Remote Process Instantiation via WMI
 id: d25d2c3d-d9d8-40ec-8fdf-e86fe155a3da
-version: '12'
-date: '2025-02-24'
+version: '13'
+date: '2025-03-19'
 author: Rico Valdez, Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -65,12 +65,12 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
+  - CISA AA23-347A
   - China-Nexus Threat Activity
   - Ransomware
-  - Active Directory Lateral Movement
-  - CISA AA23-347A
   - Suspicious WMI Use
-  - Earth Estries
+  - Salt Typhoon
+  - Active Directory Lateral Movement
   asset_type: Endpoint
   mitre_attack_id:
   - T1047

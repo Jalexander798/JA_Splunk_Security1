@@ -1,7 +1,7 @@
 name: Windows Archive Collected Data via Rar
 id: 2015de95-fe91-413d-9d62-2fe011b67e82
-version: '7'
-date: '2025-02-24'
+version: '8'
+date: '2025-03-19'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -62,8 +62,8 @@ rba:
 tags:
   analytic_story:
   - DarkGate Malware
+  - Salt Typhoon
   - China-Nexus Threat Activity
-  - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:
   - T1560.001

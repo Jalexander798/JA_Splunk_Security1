@@ -1,7 +1,7 @@
 name: Suspicious Regsvr32 Register Suspicious Path
 id: 62732736-6250-11eb-ae93-0242ac130002
-version: '13'
-date: '2025-02-24'
+version: '14'
+date: '2025-03-19'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -73,13 +73,13 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - China-Nexus Threat Activity
-  - IcedID
-  - Qakbot
-  - Derusbi
   - Living Off The Land
-  - Earth Estries
+  - Qakbot
+  - China-Nexus Threat Activity
+  - Derusbi
+  - Salt Typhoon
   - Suspicious Regsvr32 Activity
+  - IcedID
   asset_type: Endpoint
   mitre_attack_id:
   - T1218.010

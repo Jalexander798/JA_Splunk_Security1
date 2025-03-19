@@ -1,7 +1,7 @@
 name: Executables Or Script Creation In Suspicious Path
 id: a7e3f0f0-ae42-11eb-b245-acde48001122
-version: '12'
-date: '2025-02-28'
+version: '13'
+date: '2025-03-19'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -15,14 +15,15 @@ description: The following analytic identifies the creation of executables or sc
   a significant security threat.
 data_source:
 - Sysmon EventID 11
-search: '| tstats `security_content_summariesonly` values(Filesystem.file_path) as file_path count min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Filesystem
-  where Filesystem.file_name IN ("*.exe", "*.dll", "*.sys", "*.com", "*.vbs", "*.vbe", "*.js", "*.ps1", "*.bat", "*.cmd", "*.pif") 
-  AND Filesystem.file_path IN ("*\\windows\\fonts\\*", "*\\users\\public\\*", "*\\windows\\debug\\*", "*\\Users\\Administrator\\Music\\*", "*\\Windows\\servicing\\*", "*\\Users\\Default\\*", "*Recycle.bin*", "*\\Windows\\Media\\*",
+search: '| tstats `security_content_summariesonly` values(Filesystem.file_path) as
+  file_path count min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Filesystem
+  where Filesystem.file_name IN ("*.exe", "*.dll", "*.sys", "*.com", "*.vbs", "*.vbe",
+  "*.js", "*.ps1", "*.bat", "*.cmd", "*.pif") AND Filesystem.file_path IN ("*\\windows\\fonts\\*",
+  "*\\users\\public\\*", "*\\windows\\debug\\*", "*\\Users\\Administrator\\Music\\*",
+  "*\\Windows\\servicing\\*", "*\\Users\\Default\\*", "*Recycle.bin*", "*\\Windows\\Media\\*",
   "*\\Windows\\repair\\*", "*\\PerfLogs\\*") AND NOT(Filesystem.file_path IN("*\\temp\\*"))
   by Filesystem.file_create_time Filesystem.process_id Filesystem.file_name Filesystem.user
-  | `drop_dm_object_name(Filesystem)` 
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)`
+  | `drop_dm_object_name(Filesystem)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `executables_or_script_creation_in_suspicious_path_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
   on process that include the name of the Filesystem responsible for the changes from
@@ -60,48 +61,48 @@ rba:
     type: file_name
 tags:
   analytic_story:
-  - BlackByte Ransomware
-  - Brute Ratel C4
-  - Trickbot
-  - Snake Keylogger
-  - Graceful Wipe Out Attack
-  - PlugX
-  - Handala Wiper
-  - Earth Estries
-  - Warzone RAT
-  - ValleyRAT
-  - NjRAT
-  - LockBit Ransomware
-  - Double Zero Destructor
-  - Swift Slicer
-  - DarkCrystal RAT
-  - AsyncRAT
-  - Volt Typhoon
-  - Chaos Ransomware
-  - Hermetic Wiper
-  - Derusbi
-  - XMRig
-  - AgentTesla
-  - WinDealer RAT
-  - RedLine Stealer
-  - Remcos
-  - Rhysida Ransomware
-  - China-Nexus Threat Activity
-  - Crypto Stealer
-  - Qakbot
-  - IcedID
-  - Meduza Stealer
-  - AcidPour
-  - MoonPeak
-  - CISA AA23-347A
-  - DarkGate Malware
-  - Industroyer2
-  - Azorult
-  - Data Destruction
-  - Amadey
-  - SnappyBee
-  - WhisperGate
   - SystemBC
+  - Snake Keylogger
+  - China-Nexus Threat Activity
+  - Remcos
+  - LockBit Ransomware
+  - AsyncRAT
+  - DarkCrystal RAT
+  - Derusbi
+  - WinDealer RAT
+  - DarkGate Malware
+  - Crypto Stealer
+  - ValleyRAT
+  - AcidPour
+  - PlugX
+  - Data Destruction
+  - Qakbot
+  - CISA AA23-347A
+  - Hermetic Wiper
+  - Volt Typhoon
+  - Double Zero Destructor
+  - NjRAT
+  - Trickbot
+  - AgentTesla
+  - Meduza Stealer
+  - SnappyBee
+  - Azorult
+  - WhisperGate
+  - Warzone RAT
+  - Swift Slicer
+  - Rhysida Ransomware
+  - Brute Ratel C4
+  - BlackByte Ransomware
+  - Graceful Wipe Out Attack
+  - Chaos Ransomware
+  - Handala Wiper
+  - RedLine Stealer
+  - Salt Typhoon
+  - XMRig
+  - MoonPeak
+  - Industroyer2
+  - Amadey
+  - IcedID
   asset_type: Endpoint
   mitre_attack_id:
   - T1036

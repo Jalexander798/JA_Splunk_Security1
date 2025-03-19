@@ -1,21 +1,26 @@
 name: Windows Unusual SysWOW64 Process Run System32 Executable
 id: e4602172-db86-4315-86df-da66fb40bcde
-version: 1
-date: '2025-02-11'
+version: '2'
+date: '2025-03-19'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
-description: The following analytic detects an unusual process execution pattern where a process running from C:\Windows\SysWOW64\ attempts to execute a binary from C:\Windows\System32\. In a typical Windows environment, 32-bit processes under SysWOW64 should primarily interact with 32-bit binaries within the same directory. However, an execution flow where a 32-bit process spawns a 64-bit binary from System32 can indicate potential process injection, privilege escalation, evasion techniques, or unauthorized execution hijacking.
+description: The following analytic detects an unusual process execution pattern where
+  a process running from C:\Windows\SysWOW64\ attempts to execute a binary from C:\Windows\System32\.
+  In a typical Windows environment, 32-bit processes under SysWOW64 should primarily
+  interact with 32-bit binaries within the same directory. However, an execution flow
+  where a 32-bit process spawns a 64-bit binary from System32 can indicate potential
+  process injection, privilege escalation, evasion techniques, or unauthorized execution
+  hijacking.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
-search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Processes
-  where Processes.process_path = "*\\Windows\\SysWOW64\\*" AND Processes.process = "*windows\\system32\\*"
-  by Processes.parent_process_name Processes.process_path Processes.process Processes.original_file_name Processes.dest Processes.user 
-  | `drop_dm_object_name(Processes)` 
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)` 
-  | `windows_unusual_syswow64_process_run_system32_executable_filter`'
+search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
+  as lastTime from datamodel=Endpoint.Processes where Processes.process_path = "*\\Windows\\SysWOW64\\*"
+  AND Processes.process = "*windows\\system32\\*" by Processes.parent_process_name
+  Processes.process_path Processes.process Processes.original_file_name Processes.dest
+  Processes.user | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `windows_unusual_syswow64_process_run_system32_executable_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -25,7 +30,10 @@ how_to_implement: The detection is based on data that originates from Endpoint D
   the EDR product. The logs must also be mapped to the `Processes` node of the `Endpoint`
   data model. Use the Splunk Common Information Model (CIM) to normalize the field
   names and speed up the data modeling process.
-known_false_positives: some legitimate system processes, software updaters, or compatibility tools may trigger this behavior, occurrences involving unknown, unsigned, or unusual parent processes should be investigated for potential malware activity, persistence mechanisms, or execution flow hijacking.
+known_false_positives: some legitimate system processes, software updaters, or compatibility
+  tools may trigger this behavior, occurrences involving unknown, unsigned, or unusual
+  parent processes should be investigated for potential malware activity, persistence
+  mechanisms, or execution flow hijacking.
 references:
 - https://www.trendmicro.com/en_nl/research/24/k/earth-estries.html
 drilldown_searches:
@@ -53,9 +61,9 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - China-Nexus Threat Activity
   - DarkGate Malware
-  - Earth Estries
+  - Salt Typhoon
+  - China-Nexus Threat Activity
   asset_type: Endpoint
   mitre_attack_id:
   - T1036.009
