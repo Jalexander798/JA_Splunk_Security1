@@ -63,9 +63,6 @@ rba:
   - field: src
     type: system
     score: 60
-  - field: dest
-    type: system
-    score: 60
   - field: src_user
     type: user
     score: 60
