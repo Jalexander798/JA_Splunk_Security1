@@ -1,7 +1,7 @@
 name: Detect Remote Access Software Usage Process
 id: ffd5e001-2e34-48f4-97a2-26dc4bb08178
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-03-19'
 author: Steven Dick
 status: production
 type: Anomaly
@@ -86,6 +86,7 @@ tags:
   - Gozi Malware
   - CISA AA24-241A
   - Remote Monitoring and Management Software
+  - Cactus Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1219

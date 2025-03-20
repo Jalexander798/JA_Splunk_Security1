@@ -1,7 +1,7 @@
 name: Suspicious DLLHost no Command Line Arguments
 id: ff61e98c-0337-4593-a78f-72a676c56f26
-version: 7
-date: '2024-11-13'
+version: 8
+date: '2025-03-19'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -66,6 +66,7 @@ tags:
   - BlackByte Ransomware
   - Cobalt Strike
   - Graceful Wipe Out Attack
+  - Cactus Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1055

@@ -1,7 +1,7 @@
 name: Windows Remote Access Software Hunt
 id: 8bd22c9f-05a2-4db1-b131-29271f28cb0a
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-03-19'
 author: Michael Haag, Splunk
 status: production
 type: Hunting
@@ -44,6 +44,7 @@ tags:
   - Insider Threat
   - Command And Control
   - Ransomware
+  - Cactus Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1219
