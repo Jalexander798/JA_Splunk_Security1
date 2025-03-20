@@ -47,12 +47,9 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: The user $user$ ran a known malicious PowerShell string matching *$match$*
+  message: The user $user_id$ ran a known malicious PowerShell string matching *$match$*
     on $dest$
   risk_objects:
-  - field: user
-    type: user
-    score: 70
   - field: dest
     type: system
     score: 70
