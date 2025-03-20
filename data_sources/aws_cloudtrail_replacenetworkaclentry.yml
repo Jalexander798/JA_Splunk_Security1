@@ -1,12 +1,16 @@
 name: AWS CloudTrail ReplaceNetworkAclEntry
 id: db0c240e-3754-40e4-86ef-cde018ee9f65
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail ReplaceNetworkAclEntry
+description: Logs an event when a network ACL entry is replaced within the AWS CloudTrail.
+mitre_components:
+- Firewall Rule Modification
+- Cloud Service Modification
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: ReplaceNetworkAclEntry
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876

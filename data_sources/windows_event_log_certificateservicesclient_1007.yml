@@ -1,12 +1,20 @@
 name: Windows Event Log CertificateServicesClient 1007
 id: c51444e3-479d-4c4a-b111-e8276a3acf39
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log CertificateServicesClient 1007
+description: Logs the export of a certificate from the local certificate store, including
+  details about the certificate thumbprint, subject names, and the process involved.
+mitre_components:
+- Certificate Registration
+- Certificate Metadata
+- Process Metadata
+- Application Log Content
+- User Account Metadata
 source: XmlWinEventLog:Microsoft-Windows-CertificateServicesClient-Lifecycle-System/Operational
 sourcetype: XmlWinEventLog
 separator: EventCode
+separator_value: '1007'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

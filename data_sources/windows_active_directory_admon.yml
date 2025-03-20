@@ -1,9 +1,16 @@
 name: Windows Active Directory Admon
 id: 22bbf4e4-d313-43c1-98ee-808b8775519d
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Active Directory Admon
+description: Logs administrative actions within Active Directory, including user and
+  group modifications, permission changes, and policy updates.
+mitre_components:
+- Active Directory Object Modification
+- Group Modification
+- User Account Modification
+- Configuration Modification
+- Application Log Content
 source: ActiveDirectory
 sourcetype: ActiveDirectory
 supported_TA:

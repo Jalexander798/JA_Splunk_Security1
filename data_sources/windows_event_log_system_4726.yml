@@ -1,12 +1,19 @@
 name: Windows Event Log System 4726
 id: 05e6b2df-b50e-441b-8ac8-565f2e80d62f
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log System 4726
+description: Logs the deletion of a user account, including details about the account
+  name, associated domain, and the account performing the action.
+mitre_components:
+- User Account Deletion
+- User Account Metadata
+- Active Directory Object Modification
+- Application Log Content
 source: XmlWinEventLog:System
 sourcetype: xmlwineventlog
 separator: EventCode
+separator_value: '4726'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

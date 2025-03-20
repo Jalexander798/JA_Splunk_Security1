@@ -1,12 +1,19 @@
 name: AWS CloudTrail CreatePolicyVersion
 id: f9f0f3da-37ec-4164-9ea0-0ae46645a86b
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail CreatePolicyVersion
+description: Logs the creation of new versions of IAM policies, including changes
+  to permissions and attached roles or resources.
+mitre_components:
+- Cloud Service Modification
+- Cloud Service Metadata
+- User Account Metadata
+- Group Modification
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: CreatePolicyVersion
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
