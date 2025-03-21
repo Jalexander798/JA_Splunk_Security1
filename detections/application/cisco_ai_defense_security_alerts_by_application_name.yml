@@ -71,7 +71,7 @@ tags:
     - Splunk Enterprise Security
     - Splunk Cloud
     security_domain: endpoint
-manual_test: We are dynamically creating the risk_score field based on the severity of the alert in the SPL and that supersedes the risk score set in the detection.
+    manual_test: We are dynamically creating the risk_score field based on the severity of the alert in the SPL and that supersedes the risk score set in the detection.
 tests:
   - name: True Positive Test
     attack_data:
