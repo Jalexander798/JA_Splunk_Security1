@@ -43,12 +43,12 @@ references:
 - https://www.robustintelligence.com/blog-posts/prompt-injection-attack-on-gpt-4
 - https://docs.aws.amazon.com/prescriptive-guidance/latest/llm-prompt-engineering-best-practices/common-attacks.html
 drilldown_searches:
-- name: View the detection results for - "$app_name$"
-  search: '%original_detection_search% | search  app_name = "$app_name$"'
+- name: View the detection results for - "$application_name$"
+  search: '%original_detection_search% | search  application_name = "$application_name$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$app_name$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$app_name$") starthoursago=168  | stats count min(_time)
+- name: View risk events for the last 7 days for - "$application_name$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$application_name$") starthoursago=168  | stats count min(_time)
     as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message)
     as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
     as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
