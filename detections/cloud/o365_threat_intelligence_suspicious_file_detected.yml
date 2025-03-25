@@ -1,7 +1,7 @@
 name: O365 Threat Intelligence Suspicious File Detected
 id: 00958c7b-35db-4e7a-ad13-31550a7a7c64
 version: 6
-date: 2025/03/25
+date: '2025-03-25'
 author: Steven Dick
 status: production
 type: TTP
