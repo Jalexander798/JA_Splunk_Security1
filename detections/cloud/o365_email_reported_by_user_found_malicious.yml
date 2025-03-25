@@ -1,7 +1,7 @@
 name: O365 Email Reported By User Found Malicious
 id: 7698b945-238e-4bb9-b172-81f5ca1685a1
-version: 5
-date: '2025-02-10'
+version: 6
+date: 2025/03/25
 author: Steven Dick
 status: production
 type: TTP
@@ -13,20 +13,14 @@ description: The following analytic detects when an email submitted to Microsoft
 data_source:
 - Office 365 Universal Audit Log
 search: '`o365_management_activity` Workload=SecurityComplianceCenter Operation=AlertEntityGenerated
-      Name="Email reported by user as*" 
-  | fromjson Data 
-  | rename _raw AS temp etps AS _raw 
-  | extract pairdelim=";" kvdelim=":" 
-  | rename _raw AS etps temp AS _raw 
-  | search RescanVerdict IN (Phish,Malware) 
-  | rex field=tsd "\<(?<src_user>.+)\>" 
-  | eval src_user = case(isnull(src_user),tsd,true(),src_user) 
-  | rename Name as signature, AlertId as signature_id, AlertEntityId as user, tsd as sender, ms as subject
-  | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product signature signature_id src_user sender subject
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)` 
-  | `o365_email_reported_by_user_found_malicious_filter`'
+  Name="Email reported by user as*" | fromjson Data | rename _raw AS temp etps AS
+  _raw | extract pairdelim=";" kvdelim=":" | rename _raw AS etps temp AS _raw | search
+  RescanVerdict IN (Phish,Malware) | rex field=tsd "\<(?<src_user>.+)\>" | eval src_user
+  = case(isnull(src_user),tsd,true(),src_user) | rename Name as signature, AlertId
+  as signature_id, AlertEntityId as user, tsd as sender, ms as subject | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account
+  vendor_product signature signature_id src_user sender subject | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `o365_email_reported_by_user_found_malicious_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events. You must deploy/allow the usage of the Microsoft
   Office Report A Message function.
@@ -75,7 +69,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
     sourcetype: o365:management:activity
     source: o365

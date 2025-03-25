@@ -1,7 +1,7 @@
 name: O365 Email Security Feature Changed
 id: 4d28013d-3a0f-4d65-a33f-4e8009fee0ae
-version: 5
-date: '2025-02-10'
+version: 6
+date: 2025/03/25
 author: Steven Dick
 status: production
 type: TTP
@@ -12,13 +12,12 @@ description: The following analytic identifies when specific O365 advanced secur
   compromise, or other malicious activities without leaving a detailed audit trail.
 data_source:
 - Office 365 Universal Audit Log
-search: '`o365_management_activity` Workload=Exchange AND Operation IN ("Set-*","Disable-*","New-*","Remove-*") Operation IN ("*AntiPhish*","*SafeLink*","*SafeAttachment*","*Malware*") 
-  | rename Id as object_id, UserId as user, Operation as signature, ObjectId as object
-  | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product signature object_id object
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)` 
-  | `o365_email_security_feature_changed_filter`'
+search: '`o365_management_activity` Workload=Exchange AND Operation IN ("Set-*","Disable-*","New-*","Remove-*")
+  Operation IN ("*AntiPhish*","*SafeLink*","*SafeAttachment*","*Malware*") | rename
+  Id as object_id, UserId as user, Operation as signature, ObjectId as object | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account
+  vendor_product signature object_id object | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `o365_email_security_feature_changed_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: Administrators might alter features for troubleshooting, performance
@@ -63,7 +62,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
     sourcetype: o365:management:activity
     source: o365
