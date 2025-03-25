@@ -1,12 +1,20 @@
 name: O365 Consent to application.
 id: 0a15a464-ef51-4614-9a07-a216eb9817db
-version: 1
-date: "2024-07-18"
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for O365 Consent to application.
+description: Logs user or administrator consent to an application's permissions in
+  Microsoft 365, including details about the application, granted permissions, and
+  the consenting user or process.
+mitre_components:
+- User Account Modification
+- Cloud Service Modification
+- Cloud Service Metadata
+- Configuration Modification
 source: o365
 sourcetype: o365:management:activity
 separator: Operation
+separator_value: Consent to application.
 supported_TA:
   - name: Splunk Add-on for Microsoft Office 365
     url: https://splunkbase.splunk.com/app/4055

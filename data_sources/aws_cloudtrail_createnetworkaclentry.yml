@@ -1,12 +1,19 @@
 name: AWS CloudTrail CreateNetworkAclEntry
 id: 45934028-10ec-4ab5-a7b1-a6349b833e67
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail CreateNetworkAclEntry
+description: Logs the creation of new entries in a network ACL, including rules to
+  allow or deny specific network traffic.
+mitre_components:
+- Firewall Rule Modification
+- Network Connection Creation
+- Cloud Service Modification
+- Cloud Service Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: CreateNetworkAclEntry
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
@@ -120,7 +127,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "6d1ce00e-4099-463c-8a4d-2af2fb2178ba", "readOnly": false, "eventType": "AwsApiCall",
   "managementEvent": true, "eventCategory": "Management", "recipientAccountId": "111111111111"}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

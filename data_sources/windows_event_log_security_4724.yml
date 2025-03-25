@@ -1,12 +1,16 @@
 name: Windows Event Log Security 4724
 id: 117fe51f-93f8-4589-8e8b-c6b7b7154c7d
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log Security 4724
+description: Logs an event when an attempt is made to reset an account's password,
+  whether successful or not.
+mitre_components:
+- User Account Modification
 source: XmlWinEventLog:Security
 sourcetype: xmlwineventlog
 separator: EventCode
+separator_value: '4724'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

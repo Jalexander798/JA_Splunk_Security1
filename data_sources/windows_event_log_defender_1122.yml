@@ -1,12 +1,18 @@
 name: Windows Event Log Defender 1122
 id: 4a2d0499-f489-4557-82f4-f357025cf3e7
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for Windows Event Log Defender 1122
+description: Logs an event when a process attempts to load a DLL that is blocked by
+  an attack surface reduction rule.
+mitre_components:
+- Application Log Content
+- Process Creation
+- Module Load
 source: WinEventLog:Microsoft-Windows-Windows Defender/Operational
 sourcetype: xmlwineventlog
 separator: EventCode
+separator_value: '1122'
 supported_TA:
 - name: Splunk Add-on for Microsoft Windows
   url: https://splunkbase.splunk.com/app/742

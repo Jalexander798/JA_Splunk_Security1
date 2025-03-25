@@ -1,9 +1,16 @@
 name: osquery
 id: 7ec4d7c8-c1d0-423a-9169-261f6adb74c0
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for osquery
+description: Logs system queries performed using osquery, including details about
+  processes, file access, network activity, and system configurations.
+mitre_components:
+- Process Metadata
+- File Access
+- Network Traffic Content
+- Host Status
+- Application Log Content
 source: osquery
 sourcetype: osquery:results
 supported_TA: []

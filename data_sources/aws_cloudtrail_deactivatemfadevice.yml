@@ -1,12 +1,19 @@
 name: AWS CloudTrail DeactivateMFADevice
 id: 7397a10b-1150-4de9-8062-a96454ae53b2
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail DeactivateMFADevice
+description: Logs the deactivation of a multi-factor authentication (MFA) device,
+  including details about the associated user and the device.
+mitre_components:
+- User Account Modification
+- User Account Metadata
+- Cloud Service Modification
+- Cloud Service Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: DeactivateMFADevice
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
@@ -99,7 +106,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "Root", "princip
   "readOnly": false, "eventType": "AwsApiCall", "managementEvent": true, "recipientAccountId":
   "111111111111", "eventCategory": "Management"}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

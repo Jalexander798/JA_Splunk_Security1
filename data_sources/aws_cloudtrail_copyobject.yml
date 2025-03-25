@@ -1,12 +1,19 @@
 name: AWS CloudTrail CopyObject
 id: 965083f4-64a8-403f-99cc-252e1a6bd3b6
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail CopyObject
+description: Logs operations that copy objects within or between AWS S3 buckets, including
+  details of source and destination.
+mitre_components:
+- Cloud Storage Access
+- Cloud Storage Modification
+- Cloud Storage Metadata
+- Instance Modification
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: CopyObject
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
@@ -118,7 +125,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "IAMUser", "prin
   "eventType": "AwsApiCall", "managementEvent": false, "recipientAccountId": "111111111111",
   "eventCategory": "Data"}'
 output_fields:
-- action
 - dest
 - user
 - user_agent

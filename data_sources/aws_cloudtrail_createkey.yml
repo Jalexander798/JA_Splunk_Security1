@@ -1,12 +1,19 @@
 name: AWS CloudTrail CreateKey
 id: fcfc1593-b6b5-4a0f-91c5-3c395116a8b9
-version: 1
-date: '2024-07-18'
+version: 2
+date: '2025-01-23'
 author: Patrick Bareiss, Splunk
-description: Data source object for AWS CloudTrail CreateKey
+description: Logs the creation of new AWS KMS keys, including details of key properties
+  and associated metadata.
+mitre_components:
+- Cloud Service Creation
+- Cloud Service Metadata
+- Instance Creation
+- Volume Metadata
 source: aws_cloudtrail
 sourcetype: aws:cloudtrail
 separator: eventName
+separator_value: CreateKey
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
@@ -149,7 +156,6 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "eventType": "AwsApiCall", "managementEvent": true, "eventCategory": "Management",
   "recipientAccountId": "111111111111"}'
 output_fields:
-- action
 - dest
 - user
 - user_agent
