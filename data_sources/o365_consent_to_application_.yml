@@ -114,3 +114,9 @@ example_log:
   "Type": 2}, {"ID": "TestApp2", "Type": 1}, {"ID": "95106c0e-3519-450e-8e38-7f326d873454",
   "Type": 2}, {"ID": "95106c0e-3519-450e-8e38-7f326d873454", "Type": 4}], "TargetContextId":
   "9c00a473-1b2c-4bc2-9215-84df3f57aee5"}'
+output_fields:
+- dest 
+- user 
+- src 
+- vendor_account 
+- vendor_product 

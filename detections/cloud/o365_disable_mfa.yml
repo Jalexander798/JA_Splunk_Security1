@@ -1,6 +1,6 @@
 name: O365 Disable MFA
 id: c783dd98-c703-4252-9e8a-f19d9f5c949e
-version: 5
+version: 6
 date: '2024-11-14'
 author: Rod Soto, Splunk
 status: production
@@ -16,11 +16,13 @@ description: The following analytic identifies instances where Multi-Factor Auth
   related to the affected account.
 data_source:
 - O365 Disable Strong Authentication.
-search: '`o365_management_activity` Operation="Disable Strong Authentication." | stats
-  count earliest(_time) as firstTime latest(_time) as lastTime by UserType Operation
-  UserId ResultStatus object | rename UserType AS user_type, Operation AS action,
-  UserId AS src_user, object AS user, ResultStatus AS result | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `o365_disable_mfa_filter`'
+search: '`o365_management_activity` Operation="Disable Strong Authentication." 
+  | rename UserId as user object as src_user
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user src vendor_account vendor_product src_user
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `o365_disable_mfa_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 add-on. This search
   works with o365:management:activity
 known_false_positives: Unless it is a special case, it is uncommon to disable MFA
@@ -42,7 +44,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: User $src_user$ has executed an operation $action$ for user $user$
+  message: User $src_user$ has executed an operation $signature$ for user $user$
   risk_objects:
   - field: user
     type: user

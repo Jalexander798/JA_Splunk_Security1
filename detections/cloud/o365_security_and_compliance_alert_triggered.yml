@@ -1,6 +1,6 @@
 name: O365 Security And Compliance Alert Triggered
 id: 5b367cdd-8dfc-49ac-a9b7-6406cf27f33e
-version: 6
+version: 7
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 data_source: []
@@ -15,14 +15,19 @@ description: The following analytic identifies alerts triggered by the Office 36
   If confirmed malicious, these alerts could indicate attempts to breach security
   policies, leading to unauthorized access, data exfiltration, or other malicious
   activities.
-search: '`o365_management_activity` Workload=SecurityComplianceCenter Category=ThreatManagement
-  Operation=AlertTriggered | spath input=Data path=f3u output=user | spath input=Data
-  path=op output=operation | spath input=_raw path=wl | spath input=Data path=rid
-  output=rule_id | spath input=Data path=ad output=alert_description | spath input=Data
-  path=lon output=operation_name | spath input=Data path=an output=alert_name | spath
-  input=Data path=sev output=severity |  stats count earliest(_time) as firstTime
-  latest(_time) as lastTime by user, Name, operation, rule_id, alert_description,
-  alert_name, severity | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+search: '`o365_management_activity` Workload=SecurityComplianceCenter Category=ThreatManagement Operation=AlertTriggered 
+  | spath input=Data path=f3u output=user 
+  | spath input=Data path=op output=operation 
+  | spath input=_raw path=wl 
+  | spath input=Data path=rid output=rule_id 
+  | spath input=Data path=ad output=alert_description 
+  | spath input=Data path=lon output=operation_name 
+  | spath input=Data path=an output=alert_name 
+  | spath input=Data path=sev output=severity 
+  | fillnull 
+  | stats count earliest(_time) as firstTime latest(_time) as lastTime by user, Name, rule_id, alert_description, alert_name, severity, dest, src, vendor_account, vendor_product, signature
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
   | `o365_security_and_compliance_alert_triggered_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
