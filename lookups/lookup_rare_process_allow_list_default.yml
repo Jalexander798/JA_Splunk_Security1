@@ -5,7 +5,6 @@ id: fc0c452e-47b1-4931-ba41-de5b7c6ed92b
 author: Splunk Threat Research Team
 lookup_type: csv
 case_sensitive_match: false
-default_match: false
 description: A list of rare processes that are legitimate that is provided by Splunk
 match_type: 
 - WILDCARD(process)
