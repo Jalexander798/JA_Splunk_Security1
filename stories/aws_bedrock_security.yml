@@ -4,7 +4,7 @@ version: 1
 date: '2024-12-05'
 author: Bhavin Patel, Splunk
 status: production
-description: This analytic story contains detections that query your AWS CloudTrail and S3 access logs for activities related to potential security risks and malicious activities on Amazon Bedrock services.
+description: This analytic story contains detections that query your AWS CloudTrail and CloudWatch logs for activities related to potential security risks and malicious activities on Amazon Bedrock services.
 narrative: 'Organizations increasingly leverage Amazon Bedrock to power their Generative AI (GenAI) applications. Adversaries with compromised AWS credentials can exploit Bedrock services and associated resources to perform malicious activities, extract sensitive data, or disrupt operations. 
 
   Attackers often perform reconnaissance by repeatedly listing foundation models or making high volumes of API calls. They may attempt to evade detection by disabling logging configurations or deleting GuardRails that prevent harmful outputs. More sophisticated attacks include attaching manipulated training datasets for fine-tuning, deleting S3 buckets containing critical data, or performing LLM jacking where attackers compute their own responses to bypass security controls.
