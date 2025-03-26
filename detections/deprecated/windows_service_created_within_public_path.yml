@@ -5,7 +5,7 @@ date: '2025-03-27'
 author: Mauricio Velazco, Splunk
 status: deprecated
 type: TTP
-description: This analytic is deprecated becuase it the duplicated of this Windows Service Created with Suspicious Service Path. 
+description: This analytic is deprecated becuase it the duplicate of - "Windows Service Created with Suspicious Service Path". 
   The following analytic detects the creation of a Windows Service with
   its binary path located in public directories using Windows Event ID 7045. This
   detection leverages logs from the `wineventlog_system` data source, focusing on
