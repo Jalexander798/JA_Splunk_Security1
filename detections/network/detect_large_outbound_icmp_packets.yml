@@ -2,7 +2,7 @@ name: Detect Large Outbound ICMP Packets
 id: e9c102de-4d43-42a7-b1c8-8062ea297419
 version: '11'
 date: '2025-03-27'
-author: Rico Valdez, Dean Luxton, Splunk
+author: Rico Valdez, Dean Luxton, Bhavin Patel, Splunk
 status: production
 type: TTP
 description: The following analytic identifies outbound ICMP packets with a size larger
@@ -12,7 +12,7 @@ description: The following analytic identifies outbound ICMP packets with a size
   control communication, and large ICMP packets can indicate data exfiltration or
   other malicious activities. If confirmed malicious, this could allow attackers to
   maintain covert communication channels, exfiltrate sensitive data, or further compromise
-  the network. 
+  the network.
 data_source:
 - Palo Alto Network Traffic
 search: |-
