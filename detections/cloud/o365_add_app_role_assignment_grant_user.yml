@@ -1,6 +1,6 @@
 name: O365 Add App Role Assignment Grant User
 id: b2c81cc6-6040-11eb-ae93-0242ac130002
-version: 6
+version: 7
 date: '2025-02-10'
 author: Rod Soto, Splunk
 status: production
@@ -14,11 +14,10 @@ description: The following analytic detects the addition of an application role 
   access to critical resources and data within the Office 365 environment.
 data_source:
 - O365 Add app role assignment grant to user.
-search: '`o365_management_activity` Workload=AzureActiveDirectory Operation="Add app
-  role assignment grant to user." | stats count min(_time) as firstTime max(_time)
-  as lastTime values(Actor{}.ID) as Actor.ID values(Actor{}.Type) as Actor.Type values(ModifiedProperties{}.Name)
-  as modified_properties_name by user dest ResultStatus Operation | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `o365_add_app_role_assignment_grant_user_filter`'
+search: '`o365_management_activity` Workload=AzureActiveDirectory Operation="Add app role assignment grant to user."
+  | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user src vendor_account vendor_product 
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `o365_add_app_role_assignment_grant_user_filter`'
 how_to_implement: You must install splunk Microsoft Office 365 add-on. This search
   works with o365:management:activity
 known_false_positives: The creation of a new Federation is not necessarily malicious,
@@ -42,8 +41,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: User $user$ has created a new federation setting $modified_properties_name$
-    on $dest$
+  message: User $user$ added a new app role assignment
   risk_objects:
   - field: user
     type: user
