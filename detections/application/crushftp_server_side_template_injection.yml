@@ -57,7 +57,7 @@ rba:
     score: 64
   threat_objects:
   - field: src_ip
-    type: ip_address  
+    type: ip_address
 tags:
   analytic_story:
   - CrushFTP Vulnerabilities
