@@ -1,4 +1,4 @@
-name: Splunk CIM
+name: Splunk Common Information Model (CIM)
 id: d3dd8270-7e1c-4bcd-8f3a-e5ec4a0e740a
 version: 1
 date: '2025-01-14'
@@ -7,6 +7,6 @@ description: Data source object for Splunk CIM
 source: not_applicable
 sourcetype: not_applicable
 supported_TA:
-- name: Splunk_SA_CIM
+- name: Splunk Common Information Model (CIM)
   url: https://splunkbase.splunk.com/app/1621
   version: 6.0.3
