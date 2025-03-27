@@ -30,11 +30,11 @@ splunk_api_username: null
 post_test_behavior: pause_on_failure
 apps:
 - uid: 1621
-  title: Splunk Common Information Model (CIM)
+  title: Splunk_SA_CIM
   appid: Splunk_SA_CIM
   version: 6.0.3
   description: description of app
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-common-information-model-(cim)_603.tgz
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-common-information-model-cim_603.tgz
 - uid: 6553
   title: Splunk Add-on for Okta Identity Cloud
   appid: Splunk_TA_okta_identity_cloud
