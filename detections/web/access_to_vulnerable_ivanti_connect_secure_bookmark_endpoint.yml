@@ -7,8 +7,7 @@ status: production
 type: TTP
 data_source:
 - Suricata
-description: The following analytic identifies access to the 
-  /api/v1/configuration/users/user-roles/user-role/rest-userrole1/web/web-bookmarks/bookmark
+description: The following analytic identifies access to the /api/v1/configuration/users/user-roles/user-role/rest-userrole1/web/web-bookmarks/bookmark
   endpoint, which is associated with CVE-2023-46805 and CVE-2024-21887 vulnerabilities.
   It detects this activity by monitoring for GET requests that receive a 403 Forbidden
   response with an empty body. This behavior is significant as it indicates potential
