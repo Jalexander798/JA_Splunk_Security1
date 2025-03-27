@@ -1,7 +1,7 @@
 name: AWS Unusual Number of Failed Authentications From Ip
 id: 0b5c9c2b-e2cb-4831-b4f1-af125ceb1386
-version: 7
-date: '2025-02-10'
+version: 10
+date: '2025-03-27'
 author: Bhavin Patel, Splunk
 status: production
 type: Anomaly
@@ -14,16 +14,17 @@ description: The following analytic identifies a single source IP failing to aut
   unauthorized access, data breaches, or further exploitation within the AWS environment.
 data_source:
 - AWS CloudTrail ConsoleLogin
-search: '`cloudtrail` eventName=ConsoleLogin action=failure 
-  | rename eventName as action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region
-  | bucket span=10m _time
-  | stats  dc(_raw) AS distinct_attempts values(user_name) as tried_accounts values(action) as action values(dest) as dest 
-  values(vendor_account) as vendor_account values(vendor_region) as vendor_region values(vendor_product) as vendor_product values(user_agent) as user_agent by _time, src 
-  | eventstats avg(distinct_attempts) as avg_attempts , stdev(distinct_attempts) as ip_std by _time 
-  | eval upperBound=(avg_attempts+ip_std*3) 
-  | eval  isOutlier=if(distinct_attempts > 10 and distinct_attempts >= upperBound, 1, 0) 
-  | where isOutlier = 1 
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `aws_unusual_number_of_failed_authentications_from_ip_filter`'
+search: '`cloudtrail` eventName=ConsoleLogin action=failure | rename eventName as
+  action, eventSource as dest, userName as user, userAgent as user_agent, sourceIPAddress
+  as src, userIdentity.accountId as vendor_account, awsRegion as vendor_region | bucket
+  span=10m _time | stats  dc(_raw) AS distinct_attempts values(user_name) as tried_accounts
+  values(action) as action values(dest) as dest values(vendor_account) as vendor_account
+  values(vendor_region) as vendor_region values(vendor_product) as vendor_product
+  values(user_agent) as user_agent by _time, src | eventstats avg(distinct_attempts)
+  as avg_attempts , stdev(distinct_attempts) as ip_std by _time | eval upperBound=(avg_attempts+ip_std*3)
+  | eval  isOutlier=if(distinct_attempts > 10 and distinct_attempts >= upperBound,
+  1, 0) | where isOutlier = 1 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `aws_unusual_number_of_failed_authentications_from_ip_filter`'
 how_to_implement: You must install Splunk Add-on for AWS in order to ingest Cloudtrail.
   We recommend the users to try different combinations of the bucket span time and
   the calculation of the upperBound field to tune this search according to their environment
@@ -73,7 +74,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/aws_mulitple_failed_console_login/aws_cloudtrail.json
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/aws_mulitple_failed_console_login/aws_cloudtrail.json
     source: aws_cloudtrail
     sourcetype: aws:cloudtrail

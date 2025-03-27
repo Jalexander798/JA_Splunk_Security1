@@ -1,7 +1,7 @@
 name: Windows PowerShell Process With Malicious String
 id: 5df35d50-e1a3-4a52-a337-92e69d9b1b8a
-version: 2
-date: '2024-12-19'
+version: 3
+date: '2025-03-27'
 author: Steven Dick
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: Spoolsv Suspicious Loaded Modules
 id: a5e451f8-da81-11eb-b245-acde48001122
-version: '7'
-date: '2025-03-03'
+version: 8
+date: '2025-03-27'
 author: Mauricio Velazco, Michael Haag, Teoderick Contreras, Splunk
 status: production
 type: TTP

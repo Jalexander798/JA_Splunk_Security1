@@ -1,7 +1,7 @@
 name: Windows Command and Scripting Interpreter Path Traversal Exec
 id: 58fcdeb1-728d-415d-b0d7-3ab18a275ec2
-version: 7
-date: '2025-03-03'
+version: 8
+date: '2025-03-27'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -20,13 +20,13 @@ data_source:
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Processes where NOT Processes.os="Linux" Processes.process="*\/..\/..\/..\/*"
   OR Processes.process="*\\..\\..\\..\\*" OR Processes.process="*\/\/..\/\/..\/\/..\/\/*"
-  by Processes.action Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec 
-  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name 
-  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid Processes.process_hash 
-  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path 
-  Processes.user Processes.user_id Processes.vendor_product 
-  | `drop_dm_object_name("Processes")` | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `windows_command_and_scripting_interpreter_path_traversal_exec_filter`'
+  by Processes.action Processes.dest Processes.original_file_name Processes.parent_process
+  Processes.parent_process_exec Processes.parent_process_guid Processes.parent_process_id
+  Processes.parent_process_name Processes.parent_process_path Processes.process Processes.process_exec
+  Processes.process_guid Processes.process_hash Processes.process_id Processes.process_integrity_level
+  Processes.process_name Processes.process_path Processes.user Processes.user_id Processes.vendor_product
+  | `drop_dm_object_name("Processes")` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `windows_command_and_scripting_interpreter_path_traversal_exec_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -77,7 +77,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/path_traversal/sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/path_traversal/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

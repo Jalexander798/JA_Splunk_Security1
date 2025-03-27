@@ -1,7 +1,7 @@
 name: Modification Of Wallpaper
 id: accb0712-c381-11eb-8e5b-acde48001122
-version: '5'
-date: '2025-03-03'
+version: 6
+date: '2025-03-27'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: Windows System Remote Discovery With Query
 id: 94859172-a521-474f-97ac-4cf4b09634a3
-version: 2
-date: '2025-02-05'
+version: 3
+date: '2025-03-27'
 author: Steven Dick
 status: production
 type: Anomaly

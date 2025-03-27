@@ -1,7 +1,7 @@
 name: Remote Process Instantiation via WMI and PowerShell
 id: 112638b4-4634-11ec-b9ab-3e22fbd008af
-version: 6
-date: '2024-12-10'
+version: 13
+date: '2025-03-27'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
