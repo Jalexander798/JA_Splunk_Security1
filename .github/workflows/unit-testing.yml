@@ -47,7 +47,6 @@ jobs:
             git switch new_branch_for_testing
             contentctl test --disable-tqdm --no-enable-integration-testing --container-settings.num-containers 2 --post-test-behavior never_pause mode:changes --mode.target-branch ${{ github.base_ref }}
             echo "contentctl test - COMPLETED"
-          continue-on-error: true
 
         # Store test_results/summary.yml and dist/DA-ESS-ContentUpdate-latest.tar.gz to job artifact-test_summary_results.zip
         - name: store_artifacts
