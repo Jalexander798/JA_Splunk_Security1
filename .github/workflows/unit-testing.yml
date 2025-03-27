@@ -14,7 +14,6 @@ jobs:
             repository: 'splunk/security_content' #this should be the TARGET repo of the PR. we hardcode it for now
             ref: ${{ github.base_ref }}
           
-
         - uses: actions/setup-python@v5
           with:
             python-version: '3.11' #Available versions here - https://github.com/actions/python-versions/releases  easy to change/make a matrix/use pypy
@@ -36,8 +35,8 @@ jobs:
         # Instructions for pulling a PR were taken from: 
         # https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/checking-out-pull-requests-locally
         - name: Run ContentCTL test for changes against target branch
+          id: contentctl_test
           run: |
-            
             echo "Current Branch (Head Ref): ${{ github.head_ref }}"
             echo "Target Branch (Base Ref): ${{ github.base_ref }}"
             git pull > /dev/null 2>&1
@@ -47,6 +46,7 @@ jobs:
             git switch new_branch_for_testing
             contentctl test --verbose --disable-tqdm --no-enable-integration-testing --container-settings.num-containers 2 --post-test-behavior never_pause mode:changes --mode.target-branch ${{ github.base_ref }}
             echo "contentctl test - COMPLETED"
+            echo "exit_code=$?" >> $GITHUB_OUTPUT
 
         # Store test_results/summary.yml and dist/DA-ESS-ContentUpdate-latest.tar.gz to job artifact-test_summary_results.zip
         - name: store_artifacts
@@ -69,3 +69,10 @@ jobs:
             echo "This job will fail if there are failures in unit-testing"  
             python .github/workflows/format_test_results.py >> $GITHUB_STEP_SUMMARY
             echo "The Unit testing is completed. See details in the unit-testing job summary UI "
+
+        # Fail the job if contentctl test failed
+        - name: Check contentctl test results
+          if: steps.contentctl_test.outputs.exit_code != '0'
+          run: |
+            echo "::error::contentctl test failed with exit code ${{ steps.contentctl_test.outputs.exit_code }}"
+            exit 1
