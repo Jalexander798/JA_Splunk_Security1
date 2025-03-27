@@ -1,6 +1,6 @@
 name: Windows Svchost.exe Parent Process Anomaly
 id: 1d38e5e9-2ff8-4c47-872c-bf1657cefab5
-version: 1
+version: 2
 date: '2025-02-11'
 author: Teoderick Contreras, Splunk
 status: production

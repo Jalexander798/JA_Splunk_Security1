@@ -1,8 +1,8 @@
 name: Remote Process Instantiation via WMI
 id: d25d2c3d-d9d8-40ec-8fdf-e86fe155a3da
-version: '12'
-date: '2025-02-24'
-author: Rico Valdez, Mauricio Velazco, Splunk
+version: '13'
+date: '2025-03-27'
+author: Mauricio Velazco, Splunk
 status: production
 type: TTP
 description: The following analytic detects the execution of wmic.exe with parameters

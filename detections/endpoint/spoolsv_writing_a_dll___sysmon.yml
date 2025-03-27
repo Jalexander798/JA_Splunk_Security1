@@ -1,8 +1,8 @@
 name: Spoolsv Writing a DLL - Sysmon
 id: 347fd388-da87-11eb-836d-acde48001122
-version: '6'
-date: '2025-03-03'
-author: Mauricio Velazco, Michael Haag, Splunk
+version: '7'
+date: '2025-03-27'
+author: Mauricio Velazco, Splunk
 status: production
 type: TTP
 description: The following analytic detects `spoolsv.exe` writing a `.dll` file, which
