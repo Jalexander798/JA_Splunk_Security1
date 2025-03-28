@@ -4,7 +4,6 @@ version: 4
 id: c9038bad-c77b-4caa-9df2-09dc4454ac77
 author: Splunk Threat Research Team
 lookup_type: csv
-default_match: false
 description: A list of services that deal with security, such as Antivirus, Endpoint Detection and Response, etc.
 match_type: 
 - WILDCARD(service)

@@ -82,6 +82,7 @@ tags:
   - DarkGate Malware
   - Rhysida Ransomware
   - Seashell Blizzard
+  - VanHelsing Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1021.002

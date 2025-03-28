@@ -1,7 +1,7 @@
 name: Detect Renamed PSExec
 id: 683e6196-b8e8-11eb-9a79-acde48001122
-version: '12'
-date: '2025-02-24'
+version: '13'
+date: '2025-03-25'
 author: Michael Haag, Splunk, Alex Oberkircher, Github Community
 status: production
 type: Hunting
@@ -51,6 +51,7 @@ tags:
   - Rhysida Ransomware
   - Earth Estries
   - SamSam Ransomware
+  - VanHelsing Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1569.002

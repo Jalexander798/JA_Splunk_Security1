@@ -1,6 +1,6 @@
 name: O365 External Identity Policy Changed
 id: 29af1725-7a72-4d2d-8a18-e697e79a62d3
-version: 4
+version: 5
 date: '2024-11-14'
 author: Steven Dick
 status: production
@@ -15,23 +15,27 @@ description: The following analytic identifies when changes are made to the exte
   by Abusing External Identities`.
 data_source:
 - Office 365 Universal Audit Log
-search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Update
-  policy.\" Target{}.ID=\"B2BManagementPolicy\" | eval object_attrs = mvindex('ModifiedProperties{}.NewValue',0),
-  object_attrs_old = mvindex('ModifiedProperties{}.OldValue',0), object_name = mvindex('Target{}.ID',3),
-  signature=Operation, user = case(match(mvindex('Actor{}.ID',-1),\"User\"),mvindex('Actor{}.ID',0),match(mvindex('Actor{}.ID',-1),\"\
-  ServicePrincipal\"),mvindex('Actor{}.ID',3),true(),mvindex('Actor{}.ID',0)) | spath
-  input=object_attrs_old output=B2BOld path={} | spath input=B2BOld | rename B2BManagementPolicy.*
-  as B2BManagementPolicyOld.* | spath input=object_attrs output=B2BNew path={} | spath
-  input=B2BNew | eval object_attrs = 'B2BManagementPolicy.InvitationsAllowedAndBlockedDomainsPolicy.AllowedDomains{}'
-  , object_attrs_old = 'B2BManagementPolicyOld.InvitationsAllowedAndBlockedDomainsPolicy.AllowedDomains{}'
-  | eval diff_add=mvmap(object_attrs,if(isnull(mvfind(object_attrs_old,object_attrs)),object_attrs,null))
-  | eval diff_remove=mvmap(object_attrs_old,if(isnull(mvfind(object_attrs,object_attrs_old)),object_attrs_old,null))
-  | eval result = case(isnotnull(diff_add),\"Added \".mvjoin(diff_add,\",\"),isnotnull(diff_remove),\"\
-  Removed \".mvjoin(diff_remove,\",\")), action = case(isnotnull(diff_add),\"created\"\
-  ,isnotnull(diff_remove),\"deleted\") | stats values(object_attrs) as object_attrs,
-  values(action) as action, values(result) as result, values(B2BManagementPolicy*)
-  as B2BManagementPolicy*, count, min(_time) as firstTime, max(_time) as lastTime
-  by user,signature,object_name | `security_content_ctime(firstTime)`  | `security_content_ctime(lastTime)`
+search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Update policy.\" Target{}.ID=\"B2BManagementPolicy\" 
+  | eval object_attrs = mvindex('ModifiedProperties{}.NewValue',0),
+      object_attrs_old = mvindex('ModifiedProperties{}.OldValue',0), object_name = mvindex('Target{}.ID',3),
+      signature=Operation, user = case(match(mvindex('Actor{}.ID',-1),\"User\"),mvindex('Actor{}.ID',0),match(mvindex('Actor{}.ID',-1),\"ServicePrincipal\"),
+      mvindex('Actor{}.ID',3),true(),mvindex('Actor{}.ID',0)) 
+  | spath input=object_attrs_old output=B2BOld path={} 
+  | spath input=B2BOld 
+  | rename B2BManagementPolicy.* as B2BManagementPolicyOld.* 
+  | spath input=object_attrs output=B2BNew path={} 
+  | spath input=B2BNew 
+  | eval object_attrs = 'B2BManagementPolicy.InvitationsAllowedAndBlockedDomainsPolicy.AllowedDomains{}'
+      , object_attrs_old = 'B2BManagementPolicyOld.InvitationsAllowedAndBlockedDomainsPolicy.AllowedDomains{}' 
+  | eval diff_add=mvmap(object_attrs,if(isnull(mvfind(object_attrs_old,object_attrs)),object_attrs,null)) 
+  | eval diff_remove=mvmap(object_attrs_old,if(isnull(mvfind(object_attrs,object_attrs_old)),object_attrs_old,null)) 
+  | eval result = case(isnotnull(diff_add),\"Added \".mvjoin(diff_add,\",\"),isnotnull(diff_remove),\"Removed \".mvjoin(diff_remove,\",\")), action = case(isnotnull(diff_add),\"created\",isnotnull(diff_remove),\"deleted\") 
+  | stats values(object_attrs) as object_attrs,
+      values(action) as action, values(result) as result, values(B2BManagementPolicy*)
+      as B2BManagementPolicy*, count, min(_time) as firstTime, max(_time) as lastTime
+      by user signature object_name dest vendor_account vendor_product 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
   | `o365_external_identity_policy_changed_filter`"
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
@@ -54,7 +58,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: User $user$ changed the external identity [$object_name$] policy - $result$
+  message: User $user$ changed the external identity [$object_name$] policy 
   risk_objects:
   - field: user
     type: user

@@ -1,6 +1,6 @@
 name: O365 Block User Consent For Risky Apps Disabled
 id: 12a23592-e3da-4344-8545-205d3290647c
-version: 4
+version: 5
 date: '2024-11-14'
 author: Mauricio Velazco, Splunk
 status: production
@@ -15,13 +15,15 @@ description: The following analytic detects when the "risk-based step-up consent
   to grant consent to malicious applications. If confirmed malicious, attackers could
   gain unauthorized access to user data and sensitive information, leading to data
   breaches and further compromise within the organization.
-search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Update
-  authorization policy.\" | eval index_number = if(mvfind('ModifiedProperties{}.Name',
-  \"AllowUserConsentForRiskyApps\") >= 0, mvfind('ModifiedProperties{}.Name', \"AllowUserConsentForRiskyApps\"\
-  ), -1) | search index_number >= 0  | eval AllowUserConsentForRiskyApps = mvindex('ModifiedProperties{}.NewValue',index_number)
-  | where AllowUserConsentForRiskyApps like \"%true%\" | stats count min(_time) as
-  firstTime max(_time) as lastTime by user, Operation, AllowUserConsentForRiskyApps,
-  user_agent | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Update authorization policy.\" 
+  | eval index_number = if(mvfind('ModifiedProperties{}.Name',\"AllowUserConsentForRiskyApps\") >= 0, mvfind('ModifiedProperties{}.Name',\"AllowUserConsentForRiskyApps\"), -1) 
+  | search index_number >= 0 
+  | eval AllowUserConsentForRiskyApps = mvindex('ModifiedProperties{}.NewValue',index_number) 
+  | where AllowUserConsentForRiskyApps like \"%true%\" 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user src vendor_account vendor_product AllowUserConsentForRiskyApps
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
   | `o365_block_user_consent_for_risky_apps_disabled_filter`"
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
