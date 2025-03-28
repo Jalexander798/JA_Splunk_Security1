@@ -112,3 +112,9 @@ example_log:
   "Type": 2}, {"ID": "57e4bd36-9722-4a4a-9729-7203d8e00b72", "Type": 2}, {"ID": "User",
   "Type": 2}, {"ID": "lowpriv@splunkresearch.onmicrosoft.com", "Type": 5}, {"ID":
   "10032002CC029AE9", "Type": 3}], "TargetContextId": "d8211c86-3244-409b-8c4f-ae27ed34b4a5"}'
+output_fields:
+- dest 
+- user 
+- src 
+- vendor_account 
+- vendor_product 

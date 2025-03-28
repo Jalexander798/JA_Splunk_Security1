@@ -100,3 +100,9 @@ example_log:
   "SizeInBytes": 44572}, {"InternetMessageId": "<CH0PR18MB5530506D1B68B05A99A1109FF185A@CH0PR18MB5530.namprd18.prod.outlook.com>",
   "SizeInBytes": 245068}], "Id": "LgAAAAC0AxwgOj/BRq9Bs1bhMPw/AQDh+UNSDzeHSLWfq+fr83BDAAAAAAEMAAAB",
   "Path": "\\Inbox"}], "OperationCount": 4}'
+output_fields:
+- dest 
+- user 
+- src 
+- vendor_account 
+- vendor_product 
