@@ -1,7 +1,7 @@
 name: Exchange PowerShell Abuse via SSRF
 id: 29228ab4-0762-11ec-94aa-acde48001122
-version: 6
-date: '2025-02-19'
+version: 7
+date: '2025-03-25'
 author: Michael Haag, Splunk
 status: experimental
 type: TTP
@@ -39,6 +39,7 @@ tags:
   - ProxyShell
   - BlackByte Ransomware
   - ProxyNotShell
+  - Seashell Blizzard
   asset_type: Endpoint
   mitre_attack_id:
   - T1190
