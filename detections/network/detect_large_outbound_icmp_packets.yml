@@ -44,7 +44,7 @@ known_false_positives: ICMP packets are used in a variety of ways to help troubl
 references: []
 drilldown_searches:
 - name: View the detection results for - "$src_ip$" and "$dest_ip$"
-  search: '%original_detection_search% | search  src = "$src_ip$" dest = "$dest_ip$"'
+  search: '%original_detection_search% | search  src_ip = "$src_ip$" dest_ip = "$dest_ip$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$src_ip$" and "$dest_ip$"
