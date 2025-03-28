@@ -1,7 +1,7 @@
 name: O365 Email Reported By Admin Found Malicious
 id: 94396c3e-7728-422a-9956-e4b77b53dbdf
-version: 5
-date: '2025-02-10'
+version: 6
+date: '2025-03-25'
 author: Steven Dick
 status: production
 type: TTP
@@ -13,12 +13,11 @@ description: The following analytic detects when an email manually submitted to 
 data_source:
 - Office 365 Universal Audit Log
 search: '`o365_management_activity` Workload=SecurityComplianceCenter Operation=AdminSubmission
-  | search RescanVerdict IN (Phish,Malware) | stats values(Subject) as subject, values(RescanVerdict)
-  as result, values(SenderIP) as src, values(P2Sender) as sender, values(P1Sender)
-  as src_user, values(Recipients{}) as user, count min(_time) as firstTime, max(_time)
-  as lastTime, by Id,Operation,UserId | rename Name as signature, Id as signature_id,
-  UserId as o365_adminuser | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `o365_email_reported_by_admin_found_malicious_filter`'
+  | search RescanVerdict IN (Phish,Malware) | rename Id as signature_id, SenderIP
+  as src, Recipients{} as dest_user, P1Sender as src_user | fillnull | stats count
+  min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product
+  signature signature_id dest_user src_user Subject SubmissionContent | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `o365_email_reported_by_admin_found_malicious_filter`'
 how_to_implement: You must install splunk Microsoft Office 365 add-on. This search
   works with o365:management:activity
 known_false_positives: Administrators that submit known phishing training exercises.
@@ -39,8 +38,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: O365 security admin $o365_adminuser$ manually reported a suspicious email
-    from $src_user$
+  message: O365 security admin $user$ manually reported a suspicious email from $src_user$
   risk_objects:
   - field: src_user
     type: user
@@ -49,7 +47,7 @@ rba:
     type: user
     score: 50
   threat_objects:
-  - field: subject
+  - field: Subject
     type: email_subject
 tags:
   analytic_story:
@@ -67,7 +65,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
     sourcetype: o365:management:activity
     source: o365

@@ -5,7 +5,6 @@ id: 8c214005-2b4e-49c8-bba6-747005f11296
 author: Steven Dick
 lookup_type: csv
 description: A list of suspicious Windows Service names and locations
-default_match: false
 match_type: 
 - WILDCARD(service_name)
 - WILDCARD(service_path)

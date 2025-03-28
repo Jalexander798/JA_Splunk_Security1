@@ -114,3 +114,9 @@ example_log:
   "Type": 4}], "TargetContextId": "0e8108b1-18e9-41a4-961b-dfcddf92ef08", "UserId":
   "rodsoto@rodsoto.onmicrosoft.com", "UserKey": "10037FFEA938FB92@rodsoto.onmicrosoft.com",
   "UserType": 0, "Version": 1, "Workload": "AzureActiveDirectory"}'
+output_fields:
+- dest 
+- user 
+- src 
+- vendor_account 
+- vendor_product 

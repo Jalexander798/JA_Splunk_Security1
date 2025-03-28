@@ -4,7 +4,6 @@ version: 3
 id: 93d9fb06-035e-496c-91d5-7a79543ce1e1
 author: Splunk Threat Research Team
 lookup_type: csv
-default_match: false
 description: A list of file names that are ransomware note files
 match_type: 
 - WILDCARD(ransomware_notes)
