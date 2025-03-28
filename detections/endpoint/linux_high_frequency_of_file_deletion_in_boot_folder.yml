@@ -19,11 +19,12 @@ search: '| tstats `security_content_summariesonly` values(Filesystem.file_access
   as file_hash values(Filesystem.file_modify_time) as file_modify_time values(Filesystem.file_name)
   as file_name values(Filesystem.file_path) as file_path  values(Filesystem.file_acl)
   as file_acl values(Filesystem.file_size) as file_size values(Filesystem.process_id)
-  as process_id values(Filesystem.user) as user values(Filesystem.vendor_product)
-  as vendor_product dc(Filesystem.file_path) as numOfDelFilePath count min(_time)
+  as process_id values(Filesystem.user) as user 
+  values(Filesystem.process_exec) as process_exec values(Filesystem.process_name) as process_name 
+  values(Filesystem.process_path) as process_path values(Filesystem.vendor_product) as vendor_product dc(Filesystem.file_path) as numOfDelFilePath count min(_time)
   as firstTime max(_time) as lastTime FROM datamodel=Endpoint.Filesystem where Filesystem.action=deleted
   Filesystem.file_path = "/boot/*" by _time span=1h  Filesystem.dest Filesystem.process_guid
-  Filesystem.action | `drop_dm_object_name(Filesystem)` | where  numOfDelFilePath
+  Filesystem.action  | `drop_dm_object_name(Filesystem)` | where  numOfDelFilePath
   >= 200 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `linux_high_frequency_of_file_deletion_in_boot_folder_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting

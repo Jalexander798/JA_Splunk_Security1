@@ -104,8 +104,11 @@ fields:
 output_fields:
 - action 
 - dest 
+- process_exec
 - process_guid 
 - process_id 
+- process_name
+- process_path
 - registry_hive 
 - registry_path 
 - registry_key_name 

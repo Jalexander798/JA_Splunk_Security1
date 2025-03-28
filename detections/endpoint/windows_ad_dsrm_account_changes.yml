@@ -21,7 +21,8 @@ search: '| tstats `security_content_summariesonly` min(_time) as firstTime max(_
   Registry.registry_value_data IN ("*1","*2") by Registry.action Registry.dest Registry.process_guid
   Registry.process_id Registry.registry_hive Registry.registry_path Registry.registry_key_name
   Registry.registry_value_data Registry.registry_value_name Registry.registry_value_type
-  Registry.status Registry.user Registry.vendor_product | `drop_dm_object_name(Registry)`
+  Registry.status Registry.user Registry.vendor_product Registry.process_exec Registry.process_name Registry.process_path 
+  | `drop_dm_object_name(Registry)`
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_ad_dsrm_account_changes_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related

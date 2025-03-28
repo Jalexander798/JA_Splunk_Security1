@@ -20,7 +20,8 @@ search: '|tstats `security_content_summariesonly` count min(_time) as firstTime 
   "*.lnk", "*.dat") by Filesystem.action Filesystem.dest Filesystem.file_access_time
   Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time Filesystem.file_name
   Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid
-  Filesystem.process_id Filesystem.user Filesystem.vendor_product | `drop_dm_object_name(Filesystem)`
+  Filesystem.process_id Filesystem.user Filesystem.vendor_product Filesystem.process_exec 
+  Filesystem.process_name Filesystem.process_path  | `drop_dm_object_name(Filesystem)`
   | eval dropped_file_path = split(file_path, "\\") | eval dropped_file_path_split_count
   = mvcount(dropped_file_path) | eval root_drive = mvindex(dropped_file_path,0) |
   where LIKE(root_drive, "C:") AND dropped_file_path_split_count = 2 | `security_content_ctime(firstTime)`

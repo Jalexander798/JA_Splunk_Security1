@@ -21,6 +21,7 @@ search: '| tstats `security_content_summariesonly` min(_time) as firstTime max(_
   Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time
   Filesystem.file_name Filesystem.file_path Filesystem.file_acl Filesystem.file_size
   Filesystem.process_guid Filesystem.process_id Filesystem.user Filesystem.vendor_product
+  Filesystem.process_exec Filesystem.process_name Filesystem.process_path 
   | `drop_dm_object_name(Filesystem)` | rex field=file_name "(?<file_extension>\.[^\.]+)$"
   | lookup update=true ransomware_extensions_lookup Extensions AS file_extension OUTPUT
   Extensions Name | search Name !=False | stats min(firstTime) as firstTime max(lastTime)

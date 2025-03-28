@@ -21,6 +21,7 @@ search: '| tstats `security_content_summariesonly`  count min(_time) as firstTim
   Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path
   Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name
   Registry.registry_value_type Registry.status Registry.user Registry.vendor_product
+  Registry.process_exec Registry.process_name Registry.process_path 
   | `drop_dm_object_name(Registry)` | eval dropped_reg_path = split(registry_path,
   "\\") | eval dropped_reg_path_split_count = mvcount(dropped_reg_path) | eval validation_result=
   if(match(registry_value_name,"^[0-9a-fA-F]{32}$"),"md5","nonmd5") | where validation_result

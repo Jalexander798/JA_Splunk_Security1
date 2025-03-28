@@ -19,7 +19,8 @@ search: '| tstats `security_content_summariesonly` count values(Filesystem.file_
   where (Filesystem.file_name=*.cab) by Filesystem.action Filesystem.dest Filesystem.file_access_time
   Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time Filesystem.file_name
   Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid
-  Filesystem.process_id Filesystem.user Filesystem.vendor_product | `drop_dm_object_name("Filesystem")`
+  Filesystem.process_id Filesystem.user Filesystem.vendor_product Filesystem.process_exec 
+  Filesystem.process_name Filesystem.process_path  | `drop_dm_object_name("Filesystem")`
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_cab_file_on_disk_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related

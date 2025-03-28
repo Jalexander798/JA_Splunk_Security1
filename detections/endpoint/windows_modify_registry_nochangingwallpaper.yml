@@ -19,7 +19,8 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   Registry.registry_value_data = 1) by Registry.action Registry.dest Registry.process_guid
   Registry.process_id Registry.registry_hive Registry.registry_path Registry.registry_key_name
   Registry.registry_value_data Registry.registry_value_name Registry.registry_value_type
-  Registry.status Registry.user Registry.vendor_product | `drop_dm_object_name(Registry)`
+  Registry.status Registry.user Registry.vendor_product Registry.process_exec Registry.process_name Registry.process_path 
+  | `drop_dm_object_name(Registry)`
   | where isnotnull(registry_value_data) | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_modify_registry_nochangingwallpaper_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information

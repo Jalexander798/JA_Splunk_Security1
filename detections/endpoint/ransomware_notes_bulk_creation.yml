@@ -21,7 +21,8 @@ search: '`sysmon` EventCode=11 file_name IN ("*\.txt","*\.html","*\.hta") | bin 
   as file_create_time values(file_hash) as file_hash values(file_modify_time) as file_modify_time
   values(file_path) as file_path values(file_acl) as file_acl values(file_size) as
   file_size values(process_guid) as process_guid values(process_id) as process_id
-  values(user) as user values(vendor_product) as vendor_product by dest file_name
+  values(user) as user values(vendor_product) as vendor_product values(process_name) as process_name
+  values(process_path) as process_path values(process_exec) as process_exec by dest file_name
   | where unique_readme_path_count >= 15 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `ransomware_notes_bulk_creation_filter`'
 how_to_implement: You must be ingesting data that records the filesystem activity

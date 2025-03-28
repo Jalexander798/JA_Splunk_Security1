@@ -19,7 +19,7 @@ search: "| tstats `security_content_summariesonly` min(_time) as firstTime, max(
   \ as lastTime, count FROM datamodel=Endpoint.Registry \nWHERE (Registry.registry_path\
   \ = \"*\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\AppCompatFlags\\\
   \\TelemetryController*\" \nAND Registry.registry_value_name=\"Command\" NOT Registry.registry_value_data\
-  \ IN (\"(empty)\")) \nby Registry.action Registry.dest Registry.process_guid Registry.process_id\
+  \ IN (\"(empty)\")) \nby Registry.action Registry.dest Registry.process_exec Registry.process_name Registry.process_path Registry.process_guid Registry.process_id\
   \ Registry.registry_hive Registry.registry_path \nRegistry.registry_key_name Registry.registry_value_data\
   \ Registry.registry_value_name  \nRegistry.registry_value_type Registry.status Registry.user\
   \ Registry.vendor_product \n| `drop_dm_object_name(Registry)`\n| eval process =\

@@ -96,8 +96,10 @@ output_fields:
 - file_path 
 - file_acl 
 - file_size 
+- process_exec
 - process_guid 
 - process_id 
+- process_name
 - user 
 - vendor_product
 field_mappings:

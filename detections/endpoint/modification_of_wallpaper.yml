@@ -22,7 +22,7 @@ search: '`sysmon` EventCode =13  (TargetObject IN ("*\\Control Panel\\Desktop\\W
   AND Details IN ("*\\temp\\*", "*\\users\\public\\*")) | stats count min(_time) as
   firstTime max(_time) as lastTime by action dest process_guid process_id registry_hive
   registry_path registry_key_name registry_value_data registry_value_name status user_id
-  vendor_product | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  vendor_product process_exec process_name process_path  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `modification_of_wallpaper_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the Image, TargetObject registry key, registry Details from your endpoints.

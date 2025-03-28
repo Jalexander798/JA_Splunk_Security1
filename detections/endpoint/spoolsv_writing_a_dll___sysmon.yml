@@ -17,7 +17,7 @@ data_source:
 - Sysmon EventID 11
 search: '`sysmon` EventID=11 process_name=spoolsv.exe file_path="*\\spool\\drivers\\x64\\*"
   file_name=*.dll | stats count min(_time) as firstTime max(_time) as lastTime by
-  action dest file_name file_path  process_guid process_id user_id vendor_product
+  action dest file_name file_path  process_guid process_id user_id vendor_product process_exec process_name process_path 
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `spoolsv_writing_a_dll___sysmon_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your

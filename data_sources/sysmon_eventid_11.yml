@@ -97,8 +97,11 @@ output_fields:
 - dest 
 - file_name 
 - file_path 
+- process_exec
 - process_guid 
 - process_id 
+- process_name
+- process_path
 - user 
 - vendor_product 
 field_mappings:

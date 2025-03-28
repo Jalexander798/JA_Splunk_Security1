@@ -25,7 +25,7 @@ search: '`sysmon` EventCode=11 Image="*\\mshta.exe" TargetFilename IN ("*\\Windo
   "*\\Windows\\SysWOW64\\Tasks\\Microsoft\\Windows\\PLA\\*", "*\\Windows\\SysWOW64\\Tasks\\Microsoft\\Windows\\RemoteApp
   and Desktop Connections Update\\*", "*\\Windows\\SysWOW64\\Tasks\\Microsoft\\Windows\\PLA\\System\\*")
   | stats count min(_time) as firstTime max(_time) as lastTime by action dest file_name
-  file_path  process_guid process_id user user_id vendor_product Image TargetFilename
+  file_path  process_guid process_id user user_id vendor_product Image TargetFilename process_exec process_name process_path 
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_mshta_writing_to_world_writable_path_filter`'
 how_to_implement: The analytic is designed to be run against Sysmon event logs collected
   from endpoints. The analytic requires the Sysmon event logs to be ingested into
