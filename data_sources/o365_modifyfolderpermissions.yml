@@ -114,3 +114,9 @@ example_log:
   "ParentFolder": {"Id": "LgAAAABKe+NY5HVjRYWDqaJ5IKKFAQBQ11dzmT6LS6bQbkNDtISsAAAAAAEMAAAB",
   "MemberRights": "FreeBusySimple", "MemberSid": "S-1-1-0", "MemberUpn": "Everyone",
   "Name": "Inbox", "Path": "\\Inbox"}}}'
+output_fields:
+- dest 
+- user 
+- src 
+- vendor_account 
+- vendor_product 

@@ -5,7 +5,6 @@ id: d7a6399f-9f59-4d16-a637-3353e6d4e3d1
 author: Splunk Threat Research Team
 lookup_type: csv
 description: A list of Windows Protocol Handlers
-default_match: false
 match_type: 
 - WILDCARD(handler)
 min_matches: 1

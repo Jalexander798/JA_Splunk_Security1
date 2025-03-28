@@ -4,6 +4,5 @@ version: 1
 id: d83dad4f-7bce-4979-bf07-a88c610da5f6
 author: Splunk Threat Research Team
 lookup_type: csv
-default_match: false
 description: A lookup file for deprecation information
 min_matches: 1

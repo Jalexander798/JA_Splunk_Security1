@@ -1,6 +1,6 @@
 name: O365 Excessive SSO logon errors
 id: 8158ccc4-6038-11eb-ae93-0242ac130002
-version: 6
+version: 7
 date: '2024-11-14'
 author: Rod Soto, Splunk
 status: production
@@ -14,10 +14,11 @@ description: The following analytic detects accounts experiencing a high number 
   movement within the organization.
 data_source:
 - O365 UserLoginFailed
-search: '`o365_management_activity` Workload=AzureActiveDirectory LogonError=*Sso*
-  Operation=UserLoginFailed | stats count min(_time) as firstTime max(_time) as lastTime
-  values(user) as user by  src_ip signature user_agent authentication_service action|
-  where count >= 5 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+search: '`o365_management_activity` Workload=AzureActiveDirectory LogonError=*Sso* Operation=UserLoginFailed  
+  | stats count min(_time) as firstTime max(_time) as lastTime values(user) as user by src vendor_account vendor_product dest signature user_agent
+  | where count >= 5 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
   | `o365_excessive_sso_logon_errors_filter`'
 how_to_implement: You must install splunk Microsoft Office 365 add-on. This search
   works with o365:management:activity
@@ -40,13 +41,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Excessive number of SSO logon errors from $src_ip$ using UserAgent $user_agent$.
+  message: Excessive number of SSO logon errors from $src$ using UserAgent $user_agent$.
   risk_objects:
   - field: user
     type: user
     score: 64
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:
