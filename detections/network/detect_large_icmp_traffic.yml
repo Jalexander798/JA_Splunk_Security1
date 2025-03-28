@@ -44,7 +44,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Detect Large Outbound ICMP Packets detected from $src_ip$ to $dest_ip$
+  message: Large ICMP traffic greater than a 1000 bytes detected from $src_ip$ to $dest_ip$
   risk_objects:
   - field: dest_ip
     type: system
