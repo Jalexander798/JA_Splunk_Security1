@@ -16,7 +16,7 @@ data_source:
 - Sysmon EventID 11
 search: '`sysmon` EventID=11 process_name=taskmgr.exe TargetFilename=*lsass*.dmp |
   stats count min(_time) as firstTime max(_time) as lastTime by action dest file_name
-  file_path  process_guid process_id user_id vendor_product process_exec process_name process_path  
+  file_path  process_guid process_id user_id vendor_product process_exec process_name process_path TargetFilename
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `creation_of_lsass_dump_with_taskmgr_filter`'
 how_to_implement: This search requires Sysmon Logs and a Sysmon configuration, which
@@ -46,7 +46,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: $process_name$ was identified on endpoint $dest$ writing $TargetFilename$
+  message: $process_exec$ was identified on endpoint $dest$ writing $TargetFilename$
     to disk. This behavior is related to dumping credentials via Task Manager.
   risk_objects:
   - field: dest

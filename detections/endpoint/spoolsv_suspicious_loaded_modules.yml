@@ -46,7 +46,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: $Image$ with process id $process_id$ has loaded a driver from $ImageLoaded$
+  message: $process_path$ with process id $process_id$ has loaded a driver from $ImageLoaded$
     on endpoint $dest$. This behavior is suspicious and related to PrintNightmare.
   risk_objects:
   - field: dest

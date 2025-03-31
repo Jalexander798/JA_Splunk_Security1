@@ -44,7 +44,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Suspicious powerShell script execution by $user$ on $dest$ via EventCode
+  message: Suspicious powerShell script execution by $user_id$ on $dest$ via EventCode
     4104, where WMI is performing an event query looking for running processes or
     running services
   risk_objects:
