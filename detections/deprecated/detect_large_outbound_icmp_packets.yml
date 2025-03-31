@@ -1,11 +1,11 @@
 name: Detect Large Outbound ICMP Packets
 id: e9c102de-4d43-42a7-b1c8-8062ea297419
-version: '10'
-date: '2025-02-24'
-author: Rico Valdez, Dean Luxton, Splunk
-status: production
+version: '11'
+date: '2025-03-27'
+author: Rico Valdez, Dean Luxton, Bhavin Patel, Splunk
+status: deprecated
 type: TTP
-description: The following analytic identifies outbound ICMP packets with a size larger
+description: This analytic has been deprecated in favour of a better named detection - Detect Large ICMP Traffic. The following analytic identifies outbound ICMP packets with a size larger
   than 1,000 bytes. It leverages the Network_Traffic data model to detect unusually
   large ICMP packets that are not blocked and are destined for external IP addresses.
   This activity is significant because threat actors often use ICMP for command and
@@ -42,7 +42,7 @@ known_false_positives: ICMP packets are used in a variety of ways to help troubl
 references: []
 drilldown_searches:
 - name: View the detection results for - "$src_ip$" and "$dest_ip$"
-  search: '%original_detection_search% | search  src = "$src_ip$" dest = "$dest_ip$"'
+  search: '%original_detection_search% | search  src_ip = "$src_ip$" dest_ip = "$dest_ip$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$src_ip$" and "$dest_ip$"
