@@ -43,7 +43,7 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: A PowerShell script contains Import Applocker Policy command $ScriptBlockText$
-    with EventCode $EventCode$ on host $dest$
+    on host $dest$
   risk_objects:
   - field: dest
     type: system

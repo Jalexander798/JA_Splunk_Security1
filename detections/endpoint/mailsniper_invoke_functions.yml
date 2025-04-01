@@ -43,7 +43,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Potential mailsniper.ps1 functions executed on dest $dest$ by user $user$.
+  message: Potential mailsniper.ps1 functions executed on dest $dest$ by user $user_id$.
   risk_objects:
   - field: dest
     type: system
