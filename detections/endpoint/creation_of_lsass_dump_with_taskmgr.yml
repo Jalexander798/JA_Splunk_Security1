@@ -1,7 +1,7 @@
 name: Creation of lsass Dump with Taskmgr
 id: b2fbe95a-9c62-4c12-8a29-24b97e84c0cd
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-03-25'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -56,6 +56,7 @@ tags:
   analytic_story:
   - Credential Dumping
   - CISA AA22-257A
+  - Seashell Blizzard
   asset_type: Windows
   mitre_attack_id:
   - T1003.001

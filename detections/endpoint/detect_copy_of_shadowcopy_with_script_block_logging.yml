@@ -1,7 +1,7 @@
 name: Detect Copy of ShadowCopy with Script Block Logging
 id: 9251299c-ea5b-11eb-a8de-acde48001122
 version: 7
-date: '2025-02-10'
+date: '2025-03-25'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -57,6 +57,7 @@ rba:
 tags:
   analytic_story:
   - Credential Dumping
+  - VanHelsing Ransomware
   asset_type: Endpoint
   cve:
   - CVE-2021-36934

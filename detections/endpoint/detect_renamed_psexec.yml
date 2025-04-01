@@ -54,6 +54,7 @@ tags:
   - Rhysida Ransomware
   - Earth Estries
   - SamSam Ransomware
+  - VanHelsing Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1569.002

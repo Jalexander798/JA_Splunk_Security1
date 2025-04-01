@@ -1,7 +1,7 @@
 name: Detect Remote Access Software Usage FileInfo
 id: ccad96d7-a48c-4f13-8b9c-9f6a31cba454
 version: 7
-date: '2024-11-13'
+date: '2025-03-24'
 author: Steven Dick
 status: production
 type: Anomaly
@@ -74,6 +74,7 @@ tags:
   - Ransomware
   - Gozi Malware
   - Remote Monitoring and Management Software
+  - Seashell Blizzard
   asset_type: Endpoint
   mitre_attack_id:
   - T1219

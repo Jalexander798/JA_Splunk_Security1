@@ -1,7 +1,7 @@
 name: Detect Exchange Web Shell
 id: 8c14eeee-2af1-4a4b-bda8-228da0f4862a
 version: 11
-date: '2025-02-10'
+date: '2025-03-25'
 author: Michael Haag, Shannon Davis, David Dorsey, Splunk
 status: production
 type: TTP
@@ -72,6 +72,7 @@ tags:
   - ProxyShell
   - Compromised Windows Host
   - BlackByte Ransomware
+  - Seashell Blizzard
   asset_type: Endpoint
   mitre_attack_id:
   - T1133
