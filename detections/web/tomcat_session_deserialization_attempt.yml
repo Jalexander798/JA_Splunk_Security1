@@ -41,7 +41,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View suspicious JSESSIONID cookies
-  search: '%original_detection_search% | fields + uri_path, cookie, status'
+  search: '| from datamodel Web.Web | search http_method = GET Web.cookie="*JSESSIONID=.*" src=$src$ | table src dest http_method uri_path http_user_agent status'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:

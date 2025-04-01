@@ -40,7 +40,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View all PUT requests to .session files
-  search: '%original_detection_search% | fields + uri_path, status, dest'
+  search: '| from datamodel Web.Web | search http_method = PUT uri_path="*.session" src=$src$ | table src dest http_method uri_path http_user_agent status'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
