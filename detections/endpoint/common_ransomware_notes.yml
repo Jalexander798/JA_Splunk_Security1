@@ -1,7 +1,7 @@
 name: Common Ransomware Notes
 id: ada0f478-84a8-4641-a3f1-d82362d6bd71
 version: '9'
-date: '2025-03-14'
+date: '2025-04-01'
 author: David Dorsey, Splunk
 status: production
 type: Hunting
@@ -38,6 +38,7 @@ tags:
   - Clop Ransomware
   - Ryuk Ransomware
   - Black Basta Ransomware
+  - Termite Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1485

@@ -58,6 +58,7 @@ tags:
   - Crypto Stealer
   - Snake Keylogger
   - Clop Ransomware
+  - Termite Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1486
