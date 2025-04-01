@@ -81,6 +81,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.001/gpo_new_cse/windows-security.log
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.001/group_policy_new_cse/windows-security.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

@@ -70,6 +70,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/refs/heads/master/datasets/attack_techniques/T1218/living_off_the_land/lolbinrisk.log
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218/living_off_the_land/lolbinrisk.log
     source: lotl
     sourcetype: stash
