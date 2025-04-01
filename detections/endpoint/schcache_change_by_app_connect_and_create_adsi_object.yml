@@ -15,10 +15,14 @@ description: The following analytic detects an application attempting to connect
   within the network.
 data_source:
 - Sysmon EventID 11
-search: '`sysmon` EventCode=11  TargetFilename = "*\\Windows\\SchCache\\*" TargetFilename
-  = "*.sch*" NOT (Image IN ("*\\Windows\\system32\\mmc.exe")) | stats count min(_time)
-  as firstTime max(_time) as lastTime by action dest file_name file_path  process_guid
-  process_id user_id vendor_product Image | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+search: |-
+  `sysmon` EventCode=11 TargetFilename = "*\\Windows\\SchCache\\*" TargetFilename
+      = "*.sch*" NOT (Image IN ("*\\Windows\\system32\\mmc.exe")) 
+  | stats count min(_time)
+      as firstTime max(_time) as lastTime by action dest file_name file_path process_guid
+      process_id user_id vendor_product process_name 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)`
   | `schcache_change_by_app_connect_and_create_adsi_object_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your
@@ -44,7 +48,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: process $Image$ create a file $TargetFilename$ in host $dest$
+  message: Process $process_name$ created a file $file_name$ on host $dest$ 
   risk_objects:
   - field: dest
     type: system
