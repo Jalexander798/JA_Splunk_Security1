@@ -46,9 +46,6 @@ drilldown_searches:
 rba:
   message: A Tomcat session file upload attempt has been detected from IP $src$ targeting $dest$ with a suspicious .session file. This could indicate the first stage of CVE-2025-24813 exploitation.
   risk_objects:
-  - field: src
-    type: system
-    score: 70
   - field: dest
     type: system
     score: 70

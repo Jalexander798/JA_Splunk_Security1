@@ -41,15 +41,12 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View suspicious JSESSIONID cookies
-  search: '| from datamodel Web.Web | search http_method = GET Web.cookie="*JSESSIONID=.*" src=$src$ | table src dest http_method uri_path http_user_agent status'
+  search: '| from datamodel Web.Web | search http_method=GET AND cookie="*JSESSIONID=.*" src=$src$ | table src dest http_method uri_path http_user_agent status'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
   message: A Tomcat session deserialization attempt has been detected from IP $src$ targeting $dest$ with a suspicious JSESSIONID cookie. This could indicate exploitation of CVE-2025-24813.
   risk_objects:
-  - field: src
-    type: system
-    score: 80
   - field: dest
     type: system
     score: 80
