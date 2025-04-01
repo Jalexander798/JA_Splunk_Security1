@@ -15,24 +15,6 @@ known_false_positives: Some legitimate user actions may trigger Explorer.exe to 
 references:
 - https://www.zerodayinitiative.com/advisories/ZDI-CAN-25373/
 - https://www.trendmicro.com/en_us/research/25/c/windows-shortcut-zero-day-exploit.html
-drilldown_searches:
-- name: View the detection results for - "$user$" and "$dest$"
-  search: '%original_detection_search% | search user = "$user$" dest = "$dest$"'
-  earliest_offset: $info_min_time$
-  latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$user$" and "$dest$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$", "$dest$") starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
-  latest_offset: $info_max_time$
-rba:
-  message: Windows Explorer.exe spawning PowerShell or cmd.exe processes on $dest$.
-  risk_objects:
-  - field: dest
-    type: system
-    score: 10
-  threat_objects:
-  - field: parent_process_name
-    type: parent_process_name
 tags:
   analytic_story:
   - ZDI-CAN-25373 Windows Shortcut Exploit Abused as Zero-Day
