@@ -42,9 +42,7 @@ rba:
   - field: dest
     type: system
     score: 20
-  threat_objects:
-  - field: parent_process_name
-    type: parent_process_name
+  threat_objects: []
 tags:
   analytic_story:
   - Medusa Ransomware
