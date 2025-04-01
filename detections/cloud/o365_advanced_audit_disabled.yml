@@ -1,6 +1,6 @@
 name: O365 Advanced Audit Disabled
 id: 49862dd4-9cb2-4c48-a542-8c8a588d9361
-version: 5
+version: 6
 date: '2025-02-10'
 author: Mauricio Velazco, Michael Haag, Splunk
 status: production
@@ -15,14 +15,19 @@ description: The following analytic detects instances where the O365 advanced au
   it can blind security teams to potential malicious actions. If confirmed malicious,
   attackers could operate within the user's mailbox or account with reduced risk of
   detection, leading to unauthorized data access, data exfiltration, or account compromise.
-search: "`o365_management_activity` Operation=\"Change user license.\"  | eval property_name
-  = mvindex ('ExtendedProperties{}.Name', 1) | search property_name = \"extendedAuditEventCategory\"\
-  \ | eval additionalDetails = mvindex('ExtendedProperties{}.Value',0) | eval split_value=split(additionalDetails,
-  \"NewValue\") | eval possible_plan=mvindex(split_value, 1)  | rex field=\"possible_plan\"\
-  \ \"DisabledPlans=\\[(?P<DisabledPlans>[^\\]]+)\\]\" | search DisabledPlans IN (\"\
-  *M365_ADVANCED_AUDITING*\") | stats min(_time) as firstTime max(_time) as lastTime
-  by Operation user object DisabledPlans | `security_content_ctime(firstTime)`  |
-  `security_content_ctime(lastTime)` | `o365_advanced_audit_disabled_filter`"
+search: "`o365_management_activity` Operation=\"Change user license.\" 
+  | eval property_name = mvindex ('ExtendedProperties{}.Name', 1) 
+  | search property_name = \"extendedAuditEventCategory\" 
+  | eval additionalDetails = mvindex('ExtendedProperties{}.Value',0) 
+  | eval split_value=split(additionalDetails,\"NewValue\") 
+  | eval possible_plan=mvindex(split_value, 1) 
+  | rex field=\"possible_plan\" \"DisabledPlans=\\[(?P<DisabledPlans>[^\\]]+)\\]\" 
+  | search DisabledPlans IN (\"*M365_ADVANCED_AUDITING*\")  
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user src vendor_account vendor_product DisabledPlans object
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `o365_advanced_audit_disabled_filter`"
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: Administrators might temporarily disable the advanced audit

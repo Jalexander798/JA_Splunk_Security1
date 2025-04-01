@@ -1,7 +1,7 @@
 name: ConnectWise ScreenConnect Path Traversal Windows SACL
 id: 4e127857-1fc9-4c95-9d69-ba24c91d52d7
-version: 5
-date: '2024-12-10'
+version: 6
+date: '2025-03-24'
 author: Michael Haag, Splunk
 data_source:
 - Windows Event Log Security 4663
@@ -57,6 +57,7 @@ tags:
   analytic_story:
   - ConnectWise ScreenConnect Vulnerabilities
   - Compromised Windows Host
+  - Seashell Blizzard
   asset_type: Endpoint
   mitre_attack_id:
   - T1190
