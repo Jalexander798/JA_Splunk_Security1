@@ -1,7 +1,7 @@
 name: Windows Service Created with Suspicious Service Name
 id: 35eb6d19-a497-400c-93c5-645562804b11
-version: 1
-date: '2025-02-07'
+version: 2
+date: '2025-03-26'
 author: Steven Dick
 status: production
 type: Anomaly
@@ -11,7 +11,7 @@ data_source:
 search: |-
   `wineventlog_system` EventCode=7045 
   | stats values(ImagePath) as process, count, min(_time) as firstTime, max(_time) as lastTime values(EventCode) as signature by Computer, ServiceName, StartType, ServiceType, UserID
-  | eval process_name = mvindex(split(process,"\\"),-1)
+  | eval process_name = replace(mvindex(split(process,"\\"),-1), "\"", "")
   | rename Computer as dest, ServiceName as object_name, ServiceType as object_type, UserID as user_id
   | lookup windows_suspicious_services service_name as object_name
   | where isnotnull(tool_name)
