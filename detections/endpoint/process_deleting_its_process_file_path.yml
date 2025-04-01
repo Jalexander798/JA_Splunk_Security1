@@ -52,7 +52,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A process $Image$ tries to delete its process path in commandline $CommandLine$
+  message: A process $process_name$ tries to delete its process path in commandline $process$
     as part of defense evasion in host $dest$ by user $user$
   risk_objects:
   - field: dest

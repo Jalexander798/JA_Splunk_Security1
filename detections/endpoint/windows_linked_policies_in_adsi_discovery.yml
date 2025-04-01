@@ -42,7 +42,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Windows PowerShell [Adsisearcher] was used user enumeration on $user$
+  message: Windows PowerShell [Adsisearcher] was used user enumeration on $user_id$
   risk_objects:
   - field: dest
     type: system

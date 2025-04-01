@@ -43,7 +43,7 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: Suspicious PowerShell Get-ForestDomain was identified on endpoint $dest$
-    by user $user$.
+    by user $user_id$.
   risk_objects:
   - field: dest
     type: system

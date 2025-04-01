@@ -46,7 +46,7 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: A suspicious powershell script contains domain enumeration command in $ScriptBlockText$
-    with EventCode $EventCode$ in host $dest$
+    in host $dest$
   risk_objects:
   - field: dest
     type: system
