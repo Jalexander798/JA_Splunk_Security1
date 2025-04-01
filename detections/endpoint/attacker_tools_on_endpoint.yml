@@ -1,6 +1,6 @@
 name: Attacker Tools On Endpoint
 id: a51bfe1a-94f0-48cc-b4e4-16a110145893
-version: 9
+version: 10
 date: '2025-02-27'
 author: Bhavin Patel, Splunk
 status: production
