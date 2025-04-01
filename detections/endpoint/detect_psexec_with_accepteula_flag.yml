@@ -1,7 +1,7 @@
 name: Detect PsExec With accepteula Flag
 id: 27c3a83d-cada-47c6-9042-67baf19d2574
 version: 11
-date: '2025-03-19'
+date: '2025-03-25'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -82,6 +82,8 @@ tags:
   - DarkGate Malware
   - Rhysida Ransomware
   - Cactus Ransomware
+  - Seashell Blizzard
+  - VanHelsing Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1021.002

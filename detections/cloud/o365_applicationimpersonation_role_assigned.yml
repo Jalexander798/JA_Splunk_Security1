@@ -1,6 +1,6 @@
 name: O365 ApplicationImpersonation Role Assigned
 id: 49cdce75-f814-4d56-a7a4-c64ec3a481f2
-version: 5
+version: 6
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
@@ -15,9 +15,12 @@ description: The following analytic detects the assignment of the ApplicationImp
   malicious, an attacker could gain unauthorized access to sensitive information,
   manipulate mailbox data, and perform actions as a legitimate user, posing a severe
   security risk to the organization.
-search: '`o365_management_activity` Workload=Exchange Operation="New-ManagementRoleAssignment"  Role=ApplicationImpersonation
-  |  rename User as target_user | stats  max(_time) as lastTime by Operation, user,
-  object, ObjectId, Role, target_user | `security_content_ctime(lastTime)` | `o365_applicationimpersonation_role_assigned_filter`'
+search: '`o365_management_activity` Workload=Exchange Operation="New-ManagementRoleAssignment" Role=ApplicationImpersonation 
+  | rename User as target_user  
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user src vendor_account vendor_product target_user 
+  | `security_content_ctime(lastTime)` 
+  | `o365_applicationimpersonation_role_assigned_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: While infrequent, the ApplicationImpersonation role may be

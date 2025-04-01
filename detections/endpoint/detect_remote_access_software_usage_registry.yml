@@ -1,7 +1,7 @@
 name: Detect Remote Access Software Usage Registry
 id: 33804986-25dd-43cf-bb6b-dc14956c7cbc
-version: 4
-date: '2025-03-19'
+version: 5
+date: '2025-03-24'
 author: Steven Dick
 status: production
 type: Anomaly
@@ -62,6 +62,7 @@ tags:
   - CISA AA24-241A
   - Remote Monitoring and Management Software
   - Cactus Ransomware
+  - Seashell Blizzard
   asset_type: Endpoint
   mitre_attack_id: 
   - T1219
