@@ -5,7 +5,6 @@ id: f3b92ff9-667c-481f-b29d-458e10d48508
 author: Splunk Threat Research Team
 lookup_type: csv
 description: A list of Remote Access Software
-default_match: false
 match_type: 
 - WILDCARD(remote_utility)
 - WILDCARD(remote_domain)

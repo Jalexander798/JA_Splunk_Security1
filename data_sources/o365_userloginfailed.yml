@@ -119,3 +119,9 @@ example_log:
   "OS", "Value": "Windows10"}, {"Name": "BrowserType", "Value": "Chrome"}, {"Name":
   "IsCompliantAndManaged", "Value": "False"}], "ErrorNumber": "50126", "LogonError":
   "InvalidUserNameOrPassword"}'
+output_fields:
+- dest 
+- user 
+- src 
+- vendor_account 
+- vendor_product 

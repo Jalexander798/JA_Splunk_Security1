@@ -109,3 +109,9 @@ example_log:
   "00000002-0000-0ff1-ce00-000000000000", "DeviceProperties": [{"Name": "OS", "Value":
   "Windows10"}, {"Name": "BrowserType", "Value": "Firefox"}, {"Name": "SessionId",
   "Value": "15e27956-79a0-45b2-9d02-60f48349f692"}], "ErrorNumber": "0"}'
+output_fields:
+- dest 
+- user 
+- src 
+- vendor_account 
+- vendor_product 
