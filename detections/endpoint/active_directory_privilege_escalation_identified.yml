@@ -66,10 +66,4 @@ tags:
   - Splunk Enterprise Security
   - Splunk Cloud
   security_domain: endpoint
-tests:
-- name: True Positive Test
-  attack_data:
-  - data: 
-      https://raw.githubusercontent.com/splunk/attack_data/master/datasets/attack_techniques/T1484/privesc/priv_esc.log
-    source: adlm
-    sourcetype: stash
+
