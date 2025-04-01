@@ -1,7 +1,7 @@
 name: Nginx ConnectWise ScreenConnect Authentication Bypass
 id: b3f7a803-e802-448b-8eb2-e796b223bccc
-version: 4
-date: '2024-11-15'
+version: 5
+date: '2025-03-24'
 author: Michael Haag, Splunk
 data_source:
 - Nginx Access
@@ -60,6 +60,7 @@ rba:
 tags:
   analytic_story:
   - ConnectWise ScreenConnect Vulnerabilities
+  - Seashell Blizzard
   asset_type: Web Proxy
   mitre_attack_id:
   - T1190

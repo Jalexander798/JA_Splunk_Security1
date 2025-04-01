@@ -1,7 +1,7 @@
 name: O365 Email Suspicious Behavior Alert
 id: 85c7555a-05af-4322-81aa-76b4ddf52baa
-version: 5
-date: '2025-02-10'
+version: 6
+date: '2025-03-25'
 author: Steven Dick
 status: production
 type: TTP
@@ -16,8 +16,9 @@ data_source:
 search: '`o365_management_activity` Workload=SecurityComplianceCenter Operation=AlertEntityGenerated
   Name IN ("Suspicious email sending patterns detected","User restricted from sending
   email","Suspicious Email Forwarding Activity","Email sending limit exceeded") |
-  fromjson Data | stats count min(_time) as firstTime max(_time) as lastTime by AlertId,ObjectId,Operation,Name
-  | rename Name as signature, AlertId as signature_id, ObjectId as user | `security_content_ctime(firstTime)`
+  fromjson Data | rename Name as signature, AlertId as signature_id, ObjectId as user
+  | fillnull | stats count min(_time) as firstTime max(_time) as lastTime by dest
+  user src vendor_account vendor_product signature signature_id | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `o365_email_suspicious_behavior_alert_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events. The alerts must be enabled in the o365 security
@@ -63,7 +64,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566/o365_various_alerts/o365_various_alerts.log
     sourcetype: o365:management:activity
     source: o365

@@ -1,6 +1,6 @@
 name: O365 Multiple Service Principals Created by User
 id: a34e65d0-54de-4b02-9db8-5a04522067f6
-version: 4
+version: 5
 date: '2024-11-14'
 author: Mauricio Velazco, Splunk
 data_source:
@@ -15,12 +15,17 @@ description: The following analytic identifies instances where a single user cre
   potentially leading to broader network infiltration or privilege escalation. If
   confirmed malicious, this behavior could allow attackers to gain persistent access,
   escalate privileges, or exfiltrate sensitive information.
-search: "`o365_management_activity`  Workload=AzureActiveDirectory Operation=\"Add
-  service principal.\"  | bucket span=10m _time | eval len=mvcount('Actor{}.ID') |
-  eval userType = mvindex('Actor{}.ID',len-1) | search userType = \"User\" | eval
-  displayName = object | stats count earliest(_time) as firstTime latest(_time) as
-  lastTime values(displayName) as displayName dc(displayName) as unique_apps by src_user
-  | where unique_apps > 3 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Add service principal.\" 
+  | bucket span=10m _time 
+  | eval len=mvcount('Actor{}.ID') 
+  | eval userType = mvindex('Actor{}.ID',len-1) 
+  | search userType = \"User\" 
+  | eval displayName = object 
+  | stats count earliest(_time) as firstTime latest(_time) as lastTime values(displayName) as displayName dc(displayName) as unique_apps values(user) as user values(src) as src 
+  by src_user vendor_account vendor_product dest signature
+  | where unique_apps > 3 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
   | `o365_multiple_service_principals_created_by_user_filter`"
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
