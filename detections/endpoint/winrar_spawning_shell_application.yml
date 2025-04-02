@@ -1,6 +1,6 @@
 name: WinRAR Spawning Shell Application
 id: d2f36034-37fa-4bd4-8801-26807c15540f
-version: 7
+version: 8
 date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production
@@ -20,8 +20,11 @@ description: The following analytic detects the execution of Windows shell proce
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime from datamodel=Endpoint.Processes where Processes.parent_process_name=winrar.exe
   `windows_shells` OR Processes.process_name IN ("certutil.exe","mshta.exe","bitsadmin.exe")
-  by Processes.dest Processes.user Processes.parent_process_name Processes.parent_process
-  Processes.process_name Processes.process Processes.process_id Processes.parent_process_id
+  by Processes.action Processes.dest Processes.original_file_name Processes.parent_process
+  Processes.parent_process_exec Processes.parent_process_guid Processes.parent_process_id
+  Processes.parent_process_name Processes.parent_process_path Processes.process Processes.process_exec
+  Processes.process_guid Processes.process_hash Processes.process_id Processes.process_integrity_level
+  Processes.process_name Processes.process_path Processes.user Processes.user_id Processes.vendor_product
   | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `winrar_spawning_shell_application_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
@@ -90,7 +93,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/atomic_red_team/winrar.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/atomic_red_team/winrar.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

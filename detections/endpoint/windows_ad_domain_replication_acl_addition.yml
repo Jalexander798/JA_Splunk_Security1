@@ -1,6 +1,6 @@
 name: Windows AD Domain Replication ACL Addition
 id: 8c372853-f459-4995-afdc-280c114d33ab
-version: 8
+version: 9
 date: '2024-12-10'
 author: Dean Luxton
 type: TTP
@@ -39,7 +39,7 @@ search: '`wineventlog_security` EventCode=5136 ObjectClass=domainDNS  | stats mi
   as aceType values(aceFlags) as aceFlags(inheritance) values(aceControlAccessRights)
   as aceControlAccessRights values(aceAccessRights) as aceAccessRights values(new_ace)
   as new_ace values(SubjectLogonId) as SubjectLogonId by ObjectClass ObjectDN src_user
-  user | search (aceControlAccessRights="DS-Replication-Get-Changes" AND aceControlAccessRights="DS-Replication-Get-Changes-All")
+  user dest | search (aceControlAccessRights="DS-Replication-Get-Changes" AND aceControlAccessRights="DS-Replication-Get-Changes-All")
   OR (aceControlAccessRights="1131f6aa-9c07-11d1-f79f-00c04fc2dcd2" AND aceControlAccessRights="1131f6ad-9c07-11d1-f79f-00c04fc2dcd2")
   | `windows_ad_domain_replication_acl_addition_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
@@ -100,7 +100,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484/aclmodification/windows-security-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484/aclmodification/windows-security-xml.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

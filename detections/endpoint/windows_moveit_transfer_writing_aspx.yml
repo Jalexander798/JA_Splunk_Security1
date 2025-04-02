@@ -1,12 +1,12 @@
 name: Windows MOVEit Transfer Writing ASPX
 id: c0ed2aca-5666-45b3-813f-ddfac3f3eda0
-version: 4
+version: 5
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: experimental
 type: TTP
 data_source:
-- Sysmon EventID 11
+- Sysmon EventID 1 AND Sysmon EventID 11
 description: The following analytic detects the creation of new ASPX files in the
   MOVEit Transfer application's "wwwroot" directory. It leverages endpoint data on
   process and filesystem activity to identify processes responsible for creating these
@@ -62,7 +62,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.003/moveit_windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.003/moveit_windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

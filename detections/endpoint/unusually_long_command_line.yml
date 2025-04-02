@@ -1,6 +1,6 @@
 name: Unusually Long Command Line
 id: c77162d3-f93c-45cc-80c8-22f6a4264e7f
-version: 8
+version: 9
 date: '2024-11-13'
 author: David Dorsey, Splunk
 status: experimental
@@ -18,13 +18,17 @@ data_source:
 - Windows Event Log Security 4688
 - CrowdStrike ProcessRollup2
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
-  as lastTime FROM datamodel=Endpoint.Processes by Processes.user Processes.dest Processes.process_name
-  Processes.process | `drop_dm_object_name("Processes")` | `security_content_ctime(firstTime)`|
-  `security_content_ctime(lastTime)`|  eval processlen=len(process) | eventstats stdev(processlen)
-  as stdev, avg(processlen) as avg by dest | stats max(processlen) as maxlen, values(stdev)
-  as stdevperhost, values(avg) as avgperhost by dest, user, process_name, process
-  | `unusually_long_command_line_filter` |eval threshold = 3 | where maxlen > ((threshold*stdevperhost)
-  + avgperhost)'
+  as lastTime FROM datamodel=Endpoint.Processes by Processes.action Processes.dest
+  Processes.original_file_name Processes.parent_process Processes.parent_process_exec
+  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name
+  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid
+  Processes.process_hash Processes.process_id Processes.process_integrity_level Processes.process_name
+  Processes.process_path Processes.user Processes.user_id Processes.vendor_product
+  | `drop_dm_object_name("Processes")` | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`|  eval
+  processlen=len(process) | eventstats stdev(processlen) as stdev, avg(processlen)
+  as avg by dest | stats max(processlen) as maxlen, values(stdev) as stdevperhost,
+  values(avg) as avgperhost by dest, user, process_name, process | `unusually_long_command_line_filter`
+  |eval threshold = 3 | where maxlen > ((threshold*stdevperhost) + avgperhost)'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,

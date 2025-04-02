@@ -14,4 +14,22 @@ supported_TA:
   version: 4.0.2
 fields:
 - _time
+output_fields:
+- action 
+- dest 
+- dvc 
+- file_path 
+- file_hash 
+- file_name 
+- file_modify_time 
+- process_exec 
+- process_guid 
+- process_id 
+- process_name 
+- process_path 
+- signature 
+- signature_id 
+- user 
+- user_id 
+- vendor_product
 example_log: |-

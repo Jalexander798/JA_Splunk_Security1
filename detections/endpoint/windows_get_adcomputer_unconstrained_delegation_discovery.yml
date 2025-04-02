@@ -1,6 +1,6 @@
 name: Windows Get-AdComputer Unconstrained Delegation Discovery
 id: c8640777-469f-4638-ab44-c34a3233ffac
-version: 6
+version: 7
 date: '2024-11-13'
 author: Mauricio Velazco, Splunk
 status: production
@@ -16,10 +16,10 @@ description: The following analytic detects the use of the Get-ADComputer cmdlet
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 (ScriptBlockText = "*Get-ADComputer*" AND ScriptBlockText
-  = "*TrustedForDelegation*") | stats count min(_time) as firstTime max(_time) as
-  lastTime by EventCode ScriptBlockText Computer UserID | rename Computer as dest
-  | rename UserID as user | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `windows_get_adcomputer_unconstrained_delegation_discovery_filter`'
+  = "*TrustedForDelegation*") | fillnull | stats count min(_time) as firstTime max(_time)
+  as lastTime by dest signature signature_id user_id vendor_product EventID Guid Opcode
+  Name Path ProcessID ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `windows_get_adcomputer_unconstrained_delegation_discovery_filter`'
 how_to_implement: The following  analytic requires PowerShell operational logs to
   be imported. Modify the powershell macro as needed to match the sourcetype or add
   index. This analytic is specific to 4104, or PowerShell Script Block Logging.
@@ -32,13 +32,13 @@ references:
 - https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/domain-compromise-via-unrestricted-kerberos-delegation
 - https://www.cyberark.com/resources/threat-research-blog/weakness-within-kerberos-delegation
 drilldown_searches:
-- name: View the detection results for - "$dest$" and "$user$"
-  search: '%original_detection_search% | search  dest = "$dest$" user = "$user$"'
+- name: View the detection results for - "$dest$" and "$user_id$"
+  search: '%original_detection_search% | search  dest = "$dest$" user_id = "$user_id$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$dest$" and "$user$"
+- name: View risk events for the last 7 days for - "$dest$" and "$user_id$"
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$",
-    "$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
+    "$user_id$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
     as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
     Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
     as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
@@ -51,7 +51,7 @@ rba:
   - field: dest
     type: system
     score: 35
-  - field: user
+  - field: user_id
     type: user
     score: 35
   threat_objects: []
@@ -69,7 +69,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1018/windows_get_adcomputer_unconstrained_delegation_discovery/windows-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1018/windows_get_adcomputer_unconstrained_delegation_discovery/windows-xml.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

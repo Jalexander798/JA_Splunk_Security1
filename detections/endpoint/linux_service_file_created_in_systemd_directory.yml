@@ -1,6 +1,6 @@
 name: Linux Service File Created In Systemd Directory
 id: c7495048-61b6-11ec-9a37-acde48001122
-version: 5
+version: 6
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -18,10 +18,12 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   as lastTime FROM datamodel=Endpoint.Filesystem where Filesystem.file_name = *.service
   Filesystem.file_path IN ("*/etc/systemd/system*", "*/lib/systemd/system*", "*/usr/lib/systemd/system*",
   "*/run/systemd/system*", "*~/.config/systemd/*", "*~/.local/share/systemd/*","*/etc/systemd/user*",
-  "*/lib/systemd/user*", "*/usr/lib/systemd/user*", "*/run/systemd/user*") by Filesystem.dest
-  Filesystem.file_create_time Filesystem.file_name Filesystem.process_guid Filesystem.file_path
-  | `drop_dm_object_name(Filesystem)` | `security_content_ctime(lastTime)` | `security_content_ctime(firstTime)`
-  | `linux_service_file_created_in_systemd_directory_filter`'
+  "*/lib/systemd/user*", "*/usr/lib/systemd/user*", "*/run/systemd/user*") by Filesystem.action
+  Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash
+  Filesystem.file_modify_time Filesystem.file_name Filesystem.file_path Filesystem.file_acl
+  Filesystem.file_size Filesystem.process_guid Filesystem.process_id Filesystem.user
+  Filesystem.vendor_product | `drop_dm_object_name(Filesystem)` | `security_content_ctime(lastTime)`
+  | `security_content_ctime(firstTime)` | `linux_service_file_created_in_systemd_directory_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the file name, file path, and process_guid executions from your endpoints.
   If you are using Sysmon, you can use the Add-on for Linux Sysmon from Splunkbase.
@@ -74,7 +76,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.006/service_systemd/sysmon_linux.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.006/service_systemd/sysmon_linux.log
     source: Syslog:Linux-Sysmon/Operational
     sourcetype: sysmon:linux

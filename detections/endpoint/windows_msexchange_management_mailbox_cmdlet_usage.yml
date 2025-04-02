@@ -1,6 +1,6 @@
 name: Windows MSExchange Management Mailbox Cmdlet Usage
 id: 396de86f-25e7-4b0e-be09-a330be35249d
-version: 5
+version: 6
 date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
@@ -12,10 +12,7 @@ description: The following analytic identifies suspicious Cmdlet usage in Exchan
   access or manipulation of mailboxes and roles, which are critical for maintaining
   email security. If confirmed malicious, attackers could export mailbox data, assign
   new roles, or search mailboxes, leading to data breaches and privilege escalation.
-data_source:
-- Sysmon EventID 1
-- Windows Event Log Security 4688
-- CrowdStrike ProcessRollup2
+data_source: []
 search: '`msexchange_management` EventCode=1 Message IN ("*New-MailboxExportRequest*",
   "*New-ManagementRoleAssignment*", "*New-MailboxSearch*", "*Get-Recipient*", "*Search-Mailbox*")
   | stats count min(_time) as firstTime max(_time) as lastTime by host Message | `security_content_ctime(firstTime)`
@@ -67,7 +64,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/exchange/msexchangemanagement.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/exchange/msexchangemanagement.log
     source: WinEventLog:MSExchange Management
     sourcetype: MSExchange:management

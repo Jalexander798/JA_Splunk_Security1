@@ -2,7 +2,7 @@ name: Windows Unusual Count Of Users Failed To Auth Using Kerberos
 id: bc9cb715-08ba-40c3-9758-6e2b26e455cb
 date: '2025-02-10'
 type: Anomaly
-version: 5
+version: 6
 status: production
 author: Mauricio Velazco, Splunk
 data_source:
@@ -42,9 +42,10 @@ drilldown_searches:
   latest_offset: $info_max_time$
 search: '`wineventlog_security` EventCode=4771 TargetUserName!="*$" Status=0x18 |
   bucket span=5m _time | stats dc(TargetUserName) AS unique_accounts values(TargetUserName)
-  as user by _time, IpAddress | eventstats avg(unique_accounts) as comp_avg , stdev(unique_accounts)
-  as comp_std by IpAddress | eval upperBound=(comp_avg+comp_std*3) | eval isOutlier=if(unique_accounts
-  > 10 and unique_accounts >= upperBound, 1, 0) | search isOutlier=1 | `windows_unusual_count_of_users_failed_to_auth_using_kerberos_filter`'
+  as user values(dest) as dest by _time, IpAddress | eventstats avg(unique_accounts)
+  as comp_avg , stdev(unique_accounts) as comp_std by IpAddress | eval upperBound=(comp_avg+comp_std*3)
+  | eval isOutlier=if(unique_accounts > 10 and unique_accounts >= upperBound, 1, 0)
+  | search isOutlier=1 | `windows_unusual_count_of_users_failed_to_auth_using_kerberos_filter`'
 rba:
   message: Potential Kerberos based password spraying attack from $IpAddress$
   risk_objects:
@@ -69,8 +70,7 @@ tags:
   security_domain: endpoint
 tests:
 - attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_valid_users_kerberos_xml/windows-security.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_valid_users_kerberos_xml/windows-security.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog
   name: True Positive Test

@@ -1,6 +1,6 @@
 name: Windows Impair Defense Disable Win Defender Report Infection
 id: 201946c6-b1d5-42bb-a7e0-5f7123f47fc4
-version: 5
+version: 6
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -17,10 +17,11 @@ description: The following analytic detects modifications to the Windows registr
   prolonged unauthorized access and potential data breaches.
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry where Registry.registry_path= "*\\Microsoft\\MRT\\DontReportInfectionInformation"
-  Registry.registry_value_data="0x00000001" by Registry.registry_key_name Registry.user
-  Registry.registry_path Registry.registry_value_data Registry.action Registry.dest
-  | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `windows_impair_defense_disable_win_defender_report_infection_filter`'
+  Registry.registry_value_data="0x00000001" by Registry.action Registry.dest Registry.process_guid
+  Registry.process_id Registry.registry_hive Registry.registry_path Registry.registry_key_name
+  Registry.registry_value_data Registry.registry_value_name Registry.registry_value_type
+  Registry.status Registry.user Registry.vendor_product | `drop_dm_object_name(Registry)`
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_impair_defense_disable_win_defender_report_infection_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
   on process that include the name of the process responsible for the changes from
   your endpoints into the `Endpoint` datamodel in the `Registry` node.
@@ -68,7 +69,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable-windows-security-defender-features/windefender-bypas-2-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.001/disable-windows-security-defender-features/windefender-bypas-2-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
