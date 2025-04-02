@@ -1,6 +1,6 @@
 name: Download Files Using Telegram
 id: 58194e28-ae5e-11eb-8912-acde48001122
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
@@ -15,9 +15,10 @@ description: The following analytic detects suspicious file downloads by the Tel
 data_source:
 - Sysmon EventID 15
 search: '`sysmon` EventCode= 15 process_name = "telegram.exe" TargetFilename = "*:Zone.Identifier"
-  |stats count min(_time) as firstTime max(_time) as lastTime by dest EventCode process_name
-  process_id TargetFilename Hash | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `download_files_using_telegram_filter`'
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest dvc file_hash
+  file_name file_path process_exec process_guid process_id process_name process_path
+  signature signature_id user_id vendor_product Contents Image | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `download_files_using_telegram_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name and TargetFilename from your endpoints or Events that
   monitor filestream events which is happened when process download something. (EventCode
@@ -65,7 +66,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/minergate/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/minergate/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

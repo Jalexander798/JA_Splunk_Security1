@@ -1,6 +1,6 @@
 name: PowerShell WebRequest Using Memory Stream
 id: 103affa6-924a-4b53-aff4-1d5075342aab
-version: 4
+version: 5
 date: '2024-11-13'
 author: Steven Dick
 status: production
@@ -16,10 +16,9 @@ description: The following analytic detects the use of .NET classes in PowerShel
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104  ScriptBlockText IN ("*system.net.webclient*","*system.net.webrequest*")
-  AND ScriptBlockText="*IO.MemoryStream*" | eval Path = case(isnotnull(Path),Path,true(),"unknown")
-  | stats count min(_time) as firstTime max(_time) as lastTime list(ScriptBlockText)
-  as command values(Path) as file_name values(UserID) as user by ActivityID, Computer,
-  EventCode | rename Computer as dest, EventCode as signature_id | `security_content_ctime(firstTime)`
+  AND ScriptBlockText="*IO.MemoryStream*" | fillnull | stats count min(_time) as firstTime
+  max(_time) as lastTime by dest signature signature_id user_id vendor_product EventID
+  Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `powershell_webrequest_using_memory_stream_filter`'
 how_to_implement: The following analytic requires PowerShell operational logs to be
   imported. Modify the powershell macro as needed to match the sourcetype or add index.
@@ -45,21 +44,20 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: Powershell webrequest to memory stream behavior. Possible fileless malware
-    staging on $dest$ by $user$.
+    staging on $dest$ by $user_id$.
   risk_objects:
   - field: dest
     type: system
     score: 80
-  - field: user
+  - field: user_id
     type: user
     score: 80
-  threat_objects:
-  - field: file_name
-    type: file_name
+  threat_objects: []
 tags:
   analytic_story:
   - Malicious PowerShell
   - MoonPeak
+  - PHP-CGI RCE Attack on Japanese Organizations
   asset_type: Endpoint
   mitre_attack_id:
   - T1059.001
@@ -73,7 +71,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/gootloader/partial_ttps/windows-powershell-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/gootloader/partial_ttps/windows-powershell-xml.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

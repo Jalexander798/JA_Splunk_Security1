@@ -1,6 +1,6 @@
 name: Email files written outside of the Outlook directory
 id: 8d52cf03-ba25-4101-aa78-07994aed4f74
-version: 7
+version: 8
 date: '2025-02-10'
 author: Bhavin Patel, Splunk
 status: experimental
@@ -19,9 +19,11 @@ search: '| tstats `security_content_summariesonly` count values(Filesystem.file_
   as file_path min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Filesystem
   where (Filesystem.file_name=*.pst OR Filesystem.file_name=*.ost) Filesystem.file_path
   != "C:\\Users\\*\\My Documents\\Outlook Files\\*"  Filesystem.file_path!="C:\\Users\\*\\AppData\\Local\\Microsoft\\Outlook*"
-  by Filesystem.action Filesystem.process_id Filesystem.file_name Filesystem.dest
-  | `drop_dm_object_name("Filesystem")` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`|
-  `email_files_written_outside_of_the_outlook_directory_filter`'
+  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time
+  Filesystem.file_hash Filesystem.file_modify_time Filesystem.file_name Filesystem.file_path
+  Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id
+  Filesystem.user Filesystem.vendor_product | `drop_dm_object_name("Filesystem")`
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`| `email_files_written_outside_of_the_outlook_directory_filter`'
 how_to_implement: To successfully implement this search, you must be ingesting data
   that records the file-system activity from your hosts to populate the Endpoint.Filesystem
   data model node. This is typically populated via endpoint detection-and-response

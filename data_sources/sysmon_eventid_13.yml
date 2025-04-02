@@ -101,6 +101,19 @@ fields:
 - timestartpos
 - user_id
 - vendor_product
+output_fields:
+- action 
+- dest 
+- process_guid 
+- process_id 
+- registry_hive 
+- registry_path 
+- registry_key_name 
+- registry_value_data 
+- registry_value_name 
+- status 
+- user 
+- vendor_product
 field_mappings:
 - data_model: cim
   data_set: Endpoint.Registry

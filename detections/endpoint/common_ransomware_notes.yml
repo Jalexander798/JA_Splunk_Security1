@@ -1,7 +1,7 @@
 name: Common Ransomware Notes
 id: ada0f478-84a8-4641-a3f1-d82362d6bd71
-version: '8'
-date: '2025-03-03'
+version: 9
+date: '2025-03-27'
 author: David Dorsey, Splunk
 status: production
 type: Hunting
@@ -16,9 +16,12 @@ data_source:
 - Sysmon EventID 11
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime values(Filesystem.user) as user values(Filesystem.dest) as dest values(Filesystem.file_path)
-  as file_path from datamodel=Endpoint.Filesystem by Filesystem.file_name | `drop_dm_object_name(Filesystem)`
-  | `security_content_ctime(lastTime)` | `security_content_ctime(firstTime)` | `ransomware_notes`
-  | `common_ransomware_notes_filter`'
+  as file_path from datamodel=Endpoint.Filesystem by Filesystem.action Filesystem.dest
+  Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time
+  Filesystem.file_name Filesystem.file_path Filesystem.file_acl Filesystem.file_size
+  Filesystem.process_guid Filesystem.process_id Filesystem.user Filesystem.vendor_product
+  | `drop_dm_object_name(Filesystem)` | `security_content_ctime(lastTime)` | `security_content_ctime(firstTime)`
+  | `ransomware_notes` | `common_ransomware_notes_filter`'
 how_to_implement: You must be ingesting data that records file-system activity from
   your hosts to populate the Endpoint Filesystem data-model node. This is typically
   populated via endpoint detection-and-response product, such as Carbon Black, or

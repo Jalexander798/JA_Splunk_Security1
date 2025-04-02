@@ -1,6 +1,6 @@
 name: Detect Certipy File Modifications
 id: 7e3df743-b1d8-4631-8fa8-bd5819688876
-version: 5
+version: 6
 date: '2024-11-13'
 author: Steven Dick
 status: production
@@ -14,21 +14,15 @@ description: The following analytic detects the use of the Certipy tool to enume
   malicious, this could lead to unauthorized access to sensitive AD CS information,
   enabling further attacks or privilege escalation within the network.
 data_source:
-- Sysmon EventID 1 AND Sysmon EventID 11
-search: '| tstats `security_content_summariesonly` count min(_time) AS firstTime max(_time)
-  AS lastTime values(Processes.process_current_directory) as process_current_directory
-  FROM datamodel=Endpoint.Processes where Processes.action="allowed" BY _time span=1h
-  Processes.user Processes.dest Processes.process_id Processes.process_name Processes.process
-  Processes.process_path Processes.parent_process_name Processes.parent_process Processes.process_guid
-  Processes.action |`drop_dm_object_name(Processes)` | join max=0 dest process_guid
-  [| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
-  as lastTime from datamodel=Endpoint.Filesystem where Filesystem.file_name IN ("*_certipy.zip",
-  "*_certipy.txt", "*_certipy.json", "*.ccache") by Filesystem.file_create_time Filesystem.process_id
-  Filesystem.process_guid Filesystem.file_name Filesystem.file_path Filesystem.dest
-  | `drop_dm_object_name(Filesystem)` ] | fields firstTime lastTime user dest file_create_time
-  file_name file_path parent_process_name parent_process process_name process_path
-  process_current_directory process process_guid process_id | where isnotnull(file_name)
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `detect_certipy_file_modifications_filter`'
+- Sysmon EventID 11
+search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time) as lastTime from 
+  datamodel=Endpoint.Filesystem where Filesystem.file_name IN ("*_certipy.zip","*_certipy.txt", "*_certipy.json", "*.ccache") 
+  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time 
+  Filesystem.file_name Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id 
+  Filesystem.user Filesystem.vendor_product 
+  | `drop_dm_object_name(Filesystem)`
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` 
+  | `detect_certipy_file_modifications_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your
   endpoints as well as file creation or deletion events.
@@ -61,8 +55,6 @@ rba:
   threat_objects:
   - field: file_name
     type: file_name
-  - field: process_name
-    type: process_name
 tags:
   analytic_story:
   - Windows Certificate Services

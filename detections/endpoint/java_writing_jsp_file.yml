@@ -1,6 +1,6 @@
 name: Java Writing JSP File
 id: eb65619c-4f8d-4383-a975-d352765d344b
-version: 6
+version: 7
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production
@@ -13,18 +13,39 @@ description: The following analytic detects the Java process writing a .jsp file
   this could allow unauthorized access, data exfiltration, or further compromise of
   the affected system, posing a severe security risk.
 data_source:
-- Sysmon EventID 1 AND Sysmon EventID 11
-search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Processes
-  where Processes.process_name IN ("java","java.exe", "javaw.exe") by _time Processes.process_id
-  Processes.process_name Processes.dest Processes.process_guid Processes.user | `drop_dm_object_name(Processes)`
-  | join process_guid [| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Filesystem
-  where Filesystem.file_name="*.jsp*" by _time Filesystem.dest Filesystem.file_create_time
-  Filesystem.file_name Filesystem.file_path Filesystem.process_guid Filesystem.user
-  | `drop_dm_object_name(Filesystem)` | fields _time process_guid file_path file_name
-  file_create_time user dest process_name] | stats count min(_time) as firstTime max(_time)
-  as lastTime by dest process_name process_guid file_name file_path file_create_time
-  user | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `java_writing_jsp_file_filter`'
+- Sysmon for Linux EventID 1 AND Sysmon for Linux EventID 11
+search: '| tstats prestats=t `security_content_summariesonly` count min(_time) as
+  firstTime max(_time) as lastTime FROM datamodel=Endpoint.Processes where Processes.process_name
+  IN ("java","java.exe", "javaw.exe") by Processes.action Processes.dest Processes.original_file_name
+  Processes.parent_process Processes.parent_process_exec Processes.parent_process_guid
+  Processes.parent_process_id Processes.parent_process_name Processes.parent_process_path
+  Processes.process Processes.process_exec Processes.process_guid Processes.process_hash
+  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path
+  Processes.user Processes.user_id Processes.vendor_product | `drop_dm_object_name(Processes)`
+  | tstats prestats=t append=t `security_content_summariesonly` count min(_time) as
+  firstTime max(_time) as lastTime FROM datamodel=Endpoint.Filesystem where Filesystem.file_name="*.jsp*"
+  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time
+  Filesystem.file_hash Filesystem.file_modify_time Filesystem.file_name Filesystem.file_path
+  Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id
+  Filesystem.user Filesystem.vendor_product | `drop_dm_object_name(Filesystem)` |
+  table action dest original_file_name parent_process parent_process_exec parent_process_guid
+  parent_process_id parent_process_name parent_process_path process process_exec process_guid
+  process_hash process_id process_integrity_level process_name process_path user user_id
+  vendor_product file_access_time file_create_time file_hash file_modify_time file_name
+  file_path file_acl file_size firstTime lastTime | stats values(action) as action
+  values(dest) as dest values(original_file_name) as original_file_name values(parent_process)
+  as parent_process values(parent_process_exec) as parent_process_exec values(parent_process_guid)
+  as parent_process_guid values(parent_process_id) as parent_process_id values(parent_process_name)
+  as parent_process_name values(parent_process_path) as parent_process_path values(process)
+  as process values(process_exec) as process_exec values(process_hash) as process_hash
+  values(process_id) as process_id values(process_integrity_level) as process_integrity_level
+  values(process_name) as process_name values(process_path) as process_path values(user)
+  as user values(user_id) as user_id values(vendor_product) as vendor_product values(file_access_time)
+  as file_access_time values(file_create_time) as file_create_time values(file_hash)
+  as file_hash values(file_modify_time) as file_modify_time values(file_name) as file_name
+  values(file_path) as file_path values(file_acl) as file_acl values(file_size) as
+  file_size by process_guid | where isnotnull(process) AND isnotnull(file_name) |
+  `java_writing_jsp_file_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
   on process that include the name of the process responsible for the changes from
   your endpoints into the `Endpoint` datamodel in the `Processes` and `Filesystem`
@@ -79,7 +100,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/spring4shell/java_write_jsp-linux-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/spring4shell/java_write_jsp-linux-sysmon.log
     source: Syslog:Linux-Sysmon/Operational
     sourcetype: sysmon:linux

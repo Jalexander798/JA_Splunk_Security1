@@ -77,6 +77,8 @@ fields:
 - user_id
 - vendor
 - vendor_product
+output_fields:
+- dest
 example_log: <Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider
   Name='Microsoft-Windows-TaskScheduler' Guid='{DE7B24EA-73C8-4A09-985D-5BDADCFA9017}'/><EventID>200</EventID><Version>1</Version><Level>4</Level><Task>200</Task><Opcode>1</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated
   SystemTime='2024-03-04T03:52:18.856458200Z'/><EventRecordID>4323</EventRecordID><Correlation
