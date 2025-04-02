@@ -81,8 +81,7 @@ output_fields:
 - vendor_product 
 - Guid 
 - Opcode 
-- Name 
-- Path 
+- Name
 - ProcessID 
 - ScriptBlockId 
 - ScriptBlockText
