@@ -65,11 +65,11 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - SnappyBee
-  - CISA AA23-347A
-  - Active Directory Lateral Movement
   - China-Nexus Threat Activity
-  - Earth Estries
+  - CISA AA23-347A
+  - SnappyBee
+  - Salt Typhoon
+  - Active Directory Lateral Movement
   asset_type: Endpoint
   mitre_attack_id:
   - T1543.003

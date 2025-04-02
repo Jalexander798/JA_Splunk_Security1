@@ -71,32 +71,32 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - DHS Report TA18-074A
-  - Trickbot
-  - NOBELIUM Group
-  - Prestige Ransomware
-  - Earth Estries
-  - ShrinkLocker
-  - NjRAT
-  - CISA AA24-241A
-  - DarkCrystal RAT
   - Sandworm Tools
-  - Living Off The Land
-  - AsyncRAT
-  - Scheduled Tasks
-  - AgentTesla
-  - Windows Persistence Techniques
-  - RedLine Stealer
-  - Rhysida Ransomware
-  - Winter Vivern
   - China-Nexus Threat Activity
+  - CISA AA24-241A
+  - AsyncRAT
+  - DarkCrystal RAT
+  - Windows Persistence Techniques
+  - Scheduled Tasks
   - Qakbot
-  - CISA AA22-257A
-  - MoonPeak
   - CISA AA23-347A
+  - NjRAT
+  - Trickbot
+  - AgentTesla
+  - Living Off The Land
+  - Winter Vivern
   - Phemedrone Stealer
   - Azorult
+  - CISA AA22-257A
+  - Rhysida Ransomware
+  - Prestige Ransomware
+  - NOBELIUM Group
+  - ShrinkLocker
+  - RedLine Stealer
   - Amadey
+  - Salt Typhoon
+  - MoonPeak
+  - DHS Report TA18-074A
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.005

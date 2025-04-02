@@ -69,12 +69,12 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
+  - CISA AA23-347A
   - China-Nexus Threat Activity
   - Ransomware
-  - Active Directory Lateral Movement
-  - CISA AA23-347A
   - Suspicious WMI Use
-  - Earth Estries
+  - Salt Typhoon
+  - Active Directory Lateral Movement
   asset_type: Endpoint
   mitre_attack_id:
   - T1047

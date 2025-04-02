@@ -56,12 +56,12 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - China-Nexus Threat Activity
-  - Derusbi
-  - DarkGate Malware
   - PlugX
-  - Earth Estries
+  - China-Nexus Threat Activity
   - SnappyBee
+  - Derusbi
+  - Salt Typhoon
+  - DarkGate Malware
   asset_type: Endpoint
   mitre_attack_id:
   - T1574.002

@@ -54,18 +54,18 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - SnappyBee
-  - Windows Persistence Techniques
-  - Brute Ratel C4
-  - CISA AA23-347A
-  - Suspicious Windows Registry Activities
-  - China-Nexus Threat Activity
-  - Derusbi
   - PlugX
+  - CISA AA23-347A
+  - China-Nexus Threat Activity
+  - Windows Persistence Techniques
+  - SnappyBee
+  - Derusbi
   - Windows Registry Abuse
+  - Salt Typhoon
   - Active Directory Lateral Movement
+  - Suspicious Windows Registry Activities
   - Crypto Stealer
-  - Earth Estries
+  - Brute Ratel C4
   asset_type: Endpoint
   mitre_attack_id:
   - T1574.011
