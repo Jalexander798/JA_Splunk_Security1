@@ -1,6 +1,6 @@
 name: Process Deleting Its Process File Path
 id: f7eda4bc-871c-11eb-b110-acde48001122
-version: 5
+version: 6
 date: '2024-11-13'
 author: Teoderick Contreras
 status: production
@@ -15,13 +15,13 @@ description: The following analytic identifies a process attempting to delete it
   remediation efforts.
 data_source:
 - Sysmon EventID 1
-- Windows Event Log Security 4688
-- CrowdStrike ProcessRollup2
 search: '`sysmon` EventCode=1 CommandLine = "* /c *" CommandLine = "* del*" Image
   = "*\\cmd.exe" | eval result = if(like(process,"%".parent_process."%"), "Found",
-  "Not Found") | stats min(_time) as firstTime max(_time) as lastTime count by dest
-  user ParentImage ParentCommandLine Image CommandLine EventCode ProcessID result
-  | where result = "Found" | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  "Not Found") | stats min(_time) as firstTime max(_time) as lastTime count by action
+  dest original_file_name parent_process parent_process_exec parent_process_guid parent_process_id
+  parent_process_name parent_process_path process process_exec process_guid process_hash
+  process_id process_integrity_level process_name process_path user user_id vendor_product
+  result | where result = "Found" | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `process_deleting_its_process_file_path_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
@@ -52,7 +52,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A process $Image$ tries to delete its process path in commandline $CommandLine$
+  message: A process $process_name$ tries to delete its process path in commandline $process$
     as part of defense evasion in host $dest$ by user $user$
   risk_objects:
   - field: dest
@@ -79,7 +79,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/clop/clop_a/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/clop/clop_a/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

@@ -1,6 +1,6 @@
 name: Powershell COM Hijacking InprocServer32 Modification
 id: ea61e291-af05-4716-932a-67faddb6ae6f
-version: 5
+version: 6
 date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
@@ -16,8 +16,9 @@ description: The following analytic detects attempts to modify or add a Componen
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText = "*Software\\Classes\\CLSID\\*\\InProcServer32*"
-  | stats count min(_time) as firstTime max(_time) as lastTime by EventCode ScriptBlockText
-  Computer UserID | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | fillnull | stats count min(_time) as firstTime max(_time) as lastTime by dest
+  signature signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID
+  ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `powershell_com_hijacking_inprocserver32_modification_filter`'
 how_to_implement: The following analytic requires PowerShell operational logs to be
   imported. Modify the PowerShell macro as needed to match the sourcetype or add index.
@@ -45,9 +46,9 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: A PowerShell script has been identified with InProcServer32 within the
-    script code on $Computer$.
+    script code on $dest$.
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 64
   threat_objects: []
@@ -66,7 +67,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.015/atomic_red_team/windows-powershell.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.015/atomic_red_team/windows-powershell.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

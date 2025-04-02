@@ -3,7 +3,7 @@ id: 80f9d53e-9ca1-11eb-b0d6-acde48001122
 author: Mauricio Velazco, Splunk
 type: TTP
 status: production
-version: 7
+version: 8
 date: '2025-02-10'
 data_source:
 - Windows Event Log Security 4625
@@ -44,8 +44,9 @@ drilldown_searches:
   latest_offset: $info_max_time$
 search: '`wineventlog_security` EventCode=4625 Logon_Type=3 IpAddress!="-" | bucket
   span=5m _time | stats dc(TargetUserName) AS unique_accounts values(TargetUserName)
-  as tried_accounts by _time, IpAddress, Computer | rename Computer as dest| where
-  unique_accounts > 30 | `windows_multiple_users_remotely_failed_to_authenticate_from_host_filter`'
+  as tried_accounts values(dest) as dest values(src) as src values(user) as user by
+  _time, IpAddress, Computer, action, app, authentication_method, signature, signature_id
+  | rename Computer as dest | where unique_accounts > 30 | `windows_multiple_users_remotely_failed_to_authenticate_from_host_filter`'
 rba:
   message: Potential password spraying attack on $dest$
   risk_objects:
@@ -67,8 +68,7 @@ tags:
   security_domain: endpoint
 tests:
 - attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_remote_spray_xml/windows-security.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_remote_spray_xml/windows-security.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog
   name: True Positive Test

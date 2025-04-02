@@ -1,6 +1,6 @@
 name: Windows Multiple Disabled Users Failed To Authenticate Wth Kerberos
 id: 98f22d82-9d62-11eb-9fcf-acde48001122
-version: 6
+version: 7
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 type: TTP
@@ -40,7 +40,8 @@ drilldown_searches:
   latest_offset: $info_max_time$
 search: '`wineventlog_security` EventCode=4768 TargetUserName!=*$ Status=0x12 | bucket
   span=5m _time | stats dc(TargetUserName) AS unique_accounts values(TargetUserName)
-  as user by _time, IpAddress | where unique_accounts > 30 | `windows_multiple_disabled_users_failed_to_authenticate_wth_kerberos_filter`'
+  as user values(dest) as dest by _time, IpAddress | where unique_accounts > 30 |
+  `windows_multiple_disabled_users_failed_to_authenticate_wth_kerberos_filter`'
 rba:
   message: Potential Kerberos based password spraying attack from $IpAddress$
   risk_objects:
@@ -65,8 +66,7 @@ tags:
   security_domain: endpoint
 tests:
 - attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_disabled_users_kerberos_xml/windows-security.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/purplesharp_disabled_users_kerberos_xml/windows-security.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog
   name: True Positive Test

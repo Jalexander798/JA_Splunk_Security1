@@ -1,6 +1,6 @@
 name: PowerShell Enable PowerShell Remoting
 id: 40e3b299-19a5-4460-96e9-e1467f714f8e
-version: 5
+version: 6
 date: '2025-02-10'
 author: Michael Haag, Splunk
 type: Anomaly
@@ -15,8 +15,9 @@ description: The following analytic detects the use of the Enable-PSRemoting cmd
   this activity could allow an attacker to take control of the system remotely, execute
   commands, and potentially pivot to other systems within the network, leading to
   further compromise and lateral movement.
-search: '`powershell` EventCode=4104 ScriptBlockText="*Enable-PSRemoting*" | stats
-  count min(_time) as firstTime max(_time) as lastTime by Computer EventCode ScriptBlockText
+search: '`powershell` EventCode=4104 ScriptBlockText="*Enable-PSRemoting*" | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature signature_id
+  user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`| `powershell_enable_powershell_remoting_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
@@ -41,9 +42,9 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: PowerShell was identified running a Invoke-PSremoting on $Computer$.
+  message: PowerShell was identified running a Invoke-PSremoting on $dest$.
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 25
   threat_objects: []
@@ -61,7 +62,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/atomic_red_team/4104-psremoting-windows-powershell.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/atomic_red_team/4104-psremoting-windows-powershell.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

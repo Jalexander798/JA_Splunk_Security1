@@ -14,13 +14,14 @@ description: The following analytic detects the execution of processes with file
   potentially leading to data exfiltration or further compromise of the network.
 data_source:
 - Sysmon EventID 1
-- Windows Event Log Security 4688
-- CrowdStrike ProcessRollup2
 search: '`sysmon` EventCode=1 | stats count min(_time) as firstTime max(_time) as
-  lastTime, values(Company) as Company values(Product) as Product by dest, user, parent_process_name,
-  process_name, process | lookup remote_access_software remote_utility_fileinfo AS
-  Product OUTPUT isutility, description as signature, comment_reference as desc, category
-  | search isutility = True | `remote_access_software_usage_exceptions` | `detect_remote_access_software_usage_fileinfo_filter`'
+  lastTime, values(Company) as Company values(Product) as Product by action dest original_file_name
+  parent_process parent_process_exec parent_process_guid parent_process_id parent_process_name
+  parent_process_path process process_exec process_guid process_hash process_id process_integrity_level
+  process_name process_path user user_id vendor_product | lookup remote_access_software
+  remote_utility_fileinfo AS Product OUTPUT isutility, description as signature, comment_reference
+  as desc, category | search isutility = True | `remote_access_software_usage_exceptions`
+  | `detect_remote_access_software_usage_fileinfo_filter`'
 how_to_implement: This analytic relies on Sysmon to be properly installed and utilized
   in the environment. Ensure that proper logging is setup for Sysmon and data is being
   ingested into Splunk. The "exceptions" macro leverages both an Assets and Identities
@@ -47,7 +48,7 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: Investigate processes on $dest$ 
+- name: Investigate processes on $dest$
   search: '| from datamodel:Endpoint.Processes| search dest=$dest$ process_name=$process_name$'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
@@ -60,7 +61,7 @@ rba:
     score: 25
   - field: user
     type: user
-    score: 25    
+    score: 25
   threat_objects:
   - field: process_name
     type: process_name
@@ -87,7 +88,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1219/screenconnect/screenconnect_sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1219/screenconnect/screenconnect_sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

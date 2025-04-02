@@ -1,6 +1,6 @@
 name: Windows Autostart Execution LSASS Driver Registry Modification
 id: 57fb8656-141e-4d8a-9f51-62cff4ecb82a
-version: 5
+version: 6
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production
@@ -17,9 +17,11 @@ data_source:
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Registry where Registry.registry_path IN ("*\\CurrentControlSet\\Services\\NTDS\\DirectoryServiceExtPt","*\\CurrentControlSet\\Services\\NTDS\\LsaDbExtPt")
-  by Registry.registry_key_name Registry.user Registry.registry_path Registry.registry_value_data
-  Registry.action Registry.dest Registry.process_guid | `drop_dm_object_name(Registry)`
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_autostart_execution_lsass_driver_registry_modification_filter`'
+  by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive
+  Registry.registry_path Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name
+  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product
+  | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `windows_autostart_execution_lsass_driver_registry_modification_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
   on process that include the name of the process responsible for the changes from
   your endpoints into the `Endpoint` datamodel in the `Registry` node. In addition,
@@ -69,7 +71,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.008/atomic_red_team/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.008/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

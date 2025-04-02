@@ -1,6 +1,6 @@
 name: Windows AD DCShadow Privileges ACL Addition
 id: ae915743-1aa8-4a94-975c-8062ebc8b723
-version: 4
+version: 5
 date: '2025-02-17'
 author: Dean Luxton
 status: production
@@ -13,10 +13,10 @@ description: This detection identifies an Active Directory access-control list (
 search: '`wineventlog_security` EventCode=5136 ObjectClass=domainDNS  | stats min(_time)
   as _time values(eval(if(OperationType=="%%14675",AttributeValue,null))) as old_value
   values(eval(if(OperationType=="%%14674",AttributeValue,null))) as new_value values(OperationType)
-  as OperationType by ObjectClass ObjectDN OpCorrelationID src_user SubjectLogonId  |
-  rex field=old_value max_match=10000 "\((?P<old_values>.*?)\)"  | rex field=new_value
-  max_match=10000 "\((?P<new_ace>.*?)\)"  | mvexpand new_ace | where NOT new_ace IN
-  (old_values)  | rex field=new_ace "(?P<aceType>.*?);(?P<aceFlags>.*?);(?P<aceAccessRights>.*?);(?P<aceObjectGuid>.*?);;(?P<aceSid>.*?)$"
+  as OperationType values(dest) as dest by ObjectClass ObjectDN OpCorrelationID src_user
+  SubjectLogonId  | rex field=old_value max_match=10000 "\((?P<old_values>.*?)\)"  |
+  rex field=new_value max_match=10000 "\((?P<new_ace>.*?)\)"  | mvexpand new_ace |
+  where NOT new_ace IN (old_values)  | rex field=new_ace "(?P<aceType>.*?);(?P<aceFlags>.*?);(?P<aceAccessRights>.*?);(?P<aceObjectGuid>.*?);;(?P<aceSid>.*?)$"
   | search aceObjectGuid IN ("9923a32a-3607-11d2-b9be-0000f87a36b2","1131f6ab-9c07-11d1-f79f-00c04fc2dcd2","1131f6ac-9c07-11d1-f79f-00c04fc2dcd2")
   | rex max_match=100 field=aceAccessRights "(?P<AccessRights>[A-Z]{2})"  | rex max_match=100
   field=aceFlags "(?P<aceFlags>[A-Z]{2})"  | lookup msad_guid_lookup guid as aceObjectGuid
@@ -89,7 +89,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484/DCShadowPermissions/windows-security-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484/DCShadowPermissions/windows-security-xml.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

@@ -1,6 +1,6 @@
 name: Windows Group Policy Object Created
 id: 23add2a8-ea22-4fd4-8bc0-8c0b822373a1
-version: 6
+version: 7
 date: '2025-02-10'
 author: Mauricio Velazco
 status: production
@@ -18,8 +18,9 @@ description: The following analytic detects the creation of a new Group Policy O
 search: '`wineventlog_security` EventCode=5137 OR (EventCode=5136 AttributeValue!="New
   Group Policy Object" AND (AttributeLDAPDisplayName=displayName OR AttributeLDAPDisplayName=gPCFileSysPath)
   ) ObjectClass=groupPolicyContainer | stats values(AttributeValue) as details values(SubjectUserSid)
-  as User values(ObjectDN) as ObjectDN by ObjectGUID Computer | eval GPO_Name = mvindex(details,
-  0) | eval GPO_Path = mvindex(details, 1) | fields - details | `windows_group_policy_object_created_filter`'
+  as User values(ObjectDN) as ObjectDN by ObjectGUID Computer dest | eval GPO_Name
+  = mvindex(details, 0) | eval GPO_Path = mvindex(details, 1) | fields - details |
+  `windows_group_policy_object_created_filter`'
 how_to_implement: To successfully implement this search, the Advanced Security Audit
   policy setting `Audit Directory Service Changes` within `DS Access` needs to be
   enabled. Furthermore, the appropriate system access control lists (SACL) need to
@@ -71,7 +72,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.001/group_policy_created/windows-security.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1484.001/group_policy_created/windows-security.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

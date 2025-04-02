@@ -1,7 +1,7 @@
 name: Ransomware Notes bulk creation
 id: eff7919a-8330-11eb-83f8-acde48001122
-version: '6'
-date: '2025-03-19'
+version: 6
+date: '2025-03-27'
 author: Teoderick Contreras
 status: production
 type: Anomaly
@@ -14,11 +14,16 @@ description: The following analytic identifies the bulk creation of ransomware n
   files inaccessible and potentially causing significant operational disruption.
 data_source:
 - Sysmon EventID 11
-search: '`sysmon` EventCode=11 file_name IN ("*\.txt","*\.html","*\.hta") |bin _time
+search: '`sysmon` EventCode=11 file_name IN ("*\.txt","*\.html","*\.hta") | bin _time
   span=10s | stats min(_time) as firstTime max(_time) as lastTime dc(TargetFilename)
-  as unique_readme_path_count values(TargetFilename) as list_of_readme_path by Computer
-  Image file_name | rename Computer as dest | where unique_readme_path_count >= 15
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `ransomware_notes_bulk_creation_filter`'
+  as unique_readme_path_count values(TargetFilename) as list_of_readme_path values(action)
+  as action values(file_access_time) as file_access_time values(file_create_time)
+  as file_create_time values(file_hash) as file_hash values(file_modify_time) as file_modify_time
+  values(file_path) as file_path values(file_acl) as file_acl values(file_size) as
+  file_size values(process_guid) as process_guid values(process_id) as process_id
+  values(user) as user values(vendor_product) as vendor_product by dest file_name
+  | where unique_readme_path_count >= 15 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `ransomware_notes_bulk_creation_filter`'
 how_to_implement: You must be ingesting data that records the filesystem activity
   from your hosts to populate the Endpoint file-system data model node. If you are
   using Sysmon, you will need a Splunk Universal Forwarder on each endpoint from which
