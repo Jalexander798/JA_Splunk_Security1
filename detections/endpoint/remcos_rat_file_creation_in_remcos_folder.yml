@@ -1,6 +1,6 @@
 name: Remcos RAT File Creation in Remcos Folder
 id: 25ae862a-1ac3-11ec-94a1-acde48001122
-version: 5
+version: 6
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk, Sanjay Govind
 status: production
@@ -16,8 +16,10 @@ data_source:
 - Sysmon EventID 11
 search: '|tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Filesystem where Filesystem.file_name IN ("*.dat")
-  Filesystem.file_path = "*\\remcos\\*" by _time Filesystem.file_name Filesystem.file_path
-  Filesystem.dest Filesystem.file_create_time | `drop_dm_object_name(Filesystem)`
+  Filesystem.file_path = "*\\remcos\\*" by Filesystem.action Filesystem.dest Filesystem.file_access_time
+  Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time Filesystem.file_name
+  Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid
+  Filesystem.process_id Filesystem.user Filesystem.vendor_product | `drop_dm_object_name(Filesystem)`
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `remcos_rat_file_creation_in_remcos_folder_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your
@@ -62,7 +64,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/remcos/remcos_agent/sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/remcos/remcos_agent/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

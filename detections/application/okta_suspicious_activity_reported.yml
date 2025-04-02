@@ -1,6 +1,6 @@
 name: Okta Suspicious Activity Reported
 id: bfc840f5-c9c6-454c-aa13-b46fd0bf1e79
-version: 6
+version: 7
 date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
@@ -17,7 +17,7 @@ data_source:
 - Okta
 search: '`okta` eventType=user.account.report_suspicious_activity_by_enduser | stats
   count min(_time) as firstTime max(_time) as lastTime values(displayMessage) by user
-  eventType client.userAgent.rawUserAgent client.userAgent.browser client.geographicalContext.city  client.geographicalContext.country
+  dest src eventType client.userAgent.rawUserAgent client.userAgent.browser client.geographicalContext.city  client.geographicalContext.country
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `okta_suspicious_activity_reported_filter`'
 how_to_implement: This detection utilizes logs from Okta Identity Management (IM)
   environments. It requires the ingestion of OktaIm2 logs through the Splunk Add-on
@@ -64,7 +64,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/okta_suspicious_activity_reported_by_user/okta_suspicious_activity_reported_by_user.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/okta_suspicious_activity_reported_by_user/okta_suspicious_activity_reported_by_user.log
     source: Okta
     sourcetype: OktaIM2:log

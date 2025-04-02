@@ -1,7 +1,7 @@
 name: Linux Preload Hijack Library Calls
 id: cbe2ca30-631e-11ec-8670-acde48001122
-version: '7'
-date: '2025-02-24'
+version: 8
+date: '2025-03-27'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -17,8 +17,11 @@ data_source:
 - Sysmon for Linux EventID 1
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime from datamodel=Endpoint.Processes where Processes.process = "*LD_PRELOAD*"
-  by Processes.dest Processes.user Processes.parent_process_name Processes.process_name
-  Processes.process Processes.process_id Processes.parent_process_id Processes.process_guid
+  by Processes.action Processes.dest Processes.original_file_name Processes.parent_process
+  Processes.parent_process_exec Processes.parent_process_guid Processes.parent_process_id
+  Processes.parent_process_name Processes.parent_process_path Processes.process Processes.process_exec
+  Processes.process_guid Processes.process_hash Processes.process_id Processes.process_integrity_level
+  Processes.process_name Processes.process_path Processes.user Processes.user_id Processes.vendor_product
   | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `linux_preload_hijack_library_calls_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection

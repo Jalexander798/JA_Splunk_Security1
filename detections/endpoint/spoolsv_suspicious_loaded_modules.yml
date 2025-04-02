@@ -1,7 +1,7 @@
 name: Spoolsv Suspicious Loaded Modules
 id: a5e451f8-da81-11eb-b245-acde48001122
-version: '7'
-date: '2025-03-03'
+version: 8
+date: '2025-03-27'
 author: Mauricio Velazco, Michael Haag, Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -16,8 +16,14 @@ data_source:
 - Sysmon EventID 7
 search: '`sysmon` EventCode=7 Image ="*\\spoolsv.exe" ImageLoaded="*\\Windows\\System32\\spool\\drivers\\x64\\*"
   ImageLoaded = "*.dll" | stats dc(ImageLoaded) as countImgloaded values(ImageLoaded)
-  as ImageLoaded count min(_time) as firstTime max(_time) as lastTime by Image Computer
-  ProcessId EventCode | rename Computer as dest | where countImgloaded >= 3 | `security_content_ctime(firstTime)`
+  as ImageLoaded values(loaded_file) as loaded_file values(loaded_file_path) as loaded_file_path
+  values(original_file_name) as original_file_name values(process_exec) as process_exec
+  values(process_guid) as process_guid values(process_hash) as process_hash values(process_name)
+  as process_name values(service_dll_signature_exists) as service_dll_signature_exists
+  values(service_dll_signature_verified) as service_dll_signature_verified values(signature)
+  as signature values(signature_id) as signature_id values(user_id) as user_id values(vendor_product)
+  as vendor_product values(Image) as Image count min(_time) as firstTime max(_time) as lastTime by process_path
+  dest process_id | where countImgloaded >= 3 | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `spoolsv_suspicious_loaded_modules_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name and imageloaded executions from your endpoints. If you
@@ -40,7 +46,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: $Image$ with process id $ProcessId$ has loaded a driver from $ImageLoaded$
+  message: $Image$ with process id $process_id$ has loaded a driver from $ImageLoaded$
     on endpoint $dest$. This behavior is suspicious and related to PrintNightmare.
   risk_objects:
   - field: dest

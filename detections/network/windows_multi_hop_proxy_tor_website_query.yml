@@ -1,6 +1,6 @@
 name: Windows Multi hop Proxy TOR Website Query
 id: 4c2d198b-da58-48d7-ba27-9368732d0054
-version: 5
+version: 6
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -16,8 +16,9 @@ description: The following analytic identifies DNS queries to known TOR proxy we
 data_source:
 - Sysmon EventID 22
 search: '`sysmon` EventCode=22 QueryName IN ("*.torproject.org", "www.theonionrouter.com")
-  | stats count min(_time) as firstTime max(_time) as lastTime by Image QueryName
-  QueryStatus ProcessId  Computer | rename Computer as dest | `security_content_ctime(firstTime)`
+  | stats count min(_time) as firstTime max(_time) as lastTime by answer answer_count
+  dvc process_exec process_guid process_name query query_count reply_code_id signature
+  signature_id src user_id vendor_product QueryName QueryResults QueryStatus | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_multi_hop_proxy_tor_website_query_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name and sysmon eventcode = 22 dns query events from your
@@ -42,10 +43,10 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: a process $Image$ is having a dns query in a tor domain $QueryName$ in
-    $dest$
+  message: a process $process_name$ is having a dns query in a tor domain $QueryName$
+    in $dvc$
   risk_objects:
-  - field: dest
+  - field: dvc
     type: system
     score: 25
   threat_objects: []
@@ -63,7 +64,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/agent_tesla/agent_tesla_tor_dns_query/sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/agent_tesla/agent_tesla_tor_dns_query/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

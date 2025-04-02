@@ -1,6 +1,6 @@
 name: Windows BitLockerToGo with Network Activity
 id: 14e3a089-cc23-4f4d-a770-26e44a31fbac
-version: 3
+version: 4
 date: '2025-02-17'
 author: Michael Haag, Nasreddine Bencherchali, Splunk
 data_source:
@@ -18,9 +18,9 @@ description: The following analytic detects suspicious usage of BitLockerToGo.ex
   and password manager archives. The detection focuses on identifying BitLockerToGo.exe
   execution patterns that deviate from normal system behavior.
 search: '`sysmon` EventCode=22 process_name="bitlockertogo.exe" | stats count min(_time)
-  as firstTime max(_time) as lastTime values(query) as query values(answer) as answer
-  values(QueryResults) as query_results values(QueryStatus) as query_status by process_name
-  process_guid Computer | rename Computer as dest | `security_content_ctime(firstTime)`
+  as firstTime max(_time) as lastTime by answer answer_count dvc process_exec process_guid
+  process_name query query_count reply_code_id signature signature_id src user_id
+  vendor_product QueryName QueryResults QueryStatus | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_bitlockertogo_with_network_activity_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name and eventcode = 22 dnsquery executions from your endpoints.
@@ -46,7 +46,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218/bitlockertogo/bitlockertogo_windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218/bitlockertogo/bitlockertogo_windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

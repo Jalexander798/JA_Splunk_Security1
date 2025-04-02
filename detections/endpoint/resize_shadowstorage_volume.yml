@@ -23,10 +23,14 @@ search: '| tstats `security_content_summariesonly` values(Processes.process) as 
   where Processes.parent_process_name = "cmd.exe" OR Processes.parent_process_name
   = "powershell.exe" OR Processes.parent_process_name = "powershell_ise.exe" OR Processes.parent_process_name
   =  "wmic.exe" Processes.process_name = "vssadmin.exe" Processes.process="*resize*"
-  Processes.process="*shadowstorage*" Processes.process="*/maxsize*" by Processes.parent_process_name
-  Processes.parent_process Processes.process_name Processes.process Processes.dest
-  Processes.user Processes.process_id Processes.process_guid | `drop_dm_object_name(Processes)`
-  | `security_content_ctime(firstTime)` |`security_content_ctime(lastTime)` | `resize_shadowstorage_volume_filter`'
+  Processes.process="*shadowstorage*" Processes.process="*/maxsize*" by Processes.action
+  Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec
+  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name
+  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid
+  Processes.process_hash Processes.process_id Processes.process_integrity_level Processes.process_name
+  Processes.process_path Processes.user Processes.user_id Processes.vendor_product
+  | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)` |`security_content_ctime(lastTime)`
+  | `resize_shadowstorage_volume_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -85,7 +89,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/clop/clop_a/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/clop/clop_a/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

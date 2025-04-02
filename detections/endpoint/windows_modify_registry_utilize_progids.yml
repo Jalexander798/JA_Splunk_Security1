@@ -1,6 +1,6 @@
 name: Windows Modify Registry Utilize ProgIDs
 id: 64fa82dd-fd11-472a-9e94-c221fffa591d
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 data_source:
@@ -17,10 +17,12 @@ description: The following analytic detects modifications to the Windows Registr
   detection of these modifications helps mitigate unauthorized execution and prevents
   further exploitation of the system.
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Registry
-  WHERE Registry.registry_path= "*\\ms-settings\\CurVer\\(Default)" BY Registry.dest
-  Registry.user Registry.registry_path Registry.registry_key_name Registry.registry_value_name
-  Registry.registry_value_data Registry.process_guid | `drop_dm_object_name(Registry)`
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_modify_registry_utilize_progids_filter`'
+  WHERE Registry.registry_path= "*\\ms-settings\\CurVer\\(Default)" by Registry.action
+  Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path
+  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name
+  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product
+  | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `windows_modify_registry_utilize_progids_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the registry value name, registry path, and registry value data from your
   endpoints. If you are using Sysmon, you must have at least version 2.0 of the official
@@ -68,7 +70,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/pwn_reg/pwn_reg.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/pwn_reg/pwn_reg.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
