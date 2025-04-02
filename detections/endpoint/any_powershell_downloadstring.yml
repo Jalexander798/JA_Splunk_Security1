@@ -84,6 +84,7 @@ tags:
   - IcedID
   - SysAid On-Prem Software CVE-2023-47246 Vulnerability
   - Phemedrone Stealer
+  - PHP-CGI RCE Attack on Japanese Organizations
   asset_type: Endpoint
   mitre_attack_id:
   - T1059.001

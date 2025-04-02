@@ -80,6 +80,7 @@ tags:
   - Cobalt Strike
   - Compromised Windows Host
   - BlackByte Ransomware
+  - PHP-CGI RCE Attack on Japanese Organizations
   asset_type: Endpoint
   mitre_attack_id:
   - T1218.010
