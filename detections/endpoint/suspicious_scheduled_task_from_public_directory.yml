@@ -69,20 +69,21 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - CISA AA23-347A
-  - Ransomware
-  - MoonPeak
-  - Windows Persistence Techniques
-  - CISA AA24-241A
-  - Earth Estries
-  - Scheduled Tasks
-  - Medusa Ransomware
-  - DarkCrystal RAT
   - Azorult
-  - Living Off The Land
-  - Crypto Stealer
-  - Ryuk Ransomware
   - China-Nexus Threat Activity
+  - CISA AA23-347A
+  - CISA AA24-241A
+  - Crypto Stealer
+  - DarkCrystal RAT
+  - Earth Estries
+  - Living Off The Land
+  - Medusa Ransomware
+  - MoonPeak
+  - Ransomware
+  - Ryuk Ransomware
+  - Salt Typhoon
+  - Scheduled Tasks
+  - Windows Persistence Techniques
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.005

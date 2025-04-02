@@ -59,20 +59,21 @@ references:
 - https://adlumin.com/post/powerdrop-a-new-insidious-powershell-script-for-command-and-control-attacks-targets-u-s-aerospace-defense-industry/
 tags:
   analytic_story:
-  - Hermetic Wiper
-  - Flax Typhoon
-  - China-Nexus Threat Activity
-  - Lumma Stealer
-  - Data Destruction
-  - CISA AA23-347A
-  - Cleo File Transfer Software
-  - Medusa Ransomware
-  - CISA AA24-241A
-  - Earth Estries
   - Braodo Stealer
+  - China-Nexus Threat Activity
+  - CISA AA23-347A
+  - CISA AA24-241A
+  - Cleo File Transfer Software
   - DarkGate Malware
-  - Rhysida Ransomware
+  - Data Destruction
+  - Earth Estries
+  - Flax Typhoon
+  - Hermetic Wiper
+  - Lumma Stealer
   - Malicious PowerShell
+  - Medusa Ransomware
+  - Rhysida Ransomware
+  - Salt Typhoon
   - SystemBC
   - PHP-CGI RCE Attack on Japanese Organizations
   asset_type: Endpoint

@@ -54,11 +54,11 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Warzone RAT
-  - NjRAT
   - China-Nexus Threat Activity
   - Derusbi
-  - Earth Estries
+  - Warzone RAT
+  - Salt Typhoon
+  - NjRAT
   asset_type: Endpoint
   mitre_attack_id:
   - T1574.002

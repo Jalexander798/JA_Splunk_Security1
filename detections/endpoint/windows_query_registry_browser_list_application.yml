@@ -1,7 +1,7 @@
 name: Windows Query Registry Browser List Application
 id: 45ebd21c-f4bf-4ced-bd49-d25b6526cebb
-version: '5'
-date: '2025-02-07'
+version: '6'
+date: '2025-03-19'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -51,10 +51,10 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
+  - China-Nexus Threat Activity
   - SnappyBee
   - RedLine Stealer
-  - Earth Estries
-  - China-Nexus Threat Activity
+  - Salt Typhoon
   asset_type: Endpoint
   mitre_attack_id:
   - T1012
