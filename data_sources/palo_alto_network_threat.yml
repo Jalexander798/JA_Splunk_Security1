@@ -27,6 +27,13 @@ field_mappings:
     url: Web.url
     url_length: Web.url_length
     src: Web.src
+output_fields:
+- http_user_agent 
+- http_method
+- url 
+- url_length 
+- src
+- dest
 fields:
 - _time
 - date_hour

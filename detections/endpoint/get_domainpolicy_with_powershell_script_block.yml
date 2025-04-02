@@ -1,6 +1,6 @@
 name: Get DomainPolicy with Powershell Script Block
 id: a360d2b2-065a-11ec-b0bf-acde48001122
-version: 5
+version: 6
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
@@ -15,10 +15,10 @@ description: The following analytic detects the execution of the `Get-DomainPoli
   or lateral movement within the network.
 data_source:
 - Powershell Script Block Logging 4104
-search: '`powershell` EventCode=4104 ScriptBlockText ="*Get-DomainPolicy*" | stats
-  count min(_time) as firstTime max(_time) as lastTime by Opcode Computer UserID EventCode
-  ScriptBlockText | rename UserID as user | `security_content_ctime(firstTime)` |
-  `security_content_ctime(lastTime)` | `get_domainpolicy_with_powershell_script_block_filter`'
+search: '`powershell` EventCode=4104 ScriptBlockText ="*Get-DomainPolicy*" | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature signature_id
+  user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `get_domainpolicy_with_powershell_script_block_filter`'
 how_to_implement: The following analytic requires PowerShell operational logs to be
   imported. Modify the powershell macro as needed to match the sourcetype or add index.
   This analytic is specific to 4104, or PowerShell Script Block Logging.
@@ -44,10 +44,10 @@ drilldown_searches:
 rba:
   message: Powershell process with command line indicative of querying domain policy.
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 30
-  - field: user
+  - field: user_id
     type: user
     score: 30
   threat_objects: []
@@ -65,7 +65,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/domainpolicy.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/domainpolicy.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

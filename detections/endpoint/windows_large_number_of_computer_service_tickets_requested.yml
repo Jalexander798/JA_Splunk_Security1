@@ -1,6 +1,6 @@
 name: Windows Large Number of Computer Service Tickets Requested
 id: 386ad394-c9a7-4b4f-b66f-586252de20f0
-version: 5
+version: 6
 date: '2024-11-13'
 author: Mauricio Velazco, Splunk
 type: Anomaly
@@ -16,8 +16,8 @@ description: The following analytic detects a high volume of Kerberos service ti
   to multiple endpoints, potentially compromising the entire network.
 search: '`wineventlog_security` EventCode=4769 ServiceName="*$" TargetUserName!="*$"
   | bucket span=5m _time | stats dc(ServiceName) AS unique_targets values(ServiceName)
-  as host_targets by _time, IpAddress, TargetUserName | where unique_targets > 30
-  | `windows_large_number_of_computer_service_tickets_requested_filter`'
+  as host_targets values(dest) as dest by _time, IpAddress, TargetUserName | where
+  unique_targets > 30 | `windows_large_number_of_computer_service_tickets_requested_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   Domain Controller and Kerberos events. The Advanced Security Audit policy setting
   `Audit Kerberos Authentication Service` within `Account Logon` needs to be enabled.
@@ -67,7 +67,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1135/large_number_computer_service_tickets/windows-security.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1135/large_number_computer_service_tickets/windows-security.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

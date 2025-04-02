@@ -11,8 +11,7 @@ data_source:
 - Sysmon EventID 26
 search: '`sysmon` EventCode IN ("23","26") TargetFilename = "*\\Microsoft\\Windows\\PowerShell\\PSReadline\\ConsoleHost_history.txt" 
   | stats count min(_time) as firstTime, max(_time) as lastTime 
-  by user, dest, signature, signature_id, Image, process_name, process_guid 
-  | rename Image as process
+  by action dest dvc file_path file_hash file_name file_modify_time process_name process_exec process_id process_path user_id vendor_product process_guid signature signature_id user
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)`
   | `windows_consolehost_history_file_deletion_filter`'
@@ -25,12 +24,12 @@ known_false_positives: An administrator may delete the ConsoleHost history file 
 references:
 - https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a
 drilldown_searches:
-- name: View the detection results for - "$user$" and "$dest$"
-  search: '%original_detection_search% | search  user = "$user$" dest = "$dest$"'
+- name: View the detection results for - "$user_id$" and "$dest$"
+  search: '%original_detection_search% | search  user_id = "$user_id$" dest = "$dest$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$user$" and "$dest$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$",
+- name: View risk events for the last 7 days for - "$user_id$" and "$dest$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user_id$",
     "$dest$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
     as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
     Message" values(analyticstories) as "Analytic Stories" values(annotations._all)

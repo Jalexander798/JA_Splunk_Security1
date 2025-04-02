@@ -1,6 +1,6 @@
 name: Windows Enable PowerShell Web Access
 id: 175bb2de-6227-416b-9678-9b61999cd21f
-version: 4
+version: 5
 date: '2024-11-13'
 author: Michael Haag, Splunk
 data_source:
@@ -14,8 +14,9 @@ description: The following analytic detects the enabling of PowerShell Web Acces
   PowerShell Web Access can facilitate remote execution of PowerShell commands, potentially
   allowing an attacker to gain unauthorized access to systems and networks.
 search: '`powershell` EventCode=4104 ScriptBlockText IN ("*Install-WindowsFeature*WindowsPowerShellWebAccess*","*Install-PswaWebApplication*","*Add-PswaAuthorizationRule*UserName
-  *ComputerName *") | rename Computer as dest | stats count min(_time) as firstTime
-  max(_time) as lastTime by EventCode ScriptBlockText dest UserID | `security_content_ctime(firstTime)`
+  *ComputerName *") | fillnull | stats count min(_time) as firstTime max(_time) as
+  lastTime by dest signature signature_id user_id vendor_product EventID Guid Opcode
+  Name Path ProcessID ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_enable_powershell_web_access_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
@@ -62,7 +63,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/pswa_powershell.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/pswa_powershell.log
     sourcetype: XmlWinEventLog
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational

@@ -1,6 +1,6 @@
 name: Windows Admin Permission Discovery
 id: e08620cb-9488-4052-832d-97bcc0afd414
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
@@ -17,13 +17,14 @@ description: The following analytic identifies the creation of a suspicious file
 search: '|tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime from datamodel=Endpoint.Filesystem where Filesystem.file_name IN ("*.exe",
   "*.dll", "*.sys", "*.com", "*.vbs", "*.vbe", "*.js", "*.bat", "*.cmd", "*.pif",
-  "*.lnk", "*.dat") by Filesystem.dest Filesystem.file_create_time Filesystem.process_id
-  Filesystem.process_guid Filesystem.file_name Filesystem.file_path Filesystem.user
-  | `drop_dm_object_name(Filesystem)` | eval dropped_file_path = split(file_path,
-  "\\") | eval dropped_file_path_split_count = mvcount(dropped_file_path) | eval root_drive
-  = mvindex(dropped_file_path,0) | where LIKE(root_drive, "C:") AND dropped_file_path_split_count
-  = 2 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` |
-  `windows_admin_permission_discovery_filter`'
+  "*.lnk", "*.dat") by Filesystem.action Filesystem.dest Filesystem.file_access_time
+  Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time Filesystem.file_name
+  Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid
+  Filesystem.process_id Filesystem.user Filesystem.vendor_product | `drop_dm_object_name(Filesystem)`
+  | eval dropped_file_path = split(file_path, "\\") | eval dropped_file_path_split_count
+  = mvcount(dropped_file_path) | eval root_drive = mvindex(dropped_file_path,0) |
+  where LIKE(root_drive, "C:") AND dropped_file_path_split_count = 2 | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `windows_admin_permission_discovery_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
   on process that include the name of the Filesystem responsible for the changes from
   your endpoints into the `Endpoint` datamodel in the `Filesystem` node.
@@ -69,7 +70,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1069.001/njrat_admin_check/win_dat.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1069.001/njrat_admin_check/win_dat.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

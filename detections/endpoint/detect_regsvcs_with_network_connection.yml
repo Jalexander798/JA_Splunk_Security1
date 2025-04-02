@@ -1,6 +1,6 @@
 name: Detect Regsvcs with Network Connection
 id: e3e7a1c0-f2b9-445c-8493-f30a63522d1a
-version: 9
+version: 10
 date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
@@ -17,8 +17,10 @@ data_source:
 - Sysmon EventID 3
 search: '`sysmon` EventID=3 dest_ip!=10.0.0.0/8 dest_ip!=172.16.0.0/12 dest_ip!=192.168.0.0/16
   process_name=regsvcs.exe  | stats count min(_time) as firstTime max(_time) as lastTime
-  by dest, user, process_name, src_ip, dest_ip | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `detect_regsvcs_with_network_connection_filter`'
+  by action app dest dest_ip dest_port direction dvc protocol protocol_version src
+  src_ip src_port transport user vendor_product process_name process_exec process_guid
+  process_id | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `detect_regsvcs_with_network_connection_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your
   endpoints. If you are using Sysmon, you must have at least version 6.0.4 of the
@@ -72,7 +74,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.009/atomic_red_team/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.009/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

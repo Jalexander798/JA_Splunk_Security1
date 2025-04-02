@@ -1,6 +1,6 @@
 name: Okta Multiple Users Failing To Authenticate From Ip
 id: de365ffa-42f5-46b5-b43f-fa72290b8218
-version: 5
+version: 6
 date: '2025-01-21'
 author: Michael Haag, Mauricio Velazco, Splunk
 data_source:
@@ -18,9 +18,10 @@ description: The following analytic identifies instances where more than 10 uniq
 search: '| tstats `security_content_summariesonly` count max(_time) as lastTime, min(_time)
   as firstTime dc(Authentication.user) as unique_accounts values(Authentication.signature)
   as signature values(Authentication.user) as user values(Authentication.app) as app
-  values(Authentication.authentication_method) as authentication_method from datamodel=Authentication
-  where Authentication.action="failure" AND Authentication.signature=user.session.start
-  by _time span=5m Authentication.src sourcetype | where unique_accounts > 9 | `drop_dm_object_name("Authentication")`
+  values(Authentication.authentication_method) as authentication_method values(Authentication.dest)
+  as dest from datamodel=Authentication where Authentication.action="failure" AND
+  Authentication.signature=user.session.start by _time span=5m Authentication.src
+  sourcetype | where unique_accounts > 9 | `drop_dm_object_name("Authentication")`
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `okta_multiple_users_failing_to_authenticate_from_ip_filter`'
 how_to_implement: The analytic leverages Okta OktaIm2 logs to be ingested using the
   Splunk Add-on for Okta Identity Cloud (https://splunkbase.splunk.com/app/6553).
@@ -67,7 +68,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/okta_multiple_users_from_ip/okta_multiple_users_from_ip.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/okta_multiple_users_from_ip/okta_multiple_users_from_ip.log
     source: Okta
     sourcetype: OktaIM2:log

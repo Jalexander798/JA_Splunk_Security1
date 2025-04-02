@@ -1,6 +1,6 @@
 name: WSReset UAC Bypass
 id: 8b5901bc-da63-11eb-be43-acde48001122
-version: 7
+version: 8
 date: '2025-02-10'
 author: Steven Dick, Teoderick Contreras, Splunk
 status: production
@@ -14,21 +14,16 @@ description: The following analytic detects a suspicious modification of the reg
   If confirmed malicious, this could lead to unauthorized code execution and potential
   system compromise.
 data_source:
-- Sysmon EventID 1 AND Sysmon EventID 12
-- Sysmon EventID 1 AND Sysmon EventID 13
-search: '| tstats `security_content_summariesonly` count min(_time) AS firstTime max(_time)
-  AS lastTime FROM datamodel=Endpoint.Processes BY _time span=1h Processes.user Processes.process_id
-  Processes.process_name Processes.process Processes.process_path Processes.dest Processes.parent_process_name
-  Processes.parent_process Processes.process_guid | `drop_dm_object_name(Processes)`
-  | join process_guid [| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Registry
+- Sysmon EventID 12
+- Sysmon EventID 13
+search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Registry
   WHERE Registry.registry_path= "*\\AppX82a6gwre4fdg3bt635tn5ctqjf8msdd2\\Shell\\open\\command*"
   AND (Registry.registry_value_name = "(Default)" OR Registry.registry_value_name
-  = "DelegateExecute") by _time span=1h Registry.dest Registry.user Registry.registry_path
-  Registry.registry_key_name Registry.registry_value_name Registry.registry_value_data
-  Registry.process_guid | `drop_dm_object_name(Registry)`] | fields firstTime lastTime
-  dest user parent_process_name parent_process process_name process_path process registry_key_name
-  registry_path registry_value_name registry_value_data process_guid | where isnotnull(registry_value_data)
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `wsreset_uac_bypass_filter`'
+  = "DelegateExecute") by Registry.action Registry.dest Registry.process_guid Registry.process_id
+  Registry.registry_hive Registry.registry_path Registry.registry_key_name Registry.registry_value_data
+  Registry.registry_value_name Registry.registry_value_type Registry.status Registry.user
+  Registry.vendor_product | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `wsreset_uac_bypass_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -81,7 +76,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548/uac_bypass/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548/uac_bypass/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

@@ -1,6 +1,6 @@
 name: LOLBAS With Network Traffic
 id: 2820f032-19eb-497e-8642-25b04a880359
-version: 6
+version: 7
 date: '2024-12-16'
 author: Steven Dick
 status: production
@@ -28,9 +28,12 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   "*Wmic.exe", "*Runonce.exe", "*Syncappvpublishingserver.exe", "*Verclsid.exe", "*Infdefaultinstall.exe",
   "*Installutil.exe", "*Netsh.exe", "*Wab.exe", "*Dnscmd.exe", "*\\At.exe", "*Pcalua.exe",
   "*Msconfig.exe", "*makecab.exe", "*cscript.exe", "*notepad.exe", "*\\cmd.exe", "*certutil.exe",
-  "*\\powershell.exe", "*powershell_ise.exe", "*\\pwsh.exe")) by All_Traffic.app,All_Traffic.src,All_Traffic.src_ip,All_Traffic.user,All_Traffic.dest,All_Traffic.dest_ip
+  "*\\powershell.exe", "*powershell_ise.exe", "*\\pwsh.exe")) by All_Traffic.action
+  All_Traffic.app All_Traffic.dest All_Traffic.dest_ip All_Traffic.dest_port All_Traffic.direction
+  All_Traffic.dvc All_Traffic.protocol All_Traffic.protocol_version All_Traffic.src
+  All_Traffic.src_ip All_Traffic.src_port All_Traffic.transport All_Traffic.user All_Traffic.vendor_product
   | `drop_dm_object_name(All_Traffic)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | rex field=app ".*\\\(?<process_name>.*)$" | rename app as process | `lolbas_with_network_traffic_filter`'
+  | rex field=app ".*\\\(?<process_name>.*)$" | `lolbas_with_network_traffic_filter`'
 how_to_implement: To successfully implement this detection you must ingest events
   into the Network traffic data model that contain the source, destination, and communicating
   process in the app field. Relevant processes must also be ingested in the Endpoint
@@ -38,8 +41,7 @@ how_to_implement: To successfully implement this detection you must ingest event
   of this type this data type.
 known_false_positives: Legitimate usage of internal automation or scripting, especially
   powershell.exe or pwsh.exe, internal to internal or logon scripts. It may be necessary
-  to omit internal IP ranges if extremely noisy. ie NOT dest_ip IN 
-  ("10.0.0.0/8","172.16.0.0/12","192.168.0.0/16","170.98.0.0/16","0:0:0:0:0:0:0:1")
+  to omit internal IP ranges if extremely noisy. ie NOT dest_ip IN ("10.0.0.0/8","172.16.0.0/12","192.168.0.0/16","170.98.0.0/16","0:0:0:0:0:0:0:1")
 references:
 - https://lolbas-project.github.io/#
 - https://www.sans.org/presentations/lolbin-detection-methods-seven-common-attacks-revealed/
@@ -82,7 +84,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218/lolbas_with_network_traffic/lolbas_with_network_traffic.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218/lolbas_with_network_traffic/lolbas_with_network_traffic.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

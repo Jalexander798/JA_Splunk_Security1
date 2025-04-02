@@ -1,6 +1,6 @@
 name: Sunburst Correlation DLL and Network Event
 id: 701a8740-e8db-40df-9190-5516d3819787
-version: 4
+version: 5
 date: '2024-11-13'
 author: Patrick Bareiss, Splunk
 status: experimental
@@ -17,10 +17,11 @@ data_source:
 - Sysmon EventID 22
 search: (`sysmon` EventCode=7 ImageLoaded=*SolarWinds.Orion.Core.BusinessLayer.dll)
   OR (`sysmon` EventCode=22 QueryName=*avsvmcloud.com) | eventstats dc(EventCode)
-  AS dc_events | where dc_events=2 | stats min(_time) as firstTime max(_time) as lastTime
-  values(ImageLoaded) AS ImageLoaded values(QueryName) AS QueryName by host | rename
-  host as dest | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`
-  | `sunburst_correlation_dll_and_network_event_filter`
+  AS dc_events | where dc_events=2 | stats count min(_time) as firstTime max(_time)
+  as lastTime by Image ImageLoaded dest loaded_file loaded_file_path original_file_name
+  process_exec process_guid process_hash process_id process_name process_path service_dll_signature_exists
+  service_dll_signature_verified signature signature_id user_id vendor_product | `security_content_ctime(firstTime)`|
+  `security_content_ctime(lastTime)` | `sunburst_correlation_dll_and_network_event_filter`
 how_to_implement: This detection relies on sysmon logs with the Event ID 7, Driver
   loaded. Please tune your sysmon config that you DriverLoad event for SolarWinds.Orion.Core.BusinessLayer.dll
   is captured by Sysmon. Additionally, you need sysmon logs for Event ID 22, DNS Query.

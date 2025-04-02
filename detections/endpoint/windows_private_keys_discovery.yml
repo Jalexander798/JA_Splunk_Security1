@@ -1,6 +1,6 @@
 name: Windows Private Keys Discovery
 id: 5c1c2877-06c0-40ee-a1a2-db71f1372b5b
-version: 5
+version: 6
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -22,9 +22,12 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   as lastTime from datamodel=Endpoint.Processes where Processes.process = "*dir *"
   OR  Processes.process = "*findstr*" AND Processes.process IN ( "*.rdg*", "*.gpg*",
   "*.pgp*", "*.p12*", "*.der*", "*.csr*", "*.cer*", "*.ovpn*", "*.key*",  "*.ppk*",
-  "*.p12*", "*.pem*", "*.pfx*", "*.p7b*", "*.asc*") by Processes.process_name Processes.original_file_name
-  Processes.process Processes.process_id Processes.process_guid Processes.parent_process_name
-  Processes.parent_process Processes.parent_process_guid Processes.dest Processes.user
+  "*.p12*", "*.pem*", "*.pfx*", "*.p7b*", "*.asc*") by Processes.action Processes.dest
+  Processes.original_file_name Processes.parent_process Processes.parent_process_exec
+  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name
+  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid
+  Processes.process_hash Processes.process_id Processes.process_integrity_level Processes.process_name
+  Processes.process_path Processes.user Processes.user_id Processes.vendor_product
   | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_private_keys_discovery_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
@@ -78,7 +81,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winpeas/winpeas_search_private_key/dir-private-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winpeas/winpeas_search_private_key/dir-private-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
