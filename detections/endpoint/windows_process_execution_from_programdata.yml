@@ -67,8 +67,8 @@ rba:
     type: parent_process_name
 tags:
   analytic_story:
+  - Salt Typhoon
   - China-Nexus Threat Activity
-  - Earth Estries
   - SnappyBee
   asset_type: Endpoint
   mitre_attack_id:

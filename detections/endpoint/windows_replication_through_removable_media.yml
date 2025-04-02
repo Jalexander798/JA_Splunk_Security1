@@ -62,12 +62,12 @@ rba:
     type: file_name
 tags:
   analytic_story:
-  - NjRAT
+  - PlugX
   - China-Nexus Threat Activity
   - Chaos Ransomware
   - Derusbi
-  - PlugX
-  - Earth Estries
+  - Salt Typhoon
+  - NjRAT
   asset_type: Endpoint
   mitre_attack_id:
   - T1091

@@ -65,9 +65,9 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - China-Nexus Threat Activity
   - DarkGate Malware
-  - Earth Estries
+  - Salt Typhoon
+  - China-Nexus Threat Activity
   asset_type: Endpoint
   mitre_attack_id:
   - T1036.009

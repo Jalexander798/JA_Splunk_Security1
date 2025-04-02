@@ -63,48 +63,48 @@ rba:
     type: file_name
 tags:
   analytic_story:
-  - BlackByte Ransomware
-  - Brute Ratel C4
-  - Trickbot
-  - Snake Keylogger
-  - Graceful Wipe Out Attack
-  - PlugX
-  - Handala Wiper
-  - Earth Estries
-  - Warzone RAT
-  - ValleyRAT
-  - NjRAT
-  - LockBit Ransomware
-  - Double Zero Destructor
-  - Swift Slicer
-  - DarkCrystal RAT
-  - AsyncRAT
-  - Volt Typhoon
-  - Chaos Ransomware
-  - Hermetic Wiper
-  - Derusbi
-  - XMRig
-  - AgentTesla
-  - WinDealer RAT
-  - RedLine Stealer
-  - Remcos
-  - Rhysida Ransomware
-  - China-Nexus Threat Activity
-  - Crypto Stealer
-  - Qakbot
-  - IcedID
-  - Meduza Stealer
-  - AcidPour
-  - MoonPeak
-  - CISA AA23-347A
-  - DarkGate Malware
-  - Industroyer2
-  - Azorult
-  - Data Destruction
-  - Amadey
-  - SnappyBee
-  - WhisperGate
   - SystemBC
+  - Snake Keylogger
+  - China-Nexus Threat Activity
+  - Remcos
+  - LockBit Ransomware
+  - AsyncRAT
+  - DarkCrystal RAT
+  - Derusbi
+  - WinDealer RAT
+  - DarkGate Malware
+  - Crypto Stealer
+  - ValleyRAT
+  - AcidPour
+  - PlugX
+  - Data Destruction
+  - Qakbot
+  - CISA AA23-347A
+  - Hermetic Wiper
+  - Volt Typhoon
+  - Double Zero Destructor
+  - NjRAT
+  - Trickbot
+  - AgentTesla
+  - Meduza Stealer
+  - SnappyBee
+  - Azorult
+  - WhisperGate
+  - Warzone RAT
+  - Swift Slicer
+  - Rhysida Ransomware
+  - Brute Ratel C4
+  - BlackByte Ransomware
+  - Graceful Wipe Out Attack
+  - Chaos Ransomware
+  - Handala Wiper
+  - RedLine Stealer
+  - Salt Typhoon
+  - XMRig
+  - MoonPeak
+  - Industroyer2
+  - Amadey
+  - IcedID
   asset_type: Endpoint
   mitre_attack_id:
   - T1036

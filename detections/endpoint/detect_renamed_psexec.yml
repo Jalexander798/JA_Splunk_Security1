@@ -42,18 +42,18 @@ references:
 - https://redcanary.com/blog/threat-hunting-psexec-lateral-movement/
 tags:
   analytic_story:
-  - China-Nexus Threat Activity
-  - BlackByte Ransomware
-  - HAFNIUM Group
-  - DHS Report TA18-074A
-  - CISA AA22-320A
-  - DarkSide Ransomware
-  - Active Directory Lateral Movement
-  - DarkGate Malware
   - Sandworm Tools
-  - Rhysida Ransomware
-  - Earth Estries
   - SamSam Ransomware
+  - BlackByte Ransomware
+  - CISA AA22-320A
+  - China-Nexus Threat Activity
+  - Salt Typhoon
+  - DarkGate Malware
+  - Active Directory Lateral Movement
+  - HAFNIUM Group
+  - DarkSide Ransomware
+  - Rhysida Ransomware
+  - DHS Report TA18-074A
   - VanHelsing Ransomware
   asset_type: Endpoint
   mitre_attack_id:
