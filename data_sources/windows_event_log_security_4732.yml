@@ -99,4 +99,6 @@ fields:
 - vendor
 - vendor_privilege
 - vendor_product
+output_fields:
+- dest
 example_log: 10/09/2020 10:41:26 AM

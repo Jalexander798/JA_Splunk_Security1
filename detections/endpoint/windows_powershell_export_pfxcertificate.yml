@@ -1,6 +1,6 @@
 name: Windows PowerShell Export PfxCertificate
 id: ed06725f-6da6-439f-9dcc-ab30e891297c
-version: 5
+version: 6
 date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
@@ -15,9 +15,10 @@ description: The following analytic detects the use of the PowerShell cmdlet `ex
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText IN ("*export-pfxcertificate*")
-  | rename Computer as dest  | stats count min(_time) as firstTime max(_time) as lastTime
-  by EventCode ScriptBlockText dest user_id | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `windows_powershell_export_pfxcertificate_filter`'
+  | fillnull | stats count min(_time) as firstTime max(_time) as lastTime by dest
+  signature signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID
+  ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `windows_powershell_export_pfxcertificate_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
   https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.
@@ -63,7 +64,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/atomic_red_team/4104_export_pfxcertificate.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/atomic_red_team/4104_export_pfxcertificate.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

@@ -1,6 +1,6 @@
 name: Windows Alternate DataStream - Base64 Content
 id: 683f48de-982f-4a7e-9aac-9cec550da498
-version: 6
+version: 7
 date: '2025-02-10'
 author: Steven Dick, Teoderick Contreras, Michael Haag, Splunk
 status: production
@@ -19,8 +19,9 @@ search: '`sysmon` EventCode=15 NOT Contents IN ("-","[ZoneTransfer]*") | regex T
   | regex Contents="(?:[A-Za-z0-9+/]{128,})(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
   | eval file_name = replace(TargetFilename,"(.*\\\)",""), process = Image , file_path
   = TargetFilename , base64 = Contents, file_hash = coalesce(SHA256,SHA1,MD5,Hash)
-  | stats count min(_time) as firstTime max(_time) as lastTime values(user) as user
-  by dest, process, process_guid, file_name, file_path, file_hash, base64 | `base64decode(base64)`
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest dvc file_hash
+  file_name file_path process process_exec process_guid process_id process_name process_path
+  signature signature_id user_id vendor_product Contents Image base64 | `base64decode(base64)`
   | fields - base64 | rename base64_decode as command | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_alternate_datastream___base64_content_filter`'
 how_to_implement: Target environment must ingest sysmon data, specifically Event ID
@@ -33,28 +34,25 @@ references:
 - https://blog.netwrix.com/2022/12/16/alternate_data_stream/
 - https://github.com/trustedsec/SysmonCommunityGuide/blob/master/chapters/file-stream-creation-hash.md
 drilldown_searches:
-- name: View the detection results for - "$dest$" and "$user$"
-  search: '%original_detection_search% | search  dest = "$dest$" user = "$user$"'
+- name: View the detection results for - "$dest$"
+  search: '%original_detection_search% | search  dest = "$dest$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$dest$" and "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$",
-    "$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
-    as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
-    Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
-    as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
-    by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+- name: View risk events for the last 7 days for - "$dest$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Base64 content written to an NTFS alternate data stream by $user$, see
+  message: Base64 content written to an NTFS alternate data stream in $dest$, see
     command field for details.
   risk_objects:
   - field: dest
     type: system
-    score: 80
-  - field: user
-    type: user
     score: 80
   threat_objects:
   - field: file_name
@@ -73,7 +71,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1564.004/ads_abuse/ads_abuse_sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1564.004/ads_abuse/ads_abuse_sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

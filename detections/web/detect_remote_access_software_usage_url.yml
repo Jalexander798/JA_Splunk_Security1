@@ -1,6 +1,6 @@
 name: Detect Remote Access Software Usage URL
 id: 9296f515-073c-43a5-88ec-eda5a4626654
-version: 7
+version: 8
 date: '2024-11-15'
 author: Steven Dick
 status: production
@@ -17,11 +17,11 @@ data_source:
 search: '| tstats count min(_time) as firstTime max(_time) as lastTime latest(Web.http_method)
   as http_method latest(Web.http_user_agent) as http_user_agent latest(Web.url) as
   url latest(Web.user) as user latest(Web.dest) as dest from datamodel=Web by Web.action
-  Web.src Web.category Web.url_domain | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `drop_dm_object_name("Web")` | lookup remote_access_software remote_domain AS
-  url_domain OUTPUT isutility, description as signature, comment_reference as desc,
-  category | search isutility = True | `remote_access_software_usage_exceptions` |
-  `detect_remote_access_software_usage_url_filter`'
+  Web.src Web.category Web.url_domain Web.url_length | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `drop_dm_object_name("Web")` | lookup remote_access_software
+  remote_domain AS url_domain OUTPUT isutility, description as signature, comment_reference
+  as desc, category | search isutility = True | `remote_access_software_usage_exceptions`
+  | `detect_remote_access_software_usage_url_filter`'
 how_to_implement: The detection is based on data that originates from network logs.
   These logs must be processed using the appropriate Splunk Technology Add-ons that
   are specific to the network logs. The logs must also be mapped to the `Web` data
@@ -52,7 +52,7 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: Investigate traffic to $url_domain$ 
+- name: Investigate traffic to $url_domain$
   search: '| from datamodel:Web | search src=$src$ url_domain=$url_domain$'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
@@ -70,7 +70,7 @@ rba:
   - field: url_domain
     type: domain
   - field: signature
-    type: signature    
+    type: signature
 tags:
   analytic_story:
   - Insider Threat
@@ -90,7 +90,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1219/screenconnect/screenconnect_palo.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1219/screenconnect/screenconnect_palo.log
     source: screenconnect_palo
     sourcetype: pan:threat

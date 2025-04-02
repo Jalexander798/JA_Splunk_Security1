@@ -1,6 +1,6 @@
 name: Windows File Share Discovery With Powerview
 id: a44c0be1-d7ab-41e4-92fd-aa9af4fe232c
-version: 4
+version: 5
 date: '2024-11-13'
 author: Mauricio Velazco, Splunk
 type: TTP
@@ -15,10 +15,10 @@ description: The following analytic detects the execution of the Invoke-ShareFin
   If confirmed malicious, this activity could enable an attacker to escalate privileges
   or move laterally within the network, potentially compromising additional systems
   and sensitive data.
-search: '`powershell` EventCode=4104  (ScriptBlockText=Invoke-ShareFinder*) | stats
-  count min(_time) as firstTime max(_time) as lastTime by Opcode Computer UserID EventCode
-  ScriptBlockText | rename UserID as user | rename Computer as dest | `security_content_ctime(firstTime)` |
-  `security_content_ctime(lastTime)` | `windows_file_share_discovery_with_powerview_filter`'
+search: '`powershell` EventCode=4104  (ScriptBlockText=Invoke-ShareFinder*) | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature signature_id
+  user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_file_share_discovery_with_powerview_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
   https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.=
@@ -29,13 +29,13 @@ references:
 - https://thedfirreport.com/2023/01/23/sharefinder-how-threat-actors-discover-file-shares/
 - https://attack.mitre.org/techniques/T1135/
 drilldown_searches:
-- name: View the detection results for - "$dest$" and "$user$"
-  search: '%original_detection_search% | search  dest = "$dest$" user = "$user$"'
+- name: View the detection results for - "$dest$" and "$user_id$"
+  search: '%original_detection_search% | search  dest = "$dest$" user_id = "$user_id$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$dest$" and "$user$"
+- name: View risk events for the last 7 days for - "$dest$" and "$user_id$"
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$",
-    "$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
+    "$user_id$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
     as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
     Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
     as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
@@ -48,7 +48,7 @@ rba:
   - field: dest
     type: system
     score: 48
-  - field: user
+  - field: user_id
     type: user
     score: 48
   threat_objects: []
@@ -67,7 +67,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1135/powerview_sharefinder/windows-powershell.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1135/powerview_sharefinder/windows-powershell.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

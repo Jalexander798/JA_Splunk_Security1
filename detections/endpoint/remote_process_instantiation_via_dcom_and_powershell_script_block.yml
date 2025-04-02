@@ -1,6 +1,6 @@
 name: Remote Process Instantiation via DCOM and PowerShell Script Block
 id: fa1c3040-4680-11ec-a618-3e22fbd008af
-version: 6
+version: 7
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
@@ -15,13 +15,13 @@ description: The following analytic detects the execution of PowerShell commands
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 (ScriptBlockText="*Document.Application.ShellExecute*"
-  OR ScriptBlockText="*Document.ActiveView.ExecuteShellCommand*") | stats count min(_time)
-  as firstTime max(_time) as lastTime by EventCode ScriptBlockText Computer user_id
+  OR ScriptBlockText="*Document.ActiveView.ExecuteShellCommand*") | fillnull | stats
+  count min(_time) as firstTime max(_time) as lastTime by dest signature signature_id
+  user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `remote_process_instantiation_via_dcom_and_powershell_script_block_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup instructions
-  can be found 
-  https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.
+  can be found https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.
 known_false_positives: Administrators may leverage DCOM to start a process on remote
   systems, but this activity is usually limited to a small set of hosts or users.
 references:
@@ -42,10 +42,10 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A process was started on a remote endpoint from $Computer$ by abusing WMI
-    using PowerShell.exe
+  message: A process was started on a remote endpoint from $dest$ by abusing WMI using
+    PowerShell.exe
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 63
   threat_objects: []
@@ -63,7 +63,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.006/lateral_movement_psh/windows-powershell-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.006/lateral_movement_psh/windows-powershell-xml.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

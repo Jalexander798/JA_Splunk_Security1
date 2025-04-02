@@ -1,6 +1,6 @@
 name: PowerShell Domain Enumeration
 id: e1866ce2-ca22-11eb-8e44-acde48001122
-version: 6
+version: 7
 date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
@@ -16,10 +16,10 @@ description: The following analytic detects the execution of PowerShell commands
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText IN (*get-netdomaintrust*, *get-netforesttrust*,
-  *get-addomain*, *get-adgroupmember*, *get-domainuser*) | stats count min(_time)
-  as firstTime max(_time) as lastTime by Computer EventCode ScriptBlockText UserID
-  | rename Computer as dest | rename UserID as user | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `powershell_domain_enumeration_filter`'
+  *get-addomain*, *get-adgroupmember*, *get-domainuser*) | fillnull | stats count
+  min(_time) as firstTime max(_time) as lastTime by dest signature signature_id user_id
+  vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `powershell_domain_enumeration_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
   https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.
@@ -31,13 +31,13 @@ references:
 - https://www.crowdstrike.com/blog/investigating-powershell-command-and-script-logging/
 - https://www.splunk.com/en_us/blog/security/hunting-for-malicious-powershell-using-script-block-logging.html
 drilldown_searches:
-- name: View the detection results for - "$dest$" and "$user$"
-  search: '%original_detection_search% | search  dest = "$dest$" user = "$user$"'
+- name: View the detection results for - "$dest$" and "$user_id$"
+  search: '%original_detection_search% | search  dest = "$dest$" user_id = "$user_id$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$dest$" and "$user$"
+- name: View risk events for the last 7 days for - "$dest$" and "$user_id$"
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$",
-    "$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
+    "$user_id$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
     as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
     Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
     as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
@@ -46,12 +46,12 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: A suspicious powershell script contains domain enumeration command in $ScriptBlockText$
-    with EventCode $EventCode$ in host $dest$
+    in host $dest$
   risk_objects:
   - field: dest
     type: system
     score: 42
-  - field: user
+  - field: user_id
     type: user
     score: 42
   threat_objects: []
@@ -72,7 +72,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/enumeration.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/enumeration.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

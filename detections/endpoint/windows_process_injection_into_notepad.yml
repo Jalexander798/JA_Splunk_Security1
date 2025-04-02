@@ -1,6 +1,6 @@
 name: Windows Process Injection into Notepad
 id: b8340d0f-ba48-4391-bea7-9e793c5aae36
-version: 6
+version: 7
 date: '2025-02-10'
 author: Michael Haag, Splunk
 type: Anomaly
@@ -17,8 +17,12 @@ description: The following analytic detects process injection into Notepad.exe u
   or persistent access within the environment.
 search: '`sysmon` EventCode=10 TargetImage IN (*\\notepad.exe) NOT (SourceImage IN
   ("*\\system32\\*","*\\syswow64\\*","*\\Program Files\\*")) GrantedAccess IN ("0x40","0x1fffff")
-  | stats count min(_time) as firstTime max(_time) as lastTime by dest SourceImage
-  TargetImage GrantedAccess CallTrace | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | stats count min(_time) as firstTime max(_time) as lastTime by CallTrace EventID
+  GrantedAccess Guid Opcode ProcessID SecurityID SourceImage SourceProcessGUID SourceProcessId
+  TargetImage TargetProcessGUID TargetProcessId UserID dest granted_access parent_process_exec
+  parent_process_guid parent_process_id parent_process_name parent_process_path process_exec
+  process_guid process_id process_name process_path signature signature_id user_id
+  vendor_product | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_process_injection_into_notepad_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your
@@ -70,7 +74,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/sliver/T1055_windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/sliver/T1055_windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

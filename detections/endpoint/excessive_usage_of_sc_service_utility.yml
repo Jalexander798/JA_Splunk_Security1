@@ -1,6 +1,6 @@
 name: Excessive Usage Of SC Service Utility
 id: cb6b339e-d4c6-11eb-a026-acde48001122
-version: 5
+version: 6
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -15,13 +15,22 @@ description: The following analytic detects excessive usage of the `sc.exe` serv
   leading to system compromise or disruption of security defenses.
 data_source:
 - Sysmon EventID 1
-- Windows Event Log Security 4688
-- CrowdStrike ProcessRollup2
-search: '`sysmon` EventCode = 1 process_name = "sc.exe" |  bucket _time span=15m |
-  stats values(process) as process count as numScExe by dest, _time |  eventstats
-  avg(numScExe) as avgScExe, stdev(numScExe) as stdScExe, count as numSlots by dest
-  |  eval upperThreshold=(avgScExe + stdScExe *3) |  eval isOutlier=if(avgScExe >
-  5 and avgScExe >= upperThreshold, 1, 0) |  search isOutlier=1 | `security_content_ctime(firstTime)`
+search: '| tstats `security_content_summariesonly` count as numScExe min(_time) as
+  firstTime max(_time) as lastTime values(Processes.action) as action values(Processes.original_file_name)
+  as original_file_name values(Processes.parent_process_exec) as parent_process_exec
+  values(Processes.parent_process_guid) as parent_process_guid values(Processes.parent_process_name)
+  as parent_process_name values(Processes.parent_process_path) as parent_process_path
+  values(Processes.process) as process values(Processes.process_exec) as process_exec
+  values(Processes.process_guid) as process_guid values(Processes.process_hash) as
+  process_hash values(Processes.process_id) as process_id values(Processes.process_integrity_level)
+  as process_integrity_level values(Processes.process_path) as process_path values(Processes.user_id)
+  as user_id values(Processes.vendor_product) as vendor_product values(Processes.parent_process)
+  as parent_process values(Processes.process_name) as process_name values(Processes.parent_process_id)
+  as parent_process_id values(Processes.user) as user from datamodel=Endpoint.Processes
+  where Processes.process_name = "sc.exe" by Processes.dest _time span=15m | `drop_dm_object_name(Processes)`
+  | eventstats avg(numScExe) as avgScExe, stdev(numScExe) as stdScExe, count as numSlots
+  by dest | eval upperThreshold=(avgScExe + stdScExe *3) | eval isOutlier=if(avgScExe
+  > 5 and avgScExe >= upperThreshold, 1, 0) | search isOutlier=1 | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `excessive_usage_of_sc_service_utility_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your
@@ -68,7 +77,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/ransomware_ttp/data2/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/ransomware_ttp/data2/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

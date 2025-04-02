@@ -1,6 +1,6 @@
 name: GetCurrent User with PowerShell Script Block
 id: 80879283-c30f-44f7-8471-d1381f6d437a
-version: 5
+version: 6
 date: '2024-11-13'
 author: Mauricio Velazco, Splunk
 status: production
@@ -16,10 +16,10 @@ description: The following analytic detects the execution of the `GetCurrent` me
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText = "*[System.Security.Principal.WindowsIdentity]*"  ScriptBlockText
-  = "*GetCurrent()*" | stats count min(_time) as firstTime max(_time) as lastTime
-  by EventCode ScriptBlockText Computer UserID | rename Computer as dest, UserID as
-  user | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `getcurrent_user_with_powershell_script_block_filter`'
+  = "*GetCurrent()*" | fillnull | stats count min(_time) as firstTime max(_time) as
+  lastTime by dest signature signature_id user_id vendor_product EventID Guid Opcode
+  Name Path ProcessID ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `getcurrent_user_with_powershell_script_block_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
   https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.
@@ -42,7 +42,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1033/AD_discovery/windows-powershell-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1033/AD_discovery/windows-powershell-xml.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

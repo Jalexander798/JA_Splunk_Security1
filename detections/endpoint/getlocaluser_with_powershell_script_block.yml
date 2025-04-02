@@ -1,6 +1,6 @@
 name: GetLocalUser with PowerShell Script Block
 id: 2e891cbe-0426-11ec-9c9c-acde48001122
-version: 6
+version: 7
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
 status: production
@@ -15,10 +15,10 @@ description: The following analytic detects the execution of the `Get-LocalUser`
   for privilege escalation or lateral movement.
 data_source:
 - Powershell Script Block Logging 4104
-search: '`powershell` EventCode=4104 (ScriptBlockText = "*Get-LocalUser*") | stats
-  count min(_time) as firstTime max(_time) as lastTime by EventCode ScriptBlockText
-  Computer user_id | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `getlocaluser_with_powershell_script_block_filter`'
+search: '`powershell` EventCode=4104 (ScriptBlockText = "*Get-LocalUser*") | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by dest signature signature_id
+  user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `getlocaluser_with_powershell_script_block_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
   https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.
@@ -43,7 +43,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087.001/AD_discovery/windows-powershell-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087.001/AD_discovery/windows-powershell-xml.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

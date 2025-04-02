@@ -101,6 +101,8 @@ fields:
 - timestartpos
 - vendor
 - vendor_product
+output_fields:
+- dest
 example_log: <Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider
   Name='Microsoft-Windows-Security-Auditing' Guid='{54849625-5478-4994-A5BA-3E3B0328C30D}'/><EventID>4663</EventID><Version>1</Version><Level>0</Level><Task>12800</Task><Opcode>0</Opcode><Keywords>0x8020000000000000</Keywords><TimeCreated
   SystemTime='2024-02-21T14:08:33.452364300Z'/><EventRecordID>10525869</EventRecordID><Correlation/><Execution
