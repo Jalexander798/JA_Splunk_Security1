@@ -1,10 +1,10 @@
 name: Windows RunMRU Command Execution
 id: a15aa1ab-2b79-467f-8201-65e0f32d5b1a
-version: 3
+version: 4
 date: '2025-02-17'
 author: Nasreddine Bencherchali, Michael Haag, Splunk
 data_source:
-- Sysmon EventID 11
+- Sysmon EventID 12
 - Sysmon EventID 13
 type: Anomaly
 status: production
@@ -18,10 +18,11 @@ description: The following analytic detects modifications to the Windows RunMRU 
   changes to focus on actual command entries.
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime from datamodel=Endpoint.Registry where Registry.registry_key_name="*\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU*"
-  NOT Registry.registry_key_name="*\\MRUList" by Registry.dest Registry.registry_value_data
-  Registry.action  Registry.process_guid Registry.process_id Registry.registry_key_name
-  Registry.user | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `windows_runmru_command_execution_filter`'
+  NOT Registry.registry_key_name="*\\MRUList" by Registry.action Registry.dest Registry.process_guid
+  Registry.process_id Registry.registry_hive Registry.registry_path Registry.registry_key_name
+  Registry.registry_value_data Registry.registry_value_name Registry.registry_value_type
+  Registry.status Registry.user Registry.vendor_product | `drop_dm_object_name(Registry)`
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_runmru_command_execution_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -83,7 +84,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1202/atomic_red_team/windows-sysmon_runmru.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1202/atomic_red_team/windows-sysmon_runmru.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

@@ -1,6 +1,6 @@
 name: Windows CAB File on Disk
 id: 622f08d0-69ef-42c2-8139-66088bc25acd
-version: 4
+version: 5
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production
@@ -16,9 +16,11 @@ description: The following analytic detects .cab files being written to disk. It
   review the file path and associated artifacts for further investigation.
 search: '| tstats `security_content_summariesonly` count values(Filesystem.file_path)
   as file_path min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Filesystem
-  where (Filesystem.file_name=*.cab) by Filesystem.dest Filesystem.action Filesystem.process_id
-  Filesystem.file_name | `drop_dm_object_name("Filesystem")` | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `windows_cab_file_on_disk_filter`'
+  where (Filesystem.file_name=*.cab) by Filesystem.action Filesystem.dest Filesystem.file_access_time
+  Filesystem.file_create_time Filesystem.file_hash Filesystem.file_modify_time Filesystem.file_name
+  Filesystem.file_path Filesystem.file_acl Filesystem.file_size Filesystem.process_guid
+  Filesystem.process_id Filesystem.user Filesystem.vendor_product | `drop_dm_object_name("Filesystem")`
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_cab_file_on_disk_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -69,7 +71,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/autoit/cab_files.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/autoit/cab_files.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

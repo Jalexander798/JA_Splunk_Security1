@@ -1,6 +1,6 @@
 name: Detect Mimikatz Using Loaded Images
 id: 29e307ba-40af-4ab2-91b2-3c6b392bbba0
-version: 4
+version: 5
 date: '2025-02-10'
 author: Patrick Bareiss, Splunk
 status: removed
@@ -10,9 +10,14 @@ description: This search looks for reading loaded Images unique to credential du
   Event Code.
 data_source:
 - Sysmon EventID 7
-search: '`sysmon` EventCode=7 | stats values(ImageLoaded) as ImageLoaded values(ProcessId)
-  as ProcessId by dest, Image | search ImageLoaded=*WinSCard.dll ImageLoaded=*cryptdll.dll
-  ImageLoaded=*hid.dll ImageLoaded=*samlib.dll ImageLoaded=*vaultcli.dll | `security_content_ctime(firstTime)`|
+search: '`sysmon` EventCode=7 ImageLoaded=*WinSCard.dll ImageLoaded=*cryptdll.dll
+  ImageLoaded=*hid.dll ImageLoaded=*samlib.dll ImageLoaded=*vaultcli.dll | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by EventID FileVersion
+  Guid Hashes Image ImageLoaded MD5 Opcode OriginalFileName ProcessGuid ProcessID
+  ProcessId SHA256 SecurityID Signature SignatureStatus Signed UserID dest loaded_file
+  loaded_file_path original_file_name process_exec process_guid process_hash process_id
+  process_name process_path service_dll_signature_exists service_dll_signature_verified
+  signature signature_id user_id vendor_product | `security_content_ctime(firstTime)`|
   `security_content_ctime(lastTime)` | `detect_mimikatz_using_loaded_images_filter`'
 how_to_implement: This search needs Sysmon Logs and a sysmon configuration, which
   includes EventCode 7 with powershell.exe. This search uses an input macro named
@@ -57,7 +62,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/atomic_red_team/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

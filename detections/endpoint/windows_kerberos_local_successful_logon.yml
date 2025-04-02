@@ -1,6 +1,6 @@
 name: Windows Kerberos Local Successful Logon
 id: 8309c3a8-4d34-48ae-ad66-631658214653
-version: 6
+version: 7
 date: '2024-12-10'
 author: Michael Haag, Splunk
 status: production
@@ -17,8 +17,10 @@ data_source:
 - Windows Event Log Security 4624
 search: '`wineventlog_security`  EventCode=4624 LogonType=3 AuthenticationPackageName=Kerberos
   action=success src=127.0.0.1 | stats count min(_time) as firstTime max(_time) as
-  lastTime by dest, subject, action, SubjectLogonId, user, TargetUserName, src | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `windows_kerberos_local_successful_logon_filter`'
+  lastTime by action app authentication_method dest dvc process process_id process_name
+  process_path signature signature_id src src_port status subject user user_group
+  vendor_product | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `windows_kerberos_local_successful_logon_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   Windows Security Event Logs with 4624 EventCode enabled. The Windows TA is also
   required.
@@ -64,7 +66,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558/windows_kerberos_local_successful_logon/windows-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1558/windows_kerberos_local_successful_logon/windows-xml.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

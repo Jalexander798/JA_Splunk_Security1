@@ -1,6 +1,6 @@
 name: Windows DNS Query Request by Telegram Bot API
 id: 86f66f44-94d9-412d-a71d-5d8ed0fef72e
-version: 2
+version: 3
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 data_source:
@@ -16,8 +16,9 @@ description: The following analytic detects the execution of a DNS query by a pr
   Telegram bots are used to receive commands or exfiltrate data, making it a key indicator
   of suspicious or malicious activity within a network.
 search: '`sysmon` EventCode=22  query = "api.telegram.org" process_name != "telegram.exe"
-  | stats count min(_time) as firstTime max(_time) as lastTime  by query answer QueryResults
-  QueryStatus process_name process_guid Computer | rename Computer as dest | `security_content_ctime(firstTime)`
+  | stats count min(_time) as firstTime max(_time) as lastTime by answer answer_count
+  dvc process_exec process_guid process_name query query_count reply_code_id signature
+  signature_id src user_id vendor_product QueryName QueryResults QueryStatus | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_dns_query_request_by_telegram_bot_api_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name and eventcode = 22 dnsquery executions from your endpoints.
@@ -40,9 +41,9 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: DNS query by a telegram bot [$query$] on [$dest$].
+  message: DNS query by a telegram bot [$query$] on [$dvc$].
   risk_objects:
-  - field: dest
+  - field: dvc
     type: system
     score: 36
   threat_objects: []
@@ -61,7 +62,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1102.002/telegram_api_dns/telegram_dns.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1102.002/telegram_api_dns/telegram_dns.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

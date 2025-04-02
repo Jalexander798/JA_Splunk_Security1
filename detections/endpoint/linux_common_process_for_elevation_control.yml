@@ -1,7 +1,7 @@
 name: Linux Common Process For Elevation Control
 id: 66ab15c0-63d0-11ec-9e70-acde48001122
-version: '7'
-date: '2025-02-24'
+version: 8
+date: '2025-03-27'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
@@ -22,10 +22,14 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   "setregid", "chattr") OR Processes.process IN ("*chmod *", "*chown *", "*fchmod
   *", "*fchmodat *", "*fchown *", "*fchownat *", "*fremovexattr *", "*fsetxattr *",
   "*lchown *", "*lremovexattr *", "*lsetxattr *", "*removexattr *", "*setuid *", "*setgid
-  *", "*setreuid *", "*setregid *", "*setcap *", "*chattr *") by Processes.dest Processes.user
-  Processes.parent_process_name Processes.process_name Processes.process Processes.process_id
-  Processes.parent_process_id Processes.process_guid | `drop_dm_object_name(Processes)`
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `linux_common_process_for_elevation_control_filter`'
+  *", "*setreuid *", "*setregid *", "*setcap *", "*chattr *") by Processes.action
+  Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec
+  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name
+  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid
+  Processes.process_hash Processes.process_id Processes.process_integrity_level Processes.process_name
+  Processes.process_path Processes.user Processes.user_id Processes.vendor_product
+  | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `linux_common_process_for_elevation_control_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,

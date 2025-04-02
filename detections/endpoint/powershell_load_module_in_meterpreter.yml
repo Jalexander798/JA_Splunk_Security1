@@ -1,6 +1,6 @@
 name: Powershell Load Module in Meterpreter
 id: d5905da5-d050-48db-9259-018d8f034fcf
-version: 6
+version: 7
 date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
@@ -16,8 +16,9 @@ description: The following analytic detects the execution of suspicious PowerShe
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText IN ("*MSF.Powershell*","*MSF.Powershell.Meterpreter*","*MSF.Powershell.Meterpreter.Kiwi*","*MSF.Powershell.Meterpreter.Transport*")
-  | stats count min(_time) as firstTime max(_time) as lastTime by EventCode ScriptBlockText
-  Computer user_id | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | fillnull | stats count min(_time) as firstTime max(_time) as lastTime by dest
+  signature signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID
+  ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `powershell_load_module_in_meterpreter_filter`'
 how_to_implement: The following analytic requires PowerShell operational logs to be
   imported. Modify the powershell macro as needed to match the sourcetype or add index.
@@ -43,12 +44,12 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: PowerShell was identified running a script utilized by Meterpreter from
-    MetaSploit on endpoint $Computer$ by user $user_id$.
+    MetaSploit on endpoint $dest$ by user $user_id$.
   risk_objects:
   - field: user_id
     type: user
     score: 100
-  - field: Computer
+  - field: dest
     type: system
     score: 100
   threat_objects: []
@@ -66,7 +67,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/metasploit/msf.powershell.powershell.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/metasploit/msf.powershell.powershell.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog
