@@ -45,6 +45,7 @@ tags:
   - Rhysida Ransomware
   - Qakbot
   - CISA AA23-347A
+  - PHP-CGI RCE Attack on Japanese Organizations
   asset_type: Endpoint
   mitre_attack_id:
   - T1033

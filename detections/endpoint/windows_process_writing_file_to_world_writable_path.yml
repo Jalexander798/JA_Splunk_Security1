@@ -1,6 +1,6 @@
 name: Windows Process Writing File to World Writable Path
 id: c051b68c-60f7-4022-b3ad-773bec7a225b
-version: 4
+version: 5
 date: '2024-11-13'
 author: Michael Haag, Splunk
 data_source: []
@@ -46,6 +46,7 @@ references:
 tags:
   analytic_story:
   - APT29 Diplomatic Deceptions with WINELOADER
+  - PHP-CGI RCE Attack on Japanese Organizations
   asset_type: Endpoint
   mitre_attack_id:
   - T1218.005
