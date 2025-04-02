@@ -78,39 +78,38 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Amadey
-  - AsyncRAT
-  - Azorult
-  - BlackByte Ransomware
-  - BlackSuit Ransomware
-  - Braodo Stealer
-  - Chaos Ransomware
-  - China-Nexus Threat Activity
-  - CISA AA23-347A
-  - DarkGate Malware
-  - Derusbi
-  - DHS Report TA18-074A
-  - Earth Estries
-  - Emotet Malware DHS Report TA18-201A
-  - IcedID
-  - MoonPeak
-  - NjRAT
-  - Possible Backdoor Activity Associated With MUDCARP Espionage Campaigns
-  - Qakbot
-  - Ransomware
-  - RedLine Stealer
-  - Remcos
-  - PHP-CGI RCE Attack on Japanese Organizations
-  - Snake Keylogger
-  - SnappyBee
-  - Sneaky Active Directory Persistence Tricks
-  - Suspicious MSHTA Activity
-  - Suspicious Windows Registry Activities
   - SystemBC
-  - Warzone RAT
-  - WinDealer RAT
+  - Snake Keylogger
+  - China-Nexus Threat Activity
+  - Remcos
+  - AsyncRAT
   - Windows Persistence Techniques
+  - Derusbi
+  - WinDealer RAT
+  - Suspicious MSHTA Activity
+  - DarkGate Malware
+  - Suspicious Windows Registry Activities
+  - Qakbot
+  - CISA AA23-347A
+  - Ransomware
+  - NjRAT
+  - Emotet Malware DHS Report TA18-201A
+  - Possible Backdoor Activity Associated With MUDCARP Espionage Campaigns
+  - Sneaky Active Directory Persistence Tricks
+  - SnappyBee
+  - Azorult
+  - Warzone RAT
+  - BlackByte Ransomware
+  - Chaos Ransomware
+  - RedLine Stealer
+  - BlackSuit Ransomware
   - Windows Registry Abuse
+  - Amadey
+  - Salt Typhoon
+  - MoonPeak
+  - Braodo Stealer
+  - DHS Report TA18-074A
+  - IcedID
   asset_type: Endpoint
   mitre_attack_id:
   - T1547.001

@@ -74,18 +74,18 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - Ingress Tool Transfer
+  - Data Destruction
+  - Malicious PowerShell
   - China-Nexus Threat Activity
-  - Crypto Stealer
   - Hermetic Wiper
   - DarkCrystal RAT
-  - Malicious PowerShell
-  - Earth Estries
   - Phemedrone Stealer
-  - Braodo Stealer
   - PXA Stealer
-  - Data Destruction
   - Log4Shell CVE-2021-44228
+  - Salt Typhoon
+  - Braodo Stealer
+  - Crypto Stealer
+  - Ingress Tool Transfer
   - PHP-CGI RCE Attack on Japanese Organizations
   asset_type: Endpoint
   cve:

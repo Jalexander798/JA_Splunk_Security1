@@ -42,9 +42,9 @@ references:
 tags:
   analytic_story:
   - China-Nexus Threat Activity
-  - CISA AA22-277A
   - Collection and Staging
-  - Earth Estries
+  - CISA AA22-277A
+  - Salt Typhoon
   asset_type: Endpoint
   mitre_attack_id:
   - T1560.001

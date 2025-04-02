@@ -68,12 +68,12 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - SnappyBee
-  - Rhysida Ransomware
   - China-Nexus Threat Activity
-  - Crypto Stealer
-  - Earth Estries
   - Unusual Processes
+  - SnappyBee
+  - Salt Typhoon
+  - Rhysida Ransomware
+  - Crypto Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1204
