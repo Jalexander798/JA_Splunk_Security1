@@ -1,7 +1,7 @@
 name: Linux Auditd Nopasswd Entry In Sudoers File
 id: 651df959-ad17-4b73-a323-90cb96d5fa1b
-version: 6
-date: '2025-02-24'
+version: '7'
+date: '2025-03-19'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -14,11 +14,9 @@ description: The following analytic detects the addition of NOPASSWD entries to 
   and potential compromise of sensitive data and system integrity.
 data_source:
 - Linux Auditd Proctitle
-search: '`linux_auditd` proctitle = "*NOPASSWD*"
-  | rename host as dest 
-  | stats count min(_time) as firstTime max(_time) as lastTime by  proctitle dest 
-  | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`
-  | `linux_auditd_nopasswd_entry_in_sudoers_file_filter`'
+search: '`linux_auditd` proctitle = "*NOPASSWD*" | rename host as dest | stats count
+  min(_time) as firstTime max(_time) as lastTime by  proctitle dest | `security_content_ctime(firstTime)`|
+  `security_content_ctime(lastTime)` | `linux_auditd_nopasswd_entry_in_sudoers_file_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
   data, that consist SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
   executions and process details on Unix/Linux systems. These logs should be ingested
@@ -57,11 +55,11 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - China-Nexus Threat Activity
   - Linux Persistence Techniques
-  - Linux Privilege Escalation
   - Compromised Linux Host
-  - Earth Estries
+  - China-Nexus Threat Activity
+  - Salt Typhoon
+  - Linux Privilege Escalation
   asset_type: Endpoint
   mitre_attack_id:
   - T1548.003
@@ -73,8 +71,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.003/linux_auditd_nopasswd/linux_auditd_nopasswd2.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548.003/linux_auditd_nopasswd/linux_auditd_nopasswd2.log
     source: auditd
     sourcetype: auditd
-
