@@ -1,7 +1,7 @@
 name: Deleting Shadow Copies
 id: b89919ed-ee5f-492c-b139-95dbb162039e
 version: '12'
-date: '2025-03-25'
+date: '2025-04-01'
 author: David Dorsey, Splunk
 status: production
 type: TTP
@@ -85,7 +85,9 @@ tags:
   - Windows Log Manipulation
   - Compromised Windows Host
   - Clop Ransomware
+  - Medusa Ransomware
   - VanHelsing Ransomware
+  - Termite Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1490

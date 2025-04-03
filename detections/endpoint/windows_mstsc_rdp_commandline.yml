@@ -1,32 +1,27 @@
-name: Detect PsExec With accepteula Flag
-id: 27c3a83d-cada-47c6-9042-67baf19d2574
-version: 11
-date: '2025-03-25'
-author: Bhavin Patel, Splunk
+name: Windows MSTSC RDP Commandline
+id: 3718549b-867e-4084-b770-790e8dab6ab8
+version: 1
+date: '2025-03-17'
+author: Teoderick Contreras, Splunk
 status: production
-type: TTP
-description: The following analytic identifies the execution of `PsExec.exe` with
-  the `accepteula` flag in the command line. It leverages data from Endpoint Detection
-  and Response (EDR) agents, focusing on process execution logs and command-line arguments.
-  This activity is significant because PsExec is commonly used by threat actors to
-  execute code on remote systems, and the `accepteula` flag indicates first-time usage,
-  which could signify initial compromise. If confirmed malicious, this activity could
-  allow attackers to gain remote code execution capabilities, potentially leading
-  to further system compromise and lateral movement within the network.
+type: Anomaly
+description: The following analytic detects the use of the mstsc.exe command-line, which is commonly used to initiate Remote Desktop Protocol (RDP) connections. This detection focuses on instances where mstsc.exe is executed with specific parameters that may indicate suspicious or unauthorized remote access attempts. Monitoring command-line arguments such as /v:<target> for direct connections or /admin for administrative sessions can help identify potential misuse or lateral movement within a network.
 data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
 - CrowdStrike ProcessRollup2
-search: '| tstats `security_content_summariesonly` values(Processes.process) as process
-  min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Processes
-  where `process_psexec` Processes.process=*accepteula* by Processes.action Processes.dest
-  Processes.original_file_name Processes.parent_process Processes.parent_process_exec
+search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Processes 
+  where Processes.process_name = "mstsc.exe" Processes.process = "*/v:*" 
+  by Processes.action
+  Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec
   Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name
   Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid
   Processes.process_hash Processes.process_id Processes.process_integrity_level Processes.process_name
   Processes.process_path Processes.user Processes.user_id Processes.vendor_product
-  | `drop_dm_object_name(Processes)`| `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`
-  | `detect_psexec_with_accepteula_flag_filter`'
+  | `drop_dm_object_name(Processes)` 
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` 
+  | `windows_mstsc_rdp_commandline_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -36,12 +31,9 @@ how_to_implement: The detection is based on data that originates from Endpoint D
   the EDR product. The logs must also be mapped to the `Processes` node of the `Endpoint`
   data model. Use the Splunk Common Information Model (CIM) to normalize the field
   names and speed up the data modeling process.
-known_false_positives: Administrators can leverage PsExec for accessing remote systems
-  and might pass `accepteula` as an argument if they are running this tool for the
-  first time. However, it is not likely that you'd see multiple occurrences of this
-  event on a machine
+known_false_positives: administrator may remote desktop a spe
 references:
-- https://media.defense.gov/2023/May/24/2003229517/-1/-1/0/CSA_Living_off_the_Land.PDF
+- https://www.cisa.gov/news-events/cybersecurity-advisories/aa25-071a
 drilldown_searches:
 - name: View the detection results for - "$user$" and "$dest$"
   search: '%original_detection_search% | search  user = "$user$" dest = "$dest$"'
@@ -57,40 +49,20 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: An instance of $parent_process_name$ spawning $process_name$ was identified
-    on endpoint $dest$ by user $user$ running the utility for possibly the first time.
+  message: a mstsc.exe process commandline $process$ executed on $dest$.
   risk_objects:
-  - field: user
-    type: user
-    score: 35
   - field: dest
     type: system
-    score: 35
+    score: 20
   threat_objects:
-  - field: parent_process_name
-    type: parent_process_name
   - field: process_name
     type: process_name
 tags:
   analytic_story:
-  - DHS Report TA18-074A
-  - Active Directory Lateral Movement
-  - BlackByte Ransomware
-  - HAFNIUM Group
-  - Rhysida Ransomware
   - Medusa Ransomware
-  - DarkSide Ransomware
-  - SamSam Ransomware
-  - DarkGate Malware
-  - CISA AA22-320A
-  - Sandworm Tools
-  - IcedID
-  - Volt Typhoon
-  - Seashell Blizzard
-  - VanHelsing Ransomware
   asset_type: Endpoint
   mitre_attack_id:
-  - T1021.002
+  - T1021.001
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
@@ -99,6 +71,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.002/atomic_red_team/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.001/mstsc_rdp_cmd/mstsc_sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

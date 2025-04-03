@@ -74,8 +74,9 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Compromised Windows Host
+  - Medusa Ransomware
   - Clop Ransomware
+  - Compromised Windows Host
   - BlackByte Ransomware
   - VanHelsing Ransomware
   asset_type: Endpoint

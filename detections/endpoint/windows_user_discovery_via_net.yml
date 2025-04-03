@@ -1,7 +1,7 @@
 name: Windows User Discovery Via Net
 id: 7742987e-88c1-476b-a626-a869e088ab72
-version: 3
-date: '2025-02-10'
+version: '3'
+date: '2025-03-14'
 author: Mauricio Velazco, Teoderick Contreras, Nasreddine Bencherchali, Splunk
 status: production
 type: Hunting
@@ -44,6 +44,7 @@ tags:
   analytic_story:
   - Active Directory Discovery
   - Sandworm Tools
+  - Medusa Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1087.001
