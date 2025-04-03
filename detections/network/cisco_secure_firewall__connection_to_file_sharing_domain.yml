@@ -14,7 +14,7 @@ search: |
   | stats count min(_time) as firstTime max(_time) as lastTime by InitiatorIP, InitiatorPort, ResponderIP, ResponderPort, Protocol, FirewallRule, URL, EVE_Process 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
-  | `cisco_secure_firewall__connection_to_file_sharing_domain_filter`
+  | `cisco_secure_firewall___connection_to_file_sharing_domain_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
   includes the ConnectionEvent EventType. This search uses an input macro named `cisco_secure_firewall`.
@@ -47,7 +47,7 @@ rba:
   message: The host $InitiatorIP$ initiated a connection to the file sharing or pastebin domain $URL$.
   risk_objects:
     - field: InitiatorIP
-      type: ip_address
+      type: other
       score: 30
   threat_objects:
     - field: URL

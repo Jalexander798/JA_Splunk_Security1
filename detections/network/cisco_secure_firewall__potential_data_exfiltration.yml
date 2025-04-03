@@ -18,7 +18,7 @@ search: |
   | stats min(_time) as firstTime max(_time) as lastTime by InitiatorIP, ResponderIP, Exfiltrated, Protocol
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
-  | `cisco_secure_firewall__potential_data_exfiltration_filter`
+  | `cisco_secure_firewall___potential_data_exfiltration_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
   includes the ConnectionEvent EventType. This search uses an input macro named `cisco_secure_firewall`.
@@ -51,10 +51,10 @@ rba:
   message: Potential data exfiltration from $InitiatorIP$ to $ResponderIP$ with $Exfiltrated$ MB of data exfiltrated"
   risk_objects:
     - field: InitiatorIP
-      type: ip_address
+      type: other
       score: 40
     - field: ResponderIP
-      type: ip_address
+      type: other
       score: 20
   threat_objects: []
 tags:

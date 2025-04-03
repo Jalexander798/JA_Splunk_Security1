@@ -14,7 +14,7 @@ search: |
   | stats count min(_time) as firstTime max(_time) as lastTime by InitiatorIP, InitiatorPort, ResponderIP, ResponderPort, Protocol, FirewallRule, URL, EVE_Process 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
-  | `cisco_secure_firewall__blocked_connection_filter`
+  | `cisco_secure_firewall___blocked_connection_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
   includes the ConnectionEvent EventType. This search uses an input macro named `cisco_secure_firewall`.
@@ -44,10 +44,10 @@ rba:
   message: A connection request from $InitiatorIP$ to $ResponderIP$ has been blocked according to the configured firewall rule $FirewallRule$
   risk_objects:
   - field: InitiatorIP
-    type: ip_address
+    type: other
     score: 25
   - field: ResponderIP
-    type: ip_address
+    type: other
     score: 25
   - field: FirewallRule
     type: other

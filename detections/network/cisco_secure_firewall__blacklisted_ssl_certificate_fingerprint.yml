@@ -20,7 +20,7 @@ search: |
           count by SSLCertFingerprint
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
-  | `cisco_secure_firewall__blacklisted_ssl_certificate_fingerprint_filter`
+  | `cisco_secure_firewall___blacklisted_ssl_certificate_fingerprint_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
   includes the ConnectionEvent EventType. This search uses an input macro named `cisco_secure_firewall`.
@@ -53,10 +53,10 @@ rba:
     [ListingReason: $reasons$]
   risk_objects:
     - field: SSL_CertFingerprint
-      type: certificate
+      type: other
       score: 40
     - field: InitiatorIP
-      type: ip_address
+      type: other
       score: 20
   threat_objects: []
 tags:

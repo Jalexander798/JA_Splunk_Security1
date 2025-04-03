@@ -14,7 +14,7 @@ search: |
   | stats count min(_time) as firstTime max(_time) as lastTime by InitiatorIP, InitiatorPort, ResponderIP, ResponderPort, Protocol, FirewallRule, URL, EVE_Process, ClientApplication, ClientApplicationVersion 
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` 
-  | `cisco_secure_firewall__wget_or_curl_download_filter`
+  | `cisco_secure_firewall___wget_or_curl_download_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
   includes the ConnectionEvent EventType. This search uses an input macro named `cisco_secure_firewall`.
@@ -47,7 +47,7 @@ rba:
   message: The process $EVE_Process$ initiated an allowed connection to download content using a command-line utility ($ClientApplication$) from $URL$. This behavior may indicate tool staging or payload retrieval via curl or wget.
   risk_objects:
     - field: InitiatorIP
-      type: ip_address
+      type: other
       score: 25
     - field: EVE_Process
       type: process

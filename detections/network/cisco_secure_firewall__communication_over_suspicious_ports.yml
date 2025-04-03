@@ -13,7 +13,7 @@ search: |
   | stats min(_time) as firstTime max(_time) as lastTime count by InitiatorIP, ResponderIP, InitiatorPort, ResponderPort
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
-  | `cisco_secure_firewall__communication_over_suspicious_ports_filter`
+  | `cisco_secure_firewall___communication_over_suspicious_ports_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
   includes the ConnectionEvent EventType. This search uses an input macro named `cisco_secure_firewall`.
@@ -47,10 +47,10 @@ rba:
   message: Suspicious communication detected from $InitiatorIP$ to $ResponderIP$ over ports $ResponderPort$ or $InitiatorPort$.
   risk_objects:
     - field: InitiatorIP
-      type: ip_address
+      type: other
       score: 20
     - field: ResponderPort
-      type: port
+      type: other
       score: 25
   threat_objects: []
 tags:
