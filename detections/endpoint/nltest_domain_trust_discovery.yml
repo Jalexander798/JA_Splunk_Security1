@@ -1,7 +1,7 @@
 name: NLTest Domain Trust Discovery
 id: c3e05466-5f22-11eb-ae93-0242ac130002
-version: 7
-date: '2024-12-16'
+version: '7'
+date: '2025-03-14'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -68,13 +68,14 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Ryuk Ransomware
-  - Domain Trust Discovery
-  - IcedID
   - Active Directory Discovery
   - Qakbot
-  - Rhysida Ransomware
+  - Domain Trust Discovery
+  - Medusa Ransomware
   - Cleo File Transfer Software
+  - Rhysida Ransomware
+  - IcedID
+  - Ryuk Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1482

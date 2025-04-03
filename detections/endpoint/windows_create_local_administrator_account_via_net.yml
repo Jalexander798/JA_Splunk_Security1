@@ -1,7 +1,7 @@
 name: Windows Create Local Administrator Account Via Net
 id: 2c568c34-bb57-4b43-9d75-19c605b98e70
-version: 4
-date: '2025-02-10'
+version: '4'
+date: '2025-03-14'
 author: Bhavin Patel, Splunk
 status: production
 type: Anomaly
@@ -74,10 +74,11 @@ rba:
 tags:
   analytic_story:
   - DHS Report TA18-074A
-  - Azorult
   - CISA AA22-257A
-  - DarkGate Malware
+  - Medusa Ransomware
   - CISA AA24-241A
+  - Azorult
+  - DarkGate Malware
   asset_type: Endpoint
   mitre_attack_id:
   - T1136.001

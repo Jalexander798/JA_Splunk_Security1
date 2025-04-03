@@ -1,7 +1,7 @@
 name: Windows AD add Self to Group
 id: 065f2701-b7ea-42f5-9ec4-fbc2261165f9
-version: 4
-date: '2025-01-21'
+version: '4'
+date: '2025-03-14'
 author: Dean Luxton
 status: production
 type: TTP
@@ -43,8 +43,9 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Active Directory Privilege Escalation
   - Sneaky Active Directory Persistence Tricks
+  - Medusa Ransomware
+  - Active Directory Privilege Escalation
   asset_type: Endpoint
   mitre_attack_id:
   - T1098

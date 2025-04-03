@@ -1,7 +1,7 @@
 name: PowerShell WebRequest Using Memory Stream
 id: 103affa6-924a-4b53-aff4-1d5075342aab
-version: 5
-date: '2024-11-13'
+version: '5'
+date: '2025-03-14'
 author: Steven Dick
 status: production
 type: TTP
@@ -55,8 +55,9 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Malicious PowerShell
   - MoonPeak
+  - Medusa Ransomware
+  - Malicious PowerShell
   - PHP-CGI RCE Attack on Japanese Organizations
   asset_type: Endpoint
   mitre_attack_id:
