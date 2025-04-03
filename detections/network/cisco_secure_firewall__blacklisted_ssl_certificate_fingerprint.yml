@@ -10,7 +10,7 @@ data_source:
 - Cisco Secure Firewall Threat Defense Connection Event
 search: |
   `cisco_secure_fw` EventType=* SSL_CertFingerprint=*
-  | lookup sslbl_ssl_certificate_blacklist_lookup SHA1 as SSL_CertFingerprint OUTPUT Listingdate, Listingreason
+  | lookup sslbl_ssl_certificate_blacklist SHA1 as SSL_CertFingerprint OUTPUT Listingdate, Listingreason
   | where isnotnull(Listingreason)
   | stats min(_time) as firstTime max(_time) as lastTime
           values(InitiatorIP) as initiators
