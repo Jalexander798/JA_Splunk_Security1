@@ -4,7 +4,7 @@ version: 1
 date: '2025-04-02'
 author: Nasreddine Bencherchali, Splunk
 status: production
-type: anomaly
+type: Anomaly
 description: The following analytic detects potential reverse shell activity by identifying connections involving ports commonly associated with remote access tools, shell listeners, or tunneling utilities. It leverages Cisco Secure Firewall Threat Defense logs and monitors both initiator and responder ports against a list of non-standard, high-risk port values often used in post-exploitation scenarios. Adversaries frequently configure tools like netcat, Meterpreter, or other backdoors to listen or connect over uncommon ports such as 4444, 2222, or 51820 to bypass standard monitoring and firewall rules. If confirmed malicious, this activity may represent command and control (C2) tunneling, lateral movement, or unauthorized remote access.
 data_source:
 - Cisco Secure Firewall Threat Defense Connection Event
@@ -60,7 +60,6 @@ tags:
   security_domain: network
   mitre_attack_id:
     - T1021
-    - T1043
     - T1055
     - T1059.001
     - T1105
