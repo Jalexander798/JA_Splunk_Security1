@@ -1,4 +1,4 @@
-name: Cisco Secure Firewall - High EVE Threat Confidence on Encrypted Traffic
+name: Cisco Secure Firewall - High EVE Threat Confidence
 id: 8c15183e-2e70-4db4-86c3-88f8d9129b66
 version: 1
 date: '2025-04-02'
@@ -14,7 +14,7 @@ search: |
   | stats count min(_time) as firstTime max(_time) as lastTime by EVE_Process, EVE_ThreatConfidencePct, InitiatorIP, ResponderIP, Protocol
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
-  | `cisco_secure_firewall___high_eve_threat_confidence_on_encrypted_traffic_filter`
+  | `cisco_secure_firewall___high_eve_threat_confidence_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
   includes the ConnectionEvent EventType. This search uses an input macro named `cisco_secure_firewall`.
@@ -36,10 +36,9 @@ rba:
     - field: InitiatorIP
       type: other
       score: 20
-    - field: EVE_Process
-      type: process_name
-      score: 30
-  threat_objects: []
+  threat_objects:
+  - field: EVE_Process
+    type: process_name
 tags:
   analytic_story:
     - Cisco Secure Firewall Threat Defense Analytics
