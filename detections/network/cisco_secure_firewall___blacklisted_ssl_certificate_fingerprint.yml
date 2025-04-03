@@ -15,9 +15,9 @@ search: |
   | stats min(_time) as firstTime max(_time) as lastTime
           values(InitiatorIP) as initiators
           values(ResponderIP) as responders
-          values(Listingreason) as reasons
-          values(Listingdate) as dates
-          count by SSLCertFingerprint
+          values(Listingreason) as Reasons
+          values(Listingdate) as "SSL Cert Listing Dates"
+          count by SSL_CertFingerprint
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
   | `cisco_secure_firewall___blacklisted_ssl_certificate_fingerprint_filter`
