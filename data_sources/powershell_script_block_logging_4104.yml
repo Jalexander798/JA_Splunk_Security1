@@ -82,6 +82,7 @@ output_fields:
 - Guid 
 - Opcode 
 - Name
+- Path
 - ProcessID 
 - ScriptBlockId 
 - ScriptBlockText
