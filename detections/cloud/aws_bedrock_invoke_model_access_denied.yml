@@ -5,7 +5,7 @@ date: '2024-12-05'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
-description: The following analytic identifies access denied errors when attempting to invoke AWS Bedrock models. It leverages AWS CloudTrail logs to detect when a user or service receives an AccessDenied error when calling the InvokeModel API. This activity is significant as it may indicate an adversary attempting to access Bedrock models with insufficient permissions after compromising credentials. If confirmed malicious, this could suggest reconnaissance activities or privilege escalation attempts targeting generative AI resources, potentially leading to data exfiltration or manipulation of model outputs.
+description: The following analytic identifies access denied error when attempting to invoke AWS Bedrock models. It leverages AWS CloudTrail logs to detect when a user or service receives an AccessDenied error when calling the InvokeModel API. This activity is significant as it may indicate an adversary attempting to access Bedrock models with insufficient permissions after compromising credentials. If confirmed malicious, this could suggest reconnaissance activities or privilege escalation attempts targeting generative AI resources, potentially leading to data exfiltration or manipulation of model outputs.
 data_source:
 - AWS CloudTrail
 search: >-
@@ -36,7 +36,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: User $user$ received access denied errors when attempting to invoke AWS Bedrock models from $src$
+  message: User $user$ access denied when attempting to invoke AWS Bedrock models from $src$
   risk_objects:
   - field: user
     type: user
