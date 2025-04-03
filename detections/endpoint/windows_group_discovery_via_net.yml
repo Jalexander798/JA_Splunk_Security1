@@ -1,7 +1,7 @@
 name: Windows Group Discovery Via Net
 id: c5c8e0f3-147a-43da-bf04-4cfaec27dc44
-version: 3
-date: '2025-02-10'
+version: '3'
+date: '2025-03-14'
 author: Michael Haag, Mauricio Velazco, Splunk
 status: production
 type: Hunting
@@ -45,16 +45,17 @@ references:
 - https://thedfirreport.com/2023/05/22/icedid-macro-ends-in-nokoyawa-ransomware/
 tags:
   analytic_story:
+  - Windows Discovery Techniques
   - Windows Post-Exploitation
+  - Graceful Wipe Out Attack
   - Active Directory Discovery
   - Prestige Ransomware
-  - Graceful Wipe Out Attack
-  - Rhysida Ransomware
-  - Cleo File Transfer Software
-  - Volt Typhoon
-  - IcedID
-  - Windows Discovery Techniques
+  - Medusa Ransomware
   - Azorult
+  - Cleo File Transfer Software
+  - Rhysida Ransomware
+  - IcedID
+  - Volt Typhoon
   asset_type: Endpoint
   mitre_attack_id:
   - T1069.001

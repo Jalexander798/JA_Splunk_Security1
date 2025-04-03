@@ -1,7 +1,7 @@
 name: Common Ransomware Extensions
 id: a9e5c5db-db11-43ca-86a8-c852d1b2c0ec
-version: 13
-date: '2025-03-27'
+version: '13'
+date: '2025-04-01'
 author: David Dorsey, Michael Haag, Splunk, Steven Dick
 status: production
 type: TTP
@@ -71,12 +71,14 @@ tags:
   analytic_story:
   - Rhysida Ransomware
   - Prestige Ransomware
-  - LockBit Ransomware
-  - Ryuk Ransomware
-  - SamSam Ransomware
-  - Black Basta Ransomware
   - Ransomware
+  - LockBit Ransomware
+  - Medusa Ransomware
+  - SamSam Ransomware
   - Clop Ransomware
+  - Ryuk Ransomware
+  - Black Basta Ransomware
+  - Termite Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1485

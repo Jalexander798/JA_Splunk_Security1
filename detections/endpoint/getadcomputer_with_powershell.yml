@@ -1,7 +1,7 @@
 name: GetAdComputer with PowerShell
 id: c5a31f80-5888-4d81-9f78-1cc65026316e
-version: 5
-date: '2024-11-13'
+version: '5'
+date: '2025-03-14'
 author: Mauricio Velazco, Splunk
 status: production
 type: Hunting
@@ -41,6 +41,7 @@ references:
 tags:
   analytic_story:
   - Active Directory Discovery
+  - Medusa Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1018

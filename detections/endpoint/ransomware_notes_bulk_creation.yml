@@ -1,8 +1,8 @@
 name: Ransomware Notes bulk creation
 id: eff7919a-8330-11eb-83f8-acde48001122
-version: 6
-date: '2025-03-27'
-author: Teoderick Contreras
+version: '7'
+date: '2025-04-01'
+author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
 description: The following analytic identifies the bulk creation of ransomware notes
@@ -56,13 +56,15 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Rhysida Ransomware
-  - LockBit Ransomware
   - BlackMatter Ransomware
   - DarkSide Ransomware
   - Chaos Ransomware
+  - Rhysida Ransomware
+  - LockBit Ransomware
+  - Medusa Ransomware
   - Black Basta Ransomware
   - Clop Ransomware
+  - Termite Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1486

@@ -1,7 +1,7 @@
 name: Schtasks Run Task On Demand
 id: bb37061e-af1f-11eb-a159-acde48001122
-version: 5
-date: '2024-11-13'
+version: '5'
+date: '2025-03-14'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -69,11 +69,12 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Qakbot
   - Industroyer2
-  - XMRig
   - CISA AA22-257A
   - Data Destruction
+  - Qakbot
+  - XMRig
+  - Medusa Ransomware
   - Scheduled Tasks
   asset_type: Endpoint
   mitre_attack_id:
