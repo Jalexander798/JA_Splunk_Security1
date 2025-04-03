@@ -10,14 +10,14 @@ description: |
 data_source:
 - Cisco Secure Firewall Threat Defense Connection Event
 search: |
-  `cisco_secure_fw` AC_RuleAction=Allow EventType=ConnectionEvent URL IN ("*.githubusercontent.com*", "*anonfiles.com*", "*cdn.discordapp.com*", "*ddns.net*", "*dl.dropboxusercontent.com*", "*ghostbin.co*", "*glitch.me*", "*gofile.io*", "*hastebin.com*", "*mediafire.com*", "*mega.nz*", "*onrender.com*", "*pages.dev*", "*paste.ee*", "*pastebin.com*", "*pastebin.pl*", "*pastetext.net*", "*privatlab.com*", "*privatlab.net*", "*send.exploit.in*", "*sendspace.com*", "*storage.googleapis.com*", "*storjshare.io*", "*supabase.co*", "*temp.sh*", "*transfer.sh*", "*trycloudflare.com*", "*ufile.io*", "*w3spaces.com*", "*workers.dev*")
+  `cisco_secure_firewall` AC_RuleAction=Allow EventType=ConnectionEvent URL IN ("*.githubusercontent.com*", "*anonfiles.com*", "*cdn.discordapp.com*", "*ddns.net*", "*dl.dropboxusercontent.com*", "*ghostbin.co*", "*glitch.me*", "*gofile.io*", "*hastebin.com*", "*mediafire.com*", "*mega.nz*", "*onrender.com*", "*pages.dev*", "*paste.ee*", "*pastebin.com*", "*pastebin.pl*", "*pastetext.net*", "*privatlab.com*", "*privatlab.net*", "*send.exploit.in*", "*sendspace.com*", "*storage.googleapis.com*", "*storjshare.io*", "*supabase.co*", "*temp.sh*", "*transfer.sh*", "*trycloudflare.com*", "*ufile.io*", "*w3spaces.com*", "*workers.dev*")
   | stats count min(_time) as firstTime max(_time) as lastTime by InitiatorIP, InitiatorPort, ResponderIP, ResponderPort, Protocol, FirewallRule, URL, EVE_Process 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `cisco_secure_firewall__connection_to_file_sharing_domain_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
-  includes the ConnectionEvent EventType. This search uses an input macro named `cisco_secure_fw`.
+  includes the ConnectionEvent EventType. This search uses an input macro named `cisco_secure_firewall`.
   We strongly recommend that you specify your environment-specific configurations
   (index, source, sourcetype, etc.) for Cisco Secure Firewall Threat Defense logs. Replace the macro definition
   with configurations for your Splunk environment. The search also uses a post-filter

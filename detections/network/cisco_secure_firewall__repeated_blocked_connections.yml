@@ -10,7 +10,7 @@ description: |
 data_source:
 - Cisco Secure Firewall Threat Defense Connection Event
 search: |
-  `cisco_secure_fw` EventType=ConnectionEvent AC_RuleAction=Block 
+  `cisco_secure_firewall` EventType=ConnectionEvent AC_RuleAction=Block 
   | bin _time span=1m 
   | stats count min(_time) as firstTime max(_time) as lastTime by InitiatorIP, ResponderIP, Protocol, FirewallRule
   | where count >= 10
@@ -19,7 +19,7 @@ search: |
   | `cisco_secure_firewall__repeated_blocked_connections_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
-  includes the ConnectionEvent EventType. This search uses an input macro named `cisco_secure_fw`.
+  includes the ConnectionEvent EventType. This search uses an input macro named `cisco_secure_firewall`.
   We strongly recommend that you specify your environment-specific configurations
   (index, source, sourcetype, etc.) for Cisco Secure Firewall Threat Defense logs. Replace the macro definition
   with configurations for your Splunk environment. The search also uses a post-filter

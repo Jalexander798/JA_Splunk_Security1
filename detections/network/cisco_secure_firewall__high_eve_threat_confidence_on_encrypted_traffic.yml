@@ -10,14 +10,14 @@ description: |
 data_source:
 - Cisco Secure Firewall Threat Defense Connection Event
 search: |
-  `cisco_secure_fw` EventType=ConnectionEvent EVE_ThreatConfidencePct >= 80
+  `cisco_secure_firewall` EventType=ConnectionEvent EVE_ThreatConfidencePct >= 80
   | stats count min(_time) as firstTime max(_time) as lastTime by EVE_Process, EVE_ThreatConfidencePct, InitiatorIP, ResponderIP, Protocol
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
   | `cisco_secure_firewall__high_eve_threat_confidence_on_encrypted_traffic_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
-  includes the ConnectionEvent EventType. This search uses an input macro named `cisco_secure_fw`.
+  includes the ConnectionEvent EventType. This search uses an input macro named `cisco_secure_firewall`.
   We strongly recommend that you specify your environment-specific configurations
   (index, source, sourcetype, etc.) for Cisco Secure Firewall Threat Defense logs. Replace the macro definition
   with configurations for your Splunk environment. The search also uses a post-filter

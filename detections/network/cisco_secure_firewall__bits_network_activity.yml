@@ -9,14 +9,14 @@ description: The following analytic detects the use of the Background Intelligen
 data_source:
 - Cisco Secure Firewall Threat Defense Connection Event
 search: |
-  `cisco_secure_fw` EventType=ConnectionEvent AC_RuleAction=Allow ClientApplication="BITS" AND NOT URL IN ("*://msedge.b.tlu.dl*")
+  `cisco_secure_firewall` EventType=ConnectionEvent AC_RuleAction=Allow ClientApplication="BITS" AND NOT URL IN ("*://msedge.b.tlu.dl*")
   | stats count min(_time) as firstTime max(_time) as lastTime by InitiatorIP, InitiatorPort, ResponderIP, ResponderPort, Protocol, FirewallRule, URL, EVE_Process, ClientApplication, ClientApplicationVersion 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `cisco_secure_firewall__bits_network_activity_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
-  includes the ConnectionEvent EventType. This search uses an input macro named `cisco_secure_fw`.
+  includes the ConnectionEvent EventType. This search uses an input macro named `cisco_secure_firewall`.
   We strongly recommend that you specify your environment-specific configurations
   (index, source, sourcetype, etc.) for Cisco Secure Firewall Threat Defense logs. Replace the macro definition
   with configurations for your Splunk environment. The search also uses a post-filter

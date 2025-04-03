@@ -9,14 +9,14 @@ description: The following analytic detects potential reverse shell activity by 
 data_source:
 - Cisco Secure Firewall Threat Defense Connection Event
 search: |
-  `cisco_secure_fw` EventType=ConnectionEvent (ResponderPort IN ("888", "999", "2200", "2222", "4000", "4444", "6789", "8531", "50501", "51820") OR InitiatorPort IN ("888", "999", "2200", "2222", "4000", "4444", "6789", "8531", "50501", "51820"))
+  `cisco_secure_firewall` EventType=ConnectionEvent (ResponderPort IN ("888", "999", "2200", "2222", "4000", "4444", "6789", "8531", "50501", "51820") OR InitiatorPort IN ("888", "999", "2200", "2222", "4000", "4444", "6789", "8531", "50501", "51820"))
   | stats min(_time) as firstTime max(_time) as lastTime count by InitiatorIP, ResponderIP, InitiatorPort, ResponderPort
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
   | `cisco_secure_firewall__communication_over_suspicious_ports_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
-  includes the ConnectionEvent EventType. This search uses an input macro named `cisco_secure_fw`.
+  includes the ConnectionEvent EventType. This search uses an input macro named `cisco_secure_firewall`.
   We strongly recommend that you specify your environment-specific configurations
   (index, source, sourcetype, etc.) for Cisco Secure Firewall Threat Defense logs. Replace the macro definition
   with configurations for your Splunk environment. The search also uses a post-filter
