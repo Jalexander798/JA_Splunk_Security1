@@ -1,7 +1,7 @@
 name: System Information Discovery Detection
 id: 8e99f89e-ae58-4ebc-bf52-ae0b1a277e72
-version: 8
-date: '2024-12-16'
+version: '8'
+date: '2025-03-14'
 author: Patrick Bareiss, Splunk
 status: production
 type: TTP
@@ -76,6 +76,7 @@ tags:
   analytic_story:
   - Windows Discovery Techniques
   - Gozi Malware
+  - Medusa Ransomware
   - BlackSuit Ransomware
   - Cleo File Transfer Software
   asset_type: Windows

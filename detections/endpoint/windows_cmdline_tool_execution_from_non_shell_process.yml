@@ -1,7 +1,7 @@
 name: Windows Cmdline Tool Execution From Non-Shell Process
 id: 2afa393f-b88d-41b7-9793-623c93a2dfde
-version: 4
-date: '2025-02-10'
+version: '4'
+date: '2025-03-14'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -76,14 +76,15 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - Volt Typhoon
-  - Rhysida Ransomware
-  - FIN7
-  - DarkGate Malware
-  - Qakbot
   - CISA AA22-277A
-  - CISA AA23-347A
   - Gozi Malware
+  - CISA AA23-347A
+  - Qakbot
+  - Medusa Ransomware
+  - DarkGate Malware
+  - Rhysida Ransomware
+  - Volt Typhoon
+  - FIN7
   asset_type: Endpoint
   mitre_attack_id:
   - T1059.007

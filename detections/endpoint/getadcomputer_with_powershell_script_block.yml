@@ -1,7 +1,7 @@
 name: GetAdComputer with PowerShell Script Block
 id: a9a1da02-8e27-4bf7-a348-f4389c9da487
-version: 7
-date: '2024-11-13'
+version: '7'
+date: '2025-03-14'
 author: Mauricio Velazco, Splunk
 status: production
 type: Hunting
@@ -31,6 +31,7 @@ tags:
   analytic_story:
   - Active Directory Discovery
   - CISA AA22-320A
+  - Medusa Ransomware
   - Gozi Malware
   asset_type: Endpoint
   mitre_attack_id:

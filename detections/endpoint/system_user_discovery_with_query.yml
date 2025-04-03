@@ -1,7 +1,7 @@
 name: System User Discovery With Query
 id: ad03bfcf-8a91-4bc2-a500-112993deba87
-version: 6
-date: '2025-02-05'
+version: '6'
+date: '2025-03-14'
 author: Mauricio Velazco, Splunk
 status: production
 type: Hunting
@@ -42,6 +42,7 @@ references:
 tags:
   analytic_story:
   - Active Directory Discovery
+  - Medusa Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1033

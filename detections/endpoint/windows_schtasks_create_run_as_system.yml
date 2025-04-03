@@ -1,7 +1,7 @@
 name: Windows Schtasks Create Run As System
 id: 41a0e58e-884c-11ec-9976-acde48001122
-version: 7
-date: '2025-02-10'
+version: '7'
+date: '2025-03-14'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -69,6 +69,7 @@ rba:
     type: process_name
 tags:
   analytic_story:
+  - Medusa Ransomware
   - Windows Persistence Techniques
   - Qakbot
   - Scheduled Tasks
