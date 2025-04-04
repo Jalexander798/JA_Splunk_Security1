@@ -36,7 +36,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: User $user$ deleted AWS Bedrock model invocation logging for models $modelIds$ from $src$
+  message: User $user$ deleted AWS Bedrock model invocation logging from $src$
   risk_objects:
   - field: user
     type: user
