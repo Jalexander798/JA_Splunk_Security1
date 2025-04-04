@@ -63,7 +63,7 @@ ngrok,user_managed,ngrok.exe,,,TRUE,Developer Utility,https://ngrok.com/docs/gui
 NinjaRMM,*.ninjaone.com,ninjarmmagent.exe,NinjaRMM*,,TRUE,RMM,https://www.ninjaone.com/faq/,2/9/2024
 NinjaRMM,*.ninjarmm.com,NinjaRMMAgentPatcher.exe,Ninja MSP*,,TRUE,RMM,https://www.ninjaone.com/faq/,4/4/2025
 NoMachine,user_managed,nomachine*.exe,NoMachine*,nomachine,TRUE,RMM,https://kb.nomachine.com/AR04S01122,2/9/2024
-NoMachine,,nxservice*.ese,,,TRUE,RMM,https://kb.nomachine.com/AR04S01122,2/9/2024
+NoMachine,,nxservice*.exe,,,TRUE,RMM,https://kb.nomachine.com/AR04S01122,4/4/2025
 NoMachine,,nxd.exe,,,TRUE,RMM,https://kb.nomachine.com/AR04S01122,2/9/2024
 OCS inventory,user_managed,ocsinventory.exe,Ocs Inventory*,,TRUE,RMM,https://ocsinventory-ng.org/?page_id=878&lang=en,2/9/2024
 OCS inventory,,ocsservice.exe,OcsPackager*,,TRUE,RMM,https://ocsinventory-ng.org/?page_id=878&lang=en,2/9/2024
