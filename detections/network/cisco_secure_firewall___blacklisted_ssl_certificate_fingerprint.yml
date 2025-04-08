@@ -13,11 +13,10 @@ search: |
   | lookup sslbl_ssl_certificate_blacklist SHA1 as SSL_CertFingerprint OUTPUT Listingdate, Listingreason
   | where isnotnull(Listingreason)
   | stats min(_time) as firstTime max(_time) as lastTime
-          values(InitiatorIP) as InitiatorIPs
           values(ResponderIP) as ResponderIPs
           values(Listingreason) as Reasons
           values(Listingdate) as "SSL Cert Listing Dates"
-          count by SSL_CertFingerprint
+          count by SSL_CertFingerprint InitiatorIP
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
   | `cisco_secure_firewall___blacklisted_ssl_certificate_fingerprint_filter`
@@ -35,12 +34,12 @@ known_false_positives: Certain SSL certificates may be flagged in threat intelli
 references:
   - https://www.cisco.com/c/en/us/td/docs/security/firepower/741/api/FQE/secure_firewall_estreamer_fqe_guide_740.pdf
 drilldown_searches:
-- name: View the detection results for - "$InitiatorIPs$"
-  search: '%original_detection_search% | search  InitiatorIPs = "$InitiatorIPs$"'
+- name: View the detection results for - "$InitiatorIP$"
+  search: '%original_detection_search% | search  InitiatorIP = "$InitiatorIP$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$InitiatorIPs$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$InitiatorIPs$") starthoursago=168  | stats count min(_time)
+- name: View risk events for the last 7 days for - "$InitiatorIP$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$InitiatorIP$") starthoursago=168  | stats count min(_time)
     as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message)
     as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
     as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
@@ -55,7 +54,7 @@ rba:
     - field: SSL_CertFingerprint
       type: other
       score: 40
-    - field: InitiatorIPs
+    - field: InitiatorIP
       type: other
       score: 20
   threat_objects: []
