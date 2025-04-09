@@ -51,6 +51,15 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
+rba:
+  message: The host $InitiatorIP$ downloaded a file $FileName$ of type $FileType$ from $ResponderIP$.
+  risk_objects:
+    - field: InitiatorIP
+      type: user
+      score: 30
+    - field: ResponderIP
+      type: user
+      score: 30
 tags:
   analytic_story:
     - Cisco Secure Firewall Threat Defense Analytics

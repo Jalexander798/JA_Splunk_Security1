@@ -57,7 +57,7 @@ rba:
       type: user
       score: 30
   threat_objects:
-    - field: URI
+    - field: URIs
       type: url
 tags:
   analytic_story:
