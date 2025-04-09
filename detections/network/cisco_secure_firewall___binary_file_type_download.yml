@@ -25,7 +25,7 @@ search: |
   | table firstTime lastTime InitiatorIP ResponderIP ResponderPort FileDirection FileType Description URIs FileName SHA256 Application ClientApplications ThreatName
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
-  | `cisco_secure_firewall___suspicious_file_type_download_filter`
+  | `cisco_secure_firewall___binary_file_type_download_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
   includes the FileEvent EventType. This search uses an input macro named `cisco_secure_firewall`.
