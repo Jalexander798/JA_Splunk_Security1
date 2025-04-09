@@ -59,6 +59,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/aws_bedrock_logging/aws_bedrock_delete_model_invocation_logging.json
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.008/aws_bedrock_delete_model_invocation_logging/cloudtrail.json
     sourcetype: aws:cloudtrail
     source: aws_cloudtrail

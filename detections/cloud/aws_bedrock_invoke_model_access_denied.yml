@@ -60,6 +60,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/suspicious_behaviour/aws_bedrock_access_denied/aws_bedrock_access_denied.json
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087.004/aws_invoke_model_access_denied/cloudtrail.json
     sourcetype: aws:cloudtrail
     source: aws_cloudtrail
