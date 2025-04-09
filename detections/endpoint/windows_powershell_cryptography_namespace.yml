@@ -1,6 +1,6 @@
 name: Windows Powershell Cryptography Namespace
 id: f8b482f4-6d62-49fa-a905-dfa15698317b
-version: 6
+version: 7
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -17,10 +17,10 @@ description: The following analytic detects suspicious PowerShell script executi
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText = "*System.Security.Cryptography*"
-  AND NOT(ScriptBlockText IN ("*SHA*", "*MD5*", "*DeriveBytes*")) | stats count min(_time)
-  as firstTime max(_time) as lastTime by EventCode ScriptBlockText Computer UserID
-  | rename Computer as dest | rename UserID as user | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `windows_powershell_cryptography_namespace_filter`'
+  AND NOT(ScriptBlockText IN ("*SHA*", "*MD5*", "*DeriveBytes*")) | fillnull | stats
+  count min(_time) as firstTime max(_time) as lastTime by dest signature signature_id
+  user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_powershell_cryptography_namespace_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
   https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.
@@ -28,13 +28,13 @@ known_false_positives: False positives should be limited. Filter as needed.
 references:
 - https://malpedia.caad.fkie.fraunhofer.de/details/win.asyncrat
 drilldown_searches:
-- name: View the detection results for - "$dest$" and "$user$"
-  search: '%original_detection_search% | search  dest = "$dest$" user = "$user$"'
+- name: View the detection results for - "$dest$" and "$user_id$"
+  search: '%original_detection_search% | search  dest = "$dest$" user_id = "$user_id$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$dest$" and "$user$"
+- name: View risk events for the last 7 days for - "$dest$" and "$user_id$"
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$",
-    "$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
+    "$user_id$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
     as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
     Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
     as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
@@ -48,7 +48,7 @@ rba:
   - field: dest
     type: system
     score: 25
-  - field: user
+  - field: user_id
     type: user
     score: 25
   threat_objects: []
@@ -66,7 +66,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/asyncrat_crypto_pwh_namespace/windows-powershell-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/asyncrat_crypto_pwh_namespace/windows-powershell-xml.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

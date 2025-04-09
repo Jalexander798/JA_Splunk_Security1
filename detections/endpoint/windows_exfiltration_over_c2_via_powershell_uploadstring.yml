@@ -1,6 +1,6 @@
 name: Windows Exfiltration Over C2 Via Powershell UploadString
 id: 59e8bf41-7472-412a-90d3-00f3afa452e9
-version: 4
+version: 5
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
@@ -16,8 +16,9 @@ description: The following analytic identifies potential data exfiltration using
   data transfer, compromising sensitive information and potentially leading to further
   exploitation of the compromised host.
 search: '`powershell` EventCode=4104 ScriptBlockText = "*Net.webclient*" AND ScriptBlockText
-  = "*.UploadString*" | stats count min(_time) as firstTime max(_time) as lastTime
-  by EventCode ScriptBlockText Computer UserID | `security_content_ctime(firstTime)`
+  = "*.UploadString*" | fillnull | stats count min(_time) as firstTime max(_time)
+  as lastTime by dest signature signature_id user_id vendor_product EventID Guid Opcode
+  Name Path ProcessID ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_exfiltration_over_c2_via_powershell_uploadstring_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
@@ -41,10 +42,10 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A PowerShell script on $Computer$ is attempting to transfer files to a
-    remote URL.
+  message: A PowerShell script on $dest$ is attempting to transfer files to a remote
+    URL.
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 49
   threat_objects: []
@@ -62,7 +63,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winter-vivern/pwh_uploadstring/windows-powershell-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/winter-vivern/pwh_uploadstring/windows-powershell-xml.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

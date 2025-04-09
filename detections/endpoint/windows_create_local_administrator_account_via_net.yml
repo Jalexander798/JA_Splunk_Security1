@@ -1,7 +1,7 @@
 name: Windows Create Local Administrator Account Via Net
 id: 2c568c34-bb57-4b43-9d75-19c605b98e70
-version: 3
-date: '2025-02-10'
+version: '4'
+date: '2025-03-14'
 author: Bhavin Patel, Splunk
 status: production
 type: Anomaly
@@ -17,15 +17,19 @@ data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
 - CrowdStrike ProcessRollup2
-search: '| tstats `security_content_summariesonly` count values(Processes.user) as
-  user values(Processes.parent_process) as parent_process values(parent_process_name)
-  as parent_process_name min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Processes
-  where `process_net` AND Processes.process=*/add* AND Processes.process IN ("*administrators*",
-  "*administratoren*", "*administrateurs*", "*administrador*", "*amministratori*",
-  "*administratorer*", "*Rendszergazda*", "*Администратор*", "*Administratör*") by
-  Processes.process Processes.process_name Processes.parent_process_name Processes.dest
-  Processes.user| `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `windows_create_local_administrator_account_via_net_filter`'
+search: "| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)\
+  \ as lastTime from datamodel=Endpoint.Processes where `process_net` AND Processes.process=*/add*\
+  \ AND Processes.process IN (\"*administrators*\", \"*administratoren*\", \"*administrateurs*\"\
+  , \"*administrador*\", \"*amministratori*\", \"*administratorer*\", \"*Rendszergazda*\"\
+  , \"*\u0410\u0434\u043C\u0438\u043D\u0438\u0441\u0442\u0440\u0430\u0442\u043E\u0440\
+  *\", \"*Administrat\xF6r*\") by Processes.action Processes.dest Processes.original_file_name\
+  \ Processes.parent_process Processes.parent_process_exec Processes.parent_process_guid\
+  \ Processes.parent_process_id Processes.parent_process_name Processes.parent_process_path\
+  \ Processes.process Processes.process_exec Processes.process_guid Processes.process_hash\
+  \ Processes.process_id Processes.process_integrity_level Processes.process_name\
+  \ Processes.process_path Processes.user Processes.user_id Processes.vendor_product\
+  \ | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`\
+  \ | `windows_create_local_administrator_account_via_net_filter`"
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -70,10 +74,11 @@ rba:
 tags:
   analytic_story:
   - DHS Report TA18-074A
-  - Azorult
   - CISA AA22-257A
-  - DarkGate Malware
+  - Medusa Ransomware
   - CISA AA24-241A
+  - Azorult
+  - DarkGate Malware
   asset_type: Endpoint
   mitre_attack_id:
   - T1136.001
@@ -85,7 +90,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.001/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

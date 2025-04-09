@@ -1,7 +1,7 @@
 name: Windows Security And Backup Services Stop
 id: 9c24aef6-cad9-4931-acce-74318aa5663b
-version: 1
-date: '2025-02-07'
+version: 2
+date: '2025-04-01'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -61,6 +61,7 @@ tags:
   - Ransomware
   - Compromised Windows Host
   - BlackMatter Ransomware
+  - Termite Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1490

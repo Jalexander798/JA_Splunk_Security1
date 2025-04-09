@@ -1,7 +1,7 @@
 name: Windows Access Token Manipulation SeDebugPrivilege
 id: 6ece9ed0-5f92-4315-889d-48560472b188
-version: '12'
-date: '2025-02-24'
+version: 13
+date: '2025-03-27'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -19,7 +19,7 @@ search: '`wineventlog_security` EventCode=4703 EnabledPrivilegeList = "*SeDebugP
   "*\\SysWOW64\\svchost.exe*", "*\\System32\\svchost.exe*")) | stats count min(_time)
   as firstTime max(_time) as lastTime by Computer ProcessName ProcessId SubjectDomainName
   SubjectUserName SubjectUserSid TargetUserName TargetLogonId TargetDomainName EnabledPrivilegeList
-  action | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  action dest | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_access_token_manipulation_sedebugprivilege_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   Windows Security Event Logs with 4703 EventCode enabled. The Windows TA is also
@@ -56,18 +56,18 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
+  - Meduza Stealer
+  - PlugX
+  - CISA AA23-347A
+  - China-Nexus Threat Activity
+  - AsyncRAT
   - SnappyBee
+  - Derusbi
+  - WinDealer RAT
+  - Salt Typhoon
+  - DarkGate Malware
   - ValleyRAT
   - Brute Ratel C4
-  - WinDealer RAT
-  - Meduza Stealer
-  - CISA AA23-347A
-  - AsyncRAT
-  - Derusbi
-  - PlugX
-  - China-Nexus Threat Activity
-  - DarkGate Malware
-  - Earth Estries
   asset_type: Endpoint
   mitre_attack_id:
   - T1134.002

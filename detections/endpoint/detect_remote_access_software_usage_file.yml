@@ -1,7 +1,7 @@
 name: Detect Remote Access Software Usage File
 id: 3bf5541a-6a45-4fdc-b01d-59b899fff961
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-03-24'
 author: Steven Dick
 status: production
 type: Anomaly
@@ -17,7 +17,10 @@ data_source:
 - Sysmon EventID 11
 search: '| tstats `security_content_summariesonly` count, min(_time) as firstTime,
   max(_time) as lastTime, values(Filesystem.file_path) as file_path from datamodel=Endpoint.Filesystem
-  by Filesystem.dest, Filesystem.user, Filesystem.file_name | `security_content_ctime(firstTime)`
+  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time
+  Filesystem.file_hash Filesystem.file_modify_time Filesystem.file_name Filesystem.file_path
+  Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id
+  Filesystem.user Filesystem.vendor_product | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `drop_dm_object_name(Filesystem)` | lookup
   remote_access_software remote_utility AS file_name OUTPUT isutility, description
   as signature, comment_reference as desc, category | search isutility = TRUE | `remote_access_software_usage_exceptions`
@@ -54,7 +57,7 @@ drilldown_searches:
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: Investigate files on $dest$ 
+- name: Investigate files on $dest$
   search: '| from datamodel:Endpoint.Filesystem | search dest=$dest$ file_name=$file_name$'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
@@ -81,6 +84,7 @@ tags:
   - Gozi Malware
   - CISA AA24-241A
   - Remote Monitoring and Management Software
+  - Seashell Blizzard
   asset_type: Endpoint
   mitre_attack_id:
   - T1219
@@ -93,7 +97,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1219/screenconnect/screenconnect_sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1219/screenconnect/screenconnect_sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

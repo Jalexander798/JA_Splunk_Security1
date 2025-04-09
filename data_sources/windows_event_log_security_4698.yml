@@ -88,4 +88,6 @@ fields:
 - user
 - vendor
 - vendor_product
+output_fields:
+- dest
 example_log: 04/26/2022 11:12:09 AM

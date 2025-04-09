@@ -1,6 +1,6 @@
 name: Windows Steal Authentication Certificates - ESC1 Abuse
 id: cbe761fc-d945-4c8c-a71d-e26d12255d32
-version: 6
+version: 7
 date: '2024-11-13'
 author: Steven Dick
 status: production
@@ -61,9 +61,6 @@ rba:
   message: Possible AD CS ESC1 activity by $src_user$ - $flavor_text$
   risk_objects:
   - field: src
-    type: system
-    score: 60
-  - field: dest
     type: system
     score: 60
   - field: src_user

@@ -1,7 +1,7 @@
 name: Attacker Tools On Endpoint
 id: a51bfe1a-94f0-48cc-b4e4-16a110145893
-version: 9
-date: '2025-02-27'
+version: 10
+date: '2025-03-27'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -20,10 +20,15 @@ data_source:
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime values(Processes.process) as process values(Processes.parent_process)
   as parent_process from datamodel=Endpoint.Processes where Processes.dest!=unknown
-  Processes.user!=unknown by Processes.dest Processes.user Processes.process_name
-  Processes.process | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `drop_dm_object_name(Processes)` | lookup attacker_tools attacker_tool_names AS
-  process_name OUTPUT description | search description !=false| `attacker_tools_on_endpoint_filter`'
+  Processes.user!=unknown by Processes.action Processes.dest Processes.original_file_name
+  Processes.parent_process Processes.parent_process_exec Processes.parent_process_guid
+  Processes.parent_process_id Processes.parent_process_name Processes.parent_process_path
+  Processes.process Processes.process_exec Processes.process_guid Processes.process_hash
+  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path
+  Processes.user Processes.user_id Processes.vendor_product | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `drop_dm_object_name(Processes)` | lookup
+  attacker_tools attacker_tool_names AS process_name OUTPUT description | search description
+  !=false| `attacker_tools_on_endpoint_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -70,6 +75,7 @@ tags:
   - SamSam Ransomware
   - CISA AA22-264A
   - Compromised Windows Host
+  - PHP-CGI RCE Attack on Japanese Organizations
   asset_type: Endpoint
   mitre_attack_id:
   - T1003
@@ -83,7 +89,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1595/attacker_scan_tools/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1595/attacker_scan_tools/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

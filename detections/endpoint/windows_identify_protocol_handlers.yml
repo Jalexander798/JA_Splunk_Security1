@@ -1,6 +1,6 @@
 name: Windows Identify Protocol Handlers
 id: bd5c311e-a6ea-48ae-a289-19a3398e3648
-version: 6
+version: 7
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production
@@ -18,11 +18,15 @@ data_source:
 - CrowdStrike ProcessRollup2
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime values(Processes.process) as process values(Processes.parent_process)
-  as parent_process from datamodel=Endpoint.Processes  by Processes.dest Processes.parent_process_name
-  Processes.user Processes.process_name Processes.process | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `drop_dm_object_name(Processes)` | lookup
-  windows_protocol_handlers handler AS process OUTPUT handler ishandler | where ishandler="TRUE"
-  | `windows_identify_protocol_handlers_filter`'
+  as parent_process from datamodel=Endpoint.Processes by Processes.action Processes.dest
+  Processes.original_file_name Processes.parent_process Processes.parent_process_exec
+  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name
+  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid
+  Processes.process_hash Processes.process_id Processes.process_integrity_level Processes.process_name
+  Processes.process_path Processes.user Processes.user_id Processes.vendor_product
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `drop_dm_object_name(Processes)`
+  | lookup windows_protocol_handlers handler AS process OUTPUT handler ishandler |
+  where ishandler="TRUE" | `windows_identify_protocol_handlers_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -58,7 +62,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/protocol_handlers/protocolhandlers.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059/protocol_handlers/protocolhandlers.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

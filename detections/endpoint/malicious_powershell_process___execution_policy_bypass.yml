@@ -1,6 +1,6 @@
 name: Malicious PowerShell Process - Execution Policy Bypass
 id: 9be56c82-b1cc-4318-87eb-d138afaaca39
-version: '11'
+version: '12'
 date: '2025-02-24'
 author: Rico Valdez, Mauricio Velazco, Splunk
 status: production
@@ -21,7 +21,13 @@ search: '| tstats `security_content_summariesonly` values(Processes.process_id) 
   process_id, values(Processes.parent_process_id) as parent_process_id values(Processes.process)
   as process min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Processes
   where `process_powershell` (Processes.process="* -ex*" AND Processes.process="*
-  bypass *") by Processes.process_id, Processes.user, Processes.dest | `drop_dm_object_name(Processes)`
+  bypass *") 
+  by Processes.action Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec 
+  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name 
+  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid Processes.process_hash 
+  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path 
+  Processes.user Processes.user_id Processes.vendor_product 
+  | `drop_dm_object_name(Processes)`
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `malicious_powershell_process___execution_policy_bypass_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
@@ -61,12 +67,12 @@ rba:
 tags:
   analytic_story:
   - China-Nexus Threat Activity
+  - AsyncRAT
+  - DarkCrystal RAT
+  - Volt Typhoon
+  - Salt Typhoon
   - HAFNIUM Group
   - DHS Report TA18-074A
-  - DarkCrystal RAT
-  - AsyncRAT
-  - Earth Estries
-  - Volt Typhoon
   asset_type: Endpoint
   mitre_attack_id:
   - T1059.001

@@ -1,6 +1,6 @@
 name: WMI Recon Running Process Or Services
 id: b5cd5526-cce7-11eb-b3bd-acde48001122
-version: 6
+version: 7
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 status: production
@@ -16,10 +16,10 @@ description: The following analytic identifies suspicious PowerShell script exec
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText= "*SELECT*" AND (ScriptBlockText="*Win32_Process*"
-  OR ScriptBlockText="*Win32_Service*") | stats count min(_time) as firstTime max(_time)
-  as lastTime by EventCode ScriptBlockText Computer UserID | rename Computer as dest
-  | rename UserID as user | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `wmi_recon_running_process_or_services_filter`'
+  OR ScriptBlockText="*Win32_Service*") | fillnull | stats count min(_time) as firstTime
+  max(_time) as lastTime by dest signature signature_id user_id vendor_product EventID
+  Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `wmi_recon_running_process_or_services_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
   https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.
@@ -30,13 +30,13 @@ references:
 - https://github.com/trustedsec/SysmonCommunityGuide/blob/master/chapters/WMI-events.md
 - https://in.security/2019/04/03/an-intro-into-abusing-and-identifying-wmi-event-subscriptions-for-persistence/
 drilldown_searches:
-- name: View the detection results for - "$dest$" and "$user$"
-  search: '%original_detection_search% | search  dest = "$dest$" user = "$user$"'
+- name: View the detection results for - "$dest$" and "$user_id$"
+  search: '%original_detection_search% | search  dest = "$dest$" user_id = "$user_id$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$dest$" and "$user$"
+- name: View risk events for the last 7 days for - "$dest$" and "$user_id$"
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$",
-    "$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
+    "$user_id$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
     as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
     Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
     as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
@@ -44,14 +44,14 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Suspicious powerShell script execution by $user$ on $dest$ via EventCode
+  message: Suspicious powerShell script execution by $user_id$ on $dest$ via EventCode
     4104, where WMI is performing an event query looking for running processes or
     running services
   risk_objects:
   - field: dest
     type: system
     score: 20
-  - field: user
+  - field: user_id
     type: user
     score: 20
   threat_objects: []
@@ -71,7 +71,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/win32process.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/win32process.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

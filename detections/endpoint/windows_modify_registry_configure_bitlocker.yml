@@ -1,6 +1,6 @@
 name: Windows Modify Registry Configure BitLocker
 id: bd1c770f-1b55-411e-b49e-20d07bcac5f8
-version: 3
+version: 4
 date: '2024-11-13'
 author: Teoderick Contreras, Splunk
 data_source:
@@ -19,10 +19,12 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   Registry.registry_value_name IN("EnableBDEWithNoTPM", "EnableNonTPM", "UseAdvancedStartup")
   Registry.registry_value_data = 0x00000001) OR (Registry.registry_path= "*\\Policies\\Microsoft\\FVE\\*"
   Registry.registry_value_name IN("UsePIN", "UsePartialEncryptionKey", "UseTPM", "UseTPMKey",
-  "UseTPMKeyPIN", "UseTPMPIN") Registry.registry_value_data = 0x00000002) by Registry.registry_key_name
-  Registry.user Registry.registry_path Registry.registry_value_data Registry.action
-  Registry.dest Registry.registry_value_name | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `windows_modify_registry_configure_bitlocker_filter`'
+  "UseTPMKeyPIN", "UseTPMPIN") Registry.registry_value_data = 0x00000002) by Registry.action
+  Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path
+  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name
+  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product
+  | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `windows_modify_registry_configure_bitlocker_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
   on process that include the name of the process responsible for the changes from
   your endpoints into the `Endpoint` datamodel in the `Processes` node. In addition,
@@ -67,7 +69,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/bitlocker_registry_setting//fve-reg.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/bitlocker_registry_setting//fve-reg.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

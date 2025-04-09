@@ -1,6 +1,6 @@
 name: Detect Mimikatz With PowerShell Script Block Logging
 id: 8148c29c-c952-11eb-9255-acde48001122
-version: 6
+version: 7
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production
@@ -16,10 +16,10 @@ description: The following analytic detects the execution of Mimikatz commands v
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText IN (*mimikatz*, *-dumpcr*, *sekurlsa::pth*,
-  *kerberos::ptt*, *kerberos::golden*) | stats count min(_time) as firstTime max(_time)
-  as lastTime by Opcode Computer UserID EventCode ScriptBlockText | rename UserID
-  as user | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `detect_mimikatz_with_powershell_script_block_logging_filter`'
+  *kerberos::ptt*, *kerberos::golden*) | fillnull | stats count min(_time) as firstTime
+  max(_time) as lastTime by dest signature signature_id user_id vendor_product EventID
+  Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `detect_mimikatz_with_powershell_script_block_logging_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
   https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.
@@ -47,12 +47,12 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: The following behavior was identified and typically related to MimiKatz
-    being loaded within the context of PowerShell on $Computer$ by $user$.
+    being loaded within the context of PowerShell on $dest$ by $user_id$.
   risk_objects:
-  - field: user
+  - field: user_id
     type: user
     score: 90
-  - field: Computer
+  - field: dest
     type: system
     score: 90
   threat_objects: []
@@ -77,7 +77,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/credaccess-powershell.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/credaccess-powershell.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog
