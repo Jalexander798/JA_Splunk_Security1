@@ -1,6 +1,6 @@
 name: AWS ECR Container Scanning Findings High
 id: 30a0e9f8-f1dd-4f9d-8fc2-c622461d781c
-version: 7
+version: 8
 date: '2025-04-10'
 author: Patrick Bareiss, Splunk
 status: production

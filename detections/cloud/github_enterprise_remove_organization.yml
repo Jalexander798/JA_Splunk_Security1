@@ -1,6 +1,6 @@
 name: GitHub Enterprise Remove Organization
 id: 94cb89aa-aec1-4585-91b1-affcdacf357e
-version: 1
+version: 2
 date: '2025-04-10'
 author: Patrick Bareiss, Splunk
 status: production

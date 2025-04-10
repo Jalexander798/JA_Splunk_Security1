@@ -1,6 +1,6 @@
 name: Kubernetes Node Port Creation
 id: d7fc865e-b8a1-4029-a960-cf4403b821b6
-version: 4
+version: 5
 date: '2025-04-10'
 author: Patrick Bareiss, Splunk
 status: production

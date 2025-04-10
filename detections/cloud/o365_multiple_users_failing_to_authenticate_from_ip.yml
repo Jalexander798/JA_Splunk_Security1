@@ -1,6 +1,6 @@
 name: O365 Multiple Users Failing To Authenticate From Ip
 id: 8d486e2e-3235-4cfe-ac35-0d042e24ecb4
-version: 8
+version: 9
 date: '2025-04-10'
 author: Mauricio Velazco, Splunk
 status: production

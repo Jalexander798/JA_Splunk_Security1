@@ -1,6 +1,6 @@
 name: O365 Email Send Attachments Excessive Volume
 id: 70a050a2-8537-488a-a628-b60a9558d96a
-version: 1
+version: 2
 date: '2025-04-10'
 author: Steven Dick
 status: production

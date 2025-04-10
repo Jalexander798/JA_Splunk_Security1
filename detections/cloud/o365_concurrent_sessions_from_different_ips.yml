@@ -1,6 +1,6 @@
 name: O365 Concurrent Sessions From Different Ips
 id: 58e034de-1f87-4812-9dc3-a4f68c7db930
-version: 6
+version: 7
 date: '2025-04-10'
 author: Mauricio Velazco, Splunk
 status: production

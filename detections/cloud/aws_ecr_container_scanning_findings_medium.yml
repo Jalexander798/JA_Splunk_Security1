@@ -1,6 +1,6 @@
 name: AWS ECR Container Scanning Findings Medium
 id: 0b80e2c8-c746-4ddb-89eb-9efd892220cf
-version: 7
+version: 8
 date: '2025-04-10'
 author: Patrick Bareiss, Splunk
 status: production

@@ -1,6 +1,6 @@
 name: GitHub Enterprise Disable Classic Branch Protection Rule
 id: 372176ba-450c-4abd-9b86-419bb44c1b76
-version: 1
+version: 2
 date: '2025-04-10'
 author: Patrick Bareiss, Splunk
 status: production

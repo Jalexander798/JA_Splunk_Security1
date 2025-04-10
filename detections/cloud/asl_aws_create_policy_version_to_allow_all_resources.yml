@@ -1,6 +1,6 @@
 name: ASL AWS Create Policy Version to allow all resources
 id: 22cc7a62-3884-48c4-82da-592b8199b72f
-version: 3
+version: 4
 date: '2025-04-10'
 author: Patrick Bareiss, Splunk
 status: production

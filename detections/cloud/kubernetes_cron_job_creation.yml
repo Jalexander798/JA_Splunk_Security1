@@ -1,6 +1,6 @@
 name: Kubernetes Cron Job Creation
 id: 5984dbe8-572f-47d7-9251-3dff6c3f0c0d
-version: 4
+version: 5
 date: '2025-04-10'
 author: Patrick Bareiss, Splunk
 status: production

@@ -1,6 +1,6 @@
 name: GitHub Enterprise Register Self Hosted Runner
 id: b27685a2-8826-4123-ab78-2d9d0d419ed0
-version: 1
+version: 2
 date: '2025-04-10'
 author: Patrick Bareiss, Splunk
 status: production

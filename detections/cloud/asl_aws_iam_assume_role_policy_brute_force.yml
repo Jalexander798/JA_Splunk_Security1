@@ -1,6 +1,6 @@
 name: ASL AWS IAM Assume Role Policy Brute Force
 id: 726959fe-316d-445c-a584-fa187d64e295
-version: 2
+version: 6
 date: '2025-04-10'
 author: Patrick Bareiss, Splunk
 status: production

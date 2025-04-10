@@ -1,6 +1,6 @@
 name: ASL AWS SAML Update identity provider
 id: 635c26cc-0fd1-4098-8ec9-824bf9544b11
-version: 2
+version: 8
 date: '2025-04-10'
 author: Patrick Bareiss, Splunk
 status: production

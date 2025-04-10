@@ -1,6 +1,6 @@
 name: Kubernetes Create or Update Privileged Pod
 id: 3c6bd734-334d-4818-ae7c-5234313fc5da
-version: 4
+version: 5
 date: '2025-04-10'
 author: Patrick Bareiss, Splunk
 status: production

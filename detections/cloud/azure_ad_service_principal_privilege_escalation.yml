@@ -1,6 +1,6 @@
 name: Azure AD Service Principal Privilege Escalation
 id: 29eb39d3-2bc8-49cc-99b3-35593191a588
-version: 4
+version: 5
 date: '2025-04-10'
 author: Dean Luxton
 data_source:

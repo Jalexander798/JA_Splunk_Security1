@@ -1,6 +1,6 @@
 name: AWS High Number Of Failed Authentications From Ip
 id: f75b7f1a-b8eb-4975-a214-ff3e0a944757
-version: 6
+version: 7
 date: '2025-04-10'
 author: Bhavin Patel, Splunk
 status: production

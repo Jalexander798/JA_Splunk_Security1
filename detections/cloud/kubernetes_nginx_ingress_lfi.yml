@@ -1,6 +1,6 @@
 name: Kubernetes Nginx Ingress LFI
 id: 0f83244b-425b-4528-83db-7a88c5f66e48
-version: 6
+version: 7
 date: '2025-04-10'
 author: Patrick Bareiss, Splunk
 status: production

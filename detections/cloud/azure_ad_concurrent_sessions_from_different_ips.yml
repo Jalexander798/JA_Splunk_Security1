@@ -1,6 +1,6 @@
 name: Azure AD Concurrent Sessions From Different Ips
 id: a9126f73-9a9b-493d-96ec-0dd06695490d
-version: 9
+version: 10
 date: '2025-04-10'
 author: Mauricio Velazco, Bhavin Patel, Splunk
 status: production

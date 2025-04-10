@@ -1,6 +1,6 @@
 name: Kubernetes Pod With Host Network Attachment
 id: cce357cf-43a4-494a-814b-67cea90fe990
-version: 4
+version: 5
 date: '2025-04-10'
 author: Patrick Bareiss, Splunk
 status: production

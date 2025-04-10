@@ -1,6 +1,6 @@
 name: O365 Exfiltration via File Access
 id: 80b44ae2-60ff-43f1-8e56-34beb49a340a
-version: 1
+version: 2
 date: '2025-04-10'
 author: Steven Dick
 status: production

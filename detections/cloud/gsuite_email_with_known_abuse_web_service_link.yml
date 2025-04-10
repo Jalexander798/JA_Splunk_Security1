@@ -1,6 +1,6 @@
 name: Gsuite Email With Known Abuse Web Service Link
 id: 8630aa22-042b-11ec-af39-acde48001122
-version: 5
+version: 6
 date: '2025-04-10'
 author: Teoderick Contreras, Splunk
 status: production

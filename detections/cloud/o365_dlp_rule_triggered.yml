@@ -1,6 +1,6 @@
 name: O365 DLP Rule Triggered
 id: 63a8a537-36fd-4aac-a3ea-1a96afd2c871
-version: 6
+version: 7
 date: '2025-04-10'
 author: Steven Dick
 status: production

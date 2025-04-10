@@ -1,6 +1,6 @@
 name: O365 Multiple Failed MFA Requests For User
 id: fd22124e-dbac-4744-a8ce-be10d8ec3e26
-version: 6
+version: 7
 date: '2025-04-10'
 author: Mauricio Velazco, Splunk
 status: production

@@ -1,6 +1,6 @@
 name: Cloud Security Groups Modifications by User
 id: cfe7cca7-2746-4bdf-b712-b01ed819b9de
-version: 4
+version: 5
 date: '2025-04-10'
 author: Bhavin Patel, Splunk
 data_source:

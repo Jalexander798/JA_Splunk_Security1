@@ -1,6 +1,6 @@
 name: AWS Defense Evasion Stop Logging Cloudtrail
 id: 8a2f3ca2-4eb5-4389-a549-14063882e537
-version: 6
+version: 7
 date: '2025-04-10'
 author: Bhavin Patel, Splunk
 status: production

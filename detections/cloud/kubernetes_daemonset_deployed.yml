@@ -1,6 +1,6 @@
 name: Kubernetes DaemonSet Deployed
 id: bf39c3a3-b191-4d42-8738-9d9797bd0c3a
-version: 4
+version: 5
 date: '2025-04-10'
 author: Patrick Bareiss, Splunk
 status: production
