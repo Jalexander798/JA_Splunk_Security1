@@ -1,7 +1,7 @@
 name: Windows RunMRU Command Execution
 id: a15aa1ab-2b79-467f-8201-65e0f32d5b1a
-version: 4
-date: '2025-02-17'
+version: 5
+date: '2025-04-10'
 author: Nasreddine Bencherchali, Michael Haag, Splunk
 data_source:
 - Sysmon EventID 12
