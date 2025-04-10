@@ -1,7 +1,7 @@
 name: O365 BEC Email Hiding Rule Created
 id: 603ebac2-f157-4df7-a6ac-34e8d0350f86
 version: 1
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: 0xC0FFEEEE, Github Community
 type: TTP
 status: production

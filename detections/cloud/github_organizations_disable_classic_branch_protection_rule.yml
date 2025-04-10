@@ -1,7 +1,7 @@
 name: GitHub Organizations Disable Classic Branch Protection Rule
 id: 33cffee0-41ee-402e-a238-d37825f2d788
 version: 1
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: Patrick Bareiss, Splunk
 status: production
 type: Anomaly

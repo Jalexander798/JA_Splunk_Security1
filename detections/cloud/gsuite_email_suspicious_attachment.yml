@@ -1,7 +1,7 @@
 name: GSuite Email Suspicious Attachment
 id: 6d663014-fe92-11eb-ab07-acde48001122
 version: 5
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

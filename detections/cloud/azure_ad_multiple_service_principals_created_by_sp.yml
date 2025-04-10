@@ -1,7 +1,7 @@
 name: Azure AD Multiple Service Principals Created by SP
 id: 66cb378f-234d-4fe1-bb4c-e7878ff6b017
 version: 8
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: Mauricio Velazco, Splunk
 data_source:
 - Azure Active Directory Add service principal

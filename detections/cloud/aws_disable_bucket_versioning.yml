@@ -1,7 +1,7 @@
 name: AWS Disable Bucket Versioning
 id: 657902a9-987d-4879-a1b2-e7a65512824b
 version: 5
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: Bhavin Patel, Splunk
 status: production
 type: Anomaly

@@ -1,7 +1,7 @@
 name: O365 New Forwarding Mailflow Rule Created
 id: 289ed0a1-4c78-4a43-9321-44ea2e089c14
 version: 5
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: Mauricio Velazco, Splunk
 data_source: []
 type: TTP

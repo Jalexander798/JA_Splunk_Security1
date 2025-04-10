@@ -1,7 +1,7 @@
 name: GitHub Enterprise Repository Deleted
 id: f709e736-3e6c-492f-b865-bc7696cc24a7
 version: 1
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: Patrick Bareiss, Splunk
 status: production
 type: Anomaly

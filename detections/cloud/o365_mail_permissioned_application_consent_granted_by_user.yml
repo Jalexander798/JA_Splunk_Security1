@@ -1,7 +1,7 @@
 name: O365 Mail Permissioned Application Consent Granted by User
 id: fddad083-cdf5-419d-83c6-baa85e329595
 version: 5
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

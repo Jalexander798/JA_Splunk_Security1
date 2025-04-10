@@ -1,7 +1,7 @@
 name: O365 Email Hard Delete Excessive Volume
 id: c7fe0949-348a-41ce-8f17-a09a7fe5fd7d
 version: 1
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: Steven Dick
 status: production
 type: Anomaly

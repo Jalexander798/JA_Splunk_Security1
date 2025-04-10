@@ -1,7 +1,7 @@
 name: GitHub Organizations Disable 2FA Requirement
 id: 3ed0d6ba-4791-4fa8-a1ef-403e438c7033
 version: 1
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: Patrick Bareiss, Splunk
 status: production
 type: Anomaly

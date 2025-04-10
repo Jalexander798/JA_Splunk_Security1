@@ -1,7 +1,7 @@
 name: O365 Multiple Service Principals Created by User
 id: a34e65d0-54de-4b02-9db8-5a04522067f6
 version: 5
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: Mauricio Velazco, Splunk
 data_source:
 - O365 Add service principal.

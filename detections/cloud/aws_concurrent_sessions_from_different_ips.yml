@@ -1,7 +1,7 @@
 name: AWS Concurrent Sessions From Different Ips
 id: 51c04fdb-2746-465a-b86e-b413a09c9085
 version: 6
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP

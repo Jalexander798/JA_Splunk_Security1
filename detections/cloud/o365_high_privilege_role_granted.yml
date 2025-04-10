@@ -1,7 +1,7 @@
 name: O365 High Privilege Role Granted
 id: e78a1037-4548-4072-bb1b-ad99ae416426
 version: 6
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

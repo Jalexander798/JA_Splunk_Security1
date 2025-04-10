@@ -1,7 +1,7 @@
 name: AWS Multiple Failed MFA Requests For User
 id: 1fece617-e614-4329-9e61-3ba228c0f353
 version: 6
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: Bhavin Patel
 status: production
 type: Anomaly

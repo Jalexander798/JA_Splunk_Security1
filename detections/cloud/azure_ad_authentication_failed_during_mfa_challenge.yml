@@ -1,7 +1,7 @@
 name: Azure AD Authentication Failed During MFA Challenge
 id: e62c9c2e-bf51-4719-906c-3074618fcc1c
 version: 9
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk, 0xC0FFEEEE
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: Azure AD Global Administrator Role Assigned
 id: 825fed20-309d-4fd1-8aaf-cd49c1bb093c
 version: 9
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: Gowthamaraj Rajendran, Mauricio Velazco, Splunk
 status: production
 type: TTP

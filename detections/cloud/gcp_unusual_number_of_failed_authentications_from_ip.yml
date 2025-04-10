@@ -1,7 +1,7 @@
 name: GCP Unusual Number of Failed Authentications From Ip
 id: bd8097ed-958a-4873-87d9-44f2b4d85705
 version: 6
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: Bhavin Patel, Splunk
 status: production
 type: Anomaly

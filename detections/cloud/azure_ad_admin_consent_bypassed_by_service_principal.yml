@@ -1,7 +1,7 @@
 name: Azure AD Admin Consent Bypassed by Service Principal
 id: 9d4fea43-9182-4c5a-ada8-13701fd5615d
 version: 8
-date: '''2025-04-10'''
+date: '2025-04-10'
 author: Mauricio Velazco, Splunk
 data_source:
 - Azure Active Directory Add app role assignment to service principal
