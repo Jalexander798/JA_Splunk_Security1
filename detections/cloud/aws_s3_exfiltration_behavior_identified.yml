@@ -1,7 +1,7 @@
 name: AWS S3 Exfiltration Behavior Identified
 id: 85096389-a443-42df-b89d-200efbb1b560
 version: 5
-date: '2024-11-14'
+date: '''2025-04-10'''
 author: Bhavin Patel, Splunk
 status: production
 type: Correlation
@@ -40,13 +40,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$risk_object$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$risk_object$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$risk_object$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 tags:
   analytic_story:
@@ -63,7 +63,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1537/aws_exfil_risk_events/aws_risk.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1537/aws_exfil_risk_events/aws_risk.log
     sourcetype: stash
     source: aws_exfil

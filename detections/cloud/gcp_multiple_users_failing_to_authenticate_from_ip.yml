@@ -1,7 +1,7 @@
 name: GCP Multiple Users Failing To Authenticate From Ip
 id: da20828e-d6fb-4ee5-afb7-d0ac200923d5
 version: 6
-date: '2025-02-10'
+date: '''2025-04-10'''
 author: Bhavin Patel, Splunk
 status: production
 type: Anomaly
@@ -38,13 +38,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$tried_accounts$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$tried_accounts$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$tried_accounts$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: 'Multiple failed login attempts (Count: $unique_accounts$) against users
@@ -72,7 +72,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/gcp_gws_multiple_login_failure/gws_login.json
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/gcp_gws_multiple_login_failure/gws_login.json
     source: gws_login
     sourcetype: gws:reports:login

@@ -1,7 +1,7 @@
 name: AWS IAM AccessDenied Discovery Events
 id: 3e1f1568-9633-11eb-a69c-acde48001122
 version: 6
-date: '2024-11-14'
+date: '''2025-04-10'''
 author: Michael Haag, Splunk
 status: production
 type: Anomaly
@@ -15,11 +15,11 @@ description: The following analytic identifies excessive AccessDenied events wit
 data_source:
 - AWS CloudTrail
 search: '`cloudtrail` (errorCode = "AccessDenied") user_type=IAMUser (userAgent!=*.amazonaws.com)
-  | bucket _time span=1h 
-  | rename user_name as user
-  | stats count as failures min(_time) as firstTime max(_time) as lastTime, dc(signature) as methods, dc(dest) as sources values(signature) as signature values(dest) as dest by src, user, vendor_account vendor_region, vendor_product
-  | where failures >= 5 and methods >= 1 and sources >= 1 
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` 
+  | bucket _time span=1h | rename user_name as user | stats count as failures min(_time)
+  as firstTime max(_time) as lastTime, dc(signature) as methods, dc(dest) as sources
+  values(signature) as signature values(dest) as dest by src, user, vendor_account
+  vendor_region, vendor_product | where failures >= 5 and methods >= 1 and sources
+  >= 1 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `aws_iam_accessdenied_discovery_events_filter`'
 how_to_implement: The Splunk AWS Add-on and Splunk App for AWS is required to utilize
   this data. The search requires AWS CloudTrail logs.
@@ -34,17 +34,17 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
-  message: User $user$ is seen to perform excessive number of discovery
-    related api calls- $failures$, within an hour where the access was denied.
+  message: User $user$ is seen to perform excessive number of discovery related api
+    calls- $failures$, within an hour where the access was denied.
   risk_objects:
   - field: user
     type: user
@@ -66,7 +66,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1580/aws_iam_accessdenied_discovery_events/aws_iam_accessdenied_discovery_events.json
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1580/aws_iam_accessdenied_discovery_events/aws_iam_accessdenied_discovery_events.json
     sourcetype: aws:cloudtrail
     source: aws_cloudtrail

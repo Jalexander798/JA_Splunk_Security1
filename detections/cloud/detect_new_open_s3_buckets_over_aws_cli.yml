@@ -1,7 +1,7 @@
 name: Detect New Open S3 Buckets over AWS CLI
 id: 39c61d09-8b30-4154-922b-2d0a694ecc22
 version: 5
-date: '2024-11-14'
+date: '''2025-04-10'''
 author: Patrick Bareiss, Splunk
 status: production
 type: TTP
@@ -39,13 +39,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: User $user$ has created an open/public bucket $bucketName$ using AWS CLI
@@ -71,7 +71,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1530/aws_s3_public_bucket/aws_cloudtrail_events.json
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1530/aws_s3_public_bucket/aws_cloudtrail_events.json
     sourcetype: aws:cloudtrail
     source: aws_cloudtrail

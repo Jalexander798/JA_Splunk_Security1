@@ -1,7 +1,7 @@
 name: AWS SAML Update identity provider
 id: 2f0604c6-6030-11eb-ae93-0242ac130002
 version: 7
-date: '2024-11-14'
+date: '''2025-04-10'''
 author: Rod Soto, Splunk
 status: production
 type: TTP
@@ -15,10 +15,10 @@ description: The following analytic detects updates to the SAML provider in AWS.
   data.
 data_source:
 - AWS CloudTrail UpdateSAMLProvider
-search: '`cloudtrail` eventName=UpdateSAMLProvider 
-  | rename user_name as user
-  | stats count min(_time) as firstTime max(_time) as lastTime values(requestParameters.sAMLProviderArn) as request_parameters by signature dest user user_agent src vendor_account vendor_region vendor_product 
-  | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`
+search: '`cloudtrail` eventName=UpdateSAMLProvider | rename user_name as user | stats
+  count min(_time) as firstTime max(_time) as lastTime values(requestParameters.sAMLProviderArn)
+  as request_parameters by signature dest user user_agent src vendor_account vendor_region
+  vendor_product | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`
   |`aws_saml_update_identity_provider_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
   search works with AWS CloudTrail logs.
@@ -35,17 +35,17 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
-  message: User $user$ from IP address $src$ has trigged
-    an event $signature$ to update the SAML provider to $request_parameters$
+  message: User $user$ from IP address $src$ has trigged an event $signature$ to update
+    the SAML provider to $request_parameters$
   risk_objects:
   - field: user
     type: user
@@ -67,7 +67,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/update_saml_provider/update_saml_provider.json
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/update_saml_provider/update_saml_provider.json
     sourcetype: aws:cloudtrail
     source: aws_cloudtrail

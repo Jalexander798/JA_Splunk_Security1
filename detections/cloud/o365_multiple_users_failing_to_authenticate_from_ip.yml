@@ -1,7 +1,7 @@
 name: O365 Multiple Users Failing To Authenticate From Ip
 id: 8d486e2e-3235-4cfe-ac35-0d042e24ecb4
 version: 8
-date: '2025-02-10'
+date: '''2025-04-10'''
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -16,12 +16,11 @@ description: The following analytic identifies instances where more than 10 uniq
   multiple accounts, potentially leading to unauthorized access. Immediate action
   is required to block or monitor the suspicious IP and notify affected users to enhance
   their security measures.
-search: '`o365_management_activity` Workload=AzureActiveDirectory Operation=UserLoginFailed ErrorNumber=50126 
-  | bucket span=5m _time 
-  | fillnull 
-  | stats dc(user) as unique_accounts values(user) as user values(LogonError) as LogonError values(signature) as signature values(UserAgent) as user_agent values(dest) as dest by _time src vendor_account vendor_product
-  | where unique_accounts > 10 
-  | `o365_multiple_users_failing_to_authenticate_from_ip_filter`'
+search: '`o365_management_activity` Workload=AzureActiveDirectory Operation=UserLoginFailed
+  ErrorNumber=50126 | bucket span=5m _time | fillnull | stats dc(user) as unique_accounts
+  values(user) as user values(LogonError) as LogonError values(signature) as signature
+  values(UserAgent) as user_agent values(dest) as dest by _time src vendor_account
+  vendor_product | where unique_accounts > 10 | `o365_multiple_users_failing_to_authenticate_from_ip_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: A source Ip failing to authenticate with multiple users in
@@ -37,13 +36,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: Source Ip $src$ failed to authenticate with 20 users within 5 minutes.
@@ -71,7 +70,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/o365_multiple_users_from_ip/o365_multiple_users_from_ip.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/o365_multiple_users_from_ip/o365_multiple_users_from_ip.log
     source: o365
     sourcetype: o365:management:activity

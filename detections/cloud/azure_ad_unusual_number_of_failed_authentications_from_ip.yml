@@ -1,7 +1,7 @@
 name: Azure AD Unusual Number of Failed Authentications From Ip
 id: 3d8d3a36-93b8-42d7-8d91-c5f24cec223d
 version: 8
-date: '2025-02-10'
+date: '''2025-04-10'''
 author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
 status: production
 type: Anomaly
@@ -15,15 +15,13 @@ description: The following analytic identifies a single source IP failing to aut
   compromise of sensitive information.
 data_source:
 - Azure Active Directory
-search: '`azure_monitor_aad` category=SignInLogs properties.status.errorCode=50126 properties.authenticationDetails{}.succeeded=false 
-  | rename properties.* as * 
-  | bucket span=5m _time 
-  | stats dc(userPrincipalName) AS unique_accounts values(userPrincipalName) as userPrincipalName values(dest) as dest  values(user) as user by _time, src, vendor_account, vendor_product
-  | eventstats avg(unique_accounts) as ip_avg, stdev(unique_accounts) as ip_std by src
-  | eval upperBound=(ip_avg+ip_std*3) 
-  | eval isOutlier=if(unique_accounts > 10 and unique_accounts >= upperBound, 1,0) 
-  | where isOutlier = 1 
-  | `azure_ad_unusual_number_of_failed_authentications_from_ip_filter`'
+search: '`azure_monitor_aad` category=SignInLogs properties.status.errorCode=50126
+  properties.authenticationDetails{}.succeeded=false | rename properties.* as * |
+  bucket span=5m _time | stats dc(userPrincipalName) AS unique_accounts values(userPrincipalName)
+  as userPrincipalName values(dest) as dest  values(user) as user by _time, src, vendor_account,
+  vendor_product | eventstats avg(unique_accounts) as ip_avg, stdev(unique_accounts)
+  as ip_std by src | eval upperBound=(ip_avg+ip_std*3) | eval isOutlier=if(unique_accounts
+  > 10 and unique_accounts >= upperBound, 1,0) | where isOutlier = 1 | `azure_ad_unusual_number_of_failed_authentications_from_ip_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment
@@ -42,13 +40,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$userPrincipalName$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$userPrincipalName$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$userPrincipalName$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: Possible Password Spraying attack against Azure AD from source ip $src$
@@ -75,7 +73,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/password_spraying_azuread/azuread_signin.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/password_spraying_azuread/azuread_signin.log
     source: Azure AD
     sourcetype: azure:monitor:aad

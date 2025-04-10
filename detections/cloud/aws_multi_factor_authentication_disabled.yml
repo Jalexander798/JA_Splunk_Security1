@@ -1,7 +1,7 @@
 name: AWS Multi-Factor Authentication Disabled
 id: 374832b1-3603-420c-b456-b373e24d34c0
 version: 6
-date: '2025-02-10'
+date: '''2025-04-10'''
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -16,8 +16,8 @@ data_source:
 - AWS CloudTrail DeleteVirtualMFADevice
 - AWS CloudTrail DeactivateMFADevice
 search: '`cloudtrail` (eventName= DeleteVirtualMFADevice OR eventName=DeactivateMFADevice)
-  | rename user_name as user
-  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user user_agent src vendor_account vendor_region vendor_product
+  | rename user_name as user | stats count min(_time) as firstTime max(_time) as lastTime
+  by signature dest user user_agent src vendor_account vendor_region vendor_product
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `aws_multi_factor_authentication_disabled_filter`'
 how_to_implement: The Splunk AWS Add-on is required to utilize this data. The search
   requires AWS CloudTrail logs.
@@ -34,16 +34,15 @@ drilldown_searches:
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$vendor_account$" and "$user$"
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$vendor_account$",
-    "$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
-    as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
-    Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
-    as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
-    by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+    "$user$")  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
-  message: User $user$ has disabled Multi-Factor authentication for AWS account
-    $vendor_account$
+  message: User $user$ has disabled Multi-Factor authentication for AWS account $vendor_account$
   risk_objects:
   - field: user
     type: user
@@ -67,7 +66,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1621/aws_mfa_disabled/cloudtrail.json
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1621/aws_mfa_disabled/cloudtrail.json
     sourcetype: aws:cloudtrail
     source: aws_cloudtrail

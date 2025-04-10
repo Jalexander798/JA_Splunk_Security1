@@ -1,7 +1,7 @@
 name: Azure AD Privileged Role Assigned to Service Principal
 id: 5dfaa3d3-e2e4-4053-8252-16d9ee528c41
 version: 8
-date: '2025-02-10'
+date: '''2025-04-10'''
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -15,21 +15,15 @@ description: The following analytic detects the assignment of privileged roles t
   and ensures the security of Azure environments.
 data_source:
 - Azure Active Directory Add member to role
-search: '`azure_monitor_aad` operationName="Add member to role" 
-  | rename properties.* as * 
-  | search "targetResources{}.type"=ServicePrincipal 
-  | rename initiatedBy.user.userPrincipalName as initiatedBy 
-  | rename targetResources{}.modifiedProperties{}.newValue as roles 
-  | eval role=mvindex(roles,1) 
-  | rename targetResources{}.displayName as apps 
-  | eval displayName=mvindex(apps,0) 
-  | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product displayName initiatedBy result role signature
-  | lookup privileged_azure_ad_roles azureadrole AS role OUTPUT isprvilegedadrole description 
-  | search isprvilegedadrole = True 
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)` 
-  | `azure_ad_privileged_role_assigned_to_service_principal_filter`'
+search: '`azure_monitor_aad` operationName="Add member to role" | rename properties.*
+  as * | search "targetResources{}.type"=ServicePrincipal | rename initiatedBy.user.userPrincipalName
+  as initiatedBy | rename targetResources{}.modifiedProperties{}.newValue as roles
+  | eval role=mvindex(roles,1) | rename targetResources{}.displayName as apps | eval
+  displayName=mvindex(apps,0) | fillnull | stats count min(_time) as firstTime max(_time)
+  as lastTime by dest user src vendor_account vendor_product displayName initiatedBy
+  result role signature | lookup privileged_azure_ad_roles azureadrole AS role OUTPUT
+  isprvilegedadrole description | search isprvilegedadrole = True | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `azure_ad_privileged_role_assigned_to_service_principal_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment.
@@ -45,13 +39,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$initiatedBy$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$initiatedBy$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$initiatedBy$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: A privileged Azure AD role was assigned to the Service Principal $displayName$
@@ -76,7 +70,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.003/azure_ad_privileged_role_serviceprincipal/azure-audit.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.003/azure_ad_privileged_role_serviceprincipal/azure-audit.log
     source: Azure AD
     sourcetype: azure:monitor:aad

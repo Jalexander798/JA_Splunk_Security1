@@ -1,7 +1,7 @@
 name: O365 OAuth App Mailbox Access via Graph API
 id: 9db0d5b0-4058-4cb7-baaf-77d8143539a2
 version: 6
-date: '2024-11-14'
+date: '''2025-04-10'''
 author: Mauricio Velazco, Splunk
 status: production
 data_source:
@@ -14,12 +14,11 @@ description: The following analytic detects when emails are accessed in Office 3
   access to emails can lead to data breaches and information theft. If confirmed malicious,
   attackers could exfiltrate sensitive information, compromise user accounts, and
   further infiltrate the organization's network.
-search: '`o365_management_activity` Workload=Exchange Operation=MailItemsAccessed AppId=* AppId=00000003-0000-0000-c000-000000000000 
-  | fillnull 
-  | stats count earliest(_time) as firstTime latest(_time) as lastTime values(ClientIPAddress) as src by user ClientAppId OperationCount AppId vendor_account vendor_product dest signature
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)` 
-  | `o365_oauth_app_mailbox_access_via_graph_api_filter`'
+search: '`o365_management_activity` Workload=Exchange Operation=MailItemsAccessed
+  AppId=* AppId=00000003-0000-0000-c000-000000000000 | fillnull | stats count earliest(_time)
+  as firstTime latest(_time) as lastTime values(ClientIPAddress) as src by user ClientAppId
+  OperationCount AppId vendor_account vendor_product dest signature | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `o365_oauth_app_mailbox_access_via_graph_api_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: OAuth applications may access mailboxes for legitimate purposes,
@@ -34,13 +33,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: An OAuth application identified with id $ClientAppId$ accesed mailboxes
@@ -65,7 +64,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114.002/o365_oauth_app_graph_mailbox_access/o365_oauth_app_graph_mailbox_access.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1114.002/o365_oauth_app_graph_mailbox_access/o365_oauth_app_graph_mailbox_access.log
     sourcetype: o365:management:activity
     source: o365

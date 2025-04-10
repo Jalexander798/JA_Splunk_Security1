@@ -1,7 +1,7 @@
 name: O365 Multiple Service Principals Created by User
 id: a34e65d0-54de-4b02-9db8-5a04522067f6
 version: 5
-date: '2024-11-14'
+date: '''2025-04-10'''
 author: Mauricio Velazco, Splunk
 data_source:
 - O365 Add service principal.
@@ -15,18 +15,14 @@ description: The following analytic identifies instances where a single user cre
   potentially leading to broader network infiltration or privilege escalation. If
   confirmed malicious, this behavior could allow attackers to gain persistent access,
   escalate privileges, or exfiltrate sensitive information.
-search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Add service principal.\" 
-  | bucket span=10m _time 
-  | eval len=mvcount('Actor{}.ID') 
-  | eval userType = mvindex('Actor{}.ID',len-1) 
-  | search userType = \"User\" 
-  | eval displayName = object 
-  | stats count earliest(_time) as firstTime latest(_time) as lastTime values(displayName) as displayName dc(displayName) as unique_apps values(user) as user values(src) as src 
-  by src_user vendor_account vendor_product dest signature
-  | where unique_apps > 3 
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)` 
-  | `o365_multiple_service_principals_created_by_user_filter`"
+search: '`o365_management_activity` Workload=AzureActiveDirectory Operation="Add service
+  principal." | bucket span=10m _time | eval len=mvcount(''Actor{}.ID'') | eval userType
+  = mvindex(''Actor{}.ID'',len-1) | search userType = "User" | eval displayName =
+  object | stats count earliest(_time) as firstTime latest(_time) as lastTime values(displayName)
+  as displayName dc(displayName) as unique_apps values(user) as user values(src) as
+  src by src_user vendor_account vendor_product dest signature | where unique_apps
+  > 3 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` |
+  `o365_multiple_service_principals_created_by_user_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: Certain users or applications may create multiple service principals
@@ -40,13 +36,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$src_user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$src_user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$src_user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: Multiple OAuth applications were created by $src_user$ in a short period
@@ -71,7 +67,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.003/o365_multiple_service_principals_created/o365_multiple_service_principals_created.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1136.003/o365_multiple_service_principals_created/o365_multiple_service_principals_created.log
     source: o365
     sourcetype: o365:management:activity

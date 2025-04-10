@@ -1,7 +1,7 @@
 name: O365 ApplicationImpersonation Role Assigned
 id: 49cdce75-f814-4d56-a7a4-c64ec3a481f2
 version: 6
-date: '2025-02-10'
+date: '''2025-04-10'''
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -15,12 +15,10 @@ description: The following analytic detects the assignment of the ApplicationImp
   malicious, an attacker could gain unauthorized access to sensitive information,
   manipulate mailbox data, and perform actions as a legitimate user, posing a severe
   security risk to the organization.
-search: '`o365_management_activity` Workload=Exchange Operation="New-ManagementRoleAssignment" Role=ApplicationImpersonation 
-  | rename User as target_user  
-  | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user src vendor_account vendor_product target_user 
-  | `security_content_ctime(lastTime)` 
-  | `o365_applicationimpersonation_role_assigned_filter`'
+search: '`o365_management_activity` Workload=Exchange Operation="New-ManagementRoleAssignment"
+  Role=ApplicationImpersonation | rename User as target_user | fillnull | stats count
+  min(_time) as firstTime max(_time) as lastTime by signature dest user src vendor_account
+  vendor_product target_user | `security_content_ctime(lastTime)` | `o365_applicationimpersonation_role_assigned_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: While infrequent, the ApplicationImpersonation role may be
@@ -37,12 +35,12 @@ drilldown_searches:
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$target_user$" and "$user$"
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$target_user$",
-    "$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
-    as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
-    Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
-    as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
-    by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+    "$user$")  | stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: $user$ granted the ApplicationImpersonation role to $target_user$
@@ -70,7 +68,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.002/application_impersonation_role_assigned/application_impersonation_role_assigned.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.002/application_impersonation_role_assigned/application_impersonation_role_assigned.log
     source: O365
     sourcetype: o365:management:activity

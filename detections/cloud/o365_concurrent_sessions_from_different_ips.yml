@@ -1,7 +1,7 @@
 name: O365 Concurrent Sessions From Different Ips
 id: 58e034de-1f87-4812-9dc3-a4f68c7db930
 version: 6
-date: '2024-11-14'
+date: '''2025-04-10'''
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -15,13 +15,11 @@ description: The following analytic identifies user sessions in Office 365 acces
   posing severe risks to organizational security.
 data_source:
 - O365 UserLoggedIn
-search: '`o365_management_activity` Workload=AzureActiveDirectory Operation=UserLoggedIn 
-  | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime values(src) as src by signature dest user vendor_account vendor_product 
-  | where mvcount(src) > 1 
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)` 
-  | `o365_concurrent_sessions_from_different_ips_filter`'
+search: '`o365_management_activity` Workload=AzureActiveDirectory Operation=UserLoggedIn
+  | fillnull | stats count min(_time) as firstTime max(_time) as lastTime values(src)
+  as src by signature dest user vendor_account vendor_product | where mvcount(src)
+  > 1 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` |
+  `o365_concurrent_sessions_from_different_ips_filter`'
 how_to_implement: You must install splunk Microsoft Office 365 add-on. This search
   works with o365:management:activity
 known_false_positives: Unknown
@@ -35,13 +33,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: User $user$ has logged in with the same session id from more than one unique
@@ -65,7 +63,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1185/o365_concurrent_sessions_from_different_ips/o365_concurrent_sessions_from_different_ips.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1185/o365_concurrent_sessions_from_different_ips/o365_concurrent_sessions_from_different_ips.log
     sourcetype: o365:management:activity
     source: o365

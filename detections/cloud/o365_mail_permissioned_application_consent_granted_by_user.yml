@@ -1,7 +1,7 @@
 name: O365 Mail Permissioned Application Consent Granted by User
 id: fddad083-cdf5-419d-83c6-baa85e329595
 version: 5
-date: '2024-11-14'
+date: '''2025-04-10'''
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -16,17 +16,14 @@ description: The following analytic identifies instances where a user grants con
   data access, email forwarding, or sending malicious emails from the compromised
   account. Validating the legitimacy of the application and consent context is crucial
   to prevent data breaches.
-search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Consent to application.\" ResultStatus=Success 
-  | eval admin_consent =mvindex('ModifiedProperties{}.NewValue',0) 
-  | search admin_consent=False 
-  | eval permissions =mvindex('ModifiedProperties{}.NewValue',4) 
-  | rex field=permissions \"Scope:(?<Scope>[^,]+)\" 
-  | makemv delim=\" \" Scope 
-  | search Scope IN (\"Mail.Read\", \"Mail.ReadBasic\", \"Mail.ReadWrite\", \"Mail.Read.Shared\", \"Mail.ReadWrite.Shared\", \"Mail.Send\", \"Mail.Send.Shared\") 
-  | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime values(Scope) as Scope by signature dest user src vendor_account vendor_product object ObjectId
-  | `security_content_ctime(lastTime)` 
-  | `o365_mail_permissioned_application_consent_granted_by_user_filter`"
+search: '`o365_management_activity` Workload=AzureActiveDirectory Operation="Consent
+  to application." ResultStatus=Success | eval admin_consent =mvindex(''ModifiedProperties{}.NewValue'',0)
+  | search admin_consent=False | eval permissions =mvindex(''ModifiedProperties{}.NewValue'',4)
+  | rex field=permissions "Scope:(?<Scope>[^,]+)" | makemv delim=" " Scope | search
+  Scope IN ("Mail.Read", "Mail.ReadBasic", "Mail.ReadWrite", "Mail.Read.Shared", "Mail.ReadWrite.Shared",
+  "Mail.Send", "Mail.Send.Shared") | fillnull | stats count min(_time) as firstTime
+  max(_time) as lastTime values(Scope) as Scope by signature dest user src vendor_account
+  vendor_product object ObjectId | `security_content_ctime(lastTime)` | `o365_mail_permissioned_application_consent_granted_by_user_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: OAuth applications that require mail permissions may be legitimate,
@@ -44,13 +41,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: User $user$ consented an OAuth application that requests mail-related permissions.
@@ -73,7 +70,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1528/o365_user_consent_mail_permissions/o365_user_consent_mail_permissions.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1528/o365_user_consent_mail_permissions/o365_user_consent_mail_permissions.log
     source: o365
     sourcetype: o365:management:activity

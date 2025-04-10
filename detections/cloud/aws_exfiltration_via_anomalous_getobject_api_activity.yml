@@ -1,7 +1,7 @@
 name: AWS Exfiltration via Anomalous GetObject API Activity
 id: e4384bbf-5835-4831-8d85-694de6ad2cc6
 version: 5
-date: '2024-11-14'
+date: '''2025-04-10'''
 author: Bhavin Patel, Splunk
 status: production
 type: Anomaly
@@ -14,13 +14,10 @@ description: The following analytic identifies anomalous GetObject API activity 
   within a 10-minute window. This activity is significant as it may indicate unauthorized
   data access or exfiltration from S3 buckets. If confirmed malicious, attackers could
   exfiltrate sensitive data, leading to data breaches and compliance violations.
-search: '`cloudtrail` eventName=GetObject 
-  | bin _time span=10m 
-  | rename user_name as user
-  | stats count values(requestParameters.bucketName) as bucketName by signature dest user user_agent src vendor_account vendor_region vendor_product
-  | anomalydetection "count" "user" action=annotate 
-  | search probable_cause=*
-  |`aws_exfiltration_via_anomalous_getobject_api_activity_filter`'
+search: '`cloudtrail` eventName=GetObject | bin _time span=10m | rename user_name
+  as user | stats count values(requestParameters.bucketName) as bucketName by signature
+  dest user user_agent src vendor_account vendor_region vendor_product | anomalydetection
+  "count" "user" action=annotate | search probable_cause=* |`aws_exfiltration_via_anomalous_getobject_api_activity_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
   search works with AWS CloudTrail logs.
 known_false_positives: It is possible that a user downloaded these files to use them
@@ -36,13 +33,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: Anomalous S3 activities detected by user $user$ from $src$
@@ -67,7 +64,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1530/aws_exfil_high_no_getobject/cloudtrail.json
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1530/aws_exfil_high_no_getobject/cloudtrail.json
     sourcetype: aws:cloudtrail
     source: aws_cloudtrail

@@ -1,7 +1,7 @@
 name: AWS Exfiltration via Bucket Replication
 id: eeb432d6-2212-43b6-9e89-fcd753f7da4c
 version: 5
-date: '2024-11-14'
+date: '''2025-04-10'''
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -15,8 +15,9 @@ description: The following analytic detects API calls to enable S3 bucket replic
   could replicate sensitive data to external accounts, leading to data breaches and
   compliance violations.
 search: '`cloudtrail`  eventName = PutBucketReplication eventSource = s3.amazonaws.com
-  | rename user_name as user, requestParameters.ReplicationConfiguration.Rule.Destination.Bucket as bucket_name
-  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user user_agent src vendor_account vendor_region vendor_product bucket_name
+  | rename user_name as user, requestParameters.ReplicationConfiguration.Rule.Destination.Bucket
+  as bucket_name | stats count min(_time) as firstTime max(_time) as lastTime by signature
+  dest user user_agent src vendor_account vendor_region vendor_product bucket_name
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `aws_exfiltration_via_bucket_replication_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
   search works with AWS CloudTrail logs.
@@ -33,16 +34,16 @@ drilldown_searches:
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user_arn$" and "$aws_account_id$"
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user_arn$",
-    "$aws_account_id$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
-    as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
-    Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
-    as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
-    by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+    "$aws_account_id$")  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
-  message: AWS Bucket Replication rule added to $bucket_name$
-    by user $user$ from IP Address - $src$
+  message: AWS Bucket Replication rule added to $bucket_name$ by user $user$ from
+    IP Address - $src$
   risk_objects:
   - field: user
     type: user
@@ -65,7 +66,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1119/aws_exfil_datasync/cloudtrail.json
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1119/aws_exfil_datasync/cloudtrail.json
     sourcetype: aws:cloudtrail
     source: aws_cloudtrail

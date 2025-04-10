@@ -1,7 +1,7 @@
 name: O365 Multiple AppIDs and UserAgents Authentication Spike
 id: 66adc486-224d-45c1-8e4d-9e7eeaba988f
 version: 6
-date: '2024-11-14'
+date: '''2025-04-10'''
 author: Mauricio Velazco, Splunk
 status: production
 type: Anomaly
@@ -17,11 +17,12 @@ description: The following analytic identifies unusual authentication activity i
   it suggests a compromised account, potentially leading to unauthorized access, privilege
   escalation, and data exfiltration. Early detection is crucial to prevent further
   exploitation.
-search: '`o365_management_activity` Workload=AzureActiveDirectory (Operation=UserLoggedIn OR Operation=UserLoginFailed) 
-  | bucket span=5m _time 
-  | stats dc(_raw) as failed_attempts dc(ApplicationId) as unique_app_ids dc(UserAgent) as unique_user_agents values(ApplicationId) values(OS) values(signature) as signature by _time user src vendor_account vendor_product dest
-  | where failed_attempts > 5 and unique_user_agents > 5 and unique_app_ids > 2 
-  | `o365_multiple_appids_and_useragents_authentication_spike_filter`'
+search: '`o365_management_activity` Workload=AzureActiveDirectory (Operation=UserLoggedIn
+  OR Operation=UserLoginFailed) | bucket span=5m _time | stats dc(_raw) as failed_attempts
+  dc(ApplicationId) as unique_app_ids dc(UserAgent) as unique_user_agents values(ApplicationId)
+  values(OS) values(signature) as signature by _time user src vendor_account vendor_product
+  dest | where failed_attempts > 5 and unique_user_agents > 5 and unique_app_ids >
+  2 | `o365_multiple_appids_and_useragents_authentication_spike_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: Rapid authentication from the same user using more than 5 different
@@ -38,13 +39,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: $user$ authenticated in a short period of time with more than 5 different
@@ -70,7 +71,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/o365_multiple_appids_and_useragents_auth/o365_multiple_appids_and_useragents_auth.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/o365_multiple_appids_and_useragents_auth/o365_multiple_appids_and_useragents_auth.log
     source: o365
     sourcetype: o365:management:activity

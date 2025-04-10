@@ -1,7 +1,7 @@
 name: O365 Excessive SSO logon errors
 id: 8158ccc4-6038-11eb-ae93-0242ac130002
 version: 7
-date: '2024-11-14'
+date: '''2025-04-10'''
 author: Rod Soto, Splunk
 status: production
 type: Anomaly
@@ -14,11 +14,10 @@ description: The following analytic detects accounts experiencing a high number 
   movement within the organization.
 data_source:
 - O365 UserLoginFailed
-search: '`o365_management_activity` Workload=AzureActiveDirectory LogonError=*Sso* Operation=UserLoginFailed  
-  | stats count min(_time) as firstTime max(_time) as lastTime values(user) as user by src vendor_account vendor_product dest signature user_agent
-  | where count >= 5 
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)` 
+search: '`o365_management_activity` Workload=AzureActiveDirectory LogonError=*Sso*
+  Operation=UserLoginFailed | stats count min(_time) as firstTime max(_time) as lastTime
+  values(user) as user by src vendor_account vendor_product dest signature user_agent
+  | where count >= 5 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `o365_excessive_sso_logon_errors_filter`'
 how_to_implement: You must install splunk Microsoft Office 365 add-on. This search
   works with o365:management:activity
@@ -32,13 +31,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: Excessive number of SSO logon errors from $src$ using UserAgent $user_agent$.
@@ -64,7 +63,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/o365_sso_logon_errors/o365_sso_logon_errors2.json
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/o365_sso_logon_errors/o365_sso_logon_errors2.json
     sourcetype: o365:management:activity
     source: o365

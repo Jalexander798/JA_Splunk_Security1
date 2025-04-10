@@ -1,7 +1,7 @@
 name: O365 User Consent Blocked for Risky Application
 id: 242e4d30-cb59-4051-b0cf-58895e218f40
 version: 5
-date: '2024-11-14'
+date: '''2025-04-10'''
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -16,15 +16,13 @@ description: The following analytic identifies instances where Office 365 has bl
   the organization. If confirmed malicious, this activity suggests that O365's security
   measures successfully prevented a harmful application from accessing organizational
   data, warranting immediate investigation.
-search: "`o365_management_activity` Workload=AzureActiveDirectory Operation=\"Consent to application.\" ResultStatus=Failure 
-  | eval permissions =mvindex('ModifiedProperties{}.NewValue', 4) 
-  | eval reason =mvindex('ModifiedProperties{}.NewValue', 5) 
-  | search reason = \"Risky application detected\" 
-  | rex field=permissions \"Scope: (?<Scope>[^,]+)\"
-  | fillnull 
-  | stats max(_time) as lastTime by user, reason, object, Scope, dest, src, vendor_account, vendor_product, signature
-  | `security_content_ctime(lastTime)` 
-  | `o365_user_consent_blocked_for_risky_application_filter`"
+search: '`o365_management_activity` Workload=AzureActiveDirectory Operation="Consent
+  to application." ResultStatus=Failure | eval permissions =mvindex(''ModifiedProperties{}.NewValue'',
+  4) | eval reason =mvindex(''ModifiedProperties{}.NewValue'', 5) | search reason
+  = "Risky application detected" | rex field=permissions "Scope: (?<Scope>[^,]+)"
+  | fillnull | stats max(_time) as lastTime by user, reason, object, Scope, dest,
+  src, vendor_account, vendor_product, signature | `security_content_ctime(lastTime)`
+  | `o365_user_consent_blocked_for_risky_application_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: Microsofts algorithm to identify risky applications is unknown
@@ -42,13 +40,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: O365 has blocked $user$ attempt to grant to consent to an application deemed
@@ -72,7 +70,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1528/o365_user_consent_blocked/o365_user_consent_blocked.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1528/o365_user_consent_blocked/o365_user_consent_blocked.log
     source: o365
     sourcetype: o365:management:activity

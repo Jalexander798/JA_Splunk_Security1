@@ -1,7 +1,7 @@
 name: AWS Defense Evasion Delete Cloudtrail
 id: 82092925-9ca1-4e06-98b8-85a2d3889552
 version: 6
-date: '2025-02-10'
+date: '''2025-04-10'''
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -15,10 +15,11 @@ description: The following analytic detects the deletion of AWS CloudTrail logs 
   leading to prolonged unauthorized access and further exploitation.
 data_source:
 - AWS CloudTrail DeleteTrail
-search: '`cloudtrail` eventName = DeleteTrail eventSource = cloudtrail.amazonaws.com userAgent !=console.amazonaws.com errorCode = success
-  | rename user_name as user
-  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user user_agent src vendor_account vendor_region vendor_product
-  | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`| `aws_defense_evasion_delete_cloudtrail_filter`'
+search: '`cloudtrail` eventName = DeleteTrail eventSource = cloudtrail.amazonaws.com
+  userAgent !=console.amazonaws.com errorCode = success | rename user_name as user
+  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user
+  user_agent src vendor_account vendor_region vendor_product | `security_content_ctime(firstTime)`|
+  `security_content_ctime(lastTime)`| `aws_defense_evasion_delete_cloudtrail_filter`'
 how_to_implement: You must install Splunk AWS Add on and enable CloudTrail logs in
   your AWS Environment.
 known_false_positives: While this search has no known false positives, it is possible
@@ -31,13 +32,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: User $user$ has delete a CloudTrail logging for account id $vendor_account$
@@ -63,7 +64,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.008/stop_delete_cloudtrail/aws_cloudtrail_events.json
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562.008/stop_delete_cloudtrail/aws_cloudtrail_events.json
     sourcetype: aws:cloudtrail
     source: aws_cloudtrail

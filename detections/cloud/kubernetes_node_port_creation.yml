@@ -1,7 +1,7 @@
 name: Kubernetes Node Port Creation
 id: d7fc865e-b8a1-4029-a960-cf4403b821b6
 version: 4
-date: '2024-11-14'
+date: '''2025-04-10'''
 author: Patrick Bareiss, Splunk
 status: production
 type: Anomaly
@@ -26,8 +26,7 @@ how_to_implement: The detection is based on data that originates from Kubernetes
   policy in Kubernetes to determine what kind of activities are logged. This is done
   by creating an Audit Policy and providing it to the API server. Use the Splunk OpenTelemetry
   Collector for Kubernetes to collect the logs. This doc will describe how to collect
-  the audit log file 
-  https://github.com/signalfx/splunk-otel-collector-chart/blob/main/docs/migration-from-sck.md.
+  the audit log file https://github.com/signalfx/splunk-otel-collector-chart/blob/main/docs/migration-from-sck.md.
   When you want to use this detection with AWS EKS, you need to enable EKS control
   plane logging https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html.
   Then you can collect the logs from Cloudwatch using the AWS TA https://splunk.github.io/splunk-add-on-for-amazon-web-services/CloudWatchLogs/.
@@ -40,13 +39,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: Kubernetes node port creation from user $user$
@@ -71,7 +70,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204/kube_audit_create_node_port_service/kube_audit_create_node_port_service.json
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1204/kube_audit_create_node_port_service/kube_audit_create_node_port_service.json
     sourcetype: _json
     source: kubernetes

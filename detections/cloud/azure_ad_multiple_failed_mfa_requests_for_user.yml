@@ -1,7 +1,7 @@
 name: Azure AD Multiple Failed MFA Requests For User
 id: 264ea131-ab1f-41b8-90e0-33ad1a1888ea
 version: 9
-date: '2025-02-10'
+date: '''2025-04-10'''
 author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
 status: production
 type: TTP
@@ -15,15 +15,13 @@ description: The following analytic identifies multiple failed multi-factor auth
   within the environment.
 data_source:
 - Azure Active Directory Sign-in activity
-search: '`azure_monitor_aad` category=SignInLogs operationName="Sign-in activity" properties.status.errorCode=500121 properties.status.additionalDetails!="MFA denied; user declined the authentication" 
-  | rename properties.* as * 
-  | bucket span=10m _time 
-  | rename userAgent as user_agent 
-  | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime values(dest) as dest values(src) as src by user, status.additionalDetails, appDisplayName, user_agent, vendor_account, vendor_product, signature
-  | where count > 10 
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)` 
+search: '`azure_monitor_aad` category=SignInLogs operationName="Sign-in activity"
+  properties.status.errorCode=500121 properties.status.additionalDetails!="MFA denied;
+  user declined the authentication" | rename properties.* as * | bucket span=10m _time
+  | rename userAgent as user_agent | fillnull | stats count min(_time) as firstTime
+  max(_time) as lastTime values(dest) as dest values(src) as src by user, status.additionalDetails,
+  appDisplayName, user_agent, vendor_account, vendor_product, signature | where count
+  > 10 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `azure_ad_multiple_failed_mfa_requests_for_user_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
@@ -45,13 +43,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: User $user$ failed to complete MFA authentication more than 9 times in
@@ -77,7 +75,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1621/multiple_failed_mfa_requests/azure-audit.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1621/multiple_failed_mfa_requests/azure-audit.log
     source: Azure AD
     sourcetype: azure:monitor:aad

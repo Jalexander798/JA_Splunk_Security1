@@ -1,7 +1,7 @@
 name: ASL AWS UpdateLoginProfile
 id: 5b3f63a3-865b-4637-9941-f98bd1a50c0d
 version: 3
-date: '2025-02-10'
+date: '''2025-04-10'''
 author: Patrick Bareiss, Splunk
 status: production
 type: TTP
@@ -15,13 +15,22 @@ description: The following analytic detects an AWS CloudTrail event where a user
   resources within the AWS environment.
 data_source:
 - ASL AWS CloudTrail
-search: '`amazon_security_lake` api.operation=UpdateLoginProfile 
-  | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by actor.user.uid api.operation api.service.name http_request.user_agent src_endpoint.ip actor.user.account.uid cloud.provider cloud.region
-  | rename actor.user.uid as user api.operation as action api.service.name as dest http_request.user_agent as user_agent src_endpoint.ip as src actor.user.account.uid as vendor_account cloud.provider as vendor_product cloud.region as vendor_region 
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `asl_aws_updateloginprofile_filter`'
-how_to_implement: The detection is based on Amazon Security Lake events from Amazon Web Services (AWS), which is a centralized data lake that provides security-related data from AWS services. To use this detection, you must ingest CloudTrail logs from Amazon Security Lake into Splunk. To run this search, ensure that you ingest events using the latest version of Splunk Add-on for Amazon Web Services (https://splunkbase.splunk.com/app/1876) or the Federated Analytics App.
-known_false_positives: While this search has no known false positives, it is possible that an AWS admin has legitimately created keys for another user.
+search: '`amazon_security_lake` api.operation=UpdateLoginProfile | fillnull | stats
+  count min(_time) as firstTime max(_time) as lastTime by actor.user.uid api.operation
+  api.service.name http_request.user_agent src_endpoint.ip actor.user.account.uid
+  cloud.provider cloud.region | rename actor.user.uid as user api.operation as action
+  api.service.name as dest http_request.user_agent as user_agent src_endpoint.ip as
+  src actor.user.account.uid as vendor_account cloud.provider as vendor_product cloud.region
+  as vendor_region | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `asl_aws_updateloginprofile_filter`'
+how_to_implement: The detection is based on Amazon Security Lake events from Amazon
+  Web Services (AWS), which is a centralized data lake that provides security-related
+  data from AWS services. To use this detection, you must ingest CloudTrail logs from
+  Amazon Security Lake into Splunk. To run this search, ensure that you ingest events
+  using the latest version of Splunk Add-on for Amazon Web Services (https://splunkbase.splunk.com/app/1876)
+  or the Federated Analytics App.
+known_false_positives: While this search has no known false positives, it is possible
+  that an AWS admin has legitimately created keys for another user.
 references:
 - https://bishopfox.com/blog/privilege-escalation-in-aws
 - https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation-part-2/
@@ -31,17 +40,18 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
-  message: User $user$ from IP address $src$ updated the login profile of another user
-  risk_objects: 
+  message: User $user$ from IP address $src$ updated the login profile of another
+    user
+  risk_objects:
   - field: user
     type: user
     score: 30
@@ -62,7 +72,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/aws_updateloginprofile/asl_ocsf_cloudtrail.json
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1078/aws_updateloginprofile/asl_ocsf_cloudtrail.json
     sourcetype: aws:asl
     source: aws_asl

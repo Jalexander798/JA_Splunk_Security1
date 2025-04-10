@@ -1,7 +1,7 @@
 name: Azure AD New MFA Method Registered
 id: 0488e814-eb81-42c3-9f1f-b2244973e3a3
 version: 7
-date: '2025-02-10'
+date: '''2025-04-10'''
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -15,21 +15,16 @@ description: The following analytic detects the registration of a new Multi-Fact
   could bypass existing security measures, solidify their access, and potentially
   escalate privileges, access sensitive data, or make unauthorized changes. Immediate
   verification and remediation are required to secure the affected account.
-search: "`azure_monitor_aad` operationName=\"Update user\" 
-  | rename properties.* as * 
-  | eval propertyName = mvindex('targetResources{}.modifiedProperties{}.displayName',0) 
-  | search propertyName = StrongAuthenticationMethod 
-  | eval oldvalue = mvindex('targetResources{}.modifiedProperties{}.oldValue',0) 
-  | eval newvalue = mvindex('targetResources{}.modifiedProperties{}.newValue',0) 
-  | rex field=newvalue max_match=0 \"(?i)(?<new_method_type>\\\"MethodType\\\")\" 
-  | rex field=oldvalue max_match=0 \"(?i)(?<old_method_type>\\\"MethodType\\\")\" 
-  | eval count_new_method_type = coalesce(mvcount(new_method_type), 0) 
-  | eval count_old_method_type = coalesce(mvcount(old_method_type), 0) 
-  | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product newvalue oldvalue signature
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)` 
-  | `azure_ad_new_mfa_method_registered_filter`"
+search: '`azure_monitor_aad` operationName="Update user" | rename properties.* as
+  * | eval propertyName = mvindex(''targetResources{}.modifiedProperties{}.displayName'',0)
+  | search propertyName = StrongAuthenticationMethod | eval oldvalue = mvindex(''targetResources{}.modifiedProperties{}.oldValue'',0)
+  | eval newvalue = mvindex(''targetResources{}.modifiedProperties{}.newValue'',0)
+  | rex field=newvalue max_match=0 "(?i)(?<new_method_type>\"MethodType\")" | rex
+  field=oldvalue max_match=0 "(?i)(?<old_method_type>\"MethodType\")" | eval count_new_method_type
+  = coalesce(mvcount(new_method_type), 0) | eval count_old_method_type = coalesce(mvcount(old_method_type),
+  0) | fillnull | stats count min(_time) as firstTime max(_time) as lastTime by dest
+  user src vendor_account vendor_product newvalue oldvalue signature | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `azure_ad_new_mfa_method_registered_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment
@@ -47,13 +42,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: A new MFA method was registered for user $user$
@@ -76,7 +71,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.005/azure_ad_register_new_mfa_method/azure_ad_register_new_mfa_method.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098.005/azure_ad_register_new_mfa_method/azure_ad_register_new_mfa_method.log
     source: Azure AD
     sourcetype: azure:monitor:aad

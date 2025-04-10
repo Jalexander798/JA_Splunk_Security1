@@ -1,7 +1,7 @@
 name: O365 Application Available To Other Tenants
 id: 942548a3-0273-47a4-8dbd-e5202437395c
 version: 6
-date: '2025-02-10'
+date: '''2025-04-10'''
 author: Steven Dick
 status: production
 type: TTP
@@ -12,18 +12,15 @@ description: The following analytic identifies the configuration of Azure Active
   the O365 Universal Audit Log data source.
 data_source:
 - Office 365 Universal Audit Log
-search: "`o365_management_activity` Workload=AzureActiveDirectory Operation IN (\"Add application.\",\"Update application.\") ModifiedProperties{}.Name=AvailableToOtherTenants 
-  | eval result = case(match(mvindex('ModifiedProperties{}.NewValue',mvfind('ModifiedProperties{}.Name',\"\
-      AvailableToOtherTenants\")),\"false\"),\"removed\",true(),\"added\"), object_name=mvindex('Target{}.ID',
-      3), signature=Operation, object_attrs = \"AvailableToOtherTenants\", user = case(match(mvindex('Actor{}.ID',-1),\"\
-      User\"),mvindex('Actor{}.ID',0),match(mvindex('Actor{}.ID',-1),\"ServicePrincipal\"\
-      ),mvindex('Actor{}.ID',3),true(),mvindex('Actor{}.ID',0)) 
-  | search result = \"added\" 
-  | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by signature dest user src vendor_account vendor_product object_attrs object_name
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)` 
-  | `o365_application_available_to_other_tenants_filter`"
+search: '`o365_management_activity` Workload=AzureActiveDirectory Operation IN ("Add
+  application.","Update application.") ModifiedProperties{}.Name=AvailableToOtherTenants
+  | eval result = case(match(mvindex(''ModifiedProperties{}.NewValue'',mvfind(''ModifiedProperties{}.Name'',"AvailableToOtherTenants")),"false"),"removed",true(),"added"),
+  object_name=mvindex(''Target{}.ID'', 3), signature=Operation, object_attrs = "AvailableToOtherTenants",
+  user = case(match(mvindex(''Actor{}.ID'',-1),"User"),mvindex(''Actor{}.ID'',0),match(mvindex(''Actor{}.ID'',-1),"ServicePrincipal"),mvindex(''Actor{}.ID'',3),true(),mvindex(''Actor{}.ID'',0))
+  | search result = "added" | fillnull | stats count min(_time) as firstTime max(_time)
+  as lastTime by signature dest user src vendor_account vendor_product object_attrs
+  object_name | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `o365_application_available_to_other_tenants_filter`'
 how_to_implement: You must install the Splunk Microsoft Office 365 Add-on and ingest
   Office 365 management activity events.
 known_false_positives: Business approved changes by known administrators.
@@ -37,13 +34,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: An Azure Application [$object_name$] was configured by [$user$] as accessible
@@ -71,7 +68,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/o365_azure_workload_events/o365_azure_workload_events.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1098/o365_azure_workload_events/o365_azure_workload_events.log
     sourcetype: o365:management:activity
     source: o365

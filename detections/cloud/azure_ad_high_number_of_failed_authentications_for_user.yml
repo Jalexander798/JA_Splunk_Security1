@@ -1,7 +1,7 @@
 name: Azure AD High Number Of Failed Authentications For User
 id: 630b1694-210a-48ee-a450-6f79e7679f2c
 version: 8
-date: '2025-02-10'
+date: '''2025-04-10'''
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -15,15 +15,12 @@ description: The following analytic identifies an Azure AD account experiencing 
   based on their specific environment to reduce false positives.
 data_source:
 - Azure Active Directory
-search: '`azure_monitor_aad` category= SignInLogs properties.status.errorCode=50126 properties.authenticationDetails{}.succeeded=false 
-  | rename properties.* as * 
-  | bucket span=10m _time 
-  | rename properties.userAgent as user_agent 
-  | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime values(dest) as dest values(src) as src values(user_agent) as user_agent by user _time vendor_account vendor_product 
-  | where count > 20 
-  | `security_content_ctime(firstTime)` 
-  | `security_content_ctime(lastTime)` 
+search: '`azure_monitor_aad` category= SignInLogs properties.status.errorCode=50126
+  properties.authenticationDetails{}.succeeded=false | rename properties.* as * |
+  bucket span=10m _time | rename properties.userAgent as user_agent | fillnull | stats
+  count min(_time) as firstTime max(_time) as lastTime values(dest) as dest values(src)
+  as src values(user_agent) as user_agent by user _time vendor_account vendor_product
+  | where count > 20 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `azure_ad_high_number_of_failed_authentications_for_user_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
@@ -41,13 +38,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: User $user$ failed to authenticate more than 20 times in the span of 5
@@ -72,7 +69,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.001/azure_ad_high_number_of_failed_authentications_for_user/azuread.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.001/azure_ad_high_number_of_failed_authentications_for_user/azuread.log
     source: Azure AD
     sourcetype: azure:monitor:aad

@@ -1,7 +1,7 @@
 name: Azure AD Block User Consent For Risky Apps Disabled
 id: 875de3d7-09bc-4916-8c0a-0929f4ced3d8
 version: 8
-date: '2024-11-14'
+date: '''2025-04-10'''
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -15,16 +15,14 @@ description: The following analytic detects when the risk-based step-up consent 
   potentially malicious applications. If confirmed malicious, attackers could gain
   unauthorized access to user data and sensitive information, leading to data breaches
   and further compromise within the organization.
-search: "`azure_monitor_aad` operationName=\"Update authorization policy\" 
-  | rename properties.* as *  
-  | eval index_number = if(mvfind('targetResources{}.modifiedProperties{}.displayName',\"AllowUserConsentForRiskyApps\") >= 0, mvfind('targetResources{}.modifiedProperties{}.displayName',\"AllowUserConsentForRiskyApps\"), -1) 
-  | search index_number >= 0  
-  | eval AllowUserConsentForRiskyApps = mvindex('targetResources{}.modifiedProperties{}.newValue',index_number)
-  | search AllowUserConsentForRiskyApps = \"[true]\"
-  | rename userAgent as user_agent
-  | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime by dest user src vendor_account vendor_product user_agent signature
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `azure_ad_block_user_consent_for_risky_apps_disabled_filter`"
+search: '`azure_monitor_aad` operationName="Update authorization policy" | rename
+  properties.* as * | eval index_number = if(mvfind(''targetResources{}.modifiedProperties{}.displayName'',"AllowUserConsentForRiskyApps")
+  >= 0, mvfind(''targetResources{}.modifiedProperties{}.displayName'',"AllowUserConsentForRiskyApps"),
+  -1) | search index_number >= 0 | eval AllowUserConsentForRiskyApps = mvindex(''targetResources{}.modifiedProperties{}.newValue'',index_number)
+  | search AllowUserConsentForRiskyApps = "[true]" | rename userAgent as user_agent
+  | fillnull | stats count min(_time) as firstTime max(_time) as lastTime by dest
+  user src vendor_account vendor_product user_agent signature | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `azure_ad_block_user_consent_for_risky_apps_disabled_filter`'
 how_to_implement: You must install the latest version of Splunk Add-on for Microsoft
   Cloud Services from Splunkbase (https://splunkbase.splunk.com/app/3110/#/details).
   You must be ingesting Azure Active Directory events into your Splunk environment
@@ -44,13 +42,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: User $user$ disabled the BlockUserConsentForRiskyApps Azure AD setting.
@@ -73,7 +71,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562/azuread_disable_blockconsent_for_riskapps/azuread_disable_blockconsent_for_riskapps.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1562/azuread_disable_blockconsent_for_riskapps/azuread_disable_blockconsent_for_riskapps.log
     source: Azure Ad
     sourcetype: azure:monitor:aad

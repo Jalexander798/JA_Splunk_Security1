@@ -1,7 +1,7 @@
 name: AWS High Number Of Failed Authentications From Ip
 id: f75b7f1a-b8eb-4975-a214-ff3e0a944757
 version: 6
-date: '2025-02-10'
+date: '''2025-04-10'''
 author: Bhavin Patel, Splunk
 status: production
 type: Anomaly
@@ -14,13 +14,11 @@ description: The following analytic detects an IP address with 20 or more failed
   of AWS resources.
 data_source:
 - AWS CloudTrail ConsoleLogin
-search: '`cloudtrail` eventName=ConsoleLogin action=failure 
-  | bucket span=10m _time
-  | rename user_name as user
-  | stats dc(_raw) AS failed_attempts values(user) as user values(user_agent) as user_agent by _time, src, signature, dest, vendor_account vendor_region, vendor_product
-  | where failed_attempts > 20  
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `aws_high_number_of_failed_authentications_from_ip_filter`'
+search: '`cloudtrail` eventName=ConsoleLogin action=failure | bucket span=10m _time
+  | rename user_name as user | stats dc(_raw) AS failed_attempts values(user) as user
+  values(user_agent) as user_agent by _time, src, signature, dest, vendor_account
+  vendor_region, vendor_product | where failed_attempts > 20 | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `aws_high_number_of_failed_authentications_from_ip_filter`'
 how_to_implement: You must install Splunk Add-on for AWS in order to ingest Cloudtrail.
   We recommend the users to try different combinations of the bucket span time and
   the tried account threshold to tune this search according to their environment.
@@ -36,13 +34,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$src$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$src$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$src$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: 'Multiple failed console login attempts (Count: $failed_attempts$) against
@@ -68,7 +66,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/aws_mulitple_failed_console_login/aws_cloudtrail.json
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.003/aws_mulitple_failed_console_login/aws_cloudtrail.json
     source: aws_cloudtrail
     sourcetype: aws:cloudtrail

@@ -1,7 +1,7 @@
 name: AWS Excessive Security Scanning
 id: 1fdd164a-def8-4762-83a9-9ffe24e74d5a
 version: 5
-date: '2024-11-14'
+date: '''2025-04-10'''
 author: Patrick Bareiss, Splunk
 status: production
 type: TTP
@@ -14,12 +14,12 @@ description: The following analytic identifies excessive security scanning activ
   exploitation of your cloud infrastructure.
 data_source:
 - AWS CloudTrail
-search: '`cloudtrail` eventName=Describe* OR eventName=List* OR eventName=Get*  
-  | fillnull
-  | rename user_name as user
-  | stats dc(signature) as dc_events min(_time) as firstTime max(_time) as lastTime values(signature) as signature values(dest) as dest values(user_agent) as user_agent values(src) as src values(vendor_account) as vendor_account values(vendor_region) as vendor_region by user 
-  | where dc_events > 50 
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`|`aws_excessive_security_scanning_filter`'
+search: '`cloudtrail` eventName=Describe* OR eventName=List* OR eventName=Get* | fillnull
+  | rename user_name as user | stats dc(signature) as dc_events min(_time) as firstTime
+  max(_time) as lastTime values(signature) as signature values(dest) as dest values(user_agent)
+  as user_agent values(src) as src values(vendor_account) as vendor_account values(vendor_region)
+  as vendor_region by user | where dc_events > 50 | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)`|`aws_excessive_security_scanning_filter`'
 how_to_implement: You must install splunk AWS add on and Splunk App for AWS. This
   search works with AWS CloudTrail logs.
 known_false_positives: While this search has no known false positives.
@@ -31,13 +31,13 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")  |
+    stats count min(_time) as firstTime max(_time) as lastTime values(search_name)
+    as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
     as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
     | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
+  earliest_offset: 7d
   latest_offset: $info_max_time$
 rba:
   message: User $user$ has excessive number of api calls $dc_events$ from these IP
@@ -63,7 +63,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1526/aws_security_scanner/aws_security_scanner.json
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1526/aws_security_scanner/aws_security_scanner.json
     sourcetype: aws:cloudtrail
     source: aws_cloudtrail
