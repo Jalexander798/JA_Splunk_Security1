@@ -9,6 +9,9 @@ narrative: CVE-2024-4040 exposes a severe server-side template injection vulnera
 references:
 - https://github.com/airbus-cert/CVE-2024-4040
 - https://www.bleepingcomputer.com/news/security/crushftp-warns-users-to-patch-exploited-zero-day-immediately/
+- https://nvd.nist.gov/vuln/detail/CVE-2025-31161
+- https://www.crushftp.com/crush11wiki/Wiki.jsp?page=Update
+- https://www.huntress.com/blog/crushftp-cve-2025-31161-auth-bypass-and-post-exploitation
 tags:
   category:
   - Adversary Tactics
@@ -19,3 +22,4 @@ tags:
   usecase: Advanced Threat Detection
   cve:
   - CVE-2024-4040
+  - CVE-2025-31161
