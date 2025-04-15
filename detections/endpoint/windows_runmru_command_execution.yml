@@ -1,7 +1,7 @@
 name: Windows RunMRU Command Execution
 id: a15aa1ab-2b79-467f-8201-65e0f32d5b1a
-version: 4
-date: '2025-02-17'
+version: 5
+date: '2025-04-10'
 author: Nasreddine Bencherchali, Michael Haag, Splunk
 data_source:
 - Sysmon EventID 12
@@ -16,13 +16,7 @@ description: The following analytic detects modifications to the Windows RunMRU 
   If confirmed malicious, this could indicate an attacker using indirect command execution
   techniques for defense evasion or persistence. The detection excludes MRUList value
   changes to focus on actual command entries.
-search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
-  as lastTime from datamodel=Endpoint.Registry where Registry.registry_key_name="*\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU*"
-  NOT Registry.registry_key_name="*\\MRUList" by Registry.action Registry.dest Registry.process_guid
-  Registry.process_id Registry.registry_hive Registry.registry_path Registry.registry_key_name
-  Registry.registry_value_data Registry.registry_value_name Registry.registry_value_type
-  Registry.status Registry.user Registry.vendor_product | `drop_dm_object_name(Registry)`
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_runmru_command_execution_filter`'
+search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Registry where Registry.registry_path="*\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU*" NOT Registry.registry_value_name="MRUList" NOT Registry.registry_value_data="unknown" by Registry.dest Registry.registry_value_data Registry.action Registry.process_guid Registry.process_id Registry.registry_key_name Registry.user Registry.registry_path Registry.registry_hive Registry.registry_value_name Registry.status Registry.vendor_product | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_runmru_command_execution_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -81,6 +75,8 @@ tags:
   - Splunk Cloud
   security_domain: endpoint
   cve: []
+  atomic_guid: 
+  - de323a93-2f18-4bd5-ba60-d6fca6aeff76
 tests:
 - name: True Positive Test
   attack_data:
