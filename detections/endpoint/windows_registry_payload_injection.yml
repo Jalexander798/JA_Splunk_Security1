@@ -1,6 +1,6 @@
 name: Windows Registry Payload Injection
 id: c6b2d80f-179a-41a1-b95e-ce5601d7427a
-version: 6
+version: 7
 date: '2025-02-10'
 author: Steven Dick
 status: production
