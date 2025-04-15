@@ -14,14 +14,24 @@ description: The following analytic detects suspiciously long data written to th
   to maintain persistence, execute code, or manipulate system configurations without
   leaving a conventional file footprint.
 data_source:
-- Sysmon EventID 12
-- Sysmon EventID 13
-search: '| tstats `security_content_summariesonly` count from datamodel=Endpoint.Registry
-  where Registry.registry_value_data=* by Registry.action Registry.dest Registry.process_guid
-  Registry.process_id Registry.registry_hive Registry.registry_path Registry.registry_key_name
-  Registry.registry_value_data Registry.registry_value_name Registry.registry_value_type
-  Registry.status Registry.user Registry.vendor_product | `drop_dm_object_name(Registry)`
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `windows_registry_payload_injection_filter`'
+- Sysmon EventID 1 AND Sysmon EventID 12
+- Sysmon EventID 1 AND Sysmon EventID 13
+search: '| tstats `security_content_summariesonly` count min(_time) AS firstTime max(_time)
+  AS lastTime FROM datamodel=Endpoint.Processes BY _time span=1h Processes.action Processes.dest Processes.original_file_name
+  Processes.parent_process Processes.parent_process_exec Processes.parent_process_guid
+  Processes.parent_process_id Processes.parent_process_name Processes.parent_process_path
+  Processes.process Processes.process_exec Processes.process_guid Processes.process_hash
+  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path
+  Processes.user Processes.user_id Processes.vendor_product | `drop_dm_object_name(Processes)`
+  | join max=0 dest process_guid [| tstats `security_content_summariesonly` count
+  from datamodel=Endpoint.Registry where Registry.registry_value_data=* by _time span=1h
+  Registry.dest Registry.registry_path Registry.registry_value_name Registry.process_guid
+  Registry.registry_value_data Registry.registry_key_name Registry.registry_hive Registry.status | `drop_dm_object_name(Registry)`
+  | eval reg_data_len = len(registry_value_data) | where reg_data_len > 512] | fields
+  firstTime lastTime dest user parent_process_name parent_process process_name process_path
+  process registry_key_name registry_path registry_value_name registry_value_data
+  process_guid | where isnotnull(registry_value_data)| `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)`| `windows_registry_payload_injection_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
