@@ -49,7 +49,7 @@ rba:
   message: A high impact IntrusionEvent was detected from $src_ip$ to $dest$.
   risk_objects:
     - field: src_ip
-      type: ip_address
+      type: system
       score: 35
   threat_objects: []
 tags:

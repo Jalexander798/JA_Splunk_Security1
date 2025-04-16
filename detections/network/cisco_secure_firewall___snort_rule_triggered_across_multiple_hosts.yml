@@ -53,7 +53,7 @@ rba:
   message: The Snort rule $signature_id$ was triggered by $AffectedHosts$ unique internal hosts within a one-hour window, indicating potential widespread exploitation or coordinated targeting activity.
   risk_objects:
     - field: src_ip
-      type: user
+      type: system
       score: 25
   threat_objects: []
 tags:

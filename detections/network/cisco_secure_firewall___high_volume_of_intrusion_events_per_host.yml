@@ -52,7 +52,7 @@ rba:
   message: A high number of Snort intrusion detections were triggered by $src_ip$ in a 30-minute time window.
   risk_objects:
     - field: src_ip
-      type: ip_address
+      type: system
       score: 40
   threat_objects: []
 tags:
