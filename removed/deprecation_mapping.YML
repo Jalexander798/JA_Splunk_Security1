@@ -56,8 +56,6 @@ detections:
   - content: AWS Cross Account Activity From Previously Unseen Account
     removed_in_version: 5.4.0
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content:
-    - AWS Cross Account Activity From Previously Unseen Account
   - content: aws detect attach to role policy
     removed_in_version: 5.4.0
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
