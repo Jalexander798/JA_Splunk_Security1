@@ -52,7 +52,7 @@ rba:
   message: The host $src_ip$ downloaded a file $file_name$ of type $FileType$ from $dest$ over the uncommon port $dest_port$
   risk_objects:
     - field: src_ip
-      type: user
+      type: system
       score: 30
     - field: dest
       type: user
