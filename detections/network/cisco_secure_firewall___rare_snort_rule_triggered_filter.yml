@@ -1,24 +1,29 @@
-name: Cisco Secure Firewall - Possibly Compromised Host
-id: 244a77bb-3b2a-46f1-bf2c-b4f7cd29276d
+name: Cisco Secure Firewall - Rare Snort Rule Triggered
+id: e20313d2-7d63-4fcf-b2d9-d6e12c6c7bd7
 version: 1
 date: '2025-04-14'
 author: Nasreddine Bencherchali, Splunk
-status: experimental
-type: Anomaly
+status: production
+type: Hunting
 description: |
-  The following analytic highlights high-impact intrusion events assigned by Cisco Secure Firewall.
-  This detection leverages Cisco Secure Firewall Threat Defense logs and specifically the IntrusionEvent event type and `Impact` field assigned by Cisco Secure Firewall looking for an impact score of 1 or 2. If confirmed malicious this may indicate a potential compromised host.
+  This analytic identifies Snort signatures that have triggered only once in the past 7 days across all Cisco Secure Firewall IntrusionEvent logs. While these rules typically do not trigger in day-to-day network activity, their sudden appearance may indicate early-stage compromise, previously unseen malware, or reconnaissance activity against less commonly exposed services. Investigating these outliers can provide valuable insight into new or low-noise adversary behaviors.
 data_source:
   - Cisco Secure Firewall Threat Defense Intrusion Event
 search: |
-  `cisco_secure_firewall` EventType=IntrusionEvent Impact IN (1,2)
-  | stats count as TotalDetections values(SignatureID) as SignatureIDs 
-          values(IntrusionRuleMessage) as RuleMessages 
-          min(_time) as firstTime max(_time) as lastTime 
-          by InitiatorIP, ResponderIP Impact impact_desc Classification MitreAttackGroups InlineResult InlineResultReason
+  `cisco_secure_firewall` EventType=IntrusionEvent earliest=-7d
+  | stats dc(_time) as TriggerCount min(_time) as firstTime max(_time) as lastTime 
+          values(signature) as signature 
+          values(src_ip) as src_ip 
+          values(dest) as dest 
+          values(dest_port) as dest_port
+          values(transport) as transport
+          values(app) as app 
+          values(rule) as rule 
+          by signature_id class_desc MitreAttackGroups InlineResult InlineResultReason
+  | where TriggerCount = 1
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
-  | `cisco_secure_firewall___possibly_compromised_host_filter`
+  | `cisco_secure_firewall___rare_snort_rule_triggered_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
   includes the IntrusionEvent EventType. This search uses an input macro named `cisco_secure_firewall`.
@@ -28,38 +33,30 @@ how_to_implement: |
   macro designed to filter out known false positives.
   The logs are to be ingested using the Splunk Add-on for Cisco Security Cloud (https://splunkbase.splunk.com/app/7404).
   The intrusion access policy must also be configured.
-known_false_positives: False positives are directly related to their snort rules triggering and the firewall scoring. Apply additional filters if the rules are too noisy by disabling them or simply ignoring certain IP ranges that trigger it.
+known_false_positives: False positives may occur with certain rare activity. Apply additional filters where required.
 references:
   - https://www.cisco.com/c/en/us/td/docs/security/firepower/741/api/FQE/secure_firewall_estreamer_fqe_guide_740.pdf
 drilldown_searches:
-- name: View the detection results for - "$InitiatorIP$"
-  search: '%original_detection_search% | search  InitiatorIP = "$InitiatorIP$"'
+- name: View the detection results for - "$src_ip$"
+  search: '%original_detection_search% | search  src_ip = "$src_ip$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$InitiatorIP$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$InitiatorIP$") starthoursago=168  | stats count min(_time)
+- name: View risk events for the last 7 days for - "$src_ip$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$src_ip$") starthoursago=168  | stats count min(_time)
     as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message)
     as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
     as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
     by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-rba:
-  message: A high impact IntrusionEvent was detected from $InitiatorIP$ to $ResponderIP$.
-  risk_objects:
-    - field: InitiatorIP
-      type: ip_address
-      score: 35
-  threat_objects: []
 tags:
   analytic_story: 
     - Cisco Secure Firewall Threat Defense Analytics
   asset_type: Network
   security_domain: network
   mitre_attack_id:
-    - T1203
-    - T1059
-    - T1587.001
+    - T1598
+    - T1583.006
   product:
     - Splunk Enterprise
     - Splunk Cloud
