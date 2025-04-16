@@ -8,6 +8,8 @@ type: Anomaly
 description: |
   The following analytic highlights high-impact intrusion events assigned by Cisco Secure Firewall.
   This detection leverages Cisco Secure Firewall Threat Defense logs and specifically the IntrusionEvent event type and `Impact` field assigned by Cisco Secure Firewall looking for an impact score of 1 or 2. If confirmed malicious this may indicate a potential compromised host.
+data_source:
+  - Cisco Secure Firewall Threat Defense Intrusion Event
 search: |
   `cisco_secure_firewall` EventType=IntrusionEvent Impact IN (1,2)
   | stats count as TotalDetections values(SignatureID) as SignatureIDs 
@@ -16,7 +18,7 @@ search: |
           by InitiatorIP, ResponderIP Impact impact_desc Classification MitreAttackGroups InlineResult InlineResultReason
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
-  | `cisco_secure_firewall___high_impact_intrusion_event_detected_filter`
+  | `cisco_secure_firewall___possibly_compromised_host_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
   includes the IntrusionEvent EventType. This search uses an input macro named `cisco_secure_firewall`.

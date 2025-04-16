@@ -7,6 +7,8 @@ status: production
 type: Hunting
 description: |
   This analytic identifies Snort signatures that have triggered only once in the past 7 days across all Cisco Secure Firewall IntrusionEvent logs. While these rules typically do not trigger in day-to-day network activity, their sudden appearance may indicate early-stage compromise, previously unseen malware, or reconnaissance activity against less commonly exposed services. Investigating these outliers can provide valuable insight into new or low-noise adversary behaviors.
+data_source:
+  - Cisco Secure Firewall Threat Defense Intrusion Event
 search: |
   `cisco_secure_firewall` EventType=IntrusionEvent earliest=-7d
   | stats dc(_time) as TriggerCount min(_time) as firstTime max(_time) as lastTime 
