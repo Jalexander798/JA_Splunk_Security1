@@ -11,7 +11,7 @@ data_source:
 - Cisco Secure Firewall Threat Defense Connection Event
 search: |
   `cisco_secure_firewall` EventType=ConnectionEvent action=Block
-  | stats count min(_time) as firstTime max(_time) as lastTime by src_ip, dest, dest_port, transport, rule, url, EVE_Process 
+  | stats count min(_time) as firstTime max(_time) as lastTime by src_ip, dest, dest_port, transport, rule, url, EVE_Process, action
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `cisco_secure_firewall___blocked_connection_filter`
@@ -44,7 +44,7 @@ rba:
   message: A connection request from $src_ip$ to $dest$ has been blocked according to the configured firewall rule $rule$
   risk_objects:
   - field: src_ip
-    type: other
+    type: system
     score: 25
   - field: dest
     type: other

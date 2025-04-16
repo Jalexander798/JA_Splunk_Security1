@@ -15,7 +15,7 @@ search: |
   | stats count min(_time) as firstTime max(_time) as lastTime
       Values(dest_port) as dest_port
       Values(url) as url
-      by src_ip, dest, transport, rule
+      by src_ip, dest, transport, rule, action
   | where count >= 10
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
@@ -52,7 +52,7 @@ rba:
   message: Repeated blocked connections detected from $src_ip$ to $dest$ according to the configured firewall rule $rule$
   risk_objects:
     - field: src_ip
-      type: other
+      type: system
       score: 25
     - field: dest
       type: other

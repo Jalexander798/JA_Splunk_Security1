@@ -17,7 +17,7 @@ search: |
       Values(dest_port) as dest_port
       Values(ClientApplicationVersion) as ClientApplicationVersion
       Values(src_port) as src_port
-      by src_ip, dest, transport, EVE_Process, ClientApplication 
+      by src_ip, dest, transport, EVE_Process, ClientApplication, action
   | table src_ip src_port dest dest_port transport url EVE_Process ClientApplication ClientApplicationVersion rule firstTime lastTime
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` 
@@ -52,9 +52,9 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: The process $EVE_Process$ initiated an allowed connection to download content using a command-line utility ($ClientApplication$) from $url$. This behavior may indicate tool staging or payload retrieval via curl or wget.
-  risk_objects:
+  risk_objects
     - field: src_ip
-      type: other
+      type: system
       score: 25
     - field: EVE_Process
       type: user

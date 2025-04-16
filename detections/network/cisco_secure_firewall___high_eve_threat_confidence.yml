@@ -14,7 +14,7 @@ search: |
   | stats count min(_time) as firstTime max(_time) as lastTime
       Values(rule) as rule
       Values(url) as url
-      by EVE_Process, EVE_ThreatConfidencePct, src_ip, dest, dest_port, transport
+      by EVE_Process, EVE_ThreatConfidencePct, src_ip, dest, dest_port, transport, action
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
   | `cisco_secure_firewall___high_eve_threat_confidence_filter`
@@ -56,3 +56,9 @@ tags:
     - Splunk Enterprise
     - Splunk Cloud
     - Splunk Enterprise Security
+tests:
+- name: True Positive Test
+  attack_data:
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+    source: not_applicable
+    sourcetype: cisco:sfw:estreamer

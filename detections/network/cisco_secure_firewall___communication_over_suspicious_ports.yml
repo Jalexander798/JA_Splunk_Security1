@@ -15,7 +15,7 @@ search: |
         values(src_port) as src_port
         values(url) as url
         values(rule) as rule
-        count by src_ip, dest, dest_port, transport
+        count by src_ip, dest, dest_port, transport, action
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
   | `cisco_secure_firewall___communication_over_suspicious_ports_filter`
@@ -52,7 +52,7 @@ rba:
   message: Suspicious communication detected from $src_ip$ to $dest$ over port $dest_port$.
   risk_objects:
     - field: src_ip
-      type: other
+      type: system
       score: 20
     - field: dest_port
       type: other

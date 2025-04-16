@@ -18,7 +18,7 @@ search: |
     Values(rule) as rule
     Values(url) as url
     Values(EVE_Process) as EVE_Process
-    by src_ip, transport
+    by src_ip, transport, action
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
   | `cisco_secure_firewall___connection_to_file_sharing_domain_filter`
@@ -54,7 +54,7 @@ rba:
   message: The host $src_ip$ initiated a connection to the file sharing or pastebin domain $url$.
   risk_objects:
     - field: src_ip
-      type: other
+      type: system
       score: 30
   threat_objects:
     - field: url

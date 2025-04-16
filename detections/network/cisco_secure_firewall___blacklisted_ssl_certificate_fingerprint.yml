@@ -20,7 +20,7 @@ search: |
           values(url) as url
           values(Listingreason) as Reasons
           values(Listingdate) as "SSL Cert Listing Dates"
-          count by SSL_CertFingerprint src_ip transport
+          count by SSL_CertFingerprint src_ip transport action
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
   | `cisco_secure_firewall___blacklisted_ssl_certificate_fingerprint_filter`
@@ -59,7 +59,7 @@ rba:
       type: other
       score: 40
     - field: src_ip
-      type: other
+      type: system
       score: 20
   threat_objects: []
 tags:
