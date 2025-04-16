@@ -46,13 +46,11 @@ rba:
   - field: src_ip
     type: system
     score: 25
-  - field: dest
-    type: other
-    score: 25
-  - field: rule
-    type: other
-    score: 25
-  threat_objects: []
+  threat_objects:
+  - field: EVE_Process
+    type: process_name
+  - field: url
+    type: url
 tags:
   analytic_story:
   - Cisco Secure Firewall Threat Defense Analytics

@@ -49,7 +49,7 @@ rba:
     type: system
     score: 25
   - field: dest
-    type: other
+    type: system
     score: 25
   threat_objects:
   - field: url

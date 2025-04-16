@@ -52,7 +52,7 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: The process $EVE_Process$ initiated an allowed connection to download content using a command-line utility ($ClientApplication$) from $url$. This behavior may indicate tool staging or payload retrieval via curl or wget.
-  risk_objects
+  risk_objects:
     - field: src_ip
       type: system
       score: 25

@@ -55,13 +55,14 @@ rba:
     Suspicious SSL certificate fingerprint ($SSL_CertFingerprint$) used in connections 
     [ListingReason: $reasons$]
   risk_objects:
-    - field: SSL_CertFingerprint
-      type: other
-      score: 40
     - field: src_ip
       type: system
       score: 20
-  threat_objects: []
+  threat_objects:
+    - field: SSL_CertFingerprint
+      type: tls_hash
+    - field: url
+      type: url
 tags:
   analytic_story:
     - Cisco Secure Firewall Threat Defense Analytics

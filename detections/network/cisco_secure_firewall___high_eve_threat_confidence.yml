@@ -37,7 +37,7 @@ rba:
   message: High threat confidence ($EVE_ThreatConfidencePct$%) from $EVE_Process$ on $src_ip$"
   risk_objects:
     - field: src_ip
-      type: other
+      type: system
       score: 20
   threat_objects:
   - field: EVE_Process
