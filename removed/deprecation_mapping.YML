@@ -762,6 +762,12 @@ detections:
     removed_in_version: 5.2.0
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
 baselines:
+  - content: Previously Seen AWS Cross Account Activity - Initial
+    removed_in_version: 5.4.0
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+  - content: Previously Seen AWS Cross Account Activity - Update
+    removed_in_version: 5.4.0
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
   - content: Add Prohibited Processes to Enterprise Security
     removed_in_version: 5.2.0
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
@@ -809,12 +815,6 @@ baselines:
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
   - content: Systems Ready for Spectre-Meltdown Windows Patch
     removed_in_version: 5.2.0
-    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
-  - content: Previously Seen AWS Cross Account Activity - Initial
-    removed_in_version: 5.4.0
-    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
-  - content: Previously Seen AWS Cross Account Activity - Update
-    removed_in_version: 5.4.0
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
 investigations: 
   - content: All backup logs for host
