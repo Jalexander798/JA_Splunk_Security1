@@ -10,7 +10,7 @@ description: |
 data_source:
 - Cisco Secure Firewall Threat Defense Connection Event
 search: |
-  `cisco_secure_firewall` EventType=ConnectionEvent dest_port IN ("888", "999", "2200", "2222", "4000", "4444", "6789", "8531", "50501", "51820")
+  `cisco_secure_firewall` EventType=ConnectionEvent dest_port IN ("888", "999", "2200", "2222", "4000", "4444", "6789", "8531", "50501", "51820") | fillnull value="unknown" url
   | stats min(_time) as firstTime max(_time) as lastTime 
         values(src_port) as src_port
         values(url) as url
