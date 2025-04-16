@@ -3,7 +3,7 @@ id: 05032b04-4469-4034-9df7-05f607d75cba
 version: 6
 date: '2025-02-10'
 author: Patrick Bareiss, Splunk
-status: deprecated
+status: removed
 type: Anomaly
 description: The following analytic identifies the creation of GitHub Dependabot alerts,
   which indicate potential vulnerabilities in the codebase. It detects this activity

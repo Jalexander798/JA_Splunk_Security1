@@ -3,7 +3,7 @@ id: 0459f1a5-c0ac-4987-82d6-65081209f854
 version: 6
 date: '2025-02-10'
 author: Patrick Bareiss, Splunk
-status: deprecated
+status: removed
 type: Anomaly
 description: The following analytic detects the disabling of a security workflow in
   GitHub Actions. It leverages GitHub logs to identify when a workflow, excluding

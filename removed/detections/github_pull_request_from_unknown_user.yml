@@ -3,7 +3,7 @@ id: 9d7b9100-8878-4404-914e-ca5e551a641e
 version: 6
 date: '2025-02-10'
 author: Patrick Bareiss, Splunk
-status: deprecated
+status: removed
 type: Anomaly
 description: The following analytic detects pull requests from unknown users on GitHub.
   It uses a Splunk query to identify pull requests where the user ID is not specified
