@@ -1,7 +1,7 @@
 name: Linux Auditd Kernel Module Enumeration
 id: d1b088de-c47a-4572-9339-bdcc26493b32
-version: 5
-date: '2025-02-20'
+version: 6
+date: '2025-04-16'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -14,9 +14,12 @@ description: The following analytic identifies the use of the 'kmod' process to 
   other malicious actions within the system.
 data_source:
 - Linux Auditd Syscall
-search: '`linux_auditd` type=SYSCALL comm=lsmod | rename host as dest  | stats count
-  min(_time) as firstTime max(_time) as lastTime by comm exe  SYSCALL UID ppid pid
-  success dest | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)`
+search: '`linux_auditd` type=SYSCALL comm=lsmod
+  | rename host as dest 
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+  by comm exe  syscall uid ppid pid success dest 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)`
   | `linux_auditd_kernel_module_enumeration_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
   data, that consists of SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures
@@ -71,6 +74,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1082/linux_auditd_lsmod/linux_auditd_lsmod.log
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1082/linux_auditd_lsmod_new/linux_auditd_new_lsmod.log
     source: auditd
     sourcetype: auditd
