@@ -76,12 +76,6 @@ detections:
   - content: AWS SAML Access by Provider User and Principal
     removed_in_version: 5.4.0
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: Open Redirect in Splunk Web
-    removed_in_version: 5.2.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: Splunk Enterprise Information Disclosure
-    removed_in_version: 5.2.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
   - content: ASL AWS Excessive Security Scanning
     removed_in_version: 5.2.0
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
