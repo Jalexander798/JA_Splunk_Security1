@@ -10,17 +10,18 @@ description: |
 data_source:
   - Cisco Secure Firewall Threat Defense File Event
 search: |
-  `cisco_secure_firewall` EventType=FileEvent FileDirection="Download" NOT ResponderPort IN (80, 443)
+  `cisco_secure_firewall` EventType=FileEvent FileDirection="Download" NOT dest_port IN (80, 443)
   | lookup cisco_secure_firewall_filetype_lookup Name as FileType OUTPUT Description
   | stats count min(_time) as firstTime max(_time) as lastTime 
-          values(FileName) as Files 
-          values(URI) as URIs 
-          values(ClientApplication) as ClientApplications
-          values(FileSHA256) as SHA256 
-          by FileDirection FileType Application FileName ThreatName ResponderPort Description InitiatorIP ResponderIP
-  | table firstTime lastTime InitiatorIP ResponderIP ResponderPort FileDirection FileType Description URIs ClientApplications FileName SHA256 
+          values(file_name) as Files 
+          values(uri) as uri 
+          values(ClientApplication) as ClientApplication
+          values(file_hash) as file_hash 
+          values(SHA_Disposition) as SHA_Disposition 
+          by FileDirection FileType app file_name ThreatName dest_port Description src_ip dest
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
+  | table firstTime lastTime src_ip dest dest_port FileDirection FileType Description uri ClientApplication file_name file_hash SHA_Disposition ThreatName
   | `cisco_secure_firewall___file_download_over_uncommon_port_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
@@ -35,12 +36,12 @@ known_false_positives: Some legitimate applications may download files over cust
 references:
   - https://www.cisco.com/c/en/us/td/docs/security/firepower/741/api/FQE/secure_firewall_estreamer_fqe_guide_740.pdf
 drilldown_searches:
-- name: View the detection results for - "$InitiatorIP$"
-  search: '%original_detection_search% | search  InitiatorIP = "$InitiatorIP$"'
+- name: View the detection results for - "$src_ip$"
+  search: '%original_detection_search% | search  src_ip = "$src_ip$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$InitiatorIP$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$InitiatorIP$") starthoursago=168  | stats count min(_time)
+- name: View risk events for the last 7 days for - "$src_ip$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$src_ip$") starthoursago=168  | stats count min(_time)
     as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message)
     as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
     as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
@@ -48,16 +49,16 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: The host $InitiatorIP$ downloaded a file $FileName$ of type $FileType$ from $ResponderIP$ over the uncommon port $ResponderPort$
+  message: The host $src_ip$ downloaded a file $file_name$ of type $FileType$ from $dest$ over the uncommon port $dest_port$
   risk_objects:
-    - field: InitiatorIP
+    - field: src_ip
       type: user
       score: 30
-    - field: ResponderIP
+    - field: dest
       type: user
       score: 30
   threat_objects:
-    - field: URIs
+    - field: uri
       type: url
 tags:
   analytic_story:
