@@ -6,12 +6,19 @@ author: Nasreddine Bencherchali, Splunk
 status: production
 type: Anomaly
 description: |
-  The following analytic detects outbound connections initiated by command-line tools such as curl or wget. It leverages Cisco Secure Firewall Threat Defense logs and identifies allowed connections (AC_RuleAction=Allow) where either the EVE_Process or ClientApplication fields indicate use of these utilities. While curl and wget are legitimate tools commonly used for software updates and scripting, adversaries often abuse them to download payloads, retrieve additional tools, or establish staging infrastructure from compromised systems. If confirmed malicious, this behavior may indicate the download phase of an attack chain or a command-and-control utility retrieval.
+  The following analytic detects outbound connections initiated by command-line tools such as curl or wget. It leverages Cisco Secure Firewall Threat Defense logs and identifies allowed connections (action=Allow) where either the EVE_Process or ClientApplication fields indicate use of these utilities. While curl and wget are legitimate tools commonly used for software updates and scripting, adversaries often abuse them to download payloads, retrieve additional tools, or establish staging infrastructure from compromised systems. If confirmed malicious, this behavior may indicate the download phase of an attack chain or a command-and-control utility retrieval.
 data_source:
 - Cisco Secure Firewall Threat Defense Connection Event
 search: |
-  `cisco_secure_firewall` EventType=ConnectionEvent AC_RuleAction=Allow AND ( EVE_Process IN ("*curl*", "*wget*") OR ClientApplication IN ("cURL", "Wget") )
-  | stats count min(_time) as firstTime max(_time) as lastTime by InitiatorIP, InitiatorPort, ResponderIP, ResponderPort, Protocol, FirewallRule, URL, EVE_Process, ClientApplication, ClientApplicationVersion 
+  `cisco_secure_firewall` EventType=ConnectionEvent action=Allow AND ( EVE_Process IN ("*curl*", "*wget*") OR ClientApplication IN ("cURL", "Wget") )
+  | stats count min(_time) as firstTime max(_time) as lastTime
+      Values(rule) as rule
+      Values(url) as url
+      Values(dest_port) as dest_port
+      Values(ClientApplicationVersion) as ClientApplicationVersion
+      Values(src_port) as src_port
+      by src_ip, dest, transport, EVE_Process, ClientApplication 
+  | table src_ip src_port dest dest_port transport url EVE_Process ClientApplication ClientApplicationVersion rule firstTime lastTime
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` 
   | `cisco_secure_firewall___wget_or_curl_download_filter`
@@ -27,16 +34,16 @@ how_to_implement: |
 known_false_positives: |
   Developers, administrators, or automation tools may use `curl` or `wget` for legitimate purposes such as software installation, configuration scripts, or CI/CD tasks.
   Security tools or health monitoring scripts may also use these utilities to check service availability or download updates.
-  Review the destination `URL`, frequency, and process context to validate whether the download activity is authorized.
+  Review the destination `url`, frequency, and process context to validate whether the download activity is authorized.
 references:
 - https://www.cisco.com/c/en/us/td/docs/security/firepower/741/api/FQE/secure_firewall_estreamer_fqe_guide_740.pdf
 drilldown_searches:
-- name: View the detection results for - "$InitiatorIP$"
-  search: '%original_detection_search% | search  InitiatorIP = "$InitiatorIP$"'
+- name: View the detection results for - "$src_ip$"
+  search: '%original_detection_search% | search  src_ip = "$src_ip$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$InitiatorIP$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$InitiatorIP$") starthoursago=168  | stats count min(_time)
+- name: View risk events for the last 7 days for - "$src_ip$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$src_ip$") starthoursago=168  | stats count min(_time)
     as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message)
     as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
     as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
@@ -44,9 +51,9 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: The process $EVE_Process$ initiated an allowed connection to download content using a command-line utility ($ClientApplication$) from $URL$. This behavior may indicate tool staging or payload retrieval via curl or wget.
+  message: The process $EVE_Process$ initiated an allowed connection to download content using a command-line utility ($ClientApplication$) from $url$. This behavior may indicate tool staging or payload retrieval via curl or wget.
   risk_objects:
-    - field: InitiatorIP
+    - field: src_ip
       type: other
       score: 25
     - field: EVE_Process

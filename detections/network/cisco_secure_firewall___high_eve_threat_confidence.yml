@@ -11,7 +11,10 @@ data_source:
 - Cisco Secure Firewall Threat Defense Connection Event
 search: |
   `cisco_secure_firewall` EventType=ConnectionEvent EVE_ThreatConfidencePct >= 80
-  | stats count min(_time) as firstTime max(_time) as lastTime by EVE_Process, EVE_ThreatConfidencePct, InitiatorIP, ResponderIP, Protocol
+  | stats count min(_time) as firstTime max(_time) as lastTime
+      Values(rule) as rule
+      Values(url) as url
+      by EVE_Process, EVE_ThreatConfidencePct, src_ip, dest, dest_port, transport
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
   | `cisco_secure_firewall___high_eve_threat_confidence_filter`
@@ -31,9 +34,9 @@ known_false_positives: |
 references:
   - https://www.cisco.com/c/en/us/td/docs/security/firepower/741/api/FQE/secure_firewall_estreamer_fqe_guide_740.pdf
 rba:
-  message: High threat confidence ($EVE_ThreatConfidencePct$%) from $EVE_Process$ on $InitiatorIP$"
+  message: High threat confidence ($EVE_ThreatConfidencePct$%) from $EVE_Process$ on $src_ip$"
   risk_objects:
-    - field: InitiatorIP
+    - field: src_ip
       type: other
       score: 20
   threat_objects:

@@ -5,12 +5,17 @@ date: '2025-04-02'
 author: Nasreddine Bencherchali, Splunk
 status: production
 type: Anomaly
-description: The following analytic detects potential reverse shell activity by identifying connections involving ports commonly associated with remote access tools, shell listeners, or tunneling utilities. It leverages Cisco Secure Firewall Threat Defense logs and monitors both initiator and responder ports against a list of non-standard, high-risk port values often used in post-exploitation scenarios. Adversaries frequently configure tools like netcat, Meterpreter, or other backdoors to listen or connect over uncommon ports such as 4444, 2222, or 51820 to bypass standard monitoring and firewall rules. If confirmed malicious, this activity may represent command and control (C2) tunneling, lateral movement, or unauthorized remote access.
+description: |
+  The following analytic detects potential reverse shell activity by identifying connections involving ports commonly associated with remote access tools, shell listeners, or tunneling utilities. It leverages Cisco Secure Firewall Threat Defense logs and monitors destination ports against a list of non-standard, high-risk port values often used in post-exploitation scenarios. Adversaries frequently configure tools like netcat, Meterpreter, or other backdoors to listen or connect over uncommon ports such as 4444, 2222, or 51820 to bypass standard monitoring and firewall rules. If confirmed malicious, this activity may represent command and control (C2) tunneling, lateral movement, or unauthorized remote access.
 data_source:
 - Cisco Secure Firewall Threat Defense Connection Event
 search: |
-  `cisco_secure_firewall` EventType=ConnectionEvent (ResponderPort IN ("888", "999", "2200", "2222", "4000", "4444", "6789", "8531", "50501", "51820") OR InitiatorPort IN ("888", "999", "2200", "2222", "4000", "4444", "6789", "8531", "50501", "51820"))
-  | stats min(_time) as firstTime max(_time) as lastTime count by InitiatorIP, ResponderIP, InitiatorPort, ResponderPort
+  `cisco_secure_firewall` EventType=ConnectionEvent dest_port IN ("888", "999", "2200", "2222", "4000", "4444", "6789", "8531", "50501", "51820")
+  | stats min(_time) as firstTime max(_time) as lastTime 
+        values(src_port) as src_port
+        values(url) as url
+        values(rule) as rule
+        count by src_ip, dest, dest_port, transport
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
   | `cisco_secure_firewall___communication_over_suspicious_ports_filter`
@@ -31,12 +36,12 @@ known_false_positives: |
 references:
   - https://www.cisco.com/c/en/us/td/docs/security/firepower/741/api/FQE/secure_firewall_estreamer_fqe_guide_740.pdf
 drilldown_searches:
-- name: View the detection results for - "$InitiatorIP$"
-  search: '%original_detection_search% | search  InitiatorIP = "$InitiatorIP$"'
+- name: View the detection results for - "$src_ip$"
+  search: '%original_detection_search% | search  src_ip = "$src_ip$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$InitiatorIP$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$InitiatorIP$") starthoursago=168  | stats count min(_time)
+- name: View risk events for the last 7 days for - "$src_ip$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$src_ip$") starthoursago=168  | stats count min(_time)
     as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message)
     as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
     as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
@@ -44,12 +49,12 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Suspicious communication detected from $InitiatorIP$ to $ResponderIP$ over ports $ResponderPort$ or $InitiatorPort$.
+  message: Suspicious communication detected from $src_ip$ to $dest$ over port $dest_port$.
   risk_objects:
-    - field: InitiatorIP
+    - field: src_ip
       type: other
       score: 20
-    - field: ResponderPort
+    - field: dest_port
       type: other
       score: 25
   threat_objects: []

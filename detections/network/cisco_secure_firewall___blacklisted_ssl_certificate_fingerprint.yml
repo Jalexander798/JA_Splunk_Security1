@@ -5,7 +5,8 @@ date: '2025-04-02'
 author: Nasreddine Bencherchali, Splunk
 status: production
 type: TTP
-description: The following analytic detects the use of known suspicious SSL certificates in any observed event where the SSL_CertFingerprint field is present. It leverages Cisco Secure Firewall logs and compares the SSL certificate SHA1 fingerprint against a blacklist of certificates associated with malware distribution, command and control (C2) infrastructure, or phishing campaigns. This activity is significant as adversaries often reuse or self-sign certificates across malicious infrastructure, allowing defenders to track and detect encrypted sessions even when domains or IPs change. If confirmed malicious, this may indicate beaconing, malware download, or data exfiltration over TLS/SSL.
+description: |
+  The following analytic detects the use of known suspicious SSL certificates in any observed event where the SSL_CertFingerprint field is present. It leverages Cisco Secure Firewall logs and compares the SSL certificate SHA1 fingerprint against a blacklist of certificates associated with malware distribution, command and control (C2) infrastructure, or phishing campaigns. This activity is significant as adversaries often reuse or self-sign certificates across malicious infrastructure, allowing defenders to track and detect encrypted sessions even when domains or IPs change. If confirmed malicious, this may indicate beaconing, malware download, or data exfiltration over TLS/SSL.
 data_source:
 - Cisco Secure Firewall Threat Defense Connection Event
 search: |
@@ -13,10 +14,13 @@ search: |
   | lookup sslbl_ssl_certificate_blacklist SHA1 as SSL_CertFingerprint OUTPUT Listingdate, Listingreason
   | where isnotnull(Listingreason)
   | stats min(_time) as firstTime max(_time) as lastTime
-          values(ResponderIP) as ResponderIPs
+          values(dest) as dest
+          values(dest_port) as dest_port
+          values(rule) as rule
+          values(url) as url
           values(Listingreason) as Reasons
           values(Listingdate) as "SSL Cert Listing Dates"
-          count by SSL_CertFingerprint InitiatorIP
+          count by SSL_CertFingerprint src_ip transport
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
   | `cisco_secure_firewall___blacklisted_ssl_certificate_fingerprint_filter`
@@ -34,12 +38,12 @@ known_false_positives: Certain SSL certificates may be flagged in threat intelli
 references:
   - https://www.cisco.com/c/en/us/td/docs/security/firepower/741/api/FQE/secure_firewall_estreamer_fqe_guide_740.pdf
 drilldown_searches:
-- name: View the detection results for - "$InitiatorIP$"
-  search: '%original_detection_search% | search  InitiatorIP = "$InitiatorIP$"'
+- name: View the detection results for - "$src_ip$"
+  search: '%original_detection_search% | search  src_ip = "$src_ip$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$InitiatorIP$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$InitiatorIP$") starthoursago=168  | stats count min(_time)
+- name: View risk events for the last 7 days for - "$src_ip$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$src_ip$") starthoursago=168  | stats count min(_time)
     as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message)
     as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
     as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
@@ -54,7 +58,7 @@ rba:
     - field: SSL_CertFingerprint
       type: other
       score: 40
-    - field: InitiatorIP
+    - field: src_ip
       type: other
       score: 20
   threat_objects: []
