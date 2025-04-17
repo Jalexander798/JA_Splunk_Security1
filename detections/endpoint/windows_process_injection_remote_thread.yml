@@ -1,7 +1,7 @@
 name: Windows Process Injection Remote Thread
 id: 8a618ade-ca8f-4d04-b972-2d526ba59924
-version: 7
-date: '2025-04-16'
+version: 9
+date: '2025-04-17'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -63,6 +63,7 @@ tags:
   - Graceful Wipe Out Attack
   - Warzone RAT
   - Earth Alux
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1055.002

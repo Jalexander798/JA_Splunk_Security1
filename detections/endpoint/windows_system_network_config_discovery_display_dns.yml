@@ -1,7 +1,7 @@
 name: Windows System Network Config Discovery Display DNS
 id: e24f0a0e-41a9-419f-9999-eacab15efc36
-version: '5'
-date: '2025-03-14'
+version: 7
+date: '2025-04-17'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -67,6 +67,7 @@ tags:
   - Medusa Ransomware
   - Windows Post-Exploitation
   - Prestige Ransomware
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1016

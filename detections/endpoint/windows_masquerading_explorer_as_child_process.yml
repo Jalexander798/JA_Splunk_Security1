@@ -1,7 +1,7 @@
 name: Windows Masquerading Explorer As Child Process
 id: 61490da9-52a1-4855-a0c5-28233c88c481
-version: 7
-date: '2025-02-10'
+version: 9
+date: '2025-04-17'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -65,6 +65,7 @@ tags:
   analytic_story:
   - Qakbot
   - Compromised Windows Host
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1574.002

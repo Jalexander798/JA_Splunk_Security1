@@ -1,7 +1,7 @@
 name: Windows LOLBAS Executed As Renamed File
 id: fd496996-7d9e-4894-8d40-bb85b6192dc6
-version: 5
-date: '2025-02-10'
+version: 7
+date: '2025-04-17'
 author: Steven Dick
 status: production
 type: TTP
@@ -76,6 +76,7 @@ tags:
   - Living Off The Land
   - Masquerading - Rename System Utilities
   - Windows Defense Evasion Tactics
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1036.003

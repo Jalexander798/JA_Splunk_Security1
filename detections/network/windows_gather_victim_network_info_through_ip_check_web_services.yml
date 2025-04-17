@@ -1,7 +1,7 @@
 name: Windows Gather Victim Network Info Through Ip Check Web Services
 id: 70f7c952-0758-46d6-9148-d8969c4481d1
-version: 10
-date: '2025-02-10'
+version: 11
+date: '2025-04-17'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
@@ -40,6 +40,7 @@ tags:
   - Handala Wiper
   - PXA Stealer
   - Meduza Stealer
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1590.005
