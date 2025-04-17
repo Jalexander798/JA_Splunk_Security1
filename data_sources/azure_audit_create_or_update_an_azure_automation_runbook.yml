@@ -13,100 +13,99 @@ sourcetype: mscs:azure:audit
 separator: operationName.localizedValue
 separator_value: Create or Update an Azure Automation Runbook
 supported_TA:
-  - name: Splunk Add-on for Microsoft Cloud Services
-    url: https://splunkbase.splunk.com/app/3110
-    version: 5.4.3
+- name: Splunk Add-on for Microsoft Cloud Services
+  url: https://splunkbase.splunk.com/app/3110
+  version: 5.5.0
 fields:
-  - _time
-  - authorization.action
-  - authorization.scope
-  - caller
-  - channels
-  - claims.aio
-  - claims.altsecid
-  - claims.appid
-  - claims.appidacr
-  - claims.aud
-  - claims.exp
-  - claims.groups
-  - claims.http://schemas.microsoft.com/claims/authnclassreference
-  - claims.http://schemas.microsoft.com/claims/authnmethodsreferences
-  - claims.http://schemas.microsoft.com/identity/claims/identityprovider
-  - claims.http://schemas.microsoft.com/identity/claims/objectidentifier
-  - claims.http://schemas.microsoft.com/identity/claims/scope
-  - claims.http://schemas.microsoft.com/identity/claims/tenantid
-  - claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress
-  - claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname
-  - claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
-  - claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier
-  - claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname
-  - claims.iat
-  - claims.ipaddr
-  - claims.iss
-  - claims.name
-  - claims.nbf
-  - claims.puid
-  - claims.rh
-  - claims.uti
-  - claims.ver
-  - claims.wids
-  - claims.xms_tcdt
-  - correlationId
-  - date_hour
-  - date_mday
-  - date_minute
-  - date_month
-  - date_second
-  - date_wday
-  - date_year
-  - date_zone
-  - dest
-  - dvc
-  - eventDataId
-  - eventName.localizedValue
-  - eventName.value
-  - eventSource.localizedValue
-  - eventSource.value
-  - eventTimestamp
-  - host
-  - id
-  - index
-  - level
-  - linecount
-  - object
-  - object_id
-  - object_path
-  - operationId
-  - operationName.localizedValue
-  - operationName.value
-  - product
-  - properties.entity
-  - properties.eventCategory
-  - properties.hierarchy
-  - properties.message
-  - punct
-  - resourceGroupName
-  - resourceProviderName.localizedValue
-  - resourceProviderName.value
-  - resourceUri
-  - source
-  - sourcetype
-  - splunk_server
-  - status
-  - status.localizedValue
-  - status.value
-  - subStatus.value
-  - submissionTimestamp
-  - subscriptionId
-  - timeendpos
-  - timestartpos
-  - user
-  - user_name
-  - vendor
-  - vendor_product
-  - vendor_res_code
-example_log:
-  '{"authorization": {"action": "Microsoft.Automation/automationAccounts/runbooks/write",
+- _time
+- authorization.action
+- authorization.scope
+- caller
+- channels
+- claims.aio
+- claims.altsecid
+- claims.appid
+- claims.appidacr
+- claims.aud
+- claims.exp
+- claims.groups
+- claims.http://schemas.microsoft.com/claims/authnclassreference
+- claims.http://schemas.microsoft.com/claims/authnmethodsreferences
+- claims.http://schemas.microsoft.com/identity/claims/identityprovider
+- claims.http://schemas.microsoft.com/identity/claims/objectidentifier
+- claims.http://schemas.microsoft.com/identity/claims/scope
+- claims.http://schemas.microsoft.com/identity/claims/tenantid
+- claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress
+- claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname
+- claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
+- claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier
+- claims.http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname
+- claims.iat
+- claims.ipaddr
+- claims.iss
+- claims.name
+- claims.nbf
+- claims.puid
+- claims.rh
+- claims.uti
+- claims.ver
+- claims.wids
+- claims.xms_tcdt
+- correlationId
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
+- dest
+- dvc
+- eventDataId
+- eventName.localizedValue
+- eventName.value
+- eventSource.localizedValue
+- eventSource.value
+- eventTimestamp
+- host
+- id
+- index
+- level
+- linecount
+- object
+- object_id
+- object_path
+- operationId
+- operationName.localizedValue
+- operationName.value
+- product
+- properties.entity
+- properties.eventCategory
+- properties.hierarchy
+- properties.message
+- punct
+- resourceGroupName
+- resourceProviderName.localizedValue
+- resourceProviderName.value
+- resourceUri
+- source
+- sourcetype
+- splunk_server
+- status
+- status.localizedValue
+- status.value
+- subStatus.value
+- submissionTimestamp
+- subscriptionId
+- timeendpos
+- timestartpos
+- user
+- user_name
+- vendor
+- vendor_product
+- vendor_res_code
+example_log: '{"authorization": {"action": "Microsoft.Automation/automationAccounts/runbooks/write",
   "scope": "/subscriptions/1aee0e3d-b75b-440a-a927-76f0552a14e6/resourceGroups/resourceGroup1/providers/Microsoft.Automation/automationAccounts/SuspiciousAutomationAccount/runbooks/SuspiciousRunbook"},
   "caller": "evilAdmin@contoso.com", "channels": "Operation", "claims": {"aud": "https://management.core.windows.net/",
   "iss": "https://sts.windows.net/ad251139-d600-4f45-a8ba-9f6ca1e5a93d/", "iat": "1661194261",
