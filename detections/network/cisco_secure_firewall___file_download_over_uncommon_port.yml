@@ -13,12 +13,12 @@ search: |
   `cisco_secure_firewall` EventType=FileEvent FileDirection="Download" NOT dest_port IN (80, 443)
   | lookup cisco_secure_firewall_filetype_lookup Name as FileType OUTPUT Description
   | stats count min(_time) as firstTime max(_time) as lastTime 
-          values(file_name) as Files 
+          values(file_name) as file_name 
           values(uri) as uri 
           values(ClientApplication) as ClientApplication
           values(file_hash) as file_hash 
           values(SHA_Disposition) as SHA_Disposition 
-          by FileDirection FileType app file_name ThreatName dest_port Description src_ip dest
+          by FileDirection FileType app ThreatName dest_port Description src_ip dest
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
   | table firstTime lastTime src_ip dest dest_port FileDirection FileType Description uri ClientApplication file_name file_hash SHA_Disposition ThreatName
@@ -54,12 +54,11 @@ rba:
     - field: src_ip
       type: system
       score: 30
-    - field: dest
-      type: user
-      score: 30
   threat_objects:
-    - field: uri
-      type: url
+    - field: file_name
+      type: file_name
+    - field: file_hash
+      type: file_hash
 tags:
   analytic_story:
     - Cisco Secure Firewall Threat Defense Analytics
