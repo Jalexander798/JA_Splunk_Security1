@@ -1,7 +1,7 @@
 name: Deleting Shadow Copies
 id: b89919ed-ee5f-492c-b139-95dbb162039e
-version: '12'
-date: '2025-04-01'
+version: 13
+date: '2025-04-16'
 author: David Dorsey, Splunk
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: Suspicious msbuild path
 id: f5198224-551c-11eb-ae93-0242ac130002
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-04-16'
 author: Michael Haag, Splunk
 status: production
 type: TTP
