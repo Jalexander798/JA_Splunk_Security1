@@ -11,16 +11,16 @@ data_source:
 search: >-
   `cloudtrail` eventSource=bedrock.amazonaws.com eventName=InvokeModel errorCode=AccessDenied 
   | rename user_name as user 
-  | stats count min(_time) as firstTime max(_time) as lastTime values(requestParameters.modelId) as modelIds by src user user_agent vendor_account signature vendor_region result result_id
+  | stats count min(_time) as firstTime max(_time) as lastTime values(requestParameters.modelId) as modelIds by src user user_agent vendor_account vendor_product dest signature vendor_region result result_id
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)`
   | `aws_bedrock_invoke_model_access_denied_filter`
 how_to_implement: The Splunk AWS Add-on is required to utilize this data. The search requires AWS CloudTrail logs with Bedrock service events enabled. You must install and configure the AWS App for Splunk (version 6.0.0 or later) and Splunk Add-on for AWS (version 5.1.0 or later) to collect CloudTrail logs from AWS.
 known_false_positives: Legitimate users may encounter access denied errors during permission testing, role transitions, or when service permissions are being reconfigured. Access denials may also happen when automated processes are using outdated credentials or when new Bedrock features are being explored.
 references:
-- https://docs.aws.amazon.com/bedrock/latest/userguide/security-iam.html
-- https://docs.aws.amazon.com/bedrock/latest/userguide/monitoring-cloudtrail.html
-- https://attack.mitre.org/techniques/T1078/
+- https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListFoundationModels.html
+- https://trustoncloud.com/blog/exposing-the-weakness-how-we-identified-a-flaw-in-bedrocks-foundation-model-access-control/
+- https://attack.mitre.org/techniques/T1595/
 drilldown_searches:
 - name: View the detection results for - "$user$"
   search: '%original_detection_search% | search user = "$user$"'

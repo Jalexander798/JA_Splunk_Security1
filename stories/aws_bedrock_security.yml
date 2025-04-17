@@ -11,10 +11,9 @@ narrative: 'Organizations increasingly leverage Amazon Bedrock to power their Ge
   
   This Analytic Story includes detections that identify suspicious activities against AWS Bedrock services, such as access denied events, spikes in GuardRail blocks, unusual API call patterns, configuration changes to logging, and manipulation of model security controls. These detections help organizations monitor for potential compromise of their Bedrock environment and identify attempts to bypass AI security measures through configuration changes or abuse of legitimate functionality.'
 references:
-- https://aws.amazon.com/bedrock/security/
-- https://docs.aws.amazon.com/bedrock/latest/userguide/security-iam.html
-- https://docs.aws.amazon.com/bedrock/latest/userguide/security-shared-responsibility.html
-- https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html
+- https://www.sumologic.com/blog/defenders-guide-to-aws-bedrock/
+- https://www.mitigant.io/en/blog/bedrock-or-bedsand-attacking-amazon-bedrocks-achilles-heel
+- https://sysdig.com/blog/llmjacking-targets-deepseek/
 tags:
   category:
   - Cloud Security
