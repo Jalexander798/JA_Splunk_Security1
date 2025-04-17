@@ -1,7 +1,7 @@
 name: Supernova Webshell
 id: 2ec08a09-9ff1-4dac-b59f-1efd57972ec1
-version: 4
-date: '2024-11-15'
+version: 5
+date: '2025-04-16'
 author: John Stoner, Splunk
 status: experimental
 type: TTP
@@ -41,6 +41,7 @@ rba:
 tags:
   analytic_story:
   - NOBELIUM Group
+  - Earth Alux
   asset_type: Web Server
   mitre_attack_id:
   - T1505.003

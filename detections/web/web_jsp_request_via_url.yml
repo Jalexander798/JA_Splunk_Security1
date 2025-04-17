@@ -1,7 +1,7 @@
 name: Web JSP Request via URL
 id: 2850c734-2d44-4431-8139-1a56f6f54c01
-version: 5
-date: '2025-02-10'
+version: 6
+date: '2025-04-16'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -54,6 +54,7 @@ rba:
 tags:
   analytic_story:
   - Spring4Shell CVE-2022-22965
+  - Earth Alux
   asset_type: Web Server
   cve:
   - CVE-2022-22965
