@@ -82,6 +82,7 @@ tags:
   - Ingress Tool Transfer
   - Compromised Windows Host
   - CISA AA22-277A
+  - Storm-2460 CLFS Zero Day Exploitation
   asset_type: Endpoint
   mitre_attack_id:
   - T1105

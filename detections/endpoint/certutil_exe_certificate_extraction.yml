@@ -77,6 +77,7 @@ tags:
   - Cloud Federated Credential Abuse
   - Compromised Windows Host
   - Windows Certificate Services
+  - Storm-2460 CLFS Zero Day Exploitation
   asset_type: Endpoint
   product:
   - Splunk Enterprise

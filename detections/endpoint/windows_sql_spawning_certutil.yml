@@ -58,6 +58,7 @@ tags:
   analytic_story:
   - SQL Server Abuse
   - Flax Typhoon
+  - Storm-2460 CLFS Zero Day Exploitation
   asset_type: Endpoint
   atomic_guid: []
   mitre_attack_id:

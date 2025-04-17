@@ -70,6 +70,7 @@ rba:
 tags:
   analytic_story:
   - Trusted Developer Utilities Proxy Execution MSBuild
+  - Storm-2460 CLFS Zero Day Exploitation
   asset_type: Endpoint
   mitre_attack_id:
   - T1127.001

@@ -73,6 +73,7 @@ tags:
   - Clop Ransomware
   - CISA AA23-347A
   - ShrinkLocker
+  - Storm-2460 CLFS Zero Day Exploitation
   asset_type: Endpoint
   mitre_attack_id:
   - T1070.001
