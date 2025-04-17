@@ -49,12 +49,14 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A high number of Snort intrusion detections were triggered by $src_ip$ in a 30-minute time window.
+  message: A high number [$TotalEvents$] of Snort intrusion detections for [$signature$] were triggered by [$src_ip$] in a 30-minute time window.
   risk_objects:
     - field: src_ip
       type: system
       score: 40
-  threat_objects: []
+  threat_objects:
+    - field: signature
+      type: signature
 tags:
   analytic_story: 
     - Cisco Secure Firewall Threat Defense Analytics
