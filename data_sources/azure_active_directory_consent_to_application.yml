@@ -16,67 +16,66 @@ sourcetype: azure:monitor:aad
 separator: operationName
 separator_value: Consent to application
 supported_TA:
-  - name: Splunk Add-on for Microsoft Cloud Services
-    url: https://splunkbase.splunk.com/app/3110
-    version: 5.4.3
+- name: Splunk Add-on for Microsoft Cloud Services
+  url: https://splunkbase.splunk.com/app/3110
+  version: 5.5.0
 fields:
-  - _time
-  - Level
-  - callerIpAddress
-  - category
-  - correlationId
-  - date_hour
-  - date_mday
-  - date_minute
-  - date_month
-  - date_second
-  - date_wday
-  - date_year
-  - date_zone
-  - durationMs
-  - eventtype
-  - host
-  - index
-  - linecount
-  - operationName
-  - operationVersion
-  - properties.activityDateTime
-  - properties.activityDisplayName
-  - properties.additionalDetails{}.key
-  - properties.additionalDetails{}.value
-  - properties.category
-  - properties.correlationId
-  - properties.id
-  - properties.initiatedBy.user.displayName
-  - properties.initiatedBy.user.id
-  - properties.initiatedBy.user.ipAddress
-  - properties.initiatedBy.user.userPrincipalName
-  - properties.loggedByService
-  - properties.operationType
-  - properties.result
-  - properties.resultReason
-  - properties.targetResources{}.displayName
-  - properties.targetResources{}.id
-  - properties.targetResources{}.modifiedProperties{}.displayName
-  - properties.targetResources{}.modifiedProperties{}.newValue
-  - properties.targetResources{}.modifiedProperties{}.oldValue
-  - properties.targetResources{}.type
-  - properties.userAgent
-  - punct
-  - resourceId
-  - resultDescription
-  - resultSignature
-  - source
-  - sourcetype
-  - splunk_server
-  - tag
-  - tag::eventtype
-  - tenantId
-  - time
-  - timeendpos
-  - timestartpos
-example_log:
-  '{"time": "2023-10-27T16:14:14.9747033Z", "resourceId": "/tenants/75243ab2-44f8-435c-a7a6-b479385df6d4/providers/Microsoft.aadiam",
+- _time
+- Level
+- callerIpAddress
+- category
+- correlationId
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
+- durationMs
+- eventtype
+- host
+- index
+- linecount
+- operationName
+- operationVersion
+- properties.activityDateTime
+- properties.activityDisplayName
+- properties.additionalDetails{}.key
+- properties.additionalDetails{}.value
+- properties.category
+- properties.correlationId
+- properties.id
+- properties.initiatedBy.user.displayName
+- properties.initiatedBy.user.id
+- properties.initiatedBy.user.ipAddress
+- properties.initiatedBy.user.userPrincipalName
+- properties.loggedByService
+- properties.operationType
+- properties.result
+- properties.resultReason
+- properties.targetResources{}.displayName
+- properties.targetResources{}.id
+- properties.targetResources{}.modifiedProperties{}.displayName
+- properties.targetResources{}.modifiedProperties{}.newValue
+- properties.targetResources{}.modifiedProperties{}.oldValue
+- properties.targetResources{}.type
+- properties.userAgent
+- punct
+- resourceId
+- resultDescription
+- resultSignature
+- source
+- sourcetype
+- splunk_server
+- tag
+- tag::eventtype
+- tenantId
+- time
+- timeendpos
+- timestartpos
+example_log: '{"time": "2023-10-27T16:14:14.9747033Z", "resourceId": "/tenants/75243ab2-44f8-435c-a7a6-b479385df6d4/providers/Microsoft.aadiam",
   "operationName": "Consent to application", "operationVersion": "1.0", "category":
   "AuditLogs", "tenantId": "75243ab2-44f8-435c-a7a6-b479385df6d4", "resultSignature":
   "None", "resultDescription": "Microsoft.Online.Security.UserConsentBlockedForRiskyAppsException",

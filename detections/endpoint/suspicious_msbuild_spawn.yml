@@ -1,7 +1,7 @@
 name: Suspicious MSBuild Spawn
 id: a115fba6-5514-11eb-ae93-0242ac130002
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-04-16'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -69,6 +69,7 @@ tags:
   analytic_story:
   - Trusted Developer Utilities Proxy Execution MSBuild
   - Living Off The Land
+  - Storm-2460 CLFS Zero Day Exploitation
   asset_type: Endpoint
   mitre_attack_id:
   - T1127.001
