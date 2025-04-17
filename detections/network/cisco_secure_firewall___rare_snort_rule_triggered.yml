@@ -3,7 +3,7 @@ id: e20313d2-7d63-4fcf-b2d9-d6e12c6c7bd7
 version: 1
 date: '2025-04-14'
 author: Nasreddine Bencherchali, Splunk
-status: experimental
+status: production
 type: Hunting
 description: |
   This analytic identifies Snort signatures that have triggered only once in the past 7 days across all Cisco Secure Firewall IntrusionEvent logs. While these rules typically do not trigger in day-to-day network activity, their sudden appearance may indicate early-stage compromise, previously unseen malware, or reconnaissance activity against less commonly exposed services. Investigating these outliers can provide valuable insight into new or low-noise adversary behaviors.
@@ -61,3 +61,9 @@ tags:
     - Splunk Enterprise
     - Splunk Cloud
     - Splunk Enterprise Security
+tests:
+- name: True Positive Test
+  attack_data:
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/intrusion_event/intrusion_events.log
+    source: not_applicable
+    sourcetype: cisco:sfw:estreamer
