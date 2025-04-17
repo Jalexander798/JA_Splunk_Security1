@@ -1,7 +1,7 @@
 name: CertUtil With Decode Argument
 id: bfe94226-8c10-11eb-a4b3-acde48001122
-version: 8
-date: '2024-11-13'
+version: 9
+date: '2025-04-16'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -78,6 +78,7 @@ tags:
   - Living Off The Land
   - Forest Blizzard
   - APT29 Diplomatic Deceptions with WINELOADER
+  - Storm-2460 CLFS Zero Day Exploitation
   group:
   - APT29
   - Cozy Bear
