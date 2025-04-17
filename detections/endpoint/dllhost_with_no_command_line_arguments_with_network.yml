@@ -80,6 +80,7 @@ tags:
   - BlackByte Ransomware
   - Cobalt Strike
   - Graceful Wipe Out Attack
+  - Storm-2460 CLFS Zero Day Exploitation
   - Earth Alux
   asset_type: Endpoint
   mitre_attack_id:
