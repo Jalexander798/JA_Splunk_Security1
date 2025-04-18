@@ -1,7 +1,7 @@
 name: Rundll32 with no Command Line Arguments with Network
 id: 35307032-a12d-11eb-835f-acde48001122
-version: 10
-date: '2025-02-10'
+version: 11
+date: '2025-04-18'
 author: Steven Dick,  Michael Haag, Splunk
 status: production
 type: TTP
