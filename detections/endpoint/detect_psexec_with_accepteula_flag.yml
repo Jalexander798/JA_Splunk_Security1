@@ -73,19 +73,23 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - SamSam Ransomware
   - DHS Report TA18-074A
-  - HAFNIUM Group
-  - DarkSide Ransomware
   - Active Directory Lateral Movement
+  - BlackByte Ransomware
+  - HAFNIUM Group
+  - Rhysida Ransomware
+  - Medusa Ransomware
+  - DarkSide Ransomware
+  - SamSam Ransomware
+  - DarkGate Malware
   - CISA AA22-320A
   - Sandworm Tools
-  - Volt Typhoon
   - IcedID
   - BlackByte Ransomware
   - DarkGate Malware
   - Rhysida Ransomware
   - Cactus Ransomware
+  - Volt Typhoon
   - Seashell Blizzard
   - VanHelsing Ransomware
   asset_type: Endpoint

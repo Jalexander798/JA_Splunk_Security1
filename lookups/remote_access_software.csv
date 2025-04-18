@@ -61,9 +61,9 @@ Netviewer (GoToMeet),,nvClient.exe,Algorius*,netviewer,TRUE,RMM,Obsolute - found
 Netviewer (GoToMeet),,netviewer.exe,,,TRUE,RMM,Obsolute - found copy here: https://www.enviolet.com/en/service/online-consultant.html,2/9/2024
 ngrok,user_managed,ngrok.exe,,,TRUE,Developer Utility,https://ngrok.com/docs/guides/running-behind-firewalls/,2/9/2024
 NinjaRMM,*.ninjaone.com,ninjarmmagent.exe,NinjaRMM*,,TRUE,RMM,https://www.ninjaone.com/faq/,2/9/2024
-NinjaRMM,*.ninjarmm.com,NinjaRMMAgenPatcher.exe,Ninja MSP*,,TRUE,RMM,https://www.ninjaone.com/faq/,2/9/2024
+NinjaRMM,*.ninjarmm.com,NinjaRMMAgentPatcher.exe,Ninja MSP*,,TRUE,RMM,https://www.ninjaone.com/faq/,4/4/2025
 NoMachine,user_managed,nomachine*.exe,NoMachine*,nomachine,TRUE,RMM,https://kb.nomachine.com/AR04S01122,2/9/2024
-NoMachine,,nxservice*.ese,,,TRUE,RMM,https://kb.nomachine.com/AR04S01122,2/9/2024
+NoMachine,,nxservice*.exe,,,TRUE,RMM,https://kb.nomachine.com/AR04S01122,4/4/2025
 NoMachine,,nxd.exe,,,TRUE,RMM,https://kb.nomachine.com/AR04S01122,2/9/2024
 OCS inventory,user_managed,ocsinventory.exe,Ocs Inventory*,,TRUE,RMM,https://ocsinventory-ng.org/?page_id=878&lang=en,2/9/2024
 OCS inventory,,ocsservice.exe,OcsPackager*,,TRUE,RMM,https://ocsinventory-ng.org/?page_id=878&lang=en,2/9/2024

@@ -1,11 +1,12 @@
 name: Windows Service Created Within Public Path
 id: 3abb2eda-4bb8-11ec-9ae4-3e22fbd008af
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-03-27'
 author: Mauricio Velazco, Splunk
-status: production
+status: deprecated
 type: TTP
-description: The following analytic detects the creation of a Windows Service with
+description: This analytic is deprecated because it is a duplicate of - "Windows Service Created with Suspicious Service Path". 
+  The following analytic detects the creation of a Windows Service with
   its binary path located in public directories using Windows Event ID 7045. This
   detection leverages logs from the `wineventlog_system` data source, focusing on
   the `ImagePath` field to identify services installed outside standard system directories.

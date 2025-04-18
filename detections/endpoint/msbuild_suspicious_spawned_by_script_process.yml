@@ -1,7 +1,7 @@
 name: MSBuild Suspicious Spawned By Script Process
 id: 213b3148-24ea-11ec-93a2-acde48001122
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-04-16'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -70,6 +70,7 @@ rba:
 tags:
   analytic_story:
   - Trusted Developer Utilities Proxy Execution MSBuild
+  - Storm-2460 CLFS Zero Day Exploitation
   asset_type: Endpoint
   mitre_attack_id:
   - T1127.001
