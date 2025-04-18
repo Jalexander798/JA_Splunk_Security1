@@ -3,7 +3,7 @@ id: 9be25988-ad82-11eb-a14f-acde48001122
 version: 7
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: This search has been deprecated in favour of -  Windows Suspicious Process File Path. The following analytic identifies processes running from file  paths not
   typically associated with legitimate software. It leverages data from Endpoint Detection

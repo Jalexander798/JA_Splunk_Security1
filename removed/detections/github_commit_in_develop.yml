@@ -3,7 +3,7 @@ id: f3030cb6-0b02-11ec-8f22-acde48001122
 version: 5
 date: '2024-11-14'
 author: Teoderick Contreras, Splunk
-status: deprecated
+status: removed
 type: Anomaly
 description: The following analytic detects commits pushed directly to the 'develop'
   or 'main' branches in a GitHub repository. It leverages GitHub logs, focusing on

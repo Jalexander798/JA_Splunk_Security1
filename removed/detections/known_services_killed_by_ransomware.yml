@@ -3,7 +3,7 @@ id: 3070f8e0-c528-11eb-b2a0-acde48001122
 version: 8
 date: '2025-02-07'
 author: Teoderick Contreras, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: This analytic has been deprecated in favor of a new analytic - Windows Security And Backup Services Stop. The following analytic detects the suspicious termination of known services
   commonly targeted by ransomware before file encryption. It leverages Windows System
