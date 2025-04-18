@@ -1,7 +1,7 @@
 name: Windows MSIExec DLLRegisterServer
 id: fdb59aef-d88f-4909-8369-ec2afbd2c398
-version: 7
-date: '2024-11-13'
+version: 8
+date: '2025-04-17'
 author: Michael Haag, Splunk
 status: production
 type: TTP

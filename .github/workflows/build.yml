@@ -31,7 +31,7 @@ jobs:
       
       - name: Running build with enrichments
         run: |
-          contentctl build --enrichments
+          contentctl build --enrichments --enforce_deprecation_mapping_requirement
           mkdir artifacts
           mv dist/DA-ESS-ContentUpdate-latest.tar.gz artifacts/
 

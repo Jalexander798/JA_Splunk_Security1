@@ -3,7 +3,7 @@ id: a98727cc-286b-4ff2-b898-41df64695923
 version: 7  
 date: '2025-01-10'
 author: Jose Hernandez, Bhavin Patel, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: The following analytic has been deprecated in favor of "Windows Remote Desktop Network Bruteforce Attempt". The following analytic identifies potential Remote Desktop Protocol (RDP) brute force attacks by monitoring network traffic for RDP application activity. This query detects potential RDP brute force attacks by identifying source IPs that have made more than 10 successful connection attempts to the same RDP port on a host within a one-hour window. The results are presented in a table that includes the source and destination IPs, destination port, number of attempts, and the times of the first and last connection attempts, helping to prioritize IPs based on the intensity of activity.
 data_source:

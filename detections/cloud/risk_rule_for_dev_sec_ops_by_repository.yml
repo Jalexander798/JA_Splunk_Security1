@@ -1,7 +1,7 @@
 name: Risk Rule for Dev Sec Ops by Repository
 id: 161bc0ca-4651-4c13-9c27-27770660cf67
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-04-16'
 author: Bhavin Patel
 status: production
 type: Correlation
@@ -55,7 +55,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://raw.githubusercontent.com/splunk/attack_data/master/datasets/attack_techniques/T1204.003/risk_dataset/aws_ecr_risk_dataset.log
+  - data: https://raw.githubusercontent.com/splunk/attack_data/master/datasets/attack_techniques/T1204.003/risk_dataset/aws_ecr_risk_dataset.log
     source: aws_ecr_risk_dataset.log
     sourcetype: stash

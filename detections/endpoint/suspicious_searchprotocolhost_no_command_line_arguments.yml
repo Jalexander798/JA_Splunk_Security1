@@ -1,7 +1,7 @@
 name: Suspicious SearchProtocolHost no Command Line Arguments
 id: f52d2db8-31f9-4aa7-a176-25779effe55c
-version: 7
-date: '2024-11-13'
+version: 8
+date: '2025-04-18'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -69,6 +69,7 @@ tags:
   - BlackByte Ransomware
   - Cobalt Strike
   - Graceful Wipe Out Attack
+  - Cactus Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1055

@@ -1,7 +1,7 @@
 name: Access LSASS Memory for Dump Creation
 id: fb4c31b0-13e8-4155-8aa5-24de4b8d6717
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-04-18'
 author: Patrick Bareiss, Splunk
 status: production
 type: TTP
@@ -62,6 +62,7 @@ tags:
   analytic_story:
   - CISA AA23-347A
   - Credential Dumping
+  - Cactus Ransomware
   asset_type: Windows
   mitre_attack_id:
   - T1003.001

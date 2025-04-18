@@ -1,7 +1,7 @@
 name: Living Off The Land Detection
 id: 1be30d80-3a39-4df9-9102-64a467b24abc
-version: 6
-date: '2025-03-26'
+version: 7
+date: '2025-04-16'
 author: Michael Haag, Splunk
 status: production
 type: Correlation
@@ -69,7 +69,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/refs/heads/master/datasets/attack_techniques/T1218/living_off_the_land/lolbinrisk.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/refs/heads/master/datasets/attack_techniques/T1218/living_off_the_land/lolbinrisk.log
     source: lotl
     sourcetype: stash
