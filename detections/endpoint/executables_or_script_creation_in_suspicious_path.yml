@@ -1,7 +1,7 @@
 name: Executables Or Script Creation In Suspicious Path
 id: a7e3f0f0-ae42-11eb-b245-acde48001122
-version: 13
-date: '2025-03-27'
+version: 14
+date: '2025-04-16'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -63,48 +63,54 @@ rba:
     type: file_name
 tags:
   analytic_story:
-  - SystemBC
-  - Snake Keylogger
-  - China-Nexus Threat Activity
-  - Remcos
-  - LockBit Ransomware
-  - AsyncRAT
-  - DarkCrystal RAT
-  - Derusbi
-  - WinDealer RAT
-  - DarkGate Malware
-  - Crypto Stealer
-  - ValleyRAT
   - AcidPour
-  - PlugX
-  - Data Destruction
-  - Qakbot
-  - CISA AA23-347A
-  - Hermetic Wiper
-  - Volt Typhoon
-  - Double Zero Destructor
-  - NjRAT
-  - Trickbot
   - AgentTesla
-  - Meduza Stealer
-  - SnappyBee
+  - Amadey
+  - AsyncRAT
   - Azorult
-  - WhisperGate
-  - Warzone RAT
-  - Swift Slicer
-  - Rhysida Ransomware
-  - Brute Ratel C4
   - BlackByte Ransomware
-  - Graceful Wipe Out Attack
+  - Brute Ratel C4
+  - Cactus Ransomware
   - Chaos Ransomware
+  - China-Nexus Threat Activity
+  - Crypto Stealer
+  - CISA AA23-347A
+  - DarkCrystal RAT
+  - DarkGate Malware
+  - Data Destruction
+  - Derusbi
+  - Double Zero Destructor
+  - Graceful Wipe Out Attack
   - Handala Wiper
+  - Hermetic Wiper
+  - IcedID
+  - Industroyer2
+  - LockBit Ransomware
+  - Meduza Stealer
+  - MoonPeak
+  - NjRAT
+  - PlugX
+  - Qakbot
   - RedLine Stealer
+  - Remcos
+  - Rhysida Ransomware
   - Salt Typhoon
+  - SnappyBee
+  - Snake Keylogger
+  - Swift Slicer
+  - SystemBC
+  - Trickbot
+  - ValleyRAT
+  - Volt Typhoon
+  - Warzone RAT
+  - WhisperGate
+  - WinDealer RAT
   - XMRig
   - MoonPeak
   - Industroyer2
   - Amadey
   - IcedID
+  - Earth Alux
   asset_type: Endpoint
   mitre_attack_id:
   - T1036
