@@ -1,7 +1,7 @@
 name: Disable Defender AntiVirus Registry
 id: aa4f695a-3024-11ec-9987-acde48001122
-version: 11
-date: '2025-03-27'
+version: 12
+date: '2025-04-18'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP
@@ -62,6 +62,7 @@ tags:
   - CISA AA24-241A
   - IcedID
   - Black Basta Ransomware
+  - Cactus Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001

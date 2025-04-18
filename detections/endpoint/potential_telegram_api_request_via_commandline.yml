@@ -1,7 +1,7 @@
 name: Potential Telegram API Request Via CommandLine
 id: d6b0d627-d0bf-46b1-936f-c48284767d21
-version: 2
-date: '2025-02-19'
+version: 3
+date: '2025-04-17'
 author: Nasreddine Bencherchali, Splunk, Zaki Zarkasih Al Mustafa
 status: production
 type: Anomaly

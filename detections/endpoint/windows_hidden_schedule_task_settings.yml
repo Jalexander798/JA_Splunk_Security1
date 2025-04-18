@@ -1,7 +1,7 @@
 name: Windows Hidden Schedule Task Settings
 id: 0b730470-5fe8-4b13-93a7-fe0ad014d0cc
-version: 5
-date: '2024-12-10'
+version: 6
+date: '2025-03-19'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -55,6 +55,7 @@ tags:
   - Scheduled Tasks
   - Compromised Windows Host
   - Active Directory Discovery
+  - Cactus Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1053
