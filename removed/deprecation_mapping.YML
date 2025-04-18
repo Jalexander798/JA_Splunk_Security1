@@ -967,6 +967,9 @@ stories:
     reason: Analytic Story has been replaced by a new analytic story with a more specific name
     replacement_content:
     - Salt Typhoon
+  - content: AWS Cross Account Activity
+    removed_in_version: 5.4.0
+    reason: All associated detections with this story have been deprecated
   - content: AWS Cryptomining
     removed_in_version: 5.2.0
     reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
