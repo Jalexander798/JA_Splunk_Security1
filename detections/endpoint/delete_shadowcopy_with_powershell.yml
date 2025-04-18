@@ -1,7 +1,7 @@
 name: Delete ShadowCopy With PowerShell
 id: 5ee2bcd0-b2ff-11eb-bb34-acde48001122
-version: 6
-date: '2025-03-25'
+version: 7
+date: '2025-04-18'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -57,6 +57,7 @@ tags:
   - Ransomware
   - Revil Ransomware
   - DarkGate Malware
+  - Cactus Ransomware
   - VanHelsing Ransomware
   asset_type: Endpoint
   mitre_attack_id:
