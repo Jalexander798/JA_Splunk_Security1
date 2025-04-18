@@ -1,6 +1,6 @@
 name: AWS Cross Account Activity From Previously Unseen Account
 id: 21193641-cb96-4a2c-a707-d9b9a7f7792b
-version: 5
+version: 6  
 date: '2024-11-14'
 author: Rico Valdez, Splunk
 status: production
