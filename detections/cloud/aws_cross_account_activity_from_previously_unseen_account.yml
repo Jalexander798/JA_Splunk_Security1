@@ -3,7 +3,7 @@ id: 21193641-cb96-4a2c-a707-d9b9a7f7792b
 version: 5
 date: '2024-11-14'
 author: Rico Valdez, Splunk
-status: removed
+status: production
 type: Anomaly
 description: The following analytic identifies AssumeRole events where an IAM role
   in a different AWS account is accessed for the first time. It detects this activity
@@ -36,6 +36,20 @@ known_false_positives: Using multiple AWS accounts and roles is perfectly valid 
   It's suspicious when an account requests privileges of an account it hasn't before.
   You should validate with the account owner that this is a legitimate request.
 references: []
+drilldown_searches:
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search  user = "$user$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
 rba:
   message: AWS account $requestingAccountId$ is trying to access resource from some
     other account $requestedAccountId$, for the first time.
@@ -46,7 +60,7 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Suspicious Cloud Authentication Activities
+  - AWS Cross Account Activity
   asset_type: AWS Instance
   product:
   - Splunk Enterprise
