@@ -1,6 +1,6 @@
 name: Windows MsiExec HideWindow Rundll32 Execution
 id: 9683271d-92e4-43b5-a907-1983bfb9f7fd
-version: 7
+version: 8
 date: '2025-04-17'
 author: Teoderick Contreras, Splunk
 status: production
@@ -66,6 +66,7 @@ rba:
 tags:
   analytic_story:
   - Qakbot
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1218.007

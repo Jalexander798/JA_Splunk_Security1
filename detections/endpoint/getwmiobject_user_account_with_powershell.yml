@@ -1,6 +1,6 @@
 name: GetWmiObject User Account with PowerShell
 id: b44f6ac6-0429-11ec-87e9-acde48001122
-version: 7
+version: 8
 date: '2025-04-17'
 author: Mauricio Velazco, Splunk
 status: production
@@ -44,6 +44,7 @@ tags:
   analytic_story:
   - Winter Vivern
   - Active Directory Discovery
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1087.001

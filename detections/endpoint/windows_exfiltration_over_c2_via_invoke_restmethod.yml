@@ -1,6 +1,6 @@
 name: Windows Exfiltration Over C2 Via Invoke RestMethod
 id: 06ade821-f6fa-40d0-80af-15bc1d45b3ba
-version: 6
+version: 7
 date: '2025-04-17'
 author: Teoderick Contreras, Splunk
 status: production
@@ -53,6 +53,7 @@ rba:
 tags:
   analytic_story:
   - Winter Vivern
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1041

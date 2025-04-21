@@ -1,6 +1,6 @@
 name: Windows Scheduled Tasks for CompMgmtLauncher or Eventvwr
 id: feb43b86-8c38-46cd-865e-20ce8a96c26c
-version: 6
+version: 7
 date: '2025-04-17'
 author: Teoderick Contreras, Splunk
 data_source:
@@ -52,6 +52,7 @@ rba:
 tags:
   analytic_story:
   - ValleyRAT
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1053
@@ -63,7 +64,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053/valleyrat_schedtask/valleyrat_schedtask.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053/valleyrat_schedtask/valleyrat_schedtask.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

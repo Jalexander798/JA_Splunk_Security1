@@ -1,6 +1,6 @@
 name: Enumerate Users Local Group Using Telegram
 id: fcd74532-ae54-11eb-a5ab-acde48001122
-version: 8
+version: 9
 date: '2025-04-17'
 author: Teoderick Contreras, Splunk
 status: production
@@ -55,6 +55,7 @@ tags:
   analytic_story:
   - XMRig
   - Compromised Windows Host
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1087
@@ -66,7 +67,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087/enumerate_users_local_group_using_telegram/windows-xml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087/enumerate_users_local_group_using_telegram/windows-xml.log
     source: XmlWinEventLog:Security
     sourcetype: XmlWinEventLog

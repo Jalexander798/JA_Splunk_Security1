@@ -1,6 +1,6 @@
 name: Windows MSIExec Spawn Discovery Command
 id: e9d05aa2-32f0-411b-930c-5b8ca5c4fcee
-version: 9
+version: 10
 date: '2025-04-17'
 author: Michael Haag, Splunk
 status: production
@@ -75,6 +75,7 @@ tags:
   analytic_story:
   - Windows System Binary Proxy Execution MSIExec
   - Medusa Ransomware
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1218.007

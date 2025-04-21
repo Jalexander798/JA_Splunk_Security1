@@ -1,6 +1,6 @@
 name: LOLBAS With Network Traffic
 id: 2820f032-19eb-497e-8642-25b04a880359
-version: 8
+version: 9
 date: '2025-04-17'
 author: Steven Dick
 status: production
@@ -71,6 +71,7 @@ rba:
 tags:
   analytic_story:
   - Living Off The Land
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1105

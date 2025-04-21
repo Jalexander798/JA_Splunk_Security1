@@ -1,6 +1,6 @@
 name: Suspicious Copy on System32
 id: ce633e56-25b2-11ec-9e76-acde48001122
-version: 9
+version: 10
 date: '2025-04-17'
 author: Teoderick Contreras, Splunk
 status: production
@@ -76,6 +76,7 @@ tags:
   - AsyncRAT
   - Unusual Processes
   - Compromised Windows Host
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1036.003

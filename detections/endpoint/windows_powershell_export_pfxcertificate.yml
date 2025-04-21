@@ -1,6 +1,6 @@
 name: Windows PowerShell Export PfxCertificate
 id: ed06725f-6da6-439f-9dcc-ab30e891297c
-version: 7
+version: 8
 date: '2025-04-17'
 author: Michael Haag, Splunk
 status: production
@@ -52,6 +52,7 @@ rba:
 tags:
   analytic_story:
   - Windows Certificate Services
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1552.004

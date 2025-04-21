@@ -1,6 +1,6 @@
 name: PowerShell 4104 Hunting
 id: d6f2b006-0041-11ec-8885-acde48001122
-version: 15
+version: 16
 date: '2025-04-17'
 author: Michael Haag, Splunk
 status: production
@@ -76,9 +76,7 @@ tags:
   - Salt Typhoon
   - SystemBC
   - PHP-CGI RCE Attack on Japanese Organizations
-  - Rhysida Ransomware
-  - Salt Typhoon
-  - SystemBC
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1059.001
