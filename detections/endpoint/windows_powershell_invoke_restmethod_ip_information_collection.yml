@@ -50,9 +50,7 @@ rba:
   - field: dest
     type: system
     score: 45
-  threat_objects:
-  - field: dest
-    type: system
+  threat_objects: []
 tags:
   analytic_story:
   - Water Gamayun
