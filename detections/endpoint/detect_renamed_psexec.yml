@@ -1,7 +1,7 @@
 name: Detect Renamed PSExec
 id: 683e6196-b8e8-11eb-9a79-acde48001122
-version: 13
-date: '2025-03-27'
+version: 14
+date: '2025-04-18'
 author: Michael Haag, Splunk, Alex Oberkircher, Github Community
 status: production
 type: Hunting
@@ -44,12 +44,12 @@ tags:
   analytic_story:
   - Active Directory Lateral Movement
   - BlackByte Ransomware
+  - Cactus Ransomware
   - China-Nexus Threat Activity
   - CISA AA22-320A
   - DarkGate Malware
   - DarkSide Ransomware
   - DHS Report TA18-074A
-  - Earth Estries
   - HAFNIUM Group
   - Medusa Ransomware
   - Rhysida Ransomware

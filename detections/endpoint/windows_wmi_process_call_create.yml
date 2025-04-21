@@ -1,7 +1,7 @@
 name: Windows WMI Process Call Create
 id: 0661c2de-93de-11ec-9833-acde48001122
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-04-18'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting
@@ -49,6 +49,7 @@ tags:
   - IcedID
   - Suspicious WMI Use
   - CISA AA23-347A
+  - Cactus Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1047

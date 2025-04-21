@@ -3,7 +3,7 @@ id: 12d6d713-3cb4-4ffc-a064-1dca3d1cca01
 version: 5
 date: '2024-11-14'
 author: Rod Soto, Splunk
-status: deprecated
+status: removed
 type: Hunting
 description: The following analytic detects the creation of permanent access keys
   in AWS accounts. It leverages CloudWatch logs to identify events where the `CreateAccessKey`

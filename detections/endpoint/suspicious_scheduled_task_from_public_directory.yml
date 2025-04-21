@@ -1,7 +1,7 @@
 name: Suspicious Scheduled Task from Public Directory
 id: 7feb7972-7ac3-11eb-bac8-acde48001122
-version: '9'
-date: '2025-03-14'
+version: 10
+date: '2025-04-16'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly
@@ -75,7 +75,6 @@ tags:
   - CISA AA24-241A
   - Crypto Stealer
   - DarkCrystal RAT
-  - Earth Estries
   - Living Off The Land
   - Medusa Ransomware
   - MoonPeak

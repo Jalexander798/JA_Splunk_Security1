@@ -3,7 +3,7 @@ id: f880acd4-a8f1-11eb-a53b-acde48001122
 version: 6
 date: '2025-02-06'
 author: Teoderick Contreras, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: This search has been deprecated in favour of - Windows Suspicious Driver Loaded Path. The following analytic detects the loading of drivers from suspicious
   paths, which is a technique often used by malicious software such as coin miners

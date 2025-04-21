@@ -3,7 +3,7 @@ id: 2b85aa3d-f5f6-4c2e-a081-a09f6e1c2e40
 version: 6
 date: '2025-02-10'
 author: Mauricio Velazco, Splunk
-status: deprecated
+status: removed
 type: Hunting
 description: This search has been deprecated in favour of Windows Event Logging Service Has Shutdown . The following analytic detects the shutdown of the Windows Event Log
   service using Windows Event ID 1100. This event is logged every time the service

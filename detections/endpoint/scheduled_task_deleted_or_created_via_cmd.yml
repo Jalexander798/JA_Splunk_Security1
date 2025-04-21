@@ -1,7 +1,7 @@
 name: Scheduled Task Deleted Or Created via CMD
 id: d5af132c-7c17-439c-9d31-13d55340f36c
-version: '14'
-date: '2025-03-14'
+version: 15
+date: '2025-04-16'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -81,7 +81,6 @@ tags:
   - CISA AA24-241A
   - DarkCrystal RAT
   - DHS Report TA18-074A
-  - Earth Estries
   - Living Off The Land
   - Medusa Ransomware
   - MoonPeak

@@ -1,7 +1,7 @@
 name: Steal or Forge Authentication Certificates Behavior Identified
 id: 87ac670e-bbfd-44ca-b566-44e9f835518d
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-04-16'
 author: Michael Haag, Splunk
 status: production
 type: Correlation
@@ -66,7 +66,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/atomic_red_team/risk_certificate_services.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1649/atomic_red_team/risk_certificate_services.log
     source: certs
     sourcetype: stash

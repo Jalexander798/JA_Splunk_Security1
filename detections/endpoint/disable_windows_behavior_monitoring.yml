@@ -1,7 +1,7 @@
 name: Disable Windows Behavior Monitoring
 id: 79439cae-9200-11eb-a4d3-acde48001122
-version: 13
-date: '2025-03-27'
+version: 14
+date: '2025-04-18'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP
@@ -67,6 +67,7 @@ tags:
   - Black Basta Ransomware
   - Ransomware
   - RedLine Stealer
+  - Cactus Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001
