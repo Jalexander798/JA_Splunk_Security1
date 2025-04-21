@@ -11,7 +11,7 @@ description: The following analytic identifies the execution of `PsExec.exe` wit
   This activity is significant because PsExec is commonly used by threat actors to
   execute code on remote systems, and the `accepteula` flag indicates first-time usage,
   which could signify initial compromise. If confirmed malicious, this activity could
-  allow attackers to gain remote code execution capabilities, potentially leading
+  allow attackers to gain remote code execution capabilities,  potentially leading
   to further system compromise and lateral movement within the network.
 data_source:
 - Sysmon EventID 1
@@ -75,19 +75,16 @@ tags:
   analytic_story:
   - DHS Report TA18-074A
   - Active Directory Lateral Movement
-  - BlackByte Ransomware
   - HAFNIUM Group
   - Rhysida Ransomware
   - Medusa Ransomware
   - DarkSide Ransomware
   - SamSam Ransomware
-  - DarkGate Malware
   - CISA AA22-320A
   - Sandworm Tools
   - IcedID
   - BlackByte Ransomware
   - DarkGate Malware
-  - Rhysida Ransomware
   - Cactus Ransomware
   - Volt Typhoon
   - Seashell Blizzard
