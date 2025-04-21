@@ -53,7 +53,7 @@ drilldown_searches:
 rba:
   message: >
     Suspicious SSL certificate fingerprint ($SSL_CertFingerprint$) used in connections 
-    [ListingReason: $reasons$]
+    [ListingReason: $Reasons$]
   risk_objects:
     - field: src_ip
       type: system

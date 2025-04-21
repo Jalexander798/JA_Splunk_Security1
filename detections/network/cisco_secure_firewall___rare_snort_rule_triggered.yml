@@ -48,6 +48,7 @@ tags:
     - Splunk Enterprise
     - Splunk Cloud
     - Splunk Enterprise Security
+  manual_test: This detection is a hunting search that has the fixed time range of 7 days baked into the search. Hence based on the time range of the data in the logs, the detection may or may not return results with TriggerCount = 1 in testing.
 tests:
 - name: True Positive Test
   attack_data:
