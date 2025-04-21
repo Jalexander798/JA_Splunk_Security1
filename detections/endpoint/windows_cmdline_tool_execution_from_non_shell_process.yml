@@ -1,6 +1,6 @@
 name: Windows Cmdline Tool Execution From Non-Shell Process
 id: 2afa393f-b88d-41b7-9793-623c93a2dfde
-version: 5
+version: 6
 date: '2025-04-17'
 author: Teoderick Contreras, Splunk
 status: production
@@ -85,6 +85,7 @@ tags:
   - Rhysida Ransomware
   - Volt Typhoon
   - FIN7
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1059.007

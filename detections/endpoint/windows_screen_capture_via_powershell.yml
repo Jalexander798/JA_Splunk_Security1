@@ -1,6 +1,6 @@
 name: Windows Screen Capture Via Powershell
 id: 5e0b1936-8f99-4399-8ee2-9edc5b32e170
-version: 6
+version: 7
 date: '2025-04-17'
 author: Teoderick Contreras, Splunk
 status: production
@@ -52,6 +52,7 @@ rba:
 tags:
   analytic_story:
   - Winter Vivern
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1113

@@ -1,6 +1,6 @@
 name: Powershell Creating Thread Mutex
 id: 637557ec-ca08-11eb-bd0a-acde48001122
-version: 9
+version: 10
 date: '2025-04-17'
 author: Teoderick Contreras, Splunk
 status: production
@@ -57,6 +57,7 @@ rba:
 tags:
   analytic_story:
   - Malicious PowerShell
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1027.005

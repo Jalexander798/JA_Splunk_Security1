@@ -1,6 +1,6 @@
 name: Windows Known GraphicalProton Loaded Modules
 id: bf471c94-0324-4b19-a113-d02749b969bc
-version: 7
+version: 8
 date: '2025-04-17'
 author: Teoderick Contreras, Splunk
 status: production
@@ -54,6 +54,7 @@ rba:
 tags:
   analytic_story:
   - CISA AA23-347A
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1574.002

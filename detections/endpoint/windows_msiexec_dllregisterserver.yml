@@ -1,6 +1,6 @@
 name: Windows MSIExec DLLRegisterServer
 id: fdb59aef-d88f-4909-8369-ec2afbd2c398
-version: 8
+version: 9
 date: '2025-04-17'
 author: Michael Haag, Splunk
 status: production
@@ -72,6 +72,7 @@ rba:
 tags:
   analytic_story:
   - Windows System Binary Proxy Execution MSIExec
+  - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
   - T1218.007
