@@ -1,7 +1,7 @@
 name: Windows Known Abused DLL Loaded Suspiciously
 id: dd6d1f16-adc0-4e87-9c34-06189516b803
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-04-22'
 author: Steven Dick
 status: production
 type: TTP
@@ -65,7 +65,6 @@ tags:
   asset_type: Endpoint
   mitre_attack_id:
   - T1574.001
-  - T1574.002
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

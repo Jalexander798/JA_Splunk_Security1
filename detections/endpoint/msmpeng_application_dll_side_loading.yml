@@ -1,7 +1,7 @@
 name: Msmpeng Application DLL Side Loading
 id: 8bb3f280-dd9b-11eb-84d5-acde48001122
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-04-22'
 author: Teoderick Contreras, Splunk, Sanjay Govind
 status: production
 type: TTP
@@ -57,7 +57,7 @@ tags:
   - Revil Ransomware
   asset_type: Endpoint
   mitre_attack_id:
-  - T1574.002
+  - T1574.001
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
