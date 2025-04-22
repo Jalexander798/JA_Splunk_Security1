@@ -1,7 +1,7 @@
 name: Windows Deleted Registry By A Non Critical Process File Path
 id: 15e70689-f55b-489e-8a80-6d0cd6d8aad2
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-04-22'
 author: Steven Dick, Teoderick Contreras, Splunk
 status: production
 type: Anomaly

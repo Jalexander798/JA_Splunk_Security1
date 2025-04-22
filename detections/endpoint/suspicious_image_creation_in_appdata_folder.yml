@@ -1,7 +1,7 @@
 name: Suspicious Image Creation In Appdata Folder
 id: f6f904c4-1ac0-11ec-806b-acde48001122
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-04-22'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

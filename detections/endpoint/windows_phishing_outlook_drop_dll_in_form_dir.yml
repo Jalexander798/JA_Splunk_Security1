@@ -1,7 +1,7 @@
 name: Windows Phishing Outlook Drop Dll In FORM Dir
 id: fca01769-5163-4b3a-ae44-de874adfc9bc
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-04-22'
 author: Teoderick Contreras, Splunk
 data_source:
 - Sysmon EventID 1 AND Sysmon EventID 11

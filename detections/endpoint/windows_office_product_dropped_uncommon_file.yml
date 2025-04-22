@@ -1,7 +1,7 @@
 name: Windows Office Product Dropped Uncommon File
 id: 7ac0fced-9eae-4381-a748-90dcd1aa9393
-version: 3
-date: '2025-02-10'
+version: 4
+date: '2025-04-22'
 author: Teoderick Contreras, Michael Haag, Splunk, TheLawsOfChaos, Github
 status: production
 type: Anomaly
