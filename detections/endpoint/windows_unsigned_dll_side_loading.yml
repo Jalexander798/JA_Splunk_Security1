@@ -1,7 +1,7 @@
 name: Windows Unsigned DLL Side-Loading
 id: 5a83ce44-8e0f-4786-a775-8249a525c879
-version: 10
-date: '2025-04-16'
+version: 11
+date: '2025-04-22'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -61,7 +61,7 @@ tags:
   - Earth Alux
   asset_type: Endpoint
   mitre_attack_id:
-  - T1574.002
+  - T1574.001
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security

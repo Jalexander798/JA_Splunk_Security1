@@ -1,7 +1,7 @@
 name: Windows SqlWriter SQLDumper DLL Sideload
 id: 2ed89ba9-c6c7-46aa-9f08-a2a1c2955aa3
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-04-22'
 author: Michael Haag, Teoderick Contreras, Splunk
 data_source:
 - Sysmon EventID 7
@@ -69,7 +69,7 @@ tags:
   - Midnight Blizzard
   asset_type: Endpoint
   mitre_attack_id:
-  - T1574.002
+  - T1574.001
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
