@@ -51,7 +51,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Suspicious SSL certificate fingerprint ($SSL_CertFingerprint$) used in connections [ ListingReason: $Reasons$ ]
+  message: Suspicious SSL certificate fingerprint - [$SSL_CertFingerprint$] used in connections [ListingReason - $Reasons$] from $src_ip$
   risk_objects:
     - field: src_ip
       type: system
