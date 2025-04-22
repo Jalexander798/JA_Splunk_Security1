@@ -14,7 +14,6 @@ description: The following analytic detects the deletion of registry keys by non
   system damage, loss of critical configurations, and potential disruption of services.
 data_source:
 - Sysmon EventID 1 AND Sysmon EventID 12
-- Sysmon EventID 1 AND Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count from datamodel=Endpoint.Registry
   WHERE Registry.action=deleted BY _time span=1h Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive
   Registry.registry_path Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name
