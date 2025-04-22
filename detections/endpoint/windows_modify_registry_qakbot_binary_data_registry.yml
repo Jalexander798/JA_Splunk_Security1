@@ -1,11 +1,12 @@
 name: Windows Modify Registry Qakbot Binary Data Registry
 id: 2e768497-04e0-4188-b800-70dd2be0e30d
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-04-22'
 author: Teoderick Contreras, Bhavin Patel, Splunk
 status: production
 type: Anomaly
-description: The following analytic detects the creation of a suspicious registry
+description:
+  The following analytic detects the creation of a suspicious registry
   entry by Qakbot malware, characterized by 8 random registry value names with encrypted
   binary data. This detection leverages data from Endpoint Detection and Response
   (EDR) agents, focusing on registry modifications under the "SOFTWARE\\Microsoft\\"
@@ -14,9 +15,10 @@ description: The following analytic detects the creation of a suspicious registr
   data. If confirmed malicious, this could allow attackers to maintain persistence
   and execute arbitrary code on the compromised system.
 data_source:
-- Sysmon EventID 1 AND Sysmon EventID 12
-- Sysmon EventID 1 AND Sysmon EventID 13
-search: '| tstats `security_content_summariesonly` count dc(registry_value_name) as
+  - Sysmon EventID 1 AND Sysmon EventID 12
+  - Sysmon EventID 1 AND Sysmon EventID 13
+search:
+  '| tstats `security_content_summariesonly` count dc(registry_value_name) as
   registry_value_name_count FROM datamodel=Endpoint.Registry where Registry.registry_path="*\\SOFTWARE\\Microsoft\\*"
   AND Registry.registry_value_data = "Binary Data" by _time span=1m Registry.action
   Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path
@@ -38,7 +40,8 @@ search: '| tstats `security_content_summariesonly` count dc(registry_value_name)
   as registry_value_name_count values(registry_key_name) by dest process_guid process_name
   parent_process_name | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | where registry_value_name_count >= 5 | `windows_modify_registry_qakbot_binary_data_registry_filter`'
-how_to_implement: The detection is based on data that originates from Endpoint Detection
+how_to_implement:
+  The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
   you must ingest logs that contain the process GUID, process name, and parent process.
@@ -49,42 +52,43 @@ how_to_implement: The detection is based on data that originates from Endpoint D
   names and speed up the data modeling process.
 known_false_positives: unknown
 references:
-- https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/decrypting-qakbots-encrypted-registry-keys/
+  - https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/decrypting-qakbots-encrypted-registry-keys/
 drilldown_searches:
-- name: View the detection results for - "$dest$"
-  search: '%original_detection_search% | search  dest = "$dest$"'
-  earliest_offset: $info_min_time$
-  latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$dest$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
-    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
-    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
-    | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
-  latest_offset: $info_max_time$
+  - name: View the detection results for - "$dest$"
+    search: '%original_detection_search% | search  dest = "$dest$"'
+    earliest_offset: $info_min_time$
+    latest_offset: $info_max_time$
+  - name: View risk events for the last 7 days for - "$dest$"
+    search:
+      '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+      starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+      values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+      as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+      as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+      | `security_content_ctime(lastTime)`'
+    earliest_offset: $info_min_time$
+    latest_offset: $info_max_time$
 rba:
   message: Registry with binary data created by $process_name$ on $dest$
   risk_objects:
-  - field: dest
-    type: system
-    score: 49
+    - field: dest
+      type: system
+      score: 49
   threat_objects: []
 tags:
   analytic_story:
-  - Qakbot
+    - Qakbot
   asset_type: Endpoint
   mitre_attack_id:
-  - T1112
+    - T1112
   product:
-  - Splunk Enterprise
-  - Splunk Enterprise Security
-  - Splunk Cloud
+    - Splunk Enterprise
+    - Splunk Enterprise Security
+    - Splunk Cloud
   security_domain: endpoint
 tests:
-- name: True Positive Test
-  attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/qakbot/qbot2/sysmon.log
-    source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
-    sourcetype: XmlWinEventLog
+  - name: True Positive Test
+    attack_data:
+      - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/qakbot/qbot2/sysmon.log
+        source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
+        sourcetype: XmlWinEventLog
