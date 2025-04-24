@@ -1031,3 +1031,12 @@ stories:
   - content: Web Fraud Detection
     removed_in_version: 5.2.0
     reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
+  - content: CertUtil Download With URLCache and Split Arguments
+    removed_in_version: 5.4.0
+    reason: Detection deprecated in favor of "Windows CertUtil Download", in order to provide a better experience of the alert
+  - content: Windows CertUtil Download With URL Argument
+    removed_in_version: 5.4.0
+    reason: Detection deprecated in favor of "Windows CertUtil Download", in order to provide a better experience of the alert
+  - content: CertUtil Download With VerifyCtl and Split Arguments
+    removed_in_version: 5.4.0
+    reason: Detection deprecated in favor of "Windows CertUtil Download", in order to provide a better experience of the alert
