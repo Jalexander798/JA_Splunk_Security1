@@ -1,7 +1,7 @@
 name: Registry Keys Used For Persistence
 id: f5f6af30-7aa7-4295-bfe9-07fe87c01a4b
-version: 19
-date: '2025-03-27'
+version: 20
+date: '2025-04-18'
 author: Jose Hernandez, David Dorsey, Teoderick Contreras, Rod Soto, Splunk
 status: production
 type: TTP
@@ -78,38 +78,39 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - SystemBC
-  - Snake Keylogger
-  - China-Nexus Threat Activity
-  - Remcos
-  - AsyncRAT
-  - Windows Persistence Techniques
-  - Derusbi
-  - WinDealer RAT
-  - Suspicious MSHTA Activity
-  - DarkGate Malware
-  - Suspicious Windows Registry Activities
-  - Qakbot
-  - CISA AA23-347A
-  - Ransomware
-  - NjRAT
-  - Emotet Malware DHS Report TA18-201A
-  - Possible Backdoor Activity Associated With MUDCARP Espionage Campaigns
-  - Sneaky Active Directory Persistence Tricks
-  - SnappyBee
-  - Azorult
-  - Warzone RAT
-  - BlackByte Ransomware
-  - Chaos Ransomware
-  - RedLine Stealer
-  - BlackSuit Ransomware
-  - Windows Registry Abuse
   - Amadey
-  - Salt Typhoon
-  - MoonPeak
+  - AsyncRAT
+  - Azorult
+  - BlackByte Ransomware
+  - BlackSuit Ransomware
   - Braodo Stealer
+  - Cactus Ransomware
+  - Chaos Ransomware
+  - China-Nexus Threat Activity
+  - CISA AA23-347A
+  - DarkGate Malware
+  - Derusbi
   - DHS Report TA18-074A
+  - Emotet Malware DHS Report TA18-201A
   - IcedID
+  - MoonPeak
+  - NjRAT
+  - Possible Backdoor Activity Associated With MUDCARP Espionage Campaigns
+  - Qakbot
+  - Ransomware
+  - RedLine Stealer
+  - Remcos
+  - Salt Typhoon
+  - SnappyBee
+  - Snake Keylogger
+  - Sneaky Active Directory Persistence Tricks
+  - Suspicious MSHTA Activity
+  - Suspicious Windows Registry Activities
+  - SystemBC
+  - Warzone RAT
+  - Windows Persistence Techniques
+  - Windows Registry Abuse
+  - WinDealer RAT
   asset_type: Endpoint
   mitre_attack_id:
   - T1547.001

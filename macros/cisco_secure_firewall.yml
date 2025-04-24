@@ -1,0 +1,3 @@
+definition: sourcetype="cisco:sfw:estreamer"
+description: customer specific splunk configurations(eg- index, source, sourcetype) for Cisco Secure Firewall Threat Defense logs. Replace the macro definition with configurations for your Splunk Environment.
+name: cisco_secure_firewall

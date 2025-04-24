@@ -1,7 +1,7 @@
 name: Linux Persistence and Privilege Escalation Risk Behavior
 id: ad5ac21b-3b1e-492c-8e19-ea5d5e8e5cf1
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-04-16'
 author: Michael Haag, Splunk
 status: production
 type: Correlation
@@ -66,7 +66,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548/linux_risk/linuxrisk.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1548/linux_risk/linuxrisk.log
     source: linuxrisk
     sourcetype: stash

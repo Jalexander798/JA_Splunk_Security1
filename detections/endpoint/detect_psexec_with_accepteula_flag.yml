@@ -1,7 +1,7 @@
 name: Detect PsExec With accepteula Flag
 id: 27c3a83d-cada-47c6-9042-67baf19d2574
-version: 11
-date: '2025-03-25'
+version: 12
+date: '2025-04-18'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -75,16 +75,17 @@ tags:
   analytic_story:
   - DHS Report TA18-074A
   - Active Directory Lateral Movement
-  - BlackByte Ransomware
   - HAFNIUM Group
   - Rhysida Ransomware
   - Medusa Ransomware
   - DarkSide Ransomware
   - SamSam Ransomware
-  - DarkGate Malware
   - CISA AA22-320A
   - Sandworm Tools
   - IcedID
+  - BlackByte Ransomware
+  - DarkGate Malware
+  - Cactus Ransomware
   - Volt Typhoon
   - Seashell Blizzard
   - VanHelsing Ransomware

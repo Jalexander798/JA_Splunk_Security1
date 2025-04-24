@@ -1,7 +1,7 @@
 name: CertUtil Download With URLCache and Split Arguments
 id: 415b4306-8bfb-11eb-85c4-acde48001122
-version: 11
-date: '2024-12-10'
+version: 12
+date: '2025-04-16'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -82,6 +82,7 @@ tags:
   - Ingress Tool Transfer
   - Compromised Windows Host
   - CISA AA22-277A
+  - Storm-2460 CLFS Zero Day Exploitation
   asset_type: Endpoint
   mitre_attack_id:
   - T1105
