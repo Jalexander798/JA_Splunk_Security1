@@ -762,12 +762,18 @@ detections:
   - content: CertUtil Download With URLCache and Split Arguments
     removed_in_version: 5.4.0
     reason: Detection deprecated in favor of "Windows CertUtil Download", in order to provide a better experience of the alert
+    replacement_content:
+    - Windows CertUtil Download
   - content: Windows CertUtil Download With URL Argument
     removed_in_version: 5.4.0
     reason: Detection deprecated in favor of "Windows CertUtil Download", in order to provide a better experience of the alert
+    replacement_content:
+    - Windows CertUtil Download
   - content: CertUtil Download With VerifyCtl and Split Arguments
     removed_in_version: 5.4.0
     reason: Detection deprecated in favor of "Windows CertUtil Download", in order to provide a better experience of the alert
+    replacement_content:
+    - Windows CertUtil Download
 
 baselines:
   - content: Previously Seen AWS Cross Account Activity
