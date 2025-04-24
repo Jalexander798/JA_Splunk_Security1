@@ -764,7 +764,7 @@ detections:
     reason: Detection deprecated in favor of "Windows File Download Via CertUtil", in order to provide a better experience of the alert
     replacement_content:
     - Windows File Download Via CertUtil
-  - content: Windows File Download Via CertUtil With URL Argument
+  - content: Windows CertUtil Download With URL Argument
     removed_in_version: 5.6.0
     reason: Detection deprecated in favor of "Windows File Download Via CertUtil", in order to provide a better experience of the alert
     replacement_content:
