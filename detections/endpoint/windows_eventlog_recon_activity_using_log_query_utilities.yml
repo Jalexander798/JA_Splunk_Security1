@@ -95,6 +95,6 @@ tags:
 tests:
   - name: True Positive Test
     attack_data:
-      - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1621/eventlog_enumeration/eventlog_enumeration.yml
+      - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1654/eventlog_enumeration/eventlog_enumeration.log
         source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
         sourcetype: XmlWinEventLog
