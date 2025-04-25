@@ -1,11 +1,12 @@
 name: Mmc LOLBAS Execution Process Spawn
 id: f6601940-4c74-11ec-b9b7-3e22fbd008af
 version: 7
-date: '2025-04-17'
+date: '2025-04-22'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
-description: The following analytic identifies `mmc.exe` spawning a LOLBAS execution
+description:
+  The following analytic identifies `mmc.exe` spawning a LOLBAS execution
   process. It leverages data from Endpoint Detection and Response (EDR) agents, focusing
   on process creation events where `mmc.exe` is the parent process. This activity
   is significant because adversaries can abuse the DCOM protocol and MMC20 COM object
@@ -14,10 +15,11 @@ description: The following analytic identifies `mmc.exe` spawning a LOLBAS execu
   allowing attackers to execute code remotely, potentially leading to further compromise
   and persistence within the environment.
 data_source:
-- Sysmon EventID 1
-- Windows Event Log Security 4688
-- CrowdStrike ProcessRollup2
-search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
+  - Sysmon EventID 1
+  - Windows Event Log Security 4688
+  - CrowdStrike ProcessRollup2
+search:
+  '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime from datamodel=Endpoint.Processes where (Processes.parent_process_name=mmc.exe)
   (Processes.process_name IN ("Regsvcs.exe", "Ftp.exe", "OfflineScannerShell.exe",
   "Rasautou.exe", "Schtasks.exe", "Xwizard.exe", "Dllhost.exe", "Pnputil.exe", "Atbroker.exe",
@@ -37,7 +39,8 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   Processes.process_path Processes.user Processes.user_id Processes.vendor_product
   | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `mmc_lolbas_execution_process_spawn_filter`'
-how_to_implement: The detection is based on data that originates from Endpoint Detection
+how_to_implement:
+  The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
   you must ingest logs that contain the process GUID, process name, and parent process.
@@ -46,49 +49,52 @@ how_to_implement: The detection is based on data that originates from Endpoint D
   the EDR product. The logs must also be mapped to the `Processes` node of the `Endpoint`
   data model. Use the Splunk Common Information Model (CIM) to normalize the field
   names and speed up the data modeling process.
-known_false_positives: Legitimate applications may trigger this behavior, filter as
+known_false_positives:
+  Legitimate applications may trigger this behavior, filter as
   needed.
 references:
-- https://attack.mitre.org/techniques/T1021/003/
-- https://www.cybereason.com/blog/dcom-lateral-movement-techniques
-- https://lolbas-project.github.io/
+  - https://attack.mitre.org/techniques/T1021/003/
+  - https://www.cybereason.com/blog/dcom-lateral-movement-techniques
+  - https://lolbas-project.github.io/
 drilldown_searches:
-- name: View the detection results for - "$dest$"
-  search: '%original_detection_search% | search  dest = "$dest$"'
-  earliest_offset: $info_min_time$
-  latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$dest$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
-    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
-    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
-    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
-    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
-    | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
-  latest_offset: $info_max_time$
+  - name: View the detection results for - "$dest$"
+    search: '%original_detection_search% | search  dest = "$dest$"'
+    earliest_offset: $info_min_time$
+    latest_offset: $info_max_time$
+  - name: View risk events for the last 7 days for - "$dest$"
+    search:
+      '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+      starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+      values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+      as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+      as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+      | `security_content_ctime(lastTime)`'
+    earliest_offset: $info_min_time$
+    latest_offset: $info_max_time$
 rba:
   message: Mmc.exe spawned a LOLBAS process on $dest$.
   risk_objects:
-  - field: dest
-    type: system
-    score: 54
+    - field: dest
+      type: system
+      score: 54
   threat_objects: []
 tags:
   analytic_story:
-  - Active Directory Lateral Movement
-  - Living Off The Land
+    - Active Directory Lateral Movement
+    - Living Off The Land
+    - Water Gamayun
   asset_type: Endpoint
   mitre_attack_id:
-  - T1021.003
-  - T1218.014
+    - T1021.003
+    - T1218.014
   product:
-  - Splunk Enterprise
-  - Splunk Enterprise Security
-  - Splunk Cloud
+    - Splunk Enterprise
+    - Splunk Enterprise Security
+    - Splunk Cloud
   security_domain: endpoint
 tests:
-- name: True Positive Test
-  attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.003/lateral_movement_lolbas/windows-sysmon.log
-    source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
-    sourcetype: XmlWinEventLog
+  - name: True Positive Test
+    attack_data:
+      - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.003/lateral_movement_lolbas/windows-sysmon.log
+        source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
+        sourcetype: XmlWinEventLog
