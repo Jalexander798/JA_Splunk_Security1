@@ -1,0 +1,69 @@
+name: Java Spawning Command Shells
+id: 425ab753-de8f-4ab3-9671-377c60b9e53c
+version: 1
+date: '2025-04-28'
+author: Michael Haag, Splunk
+status: production
+type: Anomaly
+description: |
+  Detects instances where a Java process (such as SAP NetWeaver Java Application Server) spawns command shells or scripting utilities like cmd.exe, powershell.exe, or msbuild.exe. This behavior is highly suspicious in enterprise environments and may indicate post-exploitation activity, such as webshells or malware launched via vulnerabilities like CVE-2025-31324. Attackers exploiting SAP NetWeaver Visual Composer can upload and execute webshells, which often spawn these utilities to gain further access or execute malicious payloads.
+data_source:
+- Sysmon EventID 1
+search: |
+  | tstats `security_content_summariesonly` count min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Processes where (Processes.parent_process_name="java.exe" OR Processes.parent_process_name="java" OR Processes.parent_process_name="jc*.exe") AND (Processes.process_name="cmd.exe" OR Processes.process_name="powershell.exe" OR Processes.process_name="msbuild.exe") by Processes.dest Processes.user Processes.parent_process_name Processes.process_name Processes.process Processes.parent_process Processes.process_id Processes.parent_process_id Processes.process_guid Processes.parent_process_guid Processes.parent_process_exec Processes.process_exec Processes.process_path Processes.parent_process_path Processes.process_hash Processes.process_integrity_level Processes.original_file_name Processes.user_id Processes.action Processes.vendor_product
+  | `drop_dm_object_name(Processes)`
+  | rename process as CommandLine, parent_process as ParentCommandLine
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)`
+  | `java_spawning_command_shells_filter`
+how_to_implement: |
+  This search requires Sysmon EventID 1 (process creation) logs to be collected from endpoints. Deploy Sysmon with a configuration that captures parent and child process relationships. Ensure that logs are ingested into Splunk and mapped to the correct fields (parent_process_name, process_name, CommandLine, etc.).
+known_false_positives: |
+  Some legitimate Java-based applications may occasionally spawn command shells for maintenance or automation tasks, but this is rare in most enterprise environments. Any occurrence should be carefully reviewed, especially on SAP servers.
+references:
+- https://onapsis.com/blog/active-exploitation-of-sap-vulnerability-cve-2025-31324/
+- https://reliaquest.com/blog/threat-spotlight-reliaquest-uncovers-vulnerability-behind-sap-netweaver-compromise/
+- https://www.rapid7.com/blog/post/2025/04/28/etr-active-exploitation-of-sap-netweaver-visual-composer-cve-2025-31324/
+drilldown_searches:
+- name: View the detection results for - "$dest$"
+  search: '%original_detection_search% | search dest = "$dest$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: View risk events for the last 7 days for - "$dest$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+    starthoursago=168 | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+rba:
+  message: Java process spawning command shell or scripting utility on $dest$.
+  risk_objects:
+  - field: dest
+    type: system
+    score: 80
+  threat_objects:
+  - field: parent_process_name
+    type: parent_process_name
+tags:
+  analytic_story:
+  - SAP NetWeaver Exploitation
+  asset_type: Endpoint
+  mitre_attack_id:
+  - T1059
+  - T1190
+  product:
+  - Splunk Enterprise
+  - Splunk Enterprise Security
+  - Splunk Cloud
+  security_domain: endpoint
+  cve:
+  - CVE-2025-31324
+tests:
+- name: True Positive Test
+  attack_data:
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/spring4shell/java_write_jsp-linux-sysmon.log
+    source: Syslog:Linux-Sysmon/Operational
+    sourcetype: sysmon:linux
