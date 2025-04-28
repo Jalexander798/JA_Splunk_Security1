@@ -1,7 +1,7 @@
 name: Java Writing JSP File
 id: eb65619c-4f8d-4383-a975-d352765d344b
-version: 8
-date: '2025-04-22'
+version: 9
+date: '2025-04-28'
 author: Michael Haag, Splunk
 status: production
 type: TTP
