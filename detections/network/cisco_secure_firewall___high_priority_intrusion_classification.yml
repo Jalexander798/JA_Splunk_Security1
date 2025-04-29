@@ -30,7 +30,6 @@ search: |
           values(MitreAttackGroups) as MitreAttackGroups 
           values(InlineResult) as InlineResult 
           values(InlineResultReason) as InlineResultReason 
-          values(src_ip) as src_ip 
           values(dest_port) as dest_port 
           values(rule) as rule 
           values(transport) as transport 
