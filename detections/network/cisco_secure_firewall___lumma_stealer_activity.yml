@@ -1,4 +1,4 @@
-name: Cisco Secure Firewall - Veeam CVE-2023-27532 Exploitation Activity
+name: Cisco Secure Firewall - Lumma Stealer Activity
 id: 7b7c2e92-f0b2-48d2-9c9b-b8de52b6b2ae
 version: 1
 date: '2025-04-14'
@@ -6,7 +6,7 @@ author: Nasreddine Bencherchali, Splunk, Talos NTDR
 status: production
 type: TTP
 description: |
-  This analytic detects exploitation activity of CVE-2023-27532 using Cisco Secure Firewall Intrusion Events. 
+  This analytic detects Lumma Stealer activity using Cisco Secure Firewall Intrusion Events. 
   It leverages Cisco Secure Firewall Threat Defense IntrusionEvent logs to identify cases where four of the following Snort signature IDs 64793, 64794, 64797, 64798, 64799, 64800, 64801, 62709, 64167, 64168, 64169, 64796, 62710, 62711, 62712, 62713, 62714, 62715, 62716, 62717, 64812, 64810, 64811 occurs in the span of 15 minutes from the same host.
   If confirmed malicious, this behavior is highly indicative of a successful infection of Lumma Stealer.
 data_source:
@@ -30,7 +30,7 @@ search: |
           min(_time) as firstTime 
           max(_time) as lastTime 
           by src_ip
-  | where unique_signature_count >= 4
+  | where unique_signature_count >= 3
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
   | `cisco_secure_firewall___lumma_stealer_activity_filter`
