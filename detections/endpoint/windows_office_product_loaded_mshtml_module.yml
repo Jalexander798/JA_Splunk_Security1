@@ -1,6 +1,6 @@
 name: Windows Office Product Loaded MSHTML Module
 id: 4cc015c9-687c-40d2-adcc-46350f66e10c
-version: 2
+version: 3
 date: '2025-02-10'
 author: Michael Haag, Mauricio Velazco, Splunk
 status: production
@@ -18,8 +18,10 @@ search: '`sysmon` EventID=7 process_name IN ("EQNEDT32.exe", "excel.exe", "Graph
   "msaccess.exe", "mspub.exe", "onenote.exe", "onenoteim.exe", "onenotem.exe", "outlook.exe",
   "powerpnt.exe", "visio.exe", "winproj.exe", "winword.exe", "wordpad.exe", "wordview.exe")
   loaded_file_path IN ("*\\mshtml.dll", "*\\Microsoft.mshtml.dll","*\\IE.Interop.MSHTML.dll","*\\MshtmlDac.dll","*\\MshtmlDed.dll","*\\MshtmlDer.dll")
-  | stats count min(_time) as firstTime max(_time) as lastTime by user_id, dest, process_name,
-  loaded_file, loaded_file_path, original_file_name, process_guid | `security_content_ctime(firstTime)`
+  | fillnull | stats count min(_time) as firstTime max(_time) as lastTime by Image
+  ImageLoaded dest loaded_file loaded_file_path original_file_name process_exec process_guid
+  process_hash process_id process_name process_path service_dll_signature_exists service_dll_signature_verified
+  signature signature_id user_id vendor_product | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `windows_office_product_loaded_mshtml_module_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process names and image loads from your endpoints. If you are using
@@ -73,7 +75,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon_mshtml.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon_mshtml.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

@@ -302,5 +302,8 @@ Extensions,Name
 *.MEDUSA,Medusa
 *.rhysida,Rhysida
 *.basta, BlackBasta
+*.cts, Cactus
+*.cactus, Cactus
 *.vanhelsing,Vanhelsing
 *.vanlocker,Vanhelsing
+*.termite,Termite

@@ -1,6 +1,6 @@
 name: WMI Permanent Event Subscription - Sysmon
 id: ad05aae6-3b2a-4f73-af97-57bd26cee3b9
-version: 6
+version: 7
 date: '2025-02-10'
 author: Rico Valdez, Michael Haag, Splunk
 status: production
@@ -15,8 +15,10 @@ description: The following analytic identifies the creation of WMI permanent eve
   and execute arbitrary code, posing a severe threat to the environment.
 data_source:
 - Sysmon EventID 21
-search: '`sysmon` EventCode=21 | rename host as dest | table _time, dest, user, Operation,
-  EventType, Query, Consumer, Filter | `wmi_permanent_event_subscription___sysmon_filter`'
+search: '`sysmon` EventCode=21 | stats count min(_time) as firstTime max(_time) as
+  lastTime by dest dvc object object_attrs object_category object_path signature signature_id
+  src status user user_id vendor_product Consumer ConsumerNoQuotes Filter FilterNoQuotes
+  | `security_content_ctime(firstTime)`| `security_content_ctime(lastTime)` | `wmi_permanent_event_subscription___sysmon_filter`'
 how_to_implement: To successfully implement this search, you must be collecting Sysmon
   data using Sysmon version 6.1 or greater and have Sysmon configured to generate
   alerts for WMI activity (eventID= 19, 20, 21). In addition, you must have at least
@@ -66,7 +68,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.003/atomic_red_team/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1546.003/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

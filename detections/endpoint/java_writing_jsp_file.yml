@@ -1,7 +1,7 @@
 name: Java Writing JSP File
 id: eb65619c-4f8d-4383-a975-d352765d344b
-version: 6
-date: '2024-11-13'
+version: 9
+date: '2025-04-28'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -13,13 +13,20 @@ description: The following analytic detects the Java process writing a .jsp file
   this could allow unauthorized access, data exfiltration, or further compromise of
   the affected system, posing a severe security risk.
 data_source:
-- Sysmon EventID 1 AND Sysmon EventID 11
+- Sysmon for Linux EventID 1 AND Sysmon for Linux EventID 11
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Processes
-  where Processes.process_name IN ("java","java.exe", "javaw.exe") by _time Processes.process_id
-  Processes.process_name Processes.dest Processes.process_guid Processes.user | `drop_dm_object_name(Processes)`
+  where Processes.process_name IN ("java","java.exe", "javaw.exe") by _time Processes.action Processes.dest Processes.original_file_name
+  Processes.parent_process Processes.parent_process_exec Processes.parent_process_guid
+  Processes.parent_process_id Processes.parent_process_name Processes.parent_process_path
+  Processes.process Processes.process_exec Processes.process_guid Processes.process_hash
+  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path
+  Processes.user Processes.user_id Processes.vendor_product 
+  | `drop_dm_object_name(Processes)`
   | join process_guid [| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Filesystem
-  where Filesystem.file_name="*.jsp*" by _time Filesystem.dest Filesystem.file_create_time
-  Filesystem.file_name Filesystem.file_path Filesystem.process_guid Filesystem.user
+  where Filesystem.file_name="*.jsp*" by _time Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time
+  Filesystem.file_hash Filesystem.file_modify_time Filesystem.file_name Filesystem.file_path
+  Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id
+  Filesystem.user Filesystem.vendor_product
   | `drop_dm_object_name(Filesystem)` | fields _time process_guid file_path file_name
   file_create_time user dest process_name] | stats count min(_time) as firstTime max(_time)
   as lastTime by dest process_name process_guid file_name file_path file_create_time
@@ -65,6 +72,7 @@ tags:
   - Spring4Shell CVE-2022-22965
   - Atlassian Confluence Server and Data Center CVE-2022-26134
   - SysAid On-Prem Software CVE-2023-47246 Vulnerability
+  - SAP NetWeaver Exploitation
   asset_type: Endpoint
   cve:
   - CVE-2022-22965
@@ -79,7 +87,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/spring4shell/java_write_jsp-linux-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/spring4shell/java_write_jsp-linux-sysmon.log
     source: Syslog:Linux-Sysmon/Operational
     sourcetype: sysmon:linux

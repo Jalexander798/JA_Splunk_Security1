@@ -1,6 +1,6 @@
 name: attacker_tools
-date: 2024-12-23
-version: 2
+date: 2025-03-18
+version: 3
 id: 72620fe1-26cb-4cee-a6ee-8c6127056d81
 author: Splunk Threat Research Team
 lookup_type: csv

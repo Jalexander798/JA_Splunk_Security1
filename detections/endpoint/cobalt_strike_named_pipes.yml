@@ -1,6 +1,6 @@
 name: Cobalt Strike Named Pipes
 id: 5876d429-0240-4709-8b93-ea8330b411b5
-version: 6
+version: 7
 date: '2024-11-13'
 author: Michael Haag, Splunk
 status: production
@@ -18,8 +18,9 @@ data_source:
 - Sysmon EventID 18
 search: '`sysmon` EventID=17 OR EventID=18 PipeName IN (\\msagent_*, \\DserNamePipe*,
   \\srvsvc_*, \\postex_*, \\status_*, \\MSSE-*, \\spoolss_*, \\win_svc*, \\ntsvcs*,
-  \\winsock*, \\UIA_PIPE*)  | stats count min(_time) as firstTime max(_time) as lastTime
-  by dest, process_name, process_id process_path, PipeName | `security_content_ctime(firstTime)`
+  \\winsock*, \\UIA_PIPE*) | stats count min(_time) as firstTime max(_time) as lastTime
+  by dest dvc pipe_name process_exec process_guid process_id process_name process_path
+  signature signature_id user_id vendor_product Image PipeName | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `cobalt_strike_named_pipes_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your
@@ -79,7 +80,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/cobalt_strike/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1055/cobalt_strike/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

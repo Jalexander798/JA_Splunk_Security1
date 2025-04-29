@@ -1,6 +1,6 @@
 name: Okta Suspicious Use of a Session Cookie
 id: 71ad47d1-d6bd-4e0a-b35c-020ad9a6959e
-version: 5
+version: 6
 date: '2025-01-21'
 author: Scott Dermott, Felicity Robson, Okta, Michael Haag, Bhavin Patel, Splunk
 type: Anomaly
@@ -21,8 +21,8 @@ search: '`okta` eventType IN (policy.evaluate_sign_on) outcome.result IN (ALLOW,
   as city, values(client.userAgent.browser) as userAgentBrowser_list, values(device.os_platform)
   as okta_device_os, dc(client.userAgent.browser) as dc_userAgentBrowser, dc(client.userAgent.os)
   as dc_userAgentOS, dc(client.ipAddress) as dc_src_ip, values(outcome.reason) as
-  reason by debugContext.debugData.dtHash, user | where dc_src_ip>1 AND (dc_userAgentOS>1
-  OR dc_userAgentBrowser>1) | `okta_suspicious_use_of_a_session_cookie_filter`'
+  reason values(dest) as dest by debugContext.debugData.dtHash, user | where dc_src_ip>1
+  AND (dc_userAgentOS>1 OR dc_userAgentBrowser>1) | `okta_suspicious_use_of_a_session_cookie_filter`'
 how_to_implement: This detection utilizes logs from Okta Identity Management (IM)
   environments. It requires the ingestion of OktaIm2 logs through the Splunk Add-on
   for Okta Identity Cloud (https://splunkbase.splunk.com/app/6553).
@@ -67,7 +67,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1539/okta_web_session_multiple_ip/okta_web_session_multiple_ip.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1539/okta_web_session_multiple_ip/okta_web_session_multiple_ip.log
     source: Okta
     sourcetype: OktaIM2:log

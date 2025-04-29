@@ -1,7 +1,7 @@
 name: Powershell Fileless Script Contains Base64 Encoded Content
 id: 8acbc04c-c882-11eb-b060-acde48001122
-version: 7
-date: '2025-02-10'
+version: '8'
+date: '2025-03-14'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -15,10 +15,10 @@ description: The following analytic detects the execution of PowerShell scripts 
   detect. If confirmed malicious, this could lead to code execution, allowing attackers
   to run arbitrary commands and potentially compromise the system.
 search: '`powershell` EventCode=4104 ScriptBlockText = "*frombase64string*" OR ScriptBlockText
-  = "*gnirtS46esaBmorF*" | stats count min(_time) as firstTime max(_time) as lastTime
-  by EventCode ScriptBlockText Computer UserID | rename Computer as dest |rename UserID
-  as user | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `powershell_fileless_script_contains_base64_encoded_content_filter`'
+  = "*gnirtS46esaBmorF*" | fillnull | stats count min(_time) as firstTime max(_time)
+  as lastTime by dest signature signature_id user_id vendor_product EventID Guid Opcode
+  Name Path ProcessID ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | `powershell_fileless_script_contains_base64_encoded_content_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
   https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.
@@ -52,13 +52,14 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Hermetic Wiper
-  - Malicious PowerShell
-  - Winter Vivern
   - AsyncRAT
-  - Data Destruction
-  - IcedID
   - NjRAT
+  - Data Destruction
+  - Medusa Ransomware
+  - Hermetic Wiper
+  - IcedID
+  - Winter Vivern
+  - Malicious PowerShell
   mitre_attack_id:
   - T1027
   - T1059.001
@@ -71,7 +72,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/frombase64string.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/frombase64string.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

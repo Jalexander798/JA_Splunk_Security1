@@ -1,7 +1,7 @@
 name: Windows Office Product Dropped Cab or Inf File
 id: dbdd251e-dd45-4ec9-a555-f5e151391746
-version: 2
-date: '2025-02-10'
+version: 4
+date: '2025-04-22'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -14,11 +14,14 @@ description: The following analytic detects Office products writing .cab or .inf
   control over the affected system and potentially compromise sensitive data.
 data_source:
 - Sysmon EventID 1 AND Sysmon EventID 11
-- Windows Event Log Security 4688
-- CrowdStrike ProcessRollup2
+- Windows Event Log Security 4688 AND Sysmon EventID 11
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Processes
-  where `process_office_products` by _time span=1h Processes.process_id Processes.process_name
-  Processes.process Processes.dest Processes.process_guid | `drop_dm_object_name(Processes)`
+  where `process_office_products` by _time span=1h Processes.action Processes.dest Processes.original_file_name
+  Processes.parent_process Processes.parent_process_exec Processes.parent_process_guid
+  Processes.parent_process_id Processes.parent_process_name Processes.parent_process_path
+  Processes.process Processes.process_exec Processes.process_guid Processes.process_hash
+  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path
+  Processes.user Processes.user_id Processes.vendor_product | `drop_dm_object_name(Processes)`
   |rename process_guid as proc_guid | join proc_guid, _time [ | tstats `security_content_summariesonly`
   count min(_time) as firstTime max(_time) as lastTime FROM datamodel=Endpoint.Filesystem
   where Filesystem.file_name IN ("*.cab", "*.inf") by _time span=1h Filesystem.dest
@@ -82,7 +85,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon_cabinf.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1566.001/macro/windows-sysmon_cabinf.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

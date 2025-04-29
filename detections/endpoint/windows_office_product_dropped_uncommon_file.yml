@@ -1,7 +1,7 @@
 name: Windows Office Product Dropped Uncommon File
 id: 7ac0fced-9eae-4381-a748-90dcd1aa9393
-version: 2
-date: '2025-02-10'
+version: 4
+date: '2025-04-22'
 author: Teoderick Contreras, Michael Haag, Splunk, TheLawsOfChaos, Github
 status: production
 type: Anomaly
@@ -16,8 +16,12 @@ description: The following analytic detects Microsoft Office applications droppi
 data_source:
 - Sysmon EventID 1 AND Sysmon EventID 11
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Processes
-  where `process_office_products` by _time span=1h Processes.process_id Processes.process_name
-  Processes.process Processes.dest Processes.process_guid | `drop_dm_object_name(Processes)`
+  where `process_office_products` by _time span=1h Processes.action Processes.dest Processes.original_file_name
+  Processes.parent_process Processes.parent_process_exec Processes.parent_process_guid
+  Processes.parent_process_id Processes.parent_process_name Processes.parent_process_path
+  Processes.process Processes.process_exec Processes.process_guid Processes.process_hash
+  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path
+  Processes.user Processes.user_id Processes.vendor_product | `drop_dm_object_name(Processes)`
   | join process_guid, _time [| tstats `security_content_summariesonly` count min(_time)
   as firstTime max(_time) as lastTime FROM datamodel=Endpoint.Filesystem where Filesystem.file_name
   IN ("*.dll", "*.exe", "*.js", "*.pif", "*.ps1", "*.scr", "*.vbe", "*.vbs") by _time
@@ -78,7 +82,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/fin7/fin7_macro_js_1/sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/fin7/fin7_macro_js_1/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

@@ -1,6 +1,6 @@
 name: Windows PowerShell Add Module to Global Assembly Cache
 id: 3fc16961-97e5-4a5b-a079-e4ab0d9763eb
-version: 5
+version: 6
 date: '2025-02-10'
 author: Michael Haag, Splunk
 status: production
@@ -16,8 +16,9 @@ description: The following analytic detects the addition of a DLL to the Windows
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText IN("*system.enterpriseservices.internal.publish*")
-  | stats count min(_time) as firstTime max(_time) as lastTime by EventCode ScriptBlockText
-  Computer user_id | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | fillnull | stats count min(_time) as firstTime max(_time) as lastTime by dest
+  signature signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID
+  ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_powershell_add_module_to_global_assembly_cache_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
@@ -43,9 +44,9 @@ drilldown_searches:
   latest_offset: $info_max_time$
 rba:
   message: PowerShell was used to install a module to the Global Assembly Cache on
-    $Computer$.
+    $dest$.
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 64
   threat_objects: []
@@ -63,7 +64,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.004/pwsh_publish_powershell.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1505.004/pwsh_publish_powershell.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

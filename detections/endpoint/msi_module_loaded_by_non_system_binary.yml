@@ -1,7 +1,7 @@
 name: MSI Module Loaded by Non-System Binary
 id: ccb98a66-5851-11ec-b91c-acde48001122
-version: 6
-date: '2025-02-10'
+version: 8
+date: '2025-04-22'
 author: Michael Haag, Splunk
 status: production
 type: Hunting
@@ -15,8 +15,10 @@ description: The following analytic detects the loading of `msi.dll` by a binary
 data_source:
 - Sysmon EventID 7
 search: '`sysmon` EventCode=7 ImageLoaded="*\\msi.dll" NOT (Image IN ("*\\System32\\*","*\\syswow64\\*","*\\windows\\*",
-  "*\\winsxs\\*")) | stats count min(_time) as firstTime max(_time) as lastTime by
-  Image ImageLoaded process_name dest EventCode ProcessId | `security_content_ctime(firstTime)`
+  "*\\winsxs\\*")) | fillnull | stats count min(_time) as firstTime max(_time) as
+  lastTime by Image ImageLoaded dest loaded_file loaded_file_path original_file_name
+  process_exec process_guid process_hash process_id process_name process_path service_dll_signature_exists
+  service_dll_signature_verified signature signature_id user_id vendor_product | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `msi_module_loaded_by_non_system_binary_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name and imageloaded executions from your endpoints. If you
@@ -36,7 +38,7 @@ tags:
   cve:
   - CVE-2021-41379
   mitre_attack_id:
-  - T1574.002
+  - T1574.001
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
@@ -45,7 +47,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/msi_module_load/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/msi_module_load/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

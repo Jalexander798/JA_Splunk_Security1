@@ -36,6 +36,24 @@ fields:
 - splunk_server
 - timeendpos
 - timestartpos
+output_fields:
+- action 
+- app 
+- bytes 
+- bytes_in 
+- bytes_out 
+- dest 
+- dest_ip 
+- dest_port 
+- dvc 
+- protocol 
+- protocol_version
+- src 
+- src_ip 
+- src_port 
+- transport 
+- user 
+- vendor_product
 field_mappings:
 - data_model: cim
   data_set: All_Traffic

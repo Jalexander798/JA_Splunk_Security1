@@ -1,7 +1,7 @@
 name: Disable Windows Behavior Monitoring
 id: 79439cae-9200-11eb-a4d3-acde48001122
-version: '12'
-date: '2025-03-03'
+version: 14
+date: '2025-04-18'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP
@@ -24,8 +24,9 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   "*\\Real-Time Protection\\DisableIntrusionPreventionSystem" OR Registry.registry_path=
   "*\\Real-Time Protection\\DisableIOAVProtection" OR Registry.registry_path= "*\\Real-Time
   Protection\\DisableScriptScanning" AND Registry.registry_value_data = "0x00000001")
-  BY Registry.dest Registry.user Registry.registry_path Registry.registry_key_name
-  Registry.registry_value_name Registry.registry_value_data Registry.process_guid
+  by Registry.action Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive
+  Registry.registry_path Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name
+  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product
   | `drop_dm_object_name(Registry)` | where isnotnull(registry_value_data) | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `disable_windows_behavior_monitoring_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
@@ -66,6 +67,7 @@ tags:
   - Black Basta Ransomware
   - Ransomware
   - RedLine Stealer
+  - Cactus Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1562.001

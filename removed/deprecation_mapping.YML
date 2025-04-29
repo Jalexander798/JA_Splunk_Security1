@@ -1,9 +1,78 @@
 detections:
-  - content: Open Redirect in Splunk Web
-    removed_in_version: 5.2.0
+  - content: Detect Large Outbound ICMP Packets
+    removed_in_version: 5.6.0
+    reason: Detection has been replaced by a new detection with a more specific name
+    replacement_content:
+    - Detect Large ICMP Traffic
+  - content: Windows Service Created Within Public Path
+    removed_in_version: 5.6.0
+    reason: Detection has been replaced by a new detection with a more specific name
+    replacement_content:
+    - Windows Service Created with Suspicious Service Path
+  - content: GitHub Actions Disable Security Workflow
+    removed_in_version: 5.4.0
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: Splunk Enterprise Information Disclosure
-    removed_in_version: 5.2.0
+    replacement_content:
+    - GitHub Organizations Disable Classic Branch Protection Rule
+  - content: Github Commit Changes In Master
+    removed_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+  - content: Github Commit In Develop
+    removed_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+  - content: GitHub Dependabot Alert
+    removed_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+    replacement_content:
+    - GitHub Enterprise Disable Dependabot
+  - content: GitHub Pull Request from Unknown User
+    removed_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+  - content: Known Services Killed by Ransomware
+    removed_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+    replacement_content:
+    - Windows Security And Backup Services Stop
+  - content: Remote Desktop Network Bruteforce
+    removed_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+    replacement_content:
+    - Windows Remote Desktop Network Bruteforce Attempt
+  - content: Suspicious Driver Loaded Path
+    removed_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+    replacement_content:
+    - Windows Suspicious Driver Loaded Path
+  - content: Suspicious Event Log Service Behavior
+    removed_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+    replacement_content:
+    - Windows Event Logging Service Has Shutdown
+  - content: Suspicious Process File Path
+    removed_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+    replacement_content:
+    - Windows Suspicious Process File Path
+  - content: AWS Cross Account Activity From Previously Unseen Account
+    removed_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+  - content: aws detect attach to role policy
+    removed_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+  - content: aws detect permanent key creation
+    removed_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+  - content: aws detect role creation
+    removed_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+  - content: aws detect sts assume role abuse
+    removed_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+  - content: aws detect sts get session token abuse
+    removed_in_version: 5.4.0
+    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
+  - content: AWS SAML Access by Provider User and Principal
+    removed_in_version: 5.4.0
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
   - content: ASL AWS Excessive Security Scanning
     removed_in_version: 5.2.0
@@ -250,11 +319,7 @@ detections:
       have their specific analytics.
     replacement_content:
     - Microsoft Defender ATP Alerts
-  - content: Detect Critical Alerts from Security Tools
-    removed_in_version: 5.2.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content:
-    - Microsoft Defender Incident Alerts
+    - Microsoft Defender Incident Alerts   
   - content: Excel Spawning PowerShell
     removed_in_version: 5.2.0
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
@@ -694,58 +759,16 @@ detections:
   - content: Excel Spawning Windows Script Host
     removed_in_version: 5.2.0
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: GitHub Actions Disable Security Workflow
-    removed_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: Github Commit Changes In Master
-    removed_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: Github Commit In Develop
-    removed_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: GitHub Dependabot Alert
-    removed_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: GitHub Pull Request from Unknown User
-    removed_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: Known Services Killed by Ransomware
-    removed_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: Remote Desktop Network Bruteforce
-    removed_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: Suspicious Driver Loaded Path
-    removed_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: Suspicious Event Log Service Behavior
-    removed_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: Suspicious Process File Path
-    removed_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: AWS Cross Account Activity From Previously Unseen Account
-    removed_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: aws detect attach to role policy
-    removed_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: aws detect permanent key creation
-    removed_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: aws detect role creation
-    removed_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: aws detect sts assume role abuse
-    removed_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: aws detect sts get session token abuse
-    removed_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: AWS SAML Access by Provider User and Principal
-    removed_in_version: 5.4.0
-    reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
 baselines:
+  - content: Previously Seen AWS Cross Account Activity
+    removed_in_version: 5.4.0
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+  - content: Previously Seen AWS Cross Account Activity - Initial
+    removed_in_version: 5.4.0
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
+  - content: Previously Seen AWS Cross Account Activity - Update
+    removed_in_version: 5.4.0
+    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
   - content: Add Prohibited Processes to Enterprise Security
     removed_in_version: 5.2.0
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
@@ -793,12 +816,6 @@ baselines:
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
   - content: Systems Ready for Spectre-Meltdown Windows Patch
     removed_in_version: 5.2.0
-    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
-  - content: Previously Seen AWS Cross Account Activity - Initial
-    removed_in_version: 5.4.0
-    reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
-  - content: Previously Seen AWS Cross Account Activity - Update
-    removed_in_version: 5.4.0
     reason: 'All detection(s) which leverage this baseline have been deprecated. As such, this baseline has been deprecated as well.'
 investigations: 
   - content: All backup logs for host
@@ -943,6 +960,19 @@ investigations:
     removed_in_version: 5.2.0
     reason: 'As of Splunk Enterprise Security version 8.0, Splunk Enterprise Security no longer supports Investigations. As such, all Investigations have been deprecated in ES Content Update.'
 stories:
+  - content: Nexus APT Threat Activity
+    removed_in_version: 5.4.0
+    reason: Analytic Story has been replaced by a new analytic story with a more specific name
+    replacement_content:
+    - China-Nexus Threat Activity
+  - content: Earth Estries
+    removed_in_version: 5.4.0
+    reason: Analytic Story has been replaced by a new analytic story with a more specific name
+    replacement_content:
+    - Salt Typhoon
+  - content: AWS Cross Account Activity
+    removed_in_version: 5.4.0
+    reason: All associated detections with this story have been deprecated
   - content: AWS Cryptomining
     removed_in_version: 5.2.0
     reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
@@ -1001,8 +1031,3 @@ stories:
   - content: Web Fraud Detection
     removed_in_version: 5.2.0
     reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-  - content: Nexus APT Threat Activity
-    removed_in_version: 5.4.0
-    reason: Analytic Story deprecated as it no longer effectively identifies the intended malicious activity
-    replacement_content:
-    - China-Nexus Threat Activity

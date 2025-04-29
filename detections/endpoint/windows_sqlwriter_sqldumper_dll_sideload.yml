@@ -1,7 +1,7 @@
 name: Windows SqlWriter SQLDumper DLL Sideload
 id: 2ed89ba9-c6c7-46aa-9f08-a2a1c2955aa3
-version: 4
-date: '2024-11-13'
+version: 6
+date: '2025-04-22'
 author: Michael Haag, Teoderick Contreras, Splunk
 data_source:
 - Sysmon EventID 7
@@ -16,9 +16,11 @@ description: The following analytic detects the abuse of SqlWriter and SQLDumper
   attackers to execute arbitrary code, maintain persistence, and evade detection by
   blending with legitimate processes.
 search: '`sysmon` EventCode=7 (Image="*\\SQLDumper.exe" OR Image="*\\SQLWriter.exe")
-  ImageLoaded="*\\vcruntime140.dll" NOT ImageLoaded="C:\\Windows\\System32\\*" | stats
-  values(ImageLoaded) count min(_time) as firstTime max(_time) as lastTime by Image,ImageLoaded,
-  user, Computer, EventCode | rename Computer as dest | `security_content_ctime(firstTime)`
+  ImageLoaded="*\\vcruntime140.dll" NOT ImageLoaded="C:\\Windows\\System32\\*" | fillnull
+  | stats count min(_time) as firstTime max(_time) as lastTime by Image ImageLoaded
+  dest loaded_file loaded_file_path original_file_name process_exec process_guid process_hash
+  process_id process_name process_path service_dll_signature_exists service_dll_signature_verified
+  signature signature_id user_id vendor_product | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`| `windows_sqlwriter_sqldumper_dll_sideload_filter`'
 how_to_implement: The analytic is designed to be run against Sysmon event logs collected
   from endpoints. The analytic requires the Sysmon event logs to be ingested into
@@ -67,7 +69,7 @@ tags:
   - Midnight Blizzard
   asset_type: Endpoint
   mitre_attack_id:
-  - T1574.002
+  - T1574.001
   product:
   - Splunk Enterprise
   - Splunk Enterprise Security
@@ -77,7 +79,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/wineloader/sqlwriter_sqldumper_sideload_windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1574.002/wineloader/sqlwriter_sqldumper_sideload_windows-sysmon.log
     sourcetype: XmlWinEventLog
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational

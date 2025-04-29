@@ -1,7 +1,7 @@
 name: Windows Defacement Modify Transcodedwallpaper File
 id: e11c3d90-5bc7-42ad-94cd-ba75db10d897
-version: 4
-date: '2024-11-13'
+version: 6
+date: '2025-04-22'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -14,12 +14,15 @@ description: The following analytic identifies modifications to the TranscodedWa
   If confirmed malicious, this could be a sign of unauthorized access and tampering,
   potentially leading to further system compromise or data exfiltration.
 data_source:
-- Sysmon EventID 1
-- Windows Event Log Security 4688
-- CrowdStrike ProcessRollup2
+- Sysmon EventID 1 AND Sysmon EventID 11
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Processes
-  where Processes.process_path !="*\\Windows\\Explorer.EXE" by _time span=1h Processes.process_id
-  Processes.process_name Processes.process Processes.dest Processes.process_guid  Processes.original_file_name
+  where Processes.process_path !="*\\Windows\\Explorer.EXE" 
+  by _time span=1h Processes.action Processes.dest Processes.original_file_name
+  Processes.parent_process Processes.parent_process_exec Processes.parent_process_guid
+  Processes.parent_process_id Processes.parent_process_name Processes.parent_process_path
+  Processes.process Processes.process_exec Processes.process_guid Processes.process_hash
+  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path
+  Processes.user Processes.user_id Processes.vendor_product
   | `drop_dm_object_name(Processes)` |rename process_guid as proc_guid | join proc_guid,
   _time [ | tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Filesystem
   where Filesystem.file_path = "*\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\TranscodedWallpaper"
@@ -75,7 +78,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/wallpaper_via_transcodedwallpaper/sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/brute_ratel/wallpaper_via_transcodedwallpaper/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

@@ -1,7 +1,7 @@
 name: Suspicious writes to windows Recycle Bin
 id: b5541828-8ffd-4070-9d95-b3da4de924cb
-version: 5
-date: '2024-11-13'
+version: 7
+date: '2025-04-22'
 author: Rico Valdez, Splunk
 status: production
 type: TTP
@@ -22,7 +22,12 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   | join  process_id [| tstats `security_content_summariesonly` values(Processes.user)
   as user values(Processes.process_name) as process_name values(Processes.parent_process_name)
   as parent_process_name FROM datamodel=Endpoint.Processes where Processes.process_name
-  != "explorer.exe" by Processes.process_id Processes.dest | `drop_dm_object_name("Processes")`
+  != "explorer.exe" by Processes.action Processes.dest Processes.original_file_name
+  Processes.parent_process Processes.parent_process_exec Processes.parent_process_guid
+  Processes.parent_process_id Processes.parent_process_name Processes.parent_process_path
+  Processes.process Processes.process_exec Processes.process_guid Processes.process_hash
+  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path
+  Processes.user Processes.user_id Processes.vendor_product | `drop_dm_object_name("Processes")`
   | table user process_name process_id dest] | `suspicious_writes_to_windows_recycle_bin_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
   on filesystem and process logs responsible for the changes from your endpoints into
@@ -69,7 +74,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036/write_to_recycle_bin/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1036/write_to_recycle_bin/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

@@ -92,6 +92,15 @@ fields:
 - timestartpos
 - user_id
 - vendor_product
+output_fields:
+- action 
+- dest 
+- file_name 
+- file_path 
+- process_guid 
+- process_id 
+- user 
+- vendor_product 
 field_mappings:
 - data_model: cim
   data_set: Endpoint.Filesystem

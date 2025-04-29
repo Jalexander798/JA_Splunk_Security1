@@ -1,7 +1,7 @@
 name: AWS S3 Exfiltration Behavior Identified
 id: 85096389-a443-42df-b89d-200efbb1b560
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-04-16'
 author: Bhavin Patel, Splunk
 status: production
 type: Correlation
@@ -63,7 +63,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1537/aws_exfil_risk_events/aws_risk.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1537/aws_exfil_risk_events/aws_risk.log
     sourcetype: stash
     source: aws_exfil

@@ -1,11 +1,12 @@
 name: Revil Registry Entry
 id: e3d3f57a-c381-11eb-9e35-acde48001122
-version: 6
-date: '2024-11-13'
+version: 8
+date: '2025-04-22'
 author: Steven Dick, Teoderick Contreras, Splunk
 status: production
 type: TTP
-description: The following analytic identifies suspicious modifications in the registry
+description:
+  The following analytic identifies suspicious modifications in the registry
   entry, specifically targeting paths used by malware like REVIL. It detects changes
   in registry paths such as `SOFTWARE\\WOW6432Node\\Facebook_Assistant` and `SOFTWARE\\WOW6432Node\\BlackLivesMatter`.
   This detection leverages data from Endpoint Detection and Response (EDR) agents,
@@ -15,25 +16,19 @@ description: The following analytic identifies suspicious modifications in the r
   attackers to maintain persistence, encrypt files, and store critical ransomware-related
   information on compromised hosts.
 data_source:
-- Sysmon EventID 1
-- Windows Event Log Security 4688
-- CrowdStrike ProcessRollup2
-- Sysmon EventID 12
-- Sysmon EventID 13
-search: '| tstats `security_content_summariesonly` count min(_time) AS firstTime max(_time)
-  AS lastTime FROM datamodel=Endpoint.Processes BY _time span=1h Processes.user Processes.process_id
-  Processes.process_name Processes.process Processes.process_path Processes.dest Processes.parent_process_name
-  Processes.parent_process Processes.process_guid | `drop_dm_object_name(Processes)`
-  | join process_guid [ | tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Registry
+  - Sysmon EventID 12
+  - Sysmon EventID 13
+search:
+  '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Registry
   WHERE (Registry.registry_path="*\\SOFTWARE\\WOW6432Node\\Facebook_Assistant\\*"
-  OR Registry.registry_path="*\\SOFTWARE\\WOW6432Node\\BlackLivesMatter*") BY _time
-  span=1h Registry.registry_path Registry.registry_key_name Registry.registry_value_name
-  Registry.registry_value_data Registry.process_guid | `drop_dm_object_name(Registry)`]
-  | fields firstTime lastTime dest user parent_process_name parent_process process_name
-  process_path process registry_key_name registry_path registry_value_name registry_value_data
-  process_guid | where isnotnull(registry_value_data) | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `revil_registry_entry_filter`'
-how_to_implement: The detection is based on data that originates from Endpoint Detection
+  OR Registry.registry_path="*\\SOFTWARE\\WOW6432Node\\BlackLivesMatter*") by Registry.action
+  Registry.dest Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path
+  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name
+  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product
+  | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `revil_registry_entry_filter`'
+how_to_implement:
+  The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
   you must ingest logs that contain the process GUID, process name, and parent process.
@@ -44,50 +39,51 @@ how_to_implement: The detection is based on data that originates from Endpoint D
   names and speed up the data modeling process.
 known_false_positives: unknown
 references:
-- https://krebsonsecurity.com/2021/05/a-closer-look-at-the-darkside-ransomware-gang/
-- https://www.mcafee.com/blogs/other-blogs/mcafee-labs/mcafee-atr-analyzes-sodinokibi-aka-revil-ransomware-as-a-service-what-the-code-tells-us/
+  - https://krebsonsecurity.com/2021/05/a-closer-look-at-the-darkside-ransomware-gang/
+  - https://www.mcafee.com/blogs/other-blogs/mcafee-labs/mcafee-atr-analyzes-sodinokibi-aka-revil-ransomware-as-a-service-what-the-code-tells-us/
 drilldown_searches:
-- name: View the detection results for - "$dest$" and "$user$"
-  search: '%original_detection_search% | search  dest = "$dest$" user = "$user$"'
-  earliest_offset: $info_min_time$
-  latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$dest$" and "$user$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$",
-    "$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
-    as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
-    Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
-    as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
-    by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
-  earliest_offset: $info_min_time$
-  latest_offset: $info_max_time$
+  - name: View the detection results for - "$dest$" and "$user$"
+    search: '%original_detection_search% | search  dest = "$dest$" user = "$user$"'
+    earliest_offset: $info_min_time$
+    latest_offset: $info_max_time$
+  - name: View risk events for the last 7 days for - "$dest$" and "$user$"
+    search:
+      '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$",
+      "$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
+      as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
+      Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
+      as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
+      by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+    earliest_offset: $info_min_time$
+    latest_offset: $info_max_time$
 rba:
-  message: A registry entry $registry_path$ with registry value $registry_value_name$
+  message:
+    A registry entry $registry_path$ with registry value $registry_value_name$
     and $registry_value_name$ related to revil ransomware in host $dest$
   risk_objects:
-  - field: dest
-    type: system
-    score: 60
-  - field: user
-    type: user
-    score: 60
+    - field: dest
+      type: system
+      score: 60
+    - field: user
+      type: user
+      score: 60
   threat_objects: []
 tags:
   analytic_story:
-  - Ransomware
-  - Revil Ransomware
-  - Windows Registry Abuse
+    - Ransomware
+    - Revil Ransomware
+    - Windows Registry Abuse
   asset_type: Endpoint
   mitre_attack_id:
-  - T1112
+    - T1112
   product:
-  - Splunk Enterprise
-  - Splunk Enterprise Security
-  - Splunk Cloud
+    - Splunk Enterprise
+    - Splunk Enterprise Security
+    - Splunk Cloud
   security_domain: endpoint
 tests:
-- name: True Positive Test
-  attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/revil/inf1/windows-sysmon.log
-    source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
-    sourcetype: XmlWinEventLog
+  - name: True Positive Test
+    attack_data:
+      - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/revil/inf1/windows-sysmon.log
+        source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
+        sourcetype: XmlWinEventLog

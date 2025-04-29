@@ -1,6 +1,6 @@
 name: Modify ACL permission To Files Or Folder
 id: 7e8458cc-acca-11eb-9e3f-acde48001122
-version: 6
+version: 7
 date: '2024-12-16'
 author: Teoderick Contreras, Splunk
 status: production
@@ -22,9 +22,14 @@ search: '| tstats `security_content_summariesonly` values(Processes.process) as 
   as lastTime from datamodel=Endpoint.Processes where (Processes.process_name = "cacls.exe"
   OR Processes.process_name = "icacls.exe" OR Processes.process_name = "xcacls.exe")
   AND Processes.process = "*/G*" AND (Processes.process = "* everyone:*"  OR Processes.process
-  = "* SYSTEM:*" OR Processes.process = "* S-1-1-0:*") by Processes.parent_process_name
-  Processes.process_name Processes.dest Processes.user | `drop_dm_object_name(Processes)`
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `modify_acl_permission_to_files_or_folder_filter`'
+  = "* SYSTEM:*" OR Processes.process = "* S-1-1-0:*") by Processes.action Processes.dest
+  Processes.original_file_name Processes.parent_process Processes.parent_process_exec
+  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name
+  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid
+  Processes.process_hash Processes.process_id Processes.process_integrity_level Processes.process_name
+  Processes.process_path Processes.user Processes.user_id Processes.vendor_product
+  | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+  | `modify_acl_permission_to_files_or_folder_filter`'
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -74,7 +79,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/xmrig_miner/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

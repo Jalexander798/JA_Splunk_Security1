@@ -1,6 +1,6 @@
 name: AdsiSearcher Account Discovery
 id: de7fcadc-04f3-11ec-a241-acde48001122
-version: 6
+version: 7
 date: '2025-02-10'
 author: Teoderick Contreras, Mauricio Velazco, Splunk
 status: production
@@ -16,10 +16,10 @@ description: The following analytic detects the use of the `[Adsisearcher]` type
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText = "*[adsisearcher]*" ScriptBlockText
-  = "*objectcategory=user*" ScriptBlockText = "*.findAll()*" | stats count min(_time)
-  as firstTime max(_time) as lastTime by EventCode Computer ScriptBlockText UserID
-  | rename Computer as dest, UserID as user | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `adsisearcher_account_discovery_filter`'
+  = "*objectcategory=user*" ScriptBlockText = "*.findAll()*" | fillnull | stats count
+  min(_time) as firstTime max(_time) as lastTime by dest signature signature_id user_id
+  vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `adsisearcher_account_discovery_filter`'
 how_to_implement: The following Hunting analytic requires PowerShell operational logs
   to be imported. Modify the powershell macro as needed to match the sourcetype or
   add index. This analytic is specific to 4104, or PowerShell Script Block Logging.
@@ -29,13 +29,13 @@ references:
 - https://www.blackhillsinfosec.com/red-blue-purple/
 - https://devblogs.microsoft.com/scripting/use-the-powershell-adsisearcher-type-accelerator-to-search-active-directory/
 drilldown_searches:
-- name: View the detection results for - "$dest$" and "$user$"
-  search: '%original_detection_search% | search  dest = "$dest$" user = "$user$"'
+- name: View the detection results for - "$dest$" and "$user_id$"
+  search: '%original_detection_search% | search  dest = "$dest$" user_id = "$user_id$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$dest$" and "$user$"
+- name: View risk events for the last 7 days for - "$dest$" and "$user_id$"
   search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$",
-    "$user$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
+    "$user_id$") starthoursago=168  | stats count min(_time) as firstTime max(_time)
     as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk
     Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
     as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
@@ -43,13 +43,12 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Powershell process having commandline "AdsiSearcher" used for user enumeration
-    on $dest$
+  message: Powershell process have been used for user enumeration on $dest$
   risk_objects:
   - field: dest
     type: system
     score: 25
-  - field: user
+  - field: user_id
     type: user
     score: 25
   threat_objects: []
@@ -70,7 +69,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087.002/AD_discovery/adsisearcher_powershell.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1087.002/AD_discovery/adsisearcher_powershell.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

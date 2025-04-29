@@ -1,6 +1,6 @@
 name: Windows Impair Defense Deny Security Software With Applocker
 id: e0b6ca60-9e29-4450-b51a-bba0abae2313
-version: 5
+version: 6
 date: '2025-02-10'
 author: Teoderick Contreras, Splunk
 status: production
@@ -23,8 +23,10 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   IN("*O=SYMANTEC*","*O=MCAFEE*","*O=KASPERSKY*","*O=BLEEPING COMPUTER*", "*O=PANDA
   SECURITY*","*O=SYSTWEAK SOFTWARE*", "*O=TREND MICRO*", "*O=AVAST*", "*O=GRIDINSOFT*",
   "*O=MICROSOFT*", "*O=NANO SECURITY*", "*O=SUPERANTISPYWARE.COM*", "*O=DOCTOR WEB*",
-  "*O=MALWAREBYTES*", "*O=ESET*", "*O=AVIRA*", "*O=WEBROOT*") by  Registry.user Registry.registry_path
-  Registry.registry_value_data Registry.action Registry.registry_key_name Registry.dest
+  "*O=MALWAREBYTES*", "*O=ESET*", "*O=AVIRA*", "*O=WEBROOT*") by Registry.action Registry.dest
+  Registry.process_guid Registry.process_id Registry.registry_hive Registry.registry_path
+  Registry.registry_key_name Registry.registry_value_data Registry.registry_value_name
+  Registry.registry_value_type Registry.status Registry.user Registry.vendor_product
   | `drop_dm_object_name(Registry)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `windows_impair_defense_deny_security_software_with_applocker_filter`'
 how_to_implement: To successfully implement this search you need to be ingesting information
@@ -72,7 +74,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/azorult/sysmon.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/malware/azorult/sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog

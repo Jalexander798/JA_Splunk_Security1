@@ -1,7 +1,7 @@
 name: Powershell Processing Stream Of Data
 id: 0d718b52-c9f1-11eb-bc61-acde48001122
-version: 8
-date: '2025-02-10'
+version: '9'
+date: '2025-03-14'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -15,10 +15,10 @@ description: The following analytic detects suspicious PowerShell script executi
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText = "*IO.Compression.*" OR ScriptBlockText
-  = "*IO.StreamReader*" OR ScriptBlockText = "*]::Decompress*" | stats count min(_time)
-  as firstTime max(_time) as lastTime by EventCode ScriptBlockText Computer UserID
-  | rename UserID as user | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `powershell_processing_stream_of_data_filter`'
+  = "*IO.StreamReader*" OR ScriptBlockText = "*]::Decompress*" | fillnull | stats
+  count min(_time) as firstTime max(_time) as lastTime by dest signature signature_id
+  user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `powershell_processing_stream_of_data_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
   https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.
@@ -48,25 +48,26 @@ drilldown_searches:
 rba:
   message: A suspicious powershell script contains stream command in $ScriptBlockText$
     commonly for processing compressed or to decompressed binary file with EventCode
-    $EventCode$ in host $Computer$
+    $EventID$ in host $dest$
   risk_objects:
-  - field: Computer
+  - field: dest
     type: system
     score: 40
-  - field: user
+  - field: user_id
     type: user
     score: 40
   threat_objects: []
 tags:
   analytic_story:
-  - Malicious PowerShell
   - AsyncRAT
-  - Hermetic Wiper
   - Data Destruction
-  - IcedID
   - MoonPeak
-  - Braodo Stealer
+  - Medusa Ransomware
   - PXA Stealer
+  - Braodo Stealer
+  - Hermetic Wiper
+  - IcedID
+  - Malicious PowerShell
   asset_type: Endpoint
   mitre_attack_id:
   - T1059.001
@@ -78,7 +79,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/streamreader.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1059.001/powershell_script_block_logging/streamreader.log
     source: XmlWinEventLog:Microsoft-Windows-PowerShell/Operational
     sourcetype: XmlWinEventLog

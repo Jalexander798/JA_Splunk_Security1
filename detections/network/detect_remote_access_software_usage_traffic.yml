@@ -1,6 +1,6 @@
 name: Detect Remote Access Software Usage Traffic
 id: 885ea672-07ee-475a-879e-60d28aa5dd42
-version: 6
+version: 7
 date: '2024-11-15'
 author: Steven Dick
 status: production
@@ -17,11 +17,14 @@ data_source:
 - Palo Alto Network Traffic
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime values(All_Traffic.dest_port) as dest_port latest(user) as user from
-  datamodel=Network_Traffic by All_Traffic.src All_Traffic.dest, All_Traffic.app |
-  `drop_dm_object_name("All_Traffic")` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | lookup remote_access_software remote_appid AS app OUTPUT isutility, description
-  as signature, comment_reference as desc, category | search isutility = True | `remote_access_software_usage_exceptions`
-  | `detect_remote_access_software_usage_traffic_filter`'
+  datamodel=Network_Traffic by All_Traffic.action All_Traffic.app All_Traffic.bytes
+  All_Traffic.bytes_in All_Traffic.bytes_out All_Traffic.dest All_Traffic.dest_ip
+  All_Traffic.dest_port All_Traffic.dvc All_Traffic.protocol All_Traffic.protocol_version
+  All_Traffic.src All_Traffic.src_ip All_Traffic.src_port All_Traffic.transport All_Traffic.user
+  All_Traffic.vendor_product | `drop_dm_object_name("All_Traffic")` | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` | lookup remote_access_software remote_appid
+  AS app OUTPUT isutility, description as signature, comment_reference as desc, category
+  | search isutility = True | `remote_access_software_usage_exceptions` | `detect_remote_access_software_usage_traffic_filter`'
 how_to_implement: The following analytic was developed with Palo Alto traffic logs.
   Ensure that the logs are being ingested into Splunk and mapped to the Network_Traffic
   data model. Use the Splunk Common Information Model (CIM) to normalize the field
@@ -52,7 +55,7 @@ drilldown_searches:
     | `security_content_ctime(lastTime)`'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: Investigate application traffic for $app$ 
+- name: Investigate application traffic for $app$
   search: '| from datamodel:Network_Traffic.All_Traffic | search src=$src$ app=$app$'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
@@ -65,7 +68,7 @@ rba:
     score: 25
   - field: user
     type: user
-    score: 25    
+    score: 25
   threat_objects:
   - field: signature
     type: signature
@@ -87,7 +90,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1219/screenconnect/screenconnect_palo_traffic.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1219/screenconnect/screenconnect_palo_traffic.log
     source: screenconnect_palo_traffic
     sourcetype: pan:traffic
