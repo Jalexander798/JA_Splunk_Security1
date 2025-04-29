@@ -60,7 +60,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Lumma Stealer Activity on host $scr_ip$.
+  message: Lumma Stealer Activity on host $src_ip$.
   risk_objects:
     - field: src_ip
       type: system
