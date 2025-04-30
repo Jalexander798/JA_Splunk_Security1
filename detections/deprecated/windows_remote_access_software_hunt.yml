@@ -5,7 +5,7 @@ date: '2025-04-30'
 author: Michael Haag, Splunk
 status: deprecated
 type: Hunting
-description: The following analytic identifies the use of remote access software within
+description: This search is deprecated in favor of the new detection - Detect Remote Access Software Usage Process. The following analytic identifies the use of remote access software within
   the environment. It leverages data from Endpoint Detection and Response (EDR) agents,
   focusing on process execution logs. This detection is significant as unauthorized
   remote access tools can be used by adversaries to maintain persistent access to
