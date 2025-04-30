@@ -1,0 +1,6 @@
+name: Threat Actors by Snort IDs
+id: 77d805c2-747e-4b78-8979-52deca44254f
+version: 1
+date: '2025-04-29'
+author: Bhavin Patel, Nas Bench Splunk
+description: Utilize this panel to correlate Snort intrusion events with known threat actors. Configure the Snort-ID-to-Threat-Actor lookup to enrich incoming signature data and populate the “Threat Actors by Snort IDs” view.
