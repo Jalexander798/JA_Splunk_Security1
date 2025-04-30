@@ -1,7 +1,7 @@
 name: Detect Remote Access Software Usage Process
 id: ffd5e001-2e34-48f4-97a2-26dc4bb08178
-version: 8
-date: '2025-04-18'
+version: 9
+date: '2025-04-30'
 author: Steven Dick
 status: production
 type: Anomaly
@@ -17,18 +17,23 @@ data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
 - CrowdStrike ProcessRollup2
-search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
-  as lastTime values(Processes.parent_process) as parent_process from datamodel=Endpoint.Processes
-  where Processes.dest!=unknown Processes.process!=unknown by Processes.action Processes.dest
-  Processes.original_file_name Processes.parent_process Processes.parent_process_exec
-  Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name
-  Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid
-  Processes.process_hash Processes.process_id Processes.process_integrity_level Processes.process_name
-  Processes.process_path Processes.user Processes.user_id Processes.vendor_product
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` | `drop_dm_object_name(Processes)`
-  | lookup remote_access_software remote_utility AS process_name OUTPUT isutility,
-  description as signature, comment_reference as desc, category | search isutility
-  = True | `remote_access_software_usage_exceptions` | `detect_remote_access_software_usage_process_filter`'
+search: |
+  | tstats `security_content_summariesonly` count min(_time) as firstTime max(_time) as lastTime values(Processes.parent_process) as parent_process 
+    from datamodel=Endpoint.Processes 
+    where 
+    [| inputlookup remote_access_software where isutility=TRUE
+    | rename remote_utility AS Processes.process_name 
+    | fields Processes.process_name] 
+    AND Processes.dest!="unknown" 
+    AND Processes.user!="unknown" 
+    by Processes.action Processes.dest Processes.original_file_name Processes.parent_process Processes.parent_process_exec Processes.parent_process_guid Processes.parent_process_id Processes.parent_process_name Processes.parent_process_path Processes.process Processes.process_exec Processes.process_guid Processes.process_hash Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path Processes.user Processes.user_id Processes.vendor_product
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `drop_dm_object_name(Processes)` 
+  | lookup remote_access_software remote_utility AS process_name OUTPUT isutility description AS signature comment_reference AS desc category
+  | search isutility = TRUE
+  | `remote_access_software_usage_exceptions`
+  | `detect_remote_access_software_usage_process_filter`
 how_to_implement: The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
   telemetry from the endpoints where the agent is installed. To implement this search,
@@ -105,5 +110,8 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1219/screenconnect/screenconnect_sysmon.log
+    source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
+    sourcetype: XmlWinEventLog
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1219/atomic_red_team/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
