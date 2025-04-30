@@ -44,8 +44,28 @@
             "dataSources": {
                 "primary": "ds_7sRMJ3vQ"
             },
-            "options": {},
+            "options": {
+                "backgroundColor": "> themes.defaultBackgroundColor",
+                "fontSize": "large",
+                "tableFormat": {
+                    "align": "left",
+                    "headerAlign": "left",
+                    "rowBackgroundColors": "> table | seriesByIndex(0) | pick(tableAltRowBackgroundColorsByTheme)"
+                }
+            },
+            "title": "Lookup File - snort_ids_threat_actor.csv",
             "type": "splunk.table"
+        },
+        "viz_kMW90k69": {
+            "dataSources": {
+                "primary": "ds_8sclv3pU"
+            },
+            "options": {
+                "xAxisTitleText": "Time",
+                "yAxisTitleText": "Count of signatures"
+            },
+            "title": "Timeline",
+            "type": "splunk.line"
         },
         "viz_kpJB7bW3": {
             "containerOptions": {},
@@ -53,9 +73,12 @@
                 "primary": "ds_mGcuwEO0"
             },
             "description": "Matching Snort Intrusion Events within a time_window of 1d",
+            "options": {
+                "count": 20
+            },
             "showLastUpdated": false,
             "showProgressBar": false,
-            "title": "Snort Intrusion Events - By Threat Actor",
+            "title": "Snort Intrusion Events by dest_ip  - $threat_actor_token$",
             "type": "splunk.table"
         }
     },
@@ -63,7 +86,14 @@
         "ds_7sRMJ3vQ": {
             "name": "snort_ids_threat_actor",
             "options": {
-                "query": "|inputlookup snort_ids_threat_actor.csv \n|  table threat_actor signature_id description"
+                "query": "|inputlookup snort_ids_threat_actor.csv \n|  table threat_actor signature_id description distinct_count_snort_ids"
+            },
+            "type": "ds.search"
+        },
+        "ds_8sclv3pU": {
+            "name": "Timeline",
+            "options": {
+                "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| bin _time span=1d\n| stats count AS Total_Alerts dc(signature_id) AS sig_count\n        values(signature_id)       AS signature_ids\n        values(signature)          AS signature\n        values(class_desc)         AS class_desc\n        values(MitreAttackGroups)  AS MitreAttackGroups\n        values(InlineResult)       AS InlineResult\n        values(InlineResultReason) AS InlineResultReason\n        values(src_ip)             AS src_ip\n        values(dest_port)          AS dest_port\n        values(rule)               AS rule\n        values(transport)          AS transport\n        values(app)                AS app\n  BY dest_ip, _time\n| eval sig_ids_str = mvjoin(signature_ids, \",\")\n| lookup snort_ids_threat_actor.csv signature_id AS sig_ids_str \n    OUTPUT threat_actor, distinct_count_snort_ids, description\n| where isnotnull(threat_actor) \n    AND sig_count >= tonumber(distinct_count_snort_ids)\n| mvexpand signature_ids\n| rename signature_ids AS signature_id\n| where threat_actor=\"$threat_actor_token$\"\n| timechart span=5m count BY signature_id"
             },
             "type": "ds.search"
         },
@@ -97,7 +127,7 @@
                     {
                         "item": "viz_LbI09I1U",
                         "position": {
-                            "h": 149,
+                            "h": 313,
                             "w": 1200,
                             "x": 0,
                             "y": 0
@@ -107,10 +137,10 @@
                     {
                         "item": "viz_kpJB7bW3",
                         "position": {
-                            "h": 400,
+                            "h": 581,
                             "w": 1200,
                             "x": 0,
-                            "y": 149
+                            "y": 313
                         },
                         "type": "block"
                     }
@@ -118,7 +148,18 @@
                 "type": "grid"
             },
             "layout_gX58DqID": {
-                "structure": [],
+                "structure": [
+                    {
+                        "item": "viz_kMW90k69",
+                        "position": {
+                            "h": 400,
+                            "w": 1200,
+                            "x": 0,
+                            "y": 0
+                        },
+                        "type": "block"
+                    }
+                ],
                 "type": "grid"
             }
         },
@@ -133,7 +174,7 @@
                     "layoutId": "layout_1"
                 },
                 {
-                    "label": "New tab",
+                    "label": "TImeline",
                     "layoutId": "layout_gX58DqID"
                 }
             ]
