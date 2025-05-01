@@ -1,4 +1,19 @@
 detections:
+  - content: CertUtil Download With URLCache and Split Arguments
+    removed_in_version: 5.8.0
+    reason: Detection deprecated in favor of "Windows File Download Via CertUtil", in order to provide a better experience of the alert
+    replacement_content:
+    - Windows File Download Via CertUtil
+  - content: Windows CertUtil Download With URL Argument
+    removed_in_version: 5.8.0
+    reason: Detection deprecated in favor of "Windows File Download Via CertUtil", in order to provide a better experience of the alert
+    replacement_content:
+    - Windows File Download Via CertUtil
+  - content: CertUtil Download With VerifyCtl and Split Arguments
+    removed_in_version: 5.8.0
+    reason: Detection deprecated in favor of "Windows File Download Via CertUtil", in order to provide a better experience of the alert
+    replacement_content:
+    - Windows File Download Via CertUtil
   - content: Detect Large Outbound ICMP Packets
     removed_in_version: 5.6.0
     reason: Detection has been replaced by a new detection with a more specific name
@@ -759,21 +774,6 @@ detections:
   - content: Excel Spawning Windows Script Host
     removed_in_version: 5.2.0
     reason: Detection deprecated as it no longer effectively identifies the intended malicious activity
-  - content: CertUtil Download With URLCache and Split Arguments
-    removed_in_version: 5.6.0
-    reason: Detection deprecated in favor of "Windows File Download Via CertUtil", in order to provide a better experience of the alert
-    replacement_content:
-    - Windows File Download Via CertUtil
-  - content: Windows CertUtil Download With URL Argument
-    removed_in_version: 5.6.0
-    reason: Detection deprecated in favor of "Windows File Download Via CertUtil", in order to provide a better experience of the alert
-    replacement_content:
-    - Windows File Download Via CertUtil
-  - content: CertUtil Download With VerifyCtl and Split Arguments
-    removed_in_version: 5.6.0
-    reason: Detection deprecated in favor of "Windows File Download Via CertUtil", in order to provide a better experience of the alert
-    replacement_content:
-    - Windows File Download Via CertUtil
 baselines:
   - content: Previously Seen AWS Cross Account Activity
     removed_in_version: 5.4.0
