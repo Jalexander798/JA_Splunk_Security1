@@ -1,11 +1,11 @@
 name: Windows Remote Access Software Hunt
 id: 8bd22c9f-05a2-4db1-b131-29271f28cb0a
-version: 7
-date: '2025-04-18'
+version: 8
+date: '2025-04-30'
 author: Michael Haag, Splunk
-status: production
+status: deprecated
 type: Hunting
-description: The following analytic identifies the use of remote access software within
+description: This search is deprecated in favor of the new detection - Detect Remote Access Software Usage Process. The following analytic identifies the use of remote access software within
   the environment. It leverages data from Endpoint Detection and Response (EDR) agents,
   focusing on process execution logs. This detection is significant as unauthorized
   remote access tools can be used by adversaries to maintain persistent access to
