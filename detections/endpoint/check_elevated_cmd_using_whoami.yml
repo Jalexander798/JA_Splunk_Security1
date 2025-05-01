@@ -1,12 +1,15 @@
 name: Check Elevated CMD using whoami
 id: a9079b18-1633-11ec-859c-acde48001122
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-04-24'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
-description: The following analytic identifies the execution of the 'whoami' command
-  with specific parameters to check for elevated privileges. It leverages data from
+description: The following analytic identifies the execution of the "whoami" command
+  with the "/group" flag, where the results are passed to the "find" command in order
+  to look for a the string "12288". This string represents the SID of the group
+  "Mandatory Label\High Mandatory Level" effectively checking if the current process
+  is running as a "High" integrity process or with Administrator privileges. It leverages data from
   Endpoint Detection and Response (EDR) agents, focusing on process and command-line
   telemetry. This activity is significant because it is commonly used by attackers,
   such as FIN7, to perform reconnaissance on a compromised host. If confirmed malicious,
@@ -35,7 +38,7 @@ how_to_implement: The detection is based on data that originates from Endpoint D
   the EDR product. The logs must also be mapped to the `Processes` node of the `Endpoint`
   data model. Use the Splunk Common Information Model (CIM) to normalize the field
   names and speed up the data modeling process.
-known_false_positives: unknown
+known_false_positives: The combination of these commands is unlikely to occur in a production environment. Any matches should be investigated. 
 references: []
 drilldown_searches:
 - name: View the detection results for - "$dest$" and "$user$"
