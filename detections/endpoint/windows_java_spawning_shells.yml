@@ -1,7 +1,7 @@
 name: Windows Java Spawning Shells
 id: 28c81306-5c47-11ec-bfea-acde48001122
-version: 9
-date: '2024-12-16'
+version: 10
+date: '2025-04-28'
 author: Michael Haag, Splunk
 status: experimental
 type: TTP
@@ -61,6 +61,7 @@ tags:
   - Log4Shell CVE-2021-44228
   - SysAid On-Prem Software CVE-2023-47246 Vulnerability
   - Cleo File Transfer Software
+  - SAP NetWeaver Exploitation
   asset_type: Endpoint
   cve:
   - CVE-2021-44228
