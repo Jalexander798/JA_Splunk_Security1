@@ -1,7 +1,7 @@
 name: Linux Data Destruction Command
 id: b11d3979-b2f7-411b-bb1a-bd00e642173b
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

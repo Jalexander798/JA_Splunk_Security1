@@ -1,7 +1,7 @@
 name: Shim Database File Creation
 id: 6e4c4588-ba2f-42fa-97e6-9f6f548eaa33
-version: 9
-date: '2025-02-10'
+version: 10
+date: '2025-05-02'
 author: David Dorsey, Splunk
 status: production
 type: TTP

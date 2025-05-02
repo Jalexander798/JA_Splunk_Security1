@@ -1,7 +1,7 @@
 name: Windows Important Audit Policy Disabled
 id: 1bf500e5-1226-41d9-af5d-ed1f577929f2
-version: 1
-date: '2025-01-27'
+version: 2
+date: '2025-05-02'
 author: Nasreddine Bencherchali, Splunk
 type: TTP
 status: production

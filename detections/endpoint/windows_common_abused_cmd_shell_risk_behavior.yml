@@ -1,7 +1,7 @@
 name: Windows Common Abused Cmd Shell Risk Behavior
 id: e99fcc4f-c6b0-4443-aa2a-e3c85126ec9a
-version: 5
-date: '2025-04-16'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Correlation

@@ -1,7 +1,7 @@
 name: Linux Doas Conf File Creation
 id: f6343e86-6e09-11ec-9376-acde48001122
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

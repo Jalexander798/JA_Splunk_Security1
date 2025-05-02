@@ -1,7 +1,7 @@
 name: Msmpeng Application DLL Side Loading
 id: 8bb3f280-dd9b-11eb-84d5-acde48001122
-version: 9
-date: '2025-04-22'
+version: 10
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk, Sanjay Govind
 status: production
 type: TTP

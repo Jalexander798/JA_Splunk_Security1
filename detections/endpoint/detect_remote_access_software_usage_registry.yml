@@ -1,7 +1,7 @@
 name: Detect Remote Access Software Usage Registry
 id: 33804986-25dd-43cf-bb6b-dc14956c7cbc
-version: 6
-date: '2025-04-18'
+version: 7
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: Anomaly

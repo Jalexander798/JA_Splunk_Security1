@@ -1,7 +1,7 @@
 name: Windows SQLCMD Execution
 id: 4e7c2f85-8f02-4bd2-a48b-5ec98a2c5f72
-version: 1
-date: '2025-02-03'
+version: 2
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Hunting

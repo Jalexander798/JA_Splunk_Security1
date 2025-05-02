@@ -1,7 +1,7 @@
 name: PowerShell Loading DotNET into Memory via Reflection
 id: 85bc3f30-ca28-11eb-bd21-acde48001122
-version: 9
-date: '2025-02-10'
+version: 10
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly

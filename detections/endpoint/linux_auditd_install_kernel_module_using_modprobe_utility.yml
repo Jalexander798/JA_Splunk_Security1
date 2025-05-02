@@ -1,7 +1,7 @@
 name: Linux Auditd Install Kernel Module Using Modprobe Utility
 id: 95165985-ace5-4d42-9c42-93a89a5af901
-version: 5
-date: '2025-02-20'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

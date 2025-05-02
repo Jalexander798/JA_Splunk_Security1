@@ -1,7 +1,7 @@
 name: Windows IIS Components New Module Added
 id: 55f22929-cfd3-4388-ba5c-4d01fac7ee7e
-version: 5
-date: '2025-02-10'
+version: 6
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: TTP

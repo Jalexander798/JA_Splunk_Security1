@@ -1,7 +1,7 @@
 name: Processes Tapping Keyboard Events
 id: 2a371608-331d-4034-ae2c-21dda8f1d0ec
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Jose Hernandez, Splunk
 status: experimental
 type: TTP

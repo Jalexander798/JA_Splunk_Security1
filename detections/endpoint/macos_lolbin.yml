@@ -1,7 +1,7 @@
 name: MacOS LOLbin
 id: 58d270fb-5b39-418e-a855-4b8ac046805e
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Patrick Bareiss, Splunk
 status: production
 type: TTP

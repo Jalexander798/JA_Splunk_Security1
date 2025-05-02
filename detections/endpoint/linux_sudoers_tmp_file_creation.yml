@@ -1,7 +1,7 @@
 name: Linux Sudoers Tmp File Creation
 id: be254a5c-63e7-11ec-89da-acde48001122
-version: 8
-date: '2025-03-27'
+version: 9
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

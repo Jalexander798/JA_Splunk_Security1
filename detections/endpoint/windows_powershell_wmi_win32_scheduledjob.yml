@@ -1,7 +1,7 @@
 name: Windows PowerShell WMI Win32 ScheduledJob
 id: 47c69803-2c09-408b-b40a-063c064cbb16
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Michael Haag, Splunk
 type: TTP
 status: production

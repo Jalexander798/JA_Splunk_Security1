@@ -1,7 +1,7 @@
 name: Remcos client registry install entry
 id: f2a1615a-1d63-11ec-97d2-acde48001122
-version: 8
-date: '2025-04-22'
+version: 9
+date: '2025-05-02'
 author: Steven Dick, Bhavin Patel, Rod Soto, Teoderick Contreras, Splunk
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: Scheduled Task Creation on Remote Endpoint using At
 id: 4be54858-432f-11ec-8209-3e22fbd008af
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

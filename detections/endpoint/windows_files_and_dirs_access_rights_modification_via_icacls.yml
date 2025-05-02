@@ -1,7 +1,7 @@
 name: Windows Files and Dirs Access Rights Modification Via Icacls
 id: c76b796c-27e1-4520-91c4-4a58695c749e
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

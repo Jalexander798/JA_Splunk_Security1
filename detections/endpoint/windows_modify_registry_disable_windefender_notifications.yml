@@ -1,7 +1,7 @@
 name: Windows Modify Registry Disable WinDefender Notifications
 id: 8e207707-ad40-4eb3-b865-3a52aec91f26
-version: 7
-date: '2025-04-22'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

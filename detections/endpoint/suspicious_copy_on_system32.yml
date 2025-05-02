@@ -1,7 +1,7 @@
 name: Suspicious Copy on System32
 id: ce633e56-25b2-11ec-9e76-acde48001122
-version: 9
-date: '2025-04-22'
+version: 10
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
