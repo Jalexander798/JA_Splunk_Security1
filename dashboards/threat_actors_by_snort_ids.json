@@ -82,7 +82,7 @@
                 "backgroundColor": "#ffffff",
                 "fontColor": "#dc4e41",
                 "fontSize": "large",
-                "markdown": "\n### Connections & Files events\n- Lists all connection and file-based events for the device for the selected time range"
+                "markdown": "\n### Files events\n- Lists all connection and file-based events for the device for the selected time range"
             },
             "type": "splunk.markdown"
         },
@@ -100,6 +100,20 @@
             },
             "title": "Lookup File - snort_ids_threat_actor.csv",
             "type": "splunk.table"
+        },
+        "viz_NT8j5Ogy": {
+            "dataSources": {
+                "primary": "ds_ta3O0H2Z"
+            },
+            "options": {
+                "center": [
+                    33.844089179971704,
+                    -15.07886874422411
+                ],
+                "zoom": 1.2272251943552073
+            },
+            "title": "Connection Events",
+            "type": "splunk.map"
         },
         "viz_VpTFMowK": {
             "containerOptions": {},
@@ -152,7 +166,7 @@
                 "backgroundColor": "#ffffff",
                 "fontColor": "#f1813f",
                 "fontSize": "large",
-                "markdown": "\n### Risk Events\n- Surfaces all risk events tied to the Destination IP  \n- Helps you understand what is the are the intrusions over the last 30 days\n"
+                "markdown": "\n### Risk Events\n- Surfaces all risk events tied to the Destination IP  \n- Helps you understand what is the are the ESCU alerts in Enterprise Security\n"
             },
             "type": "splunk.markdown"
         },
@@ -187,6 +201,13 @@
             "showLastUpdated": false,
             "showProgressBar": false,
             "title": "Snort Intrusion Events by dest_ip  - $threat_actor_token$",
+            "type": "splunk.table"
+        },
+        "viz_nr87RKRM": {
+            "dataSources": {
+                "primary": "ds_7LZlDEZh"
+            },
+            "title": "Connection Events From to all Source IPs",
             "type": "splunk.table"
         },
         "viz_q2mvB6Ut": {
@@ -226,6 +247,10 @@
                             {
                                 "key": "dvc",
                                 "token": "dvc"
+                            },
+                            {
+                                "key": "value",
+                                "token": "dest_ip"
                             }
                         ]
                     },
@@ -260,7 +285,14 @@
         "ds_3mW2eanf": {
             "name": "count_of_dest_ip",
             "options": {
-                "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| bin _time span=1d \n| stats count as Total_Alerts dc(signature_id) as sig_count \n    values(signature_id) as signature_ids \n    values(signature) as signature \n    values(class_desc) as class_desc \n    values(MitreAttackGroups) as MitreAttackGroups \n    values(InlineResult) as InlineResult \n    values(InlineResultReason) as InlineResultReason \n    values(src_ip) as src_ip \n    values(dest_port) as dest_port \n    values(rule) as rule \n    values(transport) as transport \n    values(app) as app\n    by dest_ip _time \n| eval sig_ids_str = mvjoin(signature_ids, \",\") \n| lookup snort_ids_threat_actor.csv signature_id as sig_ids_str OUTPUT threat_actor, distinct_count_snort_ids, description \n| where isnotnull(threat_actor) AND sig_count >= tonumber(distinct_count_snort_ids) \n| `security_content_ctime(firstTime)` \n| `security_content_ctime(lastTime)` \n| table _time threat_actor description dest_ip signature_ids signature src_ip MitreAttackGroups \n| stats dc(dest_ip)"
+                "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| bin _time span=1d \n| stats count as Total_Alerts dc(signature_id) as sig_count \n    values(signature_id) as signature_ids \n    values(signature) as signature \n    values(class_desc) as class_desc \n    values(MitreAttackGroups) as MitreAttackGroups \n    values(InlineResult) as InlineResult \n    values(InlineResultReason) as InlineResultReason \n    values(src_ip) as src_ip \n    values(dest_port) as dest_port \n    values(rule) as rule \n    values(transport) as transport \n    values(app) as app\n    by dest_ip _time \n| eval sig_ids_str = mvjoin(signature_ids, \",\") \n| lookup snort_ids_threat_actor.csv signature_id as sig_ids_str OUTPUT threat_actor, distinct_count_snort_ids, description \n| where isnotnull(threat_actor) AND sig_count >= tonumber(distinct_count_snort_ids) \n| `security_content_ctime(firstTime)` \n| `security_content_ctime(lastTime)` \n| table _time threat_actor description dest_ip signature_ids signature src_ip MitreAttackGroups\n| search  threat_actor = \"$threat_actor_token$\"\n| stats dc(dest_ip)"
+            },
+            "type": "ds.search"
+        },
+        "ds_7LZlDEZh": {
+            "name": "Top Source IP count",
+            "options": {
+                "query": "`cisco_secure_firewall` EventType=ConnectionEvent dest_ip = $dest_ip$\n| stats count BY  dest_ip  src_ip | sort count"
             },
             "type": "ds.search"
         },
@@ -279,9 +311,9 @@
             "type": "ds.search"
         },
         "ds_TPwx4BWO": {
-            "name": "affected_dest__ip",
+            "name": "affected_dest_ip",
             "options": {
-                "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| bin _time span=1d \n| stats count as Total_Alerts dc(signature_id) as sig_count \n    values(signature_id) as signature_ids \n    values(signature) as signature \n    values(class_desc) as class_desc \n    values(MitreAttackGroups) as MitreAttackGroups \n    values(InlineResult) as InlineResult \n    values(InlineResultReason) as InlineResultReason \n    values(src_ip) as src_ip \n    values(dest_ip) as dest_ip \n    values(dest_port) as dest_port \n    values(rule) as rule \n    values(transport) as transport \n    values(connection_id) as connection_id\n    values(app) as app\n    by dvc _time \n| eval sig_ids_str = mvjoin(signature_ids, \",\") \n| lookup snort_ids_threat_actor.csv signature_id as sig_ids_str OUTPUT threat_actor, distinct_count_snort_ids, description \n| where isnotnull(threat_actor) AND sig_count >= tonumber(distinct_count_snort_ids) \n| `security_content_ctime(firstTime)` \n| `security_content_ctime(lastTime)`\n| table _time threat_actor description dvc dest_ip signature_ids signature src_ip MitreAttackGroups\n| stats count by dvc dest_ip | table dvc dest_ip"
+                "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| bin _time span=1d \n| stats count as Total_Alerts dc(signature_id) as sig_count \n    values(signature_id) as signature_ids \n    values(signature) as signature \n    values(class_desc) as class_desc \n    values(MitreAttackGroups) as MitreAttackGroups \n    values(InlineResult) as InlineResult \n    values(InlineResultReason) as InlineResultReason \n    values(src_ip) as src_ip \n    values(dest_ip) as dest_ip \n    values(dest_port) as dest_port \n    values(rule) as rule \n    values(transport) as transport \n    values(connection_id) as connection_id\n    values(app) as app\n    by dvc _time \n| eval sig_ids_str = mvjoin(signature_ids, \",\") \n| lookup snort_ids_threat_actor.csv signature_id as sig_ids_str OUTPUT threat_actor, distinct_count_snort_ids, description \n| where isnotnull(threat_actor) AND sig_count >= tonumber(distinct_count_snort_ids) \n| `security_content_ctime(firstTime)` \n| `security_content_ctime(lastTime)`\n| search threat_actor = \"$threat_actor_token$\"\n| table _time threat_actor description dvc dest_ip signature_ids signature src_ip MitreAttackGroups\n| stats count by dvc dest_ip\n| rename dvc as \"Device ID\"\n| rename dest_ip as \"Private IP Address\"\n| table \"Device ID\" \"Private IP Address\""
             },
             "type": "ds.search"
         },
@@ -310,10 +342,17 @@
             },
             "type": "ds.search"
         },
+        "ds_ta3O0H2Z": {
+            "name": "map_connection_events",
+            "options": {
+                "query": "`cisco_secure_firewall` EventType=ConnectionEvent dest_ip = $dest_ip$\n| iplocation src_ip\n| geostats count BY src_ip"
+            },
+            "type": "ds.search"
+        },
         "ds_tuaeoaIh": {
             "name": "all_intrusion_events",
             "options": {
-                "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| bin _time span=1d \n| stats count as intrusion_count\n    by _time"
+                "query": "`cisco_secure_firewall` EventType=IntrusionEvent dvc = $dvc$\n| bin _time span=1d \n| stats count as intrusion_count\n    by _time"
             },
             "type": "ds.search"
         }
@@ -464,6 +503,31 @@
                     }
                 ],
                 "type": "grid"
+            },
+            "layout_hEVylosH": {
+                "structure": [
+                    {
+                        "item": "viz_NT8j5Ogy",
+                        "position": {
+                            "h": 725,
+                            "w": 1200,
+                            "x": 0,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_nr87RKRM",
+                        "position": {
+                            "h": 400,
+                            "w": 1200,
+                            "x": 0,
+                            "y": 725
+                        },
+                        "type": "block"
+                    }
+                ],
+                "type": "grid"
             }
         },
         "options": {
@@ -485,8 +549,12 @@
                     "layoutId": "layout_U25tjhLw"
                 },
                 {
-                    "label": "Connection and File events",
+                    "label": "File events",
                     "layoutId": "layout_SprIDSDn"
+                },
+                {
+                    "label": "Connection Events",
+                    "layoutId": "layout_hEVylosH"
                 }
             ]
         }
