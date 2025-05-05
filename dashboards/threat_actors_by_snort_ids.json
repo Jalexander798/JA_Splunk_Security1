@@ -37,13 +37,6 @@
                     }
                 }
             }
-        },
-        "tokens": {
-            "default": {
-                "dvc": {
-                    "value": "*"
-                }
-            }
         }
     },
     "visualizations": {
@@ -292,7 +285,7 @@
         "ds_7LZlDEZh": {
             "name": "Top Source IP count",
             "options": {
-                "query": "`cisco_secure_firewall` EventType=ConnectionEvent dest_ip = $dest_ip$\n| stats count BY  dest_ip  src_ip | sort count"
+                "query": "`cisco_secure_firewall` EventType=ConnectionEvent dest_ip = $dest_ip$\n| stats count BY  dest_ip  src_ip connection_id | sort count"
             },
             "type": "ds.search"
         },
@@ -313,7 +306,7 @@
         "ds_TPwx4BWO": {
             "name": "affected_dest_ip",
             "options": {
-                "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| bin _time span=1d \n| stats count as Total_Alerts dc(signature_id) as sig_count \n    values(signature_id) as signature_ids \n    values(signature) as signature \n    values(class_desc) as class_desc \n    values(MitreAttackGroups) as MitreAttackGroups \n    values(InlineResult) as InlineResult \n    values(InlineResultReason) as InlineResultReason \n    values(src_ip) as src_ip \n    values(dest_ip) as dest_ip \n    values(dest_port) as dest_port \n    values(rule) as rule \n    values(transport) as transport \n    values(connection_id) as connection_id\n    values(app) as app\n    by dvc _time \n| eval sig_ids_str = mvjoin(signature_ids, \",\") \n| lookup snort_ids_threat_actor.csv signature_id as sig_ids_str OUTPUT threat_actor, distinct_count_snort_ids, description \n| where isnotnull(threat_actor) AND sig_count >= tonumber(distinct_count_snort_ids) \n| `security_content_ctime(firstTime)` \n| `security_content_ctime(lastTime)`\n| search threat_actor = \"$threat_actor_token$\"\n| table _time threat_actor description dvc dest_ip signature_ids signature src_ip MitreAttackGroups\n| stats count by dvc dest_ip\n| rename dvc as \"Device ID\"\n| rename dest_ip as \"Private IP Address\"\n| table \"Device ID\" \"Private IP Address\""
+                "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| bin _time span=1d \n| stats count as Total_Alerts dc(signature_id) as sig_count \n    values(signature_id) as signature_ids \n    values(signature) as signature \n    values(class_desc) as class_desc \n    values(MitreAttackGroups) as MitreAttackGroups \n    values(InlineResult) as InlineResult \n    values(InlineResultReason) as InlineResultReason \n    values(src_ip) as src_ip \n    values(dest_port) as dest_port \n    values(rule) as rule \n    values(transport) as transport \n    values(connection_id) as connection_id\n    values(app) as app\n    by dest_ip _time \n| eval sig_ids_str = mvjoin(signature_ids, \",\") \n| lookup snort_ids_threat_actor.csv signature_id as sig_ids_str OUTPUT threat_actor, distinct_count_snort_ids, description \n| where isnotnull(threat_actor) AND sig_count >= tonumber(distinct_count_snort_ids) \n| `security_content_ctime(firstTime)` \n| `security_content_ctime(lastTime)`\n| search threat_actor = \"$threat_actor_token$\"\n| table _time threat_actor description dest_ip signature_ids signature src_ip MitreAttackGroups\n| stats count by dest_ip\n| rename dest_ip as \"Private IP Address\"\n| table \"Private IP Address\""
             },
             "type": "ds.search"
         },
@@ -334,7 +327,7 @@
         "ds_mGcuwEO0": {
             "name": "cisco_events_match",
             "options": {
-                "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| bin _time span=1d \n| stats count as Total_Alerts dc(signature_id) as sig_count \n    values(signature_id) as signature_ids \n    values(signature) as signature \n    values(class_desc) as class_desc \n    values(MitreAttackGroups) as MitreAttackGroups \n    values(InlineResult) as InlineResult \n    values(InlineResultReason) as InlineResultReason \n    values(src_ip) as src_ip \n    values(dest_port) as dest_port \n    values(rule) as rule \n    values(transport) as transport \n    values(connection_id) as connection_id\n    values(app) as app\n    by dvc dest_ip _time \n| eval sig_ids_str = mvjoin(signature_ids, \",\") \n| lookup snort_ids_threat_actor.csv signature_id as sig_ids_str OUTPUT threat_actor, distinct_count_snort_ids, description \n| where isnotnull(threat_actor) AND sig_count >= tonumber(distinct_count_snort_ids) \n| `security_content_ctime(firstTime)` \n| `security_content_ctime(lastTime)`\n| table _time threat_actor description dvc dest_ip signature_ids signature src_ip MitreAttackGroups\n|  search threat_actor=\"$threat_actor_token$\"",
+                "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| bin _time span=1d \n| stats count as Total_Alerts dc(signature_id) as sig_count \n    values(signature_id) as signature_ids \n    values(signature) as signature \n    values(class_desc) as class_desc \n    values(MitreAttackGroups) as MitreAttackGroups \n    values(InlineResult) as InlineResult \n    values(InlineResultReason) as InlineResultReason \n    values(src_ip) as src_ip \n    values(dest_port) as dest_port \n    values(rule) as rule \n    values(transport) as transport \n    values(connection_id) as connection_id\n    values(app) as app\n    by dest_ip _time \n| eval sig_ids_str = mvjoin(signature_ids, \",\") \n| lookup snort_ids_threat_actor.csv signature_id as sig_ids_str OUTPUT threat_actor, distinct_count_snort_ids, description \n| where isnotnull(threat_actor) AND sig_count >= tonumber(distinct_count_snort_ids) \n| `security_content_ctime(firstTime)` \n| `security_content_ctime(lastTime)`\n| table _time threat_actor description dvc dest_ip signature_ids signature src_ip MitreAttackGroups\n|  search threat_actor=\"$threat_actor_token$\"",
                 "queryParameters": {
                     "earliest": "$global_time.earliest$",
                     "latest": "$global_time.latest$"
@@ -484,7 +477,7 @@
                     {
                         "item": "viz_kMW90k69",
                         "position": {
-                            "h": 396,
+                            "h": 479,
                             "w": 1200,
                             "x": 0,
                             "y": 91
@@ -497,7 +490,7 @@
                             "h": 400,
                             "w": 1200,
                             "x": 0,
-                            "y": 487
+                            "y": 570
                         },
                         "type": "block"
                     }
