@@ -14,10 +14,13 @@ description: The following analytic detects the insertion of a Linux kernel modu
   execution, persistent access, and severe compromise of the affected system.
 data_source:
 - Linux Auditd Syscall
-search: '`linux_auditd` type=SYSCALL comm=insmod | rename host as dest | stats count
-  min(_time) as firstTime max(_time) as lastTime by comm exe  SYSCALL UID ppid pid
-  success dest | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`|
-  `linux_auditd_insert_kernel_module_using_insmod_utility_filter`'
+search: '`linux_auditd` type=SYSCALL comm=insmod 
+  | rename host as dest 
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+  by comm exe  syscall uid ppid pid success dest 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)`
+  | `linux_auditd_insert_kernel_module_using_insmod_utility_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
   data, that consists of SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures
   command-line executions and process details on Unix/Linux systems. These logs should
@@ -74,6 +77,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.006/linux_auditd_insmod/linux_auditd_insmod.log
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1547.006/linux_auditd_insmod_new/linux_auditd_new_insmod.log
     source: auditd
     sourcetype: auditd

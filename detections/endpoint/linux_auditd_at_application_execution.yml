@@ -16,10 +16,13 @@ description: The following analytic detects the execution of the "At" applicatio
   and mitigate potential risks.
 data_source:
 - Linux Auditd Syscall
-search: '`linux_auditd` type=SYSCALL comm IN ("at", "atd") OR exe IN ("/usr/bin/at","/usr/bin/atd")
-  AND NOT (UID IN("daemon")) | rename host as dest | stats count min(_time) as firstTime
-  max(_time) as lastTime by comm exe  SYSCALL UID ppid pid dest | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)`| `linux_auditd_at_application_execution_filter`'
+search: '`linux_auditd` type=SYSCALL comm IN ("at", "atd") OR exe IN ("/usr/bin/at","/usr/bin/atd") AND NOT (uid IN ("daemon")) 
+  | rename host as dest 
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+  by comm exe  syscall uid ppid pid dest 
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)`
+  | `linux_auditd_at_application_execution_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
   data, that consist SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
   executions and process details on Unix/Linux systems. These logs should be ingested
@@ -75,6 +78,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.002/linux_auditd_at/linux_auditd_at_execution.log
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.002/linux_new_auditd_at/linux_auditd_new_at.log
     source: auditd
     sourcetype: auditd

@@ -15,12 +15,15 @@ description: The following analytic detects suspicious system network configurat
   reconnaissance operations, mitigating the risk of further compromise.
 data_source:
 - Linux Auditd Syscall
-search: '`linux_auditd` type=SYSCALL comm IN ("arp", "ifconfig", "ip", "netstat",
-  "firewall-cmd", "ufw", "iptables", "ss", "route") | bucket _time span=15m | rename
-  host as dest | stats dc(comm) as unique_commands, values(comm) as comm, values(exe)
-  as exe, values(SYSCALL) as SYSCALL, values(UID) as UID, values(ppid) as ppid, values(pid)
-  as pid, count, min(_time) as firstTime, max(_time) as lastTime by success dest |
-  where unique_commands >= 4 | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+search: '`linux_auditd` type=SYSCALL comm IN ("arp", "ifconfig", "ip", "netstat", "firewall-cmd", "ufw", "iptables", "ss", "route")
+  | bucket _time span=15m 
+  | rename host as dest 
+  | stats dc(comm) as unique_commands, values(comm) as comm, values(exe)
+  as exe, values(syscall) as syscall, values(uid) as uid, values(ppid) as ppid, values(pid)
+  as pid, count, min(_time) as firstTime, max(_time) as lastTime by success dest 
+  | where unique_commands >= 4 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)`
   | `linux_auditd_system_network_configuration_discovery_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
   data, that consist SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
@@ -75,6 +78,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1016/linux_auditd_net_tool/linux_auditd_net_tool.log
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1016/linux_auditd_net_tool_new/linux_auditd_net_tool_bucket_new.log
     source: auditd
     sourcetype: auditd
