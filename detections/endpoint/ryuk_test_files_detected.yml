@@ -1,7 +1,7 @@
 name: Ryuk Test Files Detected
 id: 57d44d70-28d9-4ed1-acf5-1c80ae2bbce3
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Rod Soto, Jose Hernandez, Splunk
 status: production
 type: TTP

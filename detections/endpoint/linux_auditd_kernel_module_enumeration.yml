@@ -1,7 +1,7 @@
 name: Linux Auditd Kernel Module Enumeration
 id: d1b088de-c47a-4572-9339-bdcc26493b32
 version: 6
-date: '2025-04-16'
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

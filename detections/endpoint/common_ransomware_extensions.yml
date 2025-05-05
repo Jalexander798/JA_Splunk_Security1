@@ -1,7 +1,7 @@
 name: Common Ransomware Extensions
 id: a9e5c5db-db11-43ca-86a8-c852d1b2c0ec
-version: '13'
-date: '2025-04-01'
+version: 14
+date: '2025-05-02'
 author: David Dorsey, Michael Haag, Splunk, Steven Dick
 status: production
 type: TTP

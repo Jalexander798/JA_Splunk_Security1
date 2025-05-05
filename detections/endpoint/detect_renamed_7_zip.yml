@@ -1,7 +1,7 @@
 name: Detect Renamed 7-Zip
 id: 4057291a-b8cf-11eb-95fe-acde48001122
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Hunting

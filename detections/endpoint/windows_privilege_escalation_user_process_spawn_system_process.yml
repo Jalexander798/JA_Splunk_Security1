@@ -1,7 +1,7 @@
 name: Windows Privilege Escalation User Process Spawn System Process
 id: c9687a28-39ad-43c6-8bcf-eaf061ba0cbe
-version: 6
-date: '2024-12-10'
+version: 7
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: TTP

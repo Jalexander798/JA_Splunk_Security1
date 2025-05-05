@@ -1,7 +1,7 @@
 name: Windows Event Logging Service Has Shutdown
 id: d696f622-6b08-4336-b456-696cb5b43ba0
-version: 2
-date: '2025-01-28'
+version: 3
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: production
 type: Hunting

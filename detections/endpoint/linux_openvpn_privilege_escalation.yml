@@ -1,7 +1,7 @@
 name: Linux OpenVPN Privilege Escalation
 id: d25feebe-fa1c-4754-8a1e-afb03bedc0f2
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-05-02'
 author: Gowthamaraj Rajendran, Splunk
 status: production
 type: Anomaly

@@ -1,7 +1,7 @@
 name: Linux File Created In Kernel Driver Directory
 id: b85bbeec-6326-11ec-9311-acde48001122
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

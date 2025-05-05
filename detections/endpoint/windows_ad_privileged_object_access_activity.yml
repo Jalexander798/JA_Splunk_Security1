@@ -1,7 +1,7 @@
 name: Windows AD Privileged Object Access Activity
 id: dc2f58bc-8cd2-4e51-962a-694b963acde0
-version: 5
-date: '2025-02-10'
+version: 6
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: TTP

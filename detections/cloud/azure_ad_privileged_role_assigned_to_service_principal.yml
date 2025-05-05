@@ -1,7 +1,7 @@
 name: Azure AD Privileged Role Assigned to Service Principal
 id: 5dfaa3d3-e2e4-4053-8252-16d9ee528c41
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

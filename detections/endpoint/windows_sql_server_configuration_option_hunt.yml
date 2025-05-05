@@ -1,7 +1,7 @@
 name: Windows SQL Server Configuration Option Hunt
 id: 8dc9efd5-805a-460e-889e-bc79e5477af9
-version: 1
-date: '2025-02-06'
+version: 2
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Hunting

@@ -1,7 +1,7 @@
 name: Kerberos Pre-Authentication Flag Disabled with PowerShell
 id: 59b51620-94c9-11ec-b3d5-acde48001122
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

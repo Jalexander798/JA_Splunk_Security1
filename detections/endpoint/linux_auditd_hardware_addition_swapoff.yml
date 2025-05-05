@@ -1,7 +1,7 @@
 name: Linux Auditd Hardware Addition Swapoff
 id: 5728bb16-1a0b-4b66-bce2-0074ac839770
-version: 4
-date: '2025-02-20'
+version: 5
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

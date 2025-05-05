@@ -1,7 +1,7 @@
 name: AdsiSearcher Account Discovery
 id: de7fcadc-04f3-11ec-a241-acde48001122
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Mauricio Velazco, Splunk
 status: production
 type: TTP

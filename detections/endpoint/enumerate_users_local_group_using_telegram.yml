@@ -1,7 +1,7 @@
 name: Enumerate Users Local Group Using Telegram
 id: fcd74532-ae54-11eb-a5ab-acde48001122
-version: 8
-date: '2025-04-22'
+version: 9
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

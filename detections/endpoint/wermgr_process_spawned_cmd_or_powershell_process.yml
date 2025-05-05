@@ -1,7 +1,7 @@
 name: Wermgr Process Spawned CMD Or Powershell Process
 id: e8fc95bc-a107-11eb-a978-acde48001122
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

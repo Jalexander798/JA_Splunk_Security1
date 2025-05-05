@@ -1,7 +1,7 @@
 name: Windows Modify Registry DisAllow Windows App
 id: 4bc788d3-c83a-48c5-a4e2-e0c6dba57889
-version: 7
-date: '2025-04-22'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

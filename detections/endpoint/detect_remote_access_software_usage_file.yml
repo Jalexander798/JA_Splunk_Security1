@@ -1,7 +1,7 @@
 name: Detect Remote Access Software Usage File
 id: 3bf5541a-6a45-4fdc-b01d-59b899fff961
-version: 8
-date: '2025-04-18'
+version: 9
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: Anomaly

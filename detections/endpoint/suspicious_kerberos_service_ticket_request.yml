@@ -1,7 +1,7 @@
 name: Suspicious Kerberos Service Ticket Request
 id: 8b1297bc-6204-11ec-b7c4-acde48001122
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: Okta ThreatInsight Threat Detected
 id: 140504ae-5fe2-4d65-b2bc-a211813fbca6
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Michael Haag, Mauricio Velazco, Splunk
 status: production
 type: Anomaly

@@ -1,7 +1,7 @@
 name: Windows Firewall Rule Modification
 id: fe7efbf7-5f82-44b9-8c33-316189ab2393
-version: 1
-date: '2025-03-19'
+version: 2
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

@@ -1,7 +1,7 @@
 name: Ping Sleep Batch Command
 id: ce058d6c-79f2-11ec-b476-acde48001122
-version: 8
-date: '2025-02-19'
+version: 9
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

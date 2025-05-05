@@ -1,12 +1,12 @@
 name: Windows Multiple Users Failed To Authenticate From Process
 id: 9015385a-9c84-11eb-bef2-acde48001122
 type: TTP
-version: 8
+version: 9
 status: production
 author: Mauricio Velazco, Splunk
 data_source:
 - Windows Event Log Security 4625
-date: '2025-02-10'
+date: '2025-05-02'
 description: The following analytic detects a source process failing to authenticate
   with 30 unique users, indicating a potential Password Spraying attack. It leverages
   Windows Event 4625 with Logon Type 2, collected from domain controllers, member

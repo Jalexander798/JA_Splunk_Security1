@@ -1,7 +1,7 @@
 name: MS Scripting Process Loading Ldap Module
 id: 0b0c40dc-14a6-11ec-b267-acde48001122
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

@@ -1,7 +1,7 @@
 name: Windows Information Discovery Fsutil
 id: 2181f261-93e6-4166-a5a9-47deac58feff
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

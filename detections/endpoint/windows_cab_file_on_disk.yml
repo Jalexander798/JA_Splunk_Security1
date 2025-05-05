@@ -1,7 +1,7 @@
 name: Windows CAB File on Disk
 id: 622f08d0-69ef-42c2-8139-66088bc25acd
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly

@@ -1,7 +1,7 @@
 name: Mmc LOLBAS Execution Process Spawn
 id: f6601940-4c74-11ec-b9b7-3e22fbd008af
-version: 7
-date: '2025-04-22'
+version: 8
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

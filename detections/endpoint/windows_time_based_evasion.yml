@@ -1,7 +1,7 @@
 name: Windows Time Based Evasion
 id: 34502357-deb1-499a-8261-ffe144abf561
-version: 7
-date: '2025-02-19'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

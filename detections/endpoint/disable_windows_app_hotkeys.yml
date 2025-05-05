@@ -1,7 +1,7 @@
 name: Disable Windows App Hotkeys
 id: 1490f224-ad8b-11eb-8c4f-acde48001122
-version: 11
-date: '2025-04-22'
+version: 12
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP

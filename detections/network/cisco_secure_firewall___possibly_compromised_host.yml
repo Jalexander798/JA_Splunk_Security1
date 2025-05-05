@@ -1,7 +1,7 @@
 name: Cisco Secure Firewall - Possibly Compromised Host
 id: 244a77bb-3b2a-46f1-bf2c-b4f7cd29276d
-version: 1
-date: '2025-04-14'
+version: 2
+date: '2025-05-02'
 author: Nasreddine Bencherchali, Splunk
 status: experimental
 type: Anomaly

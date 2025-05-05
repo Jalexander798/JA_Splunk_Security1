@@ -1,7 +1,7 @@
 name: Windows Steal Authentication Certificates CryptoAPI
 id: 905d5692-6d7c-432f-bc7e-a6b4f464d40e
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly

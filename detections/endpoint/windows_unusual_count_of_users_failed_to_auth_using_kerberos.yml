@@ -1,8 +1,8 @@
 name: Windows Unusual Count Of Users Failed To Auth Using Kerberos
 id: bc9cb715-08ba-40c3-9758-6e2b26e455cb
-date: '2025-02-10'
+date: '2025-05-02'
 type: Anomaly
-version: 6
+version: 7
 status: production
 author: Mauricio Velazco, Splunk
 data_source:

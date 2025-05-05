@@ -1,7 +1,7 @@
 name: Windows Impair Defense Change Win Defender Health Check Intervals
 id: 5211c260-820e-4366-b983-84bbfb5c263a
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: Detect Certify Command Line Arguments
 id: e6d2dc61-a8b9-4b03-906c-da0ca75d71b8
-version: 6
-date: '2024-12-10'
+version: 7
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: TTP

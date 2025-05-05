@@ -1,7 +1,7 @@
 name: GetDomainGroup with PowerShell
 id: 93c94be3-bead-4a60-860f-77ca3fe59903
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

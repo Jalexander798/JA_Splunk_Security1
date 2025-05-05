@@ -1,10 +1,10 @@
 name: Protocols passing authentication in cleartext
 id: 6923cd64-17a0-453c-b945-81ac2d8c6db9
-version: 6
-date: '2024-11-15'
+version: 7
+date: '2025-05-02'
 author: Rico Valdez, Splunk
 status: experimental
-type: TTP
+type: Anomaly
 description: The following analytic identifies the use of cleartext protocols that
   risk leaking sensitive information. It detects network traffic on legacy protocols
   such as Telnet (port 23), POP3 (port 110), IMAP (port 143), and non-anonymous FTP
@@ -25,8 +25,7 @@ how_to_implement: This search requires you to be ingesting your network traffic,
   populating the Network_Traffic data model. For more accurate result it's better
   to limit destination to organization private and public IP range, like All_Traffic.dest
   IN(192.168.0.0/16,172.16.0.0/12,10.0.0.0/8, x.x.x.x/22)
-known_false_positives: Some networks may use kerberized FTP or telnet servers, however,
-  this is rare.
+known_false_positives: Some networks may use kerberos, FTP or telnet servers, however, this is rare.
 references:
 - https://www.rackaid.com/blog/secure-your-email-and-file-transfers/
 - https://www.infosecmatter.com/capture-passwords-using-wireshark/

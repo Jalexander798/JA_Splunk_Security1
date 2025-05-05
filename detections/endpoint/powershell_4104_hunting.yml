@@ -1,7 +1,7 @@
 name: PowerShell 4104 Hunting
 id: d6f2b006-0041-11ec-8885-acde48001122
-version: 15
-date: '2025-04-22'
+version: 16
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Hunting

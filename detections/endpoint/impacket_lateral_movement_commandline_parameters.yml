@@ -1,7 +1,7 @@
 name: Impacket Lateral Movement Commandline Parameters
 id: 8ce07472-496f-11ec-ab3b-3e22fbd008af
-version: 9
-date: '2025-02-10'
+version: 10
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

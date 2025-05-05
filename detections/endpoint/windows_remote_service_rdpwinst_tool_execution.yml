@@ -1,7 +1,7 @@
 name: Windows Remote Service Rdpwinst Tool Execution
 id: c8127f87-c7c9-4036-89ed-8fe4b30e678c
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

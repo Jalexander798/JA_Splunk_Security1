@@ -1,7 +1,7 @@
 name: Windows Rapid Authentication On Multiple Hosts
 id: 62606c77-d53d-4182-9371-b02cdbbbcef7
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 type: TTP
 status: production

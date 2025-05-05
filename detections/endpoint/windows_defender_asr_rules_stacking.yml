@@ -1,7 +1,7 @@
 name: Windows Defender ASR Rules Stacking
 id: 425a6657-c5e4-4cbb-909e-fc9e5d326f01
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Hunting

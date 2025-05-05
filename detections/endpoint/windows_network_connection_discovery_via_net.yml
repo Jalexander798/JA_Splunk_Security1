@@ -1,7 +1,7 @@
 name: Windows Network Connection Discovery Via Net
 id: 86a5b949-679b-4197-8d4c-9c180a818c45
-version: 2
-date: '2025-01-13'
+version: 3
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: production
 type: Hunting

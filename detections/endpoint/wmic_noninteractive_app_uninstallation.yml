@@ -1,7 +1,7 @@
 name: Wmic NonInteractive App Uninstallation
 id: bff0e7a0-317f-11ec-ab4e-acde48001122
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting

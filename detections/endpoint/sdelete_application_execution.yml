@@ -1,7 +1,7 @@
 name: Sdelete Application Execution
 id: 31702fc0-2682-11ec-85c3-acde48001122
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: Linux Curl Upload File
 id: c1de2d9a-0c02-4bb4-a49a-510c6e9cf2bf
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: TTP

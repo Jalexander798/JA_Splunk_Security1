@@ -1,7 +1,7 @@
 name: Windows SIP WinVerifyTrust Failed Trust Validation
 id: 6ffc7f88-415b-4278-a80d-b957d6539e1a
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly

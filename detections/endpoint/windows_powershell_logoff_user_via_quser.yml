@@ -1,7 +1,7 @@
 name: Windows Powershell Logoff User via Quser
 id: 6d70780d-4cfe-4820-bafd-1b43941986b5
-version: 3
-date: '2025-02-10'
+version: 4
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 data_source:
 - Powershell Script Block Logging 4104

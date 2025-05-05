@@ -1,7 +1,7 @@
 name: Spoolsv Writing a DLL
 id: d5bf5cf2-da71-11eb-92c2-acde48001122
-version: 10
-date: '2025-04-22'
+version: 11
+date: '2025-05-02'
 author: Mauricio Velazco, Michael Haag, Splunk
 status: production
 type: TTP
