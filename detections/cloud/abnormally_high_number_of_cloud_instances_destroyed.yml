@@ -1,7 +1,7 @@
 name: Abnormally High Number Of Cloud Instances Destroyed
 id: ef629fc9-1583-4590-b62a-f2247fbf7bbf
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: David Dorsey, Splunk
 status: experimental
 type: Anomaly

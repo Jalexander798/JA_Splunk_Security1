@@ -1,7 +1,7 @@
 name: O365 ZAP Activity Detection
 id: 4df275fd-a0e5-4246-8b92-d3201edaef7a
-version: 6
-date: '2025-03-25'
+version: 7
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: Anomaly

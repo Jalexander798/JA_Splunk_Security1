@@ -1,7 +1,7 @@
 name: Disabling Windows Local Security Authority Defences via Registry
 id: 45cd08f8-a2c9-4f4e-baab-e1a0c624b0ab
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-05-02'
 author: Dean Luxton
 status: production
 type: TTP

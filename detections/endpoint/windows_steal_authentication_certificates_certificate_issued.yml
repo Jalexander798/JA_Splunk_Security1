@@ -1,7 +1,7 @@
 name: Windows Steal Authentication Certificates Certificate Issued
 id: 9b1a5385-0c31-4c39-9753-dc26b8ce64c2
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly

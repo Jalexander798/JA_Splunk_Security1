@@ -1,7 +1,7 @@
 name: WMI Recon Running Process Or Services
 id: b5cd5526-cce7-11eb-b3bd-acde48001122
-version: 7
-date: '2024-11-13'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

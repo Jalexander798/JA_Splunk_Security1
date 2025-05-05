@@ -1,7 +1,7 @@
 name: Schedule Task with HTTP Command Arguments
 id: 523c2684-a101-11eb-916b-acde48001122
-version: 5
-date: '2024-12-10'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

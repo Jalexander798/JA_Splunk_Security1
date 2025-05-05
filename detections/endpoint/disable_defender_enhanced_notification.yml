@@ -1,7 +1,7 @@
 name: Disable Defender Enhanced Notification
 id: dc65678c-301f-11ec-8e30-acde48001122
-version: 9
-date: '2025-02-10'
+version: 10
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP

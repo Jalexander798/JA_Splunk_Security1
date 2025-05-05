@@ -1,7 +1,7 @@
 name: Remote Desktop Network Traffic
 id: 272b8407-842d-4b3d-bead-a704584003d3
-version: 10
-date: '2025-02-10'
+version: 11
+date: '2025-05-02'
 author: David Dorsey, Splunk
 status: production
 type: Anomaly

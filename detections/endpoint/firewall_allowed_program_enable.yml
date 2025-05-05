@@ -1,7 +1,7 @@
 name: Firewall Allowed Program Enable
 id: 9a8f63a8-43ac-11ec-904c-acde48001122
-version: '6'
-date: '2025-03-14'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

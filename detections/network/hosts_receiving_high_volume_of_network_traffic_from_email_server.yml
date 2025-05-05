@@ -1,7 +1,7 @@
 name: Hosts receiving high volume of network traffic from email server
 id: 7f5fb3e1-4209-4914-90db-0ec21b556368
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Bhavin Patel, Splunk
 status: experimental
 type: Anomaly

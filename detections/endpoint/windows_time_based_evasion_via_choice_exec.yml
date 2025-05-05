@@ -1,7 +1,7 @@
 name: Windows Time Based Evasion via Choice Exec
 id: d5f54b38-10bf-4b3a-b6fc-85949862ed50
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

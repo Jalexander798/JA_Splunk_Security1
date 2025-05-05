@@ -1,7 +1,7 @@
 name: Detect HTML Help Spawn Child Process
 id: 723716de-ee55-4cd4-9759-c44e7e55ba4b
-version: 10
-date: '2025-02-10'
+version: 11
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: TTP

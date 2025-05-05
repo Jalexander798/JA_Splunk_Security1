@@ -1,7 +1,7 @@
 name: O365 FullAccessAsApp Permission Assigned
 id: 01a510b3-a6ac-4d50-8812-7e8a3cde3d79
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

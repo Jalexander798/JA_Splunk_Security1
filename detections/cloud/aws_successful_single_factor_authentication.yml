@@ -1,7 +1,7 @@
 name: AWS Successful Single-Factor Authentication
 id: a520b1fe-cc9e-4f56-b762-18354594c52f
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: Detect Certipy File Modifications
 id: 7e3df743-b1d8-4631-8fa8-bd5819688876
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: TTP

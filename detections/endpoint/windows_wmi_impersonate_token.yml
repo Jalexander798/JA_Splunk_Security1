@@ -1,7 +1,7 @@
 name: Windows WMI Impersonate Token
 id: cf192860-2d94-40db-9a51-c04a2e8a8f8b
-version: 6
-date: '2025-04-22'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

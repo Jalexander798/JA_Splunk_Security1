@@ -1,7 +1,7 @@
 name: Windows Spearphishing Attachment Onenote Spawn Mshta
 id: 35aeb0e7-7de5-444a-ac45-24d6788796ec
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

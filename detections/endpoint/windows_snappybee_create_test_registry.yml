@@ -1,7 +1,7 @@
 name: Windows SnappyBee Create Test Registry
 id: 80402396-d78a-4c6e-ade5-7697ea670adf
-version: 3
-date: '2025-04-22'
+version: 4
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

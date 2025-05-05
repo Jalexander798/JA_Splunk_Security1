@@ -1,7 +1,7 @@
 name: Detect Exchange Web Shell
 id: 8c14eeee-2af1-4a4b-bda8-228da0f4862a
-version: 11
-date: '2025-03-25'
+version: 12
+date: '2025-05-02'
 author: Michael Haag, Shannon Davis, David Dorsey, Splunk
 status: production
 type: TTP

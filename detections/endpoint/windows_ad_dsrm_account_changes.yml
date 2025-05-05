@@ -1,7 +1,7 @@
 name: Windows AD DSRM Account Changes
 id: 08cb291e-ea77-48e8-a95a-0799319bf056
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-05-02'
 author: Dean Luxton
 type: TTP
 status: production

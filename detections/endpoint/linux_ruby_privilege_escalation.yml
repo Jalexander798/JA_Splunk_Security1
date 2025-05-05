@@ -1,7 +1,7 @@
 name: Linux Ruby Privilege Escalation
 id: 097b28b5-7004-4d40-a715-7e390501788b
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-05-02'
 author: Gowthamaraj Rajendran, Splunk
 status: production
 type: Anomaly

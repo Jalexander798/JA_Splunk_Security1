@@ -1,7 +1,7 @@
 name: Windows Command and Scripting Interpreter Hunting Path Traversal
 id: d0026380-b3c4-4da0-ac8e-02790063ff6b
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Michael Haag, Splunk
 status: production
 type: Hunting

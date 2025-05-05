@@ -1,7 +1,7 @@
 name: Windows Security And Backup Services Stop
 id: 9c24aef6-cad9-4931-acce-74318aa5663b
-version: 2
-date: '2025-04-01'
+version: 3
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

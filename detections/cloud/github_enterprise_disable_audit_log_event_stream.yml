@@ -1,7 +1,7 @@
 name: GitHub Enterprise Disable Audit Log Event Stream
 id: 7bc111cc-7f1b-4be7-99fa-50cf8d2e7564
-version: 1
-date: '2025-01-16'
+version: 2
+date: '2025-05-02'
 author: Patrick Bareiss, Splunk
 status: production
 type: Anomaly

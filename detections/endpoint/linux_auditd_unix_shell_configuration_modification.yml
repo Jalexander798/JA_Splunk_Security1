@@ -1,7 +1,7 @@
 name: Linux Auditd Unix Shell Configuration Modification
 id: 66f737c6-3f7f-46ed-8e9b-cc0e5bf01f04
-version: 5
-date: '2025-02-20'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

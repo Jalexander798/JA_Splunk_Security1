@@ -1,7 +1,7 @@
 name: Suspicious WAV file in Appdata Folder
 id: 5be109e6-1ac5-11ec-b421-acde48001122
-version: 7
-date: '2025-04-22'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

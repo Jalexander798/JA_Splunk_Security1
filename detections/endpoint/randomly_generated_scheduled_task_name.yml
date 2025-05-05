@@ -1,7 +1,7 @@
 name: Randomly Generated Scheduled Task Name
 id: 9d22a780-5165-11ec-ad4f-3e22fbd008af
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: experimental
 type: Hunting

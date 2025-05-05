@@ -1,7 +1,7 @@
 name: Linux Add Files In Known Crontab Directories
 id: 023f3452-5f27-11ec-bf00-acde48001122
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

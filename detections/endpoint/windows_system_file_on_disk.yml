@@ -1,7 +1,7 @@
 name: Windows System File on Disk
 id: 993ce99d-9cdd-42c7-a2cf-733d5954e5a6
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Hunting

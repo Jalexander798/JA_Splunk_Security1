@@ -1,7 +1,7 @@
 name: Linux Csvtool Privilege Escalation
 id: f8384f9e-1a5c-4c3a-96d6-8a7e5a38a8b8
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-05-02'
 author: Gowthamaraj Rajendran, Splunk
 status: production
 type: Anomaly

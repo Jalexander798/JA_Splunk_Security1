@@ -1,7 +1,7 @@
 name: Allow Inbound Traffic In Firewall Rule
 id: a5d85486-b89c-11eb-8267-acde48001122
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
