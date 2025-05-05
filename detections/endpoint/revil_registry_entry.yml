@@ -1,7 +1,7 @@
 name: Revil Registry Entry
 id: e3d3f57a-c381-11eb-9e35-acde48001122
-version: 8
-date: '2025-04-22'
+version: 9
+date: '2025-05-02'
 author: Steven Dick, Teoderick Contreras, Splunk
 status: production
 type: TTP

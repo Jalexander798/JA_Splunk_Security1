@@ -1,7 +1,7 @@
 name: GCP Successful Single-Factor Authentication
 id: 40e17d88-87da-414e-b253-8dc1e4f9555b
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Bhavin Patel, Mauricio Velazco, Splunk
 status: production
 type: TTP

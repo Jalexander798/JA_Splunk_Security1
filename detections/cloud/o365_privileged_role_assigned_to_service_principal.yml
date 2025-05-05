@@ -1,7 +1,7 @@
 name: O365 Privileged Role Assigned To Service Principal
 id: 80f3fc1b-705f-4080-bf08-f61bf013b900
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: TTP

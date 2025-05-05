@@ -1,7 +1,7 @@
 name: Powershell Remote Thread To Known Windows Process
 id: ec102cb2-a0f5-11eb-9b38-acde48001122
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

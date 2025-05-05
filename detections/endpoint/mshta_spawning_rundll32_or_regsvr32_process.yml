@@ -1,7 +1,7 @@
 name: Mshta spawning Rundll32 OR Regsvr32 Process
 id: 4aa5d062-e893-11eb-9eb2-acde48001122
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

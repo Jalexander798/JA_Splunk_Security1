@@ -1,7 +1,7 @@
 name: Rundll32 CreateRemoteThread In Browser
 id: f8a22586-ee2d-11eb-a193-acde48001122
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

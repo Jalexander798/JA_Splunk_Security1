@@ -1,7 +1,7 @@
 name: Mailsniper Invoke functions
 id: a36972c8-b894-11eb-9f78-acde48001122
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

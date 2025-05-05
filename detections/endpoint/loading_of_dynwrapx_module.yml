@@ -1,7 +1,7 @@
 name: Loading Of Dynwrapx Module
 id: eac5e8ba-4857-11ec-9371-acde48001122
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

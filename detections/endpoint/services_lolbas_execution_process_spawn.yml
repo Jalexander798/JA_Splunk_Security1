@@ -1,7 +1,7 @@
 name: Services LOLBAS Execution Process Spawn
 id: ba9e1954-4c04-11ec-8b74-3e22fbd008af
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

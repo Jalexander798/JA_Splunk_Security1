@@ -1,7 +1,7 @@
 name: Windows MSHTA Writing to World Writable Path
 id: efbcf8ee-bc75-47f1-8985-a5c638c4faf0
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Michael Haag, Splunk
 data_source:
 - Sysmon EventID 11

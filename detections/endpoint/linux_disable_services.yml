@@ -1,7 +1,7 @@
 name: Linux Disable Services
 id: f2e08a38-6689-4df4-ad8c-b51c16262316
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

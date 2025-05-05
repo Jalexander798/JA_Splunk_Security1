@@ -1,7 +1,7 @@
 name: Windows Account Discovery for Sam Account Name
 id: 69934363-e1dd-4c49-8651-9d7663dd4d2f
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

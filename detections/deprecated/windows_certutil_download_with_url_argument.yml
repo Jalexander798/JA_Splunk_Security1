@@ -1,7 +1,7 @@
 name: Windows CertUtil Download With URL Argument
 id: 4fc5ca00-4c7c-46b3-8772-c98a4b8bd944
 version: 6
-date: '2025-04-24'
+date: '2025-05-02'
 author: Nasreddine Bencherchali, Splunk
 status: deprecated
 type: TTP

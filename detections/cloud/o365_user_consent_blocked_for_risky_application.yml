@@ -1,7 +1,7 @@
 name: O365 User Consent Blocked for Risky Application
 id: 242e4d30-cb59-4051-b0cf-58895e218f40
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: Samsam Test File Write
 id: 493a879d-519d-428f-8f57-a06a0fdc107e
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Rico Valdez, Splunk
 status: production
 type: TTP

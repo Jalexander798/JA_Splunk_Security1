@@ -1,7 +1,7 @@
 name: Windows Unusual NTLM Authentication Destinations By Source
 id: ae9b0df5-5fb0-477f-abc9-47faf42aa91d
-version: 5
-date: '2025-02-10'
+version: 6
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: Anomaly

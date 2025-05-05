@@ -1,7 +1,7 @@
 name: Windows WinDBG Spawning AutoIt3
 id: 7aec015b-cd69-46c3-85ed-dac152056aa4
-version: 8
-date: '2024-12-10'
+version: 9
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: TTP

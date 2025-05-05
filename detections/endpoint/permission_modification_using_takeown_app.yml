@@ -1,7 +1,7 @@
 name: Permission Modification using Takeown App
 id: fa7ca5c6-c9d8-11eb-bce9-acde48001122
-version: 6
-date: '2025-01-27'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

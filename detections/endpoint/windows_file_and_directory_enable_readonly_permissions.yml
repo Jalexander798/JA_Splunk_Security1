@@ -1,7 +1,7 @@
 name: Windows File and Directory Enable ReadOnly Permissions
 id: 1ae407b0-a042-4eb0-834a-590da055575e
-version: 2
-date: '2024-12-13'
+version: 3
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 data_source:
 - Sysmon EventID 1

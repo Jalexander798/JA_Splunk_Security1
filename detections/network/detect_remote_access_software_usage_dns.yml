@@ -1,7 +1,7 @@
 name: Detect Remote Access Software Usage DNS
 id: a16b797d-e309-41bd-8ba0-5067dae2e4be
-version: 7
-date: '2024-11-15'
+version: 8
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: Anomaly

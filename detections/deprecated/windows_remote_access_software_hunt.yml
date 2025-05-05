@@ -1,7 +1,7 @@
 name: Windows Remote Access Software Hunt
 id: 8bd22c9f-05a2-4db1-b131-29271f28cb0a
 version: 8
-date: '2025-04-30'
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: deprecated
 type: Hunting

@@ -1,7 +1,7 @@
 name: Windows SubInAcl Execution
 id: 12491419-1a6f-4af4-afc3-4e2052f0610e
-version: 3
-date: '2025-01-07'
+version: 4
+date: '2025-05-02'
 author: Nasreddine Bencherchali, Michael Haag, Splunk
 status: production
 type: Anomaly

@@ -1,7 +1,7 @@
 name: Okta Authentication Failed During MFA Challenge
 id: e2b99e7d-d956-411a-a120-2b14adfdde93
-version: 5
-date: '2025-02-10'
+version: 6
+date: '2025-05-02'
 author: Bhavin Patel, Splunk
 data_source:
 - Okta

@@ -1,7 +1,7 @@
 name: WMI Temporary Event Subscription
 id: 38cbd42c-1098-41bb-99cf-9d6d2b296d83
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Rico Valdez, Splunk
 status: experimental
 type: TTP

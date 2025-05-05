@@ -1,7 +1,7 @@
 name: Windows SSH Proxy Command
 id: ac520039-21f1-4567-b528-5b7133dba76f
-version: 1
-date: '2025-03-24'
+version: 2
+date: '2025-05-02'
 author: Michael Haag, AJ King, Splunk, Jesse Hunter, Splunk Community Contributor
 status: production
 type: Anomaly

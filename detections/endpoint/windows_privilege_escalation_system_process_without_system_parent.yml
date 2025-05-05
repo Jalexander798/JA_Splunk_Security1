@@ -1,7 +1,7 @@
 name: Windows Privilege Escalation System Process Without System Parent
 id: 5a5351cd-ba7e-499e-ad82-2ce160ffa637
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: TTP

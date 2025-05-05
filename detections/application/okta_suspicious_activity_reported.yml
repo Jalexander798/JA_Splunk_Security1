@@ -1,7 +1,7 @@
 name: Okta Suspicious Activity Reported
 id: bfc840f5-c9c6-454c-aa13-b46fd0bf1e79
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: TTP

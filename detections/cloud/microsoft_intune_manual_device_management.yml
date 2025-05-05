@@ -1,7 +1,7 @@
 name: Microsoft Intune Manual Device Management
 id: 5ca7ebee-4ee7-4cf2-b3be-0ea26a00d822
-version: 1
-date: '2025-01-07'
+version: 2
+date: '2025-05-02'
 author: Dean Luxton
 data_source:
 - Azure Monitor Activity

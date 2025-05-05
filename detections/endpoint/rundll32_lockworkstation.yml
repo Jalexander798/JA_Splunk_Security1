@@ -1,7 +1,7 @@
 name: Rundll32 LockWorkStation
 id: fa90f372-f91d-11eb-816c-acde48001122
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

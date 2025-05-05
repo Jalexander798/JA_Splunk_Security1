@@ -1,7 +1,7 @@
 name: Remote Process Instantiation via WinRM and PowerShell Script Block
 id: 7d4c618e-4716-11ec-951c-3e22fbd008af
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

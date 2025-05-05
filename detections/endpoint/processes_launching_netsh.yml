@@ -1,7 +1,7 @@
 name: Processes launching netsh
 id: b89919ed-fe5f-492c-b139-95dbb162040e
-version: 9
-date: '2025-02-10'
+version: 10
+date: '2025-05-02'
 author: Michael Haag, Josef Kuepker, Splunk
 status: production
 type: Anomaly

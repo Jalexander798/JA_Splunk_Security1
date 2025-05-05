@@ -1,7 +1,7 @@
 name: Gsuite Email Suspicious Subject With Attachment
 id: 8ef3971e-00f2-11ec-b54f-acde48001122
-version: 5
-date: '2025-02-10'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

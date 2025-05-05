@@ -1,7 +1,7 @@
 name: VMware Workspace ONE Freemarker Server-side Template Injection
 id: 9e5726fe-8fde-460e-bd74-cddcf6c86113
-version: 4
-date: '2024-11-15'
+version: 5
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly

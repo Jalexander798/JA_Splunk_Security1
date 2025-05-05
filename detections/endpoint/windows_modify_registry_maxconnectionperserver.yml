@@ -1,7 +1,7 @@
 name: Windows Modify Registry MaxConnectionPerServer
 id: 064cd09f-1ff4-4823-97e0-45c2f5b087ec
-version: 7
-date: '2025-04-22'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

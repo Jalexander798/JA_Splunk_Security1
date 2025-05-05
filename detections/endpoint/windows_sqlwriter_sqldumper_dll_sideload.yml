@@ -1,7 +1,7 @@
 name: Windows SqlWriter SQLDumper DLL Sideload
 id: 2ed89ba9-c6c7-46aa-9f08-a2a1c2955aa3
-version: 6
-date: '2025-04-22'
+version: 7
+date: '2025-05-02'
 author: Michael Haag, Teoderick Contreras, Splunk
 data_source:
 - Sysmon EventID 7

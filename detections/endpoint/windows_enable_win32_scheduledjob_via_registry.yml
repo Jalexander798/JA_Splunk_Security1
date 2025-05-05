@@ -1,7 +1,7 @@
 name: Windows Enable Win32 ScheduledJob via Registry
 id: 12c80db8-ef62-4456-92df-b23e1b3219f6
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-05-02'
 author: Michael Haag, Splunk
 type: Anomaly
 status: production

@@ -1,7 +1,7 @@
 name: Detect suspicious DNS TXT records using pretrained model in DSDL
 id: 92f65c3a-968c-11ed-a1eb-0242ac120002
-version: 4
-date: '2024-11-15'
+version: 5
+date: '2025-05-02'
 author: Abhinav Mishra, Kumar Sharad and Namratha Sreekanta, Splunk
 status: experimental
 type: Anomaly
