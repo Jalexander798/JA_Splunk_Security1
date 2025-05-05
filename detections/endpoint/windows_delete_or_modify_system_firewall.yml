@@ -1,7 +1,7 @@
 name: Windows Delete or Modify System Firewall
 id: b188d11a-eba7-419d-b8b6-cc265b4f2c4f
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

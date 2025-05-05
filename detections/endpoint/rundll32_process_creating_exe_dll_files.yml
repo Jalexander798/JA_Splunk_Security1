@@ -1,7 +1,7 @@
 name: Rundll32 Process Creating Exe Dll Files
 id: 6338266a-ee2a-11eb-bf68-acde48001122
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

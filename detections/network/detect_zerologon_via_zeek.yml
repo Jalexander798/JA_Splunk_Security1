@@ -1,7 +1,7 @@
 name: Detect Zerologon via Zeek
 id: bf7a06ec-f703-11ea-adc1-0242ac120002
-version: '5'
-date: '2025-03-03'
+version: 6
+date: '2025-05-02'
 author: Shannon Davis, Splunk
 status: experimental
 type: TTP

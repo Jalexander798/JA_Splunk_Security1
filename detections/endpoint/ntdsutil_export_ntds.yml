@@ -1,7 +1,7 @@
 name: Ntdsutil Export NTDS
 id: da63bc76-61ae-11eb-ae93-0242ac130002
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Michael Haag, Patrick Bareiss, Splunk
 status: production
 type: TTP

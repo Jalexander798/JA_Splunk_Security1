@@ -1,7 +1,7 @@
 name: Kubernetes Access Scanning
 id: 2f4abe6d-5991-464d-8216-f90f42999764
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-05-02'
 author: Patrick Bareiss, Splunk
 status: production
 type: Anomaly

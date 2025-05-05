@@ -1,7 +1,7 @@
 name: CHCP Command Execution
 id: 21d236ec-eec1-11eb-b23e-acde48001122
 version: 7
-date: '2025-04-24'
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

@@ -1,7 +1,7 @@
 name: Windows Anonymous Pipe Activity
 id: ee301e1e-cd81-4011-a911-e5f049b9e3d5
-version: '2'
-date: '2025-03-19'
+version: 3
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting

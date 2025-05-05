@@ -1,7 +1,7 @@
 name: Windows IIS Components Module Failed to Load
 id: 40c2ba5b-dd6a-496b-9e6e-c9524d0be167
-version: 5
-date: '2025-02-10'
+version: 6
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly

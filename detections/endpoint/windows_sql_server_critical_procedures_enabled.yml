@@ -1,7 +1,7 @@
 name: Windows SQL Server Critical Procedures Enabled
 id: d0434864-b043-41e3-8c08-30e53605e9cb
-version: 1
-date: '2025-02-06'
+version: 2
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: TTP

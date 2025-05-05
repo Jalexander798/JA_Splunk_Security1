@@ -1,7 +1,7 @@
 name: Windows Service Deletion In Registry
 id: daed6823-b51c-4843-a6ad-169708f1323e
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

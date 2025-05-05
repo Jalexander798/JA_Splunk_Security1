@@ -1,7 +1,7 @@
 name: Windows AD GPO Disabled
 id: 72793bc0-c0cd-400e-9e60-fdf36f278917
-version: 5
-date: '2025-02-17'
+version: 6
+date: '2025-05-02'
 author: Dean Luxton
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: Linux Clipboard Data Copy
 id: 7173b2ad-6146-418f-85ae-c3479e4515fc
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly

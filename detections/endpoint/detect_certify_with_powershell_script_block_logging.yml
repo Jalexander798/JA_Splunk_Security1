@@ -1,7 +1,7 @@
 name: Detect Certify With PowerShell Script Block Logging
 id: f533ca6c-9440-4686-80cb-7f294c07812a
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: TTP

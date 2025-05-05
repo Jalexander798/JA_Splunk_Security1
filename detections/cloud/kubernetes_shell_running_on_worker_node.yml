@@ -1,7 +1,7 @@
 name: Kubernetes Shell Running on Worker Node
 id: efebf0c4-dcf4-496f-85a2-5ab7ad8fa876
-version: 5
-date: '2024-11-14'
+version: 6
+date: '2025-05-02'
 author: Matthew Moore, Splunk
 status: experimental
 type: Anomaly

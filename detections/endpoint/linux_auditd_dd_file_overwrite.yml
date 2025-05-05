@@ -1,7 +1,7 @@
 name: Linux Auditd Dd File Overwrite
 id: d1b74420-4cea-4752-a123-9b40dfcca49a
-version: 4
-date: '2025-02-20'
+version: 5
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

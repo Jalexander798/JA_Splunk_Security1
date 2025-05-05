@@ -1,7 +1,7 @@
 name: Windows Privilege Escalation Suspicious Process Elevation
 id: 6a80300a-9f8a-4f22-bd3e-09ca577cfdfc
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: TTP

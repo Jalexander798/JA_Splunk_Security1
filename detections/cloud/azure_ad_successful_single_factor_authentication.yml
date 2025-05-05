@@ -1,7 +1,7 @@
 name: Azure AD Successful Single-Factor Authentication
 id: a560e7f6-1711-4353-885b-40be53101fcd
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-05-02'
 author: Mauricio Velazco, Gowthamaraj Rajendran, Splunk
 status: production
 type: TTP

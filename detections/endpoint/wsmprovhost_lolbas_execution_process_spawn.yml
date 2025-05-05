@@ -1,7 +1,7 @@
 name: Wsmprovhost LOLBAS Execution Process Spawn
 id: 2eed004c-4c0d-11ec-93e8-3e22fbd008af
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

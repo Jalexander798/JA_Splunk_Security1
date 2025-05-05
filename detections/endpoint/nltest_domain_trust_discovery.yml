@@ -1,7 +1,7 @@
 name: NLTest Domain Trust Discovery
 id: c3e05466-5f22-11eb-ae93-0242ac130002
-version: '7'
-date: '2025-03-14'
+version: 8
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: Microsoft Intune Mobile Apps
 id: 98e6b389-2806-4426-a580-8a92cb0d9710
-version: 1
-date: '2025-01-07'
+version: 2
+date: '2025-05-02'
 author: Dean Luxton
 data_source:
 - Azure Monitor Activity

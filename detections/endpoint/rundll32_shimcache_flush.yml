@@ -1,7 +1,7 @@
 name: Rundll32 Shimcache Flush
 id: a913718a-25b6-11ec-96d3-acde48001122
-version: 7
-date: '2025-04-22'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

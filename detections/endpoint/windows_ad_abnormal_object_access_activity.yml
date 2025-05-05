@@ -1,7 +1,7 @@
 name: Windows AD Abnormal Object Access Activity
 id: 71b289db-5f2c-4c43-8256-8bf26ae7324a
-version: 5
-date: '2025-02-10'
+version: 6
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: Anomaly

@@ -1,7 +1,7 @@
 name: Windows SQL Server xp_cmdshell Config Change
 id: 5eb76fe2-a869-4865-8c4c-8cff424b18b1
-version: 3
-date: '2025-03-24'
+version: 4
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: TTP

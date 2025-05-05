@@ -1,7 +1,7 @@
 name: MSI Module Loaded by Non-System Binary
 id: ccb98a66-5851-11ec-b91c-acde48001122
-version: 8
-date: '2025-04-22'
+version: 9
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Hunting

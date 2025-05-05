@@ -1,7 +1,7 @@
 name: Azure AD Tenant Wide Admin Consent Granted
 id: dc02c0ee-6ac0-4c7f-87ba-8ce43a4e4418
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

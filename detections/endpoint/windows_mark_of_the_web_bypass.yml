@@ -1,7 +1,7 @@
 name: Windows Mark Of The Web Bypass
 id: 8ca13343-7405-4916-a2d1-ae34ce0c28ae
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

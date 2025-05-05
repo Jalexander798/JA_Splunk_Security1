@@ -1,7 +1,7 @@
 name: Windows Executable in Loaded Modules
 id: 3e27af56-fcf0-4113-988d-24969b062be7
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

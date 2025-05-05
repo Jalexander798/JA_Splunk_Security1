@@ -1,7 +1,7 @@
 name: Excessive Attempt To Disable Services
 id: 8fa2a0f0-acd9-11eb-8994-acde48001122
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

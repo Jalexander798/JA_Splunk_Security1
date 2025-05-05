@@ -1,7 +1,7 @@
 name: Detect PsExec With accepteula Flag
 id: 27c3a83d-cada-47c6-9042-67baf19d2574
-version: 12
-date: '2025-04-18'
+version: 13
+date: '2025-05-02'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
