@@ -1,7 +1,7 @@
 name: Windows Firewall Rule Deletion
 id: ca5327e1-0a91-4e23-bbd4-8901806c00e1
-version: 1
-date: '2025-03-19'
+version: 2
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

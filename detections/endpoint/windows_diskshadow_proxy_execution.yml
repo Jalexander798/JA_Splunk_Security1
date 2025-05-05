@@ -1,7 +1,7 @@
 name: Windows Diskshadow Proxy Execution
 id: 58adae9e-8ea3-11ec-90f6-acde48001122
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Lou Stella, Splunk
 status: production
 type: TTP

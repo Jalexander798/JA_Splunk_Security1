@@ -1,7 +1,7 @@
 name: PowerShell Get LocalGroup Discovery
 id: b71adfcc-155b-11ec-9413-acde48001122
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Hunting

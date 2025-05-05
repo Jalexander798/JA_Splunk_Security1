@@ -1,7 +1,7 @@
 name: Suspicious Java Classes
 id: 6ed33786-5e87-4f55-b62c-cb5f1168b831
-version: 4
-date: '2025-01-21'
+version: 5
+date: '2025-05-02'
 author: Jose Hernandez, Splunk
 status: experimental
 type: Anomaly

@@ -1,7 +1,7 @@
 name: WordPress Bricks Builder plugin RCE
 id: 56a8771a-3fda-4959-b81d-2f266e2f679f
-version: 4
-date: '2024-11-15'
+version: 5
+date: '2025-05-02'
 author: Michael Haag, Splunk
 data_source:
 - Nginx Access

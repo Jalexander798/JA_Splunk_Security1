@@ -1,7 +1,7 @@
 name: Windows SQL Server Extended Procedure DLL Loading Hunt
 id: 182ba99f-2dde-4cdb-8e5c-e3b1e251cb10
-version: 1
-date: '2025-02-10'
+version: 2
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Hunting

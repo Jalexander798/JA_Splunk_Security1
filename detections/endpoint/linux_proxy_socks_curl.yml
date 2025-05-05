@@ -1,7 +1,7 @@
 name: Linux Proxy Socks Curl
 id: bd596c22-ad1e-44fc-b242-817253ce8b08
-version: 8
-date: '2025-03-27'
+version: 9
+date: '2025-05-02'
 author: Michael Haag, Splunk, 0xC0FFEEEE, Github Community
 status: production
 type: TTP

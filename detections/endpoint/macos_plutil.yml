@@ -1,7 +1,7 @@
 name: MacOS plutil
 id: c11f2b57-92c1-4cd2-b46c-064eafb833ac
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-05-02'
 author: Patrick Bareiss, Splunk
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: ASL AWS IAM Failure Group Deletion
 id: 8d12f268-c567-4557-9813-f8389e235c06
-version: 7
-date: '2024-11-14'
+version: 8
+date: '2025-05-02'
 author: Patrick Bareiss, Splunk
 status: production
 type: Anomaly

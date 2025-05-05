@@ -1,7 +1,7 @@
 name: Linux PHP Privilege Escalation
 id: 4fc4c031-e5be-4cc0-8cf9-49f9f507bcb5
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-05-02'
 author: Gowthamaraj Rajendran, Splunk
 status: production
 type: Anomaly

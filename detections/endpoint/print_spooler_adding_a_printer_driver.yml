@@ -1,7 +1,7 @@
 name: Print Spooler Adding A Printer Driver
 id: 313681a2-da8e-11eb-adad-acde48001122
-version: '6'
-date: '2025-03-03'
+version: 7
+date: '2025-05-02'
 author: Mauricio Velazco, Michael Haag, Teoderick Contreras, Splunk
 status: production
 type: TTP

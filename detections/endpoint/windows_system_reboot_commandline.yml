@@ -1,7 +1,7 @@
 name: Windows System Reboot CommandLine
 id: 97fc2b60-c8eb-4711-93f7-d26fade3686f
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

@@ -1,7 +1,7 @@
 name: Windows PowerView SPN Discovery
 id: a7093c28-796c-4ebb-9997-e2c18b870837
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Gowthamaraj Rajendran, Splunk
 status: production
 type: TTP

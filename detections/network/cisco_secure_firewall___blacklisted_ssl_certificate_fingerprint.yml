@@ -1,7 +1,7 @@
 name: Cisco Secure Firewall - Blacklisted SSL Certificate Fingerprint
 id: c43f7b49-2dab-4e76-892e-7f971c2f20f1
-version: 1
-date: '2025-04-02'
+version: 2
+date: '2025-05-02'
 author: Nasreddine Bencherchali, Splunk
 status: production
 type: TTP

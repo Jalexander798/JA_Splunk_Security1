@@ -1,7 +1,7 @@
 name: Linux Auditd Edit Cron Table Parameter
 id: f4bb7321-7e64-4d1e-b1aa-21f8b019a91f
-version: 5
-date: '2025-02-20'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -14,11 +14,13 @@ description: The following analytic detects the suspicious editing of cron jobs 
   compromise.
 data_source:
 - Linux Auditd Syscall
-search: '`linux_auditd` type=SYSCALL SYSCALL=rename (comm IN ("crontab") OR exe IN
-  ("*/crontab")) success=yes AND NOT (UID IN("daemon")) | rename host as dest | stats
-  count min(_time) as firstTime max(_time) as lastTime by comm exe  SYSCALL UID ppid
-  pid dest | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`|
-  `linux_auditd_edit_cron_table_parameter_filter`'
+search: '`linux_auditd` type=SYSCALL syscall IN ("rename", "execve") (comm IN ("crontab") OR exe IN ("*/crontab")) success=yes AND NOT (UID IN("daemon"))
+  | rename host as dest 
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+  by comm exe  syscall uid ppid pid dest 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)`
+  | `linux_auditd_edit_cron_table_parameter_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
   data, that consist SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
   executions and process details on Unix/Linux systems. These logs should be ingested
@@ -73,6 +75,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.003/linux_auditd_crontab_edit/linux_auditd_crontab_edit.log
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053.003/linux_auditd_crontab_edit_new/linux_auditd_new_crontab.log
     source: auditd
     sourcetype: auditd

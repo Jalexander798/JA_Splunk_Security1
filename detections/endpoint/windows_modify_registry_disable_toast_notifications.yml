@@ -1,7 +1,7 @@
 name: Windows Modify Registry Disable Toast Notifications
 id: ed4eeacb-8d5a-488e-bc97-1ce6ded63b84
-version: 7
-date: '2025-04-22'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

@@ -1,7 +1,7 @@
 name: Windows Sqlservr Spawning Shell
 id: d33aac9f-030c-4830-8701-0c2dd75bb6cb
-version: 2
-date: '2025-03-27'
+version: 3
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: TTP

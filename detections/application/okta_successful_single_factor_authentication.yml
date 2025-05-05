@@ -1,7 +1,7 @@
 name: Okta Successful Single Factor Authentication
 id: 98f6ad4f-4325-4096-9d69-45dc8e638e82
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Bhavin Patel, Splunk
 data_source:
 - Okta

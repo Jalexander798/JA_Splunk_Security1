@@ -1,7 +1,7 @@
 name: Windows Office Product Loaded MSHTML Module
 id: 4cc015c9-687c-40d2-adcc-46350f66e10c
-version: 3
-date: '2025-02-10'
+version: 4
+date: '2025-05-02'
 author: Michael Haag, Mauricio Velazco, Splunk
 status: production
 type: Anomaly

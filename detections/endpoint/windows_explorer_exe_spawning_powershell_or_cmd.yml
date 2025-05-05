@@ -1,7 +1,7 @@
 name: Windows Explorer.exe Spawning PowerShell or Cmd
 id: 593854c5-2182-49dd-9f31-18ef697445b9
-version: 1
-date: '2025-03-24'
+version: 2
+date: '2025-05-02'
 author: Michael Haag, AJ King, Splunk, Jesse Hunter, Splunk Community Contributor
 status: production
 type: Hunting

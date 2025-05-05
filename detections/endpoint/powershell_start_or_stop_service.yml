@@ -1,7 +1,7 @@
 name: PowerShell Start or Stop Service
 id: 04207f8a-e08d-4ee6-be26-1e0c4488b04a
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Michael Haag, Splunk
 type: Anomaly
 status: production

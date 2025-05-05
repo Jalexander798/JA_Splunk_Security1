@@ -1,7 +1,7 @@
 name: Linux Iptables Firewall Modification
 id: 309d59dc-1e1b-49b2-9800-7cf18d12f7b7
-version: 10
-date: '2025-03-27'
+version: 11
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

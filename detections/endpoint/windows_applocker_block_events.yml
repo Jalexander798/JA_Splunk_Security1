@@ -1,7 +1,7 @@
 name: Windows AppLocker Block Events
 id: e369afe8-cd35-47a3-9c1e-d813efc1f7dd
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Michael Haag, Splunk
 data_source: []
 type: Anomaly

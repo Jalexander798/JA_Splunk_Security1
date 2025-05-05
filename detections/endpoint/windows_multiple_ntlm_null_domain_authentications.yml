@@ -1,7 +1,7 @@
 name: Windows Multiple NTLM Null Domain Authentications
 id: c187ce2c-c88e-4cec-8a1c-607ca0dedd78
-version: 5
-date: '2025-02-10'
+version: 6
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: TTP

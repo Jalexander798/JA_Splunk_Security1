@@ -1,7 +1,7 @@
 name: Kubernetes newly seen TCP edge
 id: 13f081d6-7052-428a-bbb0-892c79ca7c65
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-05-02'
 author: Matthew Moore, Splunk
 status: experimental
 type: Anomaly

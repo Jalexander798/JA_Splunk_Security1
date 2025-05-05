@@ -1,8 +1,8 @@
 name: Windows Multiple Users Failed To Authenticate Using Kerberos
 id: 3a91a212-98a9-11eb-b86a-acde48001122
 type: TTP
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 status: production
 author: Mauricio Velazco, Splunk
 data_source:

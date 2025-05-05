@@ -1,7 +1,7 @@
 name: MacOS LOLbin
 id: 58d270fb-5b39-418e-a855-4b8ac046805e
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-05'
 author: Patrick Bareiss, Splunk
 status: production
 type: TTP
@@ -13,7 +13,8 @@ description: The following analytic detects multiple executions of Living off th
   detection. If confirmed malicious, this behavior could allow attackers to execute
   arbitrary code, escalate privileges, or persist within the environment, posing a
   significant security risk.
-data_source: []
+data_source:
+- osquery
 search: '`osquery_macro` name=es_process_events columns.cmdline IN ("find*", "crontab*",
   "screencapture*", "openssl*", "curl*", "wget*", "killall*", "funzip*") | rename
   columns.* as * | stats  min(_time) as firstTime max(_time) as lastTime values(cmdline)

@@ -1,7 +1,7 @@
 name: Windows Service Created with Suspicious Service Path
 id: 429141be-8311-11eb-adb6-acde48001122
-version: '14'
-date: '2025-03-19'
+version: 15
+date: '2025-05-02'
 author: Teoderick Contreras, Mauricio Velazco, Splunk
 status: production
 type: TTP

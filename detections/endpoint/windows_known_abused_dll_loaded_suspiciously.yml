@@ -1,7 +1,7 @@
 name: Windows Known Abused DLL Loaded Suspiciously
 id: dd6d1f16-adc0-4e87-9c34-06189516b803
-version: 7
-date: '2025-04-22'
+version: 8
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: TTP

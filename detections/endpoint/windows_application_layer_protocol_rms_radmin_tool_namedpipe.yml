@@ -1,7 +1,7 @@
 name: Windows Application Layer Protocol RMS Radmin Tool Namedpipe
 id: b62a6040-49f4-47c8-b3f6-fc1adb952a33
-version: 5
-date: '2024-11-13'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
