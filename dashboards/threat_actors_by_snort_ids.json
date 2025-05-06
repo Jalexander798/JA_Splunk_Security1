@@ -11,16 +11,22 @@
             "type": "input.timerange"
         },
         "input_tlWhhLwR": {
+            "context": {
+                "formattedConfig": {
+                    "number": {
+                        "prefix": ""
+                    }
+                },
+                "formattedStatics": ">statics | formatByType(formattedConfig)",
+                "label": ">primary | seriesByName(\"threat_actor\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+                "statics": [],
+                "value": ">primary | seriesByName(\"threat_actor\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+            },
             "dataSources": {
                 "primary": "ds_i58D84BP"
             },
             "options": {
-                "items": [
-                    {
-                        "label": "All Threat Actors",
-                        "value": "*"
-                    }
-                ],
+                "items": ">frame(label, value) | prepend(formattedStatics) | objects()",
                 "token": "threat_actor_token"
             },
             "title": "Threat Actor",
@@ -200,6 +206,30 @@
             "dataSources": {
                 "primary": "ds_7LZlDEZh"
             },
+            "eventHandlers": [
+                {
+                    "options": {
+                        "tokens": [
+                            {
+                                "key": "value",
+                                "token": "connection_id"
+                            },
+                            {
+                                "key": "value",
+                                "token": "dest_ip"
+                            }
+                        ]
+                    },
+                    "type": "drilldown.setToken"
+                }
+            ],
+            "options": {
+                "headerVisibility": "fixed",
+                "showInternalFields": false,
+                "tableFormat": {
+                    "align": "left"
+                }
+            },
             "title": "Connection Events From to all Source IPs",
             "type": "splunk.table"
         },
@@ -215,7 +245,7 @@
                     "rowBackgroundColors": "> table | seriesByIndex(0) | pick(tableAltRowBackgroundColorsByTheme)"
                 }
             },
-            "title": "File Events on the machine - $dvc$",
+            "title": "File Events on the machine - $dest_ip$",
             "type": "splunk.table"
         },
         "viz_q5G96ojA": {
@@ -261,7 +291,7 @@
                 "backgroundColor": "#ffffff",
                 "fontColor": "#4fa484",
                 "fontSize": "large",
-                "markdown": "### Home Page\n- Shows the list of threat actors that are currently being tracked\n- Table of Affected hosts and known snort signatures "
+                "markdown": "### Home Page\n- Shows the list of threat actors that are currently being tracked\n- Table of Affected hosts with known snort signatures "
             },
             "type": "splunk.markdown"
         }
@@ -271,7 +301,7 @@
             "name": "risk_events",
             "options": {
                 "enableSmartSources": true,
-                "query": "`cisco_secure_firewall` EventType=IntrusionEvent\n| bin _time span=1d\n| stats count AS Total_Alerts, dc(signature_id) AS sig_count, values(signature_id) AS signature_ids, values(signature) AS signature, values(class_desc) AS class_desc, values(MitreAttackGroups) AS MitreAttackGroups, values(InlineResult) AS InlineResult, values(InlineResultReason) AS InlineResultReason, values(src_ip) AS src_ip, values(dest_port) AS dest_port, values(rule) AS rule, values(transport) AS transport, values(app) AS app BY dest_ip, _time\n| eval sig_ids_str=mvjoin(signature_ids, \",\")\n| lookup snort_ids_threat_actor.csv signature_id AS sig_ids_str OUTPUT threat_actor, distinct_count_snort_ids, description\n| where isnotnull(threat_actor) AND sig_count>=tonumber(distinct_count_snort_ids)\n| `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` \n|  search threat_actor=\"$threat_actor_token$\"\n| join type=inner dest_ip [ | from datamodel Risk.All_Risk | rename normalized_risk_object AS dest_ip | stats count AS Risk_Event_Count, min(_time) AS risk_firstTime, max(_time) AS risk_lastTime, values(search_name) AS \"Search Name\", values(analyticstories) AS \"Analytic Stories\", values(annotations._all) AS Annotations, values(annotations.mitre_attack.mitre_tactic) AS \"ATT&CK Tactics\" BY dest_ip | `security_content_ctime(risk_firstTime)` | `security_content_ctime(risk_lastTime)` ]\n| table _time, dest_ip \"Search Name\" src_ip Risk_Event_Count\n"
+                "query": "| from datamodel Risk.All_Risk | rename normalized_risk_object AS dest_ip | search dest_ip = $dest_ip$\n| stats\n    count                   AS Risk_Event_Count\n    min(_time)              AS firstTime\n    max(_time)              AS lastTime\n    values(search_name)     AS raw_search_names\n    values(analyticstories) AS \"Analytic Stories\"\n    values(annotations._all) AS Annotations\n    values(annotations.mitre_attack.mitre_tactic) AS \"ATT&CK Tactics\"\n  BY dest_ip src_ip\n| mvexpand raw_search_names\n| rename raw_search_names AS \"Search Name\"\n| `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`\n| table firstTime lastTime dest_ip, \"Search Name\", Risk_Event_Count"
             },
             "type": "ds.search"
         },
@@ -327,7 +357,7 @@
         "ds_mGcuwEO0": {
             "name": "cisco_events_match",
             "options": {
-                "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| bin _time span=1d \n| stats count as Total_Alerts dc(signature_id) as sig_count \n    values(signature_id) as signature_ids \n    values(signature) as signature \n    values(class_desc) as class_desc \n    values(MitreAttackGroups) as MitreAttackGroups \n    values(InlineResult) as InlineResult \n    values(InlineResultReason) as InlineResultReason \n    values(src_ip) as src_ip \n    values(dest_port) as dest_port \n    values(rule) as rule \n    values(transport) as transport \n    values(connection_id) as connection_id\n    values(app) as app\n    by dest_ip _time \n| eval sig_ids_str = mvjoin(signature_ids, \",\") \n| lookup snort_ids_threat_actor.csv signature_id as sig_ids_str OUTPUT threat_actor, distinct_count_snort_ids, description \n| where isnotnull(threat_actor) AND sig_count >= tonumber(distinct_count_snort_ids) \n| `security_content_ctime(firstTime)` \n| `security_content_ctime(lastTime)`\n| table _time threat_actor description dvc dest_ip signature_ids signature src_ip MitreAttackGroups\n|  search threat_actor=\"$threat_actor_token$\"",
+                "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| bin _time span=1d \n| stats count as Total_Alerts dc(signature_id) as sig_count \n    values(signature_id) as signature_ids \n    values(signature) as signature \n    values(class_desc) as class_desc \n    values(MitreAttackGroups) as MitreAttackGroups \n    values(InlineResult) as InlineResult \n    values(InlineResultReason) as InlineResultReason \n    values(src_ip) as src_ip \n    values(dest_port) as dest_port \n    values(rule) as rule \n    values(transport) as transport \n    values(connection_id) as connection_id\n    values(app) as app\n    by dest_ip _time \n| eval sig_ids_str = mvjoin(signature_ids, \",\") \n| lookup snort_ids_threat_actor.csv signature_id as sig_ids_str OUTPUT threat_actor, distinct_count_snort_ids, description \n| where isnotnull(threat_actor) AND sig_count >= tonumber(distinct_count_snort_ids) \n| `security_content_ctime(firstTime)` \n| `security_content_ctime(lastTime)`\n| table _time threat_actor description dest_ip signature_ids signature src_ip MitreAttackGroups\n|  search threat_actor=\"$threat_actor_token$\"",
                 "queryParameters": {
                     "earliest": "$global_time.earliest$",
                     "latest": "$global_time.latest$"
@@ -342,10 +372,17 @@
             },
             "type": "ds.search"
         },
+        "ds_tp3k6kI6": {
+            "name": "connection_raw_event",
+            "options": {
+                "query": "`cisco_secure_firewall`  dest_ip = $dest_ip$ connection_id=$connection_id$"
+            },
+            "type": "ds.search"
+        },
         "ds_tuaeoaIh": {
             "name": "all_intrusion_events",
             "options": {
-                "query": "`cisco_secure_firewall` EventType=IntrusionEvent dvc = $dvc$\n| bin _time span=1d \n| stats count as intrusion_count\n    by _time"
+                "query": "`cisco_secure_firewall` EventType=IntrusionEvent dest_ip = $dest_ip$\n| bin _time span=1d \n| stats count as intrusion_count\n    by _time"
             },
             "type": "ds.search"
         }
@@ -438,6 +475,9 @@
                 "type": "grid"
             },
             "layout_U25tjhLw": {
+                "options": {
+                    "gutterSize": 12
+                },
                 "structure": [
                     {
                         "item": "viz_WhFvmhK9",
