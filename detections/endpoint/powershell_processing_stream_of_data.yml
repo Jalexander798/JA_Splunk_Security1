@@ -1,7 +1,7 @@
 name: Powershell Processing Stream Of Data
 id: 0d718b52-c9f1-11eb-bc61-acde48001122
-version: '9'
-date: '2025-03-14'
+version: 10
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

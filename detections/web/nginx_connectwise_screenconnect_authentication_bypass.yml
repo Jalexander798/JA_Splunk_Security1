@@ -1,7 +1,7 @@
 name: Nginx ConnectWise ScreenConnect Authentication Bypass
 id: b3f7a803-e802-448b-8eb2-e796b223bccc
-version: 5
-date: '2025-03-24'
+version: 6
+date: '2025-05-02'
 author: Michael Haag, Splunk
 data_source:
 - Nginx Access

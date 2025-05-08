@@ -1,7 +1,7 @@
 name: AWS ECR Container Upload Unknown User
 id: 300688e4-365c-4486-a065-7c884462b31d
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Patrick Bareiss, Splunk
 status: production
 type: Anomaly

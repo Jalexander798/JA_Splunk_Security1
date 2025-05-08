@@ -1,7 +1,7 @@
 name: Anomalous usage of 7zip
 id: 9364ee8e-a39a-11eb-8f1d-acde48001122
-version: 9
-date: '2025-02-10'
+version: 10
+date: '2025-05-02'
 author: Michael Haag, Teoderick Contreras, Splunk
 status: production
 type: Anomaly

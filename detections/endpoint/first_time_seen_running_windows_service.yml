@@ -1,7 +1,7 @@
 name: First Time Seen Running Windows Service
 id: 823136f2-d755-4b6d-ae04-372b486a5808
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-05-02'
 author: David Dorsey, Splunk
 status: experimental
 type: Anomaly

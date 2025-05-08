@@ -1,7 +1,7 @@
 name: Windows LOLBAS Executed Outside Expected Path
 id: 326fdf44-b90c-4d2e-adca-1fd140b10536
-version: 5
-date: '2025-02-10'
+version: 6
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: Headless Browser Mockbin or Mocky Request
 id: 94fc85a1-e55b-4265-95e1-4b66730e05c0
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: TTP

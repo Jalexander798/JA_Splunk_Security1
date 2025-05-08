@@ -1,7 +1,7 @@
 name: Windows Admon Default Group Policy Object Modified
 id: 83458004-db60-4170-857d-8572f16f070b
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

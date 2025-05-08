@@ -1,7 +1,7 @@
 name: Create Remote Thread In Shell Application
 id: 10399c1e-f51e-11eb-b920-acde48001122
-version: 7
-date: '2024-12-10'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

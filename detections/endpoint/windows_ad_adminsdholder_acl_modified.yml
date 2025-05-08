@@ -1,7 +1,7 @@
 name: Windows AD AdminSDHolder ACL Modified
 id: 00d877c3-7b7b-443d-9562-6b231e2abab9
-version: 7
-date: '2024-11-13'
+version: 8
+date: '2025-05-02'
 author: Mauricio Velazco, Dean Luxton, Splunk
 type: TTP
 status: production

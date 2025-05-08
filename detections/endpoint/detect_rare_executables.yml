@@ -1,7 +1,7 @@
 name: Detect Rare Executables
 id: 44fddcb2-8d3b-454c-874e-7c6de5a4f7ac
-version: 9
-date: '2025-03-27'
+version: 10
+date: '2025-05-02'
 author: Bhavin Patel, Splunk
 status: production
 type: Anomaly

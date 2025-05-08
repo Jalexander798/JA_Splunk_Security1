@@ -1,7 +1,7 @@
 name: Linux Auditd Doas Conf File Creation
 id: 61059783-574b-40d2-ac2f-69b898afd6b4
-version: 5
-date: '2025-02-20'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

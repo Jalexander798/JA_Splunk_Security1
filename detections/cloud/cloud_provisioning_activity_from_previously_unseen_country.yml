@@ -1,7 +1,7 @@
 name: Cloud Provisioning Activity From Previously Unseen Country
 id: 94994255-3acf-4213-9b3f-0494df03bb31
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-05-02'
 author: Rico Valdez, Bhavin Patel, Splunk
 status: production
 type: Anomaly

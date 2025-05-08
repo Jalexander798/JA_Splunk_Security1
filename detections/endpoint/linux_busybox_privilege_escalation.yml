@@ -1,7 +1,7 @@
 name: Linux Busybox Privilege Escalation
 id: 387c4e78-f4a4-413d-ad44-e9f7bc4642c9
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-05-02'
 author: Gowthamaraj Rajendran, Splunk
 status: production
 type: Anomaly

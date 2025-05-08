@@ -1,7 +1,7 @@
 name: Java Writing JSP File
 id: eb65619c-4f8d-4383-a975-d352765d344b
-version: 8
-date: '2025-04-22'
+version: 9
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -72,6 +72,7 @@ tags:
   - Spring4Shell CVE-2022-22965
   - Atlassian Confluence Server and Data Center CVE-2022-26134
   - SysAid On-Prem Software CVE-2023-47246 Vulnerability
+  - SAP NetWeaver Exploitation
   asset_type: Endpoint
   cve:
   - CVE-2022-22965

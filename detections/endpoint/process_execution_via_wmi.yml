@@ -1,7 +1,7 @@
 name: Process Execution via WMI
 id: 24869767-8579-485d-9a4f-d9ddfd8f0cac
-version: 9
-date: '2024-11-13'
+version: 10
+date: '2025-05-02'
 author: Rico Valdez, Michael Haag, Splunk
 status: production
 type: TTP

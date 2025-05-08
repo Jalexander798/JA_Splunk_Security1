@@ -1,7 +1,7 @@
 name: Kubernetes Suspicious Image Pulling
 id: 4d3a17b3-0a6d-4ae0-9421-46623a69c122
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-05-02'
 author: Patrick Bareiss, Splunk
 status: production
 type: Anomaly

@@ -1,7 +1,7 @@
 name: Linux Auditd Whoami User Discovery
 id: d1ff2e22-310d-446a-80b3-faedaa7b3b52
-version: 4
-date: '2025-02-20'
+version: 5
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -15,10 +15,13 @@ description: The following analytic detects the suspicious use of the whoami com
   further malicious operations.
 data_source:
 - Linux Auditd Syscall
-search: '`linux_auditd` type=SYSCALL comm=whoami OR exe= "*/whoami" | rename host
-  as dest | stats count min(_time) as firstTime max(_time) as lastTime by comm exe  SYSCALL
-  UID ppid pid dest success | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`|
-  `linux_auditd_whoami_user_discovery_filter`'
+search: '`linux_auditd` type=SYSCALL comm=whoami OR exe= "*/whoami" 
+  | rename host as dest 
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+  by comm exe  syscall uid ppid pid dest success 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)`
+  | `linux_auditd_whoami_user_discovery_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
   data, that consist SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
   executions and process details on Unix/Linux systems. These logs should be ingested
@@ -73,6 +76,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1033/linux_auditd_whoami/linux_auditd_whoami.log
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1033/linux_auditd_whoami_new/linux_auditd_new_whoami.log
     source: auditd
     sourcetype: auditd

@@ -1,7 +1,7 @@
 name: Windows New Custom Security Descriptor Set On EventLog Channel
 id: c0e5dd5a-2117-41d5-a04c-82a762a86a38
-version: 3
-date: '2025-01-07'
+version: 4
+date: '2025-05-02'
 author: Nasreddine Bencherchali, Michael Haag, Splunk
 status: production
 type: Anomaly

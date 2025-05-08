@@ -1,7 +1,7 @@
 name: Okta Unauthorized Access to Application
 id: 5f661629-9750-4cb9-897c-1f05d6db8727
-version: 5
-date: '2025-01-21'
+version: 6
+date: '2025-05-02'
 author: Bhavin Patel, Splunk
 data_source:
 - Okta

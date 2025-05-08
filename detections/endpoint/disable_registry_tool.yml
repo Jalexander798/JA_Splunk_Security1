@@ -1,7 +1,7 @@
 name: Disable Registry Tool
 id: cd2cf33c-9201-11eb-a10a-acde48001122
-version: 12
-date: '2025-04-22'
+version: 13
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP

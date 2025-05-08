@@ -1,7 +1,7 @@
 name: AWS Bedrock High Number List Foundation Model Failures
 id: e84b3c74-f742-11ee-9f6e-acde48001122
-version: 1
-date: '2024-12-05'
+version: 2
+date: '2025-05-02'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP

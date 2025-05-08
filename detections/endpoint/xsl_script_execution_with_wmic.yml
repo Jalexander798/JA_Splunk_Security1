@@ -1,7 +1,7 @@
 name: XSL Script Execution With WMIC
 id: 004e32e2-146d-11ec-a83f-acde48001122
-version: 7
-date: '2024-11-13'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: Ivanti Connect Secure Command Injection Attempts
 id: 1f32a7e0-a060-4545-b7de-73fcf9ad536e
-version: 5
-date: '2024-11-15'
+version: 6
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: TTP

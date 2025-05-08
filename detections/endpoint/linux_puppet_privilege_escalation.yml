@@ -1,7 +1,7 @@
 name: Linux Puppet Privilege Escalation
 id: 1d19037f-466e-4d56-8d87-36fafd9aa3ce
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-05-02'
 author: Gowthamaraj Rajendran, Splunk
 status: production
 type: Anomaly

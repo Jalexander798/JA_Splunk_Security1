@@ -1,7 +1,7 @@
 name: File with Samsam Extension
 id: 02c6cfc2-ae66-4735-bfc7-6291da834cbf
-version: 7
-date: '2024-11-13'
+version: 8
+date: '2025-05-02'
 author: Rico Valdez, Splunk
 status: production
 type: TTP

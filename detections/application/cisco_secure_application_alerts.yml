@@ -1,7 +1,7 @@
 name: Cisco Secure Application Alerts
 id: 9982bff4-fc5d-49a3-ab9e-2dbbab2a711b
-version: 1
-date: '2025-02-04'
+version: 2
+date: '2025-05-02'
 author: Ryan Long, Bhavin Patel, Splunk
 status: production
 type: Anomaly

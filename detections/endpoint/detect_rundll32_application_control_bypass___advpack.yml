@@ -1,7 +1,7 @@
 name: Detect Rundll32 Application Control Bypass - advpack
 id: 4aefadfe-9abd-4bf8-b3fd-867e9ef95bf8
-version: 10
-date: '2025-02-10'
+version: 11
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: TTP

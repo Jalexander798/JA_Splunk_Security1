@@ -1,7 +1,7 @@
 name: Short Lived Windows Accounts
 id: b25f6f62-0782-43c1-b403-083231ffd97d
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-05-02'
 author: David Dorsey, Bhavin Patel, Splunk
 status: production
 type: TTP

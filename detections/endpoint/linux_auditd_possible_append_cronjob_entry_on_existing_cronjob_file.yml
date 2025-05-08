@@ -1,7 +1,7 @@
 name: Linux Auditd Possible Append Cronjob Entry On Existing Cronjob File
 id: fea71cf0-fa10-4ef6-9202-9682b2e0c477
-version: 6
-date: '2025-02-20'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting

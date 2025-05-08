@@ -1,7 +1,7 @@
 name: Windows AD ServicePrincipalName Added To Domain Account
 id: 8a1259cb-0ea7-409c-8bfe-74bad89259f9
-version: 6
-date: '2024-11-13'
+version: 7
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 type: TTP
 status: production

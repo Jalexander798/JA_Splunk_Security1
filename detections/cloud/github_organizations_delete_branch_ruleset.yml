@@ -1,7 +1,7 @@
 name: GitHub Organizations Delete Branch Ruleset
 id: 8e454f64-4bd6-45e6-8a94-1b482593d721
-version: 1
-date: '2025-01-17'
+version: 2
+date: '2025-05-02'
 author: Patrick Bareiss, Splunk
 status: production
 type: Anomaly
