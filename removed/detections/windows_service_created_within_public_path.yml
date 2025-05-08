@@ -3,7 +3,7 @@ id: 3abb2eda-4bb8-11ec-9ae4-3e22fbd008af
 version: 9
 date: '2025-05-02'
 author: Mauricio Velazco, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: This analytic is deprecated because it is a duplicate of - "Windows Service Created with Suspicious Service Path". 
   The following analytic detects the creation of a Windows Service with
