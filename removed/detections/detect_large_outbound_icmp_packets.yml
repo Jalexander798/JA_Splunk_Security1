@@ -3,7 +3,7 @@ id: e9c102de-4d43-42a7-b1c8-8062ea297419
 version: 12
 date: '2025-05-02'
 author: Rico Valdez, Dean Luxton, Bhavin Patel, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: This analytic has been deprecated in favour of a better named detection - Detect Large ICMP Traffic. The following analytic identifies outbound ICMP packets with a size larger
   than 1,000 bytes. It leverages the Network_Traffic data model to detect unusually
