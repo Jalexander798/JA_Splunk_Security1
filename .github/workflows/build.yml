@@ -19,13 +19,8 @@ jobs:
           
       - name: Install Python Dependencies and ContentCTL and Atomic Red Team
         run: |
-          if [ -n "${{ vars.CONTENTCTL_VERSION }}" ]; then
-            echo "Installing contentctl version ${{ vars.CONTENTCTL_VERSION }}"
-            pip install -r requirements.txt
-          else
-            echo "Installing latest contentctl version"
-            pip install -r requirements.txt
-          fi
+          echo "- Contentctl version - $(cat requirements.txt)"
+          pip install -r requirements.txt
           git clone --depth=1 --single-branch --branch=master https://github.com/redcanaryco/atomic-red-team.git external_repos/atomic-red-team
           git clone --depth=1 --single-branch --branch=master https://github.com/mitre/cti external_repos/cti
       
