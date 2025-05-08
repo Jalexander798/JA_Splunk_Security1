@@ -15,7 +15,8 @@ description: The following analytic detects the use of PowerShell scripts to loa
   to execute code in memory, bypassing traditional defenses. If confirmed malicious,
   this activity could lead to unauthorized code execution, privilege escalation, and
   persistent access within the environment.
-search: '`powershell` EventCode=4104 ScriptBlockText IN ("*Reflection.Assembly]::Load*",
+search: | 
+  `powershell` EventCode=4104 ScriptBlockText IN ("*Reflection.Assembly]::Load*",
   "*Reflection.Assembly.Load*", "*UnsafeLoadFrom*", "*.LoadFrom(*", "*.LoadModule(*",
   "*.LoadWithPartialName*", "*ReflectionOnlyLoad*", "*Reflection.Assembly]::('daoL'[-1..-4] -join '')*") 
   | fillnull 
@@ -23,7 +24,7 @@ search: '`powershell` EventCode=4104 ScriptBlockText IN ("*Reflection.Assembly]:
   by dest signature signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText 
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` 
-  | `powershell_loading_dotnet_into_memory_via_reflection_filter`'
+  | `powershell_loading_dotnet_into_memory_via_reflection_filter`
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
   https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.
