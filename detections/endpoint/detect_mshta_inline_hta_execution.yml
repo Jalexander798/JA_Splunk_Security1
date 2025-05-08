@@ -1,7 +1,7 @@
 name: Detect mshta inline hta execution
 id: a0873b32-5b68-11eb-ae93-0242ac130002
-version: 16
-date: '2025-05-02'
+version: '17'
+date: '2025-05-06'
 author: Bhavin Patel, Michael Haag, Splunk
 status: production
 type: TTP
@@ -75,10 +75,11 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - Gozi Malware
-  - Suspicious MSHTA Activity
-  - Living Off The Land
   - Compromised Windows Host
+  - Gozi Malware
+  - Living Off The Land
+  - Suspicious MSHTA Activity
+  - XWorm
   asset_type: Endpoint
   mitre_attack_id:
   - T1218.005

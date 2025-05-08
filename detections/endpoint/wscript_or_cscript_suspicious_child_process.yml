@@ -1,7 +1,7 @@
 name: Wscript Or Cscript Suspicious Child Process
 id: 1f35e1da-267b-11ec-90a9-acde48001122
-version: 8
-date: '2025-05-02'
+version: '9'
+date: '2025-05-06'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -65,12 +65,13 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Remcos
-  - FIN7
-  - Unusual Processes
   - Data Destruction
-  - WhisperGate
+  - FIN7
   - NjRAT
+  - Remcos
+  - XWorm
+  - WhisperGate
+  - Unusual Processes
   - ShrinkLocker
   asset_type: Endpoint
   mitre_attack_id:

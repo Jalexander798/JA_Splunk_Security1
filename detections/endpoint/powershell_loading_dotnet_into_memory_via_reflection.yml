@@ -1,8 +1,8 @@
 name: PowerShell Loading DotNET into Memory via Reflection
 id: 85bc3f30-ca28-11eb-bd21-acde48001122
-version: 10
-date: '2025-05-02'
-author: Michael Haag, Splunk
+version: 11
+date: '2025-05-06'
+author: Michael Haag, Teoderick Contreras Splunk
 status: production
 type: Anomaly
 data_source:
@@ -17,10 +17,13 @@ description: The following analytic detects the use of PowerShell scripts to loa
   persistent access within the environment.
 search: '`powershell` EventCode=4104 ScriptBlockText IN ("*Reflection.Assembly]::Load*",
   "*Reflection.Assembly.Load*", "*UnsafeLoadFrom*", "*.LoadFrom(*", "*.LoadModule(*",
-  "*.LoadWithPartialName*", "*ReflectionOnlyLoad*") | fillnull | stats count min(_time)
-  as firstTime max(_time) as lastTime by dest signature signature_id user_id vendor_product
-  EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `powershell_loading_dotnet_into_memory_via_reflection_filter`'
+  "*.LoadWithPartialName*", "*ReflectionOnlyLoad*", "*Reflection.Assembly]::('daoL'[-1..-4] -join '')*") 
+  | fillnull 
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+  by dest signature signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText 
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)` 
+  | `powershell_loading_dotnet_into_memory_via_reflection_filter`'
 how_to_implement: To successfully implement this analytic, you will need to enable
   PowerShell Script Block Logging on some or all endpoints. Additional setup here
   https://docs.splunk.com/Documentation/UBA/5.0.4.1/GetDataIn/AddPowerShell#Configure_module_logging_for_PowerShell.
