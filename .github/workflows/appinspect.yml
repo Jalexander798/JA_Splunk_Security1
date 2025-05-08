@@ -47,3 +47,4 @@ jobs:
           path: |
             artifacts/DA-ESS-ContentUpdate-latest.tar.gz
             artifacts/app_inspect_report
+            
