@@ -46,6 +46,24 @@
         }
     },
     "visualizations": {
+        "viz_1ZFeC3zY": {
+            "containerOptions": {},
+            "dataSources": {
+                "primary": "ds_m3IAfEaF"
+            },
+            "eventHandlers": [
+                {
+                    "options": {
+                        "tabId": "layout_hEVylosH"
+                    },
+                    "type": "drilldown.switchToTab"
+                }
+            ],
+            "showLastUpdated": false,
+            "showProgressBar": false,
+            "title": "Snort Intrusion events for Threat Actor - $threat_actor_token$",
+            "type": "splunk.table"
+        },
         "viz_3VU4OAeI": {
             "containerOptions": {},
             "dataSources": {
@@ -69,21 +87,96 @@
             },
             "type": "splunk.markdown"
         },
-        "viz_87JZM6jW": {
+        "viz_8VIu1U0s": {
+            "containerOptions": {},
+            "context": {},
             "dataSources": {
-                "primary": "ds_YybVUCKh"
+                "primary": "ds_8LU6nawL"
             },
-            "title": "Number of Affected Hosts",
+            "description": "This table gives you an overview of all active threat actors in your environment",
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": false,
+            "title": "All Intrusion Events by Threat Actor",
+            "type": "splunk.pie"
+        },
+        "viz_AQzurdgj": {
+            "containerOptions": {},
+            "context": {
+                "majorColorEditorConfig": [
+                    {
+                        "to": 20,
+                        "value": "#ffffff"
+                    },
+                    {
+                        "from": 20,
+                        "to": 40,
+                        "value": "#669922"
+                    },
+                    {
+                        "from": 40,
+                        "to": 80,
+                        "value": "#cba700"
+                    },
+                    {
+                        "from": 80,
+                        "value": "#d41f1f"
+                    }
+                ],
+                "trendColorEditorConfig": [
+                    {
+                        "to": 0,
+                        "value": "#9E2520"
+                    },
+                    {
+                        "from": 0,
+                        "value": "#1C6B2D"
+                    }
+                ]
+            },
+            "dataSources": {
+                "primary": "ds_cU42yLz2"
+            },
+            "description": "This table shows the file events per day",
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": false,
+            "title": "File Events Trend",
+            "type": "splunk.area"
+        },
+        "viz_FVgI8gNf": {
+            "options": {},
             "type": "splunk.singlevalue"
         },
-        "viz_CsqOm7fD": {
-            "options": {
-                "backgroundColor": "#ffffff",
-                "fontColor": "#dc4e41",
-                "fontSize": "large",
-                "markdown": "\n### Files events\n- Lists all connection and file-based events for the device for the selected time range"
+        "viz_FY6hwnml": {
+            "dataSources": {
+                "primary": "ds_wzZtYKW7"
             },
-            "type": "splunk.markdown"
+            "title": "Affected Host",
+            "type": "splunk.singlevalue"
+        },
+        "viz_ISoX6BgF": {
+            "containerOptions": {},
+            "context": {},
+            "dataSources": {
+                "primary": "ds_z10zC280"
+            },
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": false,
+            "title": "File Events on $dest_ip$ for $threat_actor_token$",
+            "type": "splunk.events"
+        },
+        "viz_KQjoxczF": {
+            "containerOptions": {},
+            "dataSources": {
+                "primary": "ds_PpNvhTDF"
+            },
+            "description": "This numbers shows the distinct number of snort signatures matched for this threat actor",
+            "showLastUpdated": false,
+            "showProgressBar": false,
+            "title": "Distinct Snort Signature Hits",
+            "type": "splunk.singlevalue"
         },
         "viz_LbI09I1U": {
             "dataSources": {
@@ -91,6 +184,18 @@
             },
             "options": {
                 "backgroundColor": "> themes.defaultBackgroundColor",
+                "columnFormat": {
+                    "description": {
+                        "width": 60
+                    },
+                    "signature_id": {
+                        "width": 123
+                    },
+                    "threat_actor": {
+                        "width": 60
+                    }
+                },
+                "headerVisibility": "fixed",
                 "tableFormat": {
                     "align": "left",
                     "headerAlign": "left",
@@ -106,13 +211,20 @@
             },
             "options": {
                 "center": [
-                    33.844089179971704,
-                    -15.07886874422411
+                    36.04975177327002,
+                    -3.603381266452402
                 ],
-                "zoom": 1.2272251943552073
+                "zoom": 2.6208701026526793
             },
             "title": "Connection Events",
             "type": "splunk.map"
+        },
+        "viz_SnsguT0c": {
+            "dataSources": {
+                "primary": "ds_f4HzVHsa"
+            },
+            "title": "Actor Details",
+            "type": "splunk.singlevalue"
         },
         "viz_VpTFMowK": {
             "containerOptions": {},
@@ -126,6 +238,7 @@
             "dataSources": {
                 "primary": "ds_0SEcxnrn"
             },
+            "description": "This table contains the list of  other risk events in Enterprise Security for the affected host -  $dest_ip$",
             "eventHandlers": [
                 {
                     "options": {
@@ -158,6 +271,7 @@
             },
             "showLastUpdated": false,
             "showProgressBar": false,
+            "title": "Risk Events in Enterprise Security -  $dest_ip$",
             "type": "splunk.table"
         },
         "viz_WhFvmhK9": {
@@ -166,6 +280,42 @@
                 "fontColor": "#f1813f",
                 "fontSize": "large",
                 "markdown": "\n### Risk Events\n- Surfaces all risk events tied to the Destination IP  \n- Helps you understand what is the are the ESCU alerts in Enterprise Security\n"
+            },
+            "type": "splunk.markdown"
+        },
+        "viz_ZblgpoVk": {
+            "containerOptions": {},
+            "dataSources": {
+                "primary": "ds_Q6zbF7Qb"
+            },
+            "eventHandlers": [
+                {
+                    "options": {
+                        "tabId": "layout_hEVylosH"
+                    },
+                    "type": "drilldown.switchToTab"
+                }
+            ],
+            "showLastUpdated": false,
+            "showProgressBar": false,
+            "title": "Top Snort Signatures",
+            "type": "splunk.table"
+        },
+        "viz_fjbFV5up": {
+            "containerOptions": {},
+            "dataSources": {
+                "primary": "ds_YybVUCKh"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": false,
+            "title": "Affected Hosts",
+            "type": "splunk.singlevalueradial"
+        },
+        "viz_gryqfMyv": {
+            "options": {
+                "backgroundColor": "#ffffff",
+                "fontColor": "#dc4e41",
+                "markdown": "\n### Activity Explorer\n\n- Lists all connection and file-based events for the device for the selected time range"
             },
             "type": "splunk.markdown"
         },
@@ -179,28 +329,6 @@
             },
             "title": "Signatures of threat actors matched on a Per Day Basis",
             "type": "splunk.line"
-        },
-        "viz_kpJB7bW3": {
-            "containerOptions": {},
-            "dataSources": {
-                "primary": "ds_mWvtZ0jy"
-            },
-            "description": "Matching Snort Intrusion Events within a time_window of 1d",
-            "eventHandlers": [
-                {
-                    "options": {
-                        "tabId": "layout_SprIDSDn"
-                    },
-                    "type": "drilldown.switchToTab"
-                }
-            ],
-            "options": {
-                "count": 20
-            },
-            "showLastUpdated": false,
-            "showProgressBar": false,
-            "title": "Snort Intrusion Events by dest_ip  - $threat_actor_token$",
-            "type": "splunk.table"
         },
         "viz_nr87RKRM": {
             "dataSources": {
@@ -233,21 +361,6 @@
             "title": "Connection Events From to all Source IPs",
             "type": "splunk.table"
         },
-        "viz_q2mvB6Ut": {
-            "dataSources": {
-                "primary": "ds_z10zC280"
-            },
-            "options": {
-                "backgroundColor": "> themes.defaultBackgroundColor",
-                "headerVisibility": "fixed",
-                "showInternalFields": false,
-                "tableFormat": {
-                    "rowBackgroundColors": "> table | seriesByIndex(0) | pick(tableAltRowBackgroundColorsByTheme)"
-                }
-            },
-            "title": "File Events on the machine - $dest_ip$",
-            "type": "splunk.table"
-        },
         "viz_q5G96ojA": {
             "containerOptions": {
                 "visibility": {}
@@ -260,7 +373,7 @@
             "eventHandlers": [
                 {
                     "options": {
-                        "tabId": "layout_gX58DqID"
+                        "tabId": "layout_fRHBDK2O"
                     },
                     "type": "drilldown.switchToTab"
                 },
@@ -286,14 +399,40 @@
             "title": "Affected Hosts",
             "type": "splunk.table"
         },
+        "viz_uCVQgdVt": {
+            "containerOptions": {},
+            "dataSources": {
+                "primary": "ds_ULaiHv6R"
+            },
+            "options": {
+                "backgroundColor": "#000000"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": false,
+            "title": "Risk Event Timeline",
+            "type": "splunk.column"
+        },
         "viz_wl93h7VE": {
             "options": {
                 "backgroundColor": "#ffffff",
                 "fontColor": "#4fa484",
                 "fontSize": "large",
-                "markdown": "### Home Page\n- Shows the list of threat actors that are currently being tracked\n- Table of Affected hosts with known snort signatures "
+                "markdown": "### Overview\n- Shows the list of threat actors that are currently being tracked\n- Table of Affected hosts with known snort signatures "
             },
             "type": "splunk.markdown"
+        },
+        "viz_xuwsrI0Q": {
+            "containerOptions": {},
+            "context": {},
+            "dataSources": {
+                "primary": "ds_XtgOToUG"
+            },
+            "description": "Tables lists the various Mitre techniques found on affected host",
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": false,
+            "title": "Mitre Techniques detected on $dest_ip$",
+            "type": "splunk.pie"
         }
     },
     "dataSources": {
@@ -301,7 +440,7 @@
             "name": "risk_events",
             "options": {
                 "enableSmartSources": true,
-                "query": "| from datamodel Risk.All_Risk | rename normalized_risk_object AS dest_ip | search dest_ip = $dest_ip$\n| stats\n    count                   AS Risk_Event_Count\n    min(_time)              AS firstTime\n    max(_time)              AS lastTime\n    values(search_name)     AS raw_search_names\n    values(analyticstories) AS \"Analytic Stories\"\n    values(annotations._all) AS Annotations\n    values(annotations.mitre_attack.mitre_tactic) AS \"ATT&CK Tactics\"\n  BY dest_ip src_ip\n| mvexpand raw_search_names\n| rename raw_search_names AS \"Search Name\"\n| `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`\n| table firstTime lastTime dest_ip, \"Search Name\", Risk_Event_Count"
+                "query": "| from datamodel Risk.All_Risk | rename normalized_risk_object AS dest_ip | search dest_ip = $dest_ip$\n| stats count by search_name"
             },
             "type": "ds.search"
         },
@@ -309,7 +448,7 @@
             "name": "affected_hosts",
             "options": {
                 "extend": "ds_mGcuwEO0",
-                "query": "| search threat_actor=\"$threat_actor_token$\"\n| stats count by dest_ip\n| rename dest_ip as \"Private IP Address\"\n| table \"Private IP Address\""
+                "query": "| search threat_actor=\"$threat_actor_token$\"\n| stats count by dest_ip\n| rename dest_ip as \"Host IP Address\"\n| table \"Host IP Address\""
             },
             "type": "ds.chain"
         },
@@ -321,11 +460,19 @@
             "type": "ds.search"
         },
         "ds_7sRMJ3vQ": {
-            "name": "snort_ids_threat_actor",
+            "name": "lookup",
             "options": {
                 "query": "|inputlookup snort_ids_threat_actor.csv \n|  table threat_actor signature_id description distinct_count_snort_ids"
             },
             "type": "ds.search"
+        },
+        "ds_8LU6nawL": {
+            "name": "all_intrusion_events_by_threat_actors",
+            "options": {
+                "extend": "ds_mGcuwEO0",
+                "query": "| stats count by threat_actor"
+            },
+            "type": "ds.chain"
         },
         "ds_8sclv3pU": {
             "name": "Timeline",
@@ -333,6 +480,22 @@
                 "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| bin _time span=1d\n| stats count AS Total_Alerts dc(signature_id) AS sig_count\n        values(signature_id)       AS signature_ids\n        values(signature)          AS signature\n        values(class_desc)         AS class_desc\n        values(MitreAttackGroups)  AS MitreAttackGroups\n        values(InlineResult)       AS InlineResult\n        values(InlineResultReason) AS InlineResultReason\n        values(src_ip)             AS src_ip\n        values(dest_port)          AS dest_port\n        values(rule)               AS rule\n        values(transport)          AS transport\n        values(app)                AS app\n  BY dest_ip, _time\n| eval sig_ids_str = mvjoin(signature_ids, \",\")\n| lookup snort_ids_threat_actor.csv signature_id AS sig_ids_str \n    OUTPUT threat_actor, distinct_count_snort_ids, description\n| where isnotnull(threat_actor) \n    AND sig_count >= tonumber(distinct_count_snort_ids)\n| mvexpand signature_ids\n| rename signature_ids AS signature_id\n| where threat_actor=\"$threat_actor_token$\"\n| timechart span=1h count BY signature_id"
             },
             "type": "ds.search"
+        },
+        "ds_PpNvhTDF": {
+            "name": "dc_signature",
+            "options": {
+                "extend": "ds_mGcuwEO0",
+                "query": "| search threat_actor=\"$threat_actor_token$\"\n| stats dc(signature)"
+            },
+            "type": "ds.chain"
+        },
+        "ds_Q6zbF7Qb": {
+            "name": "Top Signatures",
+            "options": {
+                "extend": "ds_mGcuwEO0",
+                "query": "| search threat_actor=\"$threat_actor_token$\"\n| stats count  by signature | table signature "
+            },
+            "type": "ds.chain"
         },
         "ds_TPwx4BWO": {
             "name": "affected_dest_ip",
@@ -346,10 +509,17 @@
             },
             "type": "ds.search"
         },
-        "ds_WUBFSCV7": {
-            "name": "file_event_by_dvc",
+        "ds_ULaiHv6R": {
+            "name": "risk_event_timeline",
             "options": {
-                "query": "`cisco_secure_firewall` EventType= FileEvent \n| bin _time span=1d \n| stats count dc(file_name) values(FileDirection) values(FileType) values(src_ip) values(dest_ip) values(ClientApplication) by dvc _time \n| join type=inner dvc \n    [ | search `cisco_secure_firewall` EventType=IntrusionEvent \n    | bin _time span=1d \n    | stats count as Total_Alerts dc(signature_id) as sig_count \n        values(signature_id) as signature_ids \n        values(signature) as signature \n        values(class_desc) as class_desc \n        values(MitreAttackGroups) as MitreAttackGroups \n        values(InlineResult) as InlineResult \n        values(InlineResultReason) as InlineResultReason \n        values(src_ip) as src_ip \n        values(dest_port) as dest_port \n        values(rule) as rule \n        values(transport) as transport \n        values(connection_id) as connection_id\n        values(app) as app\n        by dvc dest_ip _time \n    | eval sig_ids_str = mvjoin(signature_ids, \",\") \n    | lookup snort_ids_threat_actor.csv signature_id as sig_ids_str OUTPUT threat_actor, distinct_count_snort_ids, description \n    | where isnotnull(threat_actor) AND sig_count >= tonumber(distinct_count_snort_ids) \n    | `security_content_ctime(firstTime)` \n    | `security_content_ctime(lastTime)`\n    |  search threat_actor=\"$threat_actor_token$\"] | table _time threat_actor dvc sig_ids_str  dc(file_name) values(FileDirection) values(FileType) values(src_ip) values(dest_ip) values(ClientApplication)"
+                "query": "index=risk normalized_risk_object=\"$dest_ip$\"\n| bin _time span=1d\n| stats count AS event_count BY _time\n| timechart span=1d sum(event_count) AS \"Events per Day\""
+            },
+            "type": "ds.search"
+        },
+        "ds_XtgOToUG": {
+            "name": "Mitre",
+            "options": {
+                "query": "| from datamodel Risk.All_Risk | rename normalized_risk_object AS dest_ip | search dest_ip = $dest_ip$\n| stats\n    count  by annotations.mitre_attack.mitre_technique \n| head 5\n| rename annotations.mitre_attack.mitre_technique as \"Mitre Techniques\""
             },
             "type": "ds.search"
         },
@@ -361,12 +531,34 @@
             },
             "type": "ds.chain"
         },
+        "ds_cU42yLz2": {
+            "name": "file_events_per_day",
+            "options": {
+                "query": "`cisco_secure_firewall` EventType=FileEvent src_ip=\"$dest_ip$\" \n| bin _time span=1d \n| stats count AS event_count BY _time \n| timechart span=1d sum(event_count) AS \"File Events per Day\""
+            },
+            "type": "ds.search"
+        },
+        "ds_f4HzVHsa": {
+            "name": "description",
+            "options": {
+                "query": "| inputlookup snort_ids_threat_actor.csv \n| search threat_actor=\"$threat_actor_token$\" \n| table description"
+            },
+            "type": "ds.search"
+        },
         "ds_i58D84BP": {
             "name": "lookup_threat_actors",
             "options": {
                 "query": "|inputlookup snort_ids_threat_actor.csv | table threat_actor"
             },
             "type": "ds.search"
+        },
+        "ds_m3IAfEaF": {
+            "name": "snort_evernts_per_actor",
+            "options": {
+                "extend": "ds_mGcuwEO0",
+                "query": "|  search threat_actor=\"$threat_actor_token$\"\n| eval _time=strftime(_time, \"%Y-%m-%d\")"
+            },
+            "type": "ds.chain"
         },
         "ds_mGcuwEO0": {
             "name": "parent_base_search",
@@ -379,25 +571,10 @@
             },
             "type": "ds.search"
         },
-        "ds_mWvtZ0jy": {
-            "name": "snort_events_by_actor",
-            "options": {
-                "extend": "ds_mGcuwEO0",
-                "query": "|  search threat_actor=\"$threat_actor_token$\""
-            },
-            "type": "ds.chain"
-        },
         "ds_ta3O0H2Z": {
             "name": "map_connection_events",
             "options": {
                 "query": "`cisco_secure_firewall` EventType=ConnectionEvent dest_ip = $dest_ip$\n| iplocation src_ip\n| geostats count BY src_ip"
-            },
-            "type": "ds.search"
-        },
-        "ds_tp3k6kI6": {
-            "name": "connection_raw_event",
-            "options": {
-                "query": "`cisco_secure_firewall`  dest_ip = $dest_ip$ connection_id=$connection_id$"
             },
             "type": "ds.search"
         },
@@ -408,11 +585,18 @@
             },
             "type": "ds.search"
         },
+        "ds_wzZtYKW7": {
+            "name": "investigating_host",
+            "options": {
+                "query": "| makeresults | eval affected_ip = \"$dest_ip$\" | table affected_ip"
+            },
+            "type": "ds.search"
+        },
         "ds_z10zC280": {
             "name": "file_events",
             "options": {
                 "extend": "ds_mGcuwEO0",
-                "query": "| join type=inner dest_ip [\n    search `cisco_secure_firewall` EventType=FileEvent\n    | bin _time span=1d\n    | stats count, dc(file_name) as \"File Count\", values(FileDirection) as Direction, values(FileType) as \"File Type\", values(dest_ip) , values(ClientApplication) BY src_ip _time | rename src_ip as dest_ip\n]\n| table _time dest_ip threat_actor \"File Count\" Direction \"File Type\" signature\n| search dest_ip=\"$dest_ip$\" threat_actor=\"$threat_actor_token$\"\n\n\n"
+                "query": "| join type=inner dest_ip [\n    search `cisco_secure_firewall` EventType=FileEvent\n    | bin _time span=1d\n    | stats count, dc(file_name) as \"File Count\", values(FileDirection) as Direction, values(FileType) as \"File Type\", values(dest_ip) , values(ClientApplication) BY src_ip _time | rename src_ip as dest_ip\n]\n| search dest_ip=\"$dest_ip$\" threat_actor=\"$threat_actor_token$\"\n| table _time dest_ip \"File Count\" Direction \"File Type\" signature\n\n\n"
             },
             "type": "ds.chain"
         }
@@ -438,9 +622,19 @@
                     {
                         "item": "viz_LbI09I1U",
                         "position": {
-                            "h": 293,
-                            "w": 1200,
+                            "h": 417,
+                            "w": 562,
                             "x": 0,
+                            "y": 110
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_8VIu1U0s",
+                        "position": {
+                            "h": 417,
+                            "w": 407,
+                            "x": 562,
                             "y": 110
                         },
                         "type": "block"
@@ -448,56 +642,10 @@
                     {
                         "item": "viz_q5G96ojA",
                         "position": {
-                            "h": 371,
-                            "w": 600,
-                            "x": 0,
-                            "y": 403
-                        },
-                        "type": "block"
-                    },
-                    {
-                        "item": "viz_kpJB7bW3",
-                        "position": {
-                            "h": 401,
-                            "w": 1200,
-                            "x": 0,
-                            "y": 774
-                        },
-                        "type": "block"
-                    },
-                    {
-                        "item": "viz_87JZM6jW",
-                        "position": {
-                            "h": 371,
-                            "w": 600,
-                            "x": 600,
-                            "y": 403
-                        },
-                        "type": "block"
-                    }
-                ],
-                "type": "grid"
-            },
-            "layout_SprIDSDn": {
-                "options": {},
-                "structure": [
-                    {
-                        "item": "viz_CsqOm7fD",
-                        "position": {
-                            "h": 94,
-                            "w": 1200,
-                            "x": 0,
-                            "y": 0
-                        },
-                        "type": "block"
-                    },
-                    {
-                        "item": "viz_q2mvB6Ut",
-                        "position": {
-                            "h": 600,
-                            "w": 1200,
-                            "x": 0,
-                            "y": 94
+                            "h": 417,
+                            "w": 231,
+                            "x": 969,
+                            "y": 110
                         },
                         "type": "block"
                     }
@@ -522,10 +670,105 @@
                     {
                         "item": "viz_VpTFMowK",
                         "position": {
-                            "h": 425,
-                            "w": 1200,
+                            "h": 272,
+                            "w": 621,
                             "x": 0,
                             "y": 106
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_xuwsrI0Q",
+                        "position": {
+                            "h": 400,
+                            "w": 1200,
+                            "x": 0,
+                            "y": 378
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_uCVQgdVt",
+                        "position": {
+                            "h": 272,
+                            "w": 579,
+                            "x": 621,
+                            "y": 106
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_FVgI8gNf",
+                        "position": {
+                            "h": 400,
+                            "w": 1200,
+                            "x": 0,
+                            "y": 778
+                        },
+                        "type": "block"
+                    }
+                ],
+                "type": "grid"
+            },
+            "layout_fRHBDK2O": {
+                "structure": [
+                    {
+                        "item": "viz_SnsguT0c",
+                        "position": {
+                            "h": 117,
+                            "w": 600,
+                            "x": 0,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_fjbFV5up",
+                        "position": {
+                            "h": 217,
+                            "w": 375,
+                            "x": 0,
+                            "y": 117
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_1ZFeC3zY",
+                        "position": {
+                            "h": 324,
+                            "w": 1200,
+                            "x": 0,
+                            "y": 334
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_ZblgpoVk",
+                        "position": {
+                            "h": 217,
+                            "w": 375,
+                            "x": 375,
+                            "y": 117
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_FY6hwnml",
+                        "position": {
+                            "h": 117,
+                            "w": 600,
+                            "x": 600,
+                            "y": 0
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_KQjoxczF",
+                        "position": {
+                            "h": 217,
+                            "w": 450,
+                            "x": 750,
+                            "y": 117
                         },
                         "type": "block"
                     }
@@ -547,8 +790,8 @@
                     {
                         "item": "viz_kMW90k69",
                         "position": {
-                            "h": 479,
-                            "w": 1200,
+                            "h": 322,
+                            "w": 600,
                             "x": 0,
                             "y": 91
                         },
@@ -557,10 +800,10 @@
                     {
                         "item": "viz_3VU4OAeI",
                         "position": {
-                            "h": 400,
-                            "w": 1200,
-                            "x": 0,
-                            "y": 570
+                            "h": 322,
+                            "w": 600,
+                            "x": 600,
+                            "y": 91
                         },
                         "type": "block"
                     }
@@ -570,9 +813,9 @@
             "layout_hEVylosH": {
                 "structure": [
                     {
-                        "item": "viz_nr87RKRM",
+                        "item": "viz_gryqfMyv",
                         "position": {
-                            "h": 307,
+                            "h": 99,
                             "w": 1200,
                             "x": 0,
                             "y": 0
@@ -580,12 +823,42 @@
                         "type": "block"
                     },
                     {
+                        "item": "viz_ISoX6BgF",
+                        "position": {
+                            "h": 350,
+                            "w": 577,
+                            "x": 0,
+                            "y": 99
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_nr87RKRM",
+                        "position": {
+                            "h": 458,
+                            "w": 577,
+                            "x": 0,
+                            "y": 449
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_AQzurdgj",
+                        "position": {
+                            "h": 350,
+                            "w": 623,
+                            "x": 577,
+                            "y": 99
+                        },
+                        "type": "block"
+                    },
+                    {
                         "item": "viz_NT8j5Ogy",
                         "position": {
-                            "h": 538,
-                            "w": 1200,
-                            "x": 0,
-                            "y": 307
+                            "h": 458,
+                            "w": 623,
+                            "x": 577,
+                            "y": 449
                         },
                         "type": "block"
                     }
@@ -600,24 +873,24 @@
         "tabs": {
             "items": [
                 {
-                    "label": "Threat Actors and Snort IDs mapping",
+                    "label": "Overview",
                     "layoutId": "layout_1"
                 },
                 {
-                    "label": "File events",
-                    "layoutId": "layout_SprIDSDn"
+                    "label": "Actor Details",
+                    "layoutId": "layout_fRHBDK2O"
                 },
                 {
-                    "label": "Connection Events",
+                    "label": "Timeline",
+                    "layoutId": "layout_gX58DqID"
+                },
+                {
+                    "label": "Activity Explorer",
                     "layoutId": "layout_hEVylosH"
                 },
                 {
                     "label": "Risk Events",
                     "layoutId": "layout_U25tjhLw"
-                },
-                {
-                    "label": "Timeline",
-                    "layoutId": "layout_gX58DqID"
                 }
             ]
         }
