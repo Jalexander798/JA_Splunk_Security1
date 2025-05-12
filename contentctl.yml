@@ -44,9 +44,9 @@ apps:
 - uid: 7404
   title: Cisco Security Cloud
   appid: CiscoSecurityCloud
-  version: 3.1.1
+  version: 3.2.0
   description: description of app
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/cisco-security-cloud_311.tgz
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/cisco-security-cloud_320.tgz
 - uid: 6652
   title: Add-on for Linux Sysmon
   appid: Splunk_TA_linux_sysmon
@@ -101,9 +101,9 @@ apps:
 - uid: 5466
   title: TA for Zeek
   appid: SPLUNK_TA_FOR_ZEEK
-  version: 1.0.8
+  version: 1.0.9
   description: description of app
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/ta-for-zeek_108.tgz
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/ta-for-zeek_109.tgz
 - uid: 3258
   title: Splunk Add-on for NGINX
   appid: SPLUNK_ADD_ON_FOR_NGINX
@@ -155,9 +155,9 @@ apps:
 - uid: 5556
   title: Splunk Add-on for Google Workspace
   appid: SPLUNK_ADD_ON_FOR_GOOGLE_WORKSPACE
-  version: 3.0.3
+  version: 3.0.4
   description: description of app
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-google-workspace_303.tgz
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-google-workspace_304.tgz
 - uid: 3110
   title: Splunk Add-on for Microsoft Cloud Services
   appid: SPLUNK_TA_MICROSOFT_CLOUD_SERVICES
