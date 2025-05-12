@@ -18,7 +18,7 @@ data_source:
   - Cisco Secure Firewall Threat Defense Intrusion Event
 search: |
   `cisco_secure_firewall` EventType=IntrusionEvent 
-  | bin _time span=4h 
+  | bin _time span=1h 
   | stats count as Total_Alerts dc(signature_id) as sig_count 
       values(signature_id) as signature_ids 
       values(signature) as signature 
@@ -48,7 +48,7 @@ how_to_implement: |
   with configurations for your Splunk environment. The search also uses a post-filter
   macro designed to filter out known false positives.
   The logs are to be ingested using the Splunk Add-on for Cisco Security Cloud (https://splunkbase.splunk.com/app/7404).
-  The intrusion access policy must also be configured.
+  The intrusion access policy must also be configured. This detection is based on the snort_ids_threat_actor.csv mapping file - please update the lookup file with the latest Snort IDs to Threat Actors if you would like to modify the distinct count of Snort IDs needed to trigger the detection or if you would like to add new Snort IDs to Threat Actors.
 known_false_positives: False positives may occur due to legitimate security testing or research activities.
 references:
   - https://www.cisco.com/c/en/us/products/security/firewalls/index.html
