@@ -1,7 +1,7 @@
 name: Citrix ADC and Gateway Unauthorized Data Disclosure
 id: b593cac5-dd20-4358-972a-d945fefdaf17
-version: 4
-date: '2024-11-15'
+version: 5
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: TTP

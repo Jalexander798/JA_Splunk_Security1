@@ -1,7 +1,7 @@
 name: Windows PowerShell Invoke-RestMethod IP Information Collection
 id: 8db47e12-9c3e-4f5a-b0d6-e42a1895cd4f
-version: 1
-date: '2025-04-17'
+version: 2
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly

@@ -1,7 +1,7 @@
 name: ProxyShell ProxyNotShell Behavior Detected
 id: c32fab32-6aaf-492d-bfaf-acbed8e50cdf
-version: 6
-date: '2025-04-16'
+version: 7
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: Correlation

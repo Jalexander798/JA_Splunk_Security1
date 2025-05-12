@@ -1,7 +1,7 @@
 name: Linux Auditd Preload Hijack Via Preload File
 id: c1b7abca-55cb-4a39-bdfb-e28c1c12745f
-version: 5
-date: '2025-02-20'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: Windows Powershell RemoteSigned File
 id: f7f7456b-470d-4a95-9703-698250645ff4
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

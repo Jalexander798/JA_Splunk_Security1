@@ -1,7 +1,7 @@
 name: Windows Default Group Policy Object Modified
 id: fe6a6cc4-9e0d-4d66-bcf4-2c7f44860876
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-05-02'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

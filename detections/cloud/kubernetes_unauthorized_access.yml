@@ -1,7 +1,7 @@
 name: Kubernetes Unauthorized Access
 id: 9b5f1832-e8b9-453f-93df-07a3d6a72a45
-version: 4
-date: '2024-11-14'
+version: 5
+date: '2025-05-02'
 author: Patrick Bareiss, Splunk
 status: production
 type: Anomaly

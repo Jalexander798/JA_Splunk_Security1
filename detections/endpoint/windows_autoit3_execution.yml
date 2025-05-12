@@ -1,7 +1,7 @@
 name: Windows AutoIt3 Execution
 id: 0ecb40d9-492b-4a57-9f87-515dd742794c
-version: 7
-date: '2024-11-13'
+version: 8
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: TTP

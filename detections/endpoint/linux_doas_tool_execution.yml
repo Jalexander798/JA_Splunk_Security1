@@ -1,7 +1,7 @@
 name: Linux Doas Tool Execution
 id: d5a62490-6e09-11ec-884e-acde48001122
-version: 6
-date: '2025-02-10'
+version: 7
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

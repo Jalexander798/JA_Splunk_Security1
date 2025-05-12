@@ -1,7 +1,7 @@
 name: Windows Modify Registry USeWuServer
 id: c427bafb-0b2c-4b18-ad85-c03c6fed9e75
-version: 7
-date: '2025-04-22'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting

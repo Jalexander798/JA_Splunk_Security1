@@ -1,10 +1,10 @@
 name: Detection of tools built by NirSoft
 id: 3d8d201c-aa03-422d-b0ee-2e5ecf9718c0
-version: 7
-date: '2024-11-13'
+version: 8
+date: '2025-05-02'
 author: Bhavin Patel, Splunk
 status: experimental
-type: TTP
+type: Anomaly
 description: The following analytic identifies the execution of tools built by NirSoft
   by detecting specific command-line arguments such as "/stext" and "/scomma". It
   leverages data from Endpoint Detection and Response (EDR) agents, focusing on process
@@ -37,10 +37,10 @@ how_to_implement: The detection is based on data that originates from Endpoint D
   data model. Use the Splunk Common Information Model (CIM) to normalize the field
   names and speed up the data modeling process.
 known_false_positives: While legitimate, these NirSoft tools are prone to abuse. You
-  should verfiy that the tool was used for a legitimate purpose.
+  should verify that the tool was used for a legitimate purpose.
 references: []
 rba:
-  message: NirSoft tools detected on $dest$
+  message: NirSoft tool detected on $dest$
   risk_objects:
   - field: user
     type: user

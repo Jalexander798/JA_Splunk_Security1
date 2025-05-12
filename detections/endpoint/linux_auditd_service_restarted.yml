@@ -1,7 +1,7 @@
 name: Linux Auditd Service Restarted
 id: 8eb3e858-18d3-44a4-a514-52cfa39f154a
-version: 5
-date: '2025-02-20'
+version: 6
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

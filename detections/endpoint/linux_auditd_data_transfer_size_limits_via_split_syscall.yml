@@ -1,7 +1,7 @@
 name: Linux Auditd Data Transfer Size Limits Via Split Syscall
 id: c03d4a49-cf9d-435b-86e9-c6f8c9b6c42e
-version: 4
-date: '2024-02-20'
+version: 5
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -15,10 +15,13 @@ description: The following analytic detects suspicious data transfer activities 
   from the network.
 data_source:
 - Linux Auditd Syscall
-search: '`linux_auditd` type=SYSCALL comm=split OR exe= "*/split" | rename host as
-  dest | stats count min(_time) as firstTime max(_time) as lastTime by comm exe  SYSCALL
-  UID ppid pid success dest | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`|
-  `linux_auditd_data_transfer_size_limits_via_split_syscall_filter`'
+search: '`linux_auditd` type=SYSCALL comm=split OR exe= "*/split" 
+  | rename host as dest 
+  | stats count min(_time) as firstTime max(_time) as lastTime 
+  by comm exe syscall uid ppid pid success dest 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)`
+  | `linux_auditd_data_transfer_size_limits_via_split_syscall_filter`'
 how_to_implement: To implement this detection, the process begins by ingesting auditd
   data, that consist SYSCALL, TYPE, EXECVE and PROCTITLE events, which captures command-line
   executions and process details on Unix/Linux systems. These logs should be ingested
@@ -72,6 +75,6 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1030/linux_auditd_split_syscall/linux_auditd_split_syscall.log
+      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1030/linux_auditd_split_syscall_new/linux_auditd_new_split.log
     source: auditd
     sourcetype: auditd

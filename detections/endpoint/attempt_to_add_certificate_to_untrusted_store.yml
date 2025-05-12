@@ -1,7 +1,7 @@
 name: Attempt To Add Certificate To Untrusted Store
 id: 6bc5243e-ef36-45dc-9b12-f4a6be131159
-version: 14
-date: '2025-02-10'
+version: 15
+date: '2025-05-02'
 author: Patrick Bareiss, Rico Valdez, Splunk
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: Windows Service Created with Suspicious Service Name
 id: 35eb6d19-a497-400c-93c5-645562804b11
-version: 2
-date: '2025-03-26'
+version: 3
+date: '2025-05-02'
 author: Steven Dick
 status: production
 type: Anomaly

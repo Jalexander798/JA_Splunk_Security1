@@ -1,7 +1,7 @@
 name: Windows Driver Load Non-Standard Path
 id: 9216ef3d-066a-4958-8f27-c84589465e62
-version: 6
-date: '2025-01-27'
+version: 7
+date: '2025-05-02'
 author: Michael Haag, Splunk
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: Network Share Discovery Via Dir Command
 id: dc1457d0-1d9b-422e-b5a7-db46c184d9aa
-version: 4
-date: '2024-11-13'
+version: 5
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Hunting

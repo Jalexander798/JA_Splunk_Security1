@@ -1,7 +1,7 @@
 name: Linux Composer Privilege Escalation
 id: a3bddf71-6ba3-42ab-a6b2-396929b16d92
-version: 8
-date: '2025-02-10'
+version: 9
+date: '2025-05-02'
 author: Gowthamaraj Rajendran, Splunk
 status: production
 type: Anomaly

@@ -1,7 +1,7 @@
 name: Linux Deletion Of Services
 id: b509bbd3-0331-4aaa-8e4a-d2affe100af6
-version: 7
-date: '2025-02-10'
+version: 8
+date: '2025-05-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
