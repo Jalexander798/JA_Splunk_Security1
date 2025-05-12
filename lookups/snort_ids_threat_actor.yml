@@ -1,0 +1,9 @@
+name: snort_ids_threat_actor
+date: 2025-05-12
+version: 1
+id: f08ae6ce-d7a8-423e-a778-be7178a719f9
+author: Splunk Threat Research Team
+lookup_type: csv
+case_sensitive_match: false
+description: Mapping file of Snort IDs to Threat Actors
+min_matches: 1
