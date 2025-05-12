@@ -18,7 +18,7 @@ data_source:
   - Cisco Secure Firewall Threat Defense Intrusion Event
 search: |
   `cisco_secure_firewall` EventType=IntrusionEvent 
-  | bin _time span=1h 
+  | bin _time span=4h 
   | stats count as Total_Alerts dc(signature_id) as sig_count 
       values(signature_id) as signature_ids 
       values(signature) as signature 
@@ -34,7 +34,7 @@ search: |
       values(app) as app
       by dest_ip _time 
   | eval sig_ids_str = mvjoin(signature_ids, ",") 
-  | lookup snort_ids_threat_actor.csv signature_id as sig_ids_str OUTPUT threat_actor, distinct_count_snort_ids, description,threat_actor_technique 
+  | lookup snort_ids_threat_actor signature_id as sig_ids_str OUTPUT threat_actor, distinct_count_snort_ids, description,threat_actor_technique 
   | where isnotnull(threat_actor) AND sig_count >= tonumber(distinct_count_snort_ids) 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)`
@@ -66,7 +66,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Potential threat actor activity detected from $src_ip$ to $dest_ip$.
+  message: Potential threat actor $threat_actor$ activity detected from $src_ip$ to $dest_ip$.
   risk_objects:
     - field: dest_ip
       type: system
