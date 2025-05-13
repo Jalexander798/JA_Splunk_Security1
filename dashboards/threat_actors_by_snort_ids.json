@@ -1,5 +1,5 @@
 {
-    "title": "Threat Actors by Snort IDs",
+    "title": "V2 - Threat Actors by Snort IDs",
     "description": "Use this dashboard to explore how Snort signatures correlate with specific threat actors and surfaces broader device activity. It’s organized into four tabs:",
     "inputs": {
         "input_global_trp": {
@@ -183,6 +183,7 @@
             "dataSources": {
                 "primary": "ds_7sRMJ3vQ"
             },
+            "description": "This table lists of all the threats that can be potentially tracked using this dashboard",
             "options": {
                 "backgroundColor": "> themes.defaultBackgroundColor",
                 "columnFormat": {
@@ -203,7 +204,7 @@
                     "rowBackgroundColors": "> table | seriesByIndex(0) | pick(tableAltRowBackgroundColorsByTheme)"
                 }
             },
-            "title": "Lookup File - snort_ids_threat_actor.csv",
+            "title": "All Threats",
             "type": "splunk.table"
         },
         "viz_NT8j5Ogy": {
@@ -212,8 +213,8 @@
             },
             "options": {
                 "center": [
-                    36.04975177327002,
-                    -3.603381266452402
+                    45.82351547154903,
+                    1.6163436265312612
                 ],
                 "zoom": 2.6208701026526793
             },
@@ -232,6 +233,18 @@
             "showProgressBar": false,
             "title": "Actor Details",
             "type": "splunk.table"
+        },
+        "viz_T6i68u8y": {
+            "containerOptions": {},
+            "context": {},
+            "dataSources": {
+                "primary": "ds_QAFOBzEx"
+            },
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": false,
+            "title": "Volume Inbound",
+            "type": "splunk.singlevalue"
         },
         "viz_VpTFMowK": {
             "containerOptions": {},
@@ -308,6 +321,18 @@
             "title": "Top Snort Signatures",
             "type": "splunk.table"
         },
+        "viz_darglsFq": {
+            "containerOptions": {},
+            "context": {},
+            "dataSources": {
+                "primary": "ds_q9NVolej"
+            },
+            "options": {},
+            "showLastUpdated": false,
+            "showProgressBar": false,
+            "title": "Volume Outbound",
+            "type": "splunk.singlevalue"
+        },
         "viz_fjbFV5up": {
             "containerOptions": {},
             "dataSources": {
@@ -372,11 +397,10 @@
             "containerOptions": {
                 "visibility": {}
             },
-            "context": {},
             "dataSources": {
                 "primary": "ds_70zt6tTO"
             },
-            "description": "This is a table of affected dest_ip with the selected threat actor",
+            "description": "Click on the host name to set a token value of dest_ip",
             "eventHandlers": [
                 {
                     "options": {
@@ -400,7 +424,6 @@
                     "type": "drilldown.setToken"
                 }
             ],
-            "options": {},
             "showLastUpdated": false,
             "showProgressBar": false,
             "title": "Affected Hosts",
@@ -469,7 +492,7 @@
         "ds_7sRMJ3vQ": {
             "name": "snort_ids_threat_actor_lookup",
             "options": {
-                "query": "|inputlookup snort_ids_threat_actor.csv |  table threat signature_id category message"
+                "query": "|inputlookup snort_ids_threat_actor.csv |  table threat signature_id category message \n|  stats values(signature_id) as signature_id  values(category) as category by threat"
             },
             "type": "ds.search"
         },
@@ -503,6 +526,13 @@
                 "query": "| search threat=\"$threat_token$\"\n| stats count  by signature | table signature "
             },
             "type": "ds.chain"
+        },
+        "ds_QAFOBzEx": {
+            "name": "volume_inbound",
+            "options": {
+                "query": "`cisco_secure_firewall` EventType=ConnectionEvent dest_ip=\"$dest_ip$\"\n| stats sum(InitiatorBytes) AS inbound_bytes\n| eval Volume_Inbound_GB = round(inbound_bytes/1024/1024/1024, 2) . \" Gb\"\n| fields Volume_Inbound_GB"
+            },
+            "type": "ds.search"
         },
         "ds_TPwx4BWO": {
             "name": "affected_dest_ip",
@@ -579,6 +609,13 @@
             },
             "type": "ds.search"
         },
+        "ds_q9NVolej": {
+            "name": "volume_outbound",
+            "options": {
+                "query": "`cisco_secure_firewall` EventType=ConnectionEvent dest_ip=\"$dest_ip$\"\n| stats sum(ResponderBytes) AS outbound_bytes\n| eval Volume_Outbound_GB = round(outbound_bytes/1024/1024/1024, 2) . \" Gb\"\n| fields Volume_Outbound_GB"
+            },
+            "type": "ds.search"
+        },
         "ds_ta3O0H2Z": {
             "name": "map_connection_events",
             "options": {
@@ -628,31 +665,31 @@
                         "type": "block"
                     },
                     {
-                        "item": "viz_LbI09I1U",
+                        "item": "viz_8VIu1U0s",
                         "position": {
-                            "h": 417,
-                            "w": 562,
+                            "h": 368,
+                            "w": 521,
                             "x": 0,
                             "y": 110
                         },
                         "type": "block"
                     },
                     {
-                        "item": "viz_8VIu1U0s",
+                        "item": "viz_LbI09I1U",
                         "position": {
-                            "h": 417,
-                            "w": 407,
-                            "x": 562,
-                            "y": 110
+                            "h": 477,
+                            "w": 1200,
+                            "x": 0,
+                            "y": 478
                         },
                         "type": "block"
                     },
                     {
                         "item": "viz_q5G96ojA",
                         "position": {
-                            "h": 417,
-                            "w": 231,
-                            "x": 969,
+                            "h": 368,
+                            "w": 679,
+                            "x": 521,
                             "y": 110
                         },
                         "type": "block"
@@ -823,7 +860,7 @@
                     {
                         "item": "viz_ISoX6BgF",
                         "position": {
-                            "h": 350,
+                            "h": 297,
                             "w": 594,
                             "x": 0,
                             "y": 99
@@ -833,17 +870,27 @@
                     {
                         "item": "viz_nr87RKRM",
                         "position": {
-                            "h": 458,
+                            "h": 290,
                             "w": 594,
                             "x": 0,
-                            "y": 449
+                            "y": 396
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_NT8j5Ogy",
+                        "position": {
+                            "h": 537,
+                            "w": 1200,
+                            "x": 0,
+                            "y": 686
                         },
                         "type": "block"
                     },
                     {
                         "item": "viz_AQzurdgj",
                         "position": {
-                            "h": 350,
+                            "h": 297,
                             "w": 606,
                             "x": 594,
                             "y": 99
@@ -851,12 +898,22 @@
                         "type": "block"
                     },
                     {
-                        "item": "viz_NT8j5Ogy",
+                        "item": "viz_T6i68u8y",
                         "position": {
-                            "h": 458,
-                            "w": 606,
+                            "h": 290,
+                            "w": 302,
                             "x": 594,
-                            "y": 449
+                            "y": 396
+                        },
+                        "type": "block"
+                    },
+                    {
+                        "item": "viz_darglsFq",
+                        "position": {
+                            "h": 290,
+                            "w": 304,
+                            "x": 896,
+                            "y": 396
                         },
                         "type": "block"
                     }
