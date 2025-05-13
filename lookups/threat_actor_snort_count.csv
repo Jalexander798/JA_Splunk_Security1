@@ -1,0 +1,4 @@
+threat_actor,distinct_count_snort_ids,threat_actor_description,category
+Daftpunk,2,French Music,all-categories
+Example Actor,4,Example,cnc-communication
+Lumma Stealer ,4,Lumma be bad! ,file-execution

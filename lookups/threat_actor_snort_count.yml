@@ -1,0 +1,9 @@
+
+name: threat_actor_snort_count
+date: 2025-05-13
+version: 1
+id: 48a35e07-ed5f-42f9-a5da-b7f2ab892e3c
+author: Bhavin Patel, Nasreddine Bencherchali, Splunk
+lookup_type: csv
+description: A list of threat actors and the number of distinct Snort IDs that should be have fired to create an alert
+min_matches: 1
