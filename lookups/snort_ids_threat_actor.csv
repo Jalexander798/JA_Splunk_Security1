@@ -1,6 +1,32 @@
-description,"distinct_count_snort_ids","signature_id","threat_actor","threat_actor_technique"
-"Daftpunk SnortIDs detected within 1h for the dest_ip",2,"11192,15306",Daftpunk,"All Techniques"
-"Example Actor with of 6 snorts within 1d",6,"11192,15306,31767,37732,46983,47398","Example Actor","All Techniques"
-"Combination of more than 4 distinct alerts for Lumma Stealar",4,"64793,64794,64797,64798,64799,64800,64801,62709,64167,64168,64169,64796,62710,62711,62712,62713,62714,62715,62716,62717,64812,64810,64811","Lumma Stealer","All Techniques"
-"Combination of more than 6 distinct alerts for Lumma Stealar Download Attempt",6,"62710,62711,62712,62713,62714,62715,62716,62717,64810,64811","Lumma Stealer","Download Attempt"
-"Combination of more than 5 distinct alerts for Lumma Stealar Outbound Connection Events",5,"64797,64798,64799,64800,64801,64167,64168,64169,62709","Lumma Stealer","Outbound Connection Attempt"
+threat_actor,signature_id
+Daftpunk,11192
+Daftpunk,15306
+Example Actor,111920
+Example Actor,153060
+Example Actor,31767
+Example Actor,37732
+Example Actor,46983
+Example Actor,47398
+Lumma Stealer,64793
+Lumma Stealer,64794
+Lumma Stealer,64797
+Lumma Stealer,64798
+Lumma Stealer,64799
+Lumma Stealer,64800
+Lumma Stealer,64801
+Lumma Stealer,62709
+Lumma Stealer,64167
+Lumma Stealer,64168
+Lumma Stealer,64169
+Lumma Stealer,64796
+Lumma Stealer,62710
+Lumma Stealer,62711
+Lumma Stealer,62712
+Lumma Stealer,62713
+Lumma Stealer,62714
+Lumma Stealer,62715
+Lumma Stealer,62716
+Lumma Stealer,62717
+Lumma Stealer,64812
+Lumma Stealer,64810
+Lumma Stealer,64811
