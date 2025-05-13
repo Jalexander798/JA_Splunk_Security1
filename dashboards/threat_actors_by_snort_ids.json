@@ -11,6 +11,11 @@
             "type": "input.timerange"
         },
         "input_tlWhhLwR": {
+            "containerOptions": {
+                "visibility": {
+                    "hideWhenNoData": true
+                }
+            },
             "context": {
                 "formattedConfig": {
                     "number": {
@@ -18,18 +23,19 @@
                     }
                 },
                 "formattedStatics": ">statics | formatByType(formattedConfig)",
-                "label": ">primary | seriesByName(\"threat_actor\") | renameSeries(\"label\") | formatByType(formattedConfig)",
+                "label": ">primary | seriesByName(\"threat\") | renameSeries(\"label\") | formatByType(formattedConfig)",
                 "statics": [],
-                "value": ">primary | seriesByName(\"threat_actor\") | renameSeries(\"value\") | formatByType(formattedConfig)"
+                "value": ">primary | seriesByName(\"threat\") | renameSeries(\"value\") | formatByType(formattedConfig)"
             },
             "dataSources": {
                 "primary": "ds_i58D84BP"
             },
             "options": {
                 "items": ">frame(label, value) | prepend(formattedStatics) | objects()",
-                "token": "threat_actor_token"
+                "selectFirstSearchResult": true,
+                "token": "threat_token"
             },
-            "title": "Threat Actor",
+            "title": "Threat",
             "type": "input.dropdown"
         }
     },
@@ -61,7 +67,7 @@
             ],
             "showLastUpdated": false,
             "showProgressBar": false,
-            "title": "Snort Intrusion events for Threat Actor - $threat_actor_token$",
+            "title": "Snort Intrusion events for Threat Actor - $threat_token$",
             "type": "splunk.table"
         },
         "viz_3VU4OAeI": {
@@ -144,27 +150,22 @@
             "title": "File Events Trend",
             "type": "splunk.area"
         },
-        "viz_FVgI8gNf": {
-            "options": {},
-            "type": "splunk.singlevalue"
-        },
         "viz_FY6hwnml": {
             "dataSources": {
                 "primary": "ds_wzZtYKW7"
             },
-            "title": "Affected Host",
+            "title": "Investigating IP",
             "type": "splunk.singlevalue"
         },
         "viz_ISoX6BgF": {
             "containerOptions": {},
-            "context": {},
             "dataSources": {
                 "primary": "ds_z10zC280"
             },
-            "options": {},
+            "description": "This table shows all the various file_events on $dest_ip$",
             "showLastUpdated": false,
             "showProgressBar": false,
-            "title": "File Events on $dest_ip$ for $threat_actor_token$",
+            "title": "File Events on $dest_ip$",
             "type": "splunk.events"
         },
         "viz_KQjoxczF": {
@@ -220,11 +221,17 @@
             "type": "splunk.map"
         },
         "viz_SnsguT0c": {
+            "containerOptions": {},
             "dataSources": {
                 "primary": "ds_f4HzVHsa"
             },
+            "options": {
+                "fontSize": "large"
+            },
+            "showLastUpdated": false,
+            "showProgressBar": false,
             "title": "Actor Details",
-            "type": "splunk.singlevalue"
+            "type": "splunk.table"
         },
         "viz_VpTFMowK": {
             "containerOptions": {},
@@ -327,7 +334,7 @@
                 "xAxisTitleText": "Time",
                 "yAxisTitleText": "Count of signatures"
             },
-            "title": "Signatures of threat actors matched on a Per Day Basis",
+            "title": "Signatures matched on a Per Day Basis on $dest_ip$",
             "type": "splunk.line"
         },
         "viz_nr87RKRM": {
@@ -448,21 +455,21 @@
             "name": "affected_hosts",
             "options": {
                 "extend": "ds_mGcuwEO0",
-                "query": "| search threat_actor=\"$threat_actor_token$\"\n| stats count by dest_ip\n| rename dest_ip as \"Host IP Address\"\n| table \"Host IP Address\""
+                "query": "| search threat=\"$threat_token$\"\n| stats count by dest_ip\n| rename dest_ip as \"Host IP Address\"\n| table \"Host IP Address\""
             },
             "type": "ds.chain"
         },
         "ds_7LZlDEZh": {
             "name": "Top Source IP count",
             "options": {
-                "query": "`cisco_secure_firewall` EventType=ConnectionEvent dest_ip = $dest_ip$\n| stats count BY  dest_ip  src_ip connection_id | sort count"
+                "query": "`cisco_secure_firewall` EventType=ConnectionEvent dest_ip = $dest_ip$\n| stats count BY  dest_ip src_ip connection_id | sort count"
             },
             "type": "ds.search"
         },
         "ds_7sRMJ3vQ": {
-            "name": "lookup",
+            "name": "snort_ids_threat_actor_lookup",
             "options": {
-                "query": "|inputlookup snort_ids_threat_actor.csv \n|  table threat_actor signature_id description distinct_count_snort_ids"
+                "query": "|inputlookup snort_ids_threat_actor.csv |  table threat signature_id category message"
             },
             "type": "ds.search"
         },
@@ -470,14 +477,14 @@
             "name": "all_intrusion_events_by_threat_actors",
             "options": {
                 "extend": "ds_mGcuwEO0",
-                "query": "| stats count by threat_actor"
+                "query": "| stats count by threat"
             },
             "type": "ds.chain"
         },
         "ds_8sclv3pU": {
-            "name": "Timeline",
+            "name": "timeline_instruction",
             "options": {
-                "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| bin _time span=1d\n| stats count AS Total_Alerts dc(signature_id) AS sig_count\n        values(signature_id)       AS signature_ids\n        values(signature)          AS signature\n        values(class_desc)         AS class_desc\n        values(MitreAttackGroups)  AS MitreAttackGroups\n        values(InlineResult)       AS InlineResult\n        values(InlineResultReason) AS InlineResultReason\n        values(src_ip)             AS src_ip\n        values(dest_port)          AS dest_port\n        values(rule)               AS rule\n        values(transport)          AS transport\n        values(app)                AS app\n  BY dest_ip, _time\n| eval sig_ids_str = mvjoin(signature_ids, \",\")\n| lookup snort_ids_threat_actor.csv signature_id AS sig_ids_str \n    OUTPUT threat_actor, distinct_count_snort_ids, description\n| where isnotnull(threat_actor) \n    AND sig_count >= tonumber(distinct_count_snort_ids)\n| mvexpand signature_ids\n| rename signature_ids AS signature_id\n| where threat_actor=\"$threat_actor_token$\"\n| timechart span=1h count BY signature_id"
+                "query": "`cisco_secure_firewall` EventType=IntrusionEvent dest_ip = \"$dest_ip$\"\n| timechart span=1d count BY signature_id"
             },
             "type": "ds.search"
         },
@@ -485,7 +492,7 @@
             "name": "dc_signature",
             "options": {
                 "extend": "ds_mGcuwEO0",
-                "query": "| search threat_actor=\"$threat_actor_token$\"\n| stats dc(signature)"
+                "query": "| search threat=\"$threat_token$\"\n| stats dc(signature)"
             },
             "type": "ds.chain"
         },
@@ -493,7 +500,7 @@
             "name": "Top Signatures",
             "options": {
                 "extend": "ds_mGcuwEO0",
-                "query": "| search threat_actor=\"$threat_actor_token$\"\n| stats count  by signature | table signature "
+                "query": "| search threat=\"$threat_token$\"\n| stats count  by signature | table signature "
             },
             "type": "ds.chain"
         },
@@ -527,7 +534,7 @@
             "name": "affect_hosts_count",
             "options": {
                 "extend": "ds_mGcuwEO0",
-                "query": "| search threat_actor = \"$threat_actor_token$\"\n| stats dc(dest_ip)"
+                "query": "| search threat = \"$threat_token$\"\n| stats dc(dest_ip)"
             },
             "type": "ds.chain"
         },
@@ -541,14 +548,15 @@
         "ds_f4HzVHsa": {
             "name": "description",
             "options": {
-                "query": "| inputlookup snort_ids_threat_actor.csv \n| search threat_actor=\"$threat_actor_token$\" \n| table description"
+                "query": "| inputlookup threat_actor_snort_count.csv \n| search threat=\"$threat_token$\" \n| table description"
             },
             "type": "ds.search"
         },
         "ds_i58D84BP": {
             "name": "lookup_threat_actors",
             "options": {
-                "query": "|inputlookup snort_ids_threat_actor.csv | table threat_actor"
+                "enableSmartSources": true,
+                "query": "| inputlookup snort_ids_threat_actor.csv | stats count by threat | table threat"
             },
             "type": "ds.search"
         },
@@ -556,14 +564,14 @@
             "name": "snort_evernts_per_actor",
             "options": {
                 "extend": "ds_mGcuwEO0",
-                "query": "|  search threat_actor=\"$threat_actor_token$\"\n| eval _time=strftime(_time, \"%Y-%m-%d\")"
+                "query": "| search threat=\"$threat_token$\"\n| eval _time=strftime(_time, \"%Y-%m-%d\")"
             },
             "type": "ds.chain"
         },
         "ds_mGcuwEO0": {
             "name": "parent_base_search",
             "options": {
-                "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| bin _time span=1d \n| stats count as Total_Alerts dc(signature_id) as sig_count \n    values(signature_id) as signature_ids \n    values(signature) as signature \n    values(class_desc) as class_desc \n    values(MitreAttackGroups) as MitreAttackGroups \n    values(InlineResult) as InlineResult \n    values(InlineResultReason) as InlineResultReason \n    values(src_ip) as src_ip \n    values(dest_port) as dest_port \n    values(rule) as rule \n    values(transport) as transport \n    values(connection_id) as connection_id\n    values(app) as app\n    by dest_ip _time \n| eval sig_ids_str = mvjoin(signature_ids, \",\") \n| lookup snort_ids_threat_actor.csv signature_id as sig_ids_str OUTPUT threat_actor, distinct_count_snort_ids, description \n| where isnotnull(threat_actor) AND sig_count >= tonumber(distinct_count_snort_ids) \n| `security_content_ctime(firstTime)` \n| `security_content_ctime(lastTime)`\n| table _time threat_actor description dest_ip signature_ids signature src_ip MitreAttackGroups connection_id",
+                "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| stats count AS total_alerts, dc(signature_id) AS sig_count, values(SnortRuleGroups) AS snort_rule_groups, values(connection_id) AS connection_id, values(rule) AS rule, values(dest_port) AS dest_port, values(transport) AS transport, values(app) AS app, values(signature) AS signature, values(src_ip) AS src_ip BY _time dest_ip signature_id\n| lookup snort_ids_threat_actor.csv signature_id OUTPUT threat, category, message\n| where isnotnull(threat)\n| bin _time span=1d\n| stats count AS Total_Alerts, dc(signature_id) AS sig_count, values(signature_id) AS signature_id, values(category) AS category, values(message) AS message, values(snort_rule_groups) AS snort_rule_groups, values(connection_id) AS connection_id, values(rule) AS rule, values(dest_port) AS dest_port, values(transport) AS transport, values(app) AS app, values(signature) AS signature, values(src_ip) AS src_ip BY _time dest_ip threat\n| lookup threat_actor_snort_count.csv threat OUTPUT description, distinct_count_snort_ids\n| table _time, dest_ip, threat, category, message, description, signature_id, signature, snort_rule_groups, sig_count, distinct_count_snort_ids, connection_id, rule, dest_port, transport, app\n| where sig_count >= distinct_count_snort_ids",
                 "queryParameters": {
                     "earliest": "$global_time.earliest$",
                     "latest": "$global_time.latest$"
@@ -596,7 +604,7 @@
             "name": "file_events",
             "options": {
                 "extend": "ds_mGcuwEO0",
-                "query": "| join type=inner dest_ip [\n    search `cisco_secure_firewall` EventType=FileEvent\n    | bin _time span=1d\n    | stats count, dc(file_name) as \"File Count\", values(FileDirection) as Direction, values(FileType) as \"File Type\", values(dest_ip) , values(ClientApplication) BY src_ip _time | rename src_ip as dest_ip\n]\n| search dest_ip=\"$dest_ip$\" threat_actor=\"$threat_actor_token$\"\n| table _time dest_ip \"File Count\" Direction \"File Type\" signature\n\n\n"
+                "query": "| join type=inner dest_ip [\n    search `cisco_secure_firewall` EventType=FileEvent\n    | bin _time span=1d\n    | stats count, dc(file_name) as \"File Count\", values(FileDirection) as Direction, values(FileType) as \"File Type\", values(dest_ip) , values(ClientApplication) BY src_ip _time | rename src_ip as dest_ip\n]\n| search dest_ip=\"$dest_ip$\" threat=\"$threat_token$\"\n| table _time dest_ip \"File Count\" Direction \"File Type\" signature\n\n\n"
             },
             "type": "ds.chain"
         }
@@ -696,16 +704,6 @@
                             "y": 106
                         },
                         "type": "block"
-                    },
-                    {
-                        "item": "viz_FVgI8gNf",
-                        "position": {
-                            "h": 400,
-                            "w": 1200,
-                            "x": 0,
-                            "y": 778
-                        },
-                        "type": "block"
                     }
                 ],
                 "type": "grid"
@@ -715,7 +713,7 @@
                     {
                         "item": "viz_SnsguT0c",
                         "position": {
-                            "h": 117,
+                            "h": 211,
                             "w": 600,
                             "x": 0,
                             "y": 0
@@ -728,17 +726,17 @@
                             "h": 217,
                             "w": 375,
                             "x": 0,
-                            "y": 117
+                            "y": 211
                         },
                         "type": "block"
                     },
                     {
                         "item": "viz_1ZFeC3zY",
                         "position": {
-                            "h": 324,
+                            "h": 448,
                             "w": 1200,
                             "x": 0,
-                            "y": 334
+                            "y": 428
                         },
                         "type": "block"
                     },
@@ -748,14 +746,14 @@
                             "h": 217,
                             "w": 375,
                             "x": 375,
-                            "y": 117
+                            "y": 211
                         },
                         "type": "block"
                     },
                     {
                         "item": "viz_FY6hwnml",
                         "position": {
-                            "h": 117,
+                            "h": 211,
                             "w": 600,
                             "x": 600,
                             "y": 0
@@ -768,7 +766,7 @@
                             "h": 217,
                             "w": 450,
                             "x": 750,
-                            "y": 117
+                            "y": 211
                         },
                         "type": "block"
                     }
@@ -826,7 +824,7 @@
                         "item": "viz_ISoX6BgF",
                         "position": {
                             "h": 350,
-                            "w": 577,
+                            "w": 594,
                             "x": 0,
                             "y": 99
                         },
@@ -836,7 +834,7 @@
                         "item": "viz_nr87RKRM",
                         "position": {
                             "h": 458,
-                            "w": 577,
+                            "w": 594,
                             "x": 0,
                             "y": 449
                         },
@@ -846,8 +844,8 @@
                         "item": "viz_AQzurdgj",
                         "position": {
                             "h": 350,
-                            "w": 623,
-                            "x": 577,
+                            "w": 606,
+                            "x": 594,
                             "y": 99
                         },
                         "type": "block"
@@ -856,8 +854,8 @@
                         "item": "viz_NT8j5Ogy",
                         "position": {
                             "h": 458,
-                            "w": 623,
-                            "x": 577,
+                            "w": 606,
+                            "x": 594,
                             "y": 449
                         },
                         "type": "block"
