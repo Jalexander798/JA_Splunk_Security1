@@ -22,8 +22,8 @@ search: |
   | lookup snort_ids_threat_actor signature_id as signature_id OUTPUT threat_actor 
   | bin _time span=1h
   | stats count as Total_Alerts dc(signature_id) as sig_count values(signature_id) as signature_id values(snort_rule_groups) as snort_rule_groups values(connection_id) as connection_id values(rule) as rule values(dest_port) as dest_port values(transport) as transport values(app) as app values(signature) as signature values(src_ip) as src_ip by _time dest_ip threat_actor 
-  | lookup threat_actor_snort_count threat_actor as threat_actor OUTPUT threat_actor_description distinct_count_snort_ids 
-  | table _time dest_ip threat_actor threat_actor_description signature_id snort_rule_groups signature sig_count distinct_count_snort_ids connection_id rule dest_port transport app 
+  | lookup threat_actor_snort_count threat_actor as threat_actor OUTPUT threat_actor_description distinct_count_snort_ids category
+  | table _time dest_ip threat_actor threat_actor_description signature_id signature snort_rule_groups category sig_count distinct_count_snort_ids  connection_id rule dest_port transport app 
   | where isnotnull(threat_actor) AND sig_count>=distinct_count_snort_ids
   | `cisco_secure_firewall___intrusion_events_by_threat_actors_filter`
 how_to_implement: |
