@@ -17,14 +17,15 @@ description: |
 data_source:
   - Cisco Secure Firewall Threat Defense Intrusion Event
 search: |
-  `cisco_secure_firewall` EventType=IntrusionEvent 
-  | stats count as total_alerts dc(signature_id) as sig_count values(SnortRuleGroups) as snort_rule_groups values(connection_id) as connection_id values(rule) as rule values(dest_port) as dest_port values(transport) as transport values(app) as app values(signature) as signature values(src_ip) as src_ip by _time dest_ip signature_id 
-  | lookup snort_ids_threat_actor signature_id as signature_id OUTPUT threat_actor 
-  | bin _time span=1h
-  | stats count as Total_Alerts dc(signature_id) as sig_count values(signature_id) as signature_id values(snort_rule_groups) as snort_rule_groups values(connection_id) as connection_id values(rule) as rule values(dest_port) as dest_port values(transport) as transport values(app) as app values(signature) as signature values(src_ip) as src_ip by _time dest_ip threat_actor 
-  | lookup threat_actor_snort_count threat_actor as threat_actor OUTPUT threat_actor_description distinct_count_snort_ids category
-  | table _time dest_ip threat_actor threat_actor_description signature_id signature snort_rule_groups category sig_count distinct_count_snort_ids  connection_id rule dest_port transport app 
-  | where isnotnull(threat_actor) AND sig_count>=distinct_count_snort_ids
+  `cisco_secure_firewall` EventType=IntrusionEvent
+  | stats count AS total_alerts, dc(signature_id) AS sig_count, values(SnortRuleGroups) AS snort_rule_groups, values(connection_id) AS connection_id, values(rule) AS rule, values(dest_port) AS dest_port, values(transport) AS transport, values(app) AS app, values(signature) AS signature, values(src_ip) AS src_ip BY _time dest_ip signature_id
+  | lookup snort_ids_threat_actor signature_id OUTPUT threat, category, message
+  | where isnotnull(threat)
+  | bin _time span=1d
+  | stats count AS Total_Alerts, dc(signature_id) AS sig_count, values(signature_id) AS signature_id, values(category) AS category, values(message) AS message, values(snort_rule_groups) AS snort_rule_groups, values(connection_id) AS connection_id, values(rule) AS rule, values(dest_port) AS dest_port, values(transport) AS transport, values(app) AS app, values(signature) AS signature, values(src_ip) AS src_ip BY _time dest_ip threat
+  | lookup threat_actor_snort_count threat OUTPUT description, distinct_count_snort_ids
+  | table _time, dest_ip, threat, category, message, description, signature_id, signature, snort_rule_groups, sig_count, distinct_count_snort_ids, connection_id, rule, dest_port, transport, app
+  | where sig_count >= distinct_count_snort_ids
   | `cisco_secure_firewall___intrusion_events_by_threat_actors_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
