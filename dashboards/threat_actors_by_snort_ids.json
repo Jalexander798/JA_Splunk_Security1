@@ -1,6 +1,6 @@
 {
     "title": "Threat Activity by Snort IDs",
-    "description": "Use this dashboard to explore how Snort signatures correlate with specific threat actors and surfaces broader device activity. It’s organized into four tabs:",
+    "description": "Use this dashboard to explore how Snort signatures correlate with specific threats and surfaces broader device activity. It’s organized into four tabs:",
     "inputs": {
         "input_global_trp": {
             "options": {
