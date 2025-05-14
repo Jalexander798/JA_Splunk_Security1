@@ -77,7 +77,29 @@
             },
             "description": "Tell you about the",
             "options": {
-                "backgroundColor": "#000000"
+                "backgroundColor": "transparent",
+                "seriesColors": [
+                    "#7B56DB",
+                    "#009CEB",
+                    "#62b3b2",
+                    "#DD9900",
+                    "#FF677B",
+                    "#CB2196",
+                    "#813193",
+                    "#0051B5",
+                    "#008C80",
+                    "#99B100",
+                    "#FFA476",
+                    "#FF6ACE",
+                    "#AE8CFF",
+                    "#00689D",
+                    "#00490A",
+                    "#465D00",
+                    "#9D6300",
+                    "#F6540B",
+                    "#FF969E",
+                    "#E47BFE"
+                ]
             },
             "showLastUpdated": false,
             "showProgressBar": false,
@@ -319,6 +341,7 @@
             "options": {
                 "backgroundColor": "#ffffff",
                 "fontColor": "#dc4e41",
+                "fontSize": "large",
                 "markdown": "\n### Activity Explorer\n\n- Lists all connection and file-based events for the device for the selected time range"
             },
             "type": "splunk.markdown"
@@ -418,7 +441,7 @@
                 "primary": "ds_ULaiHv6R"
             },
             "options": {
-                "backgroundColor": "#000000"
+                "backgroundColor": "transparent"
             },
             "showLastUpdated": false,
             "showProgressBar": false,
@@ -788,7 +811,7 @@
                     {
                         "item": "viz_70gtzPTV",
                         "position": {
-                            "h": 91,
+                            "h": 137,
                             "w": 1200,
                             "x": 0,
                             "y": 0
@@ -801,7 +824,7 @@
                             "h": 322,
                             "w": 600,
                             "x": 0,
-                            "y": 91
+                            "y": 137
                         },
                         "type": "block"
                     },
@@ -811,7 +834,7 @@
                             "h": 322,
                             "w": 600,
                             "x": 600,
-                            "y": 91
+                            "y": 137
                         },
                         "type": "block"
                     }
