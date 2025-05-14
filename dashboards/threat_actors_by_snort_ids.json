@@ -1,5 +1,5 @@
 {
-    "title": "V2 - Threat Actors by Snort IDs",
+    "title": "Threat Actors by Snort IDs",
     "description": "Use this dashboard to explore how Snort signatures correlate with specific threat actors and surfaces broader device activity. It’s organized into four tabs:",
     "inputs": {
         "input_global_trp": {
@@ -31,8 +31,8 @@
                 "primary": "ds_i58D84BP"
             },
             "options": {
+                "defaultValue": "Select a threat",
                 "items": ">frame(label, value) | prepend(formattedStatics) | objects()",
-                "selectFirstSearchResult": true,
                 "token": "threat_token"
             },
             "title": "Threat",
@@ -178,34 +178,6 @@
             "showProgressBar": false,
             "title": "Distinct Snort Signature Hits",
             "type": "splunk.singlevalue"
-        },
-        "viz_LbI09I1U": {
-            "dataSources": {
-                "primary": "ds_7sRMJ3vQ"
-            },
-            "description": "This table lists of all the threats that can be potentially tracked using this dashboard",
-            "options": {
-                "backgroundColor": "> themes.defaultBackgroundColor",
-                "columnFormat": {
-                    "description": {
-                        "width": 60
-                    },
-                    "signature_id": {
-                        "width": 123
-                    },
-                    "threat_actor": {
-                        "width": 60
-                    }
-                },
-                "headerVisibility": "fixed",
-                "tableFormat": {
-                    "align": "left",
-                    "headerAlign": "left",
-                    "rowBackgroundColors": "> table | seriesByIndex(0) | pick(tableAltRowBackgroundColorsByTheme)"
-                }
-            },
-            "title": "All Threats",
-            "type": "splunk.table"
         },
         "viz_NT8j5Ogy": {
             "dataSources": {
@@ -424,6 +396,17 @@
                     "type": "drilldown.setToken"
                 }
             ],
+            "options": {
+                "backgroundColor": "> themes.defaultBackgroundColor",
+                "count": 5,
+                "fontSize": "large",
+                "headerVisibility": "fixed",
+                "tableFormat": {
+                    "align": "center",
+                    "headerAlign": "center",
+                    "rowBackgroundColors": "> table | seriesByIndex(0) | pick(tableAltRowBackgroundColorsByTheme)"
+                }
+            },
             "showLastUpdated": false,
             "showProgressBar": false,
             "title": "Affected Hosts",
@@ -668,19 +651,9 @@
                         "item": "viz_8VIu1U0s",
                         "position": {
                             "h": 368,
-                            "w": 521,
+                            "w": 752,
                             "x": 0,
                             "y": 110
-                        },
-                        "type": "block"
-                    },
-                    {
-                        "item": "viz_LbI09I1U",
-                        "position": {
-                            "h": 477,
-                            "w": 1200,
-                            "x": 0,
-                            "y": 478
                         },
                         "type": "block"
                     },
@@ -688,8 +661,8 @@
                         "item": "viz_q5G96ojA",
                         "position": {
                             "h": 368,
-                            "w": 679,
-                            "x": 521,
+                            "w": 448,
+                            "x": 752,
                             "y": 110
                         },
                         "type": "block"
