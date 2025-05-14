@@ -6,13 +6,13 @@ author: Bhavin Patel, Nasreddine Bencherchali, Splunk
 status: production
 type: Anomaly
 description: |
-  This analytic detects intrusion events from known threat actors using Cisco Secure Firewall Intrusion Events. 
-  It leverages Cisco Secure Firewall Threat Defense IntrusionEvent logs to identify cases where multiple Snort signatures 
-  associated with known threat actor activities have been triggered within a one-hour time window. The detection uses a 
+  This analytic detects intrusion events from known threat activity using Cisco Secure Firewall Intrusion Events. 
+  It leverages Cisco Secure Firewall Threat Defense IntrusionEvent logs to identify cases where one or multiple Snort signatures 
+  associated with a known threat or threat actor activity have been triggered within a one-hour time window. The detection uses a 
   lookup table (snort_ids_threat_actor.csv) to map Snort signature IDs to known threat actors and their techniques. 
   When multiple signatures associated with the same threat actor are triggered within the time window, and the count of 
-  unique signatures matches or exceeds the expected number of signatures for that threat actor's technique, an alert is generated. 
-  This helps identify potential coordinated threat actor activity in your network environment by correlating related intrusion 
+  unique signatures matches or exceeds the expected number of signatures for that threat technique, an alert is generated. 
+  This helps identify potential coordinated threat activity in your network environment by correlating related intrusion 
   events that occur in close temporal proximity.
 data_source:
   - Cisco Secure Firewall Threat Defense Intrusion Event
