@@ -230,7 +230,7 @@
             "dataSources": {
                 "primary": "ds_0SEcxnrn"
             },
-            "description": "This table contains the list of  other risk events in Enterprise Security for the affected host -  $dest_ip$",
+            "description": "List of related risk events in Enterprise Security for the affected host -  $dest_ip$",
             "eventHandlers": [
                 {
                     "options": {
