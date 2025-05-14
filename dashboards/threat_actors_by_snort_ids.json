@@ -173,7 +173,7 @@
             "dataSources": {
                 "primary": "ds_PpNvhTDF"
             },
-            "description": "This numbers shows the distinct number of snort signatures matched for this threat actor",
+            "description": "This shows the distinct number of snort signatures matched for this threat",
             "showLastUpdated": false,
             "showProgressBar": false,
             "title": "Distinct Snort Signature Hits",
