@@ -452,9 +452,9 @@
         "viz_wl93h7VE": {
             "options": {
                 "backgroundColor": "#ffffff",
-                "fontColor": "#4fa484",
+                "fontColor": "#dc4e41",
                 "fontSize": "large",
-                "markdown": "### Overview\n- Shows the view of threats that are currently being tracked \n- Table of Affected hosts with known snort signatures \n\n### Select a threat from the dropdown and click on the Host IP Address"
+                "markdown": "### Overview\n- Shows the view of threats that are currently being tracked \n- Table of Affected hosts with known snort signatures \n- Ensure that the   `cisco_secure_firewall` macro is configured to use the right index\n- The Snort IDs to threat mapping is stored in the following lookups: \n\n            - cisco_snort_ids_to_threat_mapping\n            - threat_actor_snort_count \n\n### Select a threat from the dropdown and click on the Host IP Address"
             },
             "type": "splunk.markdown"
         },
@@ -664,7 +664,7 @@
                     {
                         "item": "viz_wl93h7VE",
                         "position": {
-                            "h": 150,
+                            "h": 321,
                             "w": 1200,
                             "x": 0,
                             "y": 0
@@ -677,7 +677,7 @@
                             "h": 368,
                             "w": 752,
                             "x": 0,
-                            "y": 150
+                            "y": 321
                         },
                         "type": "block"
                     },
@@ -687,7 +687,7 @@
                             "h": 368,
                             "w": 448,
                             "x": 752,
-                            "y": 150
+                            "y": 321
                         },
                         "type": "block"
                     }
