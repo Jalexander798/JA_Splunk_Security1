@@ -57,6 +57,7 @@
             "dataSources": {
                 "primary": "ds_m3IAfEaF"
             },
+            "description": "This table shows a detailed view of the snort events matched with the threat",
             "eventHandlers": [
                 {
                     "options": {
@@ -67,7 +68,7 @@
             ],
             "showLastUpdated": false,
             "showProgressBar": false,
-            "title": "Snort Intrusion events for Threat Actor - $threat_token$",
+            "title": "Snort Intrusion events for - $threat_token$",
             "type": "splunk.table"
         },
         "viz_3VU4OAeI": {
@@ -111,7 +112,7 @@
                 "backgroundColor": "#ffffff",
                 "fontColor": "#0877a6",
                 "fontSize": "large",
-                "markdown": "### Timeline\n\n- Visualizes the daily activity related to Snort signature matches:\n\n- Tracks total intrusion attempts per day\n- Highlights frequency and consistency of threat activity over time"
+                "markdown": "### Timeline\n\n- Visualizes the daily activity related to all Snort signature \n\n- Tracks total intrusion attempts per day\n- Highlights frequency and consistency of threat activity over time"
             },
             "type": "splunk.markdown"
         },
@@ -176,6 +177,7 @@
             "dataSources": {
                 "primary": "ds_wzZtYKW7"
             },
+            "description": "This is the value of the token set from Affected",
             "title": "Investigating IP",
             "type": "splunk.singlevalue"
         },
@@ -303,6 +305,7 @@
             "dataSources": {
                 "primary": "ds_Q6zbF7Qb"
             },
+            "description": "This shows the  snort signatures matched for this threat",
             "eventHandlers": [
                 {
                     "options": {
@@ -333,6 +336,7 @@
             "dataSources": {
                 "primary": "ds_YybVUCKh"
             },
+            "description": "This shows the distinct number of affected hosts matched for this threat",
             "showLastUpdated": false,
             "showProgressBar": false,
             "title": "Affected Hosts",
