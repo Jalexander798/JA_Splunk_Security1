@@ -75,7 +75,7 @@
             "dataSources": {
                 "primary": "ds_tuaeoaIh"
             },
-            "description": "Tell you about the",
+            "description": "",
             "options": {
                 "backgroundColor": "transparent",
                 "seriesColors": [
@@ -207,10 +207,10 @@
             },
             "options": {
                 "center": [
-                    45.82351547154903,
-                    1.6163436265312612
+                    45.503975321779336,
+                    -48.221416265989774
                 ],
-                "zoom": 2.6208701026526793
+                "zoom": 1.6208701026526793
             },
             "title": "Connection Events",
             "type": "splunk.map"
@@ -221,11 +221,12 @@
                 "primary": "ds_f4HzVHsa"
             },
             "options": {
-                "fontSize": "large"
+                "fontSize": "large",
+                "headerVisibility": "fixed"
             },
             "showLastUpdated": false,
             "showProgressBar": false,
-            "title": "Actor Details",
+            "title": "Threat Desciption",
             "type": "splunk.table"
         },
         "viz_T6i68u8y": {
@@ -385,7 +386,7 @@
                     "align": "left"
                 }
             },
-            "title": "Connection Events From to all Source IPs",
+            "title": "Connection Events from and to all Source IPs",
             "type": "splunk.table"
         },
         "viz_q5G96ojA": {
@@ -395,7 +396,7 @@
             "dataSources": {
                 "primary": "ds_70zt6tTO"
             },
-            "description": "Click on the host name to set a token value of dest_ip",
+            "description": "This table shows you the affected hosts in your environment.",
             "eventHandlers": [
                 {
                     "options": {
@@ -453,7 +454,7 @@
                 "backgroundColor": "#ffffff",
                 "fontColor": "#4fa484",
                 "fontSize": "large",
-                "markdown": "### Overview\n- Shows the list of threat actors that are currently being tracked\n- Table of Affected hosts with known snort signatures "
+                "markdown": "### Overview\n- Shows the view of threats that are currently being tracked \n- Table of Affected hosts with known snort signatures \n\n### Select a threat from the dropdown and click on the Host IP Address"
             },
             "type": "splunk.markdown"
         },
@@ -663,7 +664,7 @@
                     {
                         "item": "viz_wl93h7VE",
                         "position": {
-                            "h": 110,
+                            "h": 150,
                             "w": 1200,
                             "x": 0,
                             "y": 0
@@ -676,7 +677,7 @@
                             "h": 368,
                             "w": 752,
                             "x": 0,
-                            "y": 110
+                            "y": 150
                         },
                         "type": "block"
                     },
@@ -686,7 +687,7 @@
                             "h": 368,
                             "w": 448,
                             "x": 752,
-                            "y": 110
+                            "y": 150
                         },
                         "type": "block"
                     }
@@ -928,7 +929,7 @@
                     "layoutId": "layout_1"
                 },
                 {
-                    "label": "Actor Details",
+                    "label": "Threat Details",
                     "layoutId": "layout_fRHBDK2O"
                 },
                 {
