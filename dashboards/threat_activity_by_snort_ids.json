@@ -177,7 +177,7 @@
             "dataSources": {
                 "primary": "ds_wzZtYKW7"
             },
-            "description": "This is the value of the token set from Affected",
+            "description": "This is the value of the token set from Affected Hosts table",
             "title": "Investigating IP",
             "type": "splunk.singlevalue"
         },
@@ -222,6 +222,7 @@
             "dataSources": {
                 "primary": "ds_f4HzVHsa"
             },
+            "description": "This is the description of the selected threat actor - $threat_token$",
             "options": {
                 "fontSize": "large",
                 "headerVisibility": "fixed"
@@ -355,6 +356,7 @@
             "dataSources": {
                 "primary": "ds_8sclv3pU"
             },
+            "description": "This visualizes daily  snort events matched for the dest_ip",
             "options": {
                 "xAxisTitleText": "Time",
                 "yAxisTitleText": "Count of signatures"
