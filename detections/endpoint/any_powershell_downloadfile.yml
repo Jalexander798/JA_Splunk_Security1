@@ -1,7 +1,7 @@
 name: Any Powershell DownloadFile
 id: 1a93b7ea-7af7-11eb-adb5-acde48001122
-version: 14
-date: '2025-05-02'
+version: '15'
+date: '2025-05-06'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -74,19 +74,20 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - Data Destruction
-  - Malicious PowerShell
-  - China-Nexus Threat Activity
-  - Hermetic Wiper
-  - DarkCrystal RAT
-  - Phemedrone Stealer
-  - PXA Stealer
   - Log4Shell CVE-2021-44228
-  - Salt Typhoon
+  - Phemedrone Stealer
+  - Malicious PowerShell
+  - PXA Stealer
+  - China-Nexus Threat Activity
+  - Data Destruction
   - Braodo Stealer
-  - Crypto Stealer
-  - Ingress Tool Transfer
   - PHP-CGI RCE Attack on Japanese Organizations
+  - Hermetic Wiper
+  - Ingress Tool Transfer
+  - Salt Typhoon
+  - XWorm
+  - DarkCrystal RAT
+  - Crypto Stealer
   asset_type: Endpoint
   cve:
   - CVE-2021-44228
