@@ -74,9 +74,9 @@
         "viz_3VU4OAeI": {
             "containerOptions": {},
             "dataSources": {
-                "primary": "ds_tuaeoaIh"
+                "primary": "ds_fwElVms9"
             },
-            "description": "",
+            "description": "This table shows how many distinct source IPs hit each day.",
             "options": {
                 "backgroundColor": "transparent",
                 "seriesColors": [
@@ -104,7 +104,7 @@
             },
             "showLastUpdated": false,
             "showProgressBar": false,
-            "title": "Total Intrusion Events on a Per Day Basis",
+            "title": "Unique Attackers per Day",
             "type": "splunk.column"
         },
         "viz_70gtzPTV": {
@@ -412,10 +412,6 @@
                     "options": {
                         "tokens": [
                             {
-                                "key": "dvc",
-                                "token": "dvc"
-                            },
-                            {
                                 "key": "value",
                                 "token": "dest_ip"
                             }
@@ -593,6 +589,14 @@
             },
             "type": "ds.search"
         },
+        "ds_fwElVms9": {
+            "name": "unique_attackers_per_day",
+            "options": {
+                "extend": "ds_mGcuwEO0",
+                "query": "| search threat=\"$threat_token$\" dest_ip=\"$dest_ip$\"\n| timechart span=1d dc(src_ip) AS unique_attacker_count"
+            },
+            "type": "ds.chain"
+        },
         "ds_i58D84BP": {
             "name": "lookup_threat_actors",
             "options": {
@@ -612,7 +616,7 @@
         "ds_mGcuwEO0": {
             "name": "parent_base_search",
             "options": {
-                "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| stats count AS total_alerts, dc(signature_id) AS sig_count, values(SnortRuleGroups) AS snort_rule_groups, values(connection_id) AS connection_id, values(rule) AS rule, values(dest_port) AS dest_port, values(transport) AS transport, values(app) AS app, values(signature) AS signature, values(src_ip) AS src_ip BY _time dest_ip signature_id\n| lookup cisco_snort_ids_to_threat_mapping signature_id OUTPUT threat, category, message\n| where isnotnull(threat)\n| bin _time span=1d\n| stats count AS Total_Alerts, dc(signature_id) AS sig_count, values(signature_id) AS signature_id, values(category) AS category, values(message) AS message, values(snort_rule_groups) AS snort_rule_groups, values(connection_id) AS connection_id, values(rule) AS rule, values(dest_port) AS dest_port, values(transport) AS transport, values(app) AS app, values(signature) AS signature, values(src_ip) AS src_ip BY _time dest_ip threat\n| lookup threat_actor_snort_count threat OUTPUT description, distinct_count_snort_ids\n| table _time, dest_ip, threat, category, message, description, signature_id, signature, snort_rule_groups, sig_count, distinct_count_snort_ids, connection_id, rule, dest_port, transport, app\n| where sig_count >= distinct_count_snort_ids",
+                "query": "`cisco_secure_firewall` EventType=IntrusionEvent \n| stats count AS total_alerts, dc(signature_id) AS sig_count, values(SnortRuleGroups) AS snort_rule_groups, values(connection_id) AS connection_id, values(rule) AS rule, values(dest_port) AS dest_port, values(transport) AS transport, values(app) AS app, values(signature) AS signature, values(src_ip) AS src_ip BY _time dest_ip signature_id\n| lookup cisco_snort_ids_to_threat_mapping signature_id OUTPUT threat, category, message\n| where isnotnull(threat)\n| bin _time span=1d\n| stats count AS Total_Alerts, dc(signature_id) AS sig_count, values(signature_id) AS signature_id, values(category) AS category, values(message) AS message, values(snort_rule_groups) AS snort_rule_groups, values(connection_id) AS connection_id, values(rule) AS rule, values(dest_port) AS dest_port, values(transport) AS transport, values(app) AS app, values(signature) AS signature, values(src_ip) AS src_ip BY _time dest_ip threat\n| lookup threat_actor_snort_count threat OUTPUT description, distinct_count_snort_ids\n| table _time, dest_ip, src_ip, threat, category, message, description, signature_id, signature, snort_rule_groups, sig_count, distinct_count_snort_ids, connection_id, rule, dest_port, transport, app\n| where sig_count >= distinct_count_snort_ids",
                 "queryParameters": {
                     "earliest": "$global_time.earliest$",
                     "latest": "$global_time.latest$"
