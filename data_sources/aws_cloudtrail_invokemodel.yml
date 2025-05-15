@@ -13,7 +13,7 @@ separator_value: InvokeModel
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
-  version: 7.9.1
+  version: 7.10.0
 fields:
 - _time
 - action
@@ -102,15 +102,14 @@ example_log: '{"eventVersion": "1.08", "userIdentity": {"type": "AssumedRole", "
   "accountId": "111111111111", "accessKeyId": "ASIAYTOGP2RLXXXXXXXX", "sessionContext":
   {"sessionIssuer": {"type": "Role", "principalId": "AROAIJIESMXKGCJRCTPR6", "arn":
   "arn:aws:iam::111111111111:role/admin_role", "accountId": "111111111111", "userName":
-  "admin_role"}, "webIdFederationData": {}, "attributes": {"mfaAuthenticated":
-  "false", "creationDate": "2023-10-15T08:36:15Z"}}}, "eventTime": "2023-10-15T08:49:49Z",
+  "admin_role"}, "webIdFederationData": {}, "attributes": {"mfaAuthenticated": "false",
+  "creationDate": "2023-10-15T08:36:15Z"}}}, "eventTime": "2023-10-15T08:49:49Z",
   "eventSource": "bedrock.amazonaws.com", "eventName": "InvokeModel", "awsRegion":
-  "us-east-1", "sourceIPAddress": "192.0.2.1", "userAgent": "aws-cli/2.9.15", 
-  "requestParameters": {"modelId": "anthropic.claude-v2"}, 
-  "responseElements": {"requestId": "97b40da9-9291-4a92-8e9e-892b6887ffc9"}, 
-  "requestID": "97b40da9-9291-4a92-8e9e-892b6887ffc9", "eventID":
-  "46fe04b8-d007-4933-8bb8-c8b65c1121fa", "readOnly": false, "eventType": "AwsApiCall",
-  "managementEvent": true, "eventCategory": "Management", "recipientAccountId": "111111111111"}'
+  "us-east-1", "sourceIPAddress": "192.0.2.1", "userAgent": "aws-cli/2.9.15", "requestParameters":
+  {"modelId": "anthropic.claude-v2"}, "responseElements": {"requestId": "97b40da9-9291-4a92-8e9e-892b6887ffc9"},
+  "requestID": "97b40da9-9291-4a92-8e9e-892b6887ffc9", "eventID": "46fe04b8-d007-4933-8bb8-c8b65c1121fa",
+  "readOnly": false, "eventType": "AwsApiCall", "managementEvent": true, "eventCategory":
+  "Management", "recipientAccountId": "111111111111"}'
 output_fields:
 - dest
 - user
@@ -118,4 +117,4 @@ output_fields:
 - src
 - vendor_account
 - vendor_region
-- vendor_product 
+- vendor_product
