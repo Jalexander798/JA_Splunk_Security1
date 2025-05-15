@@ -26,7 +26,7 @@ search: '| tstats `security_content_summariesonly` min(_time) as firstTime max(_
   as process_exec values(Processes.process_guid) as process_guid values(Processes.process_hash)
   as process_hash values(Processes.process_integrity_level) as process_integrity_level
   values(Processes.process_name) as process_name values(Processes.process_path) as
-  process_path values(Processes.user) as user  values(Processes.user_id) as user_id
+  process_path  values(Processes.user_id) as user_id
   values(Processes.vendor_product) as vendor_product from datamodel=Endpoint.Processes
   where (Processes.parent_process_name=zoom.exe OR Processes.parent_process_name=zoom.us)
   by Processes.process_id Processes.dest | `drop_dm_object_name(Processes)` | lookup
