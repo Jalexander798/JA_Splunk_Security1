@@ -1,7 +1,7 @@
 name: Windows Process Execution From ProgramData
 id: 237016fa-d8e6-47b4-80f9-70c4d42c72c0
-version: 3
-date: '2025-05-02'
+version: '4'
+date: '2025-05-06'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -67,9 +67,10 @@ rba:
     type: parent_process_name
 tags:
   analytic_story:
+  - SnappyBee
+  - XWorm
   - Salt Typhoon
   - China-Nexus Threat Activity
-  - SnappyBee
   asset_type: Endpoint
   mitre_attack_id:
   - T1036.005

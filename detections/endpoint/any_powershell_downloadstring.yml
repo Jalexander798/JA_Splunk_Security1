@@ -1,7 +1,7 @@
 name: Any Powershell DownloadString
 id: 4d015ef2-7adf-11eb-95da-acde48001122
-version: 11
-date: '2025-05-02'
+version: '12'
+date: '2025-05-06'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -76,15 +76,16 @@ rba:
 tags:
   analytic_story:
   - Winter Vivern
-  - Ingress Tool Transfer
-  - Hermetic Wiper
-  - Malicious PowerShell
-  - HAFNIUM Group
-  - Data Destruction
-  - IcedID
-  - SysAid On-Prem Software CVE-2023-47246 Vulnerability
   - Phemedrone Stealer
+  - Malicious PowerShell
+  - Data Destruction
+  - SysAid On-Prem Software CVE-2023-47246 Vulnerability
   - PHP-CGI RCE Attack on Japanese Organizations
+  - Hermetic Wiper
+  - IcedID
+  - Ingress Tool Transfer
+  - HAFNIUM Group
+  - XWorm
   asset_type: Endpoint
   mitre_attack_id:
   - T1059.001
