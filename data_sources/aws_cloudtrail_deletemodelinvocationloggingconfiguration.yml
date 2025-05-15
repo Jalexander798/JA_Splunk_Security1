@@ -3,7 +3,8 @@ id: fe2b3a52-1c8d-4e17-9f74-76c531a87e21
 version: 1
 date: '2023-10-15'
 author: Bhavin Patel, Splunk
-description: Logs an event when a model invocation logging configuration is deleted within the AWS CloudTrail.
+description: Logs an event when a model invocation logging configuration is deleted
+  within the AWS CloudTrail.
 mitre_components:
 - Cloud Service Modification
 source: aws_cloudtrail
@@ -13,7 +14,7 @@ separator_value: DeleteModelInvocationLoggingConfiguration
 supported_TA:
 - name: Splunk Add-on for AWS
   url: https://splunkbase.splunk.com/app/1876
-  version: 7.9.1
+  version: 7.10.0
 fields:
 - _time
 - action
@@ -121,7 +122,21 @@ fields:
 - vendor_account
 - vendor_product
 - vendor_region
-example_log: '{"eventVersion": "1.09", "userIdentity": {"type": "IAMUser", "principalId": "AAAAAAA", "arn": "arn:aws:iam::111111111111:user/daftpunk", "accountId": "111111111111", "accessKeyId": "AKIAAAAAAAA", "userName": "daftpunk"}, "eventTime": "2025-04-03T17:16:02Z", "eventSource": "bedrock.amazonaws.com", "eventName": "DeleteModelInvocationLoggingConfiguration", "awsRegion": "us-west-2", "sourceIPAddress": "23.93.242.200", "userAgent": "aws-cli/2.24.22 md/awscrt#0.23.8 ua/2.1 os/macos#24.3.0 md/arch#arm64 lang/python#3.12.9 md/pyimpl#CPython cfg/retry-mode#standard md/installer#source md/prompt#off md/command#bedrock.delete-model-invocation-logging-configuration", "errorCode": "AccessDenied", "errorMessage": "User: arn:aws:iam::111111111111:user/daftpunk is not authorized to perform: bedrock:DeleteModelInvocationLoggingConfiguration because no identity-based policy allows the bedrock:DeleteModelInvocationLoggingConfiguration action", "requestParameters": null, "responseElements": null, "requestID": "11519ac6-2761-4434-813a-585547a59096", "eventID": "1f7bd76f-13fb-4dff-b9bb-95a466217721", "readOnly": false, "eventType": "AwsApiCall", "managementEvent": true, "recipientAccountId": "111111111111", "eventCategory": "Management", "tlsDetails": {"tlsVersion": "TLSv1.3", "cipherSuite": "TLS_AES_128_GCM_SHA256", "clientProvidedHostHeader": "bedrock.us-west-2.amazonaws.com"}}'
+example_log: '{"eventVersion": "1.09", "userIdentity": {"type": "IAMUser", "principalId":
+  "AAAAAAA", "arn": "arn:aws:iam::111111111111:user/daftpunk", "accountId": "111111111111",
+  "accessKeyId": "AKIAAAAAAAA", "userName": "daftpunk"}, "eventTime": "2025-04-03T17:16:02Z",
+  "eventSource": "bedrock.amazonaws.com", "eventName": "DeleteModelInvocationLoggingConfiguration",
+  "awsRegion": "us-west-2", "sourceIPAddress": "23.93.242.200", "userAgent": "aws-cli/2.24.22
+  md/awscrt#0.23.8 ua/2.1 os/macos#24.3.0 md/arch#arm64 lang/python#3.12.9 md/pyimpl#CPython
+  cfg/retry-mode#standard md/installer#source md/prompt#off md/command#bedrock.delete-model-invocation-logging-configuration",
+  "errorCode": "AccessDenied", "errorMessage": "User: arn:aws:iam::111111111111:user/daftpunk
+  is not authorized to perform: bedrock:DeleteModelInvocationLoggingConfiguration
+  because no identity-based policy allows the bedrock:DeleteModelInvocationLoggingConfiguration
+  action", "requestParameters": null, "responseElements": null, "requestID": "11519ac6-2761-4434-813a-585547a59096",
+  "eventID": "1f7bd76f-13fb-4dff-b9bb-95a466217721", "readOnly": false, "eventType":
+  "AwsApiCall", "managementEvent": true, "recipientAccountId": "111111111111", "eventCategory":
+  "Management", "tlsDetails": {"tlsVersion": "TLSv1.3", "cipherSuite": "TLS_AES_128_GCM_SHA256",
+  "clientProvidedHostHeader": "bedrock.us-west-2.amazonaws.com"}}'
 output_fields:
 - dest
 - user
@@ -129,4 +144,4 @@ output_fields:
 - src
 - vendor_account
 - vendor_region
-- vendor_product 
+- vendor_product

@@ -1,7 +1,7 @@
 name: Registry Keys Used For Persistence
 id: f5f6af30-7aa7-4295-bfe9-07fe87c01a4b
-version: 21
-date: '2025-05-02'
+version: '22'
+date: '2025-05-06'
 author: Jose Hernandez, David Dorsey, Teoderick Contreras, Rod Soto, Splunk
 status: production
 type: TTP
@@ -78,39 +78,40 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Amadey
-  - AsyncRAT
-  - Azorult
-  - BlackByte Ransomware
-  - BlackSuit Ransomware
-  - Braodo Stealer
-  - Cactus Ransomware
+  - DHS Report TA18-074A
+  - CISA AA23-347A
   - Chaos Ransomware
   - China-Nexus Threat Activity
-  - CISA AA23-347A
-  - DarkGate Malware
-  - Derusbi
-  - DHS Report TA18-074A
-  - Emotet Malware DHS Report TA18-201A
   - IcedID
-  - MoonPeak
-  - NjRAT
-  - Possible Backdoor Activity Associated With MUDCARP Espionage Campaigns
+  - BlackByte Ransomware
   - Qakbot
-  - Ransomware
-  - RedLine Stealer
-  - Remcos
-  - Salt Typhoon
-  - SnappyBee
-  - Snake Keylogger
-  - Sneaky Active Directory Persistence Tricks
-  - Suspicious MSHTA Activity
-  - Suspicious Windows Registry Activities
-  - SystemBC
+  - MoonPeak
   - Warzone RAT
-  - Windows Persistence Techniques
   - Windows Registry Abuse
+  - Braodo Stealer
+  - Derusbi
+  - AsyncRAT
+  - RedLine Stealer
+  - Suspicious MSHTA Activity
+  - Salt Typhoon
+  - Cactus Ransomware
+  - Possible Backdoor Activity Associated With MUDCARP Espionage Campaigns
+  - Windows Persistence Techniques
   - WinDealer RAT
+  - Amadey
+  - Suspicious Windows Registry Activities
+  - NjRAT
+  - Sneaky Active Directory Persistence Tricks
+  - BlackSuit Ransomware
+  - Ransomware
+  - XWorm
+  - SnappyBee
+  - Azorult
+  - Emotet Malware DHS Report TA18-201A
+  - Snake Keylogger
+  - Remcos
+  - SystemBC
+  - DarkGate Malware
   asset_type: Endpoint
   mitre_attack_id:
   - T1547.001
