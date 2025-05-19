@@ -348,7 +348,7 @@
                 "backgroundColor": "#ffffff",
                 "fontColor": "#dc4e41",
                 "fontSize": "large",
-                "markdown": "\n### Activity Explorer\n\n- Lists all connection and file-based events for the device for the selected time range"
+                "markdown": "\n### Activity Explorer\n\n- Lists all connection and file events related to the affected host for the selected time range"
             },
             "type": "splunk.markdown"
         },
