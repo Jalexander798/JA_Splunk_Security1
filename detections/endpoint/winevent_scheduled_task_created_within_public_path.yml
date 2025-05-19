@@ -1,7 +1,7 @@
 name: WinEvent Scheduled Task Created Within Public Path
 id: 5d9c6eee-988c-11eb-8253-acde48001122
-version: 14
-date: '2025-05-02'
+version: '15'
+date: '2025-05-06'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -54,24 +54,25 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Active Directory Lateral Movement
-  - AsyncRAT
-  - China-Nexus Threat Activity
-  - CISA AA22-257A
-  - CISA AA23-347A
   - Compromised Windows Host
+  - CISA AA23-347A
+  - China-Nexus Threat Activity
   - Data Destruction
   - IcedID
-  - Industroyer2
   - Medusa Ransomware
   - Prestige Ransomware
-  - Ransomware
-  - Ryuk Ransomware
+  - AsyncRAT
   - Salt Typhoon
-  - Scheduled Tasks
-  - SystemBC
   - Windows Persistence Techniques
   - Winter Vivern
+  - Ransomware
+  - XWorm
+  - Industroyer2
+  - Active Directory Lateral Movement
+  - CISA AA22-257A
+  - Scheduled Tasks
+  - Ryuk Ransomware
+  - SystemBC
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.005

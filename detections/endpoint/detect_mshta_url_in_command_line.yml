@@ -1,6 +1,6 @@
 name: Detect MSHTA Url in Command Line
 id: 9b3af1e6-5b68-11eb-ae93-0242ac130002
-version: 12
+version: 14
 date: '2025-05-19'
 author: Michael Haag, Splunk
 status: production
@@ -75,11 +75,10 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - Suspicious MSHTA Activity
+  - Compromised Windows Host
   - Lumma Stealer
   - Living Off The Land
   - Compromised Windows Host
-  - Fake CAPTCHA Campaigns
   asset_type: Endpoint
   mitre_attack_id:
   - T1218.005
