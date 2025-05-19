@@ -177,7 +177,7 @@
             "dataSources": {
                 "primary": "ds_wzZtYKW7"
             },
-            "description": "This is the value of the token set from Affected Hosts table",
+            "description": "Shows the IP address currently being investigated",
             "title": "Investigating IP",
             "type": "splunk.singlevalue"
         },
