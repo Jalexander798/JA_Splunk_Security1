@@ -297,7 +297,7 @@
                 "backgroundColor": "#ffffff",
                 "fontColor": "#f1813f",
                 "fontSize": "large",
-                "markdown": "\n### Risk Events\n- Surfaces all risk events tied to the Destination IP  \n- Helps you understand what is the are the ESCU alerts in Enterprise Security\n"
+                "markdown": "\n### Risk Events\n- Surfaces all risk events tied to the Destination IP  \n- Helps you understand what are the ESCU alerts in Enterprise Security\n"
             },
             "type": "splunk.markdown"
         },
