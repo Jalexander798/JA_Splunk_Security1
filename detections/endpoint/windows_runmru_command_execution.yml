@@ -1,7 +1,7 @@
 name: Windows RunMRU Command Execution
 id: a15aa1ab-2b79-467f-8201-65e0f32d5b1a
-version: 6
-date: '2025-05-02'
+version: 7
+date: '2025-05-14'
 author: Nasreddine Bencherchali, Michael Haag, Splunk
 data_source:
 - Sysmon EventID 12
@@ -66,6 +66,7 @@ rba:
 tags:
   analytic_story:
   - Lumma Stealer
+  - Fake CAPTCHA Campaigns
   asset_type: Endpoint
   mitre_attack_id:
   - T1202
