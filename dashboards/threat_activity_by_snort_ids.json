@@ -68,7 +68,7 @@
             ],
             "showLastUpdated": false,
             "showProgressBar": false,
-            "title": "Snort Intrusion events for - $threat_token$",
+            "title": "Snort Intrusion Events for - $threat_token$",
             "type": "splunk.table"
         },
         "viz_3VU4OAeI": {
