@@ -112,7 +112,7 @@
                 "backgroundColor": "#ffffff",
                 "fontColor": "#0877a6",
                 "fontSize": "large",
-                "markdown": "### Timeline\n\n- Visualizes the daily activity related to all Snort signature \n\n- Tracks total intrusion attempts per day\n- Highlights frequency and consistency of threat activity over time"
+                "markdown": "### Timeline\n\n- Visualizes the daily activity related to all Snort signature \n\n- Tracks total intrusion attempts per the selected time range\n- Highlights frequency and consistency of threat activity over time"
             },
             "type": "splunk.markdown"
         },
