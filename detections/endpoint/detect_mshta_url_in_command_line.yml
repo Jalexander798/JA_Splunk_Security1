@@ -79,7 +79,7 @@ tags:
   - Lumma Stealer
   - Living Off The Land
   - Suspicious MSHTA Activity
-  - Xworm
+  - XWorm
   asset_type: Endpoint
   mitre_attack_id:
   - T1218.005
