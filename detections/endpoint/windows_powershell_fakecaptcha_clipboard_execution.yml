@@ -1,6 +1,6 @@
 name: Windows PowerShell FakeCAPTCHA Clipboard Execution
 id: d81d4d3d-76b5-4f21-ab51-b17d5164c106
-version: 1
+version: 2
 date: '2025-05-14'
 author: Michael Haag, Splunk
 status: production
@@ -10,20 +10,23 @@ data_source:
 - Sysmon EventID 1
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time) 
   as lastTime FROM datamodel=Endpoint.Processes where `process_powershell`
+  AND Processes.process="*-w*h*"
   AND (
-    (Processes.process IN ("* -w hidden *", "* -window hidden *", "* -windowstyle hidden *", "*-w h*", "*-wind h*", "*-windowstyle h*") OR Processes.process="*-w h*")
-    AND 
-    (
-      (Processes.process IN ("*robot*", "*captcha-iogo*", "*Robot*", "*captcha-logo*", "*Captcha*", "*captcha-container*", "*captcha*", "*captcha-box*", "*CAPTCHA*", "*CaptchaListeners*"))
+      (Processes.process IN ("*robot*", "*captcha*", "*CAPTCHA*", "*verify*", "*security check*", "*complete verification*"))
       OR
       (
         (Processes.process IN ("*iwr *", "*Invoke-WebRequest*", "*wget *", "*curl *", "*Net.WebClient*", "*DownloadString*", "*[Convert]::FromBase64String*"))
         AND 
-        (Processes.process IN ("*|iex*", "*|Invoke-Expression*", "* iex *", "* Invoke-Expression *"))
+        (Processes.process IN ("*iex*", "*Invoke-Expression*"))
+        AND
+        (Processes.process IN ("*click*", "*verify*", "*check*", "*human*", "*bot*", "*token*", "*challenge*"))
       )
       OR
-      (Processes.process="*FromBase64String*" AND Processes.process="*iex*")
-    )
+      (
+        Processes.process="*clipboard*" 
+        AND Processes.process="*iex*" 
+        AND (Processes.process="*FromBase64String*" OR Processes.process="*decode*")
+      )
   )
   by Processes.action Processes.dest Processes.original_file_name Processes.parent_process 
   Processes.parent_process_exec Processes.parent_process_guid Processes.parent_process_id 
