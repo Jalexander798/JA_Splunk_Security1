@@ -78,7 +78,8 @@ tags:
   - Compromised Windows Host
   - Lumma Stealer
   - Living Off The Land
-  - Compromised Windows Host
+  - Suspicious MSHTA Activity
+  - Xworm
   asset_type: Endpoint
   mitre_attack_id:
   - T1218.005
