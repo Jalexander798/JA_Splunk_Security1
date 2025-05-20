@@ -1,6 +1,6 @@
 name: Windows PowerShell FakeCAPTCHA Clipboard Execution
 id: d81d4d3d-76b5-4f21-ab51-b17d5164c106
-version: 2
+version: 1
 date: '2025-05-14'
 author: Michael Haag, Splunk
 status: production
@@ -12,7 +12,7 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   as lastTime FROM datamodel=Endpoint.Processes where `process_powershell`
   AND Processes.process="*-w*h*"
   AND (
-      (Processes.process IN ("*robot*", "*captcha*", "*CAPTCHA*", "*verify*", "*security check*", "*complete verification*"))
+      (Processes.process IN ("*robot*", "*captcha*", "*verify*", "*security check*", "*complete verification*"))
       OR
       (
         (Processes.process IN ("*iwr *", "*Invoke-WebRequest*", "*wget *", "*curl *", "*Net.WebClient*", "*DownloadString*", "*[Convert]::FromBase64String*"))
@@ -39,7 +39,7 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   | `security_content_ctime(lastTime)`
   | `windows_powershell_fakecaptcha_clipboard_execution_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting logs with the process name, process path, and command-line executions from your endpoints. If you are using Sysmon, you must have at least Sysmon version 6.0.4 with EventID 1 configured. The full command line arguments are necessary for proper detection.
-known_false_positives: Legitimate PowerShell commands that use hidden windows for automation tasks may trigger this detection. The search specifically looks for patterns typical of FakeCAPTCHA campaigns. You may need to add additional exclusions for legitimate administrative activities in your environment by modifying the lookup file or creating an exclusions list in the filter macro.
+known_false_positives: Legitimate PowerShell commands that use hidden windows for automation tasks may trigger this detection. The search specifically looks for patterns typical of FakeCAPTCHA campaigns. You may need to add additional exclusions for legitimate administrative activities in your environment by modifying the filter macro.
 references:
 - https://urlhaus.abuse.ch/
 - https://www.proofpoint.com/us/blog/threat-insight/security-brief-clickfix-social-engineering-technique-floods-threat-landscape
