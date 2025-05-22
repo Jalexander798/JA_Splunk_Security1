@@ -22,7 +22,7 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   by All_Traffic.action All_Traffic.app All_Traffic.bytes All_Traffic.bytes_in All_Traffic.bytes_out
   All_Traffic.dest All_Traffic.dest_ip All_Traffic.dest_port All_Traffic.dvc All_Traffic.protocol
   All_Traffic.protocol_version All_Traffic.src All_Traffic.src_ip All_Traffic.src_port
-  All_Traffic.transport All_Traffic.user All_Traffic.vendor_product |`drop_dm_object_name("All_Traffic")`
+  All_Traffic.transport All_Traffic.user All_Traffic.vendor_product All_Traffic.rule |`drop_dm_object_name("All_Traffic")`
   | where src_ip != dest_ip | `security_content_ctime(firstTime)`  | `security_content_ctime(lastTime)`
   |`detect_outbound_ldap_traffic_filter`'
 how_to_implement: In order to properly run this search, Splunk needs to ingest data
