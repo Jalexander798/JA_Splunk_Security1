@@ -1,12 +1,13 @@
 name: Internal Horizontal Port Scan
 id: 1ff9eb9a-7d72-4993-a55e-59a839e607f1
-version: 6
-date: '2025-05-02'
+version: 7
+date: '2025-05-22'
 author: Dean Luxton
 status: production
 type: TTP
 data_source:
 - AWS CloudWatchLogs VPCflow
+- Cisco Secure Firewall Threat Defense Connection Event
 description: This analytic identifies instances where an internal host has attempted
   to communicate with 250 or more destination IP addresses using the same port and
   protocol. Horizontal port scans from internal hosts can indicate reconnaissance
@@ -65,8 +66,13 @@ tags:
   - Splunk Cloud
   security_domain: network
 tests:
-- name: True Positive Test
+- name: AWS CloudWatch True Positive Test
   attack_data:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1046/nmap/horizontal.log
     source: aws:cloudwatchlogs:vpcflow
     sourcetype: aws:cloudwatchlogs:vpcflow
+- name: Cisco Secure Firewall True Positive Test
+  attack_data:
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/cisco_secure_firewall_threat_defense/connection_event/connection_events.log
+    source: not_applicable
+    sourcetype: cisco:sfw:estreamer
