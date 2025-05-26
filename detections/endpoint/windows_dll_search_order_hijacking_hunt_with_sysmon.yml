@@ -1,7 +1,7 @@
 name: Windows DLL Search Order Hijacking Hunt with Sysmon
 id: 79c7d1fc-64c7-91be-a616-ccda752efe81
-version: 10
-date: '2025-05-02'
+version: '11'
+date: '2025-05-26'
 author: Michael Haag, Splunk
 status: production
 type: Hunting
@@ -32,9 +32,10 @@ references:
 - https://hijacklibs.net
 tags:
   analytic_story:
-  - Living Off The Land
-  - Windows Defense Evasion Tactics
   - Qakbot
+  - Windows Defense Evasion Tactics
+  - Living Off The Land
+  - Malicious Inno Setup Loader
   asset_type: Endpoint
   mitre_attack_id:
   - T1574.001

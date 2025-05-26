@@ -1,7 +1,7 @@
 name: Windows Suspicious Process File Path
 id: ecddae4e-3d4b-41e2-b3df-e46a88b38521
-version: '12'
-date: '2025-05-06'
+version: '13'
+date: '2025-05-26'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -74,47 +74,48 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - Meduza Stealer
-  - Phemedrone Stealer
-  - CISA AA23-347A
-  - China-Nexus Threat Activity
-  - Data Destruction
-  - Chaos Ransomware
-  - Handala Wiper
-  - Hermetic Wiper
-  - IcedID
-  - Swift Slicer
   - PlugX
   - BlackByte Ransomware
-  - Warzone RAT
-  - MoonPeak
-  - DarkGate Malware
-  - Prestige Ransomware
-  - AsyncRAT
-  - Double Zero Destructor
-  - RedLine Stealer
-  - Salt Typhoon
-  - Amadey
-  - AgentTesla
-  - Graceful Wipe Out Attack
-  - Water Gamayun
-  - ValleyRAT
-  - Earth Alux
-  - XWorm
-  - SnappyBee
-  - WhisperGate
-  - DarkCrystal RAT
-  - Azorult
-  - Brute Ratel C4
-  - Industroyer2
-  - Volt Typhoon
   - Rhysida Ransomware
-  - LockBit Ransomware
+  - ValleyRAT
+  - Malicious Inno Setup Loader
+  - Double Zero Destructor
   - Remcos
-  - XMRig
-  - SystemBC
-  - Qakbot
+  - Handala Wiper
   - Trickbot
+  - DarkGate Malware
+  - China-Nexus Threat Activity
+  - Prestige Ransomware
+  - Amadey
+  - Phemedrone Stealer
+  - Earth Alux
+  - Azorult
+  - XMRig
+  - Qakbot
+  - XWorm
+  - Chaos Ransomware
+  - IcedID
+  - Graceful Wipe Out Attack
+  - Meduza Stealer
+  - LockBit Ransomware
+  - Volt Typhoon
+  - Data Destruction
+  - Salt Typhoon
+  - Brute Ratel C4
+  - WhisperGate
+  - Water Gamayun
+  - AgentTesla
+  - Swift Slicer
+  - SystemBC
+  - AsyncRAT
+  - CISA AA23-347A
+  - Hermetic Wiper
+  - RedLine Stealer
+  - DarkCrystal RAT
+  - Warzone RAT
+  - SnappyBee
+  - Industroyer2
+  - MoonPeak
   asset_type: Endpoint
   mitre_attack_id:
   - T1543
