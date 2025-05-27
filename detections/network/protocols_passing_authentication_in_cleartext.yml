@@ -16,7 +16,7 @@ description: The following analytic identifies the use of cleartext protocols th
 data_source:
 - Cisco Secure Firewall Threat Defense Connection Event
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
-  as lastTime from datamodel=Network_Traffic where All_Traffic.action NOT IN ("blocked", "block") AND
+  as lastTime from datamodel=Network_Traffic where NOT All_Traffic.action IN ("blocked", "block") AND
   All_Traffic.transport="tcp" AND (All_Traffic.dest_port="23" OR All_Traffic.dest_port="143"
   OR All_Traffic.dest_port="110" OR (All_Traffic.dest_port="21" AND All_Traffic.user
   != "anonymous")) by All_Traffic.user All_Traffic.src_ip All_Traffic.dest All_Traffic.dest_port All_Traffic.rule
@@ -53,7 +53,9 @@ rba:
   - field: dest
     type: system
     score: 25
-  threat_objects: []
+  threat_objects:
+  - field: dest_ip
+    type: ip_address
 tags:
   analytic_story:
   - Use of Cleartext Protocols

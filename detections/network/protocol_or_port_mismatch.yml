@@ -46,10 +46,12 @@ drilldown_searches:
 rba:
   message: Port or Protocol Traffic Mismatch
   risk_objects:
-  - field: dest
+  - field: src_ip
     type: system
     score: 25
-  threat_objects: []
+  threat_objects:
+  - field: dest_ip
+    type: ip_address
 tags:
   analytic_story:
   - Prohibited Traffic Allowed or Protocol Mismatch
