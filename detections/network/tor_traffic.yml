@@ -17,7 +17,7 @@ data_source:
 - Palo Alto Network Traffic
 - Cisco Secure Firewall Threat Defense Connection Event
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
-  as lastTime from datamodel=Network_Traffic where All_Traffic.app=tor AND All_Traffic.action=allowed
+  as lastTime from datamodel=Network_Traffic where All_Traffic.app=tor AND All_Traffic.action IN ("allowed", "allow")
   by All_Traffic.action All_Traffic.app All_Traffic.bytes All_Traffic.bytes_in All_Traffic.bytes_out
   All_Traffic.dest All_Traffic.dest_ip All_Traffic.dest_port All_Traffic.dvc All_Traffic.protocol
   All_Traffic.protocol_version All_Traffic.src All_Traffic.src_ip All_Traffic.src_port
