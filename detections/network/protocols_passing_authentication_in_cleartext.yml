@@ -54,7 +54,7 @@ rba:
     type: system
     score: 25
   threat_objects:
-  - field: dest_ip
+  - field: dest
     type: ip_address
 tags:
   analytic_story:
