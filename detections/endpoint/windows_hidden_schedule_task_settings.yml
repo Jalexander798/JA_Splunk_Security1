@@ -15,9 +15,10 @@ description: The following analytic detects the creation of hidden scheduled tas
   malicious payloads.
 data_source:
 - Windows Event Log Security 4698
-search: '`wineventlog_security` EventCode=4698 | xmlkv Message | search Hidden = true
-  | stats count min(_time) as firstTime max(_time) as lastTime by  Task_Name, Command,
-  Author, Hidden, dest | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
+search: '`wineventlog_security` EventCode=4698 TaskContent = "*&lt;Hidden&gt;true&lt;/Hidden&gt;*"
+  | stats count min(_time) as firstTime max(_time) as lastTime  by  TaskName TaskContent action signature status dest
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)`
   | `windows_hidden_schedule_task_settings_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the task schedule (Exa. Security Log EventCode 4698) endpoints. Tune and
@@ -68,6 +69,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053/hidden_schedule_task/security.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053/hidden_schedule_task/inno_schtask.log
     source: WinEventLog:Security
     sourcetype: WinEventLog
