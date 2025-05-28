@@ -24,10 +24,10 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   All_Traffic.transport All_Traffic.user All_Traffic.vendor_product All_Traffic.rule | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` | `drop_dm_object_name("All_Traffic")` | `tor_traffic_filter`'
 how_to_implement: In order to properly run this search, Splunk needs to ingest data
-  from Next Generation Firewalls like Palo Alto Networks Firewalls or other network
-  control devices that mediate the traffic allowed into an environment. This is necessary
-  so that the search can identify an 'action' taken on the traffic of interest. The
-  search requires the Network_Traffic data model to be populated.
+  from Next Generation Firewalls like, Cisco Secure Firewall Threat Defense, Palo Alto Networks Firewalls 
+  or other network control devices that mediate the traffic allowed into an environment. This is necessary
+  so that the search can identify an 'action' taken on the traffic of interest.
+  The search requires the Network_Traffic data model to be populated.
 known_false_positives: None at this time
 references:
 - https://knowledgebase.paloaltonetworks.com/KCSArticleDetail?id=kA10g000000ClRtCAK

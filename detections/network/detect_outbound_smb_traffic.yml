@@ -28,8 +28,8 @@ search: '| tstats `security_content_summariesonly` earliest(_time) as start_time
   All_Traffic.transport All_Traffic.user All_Traffic.vendor_product All_Traffic.rule | `drop_dm_object_name("All_Traffic")`  |
   `security_content_ctime(start_time)`  | `security_content_ctime(end_time)`  | iplocation
   dest_ip | `detect_outbound_smb_traffic_filter`'
-how_to_implement: This search also requires you to be ingesting your network traffic
-  and populating the Network_Traffic data model
+how_to_implement: This search requires you to be ingesting your network traffic
+  and populating the Network_Traffic data model.
 known_false_positives: It is likely that the outbound Server Message Block (SMB) traffic
   is legitimate, if the company's internal networks are not well-defined in the Assets
   and Identity Framework. Categorize the internal CIDR blocks as `internal` in the

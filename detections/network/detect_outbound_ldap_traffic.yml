@@ -26,9 +26,9 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   | where src_ip != dest_ip | `security_content_ctime(firstTime)`  | `security_content_ctime(lastTime)`
   |`detect_outbound_ldap_traffic_filter`'
 how_to_implement: In order to properly run this search, Splunk needs to ingest data
-  from Next Generation Firewalls like Palo Alto Networks Firewalls or other network
-  control devices that mediate the traffic allowed into an environment. The search
-  requires the Network_Traffic data model to be populated.
+  from Next Generation Firewalls like, Cisco Secure Firewall Threat Defense, Palo Alto Networks Firewalls
+  or other network control devices that mediate the traffic allowed into an environment.
+  The search requires the Network_Traffic data model to be populated.
 known_false_positives: Unknown at this moment. Outbound LDAP traffic should not be
   allowed outbound through your perimeter firewall. Please check those servers to
   verify if the activity is legitimate.

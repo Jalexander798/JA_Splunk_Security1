@@ -24,8 +24,8 @@ search: '| tstats `security_content_summariesonly` count min(_time) as firstTime
   All_Traffic.dest_port All_Traffic.transport All_Traffic.action All_Traffic.rule |`security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `drop_dm_object_name("All_Traffic")` | `protocol_or_port_mismatch_filter`'
 how_to_implement: Running this search properly requires a technology that can inspect
-  network traffic and identify common protocols. Technologies such as Bro and Palo
-  Alto Networks firewalls are two examples that will identify protocols via inspection,
+  network traffic and identify common protocols. Technologies such as Zeek, Cisco Secure Firewall or Palo
+  Alto Networks firewalls are examples that will identify protocols via inspection,
   and not just assume a specific protocol based on the transport protocol and ports.
 known_false_positives: Some false positive could occur with some applications that change their default communication port for an added layer of obscurity.
 references: []
