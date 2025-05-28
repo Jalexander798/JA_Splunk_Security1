@@ -16,85 +16,84 @@ sourcetype: o365:management:activity
 separator: Operation
 separator_value: Add owner to application.
 supported_TA:
-  - name: Splunk Add-on for Microsoft Office 365
-    url: https://splunkbase.splunk.com/app/4055
-    version: 4.8.0
+- name: Splunk Add-on for Microsoft Office 365
+  url: https://splunkbase.splunk.com/app/4055
+  version: 4.8.1
 fields:
-  - _time
-  - ActorContextId
-  - Actor{}.ID
-  - Actor{}.Type
-  - AzureActiveDirectoryEventType
-  - CreationTime
-  - ExtendedProperties{}.Name
-  - ExtendedProperties{}.Value
-  - Id
-  - InterSystemsId
-  - IntraSystemId
-  - ModifiedProperties{}.Name
-  - ModifiedProperties{}.NewValue
-  - ModifiedProperties{}.OldValue
-  - ObjectId
-  - Operation
-  - OrganizationId
-  - RecordType
-  - ResultStatus
-  - SupportTicketId
-  - TargetContextId
-  - Target{}.ID
-  - Target{}.Type
-  - UserId
-  - UserKey
-  - UserType
-  - Version
-  - Workload
-  - action
-  - additionalDetails
-  - app
-  - authentication_service
-  - change_type
-  - command
-  - dataset_name
-  - date_hour
-  - date_mday
-  - date_minute
-  - date_month
-  - date_second
-  - date_wday
-  - date_year
-  - date_zone
-  - dest
-  - dest_name
-  - dvc
-  - event_type
-  - eventtype
-  - extendedAuditEventCategory
-  - host
-  - index
-  - linecount
-  - object
-  - object_attrs
-  - object_category
-  - punct
-  - record_type
-  - signature
-  - source
-  - sourcetype
-  - splunk_server
-  - status
-  - tag
-  - tag::eventtype
-  - timeendpos
-  - timestartpos
-  - user
-  - user_agent
-  - user_agent_change
-  - user_id
-  - user_type
-  - vendor_account
-  - vendor_product
-example_log:
-  '{"CreationTime": "2023-09-07T13:42:04", "Id": "6e2c723b-8f6e-47f4-8c60-fa23ef3fccee",
+- _time
+- ActorContextId
+- Actor{}.ID
+- Actor{}.Type
+- AzureActiveDirectoryEventType
+- CreationTime
+- ExtendedProperties{}.Name
+- ExtendedProperties{}.Value
+- Id
+- InterSystemsId
+- IntraSystemId
+- ModifiedProperties{}.Name
+- ModifiedProperties{}.NewValue
+- ModifiedProperties{}.OldValue
+- ObjectId
+- Operation
+- OrganizationId
+- RecordType
+- ResultStatus
+- SupportTicketId
+- TargetContextId
+- Target{}.ID
+- Target{}.Type
+- UserId
+- UserKey
+- UserType
+- Version
+- Workload
+- action
+- additionalDetails
+- app
+- authentication_service
+- change_type
+- command
+- dataset_name
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
+- dest
+- dest_name
+- dvc
+- event_type
+- eventtype
+- extendedAuditEventCategory
+- host
+- index
+- linecount
+- object
+- object_attrs
+- object_category
+- punct
+- record_type
+- signature
+- source
+- sourcetype
+- splunk_server
+- status
+- tag
+- tag::eventtype
+- timeendpos
+- timestartpos
+- user
+- user_agent
+- user_agent_change
+- user_id
+- user_type
+- vendor_account
+- vendor_product
+example_log: '{"CreationTime": "2023-09-07T13:42:04", "Id": "6e2c723b-8f6e-47f4-8c60-fa23ef3fccee",
   "Operation": "Add owner to application.", "OrganizationId": "48203edf-5d2c-45f2-8123-a368cc8b0e51",
   "RecordType": 8, "ResultStatus": "Success", "UserKey": "1003BFFD98415B4E@contoso.onmicrosoft.com",
   "UserType": 0, "Version": 1, "Workload": "AzureActiveDirectory", "ObjectId": "user2@contoso.onmicrosoft.com",
@@ -115,8 +114,8 @@ example_log:
   "Type": 2}, {"ID": "user2@contoso.onmicrosoft.com", "Type": 5}, {"ID": "10032002CC029AE9",
   "Type": 3}], "TargetContextId": "48203edf-5d2c-45f2-8123-a368cc8b0e51"}'
 output_fields:
-- dest 
-- user 
-- src 
-- vendor_account 
-- vendor_product 
+- dest
+- user
+- src
+- vendor_account
+- vendor_product
