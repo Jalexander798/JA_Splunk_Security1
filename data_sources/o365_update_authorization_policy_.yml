@@ -15,77 +15,76 @@ sourcetype: o365:management:activity
 separator: Operation
 separator_value: Update authorization policy.
 supported_TA:
-  - name: Splunk Add-on for Microsoft Office 365
-    url: https://splunkbase.splunk.com/app/4055
-    version: 4.8.0
+- name: Splunk Add-on for Microsoft Office 365
+  url: https://splunkbase.splunk.com/app/4055
+  version: 4.8.1
 fields:
-  - _time
-  - ActorContextId
-  - Actor{}.ID
-  - Actor{}.Type
-  - AzureActiveDirectoryEventType
-  - CreationTime
-  - ExtendedProperties{}.Name
-  - ExtendedProperties{}.Value
-  - Id
-  - InterSystemsId
-  - IntraSystemId
-  - ModifiedProperties{}.Name
-  - ModifiedProperties{}.NewValue
-  - ModifiedProperties{}.OldValue
-  - ObjectId
-  - Operation
-  - OrganizationId
-  - RecordType
-  - ResultStatus
-  - SupportTicketId
-  - TargetContextId
-  - Target{}.ID
-  - Target{}.Type
-  - UserId
-  - UserKey
-  - UserType
-  - Version
-  - Workload
-  - additionalDetails
-  - app
-  - authentication_service
-  - command
-  - date_hour
-  - date_mday
-  - date_minute
-  - date_month
-  - date_second
-  - date_wday
-  - date_year
-  - date_zone
-  - dest
-  - dest_name
-  - dvc
-  - event_type
-  - extendedAuditEventCategory
-  - host
-  - index
-  - linecount
-  - object
-  - punct
-  - record_type
-  - signature
-  - source
-  - sourcetype
-  - splunk_server
-  - status
-  - timeendpos
-  - timestartpos
-  - user
-  - user_agent
-  - user_agent_change
-  - user_id
-  - user_type
-  - vendor_account
-  - vendor_product
-example_log:
-  '{"CreationTime": "2023-10-26T19:22:20", "Id": "83774e72-313f-4d1f-8609-7d0c7bb3b4ff",
+- _time
+- ActorContextId
+- Actor{}.ID
+- Actor{}.Type
+- AzureActiveDirectoryEventType
+- CreationTime
+- ExtendedProperties{}.Name
+- ExtendedProperties{}.Value
+- Id
+- InterSystemsId
+- IntraSystemId
+- ModifiedProperties{}.Name
+- ModifiedProperties{}.NewValue
+- ModifiedProperties{}.OldValue
+- ObjectId
+- Operation
+- OrganizationId
+- RecordType
+- ResultStatus
+- SupportTicketId
+- TargetContextId
+- Target{}.ID
+- Target{}.Type
+- UserId
+- UserKey
+- UserType
+- Version
+- Workload
+- additionalDetails
+- app
+- authentication_service
+- command
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
+- dest
+- dest_name
+- dvc
+- event_type
+- extendedAuditEventCategory
+- host
+- index
+- linecount
+- object
+- punct
+- record_type
+- signature
+- source
+- sourcetype
+- splunk_server
+- status
+- timeendpos
+- timestartpos
+- user
+- user_agent
+- user_agent_change
+- user_id
+- user_type
+- vendor_account
+- vendor_product
+example_log: '{"CreationTime": "2023-10-26T19:22:20", "Id": "83774e72-313f-4d1f-8609-7d0c7bb3b4ff",
   "Operation": "Update authorization policy.", "OrganizationId": "a417c578-c7ee-480d-a225-d48057e74df5",
   "RecordType": 8, "ResultStatus": "Success", "UserKey": "1003BFFD98415B4E@splunkresearch.onmicrosoft.com",
   "UserType": 0, "Version": 1, "Workload": "AzureActiveDirectory", "ObjectId": "AuthorizationPolicy_24484114-1daa-4700-aaf7-44ee5cbe5678",
@@ -106,8 +105,8 @@ example_log:
   2}, {"ID": "24484114-1daa-4700-aaf7-44ee5cbe5678", "Type": 2}, {"ID": "Other", "Type":
   2}, {"ID": "Authorization Policy", "Type": 1}], "TargetContextId": "a417c578-c7ee-480d-a225-d48057e74df5"}'
 output_fields:
-- dest 
-- user 
-- src 
-- vendor_account 
-- vendor_product 
+- dest
+- user
+- src
+- vendor_account
+- vendor_product
