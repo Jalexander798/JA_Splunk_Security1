@@ -47,12 +47,12 @@ references:
 - https://thedfirreport.com/2022/08/08/bumblebee-roasts-its-way-to-domain-admin/
 - https://thedfirreport.com/2022/11/28/emotet-strikes-again-lnk-file-leads-to-domain-wide-ransomware/
 drilldown_searches:
-- name: View the detection results for - "$src$"
-  search: '%original_detection_search% | search  src = "$src$"'
+- name: View the detection results for - "$src_ip$"
+  search: '%original_detection_search% | search  src_ip = "$src_ip$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$src$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$src$")
+- name: View risk events for the last 7 days for - "$src_ip$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$src_ip$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -61,13 +61,10 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Traffic to known remote access software [$ClientApplication$] was detected from $src$.
+  message: Traffic to known remote access software [$ClientApplication$] was detected from $src_ip$.
   risk_objects:
-  - field: src
+  - field: src_ip
     type: system
-    score: 25
-  - field: user
-    type: user
     score: 25
   threat_objects:
   - field: ClientApplication
