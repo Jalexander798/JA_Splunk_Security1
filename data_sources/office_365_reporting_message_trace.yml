@@ -10,7 +10,7 @@ separator: Organization
 supported_TA:
 - name: Splunk Microsoft Office 365 Add-on
   url: https://splunkbase.splunk.com/app/4055
-  version: 4.8.0
+  version: 4.8.1
 fields:
 - FromIP
 - Index
@@ -70,4 +70,9 @@ fields:
 - timeendpos
 - timestartpos
 - vendor_product
-example_log: '{"Organization": "attackrange.onmicrosoft.com", "MessageId": "<BY5PR08MB62304A5BB7F9EE555B4CEA26DC1C2@BY5PR08MB6230.namprd08.prod.outlook.com>", "Received": "2025-01-16T21:06:46.832439", "SenderAddress": "victim_2@attack_range.lan", "RecipientAddress": "attacker_outside@gmail.com", "Subject": "Accounts and Passwords", "Status": "Delivered", "ToIP": "2607:f8b0:400e:c0d::1a", "FromIP": "189.135.168.197", "Size": 33584, "MessageTraceId": "3567c8ef-cc17-4a3f-d166-08dd3161e4fc", "Index": 3035}'
+example_log: '{"Organization": "attackrange.onmicrosoft.com", "MessageId": "<BY5PR08MB62304A5BB7F9EE555B4CEA26DC1C2@BY5PR08MB6230.namprd08.prod.outlook.com>",
+  "Received": "2025-01-16T21:06:46.832439", "SenderAddress": "victim_2@attack_range.lan",
+  "RecipientAddress": "attacker_outside@gmail.com", "Subject": "Accounts and Passwords",
+  "Status": "Delivered", "ToIP": "2607:f8b0:400e:c0d::1a", "FromIP": "189.135.168.197",
+  "Size": 33584, "MessageTraceId": "3567c8ef-cc17-4a3f-d166-08dd3161e4fc", "Index":
+  3035}'
