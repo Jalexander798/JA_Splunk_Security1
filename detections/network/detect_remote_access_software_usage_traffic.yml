@@ -1,7 +1,7 @@
 name: Detect Remote Access Software Usage Traffic
 id: 885ea672-07ee-475a-879e-60d28aa5dd42
-version: 8
-date: '2025-05-02'
+version: 9
+date: '2025-05-30'
 author: Steven Dick
 status: production
 type: Anomaly
