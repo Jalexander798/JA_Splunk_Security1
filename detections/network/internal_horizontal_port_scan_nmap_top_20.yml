@@ -52,13 +52,16 @@ rba:
   message: $src_ip$ has scanned for ports $dest_ports$ across $totalDestIPCount$ destination
     IPs
   risk_objects:
-  - field: src_ip
+  - field: dest_zone
     type: system
     score: 72
-  threat_objects: []
+  threat_objects:
+  - field: src_ip
+    type: ip_address
 tags:
   analytic_story:
   - Network Discovery
+  - Cisco Secure Firewall Threat Defense Analytics
   asset_type: Endpoint
   mitre_attack_id:
   - T1046

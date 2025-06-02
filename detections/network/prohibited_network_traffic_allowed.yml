@@ -58,6 +58,7 @@ tags:
   - Prohibited Traffic Allowed or Protocol Mismatch
   - Ransomware
   - Command And Control
+  - Cisco Secure Firewall Threat Defense Analytics
   asset_type: Endpoint
   mitre_attack_id:
   - T1048

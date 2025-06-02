@@ -75,6 +75,7 @@ tags:
   - Command And Control
   - Ransomware
   - Remote Monitoring and Management Software
+  - Cisco Secure Firewall Threat Defense Analytics
   asset_type: Network
   mitre_attack_id:
   - T1219

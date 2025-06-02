@@ -50,13 +50,16 @@ drilldown_searches:
 rba:
   message: $src_ip$ has scanned $totalDestPortCount$ ports on $dest_ip$
   risk_objects:
-  - field: src_ip
+  - field: dest_ip
     type: system
-    score: 64
-  threat_objects: []
+    score: 60
+  threat_objects:
+  - field: src_ip
+    type: ip_address
 tags:
   analytic_story:
   - Network Discovery
+  - Cisco Secure Firewall Threat Defense Analytics
   asset_type: Endpoint
   mitre_attack_id:
   - T1046

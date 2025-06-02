@@ -60,6 +60,7 @@ tags:
   - Ransomware
   - NOBELIUM Group
   - Command And Control
+  - Cisco Secure Firewall Threat Defense Analytics
   asset_type: Endpoint
   mitre_attack_id:
   - T1090.003

@@ -53,6 +53,7 @@ tags:
   - Hidden Cobra Malware
   - DHS Report TA18-074A
   - NOBELIUM Group
+  - Cisco Secure Firewall Threat Defense Analytics
   asset_type: Endpoint
   mitre_attack_id:
   - T1071.002
