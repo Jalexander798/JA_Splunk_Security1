@@ -1,7 +1,7 @@
 name: Cisco Secure Firewall Threat Defense Connection Event
 id: 18878597-8f8a-4bca-a805-bfbe35e00032
-version: 1
-date: '2025-04-01'
+version: 2
+date: '2025-05-22'
 author: Nasreddine Bencherchali, Splunk
 description: Data source object for raw connection events from Cisco Secure Firewall
   Threat Defense
@@ -114,7 +114,6 @@ output_fields:
 - dest_port
 - transport
 - rule
-- url
 - action
 example_log: '{"EventType":"ConnectionEvent", "FirstPacketSecond":1743500734, "DeviceUUID":"11bc8e94-f604-11ef-bcfe-eeb1de9c8a63",
   "InstanceID":1, "ConnectionID":259, "AC_RuleAction":"Block", "InitiatorIP":"172.16.3.110",
