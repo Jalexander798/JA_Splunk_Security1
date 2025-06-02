@@ -1,10 +1,10 @@
 name: AWS Defense Evasion Impair Security Services
 id: b28c4957-96a6-47e0-a965-6c767aac1458
-version: 7
-date: '2025-05-02'
+version: 8
+date: '2025-05-22'
 author: Bhavin Patel, Gowthamaraj Rajendran, Splunk
 status: production
-type: Hunting
+type: TTP
 description: The following analytic detects attempts to delete critical AWS security
   service configurations, such as CloudWatch alarms, GuardDuty detectors, and Web
   Application Firewall rules. It leverages CloudTrail logs to identify specific API
@@ -35,6 +35,30 @@ references:
 - https://docs.aws.amazon.com/cli/latest/reference/guardduty/index.html
 - https://docs.aws.amazon.com/cli/latest/reference/waf/index.html
 - https://www.elastic.co/guide/en/security/current/prebuilt-rules.html
+drilldown_searches:
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search  user = "$user$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+rba:
+  message: User $user$ has deleted a security service by attempting to $signature$ for account id $vendor_account$
+    from IP $src$
+  risk_objects:
+  - field: user
+    type: user
+    score: 90
+  threat_objects:
+  - field: src
+    type: ip_address
 tags:
   analytic_story:
   - AWS Defense Evasion
