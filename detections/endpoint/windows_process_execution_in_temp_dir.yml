@@ -1,7 +1,7 @@
 name: Windows Process Execution in Temp Dir
 id: f6fbe929-4187-4ba4-901e-8a34be838443
-version: 3
-date: '2025-05-02'
+version: '4'
+date: '2025-05-06'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -69,13 +69,14 @@ rba:
     type: process_name
 tags:
   analytic_story:
-  - Ryuk Ransomware
-  - Trickbot
-  - Qakbot
   - AgentTesla
-  - Remcos
+  - XWorm
   - NjRAT
+  - Remcos
+  - Ryuk Ransomware
   - Ransomware
+  - Qakbot
+  - Trickbot
   asset_type: Endpoint
   mitre_attack_id:
   - T1543

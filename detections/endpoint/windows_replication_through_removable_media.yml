@@ -1,7 +1,7 @@
 name: Windows Replication Through Removable Media
 id: 60df805d-4605-41c8-bbba-57baa6a4eb97
-version: 10
-date: '2025-05-02'
+version: 11
+date: '2025-05-06'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -15,11 +15,9 @@ description: The following analytic detects the creation or dropping of executab
 data_source:
 - Sysmon EventID 11
 search: '|tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
-  as lastTime from datamodel=Endpoint.Filesystem where (Filesystem.file_name = *.exe
-  OR Filesystem.file_name = *.dll OR Filesystem.file_name = *.sys OR Filesystem.file_name
-  = *.com OR Filesystem.file_name = *.vbs OR Filesystem.file_name = *.vbe OR Filesystem.file_name
-  = *.js  OR Filesystem.file_name= *.bat OR Filesystem.file_name = *.cmd OR Filesystem.file_name
-  = *.pif) by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time
+  as lastTime from datamodel=Endpoint.Filesystem 
+  where Filesystem.file_name IN ("*.exe", "*.dll", "*.sys", "*.com", "*.vbs", "*.vbe", "*.js", "*.bat", "*.cmd", "*.pif", "*.lnk", "*.url")  
+  by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time
   Filesystem.file_hash Filesystem.file_modify_time Filesystem.file_name Filesystem.file_path
   Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id
   Filesystem.user Filesystem.vendor_product | `drop_dm_object_name(Filesystem)` |
