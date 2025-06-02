@@ -50,7 +50,7 @@ rba:
   message: $src_ip$ has scanned for ports $dest_ports$ across $totalDestIPCount$ destination
     IPs
   risk_objects:
-  - field: dest_port
+  - field: dest_ports
     type: system
     score: 64
   threat_objects:
