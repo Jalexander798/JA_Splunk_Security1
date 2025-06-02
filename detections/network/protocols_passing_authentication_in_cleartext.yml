@@ -45,7 +45,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Allowed Traffic from $src_ip$ to $dest_ip$ over port $dest_port$. Which might indicate a potential authentication attempts over a  cleartext protocol.
+  message: Allowed Traffic from $src_ip$ to $dest$ over port $dest_port$. Which might indicate a potential authentication attempts over a  cleartext protocol.
   risk_objects:
   - field: user
     type: user
