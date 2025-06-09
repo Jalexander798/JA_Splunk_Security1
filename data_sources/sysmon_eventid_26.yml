@@ -11,25 +11,25 @@ configuration: https://github.com/SwiftOnSecurity/sysmon-config
 supported_TA:
 - name: Splunk Add-on for Sysmon
   url: https://splunkbase.splunk.com/app/5709
-  version: 4.0.2
+  version: 4.0.3
 fields:
 - _time
 output_fields:
-- action 
-- dest 
-- dvc 
-- file_path 
-- file_hash 
-- file_name 
-- file_modify_time 
-- process_exec 
-- process_guid 
-- process_id 
-- process_name 
-- process_path 
-- signature 
-- signature_id 
-- user 
-- user_id 
+- action
+- dest
+- dvc
+- file_path
+- file_hash
+- file_name
+- file_modify_time
+- process_exec
+- process_guid
+- process_id
+- process_name
+- process_path
+- signature
+- signature_id
+- user
+- user_id
 - vendor_product
-example_log: |-
+example_log: ''
