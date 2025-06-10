@@ -1,9 +1,9 @@
 name: Windows MOVEit Transfer Writing ASPX
 id: c0ed2aca-5666-45b3-813f-ddfac3f3eda0
-version: 6
-date: '2025-05-02'
+version: 7
+date: '2025-06-10'
 author: Michael Haag, Splunk
-status: experimental
+status: production
 type: TTP
 data_source:
 - Sysmon EventID 1 AND Sysmon EventID 11

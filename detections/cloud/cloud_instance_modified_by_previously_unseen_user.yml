@@ -1,9 +1,9 @@
 name: Cloud Instance Modified By Previously Unseen User
 id: 7fb15084-b14e-405a-bd61-a6de15a40722
-version: 7
-date: '2025-05-02'
+version: 8
+date: '2025-06-10'
 author: Rico Valdez, Splunk
-status: experimental
+status: production
 type: Anomaly
 description: The following analytic identifies cloud instances being modified by users
   who have not previously modified them. It leverages data from the Change data model,

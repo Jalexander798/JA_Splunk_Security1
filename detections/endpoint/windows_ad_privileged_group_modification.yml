@@ -1,9 +1,9 @@
 name: Windows AD Privileged Group Modification
 id: 187bf937-c436-4c65-bbcb-7539ffe02da1
-version: 5
-date: '2025-05-02'
+version: 6
+date: '2025-06-10'
 author: Dean Luxton
-status: experimental
+status: production
 type: TTP
 data_source:
 - Windows Event Log Security 4728

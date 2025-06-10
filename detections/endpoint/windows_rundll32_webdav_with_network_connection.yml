@@ -1,10 +1,10 @@
 name: Windows Rundll32 WebDav With Network Connection
 id: f03355e0-28b5-4e9b-815a-6adffc63b38c
-version: 7
-date: '2025-05-02'
+version: 8
+date: '2025-06-10'
 author: Michael Haag, Splunk
 type: TTP
-status: experimental
+status: production
 data_source: []
 description: The following analytic detects the execution of rundll32.exe with command-line
   arguments loading davclnt.dll and the davsetcookie function to access a remote WebDav

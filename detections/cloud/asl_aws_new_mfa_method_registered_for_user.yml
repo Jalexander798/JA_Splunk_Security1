@@ -1,9 +1,9 @@
 name: ASL AWS New MFA Method Registered For User
 id: 33ae0931-2a03-456b-b1d7-b016c5557fbd
-version: 9
-date: '2025-05-02'
+version: 10
+date: '2025-06-10'
 author: Patrick Bareiss, Splunk
-status: experimental
+status: production
 type: TTP
 description: The following analytic identifies the registration of a new Multi-Factor
   Authentication (MFA) method for an AWS account, as logged through Amazon Security

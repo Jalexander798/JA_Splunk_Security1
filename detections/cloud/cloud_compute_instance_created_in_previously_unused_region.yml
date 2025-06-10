@@ -1,9 +1,9 @@
 name: Cloud Compute Instance Created In Previously Unused Region
 id: fa4089e2-50e3-40f7-8469-d2cc1564ca59
-version: 5
-date: '2025-05-02'
+version: 6
+date: '2025-06-10'
 author: David Dorsey, Splunk
-status: experimental
+status: production
 type: Anomaly
 description: The following analytic detects the creation of a cloud compute instance
   in a region that has not been previously used within the last hour. It leverages

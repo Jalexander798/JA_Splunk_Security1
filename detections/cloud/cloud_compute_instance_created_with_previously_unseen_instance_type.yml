@@ -1,9 +1,9 @@
 name: Cloud Compute Instance Created With Previously Unseen Instance Type
 id: c6ddbf53-9715-49f3-bb4c-fb2e8a309cda
-version: 5
-date: '2025-05-02'
+version: 6
+date: '2025-06-10'
 author: David Dorsey, Splunk
-status: experimental
+status: production
 type: Anomaly
 description: The following analytic detects the creation of EC2 instances with previously
   unseen instance types. It leverages Splunk's tstats command to analyze data from

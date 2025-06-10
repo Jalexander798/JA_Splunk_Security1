@@ -1,9 +1,9 @@
 name: DLLHost with no Command Line Arguments with Network
 id: f1c07594-a141-11eb-8407-acde48001122
-version: 11
-date: '2025-05-02'
+version: 12
+date: '2025-06-10'
 author: Steven Dick, Michael Haag, Splunk
-status: experimental
+status: production
 type: TTP
 description: The following analytic detects instances of DLLHost.exe running without
   command line arguments while establishing a network connection. This behavior is

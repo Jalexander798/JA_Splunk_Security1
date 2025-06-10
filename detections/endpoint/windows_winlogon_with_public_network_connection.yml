@@ -1,9 +1,9 @@
 name: Windows WinLogon with Public Network Connection
 id: 65615b3a-62ea-4d65-bb9f-6f07c17df4ea
-version: 8
-date: '2025-05-02'
+version: 9
+date: '2025-06-10'
 author: Michael Haag, Splunk
-status: experimental
+status: production
 type: Hunting
 data_source:
 - Sysmon EventID 1 AND Sysmon EventID 3

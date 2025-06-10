@@ -1,9 +1,9 @@
 name: Gsuite Drive Share In External Email
 id: f6ee02d6-fea0-11eb-b2c2-acde48001122
-version: 7
-date: '2025-05-02'
+version: 8
+date: '2025-06-10'
 author: Teoderick Contreras, Splunk
-status: experimental
+status: production
 type: Anomaly
 description: The following analytic detects Google Drive or Google Docs files shared
   externally from an internal domain. It leverages GSuite Drive logs, extracting and

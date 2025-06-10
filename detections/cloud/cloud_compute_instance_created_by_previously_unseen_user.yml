@@ -1,9 +1,9 @@
 name: Cloud Compute Instance Created By Previously Unseen User
 id: 37a0ec8d-827e-4d6d-8025-cedf31f3a149
-version: 7
-date: '2025-05-02'
+version: 8
+date: '2025-06-10'
 author: Rico Valdez, Splunk
-status: experimental
+status: production
 type: Anomaly
 description: The following analytic identifies the creation of cloud compute instances
   by users who have not previously created them. It leverages data from the Change

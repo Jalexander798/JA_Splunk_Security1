@@ -1,9 +1,9 @@
 name: Windows AD Suspicious GPO Modification
 id: 0a2afc18-a3b5-4452-b60a-2e774214f9bf
-version: 6
-date: '2025-05-02'
+version: 7
+date: '2025-06-10'
 author: Dean Luxton
-status: experimental
+status: production
 type: TTP
 data_source:
 - Windows Event Log Security 5136

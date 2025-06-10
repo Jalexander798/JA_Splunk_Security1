@@ -1,9 +1,9 @@
 name: Print Processor Registry Autostart
 id: 1f5b68aa-2037-11ec-898e-acde48001122
-version: 8
-date: '2025-05-02'
+version: 9
+date: '2025-06-10'
 author: Teoderick Contreras, Splunk
-status: experimental
+status: production
 type: TTP
 description: The following analytic detects suspicious modifications or new entries
   in the Print Processor registry path. It leverages registry activity data from the

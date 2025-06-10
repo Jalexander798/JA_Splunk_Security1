@@ -1,9 +1,9 @@
 name: Linux Stdout Redirection To Dev Null File
 id: de62b809-a04d-46b5-9a15-8298d330f0c8
-version: 7
-date: '2025-05-02'
+version: 8
+date: '2025-06-10'
 author: Teoderick Contreras, Splunk
-status: experimental
+status: production
 type: Anomaly
 description: The following analytic detects command-line activities that redirect
   stdout or stderr to the /dev/null file. It leverages data from Endpoint Detection
