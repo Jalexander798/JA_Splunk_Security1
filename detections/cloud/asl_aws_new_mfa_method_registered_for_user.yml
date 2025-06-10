@@ -49,7 +49,7 @@ rba:
     type: user
     score: 64
   threat_objects:
-  - field: src_ip
+  - field: src
     type: ip_address
 tags:
   analytic_story:

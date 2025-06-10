@@ -16,8 +16,12 @@ description: The following analytic detects the creation of new ASPX files in th
   data, including user credentials and file metadata, posing a severe risk to the
   organization's security.
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Processes
-  where Processes.process_name=System  by _time span=1h Processes.process_id Processes.process_name
-  Processes.dest | `drop_dm_object_name(Processes)` | join process_guid, _time [|
+  where Processes.process_name=System  by _time span=1h by Processes.action Processes.dest Processes.original_file_name
+  Processes.parent_process Processes.parent_process_exec Processes.parent_process_guid
+  Processes.parent_process_id Processes.parent_process_name Processes.parent_process_path
+  Processes.process Processes.process_exec Processes.process_guid Processes.process_hash
+  Processes.process_id Processes.process_integrity_level Processes.process_name Processes.process_path
+  Processes.user Processes.user_id Processes.vendor_product | `drop_dm_object_name(Processes)` | join process_guid, _time [|
   tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime FROM datamodel=Endpoint.Filesystem where Filesystem.file_path IN ("*\\MOVEitTransfer\\wwwroot\\*")
   Filesystem.file_name IN("*.aspx", "*.ashx", "*.asp*") OR Filesystem.file_name IN

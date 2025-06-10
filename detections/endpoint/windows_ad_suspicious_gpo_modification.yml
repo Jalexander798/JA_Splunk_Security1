@@ -26,7 +26,7 @@ search: "`wineventlog_security` EventCode=5145 ShareName=\"\\\\\\\\*\\\\SYSVOL\"
   $gpo_guid$\" \n  | stats min(_time) as _time values(eval(if(OperationType==\"%%14675\"\
   ,AttributeValue,null))) as old_value values(eval(if(OperationType==\"%%14674\",AttributeValue,null)))
   as new_value values(OperationType) as OperationType by ObjectClass ObjectDN OpCorrelationID
-  src_user SubjectLogonId \n  | rex field=old_value max_match=10000 \"(?P<old_values>\\\
+  src_user SubjectLogonId dest \n  | rex field=old_value max_match=10000 \"(?P<old_values>\\\
   {.*?\\})\" \n  | rex field=new_value max_match=10000 \"(?P<new_values>\\{.*?\\})\"\
   \ \n  | rex field=ObjectDN max_match=10000 \"CN=(?P<policy_guid>\\{.*?\\})\" \n\
   \  | mvexpand new_values \n  | where NOT new_values IN (old_values,\"{00000000-0000-0000-0000-000000000000}\"\
