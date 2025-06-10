@@ -65,6 +65,7 @@ tags:
   - Splunk Enterprise Security
   - Splunk Cloud
   security_domain: network
+  manual_test: This search needs the baseline `Baseline Of Cloud Security Group API Calls Per User` to be run first.
 tests:
 - name: True Positive Test
   attack_data:

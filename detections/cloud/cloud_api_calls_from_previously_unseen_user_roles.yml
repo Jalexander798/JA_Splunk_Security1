@@ -67,6 +67,7 @@ tags:
   - Splunk Enterprise Security
   - Splunk Cloud
   security_domain: threat
+  manual_test: This search needs the baseline `Previously Seen Cloud API Calls Per User Role - Initial` to be run first.
 tests:
 - name: True Positive Test
   attack_data:
