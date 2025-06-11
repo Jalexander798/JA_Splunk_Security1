@@ -1,0 +1,36 @@
+name: Netdom Active Directory Enumeration
+id: 4d12a2e8-4b9a-4b4d-8f67-73b94bbafea1
+version: 1
+date: '2025-06-11'
+author: Mahdi Hamedani Nezhad
+status: experimental
+type: TTP
+data_source: []
+description: This detection identifies potential Active Directory enumeration behavior by observing the use of `netdom.exe` with suspicious keywords such as QUERY, WORKSTATION, SERVER, DC, OU, PDC, FSMO, and TRUST. These terms often indicate an attempt to enumerate domain infrastructure or trust relationships. Detection of this behavior is important for identifying internal reconnaissance or preparation for lateral movement within an Active Directory environment.
+search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Processes where (Processes.process_name=netdom.exe OR Processes.original_file_name=netdom.exe) (Processes.process="* QUERY *" OR Processes.process="* WORKSTATION *" OR Processes.process="* SERVER *" OR Processes.process="* DC *" OR Processes.process="* OU *" OR Processes.process="* PDC *" OR Processes.process="* FSMO *" OR Processes.process="* TRUST *") by Processes.action Processes.dest Processes.process_name Processes.process_path Processes.user Processes.process | `drop_dm_object_name(Processes)` | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+how_to_implement: Ensure endpoint process auditing is enabled and ingested into the Endpoint.Processes datamodel. Validate that command-line arguments are captured for processes.
+known_false_positives: Netdom is a legitimate tool and may be used by administrators for valid purposes. Filtering may be necessary based on known admin hosts or service accounts.
+references:
+- https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netdom
+- https://attack.mitre.org/techniques/T1069/002/
+drilldown_searches: []
+tags:
+  analytic_story:
+  - Active Directory Discovery
+  - Domain Trust Discovery
+  asset_type: Endpoint
+  atomic_guid: []
+  mitre_attack_id:
+  - T1069.002
+  - T1482
+  product:
+  - Splunk Enterprise
+  - Splunk Enterprise Security
+  - Splunk Cloud
+  security_domain: endpoint
+tests:
+- name: Manual Test
+  attack_data:
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/active_directory/command_line/netdom_enum.log
+    source: WinEventLog:Security
+    sourcetype: XmlWinEventLog
