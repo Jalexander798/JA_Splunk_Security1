@@ -7,7 +7,7 @@ status: production
 type: Anomaly
 description: |
   This detection identifies potential Active Directory enumeration behavior by observing the use of `netdom.exe`
-  with specific keywords such as "QUERY", "WORKSTATION", "SERVER", "DC", "OU", "PDC", "FSMO", or "TRUST".
+  with the "QUERY" flag along with specific parameters such as, "WORKSTATION", "SERVER", "DC", "OU", "PDC", "FSMO", or "TRUST".
   These terms often indicate an attempt to enumerate domain infrastructure or trust relationships.
   If confirmed malicious, this behavior could allow attackers to map out domain controllers, facilitating
   further attacks such as privilege escalation or lateral movement within the network.
@@ -18,8 +18,8 @@ data_source:
 search: |-
   | tstats `security_content_summariesonly` count min(_time) as firstTime max(_time) as lastTime 
   from datamodel=Endpoint.Processes where
-    (Processes.process_name=netdom.exe OR Processes.original_file_name=netdom.exe)
-    Processes.process IN ("* QUERY *", "* WORKSTATION *", "* SERVER *", "* DC *", "* OU *", "* PDC *", "* FSMO *", "* TRUST *")
+    (Processes.process_name=netdom.exe OR Processes.original_file_name=netdom.exe) Processes.process="* QUERY *"
+    Processes.process IN ("* WORKSTATION *", "* SERVER *", "* DC *", "* OU *", "* PDC *", "* FSMO *", "* TRUST *")
   by Processes.action Processes.dest Processes.original_file_name
     Processes.parent_process Processes.parent_process_exec Processes.parent_process_guid
     Processes.parent_process_id Processes.parent_process_name Processes.parent_process_path
