@@ -19,7 +19,7 @@ configuration: https://github.com/SwiftOnSecurity/sysmon-config
 supported_TA:
 - name: Splunk Add-on for Sysmon
   url: https://splunkbase.splunk.com/app/5709
-  version: 4.0.2
+  version: 4.0.3
 field_mappings:
 - data_model: cim
   data_set: DNS
@@ -96,12 +96,12 @@ fields:
 - user_id
 - vendor_product
 output_fields:
-- answer 
-- answer_count 
-- query 
-- query_count 
-- reply_code_id 
-- src 
+- answer
+- answer_count
+- query
+- query_count
+- reply_code_id
+- src
 - vendor_product
 example_log: <Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider
   Name='Microsoft-Windows-Sysmon' Guid='{5770385F-C22A-43E0-BF4C-06F5698FFBD9}'/><EventID>22</EventID><Version>5</Version><Level>4</Level><Task>22</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated

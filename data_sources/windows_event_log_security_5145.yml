@@ -1,7 +1,7 @@
 name: Windows Event Log Security 5145
 id: 0746479b-7b82-4d7e-8811-0b35da00f798
-version: 2
-date: '2025-01-23'
+version: 3
+date: '2025-06-02'
 author: Patrick Bareiss, Splunk
 description: Logs detailed information about access to a network share, including
   the user, share path, accessed file, and access permissions.
@@ -121,6 +121,7 @@ field_mappings:
     SubjectLogonId: user_logon_id
     SubjectUserSid: user_sid
     ShareName: share
+    Computer: dest
 - data_model: ocsf
   mapping:
     AccessList: access_list
@@ -135,6 +136,7 @@ field_mappings:
     SubjectLogonId: actor.session.uid
     SubjectUserSid: actor.user.uid
     ShareName: share
+    Computer: device.hostname
 example_log: <Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider
   Name='Microsoft-Windows-Security-Auditing' Guid='{54849625-5478-4994-A5BA-3E3B0328C30D}'/><EventID>5145</EventID><Version>0</Version><Level>0</Level><Task>12811</Task><Opcode>0</Opcode><Keywords>0x8020000000000000</Keywords><TimeCreated
   SystemTime='2024-03-11T03:06:39.742608600Z'/><EventRecordID>2018939</EventRecordID><Correlation/><Execution
