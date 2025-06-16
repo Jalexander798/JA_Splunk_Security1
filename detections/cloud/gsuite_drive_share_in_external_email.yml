@@ -57,12 +57,12 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: suspicious share gdrive from $parameters.owner$ to $email$ namely as $parameters.doc_title$
+  message: Suspicious share gdrive from $owner$ to $email$ namely as $doc_title$
   risk_objects:
   - field: email
     type: user
     score: 72
-  - field: parameters.owner
+  - field: owner
     type: user
     score: 72
   threat_objects: []
