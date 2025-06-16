@@ -3,7 +3,7 @@ id: 98e6b389-2806-4426-a580-8a92cb0d9710
 version: 3
 date: '2025-06-10'
 author: Dean Luxton
-status: production
+status: experimental
 type: Hunting
 description: |
   Microsoft Intune supports deploying packaged applications to support software deployment, this functionality can also be abused for deploying malicious payloads to intune managed devices. 
@@ -39,9 +39,3 @@ tags:
   - Splunk Enterprise Security
   - Splunk Cloud
   security_domain: audit
-tests:
-- name: True Positive Test
-  attack_data:
-  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1072/intune/intune.log
-    sourcetype: azure:monitor:activity
-    source: Azure AD
