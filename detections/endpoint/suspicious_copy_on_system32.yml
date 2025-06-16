@@ -33,10 +33,10 @@ search:
   `process_copy` 
   Processes.process IN(
     "* \"C:\\Windows\\System32\\*", 
-    "* 'C:\\Windows\\System32\\*", 
+    "* \'C:\\Windows\\System32\\*", 
     "* C:\\Windows\\System32\\*", 
     "* \"C:\\Windows\\SysWow64\\*"
-    "* 'C:\\Windows\\SysWow64\\*"
+    "* \'C:\\Windows\\SysWow64\\*"
     "* C:\\Windows\\SysWow64\\*"
   )
   by Processes.action Processes.dest Processes.original_file_name
