@@ -22,7 +22,7 @@ data_source:
 search:
   '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime from datamodel=Endpoint.Processes where
-  parent_process_name IN (
+  Processes.parent_process_name IN (
     "cmd.exe", 
     "powershell_ise.exe",
     "powershell.exe", 
@@ -35,8 +35,8 @@ search:
     "* \"C:\\Windows\\System32\\*", 
     "* \'C:\\Windows\\System32\\*", 
     "* C:\\Windows\\System32\\*", 
-    "* \"C:\\Windows\\SysWow64\\*"
-    "* \'C:\\Windows\\SysWow64\\*"
+    "* \"C:\\Windows\\SysWow64\\*",
+    "* \'C:\\Windows\\SysWow64\\*",
     "* C:\\Windows\\SysWow64\\*"
   )
   by Processes.action Processes.dest Processes.original_file_name
