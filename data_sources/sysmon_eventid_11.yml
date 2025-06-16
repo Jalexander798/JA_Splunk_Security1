@@ -19,7 +19,7 @@ configuration: https://github.com/SwiftOnSecurity/sysmon-config
 supported_TA:
 - name: Splunk Add-on for Sysmon
   url: https://splunkbase.splunk.com/app/5709
-  version: 4.0.2
+  version: 4.0.3
 fields:
 - _time
 - Channel
@@ -93,14 +93,14 @@ fields:
 - user_id
 - vendor_product
 output_fields:
-- action 
-- dest 
-- file_name 
-- file_path 
-- process_guid 
-- process_id 
-- user 
-- vendor_product 
+- action
+- dest
+- file_name
+- file_path
+- process_guid
+- process_id
+- user
+- vendor_product
 field_mappings:
 - data_model: cim
   data_set: Endpoint.Filesystem
