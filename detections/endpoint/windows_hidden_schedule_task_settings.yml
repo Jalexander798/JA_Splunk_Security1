@@ -1,6 +1,6 @@
 name: Windows Hidden Schedule Task Settings
 id: 0b730470-5fe8-4b13-93a7-fe0ad014d0cc
-version: '8'
+version: 8
 date: '2025-05-26'
 author: Teoderick Contreras, Splunk
 status: production
@@ -15,11 +15,15 @@ description: The following analytic detects the creation of hidden scheduled tas
   malicious payloads.
 data_source:
 - Windows Event Log Security 4698
-search: '`wineventlog_security` EventCode=4698 TaskContent = "*&lt;Hidden&gt;true&lt;/Hidden&gt;*"
-  | stats count min(_time) as firstTime max(_time) as lastTime  by  TaskName TaskContent action signature status dest
+search: |
+  `wineventlog_security`
+  EventCode=4698 
+  TaskContent = "*&lt;Hidden&gt;true&lt;/Hidden&gt;*"
+  | stats count min(_time) as firstTime max(_time) as lastTime
+    by TaskName TaskContent action signature status dest
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)`
-  | `windows_hidden_schedule_task_settings_filter`'
+  | `windows_hidden_schedule_task_settings_filter`
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the task schedule (Exa. Security Log EventCode 4698) endpoints. Tune and
   filter known instances of Task schedule used in your environment.

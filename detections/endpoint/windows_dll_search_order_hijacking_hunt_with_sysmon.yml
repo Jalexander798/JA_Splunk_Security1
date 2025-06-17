@@ -1,6 +1,6 @@
 name: Windows DLL Search Order Hijacking Hunt with Sysmon
 id: 79c7d1fc-64c7-91be-a616-ccda752efe81
-version: '11'
+version: 11
 date: '2025-05-26'
 author: Michael Haag, Splunk
 status: production

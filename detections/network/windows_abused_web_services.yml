@@ -1,6 +1,6 @@
 name: Windows Abused Web Services
 id: 01f0aef4-8591-4daa-a53d-0ed49823b681
-version: '7'
+version: 7
 date: '2025-05-26'
 author: Teoderick Contreras, Splunk
 status: production

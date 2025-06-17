@@ -1,26 +1,40 @@
-name: Windows Process with TinyUrl DNS Query
+name: Windows DNS Query Request To TinyUrl
 id: b1ea79da-719c-437c-acaf-5c93f838f425
 version: 1
 date: '2025-06-02'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
-description: The following analytic detects a suspicious process making DNS queries to known URL shortening services, specifically tinyurl.com. URL shorteners are frequently used by threat actors to obfuscate malicious destinations, including phishing pages, malware distribution sites, or command-and-control (C2) endpoints. While tinyurl.com is a legitimate service, its use in enterprise environments—particularly by non-browser processes or scripts—should be considered suspicious, especially if correlated with subsequent outbound connections, file downloads, process file path or credential prompts. Analysts should investigate the source process, execution context, and destination domain to determine intent and risk.
+description: |
+  The following analytic detects a process located in a potentially suspicious location making DNS queries to known URL shortening services, specifically tinyurl.
+  URL shorteners are frequently used by threat actors to obfuscate malicious destinations, including phishing pages, malware distribution sites, or command-and-control (C2) endpoints. 
+  While tinyurl.com is a legitimate service, its use in enterprise environments—particularly by non-browser processes or scripts—should be considered suspicious, especially if correlated with subsequent outbound connections, file downloads, process file path or credential prompts. Analysts should investigate the source process, execution context, and destination domain to determine intent and risk.
 data_source:
 - Sysmon EventID 22
-search: '`sysmon` EventCode=22 QueryName = "tinyurl.com"
-  Image IN ("*\\users\\public\\*", "*\\programdata\\*", "*\\temp\\*", "*\\Windows\\Tasks\\*", "*\\appdata\\*", "*\\perflogs\\*") 
+search: |
+  `sysmon` 
+  EventCode=22 
+  QueryName = "tinyurl.com"
+  Image IN (
+    "*\\AppData\\*",
+    "*\\Perflogs\\*",
+    "*\\ProgramData\\*",
+    "*\\Temp\\*",
+    "*\\Users\\Public\\*",
+    "*\\Windows\\Tasks\\*"
+    ) 
   | stats count min(_time) as firstTime max(_time) as lastTime 
-  by answer answer_count dvc process_exec process_guid process_name query query_count reply_code_id signature signature_id src user_id vendor_product QueryName 
-  QueryResults QueryStatus 
+    by answer answer_count dvc process_exec process_guid process_name query query_count 
+       reply_code_id signature signature_id src user_id vendor_product QueryName QueryResults QueryStatus 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
-  | `windows_process_with_tinyurl_dns_query_filter`'
-how_to_implement: This detection relies on sysmon logs with the Event ID 22, DNS Query.
+  | `windows_dns_query_request_to_tinyurl_filter`
+how_to_implement: |
+  This detection relies on sysmon logs with the Event ID 22, DNS Query.
   We suggest you run this detection at least once a day over the last 14 days.
-known_false_positives: Noise and false positive can be seen if the following instant
-  messaging is allowed to use within corporate network. In this case, a filter is
-  needed.
+known_false_positives: |
+  Noise and false positive can be seen if the following instant 
+  messaging is allowed to use within corporate network. In this case, a filter is needed.
 references:
 - https://x.com/Unit42_Intel/status/1919418143476199869
 drilldown_searches:
