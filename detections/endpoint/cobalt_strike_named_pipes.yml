@@ -17,32 +17,32 @@ data_source:
 - Sysmon EventID 17
 - Sysmon EventID 18
 search: |
-  `sysmon` EventID=17 OR EventID=18 
+  `sysmon` (EventID=17 OR EventID=18)
   PipeName IN (
-    \\DserNamePipe*, 
-    \\interprocess_*,
-    \\lsarpc_*,
-    \\mojo_*,
-    \\msagent_*, 
-    \\MSSE-*, 
-    \\netlogon_*,
-    \\ntsvcs*,
-    \\postex_*, 
-    \\samr_*,
-    \\spoolss_*, 
-    \\srvsvc_*, 
-    \\status_*, 
-    \\UIA_PIPE*
-    \\win_svc*, 
-    \\winsock*, 
-    \\wkssvc_*,
+    "\\DserNamePipe*",
+    "\\interprocess_*",
+    "\\lsarpc_*",
+    "\\mojo_*",
+    "\\msagent_*",
+    "\\MSSE-*",
+    "\\netlogon_*",
+    "\\ntsvcs*",
+    "\\postex_*",
+    "\\samr_*",
+    "\\spoolss_*",
+    "\\srvsvc_*",
+    "\\status_*",
+    "\\UIA_PIPE"*
+    "\\win_svc*",
+    "\\winsock*",
+    "\\wkssvc_*",
   )
   | stats count min(_time) as firstTime max(_time) as lastTime
   by dest dvc pipe_name process_exec process_guid process_id process_name process_path
-  signature signature_id user_id vendor_product Image PipeName 
+  signature signature_id user_id vendor_product Image PipeName
   | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` 
-  | `cobalt_strike_named_pipes_filter`'
+  | `security_content_ctime(lastTime)`
+  | `cobalt_strike_named_pipes_filter`
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your
   endpoints. If you are using Sysmon, you must have at least version 6.0.4 of the

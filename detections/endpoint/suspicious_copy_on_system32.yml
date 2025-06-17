@@ -31,7 +31,7 @@ search: |
     "sqltoolsps.exe"
   )
   `process_copy` 
-  Processes.process IN(
+  Processes.process IN (
     "* \"C:\\Windows\\System32\\*", 
     "* \'C:\\Windows\\System32\\*", 
     "* C:\\Windows\\System32\\*", 
@@ -48,7 +48,7 @@ search: |
   | `drop_dm_object_name(Processes)`
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
-  | `suspicious_copy_on_system32_filter`'
+  | `suspicious_copy_on_system32_filter`
 how_to_implement: |
   The detection is based on data that originates from Endpoint Detection
   and Response (EDR) agents. These agents are designed to provide security-related
