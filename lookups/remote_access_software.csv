@@ -1,4 +1,4 @@
-description,remote_domain,remote_utility,remote_utility_fileinfo,remote_appid,isutility,category,comment_reference,last_update
+description,remote_domain,process_name,remote_utility_fileinfo,remote_appid,isutility,category,comment_reference,last_update
 Absolute (Computrace),*search.namequery.com,rpcnet.exe,Absolute Software*,absolute-manage,TRUE,RMM,https://community.absolute.com/s/article/Understanding-Absolutes-Endpoint-Agents-Rpcnet-CTES-and-search-namequery-com,6/18/2024
 Absolute (Computrace),*server.absolute.com,ctes.exe,Absolute Persistence*,,TRUE,RMM,https://community.absolute.com/s/article/Understanding-Absolutes-Endpoint-Agents-Rpcnet-CTES-and-search-namequery-com,6/18/2024
 Absolute (Computrace),,ctespersitence.exe,CTES*,,TRUE,RMM,https://community.absolute.com/s/article/Understanding-Absolutes-Endpoint-Agents-Rpcnet-CTES-and-search-namequery-com,6/18/2024
@@ -602,5 +602,9 @@ Microsoft SCCM Remote Control,,cmrcservice.exe,Configuration Manager Remote Cont
 Microsoft SCCM Remote Control,,cmrcviewer.exe,ConfigMgr Remote Control Viewer,,TRUE,RMM,https://learn.microsoft.com/en-us/mem/configmgr/core/clients/manage/remote-control/introduction-to-remote-control,1/29/2025
 NexThink,*.data.us.nexthink.cloud,nxtsvc.exe,Nexthink Collector*,,TRUE,RMM,https://docs.nexthink.com/platform/getting-started/planning-your-installation/techical-requirements/connectivity-requirements,1/24/2025
 NexThink,*.data.eu.nexthink.cloud,nxtcod.exe,Nexthink Coordinator*,,TRUE,RMM,https://docs.nexthink.com/platform/getting-started/planning-your-installation/techical-requirements/connectivity-requirements,1/24/2025
-NexThink,*.data.pac.nexthink.cloud,nxtcoordinator.exe,,,TRUE,RMM,https://docs.nexthink.com/platform/getting-started/planning-your-installation/techical-requirements/connectivity-requirements,1/24/2025
-NexThink,*.data.meta.nexthink.cloud,nxtupdater.exe,,,TRUE,RMM,https://docs.nexthink.com/platform/getting-started/planning-your-installation/techical-requirements/connectivity-requirements,1/24/2025
+Apple Remote Desktop,user_managed,ARDAgent,,Apple Remote Desktop,TRUE,RMM,https://support.apple.com/guide/remote-desktop/install-and-set-up-remote-desktop-apdf49e03a4/mac,2/24/2024
+Jump Desktop Connect for macOS,*.jumpdesktop.com,JumpConnect,Jump Desktop Client Executable,Lets you configure your computer for remote access for free,TRUE,RMM,https://support.jumpdesktop.com/hc/en-us/articles/360042490351-Administrators-Guide-For-Jump-Desktop-Connect/,5/8/2025
+Chrome Remote Desktop,*remotedesktop.google.com,remoting_agent_process_broker,Chrome Remote Desktop,chrome-remote-desktop,TRUE,RMM,https://remotedesktop.google.com/?pli=1,5/14/2025
+Chrome Remote Desktop,*remotedesktop-pa.googleapis.com,remoting_me2me_host_service,Chrome Remote Desktop,chrome-remote-desktop,TRUE,RMM,https://remotedesktop.google.com/?pli=1,5/14/2025
+AnyDesk,*net.anydesk.com,AnyDesk,AnyDesk.app,AnyDesk,TRUE,RMM,https://support.anydesk.com/knowledge/firewall,5/14/2025
+
