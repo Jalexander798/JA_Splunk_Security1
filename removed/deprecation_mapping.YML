@@ -1,4 +1,7 @@
 detections:
+  - content: Windows AD Suspicious GPO Modification
+    removed_in_version: 5.10.0
+    reason: Detection deprecated due to lack of data and consistency. Research is being done to create potential replacement in a future release.
   - content: Windows Remote Access Software Hunt
     removed_in_version: 5.8.0
     reason: Detection has been replaced by a new detection with a more specific name and logic

@@ -1,9 +1,9 @@
 name: Cloud API Calls From Previously Unseen User Roles
 id: 2181ad1f-1e73-4d0c-9780-e8880482a08f
-version: 5
-date: '2025-05-02'
+version: 6
+date: '2025-06-10'
 author: David Dorsey, Splunk
-status: experimental
+status: production
 type: Anomaly
 description: The following analytic detects cloud API calls executed by user roles
   that have not previously run these commands. It leverages the Change data model
@@ -34,6 +34,20 @@ how_to_implement: You must be ingesting your cloud infrastructure logs from your
   the `cloud_api_calls_from_previously_unseen_user_roles_filter`
 known_false_positives: None.
 references: []
+drilldown_searches:
+- name: View the detection results for - "$dest$"
+  search: '%original_detection_search% | search  dest = "$dest$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: View risk events for the last 7 days for - "$dest$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
 rba:
   message: User $user$ of type AssumedRole attempting to execute new API calls $command$
     that have not been seen before
@@ -53,6 +67,7 @@ tags:
   - Splunk Enterprise Security
   - Splunk Cloud
   security_domain: threat
+  manual_test: This search needs the baseline `Previously Seen Cloud API Calls Per User Role - Initial` to be run first.
 tests:
 - name: True Positive Test
   attack_data:

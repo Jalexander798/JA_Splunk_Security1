@@ -1,16 +1,16 @@
 name: Windows AD Privileged Group Modification
 id: 187bf937-c436-4c65-bbcb-7539ffe02da1
-version: 5
-date: '2025-05-02'
+version: 6
+date: '2025-06-10'
 author: Dean Luxton
-status: experimental
+status: production
 type: TTP
 data_source:
 - Windows Event Log Security 4728
 description: Detect users added to privileged AD Groups.
 search: '`wineventlog_security` EventCode IN (4728) | stats min(_time) as _time dc(user)
   as usercount, values(user) as user values(user_category) as user_category values(src_user_category)
-  as src_user_category values(dvc) as dvc by signature, Group_Name,src_user | lookup
+  as src_user_category values(dvc) as dvc by signature, Group_Name,src_user dest | lookup
   admon_groups_def  cn as Group_Name OUTPUT category | where category="privileged"
   | `windows_ad_privileged_group_modification_filter`'
 how_to_implement: This analytic requires eventCode 4728 to be ingested along with
@@ -20,6 +20,20 @@ how_to_implement: This analytic requires eventCode 4728 to be ingested along wit
 known_false_positives: None
 references:
 - https://splunkbase.splunk.com/app/6853
+drilldown_searches:
+- name: View the detection results for - "$dest$"
+  search: '%original_detection_search% | search  dest = "$dest$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: View risk events for the last 7 days for - "$dest$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
 rba:
   message: $user$ was added to privileged AD Group $Group_Name$ by $src_user$
   risk_objects:
