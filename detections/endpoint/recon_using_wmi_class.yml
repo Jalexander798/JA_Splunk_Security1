@@ -1,7 +1,7 @@
 name: Recon Using WMI Class
 id: 018c1972-ca07-11eb-9473-acde48001122
-version: 7
-date: '2025-05-02'
+version: '8'
+date: '2025-05-26'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -65,12 +65,13 @@ rba:
 tags:
   analytic_story:
   - AsyncRAT
-  - Qakbot
-  - Industroyer2
-  - Hermetic Wiper
   - LockBit Ransomware
   - Malicious PowerShell
+  - Malicious Inno Setup Loader
+  - Hermetic Wiper
   - Data Destruction
+  - Qakbot
+  - Industroyer2
   - MoonPeak
   asset_type: Endpoint
   mitre_attack_id:

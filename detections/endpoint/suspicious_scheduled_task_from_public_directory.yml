@@ -1,7 +1,7 @@
 name: Suspicious Scheduled Task from Public Directory
 id: 7feb7972-7ac3-11eb-bac8-acde48001122
-version: '12'
-date: '2025-05-06'
+version: '13'
+date: '2025-05-26'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly
@@ -69,21 +69,22 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - CISA AA24-241A
-  - CISA AA23-347A
-  - Medusa Ransomware
-  - China-Nexus Threat Activity
-  - Scheduled Tasks
-  - Windows Persistence Techniques
-  - Living Off The Land
-  - Ryuk Ransomware
-  - Salt Typhoon
-  - Ransomware
   - DarkCrystal RAT
+  - China-Nexus Threat Activity
+  - Windows Persistence Techniques
+  - Ryuk Ransomware
+  - Medusa Ransomware
+  - Malicious Inno Setup Loader
+  - CISA AA23-347A
   - Azorult
-  - MoonPeak
-  - XWorm
+  - Living Off The Land
   - Crypto Stealer
+  - Salt Typhoon
+  - XWorm
+  - CISA AA24-241A
+  - Scheduled Tasks
+  - Ransomware
+  - MoonPeak
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.005

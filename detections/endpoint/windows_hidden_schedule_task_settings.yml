@@ -1,7 +1,7 @@
 name: Windows Hidden Schedule Task Settings
 id: 0b730470-5fe8-4b13-93a7-fe0ad014d0cc
-version: 7
-date: '2025-05-02'
+version: 8
+date: '2025-05-26'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -15,10 +15,15 @@ description: The following analytic detects the creation of hidden scheduled tas
   malicious payloads.
 data_source:
 - Windows Event Log Security 4698
-search: '`wineventlog_security` EventCode=4698 | xmlkv Message | search Hidden = true
-  | stats count min(_time) as firstTime max(_time) as lastTime by  Task_Name, Command,
-  Author, Hidden, dest | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `windows_hidden_schedule_task_settings_filter`'
+search: |
+  `wineventlog_security`
+  EventCode=4698 
+  TaskContent = "*&lt;Hidden&gt;true&lt;/Hidden&gt;*"
+  | stats count min(_time) as firstTime max(_time) as lastTime
+    by TaskName TaskContent action signature status dest
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)`
+  | `windows_hidden_schedule_task_settings_filter`
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the task schedule (Exa. Security Log EventCode 4698) endpoints. Tune and
   filter known instances of Task schedule used in your environment.
@@ -50,12 +55,13 @@ rba:
 tags:
   analytic_story:
   - CISA AA22-257A
-  - Industroyer2
-  - Data Destruction
-  - Scheduled Tasks
-  - Compromised Windows Host
   - Active Directory Discovery
+  - Malicious Inno Setup Loader
+  - Compromised Windows Host
+  - Data Destruction
+  - Industroyer2
   - Cactus Ransomware
+  - Scheduled Tasks
   asset_type: Endpoint
   mitre_attack_id:
   - T1053
@@ -67,7 +73,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
-      https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053/hidden_schedule_task/security.log
-    source: WinEventLog:Security
-    sourcetype: WinEventLog
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1053/hidden_schedule_task/inno_schtask.log
+    source: XmlWinEventLog:Security
+    sourcetype: XmlWinEventLog
