@@ -3,7 +3,7 @@ id: f6ee02d6-fea0-11eb-b2c2-acde48001122
 version: 8
 date: '2025-06-10'
 author: Teoderick Contreras, Splunk
-status: production
+status: Experimental
 type: Anomaly
 description:
   The following analytic detects Google Drive or Google Docs files shared
