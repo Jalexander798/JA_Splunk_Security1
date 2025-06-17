@@ -1,9 +1,9 @@
 name: Windows Driver Inventory
 id: f87aa96b-369b-4a3e-9021-1bbacbfcb8fb
-version: 5
-date: '2025-05-02'
+version: 6
+date: '2025-06-10'
 author: Michael Haag, Splunk
-status: experimental
+status: production
 type: Hunting
 description: The following analytic identifies drivers being loaded across the fleet.
   It leverages a PowerShell script input deployed to critical systems to capture driver
@@ -32,6 +32,7 @@ tags:
   - Splunk Enterprise Security
   - Splunk Cloud
   security_domain: endpoint
+  manual_test: Cannot be tested automatically, as it needs additional transforms and props to make the data ready.
 tests:
 - name: True Positive Test
   attack_data:
