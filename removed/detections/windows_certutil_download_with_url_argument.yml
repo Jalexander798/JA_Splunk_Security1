@@ -3,7 +3,7 @@ id: 4fc5ca00-4c7c-46b3-8772-c98a4b8bd944
 version: 6
 date: '2025-05-02'
 author: Nasreddine Bencherchali, Splunk
-status: deprecated
+status: removed
 type: TTP
 description: This analytic has been deprecated in favor of "Windows CertUtil Download".
   The following analytic detects the use of `certutil.exe` to download
