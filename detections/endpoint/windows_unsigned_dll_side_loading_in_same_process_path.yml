@@ -1,10 +1,8 @@
 name: Windows Unsigned DLL Side-Loading In Same Process Path
 id: 3cf85c02-f9d6-4186-bf3c-e70ee99fbc7f
-version: '12'
-date: '2025-05-06'
+version: 13
+date: '2025-05-26'
 author: Teoderick Contreras, Splunk
-data_source:
-- Sysmon EventID 7
 type: TTP
 status: production
 description: This detection identifies unsigned DLLs loaded through DLL side-loading
@@ -15,6 +13,8 @@ description: This detection identifies unsigned DLLs loaded through DLL side-loa
   potential security breaches. Regular security assessments, thorough monitoring,
   and implementing security best practices are essential in safeguarding systems from
   such threats.
+data_source:
+- Sysmon EventID 7
 search: '`sysmon` EventCode=7 Signed=false SignatureStatus != Valid NOT (Image IN
   ("*:\\windows\\system32\\*", "*:\\windows\\syswow64\\*", "c:\\Program Files*"))
   NOT (ImageLoaded IN ("*:\\windows\\system32\\*", "*:\\windows\\syswow64\\*", "c:\\Program
@@ -55,12 +55,13 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
+  - PlugX
   - DarkGate Malware
-  - China-Nexus Threat Activity
   - Derusbi
+  - China-Nexus Threat Activity
+  - Malicious Inno Setup Loader
   - Salt Typhoon
   - XWorm
-  - PlugX
   - SnappyBee
   asset_type: Endpoint
   mitre_attack_id:
