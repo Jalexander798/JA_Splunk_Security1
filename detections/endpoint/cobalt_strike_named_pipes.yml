@@ -1,7 +1,7 @@
 name: Cobalt Strike Named Pipes
 id: 5876d429-0240-4709-8b93-ea8330b411b5
-version: 8
-date: '2025-05-02'
+version: 9
+date: '2025-06-17'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -16,12 +16,33 @@ description: The following analytic detects the use of default or publicly known
 data_source:
 - Sysmon EventID 17
 - Sysmon EventID 18
-search: '`sysmon` EventID=17 OR EventID=18 PipeName IN (\\msagent_*, \\DserNamePipe*,
-  \\srvsvc_*, \\postex_*, \\status_*, \\MSSE-*, \\spoolss_*, \\win_svc*, \\ntsvcs*,
-  \\winsock*, \\UIA_PIPE*) | stats count min(_time) as firstTime max(_time) as lastTime
+search: |
+  `sysmon` (EventID=17 OR EventID=18)
+  PipeName IN (
+    "\\DserNamePipe*",
+    "\\interprocess_*",
+    "\\lsarpc_*",
+    "\\mojo_*",
+    "\\msagent_*",
+    "\\MSSE-*",
+    "\\netlogon_*",
+    "\\ntsvcs*",
+    "\\postex_*",
+    "\\samr_*",
+    "\\spoolss_*",
+    "\\srvsvc_*",
+    "\\status_*",
+    "\\UIA_PIPE"*
+    "\\win_svc*",
+    "\\winsock*",
+    "\\wkssvc_*",
+  )
+  | stats count min(_time) as firstTime max(_time) as lastTime
   by dest dvc pipe_name process_exec process_guid process_id process_name process_path
-  signature signature_id user_id vendor_product Image PipeName | `security_content_ctime(firstTime)`
-  | `security_content_ctime(lastTime)` | `cobalt_strike_named_pipes_filter`'
+  signature signature_id user_id vendor_product Image PipeName
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)`
+  | `cobalt_strike_named_pipes_filter`
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name, parent process, and command-line executions from your
   endpoints. If you are using Sysmon, you must have at least version 6.0.4 of the
