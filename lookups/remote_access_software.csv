@@ -1,4 +1,4 @@
-description,remote_domain,process_name,remote_utility_fileinfo,remote_appid,isutility,category,comment_reference,last_update
+description,remote_domain,remote_utility,remote_utility_fileinfo,remote_appid,isutility,category,comment_reference,last_update
 Absolute (Computrace),*search.namequery.com,rpcnet.exe,Absolute Software*,absolute-manage,TRUE,RMM,https://community.absolute.com/s/article/Understanding-Absolutes-Endpoint-Agents-Rpcnet-CTES-and-search-namequery-com,6/18/2024
 Absolute (Computrace),*server.absolute.com,ctes.exe,Absolute Persistence*,,TRUE,RMM,https://community.absolute.com/s/article/Understanding-Absolutes-Endpoint-Agents-Rpcnet-CTES-and-search-namequery-com,6/18/2024
 Absolute (Computrace),,ctespersitence.exe,CTES*,,TRUE,RMM,https://community.absolute.com/s/article/Understanding-Absolutes-Endpoint-Agents-Rpcnet-CTES-and-search-namequery-com,6/18/2024
@@ -55,8 +55,8 @@ Netreo,*.api.netreo.com,,,,TRUE,RMM,https://solutions.netreo.com/docs/firewall-r
 NetSupport Manager,*.netsupportmanager.com,pcictlui.exe,netsupport,netsupport-manager,TRUE,RMM,https://www.netsupportmanager.com/resources/,2/9/2024
 NetSupport Manager,,pcicfgui.exe,,,TRUE,RMM,https://www.netsupportmanager.com/resources/,2/9/2024
 NetSupport Manager,,client32.exe,,,TRUE,RMM,https://www.netsupportmanager.com/resources/,2/9/2024
-Neturo,neturo.uplus.co.kr,neturo*.exe,,,TRUE,RMM,Obscure, located an older copy here: http://www.iconpos.com/pos/home/iconpos/bbs.php?id=file&q=view&uid=2,2/9/2024
-Neturo,,ntrntservice.exe,,,TRUE,RMM,Obscure, located an older copy here: http://www.iconpos.com/pos/home/iconpos/bbs.php?id=file&q=view&uid=2,2/9/2024
+Neturo,neturo.uplus.co.kr,neturo*.exe,,,TRUE,RMM,"Obscure, located an older copy here: http://www.iconpos.com/pos/home/iconpos/bbs.php?id=file&q=view&uid=2",2/9/2024
+Neturo,,ntrntservice.exe,,,TRUE,RMM,"Obscure, located an older copy here: http://www.iconpos.com/pos/home/iconpos/bbs.php?id=file&q=view&uid=2",2/9/2024
 Netviewer (GoToMeet),,nvClient.exe,Algorius*,netviewer,TRUE,RMM,Obsolute - found copy here: https://www.enviolet.com/en/service/online-consultant.html,2/9/2024
 Netviewer (GoToMeet),,netviewer.exe,,,TRUE,RMM,Obsolute - found copy here: https://www.enviolet.com/en/service/online-consultant.html,2/9/2024
 ngrok,user_managed,ngrok.exe,,,TRUE,Developer Utility,https://ngrok.com/docs/guides/running-behind-firewalls/,2/9/2024
@@ -235,16 +235,16 @@ ISL Online,*.islonline.com,islalwaysonmonitor.exe,ISL Online*,isl-light,TRUE,RMM
 ISL Online,*.islonline.net,isllight.exe,ISL Light*,,TRUE,RMM,https://help.islonline.com/19818/165940,2/8/2024
 ISL Online,,isllightservice.exe,,,TRUE,RMM,https://help.islonline.com/19818/165940,2/8/2024
 ISL Online,,ISLLightClient.exe,,,TRUE,RMM,https://help.islonline.com/19818/165940,2/8/2024
-Itarian,*.itsm-us1.comodo.com,ITSMAgent.exe,Itarian*,,TRUE,RMM,https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html,2/8/2024
-Itarian,mdmsupport.comodo.com,ItsmRsp.exe,RMM*,,TRUE,RMM,https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html,2/8/2024
-Itarian,*.cmdm.comodo.com,ITSMService.exe,,,TRUE,RMM,https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html,2/8/2024
-Itarian,remoteaccess.itarian.com,RDesktop.exe,,,TRUE,RMM,https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html,2/8/2024
-Itarian,servicedesk.itarian.com,RHost.exe,,,TRUE,RMM,https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html,2/8/2024
-Itarian,,RmmService.exe,,,TRUE,RMM,https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html,2/8/2024
-Itarian,,ComodoRemoteControl.exe,,,TRUE,RMM,https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html,2/8/2024
-Itarian,,RAccess.exe,,,TRUE,RMM,https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html,2/8/2024
-Itarian,,RViewer.exe,,,TRUE,RMM,https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html,2/8/2024
-Itarian,,ITarianRemoteAccessSetup.exe,,,TRUE,RMM,https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html,2/8/2024
+Itarian,*.itsm-us1.comodo.com,ITSMAgent.exe,Itarian*,,TRUE,RMM,"https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html",2/8/2024
+Itarian,mdmsupport.comodo.com,ItsmRsp.exe,RMM*,,TRUE,RMM,"https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html",2/8/2024
+Itarian,*.cmdm.comodo.com,ITSMService.exe,,,TRUE,RMM,"https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html",2/8/2024
+Itarian,remoteaccess.itarian.com,RDesktop.exe,,,TRUE,RMM,"https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html",2/8/2024
+Itarian,servicedesk.itarian.com,RHost.exe,,,TRUE,RMM,"https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html",2/8/2024
+Itarian,,RmmService.exe,,,TRUE,RMM,"https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html",2/8/2024
+Itarian,,ComodoRemoteControl.exe,,,TRUE,RMM,"https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html",2/8/2024
+Itarian,,RAccess.exe,,,TRUE,RMM,"https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html",2/8/2024
+Itarian,,RViewer.exe,,,TRUE,RMM,"https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html",2/8/2024
+Itarian,,ITarianRemoteAccessSetup.exe,,,TRUE,RMM,"https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html",2/8/2024
 ITSupport247 (ConnectWise),*.itsupport247.net,saazapsc.exe,,,TRUE,RMM,https://control.itsupport247.net/,2/8/2024
 Jump Desktop,jumpdesktop.com,jumpdesktop.exe,,,TRUE,RMM,https://jumpdesktop.com/connect/,2/8/2024
 Jump Desktop,jumpto.me,jumpservice.exe,,,TRUE,RMM,https://jumpdesktop.com/connect/,2/8/2024
@@ -348,8 +348,8 @@ Centurion,centuriontech.com,ctiserv.exe,,,TRUE,RMM,https://data443.atlassian.net
 Chrome Remote Desktop,*remotedesktop.google.com,remote_host.exe,Chrome Remote Desktop,chrome-remote-desktop,TRUE,RMM,https://support.google.com/chrome/a/answer/2799701?hl=en,2/7/2024
 Chrome Remote Desktop,*remotedesktop-pa.googleapis.com,remoting_host.exe,,,TRUE,RMM,https://support.google.com/chrome/a/answer/2799701?hl=en,2/7/2024
 CloudFlare Tunnel,,cloudflared.exe,,,TRUE,Remote Access,cloudflare.com/products/tunnel/,2/7/2024
-Comodo RMM,*.itsm-us1.comodo.com,itsmagent.exe,,,TRUE,RMM,https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html,2/7/2024
-Comodo RMM,*mdmsupport.comodo.com,rviewer.exe,,,TRUE,RMM,https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html,2/7/2024
+Comodo RMM,*.itsm-us1.comodo.com,itsmagent.exe,,,TRUE,RMM,"https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html",2/7/2024
+Comodo RMM,*mdmsupport.comodo.com,rviewer.exe,,,TRUE,RMM,"https://help.itarian.com/topic-459-1-1005-14776-Appendix-1b---Endpoint-Manager-Services---IP-Nos,-Host-Names-and-Port-Details---US-Customers.html",2/7/2024
 CrossLoop,*.crossloop.com,crossloopservice.exe,Crossloop*,crossloop,TRUE,RMM,www.CrossLoop.com -> redirects to avast.com,2/7/2024
 CrossLoop,,CrossLoopConnect.exe,,,TRUE,RMM,www.CrossLoop.com -> redirects to avast.com,2/7/2024
 CrossLoop,,WinVNCStub.exe,,,TRUE,RMM,www.CrossLoop.com -> redirects to avast.com,2/7/2024
@@ -457,7 +457,7 @@ Adobe Connect,,ConnectShellSetup*.exe,,adobe-meeting-remote-control,TRUE,RMM,htt
 Adobe Connect,,Connect.exe,,adobe-connectnow,TRUE,RMM,https://helpx.adobe.com/adobe-connect/firewall-proxy-server-configuration-adobe-connect.html,2/27/2024
 Adobe Connect,,ConnectDetector.exe,,adobe-connectnow-remote-control,TRUE,RMM,https://helpx.adobe.com/adobe-connect/firewall-proxy-server-configuration-adobe-connect.html,2/27/2024
 Any Support,*.anysupport.net,ManualLauncher.exe,AnySupport*,anysupport,TRUE,RMM,https://www.anysupport.net/introduce_howto.php,2/27/2024
-Any Support,,,Koino Co., Ltd.,,TRUE,RMM,https://www.anysupport.net/introduce_howto.php,2/27/2024
+Any Support,,,"Koino Co., Ltd.",,TRUE,RMM,https://www.anysupport.net/introduce_howto.php,2/27/2024
 Acronic Cyber Protect (Remotix),cloud.acronis.com,AcronisCyberProtectConnectQuickAssist*.exe,Acronis Cyber Protect Connect Quick Assist,remotix,TRUE,RMM,https://kb.acronis.com/content/47189,2/26/2024
 Acronic Cyber Protect (Remotix),agents*-cloud.acronis.com,AcronisCyberProtectConnectAgent.exe,Acronis Cyber Protect Connect Agent,,TRUE,RMM,https://kb.acronis.com/content/47189,2/26/2024
 Acronic Cyber Protect (Remotix),gw.remotix.com,,,,TRUE,RMM,https://kb.acronis.com/content/47189,2/26/2024
@@ -602,9 +602,5 @@ Microsoft SCCM Remote Control,,cmrcservice.exe,Configuration Manager Remote Cont
 Microsoft SCCM Remote Control,,cmrcviewer.exe,ConfigMgr Remote Control Viewer,,TRUE,RMM,https://learn.microsoft.com/en-us/mem/configmgr/core/clients/manage/remote-control/introduction-to-remote-control,1/29/2025
 NexThink,*.data.us.nexthink.cloud,nxtsvc.exe,Nexthink Collector*,,TRUE,RMM,https://docs.nexthink.com/platform/getting-started/planning-your-installation/techical-requirements/connectivity-requirements,1/24/2025
 NexThink,*.data.eu.nexthink.cloud,nxtcod.exe,Nexthink Coordinator*,,TRUE,RMM,https://docs.nexthink.com/platform/getting-started/planning-your-installation/techical-requirements/connectivity-requirements,1/24/2025
-Apple Remote Desktop,user_managed,ARDAgent,,Apple Remote Desktop,TRUE,RMM,https://support.apple.com/guide/remote-desktop/install-and-set-up-remote-desktop-apdf49e03a4/mac,2/24/2024
-Jump Desktop Connect for macOS,*.jumpdesktop.com,JumpConnect,Jump Desktop Client Executable,Lets you configure your computer for remote access for free,TRUE,RMM,https://support.jumpdesktop.com/hc/en-us/articles/360042490351-Administrators-Guide-For-Jump-Desktop-Connect/,5/8/2025
-Chrome Remote Desktop,*remotedesktop.google.com,remoting_agent_process_broker,Chrome Remote Desktop,chrome-remote-desktop,TRUE,RMM,https://remotedesktop.google.com/?pli=1,5/14/2025
-Chrome Remote Desktop,*remotedesktop-pa.googleapis.com,remoting_me2me_host_service,Chrome Remote Desktop,chrome-remote-desktop,TRUE,RMM,https://remotedesktop.google.com/?pli=1,5/14/2025
-AnyDesk,*net.anydesk.com,AnyDesk,AnyDesk.app,AnyDesk,TRUE,RMM,https://support.anydesk.com/knowledge/firewall,5/14/2025
-
+NexThink,*.data.pac.nexthink.cloud,nxtcoordinator.exe,,,TRUE,RMM,https://docs.nexthink.com/platform/getting-started/planning-your-installation/techical-requirements/connectivity-requirements,1/24/2025
+NexThink,*.data.meta.nexthink.cloud,nxtupdater.exe,,,TRUE,RMM,https://docs.nexthink.com/platform/getting-started/planning-your-installation/techical-requirements/connectivity-requirements,1/24/2025
