@@ -4,7 +4,7 @@ version: 1
 date: '2025-06-09'
 author: Christian Cloutier, Splunk
 type: Response
-description: "Accepts a hostname or device id as well as one or more process IDs as input and terminates those process(es) on a device in CrowdStrike. We then generate an observable report as well as a Markdown formatted report. Both reports can be customized based on user preference.  Note that the Markdown report can report a status of "success" even when a particular PID is not actually killed.  Rely on the observable output if you need to reliably check that."
+description: "Accepts a hostname or device id as well as one or more process IDs as input and terminates those process(es) on a device in CrowdStrike. We then generate an observable report as well as a Markdown formatted report. Both reports can be customized based on user preference.  Note that the Markdown report can report a status of success even when a particular PID is not actually killed.  Rely on the observable output if you need to reliably check that."
 playbook: CrowdStrike_OAuth_API_Process_Termination
 how_to_implement: This input playbook requires the CrowdStrike OAuth API connector to be configured. It is designed to work with an endpoint hostname or device id and terminate the corresponding process on the endpoint for use in automation playbooks. 
 references: []
