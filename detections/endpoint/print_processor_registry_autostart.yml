@@ -48,7 +48,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: modified/added/deleted registry entry $Registry.registry_path$ on $dest$
+  message: modified/added/deleted registry entry $registry_path$ on $dest$
   risk_objects:
   - field: dest
     type: system
