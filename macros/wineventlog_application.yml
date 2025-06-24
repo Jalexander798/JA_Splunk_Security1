@@ -1,4 +1,5 @@
-definition: eventtype="wineventlog_application" OR Channel="application" OR source="XmlWinEventLog:Application" OR source="WinEventLog:Application"
-description: customer specific splunk configurations(eg- index, source, sourcetype).
+definition: eventtype="wineventlog_application" OR Channel="application" OR source="XmlWinEventLog:Application"
+description:
+  customer specific splunk configurations(eg- index, source, sourcetype).
   Replace the macro definition with configurations for your Splunk Environment.
 name: wineventlog_application
