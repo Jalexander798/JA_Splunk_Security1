@@ -1,6 +1,6 @@
 name: ServicePrincipalNames Discovery with PowerShell
 id: 13243068-2d38-11ec-8908-acde48001122
-version: 9
+version: 8
 date: '2025-06-24'
 author: Michael Haag, Splunk
 status: production
