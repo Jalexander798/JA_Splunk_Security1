@@ -1,7 +1,7 @@
 name: Windows PowerShell IIS Components WebGlobalModule Usage
 id: 33fc9f6f-0ce7-4696-924e-a69ec61a3d57
-version: 7
-date: '2025-05-02'
+version: 8
+date: '2025-06-24'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly

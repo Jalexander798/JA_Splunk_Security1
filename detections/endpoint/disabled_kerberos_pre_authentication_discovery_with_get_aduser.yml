@@ -1,7 +1,7 @@
 name: Disabled Kerberos Pre-Authentication Discovery With Get-ADUser
 id: 114c6bfe-9406-11ec-bcce-acde48001122
-version: 9
-date: '2025-05-02'
+version: 10
+date: '2025-06-24'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

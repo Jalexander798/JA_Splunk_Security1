@@ -1,7 +1,7 @@
 name: Remote Process Instantiation via WMI and PowerShell Script Block
 id: 2a048c14-4634-11ec-a618-3e22fbd008af
-version: 7
-date: '2025-05-02'
+version: 9
+date: '2025-06-24'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

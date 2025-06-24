@@ -1,7 +1,7 @@
 name: Windows PowerShell ScheduleTask
 id: ddf82fcb-e9ee-40e3-8712-a50b5bf323fc
-version: 7
-date: '2025-05-02'
+version: 8
+date: '2025-06-24'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly

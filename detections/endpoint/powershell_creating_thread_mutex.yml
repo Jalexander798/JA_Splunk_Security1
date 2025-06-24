@@ -1,7 +1,7 @@
 name: Powershell Creating Thread Mutex
 id: 637557ec-ca08-11eb-bd0a-acde48001122
-version: 10
-date: '2025-05-02'
+version: 11
+date: '2025-06-24'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

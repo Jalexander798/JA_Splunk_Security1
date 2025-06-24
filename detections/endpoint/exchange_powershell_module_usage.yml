@@ -1,7 +1,7 @@
 name: Exchange PowerShell Module Usage
 id: 2d10095e-05ae-11ec-8fdf-acde48001122
-version: 11
-date: '2025-05-02'
+version: 12
+date: '2025-06-24'
 author: Michael Haag, Splunk
 status: production
 type: TTP

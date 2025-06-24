@@ -1,7 +1,7 @@
 name: Remote System Discovery with Adsisearcher
 id: 70803451-0047-4e12-9d63-77fa7eb8649c
-version: 7
-date: '2025-05-02'
+version: 9
+date: '2025-06-24'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP

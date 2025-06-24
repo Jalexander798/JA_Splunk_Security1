@@ -1,7 +1,7 @@
 name: PowerShell Invoke CIMMethod CIMSession
 id: 651ee958-a433-471c-b264-39725b788b83
-version: 6
-date: '2025-05-02'
+version: 7
+date: '2025-06-24'
 author: Michael Haag, Splunk
 type: Anomaly
 status: production

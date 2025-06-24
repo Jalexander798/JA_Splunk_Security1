@@ -1,7 +1,7 @@
 name: Powershell Remove Windows Defender Directory
 id: adf47620-79fa-11ec-b248-acde48001122
-version: 10
-date: '2025-05-02'
+version: 11
+date: '2025-06-24'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP

@@ -1,7 +1,7 @@
 name: PowerShell Domain Enumeration
 id: e1866ce2-ca22-11eb-8e44-acde48001122
-version: 8
-date: '2025-05-02'
+version: 9
+date: '2025-06-24'
 author: Michael Haag, Splunk
 status: production
 type: TTP

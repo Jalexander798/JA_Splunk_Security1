@@ -1,7 +1,7 @@
 name: Get-ForestTrust with PowerShell Script Block
 id: 70fac80e-0bf1-11ec-9ba0-acde48001122
-version: 7
-date: '2025-05-02'
+version: 8
+date: '2025-06-24'
 author: Michael Haag, Splunk
 status: production
 type: TTP

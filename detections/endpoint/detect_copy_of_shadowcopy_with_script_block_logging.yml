@@ -1,7 +1,7 @@
 name: Detect Copy of ShadowCopy with Script Block Logging
 id: 9251299c-ea5b-11eb-a8de-acde48001122
-version: 8
-date: '2025-05-02'
+version: 9
+date: '2025-06-24'
 author: Michael Haag, Splunk
 status: production
 type: TTP

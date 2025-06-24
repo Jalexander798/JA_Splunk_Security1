@@ -1,7 +1,7 @@
 name: Windows Domain Account Discovery Via Get-NetComputer
 id: a7fbbc4e-4571-424a-b627-6968e1c939e4
-version: 7
-date: '2025-05-02'
+version: 8
+date: '2025-06-24'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly

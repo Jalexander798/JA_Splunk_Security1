@@ -1,7 +1,7 @@
 name: Kubernetes Anomalous Inbound Network Activity from Process
 id: 10442d8b-0701-4c25-911d-d67b906e713c
-version: 5
-date: '2025-05-02'
+version: 6
+date: '2025-06-24'
 author: Matthew Moore, Splunk
 status: experimental
 type: Anomaly
