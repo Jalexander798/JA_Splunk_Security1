@@ -1,9 +1,9 @@
 name: Cloud Compute Instance Created In Previously Unused Region
 id: fa4089e2-50e3-40f7-8469-d2cc1564ca59
-version: 5
-date: '2025-05-02'
+version: 6
+date: '2025-06-10'
 author: David Dorsey, Splunk
-status: experimental
+status: production
 type: Anomaly
 description: The following analytic detects the creation of a cloud compute instance
   in a region that has not been previously used within the last hour. It leverages
@@ -33,6 +33,20 @@ how_to_implement: You must be ingesting your cloud infrastructure logs from your
 known_false_positives: It's possible that a user has unknowingly started an instance
   in a new region. Please verify that this activity is legitimate.
 references: []
+drilldown_searches:
+- name: View the detection results for - "$dest$"
+  search: '%original_detection_search% | search  dest = "$dest$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: View risk events for the last 7 days for - "$dest$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
 rba:
   message: User $user$ is creating an instance $dest$ in a new region for the first
     time
@@ -55,6 +69,7 @@ tags:
   - Splunk Enterprise Security
   - Splunk Cloud
   security_domain: threat
+  manual_test: This search needs the baseline `Previously Seen Cloud Regions - Update` to be run first.
 tests:
 - name: True Positive Test
   attack_data:

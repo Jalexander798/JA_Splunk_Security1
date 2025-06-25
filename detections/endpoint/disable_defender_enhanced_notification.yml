@@ -1,7 +1,7 @@
 name: Disable Defender Enhanced Notification
 id: dc65678c-301f-11ec-8e30-acde48001122
-version: 10
-date: '2025-05-02'
+version: 11
+date: '2025-06-10'
 author: Teoderick Contreras, Splunk, Steven Dick
 status: production
 type: TTP
@@ -15,7 +15,6 @@ description: The following analytic detects the modification of the registry to 
   mechanisms, maintain persistence, and escalate their activities without triggering
   alerts.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Registry
   WHERE (Registry.registry_path = "*Microsoft\\Windows Defender\\Reporting*" Registry.registry_value_name
