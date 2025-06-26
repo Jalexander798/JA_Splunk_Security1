@@ -27,3 +27,8 @@ fields:
 - pid
 - uid
 example_log: 'type=DAEMON_ABORT msg=audit(06/05/2025 11:03:38.453:6845) : op=set-pid auid=unset pid=61314 uid=root ses=unset subj=unconfined  res=failed' 
+output_fields:
+- op 
+- res 
+- pid
+- uid
