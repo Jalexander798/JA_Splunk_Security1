@@ -114,6 +114,6 @@ tests:
     sourcetype: XmlWinEventLog
 - name: True Positive Test - Cisco NVM
   attack_data:
-  - data: https://github.com/splunk/attack_data/blob/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/refs/heads/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
     source: not_applicable
     sourcetype: cisco:nvm:flowdata
