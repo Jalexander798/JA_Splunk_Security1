@@ -1,7 +1,7 @@
 name: Windows Curl Upload to Remote Destination
 id: 42f8f1a2-4228-11ec-aade-acde48001122
-version: 9
-date: '2025-05-02'
+version: 10
+date: '2025-06-20'
 author: Michael Haag, Splunk
 status: production
 type: TTP
@@ -16,6 +16,7 @@ data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
 - CrowdStrike ProcessRollup2
+- Cisco Network Visibility Module Flow Data
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime from datamodel=Endpoint.Processes where `process_curl` Processes.process
   IN ("*-T *","*--upload-file *", "*-d *", "*--data *", "*-F *") by Processes.action
@@ -83,8 +84,13 @@ tags:
   - Splunk Cloud
   security_domain: endpoint
 tests:
-- name: True Positive Test
+- name: True Positive Test - Sysmon
   attack_data:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1105/atomic_red_team/windows-sysmon_curl_upload.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
+- name: True Positive Test - Cisco NVM
+  attack_data:
+  - data: https://github.com/splunk/attack_data/blob/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    source: not_applicable
+    sourcetype: cisco:nvm:flowdata
