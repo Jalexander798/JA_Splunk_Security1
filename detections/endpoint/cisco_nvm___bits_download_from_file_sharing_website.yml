@@ -78,7 +78,7 @@ rba:
       score: 30
   threat_objects:
     - field: dest_hostname
-      type: other
+      type: domain
 tags:
   analytic_story:
     - Cisco Network Visibility Module Analytics
