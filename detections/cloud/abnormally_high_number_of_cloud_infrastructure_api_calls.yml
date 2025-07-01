@@ -1,9 +1,9 @@
 name: Abnormally High Number Of Cloud Infrastructure API Calls
 id: 0840ddf1-8c89-46ff-b730-c8d6722478c0
-version: 7
-date: '2025-05-02'
+version: 8
+date: '2025-06-10'
 author: David Dorsey, Splunk
-status: experimental
+status: production
 type: Anomaly
 description: The following analytic detects a spike in the number of API calls made
   to your cloud infrastructure by a user. It leverages cloud infrastructure logs and
@@ -31,6 +31,20 @@ how_to_implement: You must be ingesting your cloud infrastructure logs. You also
   create the probability density function.
 known_false_positives: None.
 references: []
+drilldown_searches:
+- name: View the detection results for - "$dest$"
+  search: '%original_detection_search% | search  dest = "$dest$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: View risk events for the last 7 days for - "$dest$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
 rba:
   message: user $user$ has made $api_calls$ api calls, violating the dynamic threshold
     of $expected_upper_threshold$ with the following command $command$.
@@ -51,6 +65,8 @@ tags:
   - Splunk Enterprise Security
   - Splunk Cloud
   security_domain: network
+  manual_test: This search needs the baseline `Baseline Of Cloud Infrastructure API Calls Per User` to be run first.
+tests:
 tests:
 - name: True Positive Test
   attack_data:

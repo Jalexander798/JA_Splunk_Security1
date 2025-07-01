@@ -1,12 +1,11 @@
 name: Windows AD DSRM Account Changes
 id: 08cb291e-ea77-48e8-a95a-0799319bf056
-version: 7
-date: '2025-05-02'
+version: 8
+date: '2025-06-10'
 author: Dean Luxton
 type: TTP
 status: production
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 description: The following analytic identifies changes to the Directory Services Restore
   Mode (DSRM) account behavior via registry modifications. It detects alterations

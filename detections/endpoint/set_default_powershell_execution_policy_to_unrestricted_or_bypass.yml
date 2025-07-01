@@ -1,7 +1,7 @@
 name: Set Default PowerShell Execution Policy To Unrestricted or Bypass
 id: c2590137-0b08-4985-9ec5-6ae23d92f63d
-version: 16
-date: '2025-05-02'
+version: 17
+date: '2025-06-10'
 author: Steven Dick, Patrick Bareiss, Splunk
 status: production
 type: TTP
@@ -13,7 +13,6 @@ description: The following analytic detects changes to the PowerShell ExecutionP
   confirmed malicious, this could enable an attacker to execute arbitrary code, leading
   to further compromise of the system and potential escalation of privileges.
 data_source:
-- Sysmon EventID 12
 - Sysmon EventID 13
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Registry
   WHERE (Registry.registry_path=*Software\\Microsoft\\Powershell\\1\\ShellIds\\Microsoft.PowerShell*

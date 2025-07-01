@@ -45,7 +45,7 @@ fields:
 - packets
 - packets_in
 - packets_out
-- product: null
+- product
 - proto
 - resp_bytes
 - resp_ip_bytes

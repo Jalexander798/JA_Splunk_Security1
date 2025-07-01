@@ -1,9 +1,9 @@
 name: Windows Vulnerable Driver Loaded
 id: a2b1f1ef-221f-4187-b2a4-d4b08ec745f4
-version: 6
-date: '2025-05-02'
+version: 7
+date: '2025-06-10'
 author: Michael Haag, Splunk
-status: experimental
+status: production
 type: Hunting
 description: The following analytic detects the loading of known vulnerable Windows
   drivers, which may indicate potential persistence or privilege escalation attempts.
