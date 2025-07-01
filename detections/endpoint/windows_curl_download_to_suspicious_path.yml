@@ -81,6 +81,7 @@ tags:
   - Salt Typhoon
   - Ingress Tool Transfer
   - IcedID
+  - Cisco Network Visibility Module Analytics
   asset_type: Endpoint
   mitre_attack_id:
   - T1105

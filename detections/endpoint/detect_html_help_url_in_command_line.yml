@@ -79,6 +79,7 @@ tags:
   - Suspicious Compiled HTML Activity
   - Living Off The Land
   - Compromised Windows Host
+  - Cisco Network Visibility Module Analytics
   asset_type: Endpoint
   mitre_attack_id:
   - T1218.001

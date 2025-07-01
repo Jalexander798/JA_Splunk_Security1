@@ -75,6 +75,7 @@ tags:
   analytic_story:
   - Compromised Windows Host
   - Ingress Tool Transfer
+  - Cisco Network Visibility Module Analytics
   asset_type: Endpoint
   mitre_attack_id:
   - T1105

@@ -98,6 +98,7 @@ tags:
   - Living Off The Land
   - Compromised Windows Host
   - Signed Binary Proxy Execution InstallUtil
+  - Cisco Network Visibility Module Analytics
   asset_type: Endpoint
   mitre_attack_id:
   - T1218.004

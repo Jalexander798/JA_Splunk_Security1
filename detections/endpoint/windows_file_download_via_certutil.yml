@@ -80,6 +80,7 @@ tags:
   - Flax Typhoon
   - Compromised Windows Host
   - CISA AA22-277A
+  - Cisco Network Visibility Module Analytics
   asset_type: Endpoint
   mitre_attack_id:
   - T1105
