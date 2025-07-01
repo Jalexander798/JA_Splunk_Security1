@@ -4,10 +4,10 @@ dest_port,comment,confidence,category
 1015,Doly trojan,high,malware
 1042,Bla trojan,high,malware
 1075,Backdoor.Win32.LanaFTP.k listening on this port,high,malware
-1080,Was seen being used by multiple malware, and is also the default port of the pentest utility ligolo,medium,C2
+1080,Was seen being used by multiple malware and is also the default port of the pentest utility ligolo,medium,C2
 1170,Psyber Stream Server - PSS,high,malware
 1243,SubSeven backdoor,high,malware
-1337,Was seen being used by multiple malware and red team or pentest utilities, such as empire, crackmapexec, icebreaker, KittyStager, Cyberghost VPN, gophish, gtunnel. The port is also associated with various other types of exploits or shellcode,high,exploitation
+1337,Was seen being used by multiple malware and red team or pentest utilities such as empire; crackmapexec; icebreaker; KittyStager; Cyberghost VPN; gophish; gtunnel. The port is also associated with various other types of exploits or shellcode,high,exploitation
 1981,Shockrave malware,high,malware
 2001,Millennium Worm and multiple malwares,medium,malware
 2773,SubSeven trojan and some backup services,medium,malware
@@ -69,7 +69,7 @@ dest_port,comment,confidence,category
 27374,SubSeven backdoor and multiple other malwares,high,malware
 30662,o365-attack-toolkit default port,high,exploitation
 31335,Trinoo distributed attack tool port,high,exploitation
-31337,Associated with various types of exploits, shellcode and command and control servers such as SliverC2. Also serves as ThunderShell default port, and was seen used by Back Orifice backdoor.,high,C2
+31337,Associated with various types of exploits; shellcode and command and control servers such as SliverC2. Also serves as ThunderShell default port; and was seen used by Back Orifice backdoor.,high,C2
 31338,Was seen being used by the Back Orifice backdoor and other malwares,high,malware
 31785,Hack’a’Tack RAT,high,malware
 31789,Hack’a’Tack RAT,high,malware
@@ -80,7 +80,7 @@ dest_port,comment,confidence,category
 52935,C3 webcontroller default port,medium,C2
 53531,dnscat2 default port,high,C2
 54320,Back Orifice backdoor,medium,malware
-55553,Metasploit RPC daemon default port, also used by Armitage team server,high,exploitation
+55553,Metasploit RPC daemon default port; also used by Armitage team server,high,exploitation
 57230,Covenant C2 default port,high,C2
 61466,Backdoor:Win32/Thething.F and telecommando trojan,medium,malware
 65000,Devil RAT,medium,malware
