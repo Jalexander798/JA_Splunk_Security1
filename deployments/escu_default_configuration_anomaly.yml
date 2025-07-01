@@ -5,7 +5,7 @@ author: Patrick Bareiss
 description: This configuration file applies to all detections of type anomaly.
   These detections will use Risk Based Alerting.
 scheduling:
-  cron_schedule: 0 * * * *
+  cron_schedule: '{minute} * * * *'
   earliest_time: -70m@m
   latest_time: -10m@m
   schedule_window: auto

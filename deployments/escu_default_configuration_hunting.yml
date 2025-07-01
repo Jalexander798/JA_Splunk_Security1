@@ -4,7 +4,7 @@ date: '2021-12-21'
 author: Patrick Bareiss
 description: This configuration file applies to all detections of type hunting.
 scheduling:
-  cron_schedule: 0 * * * *
+  cron_schedule: '{minute} * * * *'
   earliest_time: -70m@m
   latest_time: -10m@m
   schedule_window: auto
