@@ -1,0 +1,61 @@
+name: Citrix ADC and Gateway CitrixBleed 2 Memory Disclosure
+id: bef92f3f-7dc8-413a-8989-50581039e250
+version: 1
+date: '2025-01-07'
+author: Michael Haag, Splunk
+status: production
+type: TTP
+description: This detection identifies potential exploitation attempts of CVE-2025-5777 (CitrixBleed 2), an out-of-bounds memory read vulnerability in Citrix NetScaler ADC and Gateway. The vulnerability is triggered by sending HTTP requests with oversized Host headers to the /nf/auth/startwebview.do endpoint, causing the device to leak sensitive memory contents including session tokens, SAML StateContext, and authentication materials. This search looks for HTTP requests to the vulnerable endpoint that may indicate scanning or exploitation attempts.
+data_source:
+- Suricata
+search: '| tstats count min(_time) as firstTime max(_time) as lastTime from datamodel=Web where Web.url IN ("*/nf/auth/startwebview.do*") Web.status=200 by Web.http_user_agent, Web.status, Web.http_method, Web.url, Web.url_length, Web.src, Web.dest, sourcetype 
+| `drop_dm_object_name("Web")` 
+| `security_content_ctime(firstTime)` 
+| `security_content_ctime(lastTime)` 
+| `citrix_adc_and_gateway_citrixbleed_2_memory_disclosure_filter`'
+how_to_implement: To implement this search, ensure that web traffic logs from Citrix NetScaler ADC and Gateway devices are being ingested into Splunk and mapped to the Web data model. The logs should include URL paths, HTTP methods, status codes, source and destination IPs, and user agents. Consider supplementing with network traffic analysis tools or web application firewalls that can capture detailed HTTP request information including header sizes.
+known_false_positives: Legitimate authentication flows may trigger this detection if they access the startwebview.do endpoint. However, repeated requests or requests with unusually large headers should be investigated. Normal SAML authentication workflows may occasionally access this endpoint, so baseline normal traffic patterns in your environment.
+references:
+- https://support.citrix.com/support-home/kbsearch/article?articleNumber=CTX693420
+- https://www.netscaler.com/blog/news/critical-security-updates-for-netscaler-netscaler-gateway-and-netscaler-console/
+- https://github.com/mingshenhk/CitrixBleed-2-CVE-2025-5777-PoC-
+- https://bishopfox.com/blog/netscaler-adc-and-gateway-advisory
+- https://reliaquest.com/blog/threat-spotlight-citrix-bleed-2-vulnerability-in-netscaler-adc-gateway-devices/
+drilldown_searches:
+- name: View the detection results for - "$src$" and "$dest$"
+  search: '%original_detection_search% | search src="$src$" dest="$dest$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: View risk events for the last 7 days for - "$src$" and "$dest$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$src$", "$dest$") starthoursago=168 | stats count min(_time) as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+rba:
+  message: Potential CitrixBleed 2 (CVE-2025-5777) exploitation attempt detected. HTTP requests to the vulnerable /nf/auth/startwebview.do endpoint from source $src$ to destination $dest$ may indicate scanning or active exploitation of the out-of-bounds memory read vulnerability. This could lead to session token disclosure and unauthorized access.
+  risk_objects:
+  - field: dest
+    type: system
+    score: 85
+  threat_objects:
+  - field: src
+    type: system
+tags:
+  analytic_story:
+  - Citrix NetScaler ADC and NetScaler Gateway CVE-2025-5777
+  asset_type: Web Application
+  mitre_attack_id:
+  - T1190
+  product:
+  - Splunk Enterprise
+  - Splunk Enterprise Security
+  - Splunk Cloud
+  security_domain: network
+  cve:
+  - CVE-2025-5777
+tests:
+- name: True Positive Test
+  attack_data:
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1190/citrix/suricata_citrixbleed2.log
+    source: suricata
+    sourcetype: suricata
+
