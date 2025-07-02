@@ -1,19 +1,23 @@
-name: Cisco NVM - Outbound Connection to Suspicious Port
-id: fc32a8d5-bc79-4437-b48f-4646ab7bed9d
+name: Cisco NVM - Non-Network Binary Making Network Connection
+id: c6db35af-8a0e-4b61-88ed-738e66f15715
 version: 1
 date: '2025-07-01'
 author: Nasreddine Bencherchali, Splunk
 status: production
 type: Anomaly
 description: |
-  The following analytic detects any outbound network connection from an endpoint process to a known suspicious or non-standard port.
-  It leverages Cisco Network Visibility Module flow data logs to identify potentially suspicious behavior by looking at processes
-  communicating over ports like 4444, 2222, or 51820 are commonly used by tools like Metasploit, SliverC2 or other pentest, red team or malware.
-  These connections are worth investigating further, especially when initiated by unexpected or non-network-native binaries.
+  This analytic detects network connections initiated by binaries that are not typically associated with network communication,
+  such as 'notepad.exe', 'calc.exe' or 'write.exe'.
+  It leverages Cisco Network Visibility Module logs to correlate network flow activity with process context, including command-line arguments, process path, and parent process information.
+  These applications are normally used for locally and do not require outbound network access. When they do initiate such connections, it may indicate process hollowing, code injection, or proxy execution, where adversaries abuse a trusted process to mask malicious activity.
 data_source:
   - Cisco Network Visibility Module Flow Data
 search: |
   `cisco_network_visibility_module_flowdata`
+  process_name IN (
+          "notepad.exe", "write.exe", "mspaint.exe", "calc.exe", 
+          "addinutil.exe", "cmstp.exe", "dialer.exe", "eqnedt32.exe", "IMEWDBLD.exe"
+          )
   NOT dest IN (
           "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "100.64.0.0/10", 
           "127.0.0.0/8", "169.254.0.0/16", "192.0.0.0/24", "192.0.0.0/29", "192.0.0.8/32", 
@@ -30,18 +34,16 @@ search: |
           values(module_hash_list) as module_hash_list
           values(dest_port) as dest_port
           values(aliul) as additional_logged_in_users_list
+          values(dest_hostname) as dest_hostname
           by src dest parent_process_path parent_process_integrity_level process_path process_integrity_level process_id transport
-  | lookup suspicious_ports_list dest_port OUTPUTNEW comment as dest_port_metadata confidence as dest_confidence category as dest_port_category
-  | where isnotnull(dest_port_metadata)
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
   | table
     parent_process_integrity_level parent_process_path parent_process_arguments parent_process_hash
     process_integrity_level process_path process_arguments process_hash process_id
     additional_logged_in_users_list module_name_list module_hash_list
-    src dest dest_port dest_port_category transport dest_port_metadata dest_port_confidence
-    firstTime lastTime
-  | `cisco_nvm___outbound_connection_to_suspicious_port_filter`
+    src dest_hostname dest dest_port transport firstTime lastTime
+  | `cisco_nvm___non_network_binary_making_network_connection_filter`
 how_to_implement: |
   This search requires Network Visibility Module logs, which includes the flow data sourcetype.
   This search uses an input macro named `cisco_network_visibility_module_flowdata`.
@@ -51,11 +53,11 @@ how_to_implement: |
   The search also uses a post-filter macro designed to filter out known false positives.
   The logs are to be ingested using the Splunk Add-on for Cisco Endpoint Security Analytics (CESA) (https://splunkbase.splunk.com/app/4221).
 known_false_positives: |
-  Some legitimate applications may use high or non-standard ports, such as alternate SSH daemons or development tools.
-  However, many of these ports are commonly used by threat actors for reverse shells or C2 communications.
-  Review the associated process and command-line context to determine intent.
+  Rare cases may exist where these binaries are used by plugins or third-party extensions to initiate outbound communication.
+  However, such behavior is extremely uncommon and should be investigated for potential injection or abuse.
 references:
-  - https://mthcht.medium.com/hunting-for-suspicious-ports-activities-50ef56d5cef
+  - https://redcanary.com/threat-detection-report/techniques/process-injection/
+  - https://www.blue-prints.blog/content/blog/posts/lolbin/addinutil-lolbas.html
 drilldown_searches:
   - name: View the detection results for - "$src$"
     search: '%original_detection_search% | search  src = "$src$"'
@@ -70,20 +72,21 @@ drilldown_searches:
     earliest_offset: $info_min_time$
     latest_offset: $info_max_time$
 rba:
-  message: The host $src$ established an outbound network connection via the process $process_path$ with the commandline arguments $process_arguments$ to $dest$ over suspicious port $dest_port$.
+  message: The host $src$ observed $process_name$ initiating a network connection to $dest$ over port $dest_port$, which is highly unusual
   risk_objects:
-    - field: dest
+    - field: src
       type: system
-      score: 30
+      score: 40
   threat_objects:
-    - field: process_path
+    - field: process_name
       type: process
 tags:
   analytic_story:
     - Cisco Network Visibility Module Analytics
   asset_type: Endpoint
   mitre_attack_id:
-    - T1571
+    - T1055
+    - T1036
   product:
     - Splunk Enterprise
     - Splunk Enterprise Security
