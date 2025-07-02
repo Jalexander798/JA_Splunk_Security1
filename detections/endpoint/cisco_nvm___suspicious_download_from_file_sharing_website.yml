@@ -51,7 +51,7 @@ search: |
     process_integrity_level process_path process_arguments process_hash process_id
     additional_logged_in_users_list module_name_list module_hash_list
     src dest dest_port transport firstTime lastTime
-  | `cisco_nvm___suspicious_download_from_file_sharing_website`
+  | `cisco_nvm___suspicious_download_from_file_sharing_website_filter`
 how_to_implement: |
   This search requires Network Visibility Module logs, which includes the flow data sourcetype.
   This search uses an input macro named `cisco_network_visibility_module_flowdata`.

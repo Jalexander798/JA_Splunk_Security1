@@ -1,4 +1,4 @@
-name: Cisco NVM - Suspicious Network Connection From Process Without Command Argument
+name: Cisco NVM - Suspicious Network Connection From Process With No Args
 id: 54fa06c5-96a2-4406-a4a7-44d93ddbd173
 version: 1
 date: '2025-07-02'
@@ -46,7 +46,7 @@ search: |
     process_integrity_level process_path process_arguments process_hash process_id
     additional_logged_in_users_list module_name_list module_hash_list
     src dest dest_port transport firstTime lastTime
-  | `cisco_nvm___suspicious_network_connection_from_process_without_command_argument_filter`
+  | `cisco_nvm___suspicious_network_connection_from_process_with_no_args_filter`
 how_to_implement: |
   This search requires Network Visibility Module logs, which includes the flow data sourcetype.
   This search uses an input macro named `cisco_network_visibility_module_flowdata`.
