@@ -72,13 +72,13 @@ drilldown_searches:
     earliest_offset: $info_min_time$
     latest_offset: $info_max_time$
 rba:
-  message: The host $src$ observed $process_name$ initiating a network connection to $dest$ over port $dest_port$, which is highly unusual
+  message: The host $src$ observed $process_path$ initiating a network connection to $dest$ over port $dest_port$, which is highly unusual
   risk_objects:
     - field: src
       type: system
       score: 40
   threat_objects:
-    - field: process_name
+    - field: process_path
       type: process
 tags:
   analytic_story:
