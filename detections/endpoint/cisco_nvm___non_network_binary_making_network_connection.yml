@@ -79,7 +79,7 @@ rba:
       score: 40
   threat_objects:
     - field: process_path
-      type: process
+      type: process_name
 tags:
   analytic_story:
     - Cisco Network Visibility Module Analytics
