@@ -1,7 +1,7 @@
 name: Attacker Tools On Endpoint
 id: a51bfe1a-94f0-48cc-b4e4-16a110145893
-version: 11
-date: '2025-05-02'
+version: 12
+date: '2025-07-03'
 author: Bhavin Patel, Splunk
 status: production
 type: TTP
@@ -19,8 +19,9 @@ data_source:
 - CrowdStrike ProcessRollup2
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime values(Processes.process) as process values(Processes.parent_process)
-  as parent_process from datamodel=Endpoint.Processes where Processes.dest!=unknown
-  Processes.user!=unknown by Processes.action Processes.dest Processes.original_file_name
+  as parent_process from datamodel=Endpoint.Processes where 
+  [| inputlookup attacker_tools | rename attacker_tool_names AS Processes.process_name | fields Processes.process_name] AND 
+  Processes.dest!=unknown AND Processes.user!=unknown by Processes.action Processes.dest Processes.original_file_name
   Processes.parent_process Processes.parent_process_exec Processes.parent_process_guid
   Processes.parent_process_id Processes.parent_process_name Processes.parent_process_path
   Processes.process Processes.process_exec Processes.process_guid Processes.process_hash
