@@ -72,6 +72,7 @@ rba:
     - field: src
       type: system
       score: 40
+  threat_objects:
     - field: process_path
       type: process_name
 tags:
