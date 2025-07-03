@@ -9,10 +9,6 @@ description: This analytic detects mailbox rule creation, a common technique use
   This may indicate that an attacker has gained access to the account.
 search: |-
   `o365_management_activity` Workload=Exchange Operation IN ("New-InboxRule", "Set-InboxRule")
-  | eval temp=mvzip('Parameters{}.Name','Parameters{}.Value')
-  | mvexpand temp
-  | eval temp_name=mvindex(split(temp,","),0), temp_value=mvindex(split(temp,","),1)
-  | eval {temp_name}=temp_value
   | stats min(_time) as firstTime, max(_time) as lastTime, values(Operation) as Operation, latest(Name) as Name, latest(MarkAsRead) as MarkAsRead, latest(MoveToFolder) as MoveToFolder by object_id user 
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
