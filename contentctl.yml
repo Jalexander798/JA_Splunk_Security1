@@ -215,9 +215,9 @@ apps:
 - uid: 6254
   title: Splunk Add-on for Github
   appid: Splunk_TA_github
-  version: 3.1.0
+  version: 3.2.0
   description: description of app
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-github_310.tgz
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-github_320.tgz
 - uid: 3471
   title: Splunk Add-on for AppDynamics
   appid: Splunk_TA_AppDynamics
