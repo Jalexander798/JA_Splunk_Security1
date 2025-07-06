@@ -43,6 +43,7 @@ search: |
           values(module_hash_list) as module_hash_list
           values(dest_port) as dest_port
           values(aliul) as additional_logged_in_users_list
+          values(dest_hostname) as dest_hostname
           by src dest parent_process_path parent_process_integrity_level process_path process_integrity_level process_id transport
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
@@ -50,7 +51,7 @@ search: |
     parent_process_integrity_level parent_process_path parent_process_arguments parent_process_hash
     process_integrity_level process_path process_arguments process_hash process_id
     additional_logged_in_users_list module_name_list module_hash_list
-    src dest dest_port transport firstTime lastTime
+    src dest_hostname dest dest_port transport firstTime lastTime
   | `cisco_nvm___suspicious_download_from_file_sharing_website_filter`
 how_to_implement: |
   This search requires Network Visibility Module logs, which includes the flow data sourcetype.
