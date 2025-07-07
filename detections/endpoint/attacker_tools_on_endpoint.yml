@@ -1,7 +1,7 @@
 name: Attacker Tools On Endpoint
 id: a51bfe1a-94f0-48cc-b4e4-16a110145893
 version: 12
-date: '2025-07-03'
+date: '2025-07-07'
 author: Bhavin Patel, Splunk, sventec, Github Community
 status: production
 type: TTP
@@ -17,6 +17,7 @@ data_source:
 - Sysmon EventID 1
 - Windows Event Log Security 4688
 - CrowdStrike ProcessRollup2
+- Cisco Network Visibility Module Flow Data
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime values(Processes.process) as process values(Processes.parent_process)
   as parent_process from datamodel=Endpoint.Processes where 
@@ -77,6 +78,7 @@ tags:
   - CISA AA22-264A
   - Compromised Windows Host
   - PHP-CGI RCE Attack on Japanese Organizations
+  - Cisco Network Visibility Module Analytics
   asset_type: Endpoint
   mitre_attack_id:
   - T1003
@@ -88,8 +90,13 @@ tags:
   - Splunk Cloud
   security_domain: endpoint
 tests:
-- name: True Positive Test
+- name: True Positive Test - Sysmon
   attack_data:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1595/attacker_scan_tools/windows-sysmon.log
     source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
+- name: True Positive Test - Cisco NVM
+  attack_data:
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/refs/heads/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+    source: not_applicable
+    sourcetype: cisco:nvm:flowdata
