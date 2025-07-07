@@ -226,7 +226,7 @@ apps:
     inputs to pull data from AppDynamics' REST APIs
   hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/cisco-splunk-add-on-for-appdynamics_314.tgz
 - uid: 4221
-  title: Cisco Endpoint Security Analytics (CESA) Add-On for Splunk
+  title: Cisco NVM Add-on for Splunk
   appid: TA-Cisco-NVM
   version: 4.0.7
   description: The Cisco Endpoint Security Analytics (CESA) Add-On for Splunk allows IT administrators to analyze and correlate user and endpoint behavior in Splunk Enterprise. 
