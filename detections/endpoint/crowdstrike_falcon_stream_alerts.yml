@@ -86,7 +86,7 @@ tags:
   - Splunk Enterprise Security
   - Splunk Cloud
   security_domain: endpoint
-  manual_test: We are dynamically creating the risk_score field based on the severity of the alert in the SPL and that supersedes the risk score set in the detection. Setting this detection to manual test since otherwise we fail integration testing. This detection is also based on the mitre_attack_lookup lookup table which is not available in the ESCU app
+  # manual_test: We are dynamically creating the risk_score field based on the severity of the alert in the SPL and that supersedes the risk score set in the detection. Setting this detection to manual test since otherwise we fail integration testing. This detection is also based on the mitre_attack_lookup lookup table which is not available in the ESCU app
 tests:
 - name: True Positive Test
   attack_data:
