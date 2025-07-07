@@ -1,16 +1,16 @@
 detections:
   - content: Windows InstallUtil Uninstall Option with Network
-    removed_in_version: 5.11.0
+    removed_in_version: 5.12.0
     reason: Detection has been deprecated as its scope is already covered by "Windows InstallUtil Remote Network Connection".
     replacement_content:
     - Windows InstallUtil Remote Network Connection
   - content: Any Powershell DownloadString
-    removed_in_version: 5.11.0
+    removed_in_version: 5.12.0
     reason: Detection has been replaced by a new detection with a better logic and grouping in order to ease its management.
     replacement_content:
     - Windows File Download Via PowerShell
   - content: Any Powershell DownloadFile
-    removed_in_version: 5.11.0
+    removed_in_version: 5.12.0
     reason: Detection has been replaced by a new detection with a better logic and grouping in order to ease its management.
     replacement_content:
     - Windows File Download Via PowerShell
