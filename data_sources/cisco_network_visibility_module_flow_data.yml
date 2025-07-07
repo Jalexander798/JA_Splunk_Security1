@@ -7,7 +7,7 @@ description: Data source object for Netflow events from Cisco Network Visibility
 source: not_applicable
 sourcetype: cisco:nvm:flowdata
 supported_TA:
-- name: Cisco Endpoint Security Analytics (CESA) Add-On for Splunk
+- name: Cisco NVM Add-on for Splunk
   url: https://splunkbase.splunk.com/app/4221
   version: 4.0.7
 fields:
