@@ -72,7 +72,7 @@ drilldown_searches:
     earliest_offset: $info_min_time$
     latest_offset: $info_max_time$
 rba:
-  message: Host $src$ used pip or poetry to install a likely typosquatted python package "$package_name$" from $dest_hostname$
+  message: Host $src$ used pip or poetry to install a likely typosquatted python package $package_name$ from $dest_hostname$
   risk_objects:
     - field: src
       type: system
