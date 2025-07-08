@@ -1,7 +1,7 @@
 name: Windows HTTP Network Communication From MSIExec
 id: b0fd38c7-f71a-43a2-870e-f3ca06bcdd99
-version: 5
-date: '2025-05-02'
+version: 6
+date: '2025-06-30'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly
@@ -16,6 +16,7 @@ description:
   or further malware deployment.
 data_source:
 - Sysmon EventID 1 AND Sysmon EventID 3
+- Cisco Network Visibility Module Flow Data
 search: '| tstats `security_content_summariesonly` count FROM datamodel=Endpoint.Processes where `process_msiexec` 
   by _time Processes.action Processes.dest Processes.original_file_name
   Processes.parent_process Processes.parent_process_exec Processes.parent_process_guid
@@ -80,6 +81,7 @@ tags:
   analytic_story:
     - Windows System Binary Proxy Execution MSIExec
     - Water Gamayun
+    - Cisco Network Visibility Module Analytics
   asset_type: Endpoint
   mitre_attack_id:
     - T1218.007
@@ -89,8 +91,13 @@ tags:
     - Splunk Cloud
   security_domain: endpoint
 tests:
-  - name: True Positive Test
+  - name: True Positive Test - Sysmon
     attack_data:
       - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.007/atomic_red_team/windows-sysmon.log
         source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
         sourcetype: XmlWinEventLog
+  - name: True Positive Test - Cisco NVM
+    attack_data:
+    - data: https://media.githubusercontent.com/media/splunk/attack_data/refs/heads/master/datasets/cisco_network_visibility_module/cisco_nvm_flowdata/nvm_flowdata.log
+      source: not_applicable
+      sourcetype: cisco:nvm:flowdata
