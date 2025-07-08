@@ -104,7 +104,7 @@ drilldown_searches:
     earliest_offset: $info_min_time$
     latest_offset: $info_max_time$
 rba:
-  message: Suspicious file download using the Chromium-based browser "$parent_process_name$" via the commandline $process_arguments$.
+  message: Suspicious file download using the Chromium-based browser $parent_process_name$ via the commandline $process_arguments$.
            Observed on host $src$ communicating with $dest$ / $dest_hostname$
   risk_objects:
     - field: src
