@@ -3,7 +3,7 @@ id: 0a2afc18-a3b5-4452-b60a-2e774214f9bf
 version: 7
 date: '2025-06-16'
 author: Dean Luxton
-status: deprecated
+status: removed
 type: TTP
 data_source:
 - Windows Event Log Security 5136
