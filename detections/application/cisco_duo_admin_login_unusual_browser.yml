@@ -15,7 +15,7 @@ description: The following analytic identifies instances where a Duo admin logs 
   devices by attackers attempting to evade detection. Detecting such anomalies enables early investigation and response, helping to prevent privilege 
   escalation, policy manipulation, or further compromise of sensitive administrative accounts. The impact of this attack could include unauthorized 
   changes to security policies, user access, or the disabling of critical security controls, posing a substantial risk to the organizations security posture.
-search: '`cisco:duo:activity` "action.name"=admin_login NOT access_device.browser IN (Chrome)
+search: '`cisco_duo_activity` "action.name"=admin_login NOT access_device.browser IN (Chrome)
   | rename actor.name as user access_device.ip.address as src_ip
   | stats count min(_time) as firstTime max(_time) as lastTime by access_device.browser 
   access_device.browser_version src_ip access_device.location.city 

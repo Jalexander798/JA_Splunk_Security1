@@ -64,6 +64,6 @@ tags:
 tests:
 - name: True Positive Test
   attack_data:
-  - data: 
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1556/cisco_duo_policy_bypass_2FA_other_countries/cisco_duo_administrator.json
     source: duo
     sourcetype: cisco:duo:administrator

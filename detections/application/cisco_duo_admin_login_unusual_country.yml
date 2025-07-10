@@ -15,7 +15,7 @@ description: The following analytic detects instances where a Duo admin login or
   or targeted attacks. Early detection of such activity enables rapid investigation and response, reducing the risk of unauthorized changes, data breaches, 
   or further lateral movement within the environment. The impact of this attack can be severe, potentially allowing attackers to bypass security controls, 
   alter configurations, or exfiltrate sensitive information.
-search: '`cisco:duo:activity` "action.name"=admin_login NOT access_device.location.country IN ("United States")
+search: '`cisco_duo_activity` "action.name"=admin_login NOT access_device.location.country IN ("United States")
   | rename actor.name as user access_device.ip.address as src_ip
   | stats count min(_time) as firstTime max(_time) as lastTime by access_device.browser 
   access_device.browser_version src_ip access_device.location.city 
