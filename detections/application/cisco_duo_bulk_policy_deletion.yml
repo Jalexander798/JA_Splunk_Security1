@@ -23,7 +23,7 @@ search: '`cisco_duo_administrator` action=policy_bulk_delete
   | where policy_count > 3
   | stats count min(_time) as firstTime max(_time) as lastTime by action actionlabel description user admin_email policy_count
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `duo_bulk_policy_deletion_filter`'
+  | `cisco_duo_bulk_policy_deletion_filter`'
 how_to_implement: The analytic leverages Duo activity logs to be ingested using the
   Cisco Security Cloud App (https://splunkbase.splunk.com/app/7404).
 known_false_positives: unknown

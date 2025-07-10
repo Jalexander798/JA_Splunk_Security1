@@ -26,7 +26,7 @@ search: '`cisco_duo_activity` action.name=user_update
   access_device.location.country access_device.location.state access_device.os access_device.os_version 
   action.name actor.details actor.name actor.type old_target.details target.details status old_status user
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` 
-  | `duo_set_user_status_to_bypass_2FA_filter`'
+  | `cisco_duo_set_user_status_to_bypass_2FA_filter`'
 how_to_implement: The analytic leverages Duo activity logs to be ingested using the
   Cisco Security Cloud App (https://splunkbase.splunk.com/app/7404).
 known_false_positives: unknown

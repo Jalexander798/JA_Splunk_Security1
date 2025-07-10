@@ -20,7 +20,7 @@ search: '`cisco_duo_administrator` action=bypass_create
   | rename object as user
   | stats count min(_time) as firstTime max(_time) as lastTime by action actionlabel description user
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
-  | `duo_bypass_code_generation_filter`'
+  | `cisco_duo_bypass_code_generation_filter`'
 how_to_implement: The analytic leverages Duo activity logs to be ingested using the
   Cisco Security Cloud App (https://splunkbase.splunk.com/app/7404).
 known_false_positives: unknown
