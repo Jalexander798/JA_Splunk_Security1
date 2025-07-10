@@ -13,7 +13,7 @@ description: |
 data_source:
   - Cisco Network Visibility Module Flow Data
 search: |
-  `cisco_network_visibility_module_flowdata`
+ `cisco_network_visibility_module_flowdata`
 
   ``` Usually the initiator of the connection is the child process, meaning the parent will contain the suspicious command.``` 
 
@@ -40,7 +40,7 @@ search: |
   | rex field=parent_process_arguments "(?i)\\b(?:https?|ftp)://(?<extracted_ip_parent>(?:\\d{1,3}\\.){3}\\d{1,3})"
   | rex field=process_arguments "(?i)\\b(?:https?|ftp)://(?<extracted_ip_child>(?:\\d{1,3}\\.){3}\\d{1,3})"
   | eval direct_ip_match=if(dest == extracted_ip_child, 1, if(dest == extracted_ip_parent, 1, 0))
-  
+
   | where (
       dest_hostname IN (
           "*.githubusercontent.com*", "*anonfiles.com*", "*cdn.discordapp.com*", "*ddns.net*",
@@ -53,7 +53,7 @@ search: |
       )
       OR direct_ip_match = 1
     )
-  
+
   | stats count min(_time) as firstTime max(_time) as lastTime
           values(parent_process_arguments) as parent_process_arguments
           values(process_arguments) as process_arguments
@@ -64,11 +64,11 @@ search: |
           values(dest_port) as dest_port
           values(aliul) as additional_logged_in_users_list
           values(dest_hostname) as dest_hostname
-          by src dest parent_process_path parent_process_integrity_level process_path process_name process_integrity_level process_id transport
+          by src dest parent_process_path parent_process_name parent_process_integrity_level process_path process_name process_integrity_level process_id transport
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
   | table
-    parent_process_integrity_level parent_process_path parent_process_arguments parent_process_hash
+    parent_process_integrity_level parent_process_path parent_process_name parent_process_arguments parent_process_hash
     process_integrity_level process_path process_name process_arguments process_hash process_id
     additional_logged_in_users_list module_name_list module_hash_list
     src dest_hostname dest dest_port transport firstTime lastTime
