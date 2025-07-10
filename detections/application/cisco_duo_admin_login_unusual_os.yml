@@ -20,7 +20,7 @@ search: '`cisco_duo_activity` "action.name"=admin_login NOT access_device.os IN 
   access_device.browser_version src_ip access_device.location.city 
   access_device.location.country access_device.location.state access_device.os access_device.os_version 
   actor.details actor.type outcome.result user
-  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`<
+  | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `cisco_duo_admin_login_unusual_os_filter`'
 how_to_implement: The analytic leverages Duo activity logs to be ingested using the
   Cisco Security Cloud App (https://splunkbase.splunk.com/app/7404).

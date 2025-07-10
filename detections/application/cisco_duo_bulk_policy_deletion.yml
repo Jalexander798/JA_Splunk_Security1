@@ -16,7 +16,7 @@ description: The following analytic detects instances where a Duo administrator 
   that any suspicious or unauthorized changes to security configurations are quickly identified and addressed to protect organizational assets and maintain 
   compliance.
 search: '`cisco_duo_administrator` action=policy_bulk_delete
-  | rename object as user
+  | rename username as user
   | spath input=description
   | rex field=policies max_match=0 "(?<policy_name>[^:,]+):\s+"
   | eval policy_count=mvcount(policy_name)
