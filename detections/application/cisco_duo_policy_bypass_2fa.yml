@@ -49,7 +49,7 @@ rba:
 tags:
   analytic_story:
   - Duo Suspicious Activity
-  asset_type: Duo
+  asset_type: Identity
   mitre_attack_id:
   - T1556
   product:
