@@ -10,7 +10,7 @@ description: The following analytic detects a blocked connection event by
 data_source:
 - Cisco Secure Firewall Threat Defense Connection Event
 search: |
-  `cisco_secure_firewall` EventType=ConnectionEvent action IN ("Block", "blocked")
+  `cisco_secure_firewall` EventType=ConnectionEvent action IN ("Block with reset", "Block", "blocked")
   | stats count min(_time) as firstTime max(_time) as lastTime by src_ip, dest, dest_port, transport, rule, url, EVE_Process, action
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 

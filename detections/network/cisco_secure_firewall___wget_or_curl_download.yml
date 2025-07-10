@@ -10,7 +10,7 @@ description: |
 data_source:
 - Cisco Secure Firewall Threat Defense Connection Event
 search: |
-  `cisco_secure_firewall` EventType=ConnectionEvent action IN ("Allow", "allow") AND
+  `cisco_secure_firewall` EventType=ConnectionEvent action IN ("Trust", "Allow", "allowed") AND
   ( EVE_Process IN ("*curl*", "*wget*") OR ClientApplication IN ("cURL", "Wget") )
   | stats count min(_time) as firstTime max(_time) as lastTime
       Values(rule) as rule
