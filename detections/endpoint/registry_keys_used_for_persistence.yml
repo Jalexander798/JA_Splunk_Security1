@@ -1,7 +1,7 @@
 name: Registry Keys Used For Persistence
 id: f5f6af30-7aa7-4295-bfe9-07fe87c01a4b
-version: '22'
-date: '2025-05-06'
+version: '23'
+date: '2025-07-16'
 author: Jose Hernandez, David Dorsey, Teoderick Contreras, Rod Soto, Splunk
 status: production
 type: TTP
@@ -78,40 +78,41 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - DHS Report TA18-074A
-  - CISA AA23-347A
+  - Warzone RAT
+  - Possible Backdoor Activity Associated With MUDCARP Espionage Campaigns
+  - Sneaky Active Directory Persistence Tricks
+  - Windows Registry Abuse
   - Chaos Ransomware
+  - DarkGate Malware
+  - Remcos
+  - Quasar RAT
+  - Braodo Stealer
+  - Qakbot
+  - Snake Keylogger
   - China-Nexus Threat Activity
   - IcedID
-  - BlackByte Ransomware
-  - Qakbot
-  - MoonPeak
-  - Warzone RAT
-  - Windows Registry Abuse
-  - Braodo Stealer
-  - Derusbi
-  - AsyncRAT
-  - RedLine Stealer
-  - Suspicious MSHTA Activity
-  - Salt Typhoon
-  - Cactus Ransomware
-  - Possible Backdoor Activity Associated With MUDCARP Espionage Campaigns
-  - Windows Persistence Techniques
-  - WinDealer RAT
-  - Amadey
-  - Suspicious Windows Registry Activities
-  - NjRAT
-  - Sneaky Active Directory Persistence Tricks
-  - BlackSuit Ransomware
+  - CISA AA23-347A
   - Ransomware
   - XWorm
-  - SnappyBee
   - Azorult
-  - Emotet Malware DHS Report TA18-201A
-  - Snake Keylogger
-  - Remcos
+  - Salt Typhoon
+  - Cactus Ransomware
+  - BlackSuit Ransomware
+  - BlackByte Ransomware
   - SystemBC
-  - DarkGate Malware
+  - NjRAT
+  - DHS Report TA18-074A
+  - Derusbi
+  - Amadey
+  - Suspicious MSHTA Activity
+  - Suspicious Windows Registry Activities
+  - Emotet Malware DHS Report TA18-201A
+  - WinDealer RAT
+  - AsyncRAT
+  - RedLine Stealer
+  - SnappyBee
+  - Windows Persistence Techniques
+  - MoonPeak
   asset_type: Endpoint
   mitre_attack_id:
   - T1547.001

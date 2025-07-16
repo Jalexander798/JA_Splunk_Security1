@@ -1,7 +1,7 @@
 name: Windows Boot or Logon Autostart Execution In Startup Folder
 id: 99d157cb-923f-4a00-aee9-1f385412146f
-version: '8'
-date: '2025-05-06'
+version: '9'
+date: '2025-07-16'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -55,12 +55,13 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Chaos Ransomware
-  - Gozi Malware
-  - NjRAT
-  - RedLine Stealer
   - XWorm
+  - Chaos Ransomware
+  - NjRAT
   - Crypto Stealer
+  - Gozi Malware
+  - Quasar RAT
+  - RedLine Stealer
   asset_type: Endpoint
   mitre_attack_id:
   - T1547.001
