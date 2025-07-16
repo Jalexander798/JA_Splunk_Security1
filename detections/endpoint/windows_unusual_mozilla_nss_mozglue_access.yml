@@ -69,5 +69,5 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1218.003/moz_lib_loaded/mozilla_lib.log
-    source: XmlWinEventLog:Security
+    source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
