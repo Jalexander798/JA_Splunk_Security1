@@ -13,7 +13,7 @@ description: The following analytic identifies processes accessing FileZilla XML
   malicious, this could lead to data exfiltration, credential theft, or further compromise
   of the system.
 data_source:
-- Windows Security 4663
+- Windows Event Log Security 4663
 search: '`wineventlog_security` EventCode=4663  NOT (ProcessName IN("*\\Filezilla.exe"))
   file_path IN ("*FileZilla\\recentservers.xml*", "*FileZilla\\sitemanager.xml*") 
   | stats count min(_time) as firstTime max(_time) as lastTime by  ObjectName ObjectType
@@ -49,7 +49,7 @@ rba:
   risk_objects:
   - field: dest
     type: system
-    score: 35
+    score: 40
   threat_objects:
   - field: parent_process_name
     type: parent_process_name
