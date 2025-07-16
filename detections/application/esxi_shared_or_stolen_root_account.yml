@@ -13,8 +13,9 @@ data_source:
 - VMWare ESXi Syslog
 search: '`esxi_syslog` Message="*root*" Message="*logged in*" NOT Message="*root@127.0.0.1*"
   | rex field=_raw "root@(?<SrcIpAddr>\d{1,3}(?:\.\d{1,3}){3})"
+  | rex field=_raw "Z (?<dest>[\w\.]+)\s"
   | bin _time span=15m
-  | stats min(_time) as firstTime max(_time) as lastTime dc(SrcIpAddr) AS distinct_ip_count values(SrcIpAddr) AS SrcIps by host
+  | stats min(_time) as firstTime max(_time) as lastTime dc(SrcIpAddr) AS distinct_ip_count values(SrcIpAddr) AS SrcIps by dest
   | where distinct_ip_count > 1
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
   | `esxi_shared_or_stolen_root_account_filter`'
@@ -27,12 +28,12 @@ known_false_positives: Limited false positives in most environments, however tun
 references:
 - https://detect.fyi/detecting-and-responding-to-esxi-compromise-with-splunk-f33998ce7823
 drilldown_searches:
-- name: View the detection results for - "$host$"
-  search: '%original_detection_search% | search  dest = "$host$"'
+- name: View the detection results for - "$dest$"
+  search: '%original_detection_search% | search  dest = "$dest$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$host$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$host$")
+- name: View risk events for the last 7 days for - "$dest$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
     starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
     values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
     as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
@@ -41,9 +42,9 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Root login from multiple IPs on ESXi host $host$.
+  message: Root login from multiple IPs on ESXi host $dest$.
   risk_objects:
-  - field: host
+  - field: dest
     type: system
     score: 50
   threat_objects: []
