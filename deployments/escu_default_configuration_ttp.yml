@@ -5,9 +5,9 @@ author: Patrick Bareiss
 description: This configuration file applies to all detections of type TTP.
   These detections will use Risk Based Alerting and generate Notable Events.
 scheduling:
-  cron_schedule: '{minute_range}/15 * * * *'
-  earliest_time: -15m@m
-  latest_time: now
+  cron_schedule: '*/15 * * * *'
+  earliest_time: -60m@m
+  latest_time: +10m@m
   schedule_window: auto
 alert_action:
   notable:
