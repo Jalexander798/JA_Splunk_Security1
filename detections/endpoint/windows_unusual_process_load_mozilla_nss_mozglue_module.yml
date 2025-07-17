@@ -1,4 +1,4 @@
-name: Windows Unusual Mozilla NSS-Mozglue Access
+name: Windows Unusual Process Load Mozilla NSS-Mozglue Module
 id: 1a7e7650-b81d-492e-99d4-d5ab633afbdd
 version: 1
 date: '2025-07-16'
@@ -14,7 +14,7 @@ description: The following analytic identifies processes loading Mozilla NSS-Moz
 data_source:
 - Sysmon EventID 7
 search: '`sysmon` EventCode=7  ImageLoaded IN ("*\\mozglue.dll", "*\\nss3.dll") 
-  NOT(process_name IN("firefox.exe", "thunderbird.exe")) NOT(process_path IN("*\\program files*")) 
+  NOT(process_path IN("*:\\Program Files\Mozilla Firefox\\firefox.exe", "*:\\Program Files (x86)\Mozilla Firefox\\firefox.exe", "*:\\Program Files\\Mozilla Thunderbird\\thunderbird.exe", "*:\\Program Files (x86)\\Mozilla Thunderbird\\thunderbird.exe", "*\\Tor Browser\\Browser\\firefox.exe","*:\\Program Files\\Code42\\CrashPlan\\Code42Service.exe", "*:\\Program Files (x86)\\Code42\\CrashPlan\\Code42Service.exe", "*:\\Program Files\\Pale Moon\\palemoon.exe", "*:\\Program Files (x86)\\Pale Moon\\palemoon.exe", "*:\\Program Files\\Waterfox\\waterfox.exe","*:\\Program Files (x86)\\Waterfox\\waterfox.exe", "*:\\Program Files\\Cyberfox\cyberfox.exe", "*:\\Program Files (x86)\\Cyberfox\\cyberfox.exe", "*\\AppData\\Local\\slack\\slack.exe", "*:\\Program Files (x86)\\VMware\\VMware Horizon View Client\\vmware-view.exe", "*:\\Program Files (x86)\\Dropbox\\Client\\Dropbox.exe", "*:\\Program Files\\Google\\Google Earth Pro\\client\\googleearth.exe")) 
   | fillnull 
   | stats count min(_time) as firstTime max(_time) as lastTime 
   by Image ImageLoaded dest loaded_file loaded_file_path original_file_name
@@ -22,7 +22,7 @@ search: '`sysmon` EventCode=7  ImageLoaded IN ("*\\mozglue.dll", "*\\nss3.dll")
   service_dll_signature_verified signature signature_id user_id vendor_product 
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)` 
-  | `windows_unusual_mozilla_nss_mozglue_access_filter`'
+  | `windows_unusual_process_load_mozilla_nss_mozglue_module_filter`'
 how_to_implement: To successfully implement this search, you need to be ingesting
   logs with the process name and imageloaded executions from your endpoints. If you
   are using Sysmon, you must have at least version 6.0.4 of the Sysmon TA.
