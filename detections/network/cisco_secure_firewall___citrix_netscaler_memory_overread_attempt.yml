@@ -32,7 +32,7 @@ search: |
           by dest_ip
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
-  | `cisco_secure_firewall___citrix_netscaler_memory_overread_attempt`
+  | `cisco_secure_firewall___citrix_netscaler_memory_overread_attempt_filter`
 how_to_implement: |
   This search requires Cisco Secure Firewall Threat Defense Logs, which
   includes the FileEvent EventType. This search uses an input macro named `cisco_secure_firewall`.
@@ -74,7 +74,7 @@ rba:
 tags:
   analytic_story:
     - Cisco Secure Firewall Threat Defense Analytics
-    - CVE-2025-5777
+    - Citrix NetScaler ADC and NetScaler Gateway CVE-2025-5777
   asset_type: Endpoint
   mitre_attack_id:
     - T1203
