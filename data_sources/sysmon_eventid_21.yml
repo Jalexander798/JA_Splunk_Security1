@@ -1,17 +1,18 @@
 name: Sysmon EventID 21
 id: 304384bc-715e-4958-988b-a8051a91349a
-version: 2
-date: '2025-01-23'
+version: 3
+date: '2025-07-10'
 author: Patrick Bareiss, Splunk
-description: Logs activity related to the association of a WMI event consumer with
-  a filter, including details about the consumer, filter, and associated process.
+description: Logs activity related to the association of a WMI event consumer 
+  with a filter, including details about the consumer, filter, and associated 
+  process.
 mitre_components:
 - WMI Creation
 - Process Metadata
 - Application Log Content
 - OS API Execution
 source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
-sourcetype: xmlwineventlog
+sourcetype: XmlWinEventLog
 separator: EventID
 separator_value: '21'
 configuration: https://github.com/SwiftOnSecurity/sysmon-config
@@ -108,11 +109,17 @@ output_fields:
 - user
 - user_id
 - vendor_product
-example_log: <Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider
-  Name='Microsoft-Windows-Sysmon' Guid='{5770385F-C22A-43E0-BF4C-06F5698FFBD9}'/><EventID>21</EventID><Version>3</Version><Level>4</Level><Task>21</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated
+example_log: <Event 
+  xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider
+  Name='Microsoft-Windows-Sysmon' 
+  Guid='{5770385F-C22A-43E0-BF4C-06F5698FFBD9}'/><EventID>21</EventID><Version>3</Version><Level>4</Level><Task>21</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated
   SystemTime='2021-06-16T21:46:50.225290200Z'/><EventRecordID>151644</EventRecordID><Correlation/><Execution
-  ProcessID='1972' ThreadID='3648'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>win-host-14.attackrange.local</Computer><Security
-  UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>-</Data><Data Name='EventType'>WmiBindingEvent</Data><Data
-  Name='UtcTime'>2021-06-16 21:46:50.222</Data><Data Name='Operation'>Modified</Data><Data
-  Name='User'>WIN-HOST-14\Administrator</Data><Data Name='Consumer'> "CommandLineEventConsumer.Name=\"Evil
-  Persistence\""</Data><Data Name='Filter'> "__EventFilter.Name=\"Evil Persistence\""</Data></EventData></Event>
+  ProcessID='1972' 
+  ThreadID='3648'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>win-host-14.attackrange.local</Computer><Security
+  UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>-</Data><Data 
+  Name='EventType'>WmiBindingEvent</Data><Data Name='UtcTime'>2021-06-16 
+  21:46:50.222</Data><Data Name='Operation'>Modified</Data><Data 
+  Name='User'>WIN-HOST-14\Administrator</Data><Data Name='Consumer'> 
+  "CommandLineEventConsumer.Name=\"Evil Persistence\""</Data><Data 
+  Name='Filter'> "__EventFilter.Name=\"Evil 
+  Persistence\""</Data></EventData></Event>
