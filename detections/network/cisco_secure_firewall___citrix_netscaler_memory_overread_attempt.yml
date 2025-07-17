@@ -10,7 +10,7 @@ description: |
   It leverages Cisco Secure Firewall Threat Defense IntrusionEvent logs to identify cases where Snort signature 65118 (Citrix NetScaler memory overread attempt) is triggered
   If confirmed malicious, this behavior is highly indicative of a potential exploitation of CVE-2025-5777.
 data_source:
-  - Cisco Secure Firewall Threat Defense File Event
+  - Cisco Secure Firewall Threat Defense Intrusion Event
 search: |
   `cisco_secure_firewall` 
   EventType=IntrusionEvent 
