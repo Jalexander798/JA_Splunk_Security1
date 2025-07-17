@@ -1,6 +1,6 @@
 name: CHCP Command Execution
 id: 21d236ec-eec1-11eb-b23e-acde48001122
-version: '8'
+version: 8
 date: '2025-07-16'
 author: Teoderick Contreras, Splunk
 status: production

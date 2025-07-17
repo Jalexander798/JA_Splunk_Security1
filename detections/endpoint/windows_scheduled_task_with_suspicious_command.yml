@@ -1,6 +1,6 @@
 name: Windows Scheduled Task with Suspicious Command
 id: 1f44c126-c26a-4dd3-83bb-0f9a0f03ecc3
-version: '4'
+version: 4
 date: '2025-07-16'
 author: Steven Dick
 status: production

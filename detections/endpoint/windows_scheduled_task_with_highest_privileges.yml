@@ -1,6 +1,6 @@
 name: Windows Scheduled Task with Highest Privileges
 id: 2f15e1a4-0fc2-49dd-919e-cbbe60699218
-version: '10'
+version: 10
 date: '2025-07-16'
 author: Teoderick Contreras, Splunk
 status: production

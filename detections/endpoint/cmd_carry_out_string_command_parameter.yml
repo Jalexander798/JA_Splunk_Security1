@@ -1,6 +1,6 @@
 name: CMD Carry Out String Command Parameter
 id: 54a6ed00-3256-11ec-b031-acde48001122
-version: '13'
+version: 13
 date: '2025-07-16'
 author: Teoderick Contreras, Bhavin Patel, Splunk
 status: production

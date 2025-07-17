@@ -1,6 +1,6 @@
 name: Runas Execution in CommandLine
 id: 4807e716-43a4-11ec-a0e7-acde48001122
-version: '8'
+version: 8
 date: '2025-07-16'
 author: Teoderick Contreras, Splunk
 status: production
