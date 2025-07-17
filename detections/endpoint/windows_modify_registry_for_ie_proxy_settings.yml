@@ -1,57 +1,50 @@
 name: Windows Modify Registry for IE Proxy Settings
 id: d833f972-1ff4-4ef6-b020-831aa6d13fdd
-version: 1
+version: 2
 date: '2025-07-15'
 author: Zaki Zarkasih (FPT Metrodata Indonesia)
 type: TTP
 status: production
 description: >
-  This detection identifies modifications to Internet Explorer proxy settings via registry using reg.exe, cmd.exe, or powershell.exe.
-  Attackers may alter proxy settings to redirect traffic or establish man-in-the-middle positions.
+  This detection identifies suspicious modifications to Internet Explorer (IE) proxy configuration via Windows Registry. 
+  Adversaries commonly abuse IE proxy settings to redirect network traffic through attacker-controlled infrastructure, often 
+  by modifying keys such as `ProxyEnable`, `ProxyServer`, `AutoConfigURL`, or even `ProtocolDefaults` and `ZoneMapDomains` 
+  to affect how Internet traffic is routed. These changes are typically made using command-line utilities such as `reg.exe`, `powershell.exe`, or `cmd.exe`. Such 
+  behavior may indicate attempts to bypass security controls, establish covert C2 channels, or manipulate user traffic for credential interception.
 data_source:
   - Windows Event Log Security 4688
 search: >
-  | tstats `security_content_summariesonly` 
-      values(Processes.process) as Command_Line,
-      values(Processes.process_path) as Process_Path,
-      values(Processes.parent_process) as Parent_Command,
-      values(Processes.parent_process_name) as parent_process_name,
-      values(Processes.parent_process_id) as parent_process_id,
-      values(Processes.parent_process_path) as parent_process_path,
-      values(Processes.original_file_name) as original_file_name,
-      values(Processes.process_name) as process_name,
-      values(Processes.process_id) as process_id,
-      values(Processes.user) as User,
-      values(Processes.dest) as Host,
-      values(Processes.action) as action,
-      values(Processes.process_exec) as process_exec,
-      values(Processes.parent_process_exec) as parent_process_exec,
-      values(Processes.process_guid) as process_guid,
-      values(Processes.parent_process_guid) as parent_process_guid,
-      values(Processes.process_hash) as process_hash,
-      values(Processes.process_integrity_level) as process_integrity_level,
-      values(Processes.user_id) as user_id,
-      values(Processes.vendor_product) as vendor_product
-    from datamodel=Endpoint.Processes
-    where Processes.process="*\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings*"
-      AND (
-        Processes.process_path="*\\reg.exe" OR 
-        Processes.process_path="*\\powershell.exe" OR 
-        Processes.process_path="*\\cmd.exe"
-      )
-    by _time, Processes.dest, Processes.user
-  | rex field=Command_Line "reg\\s+add\\s+\\\"(?<registry_path>[^\"]+)"
+  index="windows"
+  sourcetype=WinEventLog:Security
+  EventCode=4688
+  Process_Command_Line="*\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings*"
+  (New_Process_Name="*\\reg.exe" OR New_Process_Name="*\\powershell.exe" OR New_Process_Name="*\\cmd.exe")
+  NOT (
+      Details="DWORD*" 
+      OR Details IN ("Cookie:", "Visited:", "(Empty)") 
+      OR match(Process_Command_Line, ".*\\\\Cache.*|.*\\\\ZoneMap.*|.*\\\\WpadDecision.*") 
+      OR Details="Binary Data" 
+      OR Process_Command_Line="*\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\Accepted Documents*" 
+      OR New_Process_Name="C:\\Windows\\System32\\RuntimeBroker.exe"
+  )
+  | rex field=Process_Command_Line "(?i)(new-itemproperty|set-itemproperty|set-item|reg\\s+add|new-item)[^\n\r]*?(?<registry_path>HK(?:EY_)?(?:LM|CU|CR|U)[:\\\\][^\"'\s]+(?:\\\\[^\"'\s]*)*)"
   | eval Timestamp=strftime(_time, "%d-%m-%Y %H:%M:%S")
-  | rename Process_Path as "Created Process"
-  | table Timestamp, Host, User, "Created Process", Command_Line, registry_path, Parent_Command
+  | table Timestamp, ComputerName, Account_Name, New_Process_Name, Process_Command_Line, registry_path, Creator_Process_Name
+  | rename 
+      ComputerName as "Host", 
+      Account_Name as "User", 
+      New_Process_Name as "Created Process", 
+      Process_Command_Line as "Command Line", 
+      Creator_Process_Name as "Parent Command"
   | sort - Timestamp
   | `windows_modify_registry_for_ie_proxy_settings_filter`
 how_to_implement: >
-  Ensure Windows Event Log Security 4688 is collected and mapped to the Endpoint.Processes datamodel.
-  CIM compliance and data model acceleration are required.
+  Ensure Windows Event Log Security EventCode 4688 is collected and CIM-mapped correctly. 
+  This detection uses raw event data and assumes the availability of command-line logging.
+  CIM compliance is not required for this version, but field consistency (e.g., `New_Process_Name`, `Process_Command_Line`) is essential.
 known_false_positives: >
   Legitimate administrative scripts may also modify Internet Explorer proxy settings.
-  Validate with IT operations before escalating.
+  Validate with IT operations or automation teams before escalating.
 references:
   - https://attack.mitre.org/techniques/T1112/
   - https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/windows-scripting/aa752038(v=vs.84)
@@ -75,16 +68,19 @@ drilldown_searches:
     earliest_offset: $info_min_time$
     latest_offset: $info_max_time$
 rba:
-  message: Internet Explorer registry proxy settings modified on $dest$ by $User$
+  message: Internet Explorer registry proxy setting was modified on host $dest$ by user $User$ at path: $registry_path$
   risk_objects:
     - field: dest
       type: system
-      score: 25
+      score: 20
     - field: User
       type: user
-      score: 25
+      score: 30
+    - field: registry_path
+      type: registry_path
+      score: 35
   threat_objects:
-    - field: parent_process_name
+    - field: New_Process_Name
       type: process
 tags:
   analytic_story:
