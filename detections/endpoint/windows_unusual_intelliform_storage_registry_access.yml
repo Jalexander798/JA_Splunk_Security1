@@ -13,7 +13,7 @@ description: The following analytic identifies processes accessing Intelliform S
   could lead to data exfiltration, credential theft, or further compromise of the system.
 data_source:
 - Windows Event Log Security 4663
-search: '`wineventlog_security` EventCode=4663  NOT (ProcessName IN("*\\iexplore.exe"))
+search: '`wineventlog_security` EventCode=4663  NOT (ProcessName IN("C:\\Program Files\\Internet Explorer\\iexplore.exe", "C:\\Windows\\System32\\dllhost.exe", "C:\\Windows\\SysWow64\\dllhost.exe"))
   ObjectName IN ("*Software\\microsoft\\Internet Explorer\\Intelliforms\\storage2*") 
   | stats count min(_time) as firstTime max(_time) as lastTime by  ObjectName ObjectType
   ProcessName AccessMask process_id EventCode Computer Caller_User_Name 
