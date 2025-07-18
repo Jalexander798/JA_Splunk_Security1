@@ -1,0 +1,256 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "properties": {
+        "author": {
+            "description": "Select the author email from allowed options.",
+            "enum": [
+                "<user1@<emailaddress>",
+                "<user2@<emailaddress>",
+                "<user3@<emailaddress>",
+                "<user4@<emailaddress>",
+                "<user5@<emailaddress>"
+            ],
+            "type": "string"
+        },
+        "data_source": {
+            "description": "Select the relevant data sources for the rule.",
+            "items": {
+                "enum": [
+                    "your_data_source_1",
+                    "your_data_source_2",
+                    "your_data_source_3",
+                    "your_data_source_4",
+                    "your_data_source_5",
+                    "your_data_source_6",
+                    "your_data_source_7",
+                    "your_data_source_8",
+                    "your_data_source_9",
+                    "your_data_source_10",
+                    "your_data_source_11"
+                ],
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "date": {
+            "description": "Enter the date in YYYY-MM-DD format.",
+            "format": "date",
+            "type": "string"
+        },
+        "description": {
+            "description": "Provide a description of what the detection rule does.",
+            "type": "string"
+        },
+        "drilldown_searches": {
+            "description": "Drilldown searches related to this rule.",
+            "items": {
+                "properties": {
+                    "earliest_offset": {
+                        "description": "Earliest time offset. '$info_min_time$'",
+                        "type": "string"
+                    },
+                    "latest_offset": {
+                        "description": "Latest time offset. '$info_max_time$'",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Name of the drilldown search. 'Click to see contributing events'",
+                        "type": "string"
+                    },
+                    "search": {
+                        "description": "SPL query for the drilldown. '%original_detection_search%'",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "search",
+                    "earliest_offset",
+                    "latest_offset"
+                ],
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "how_to_implement": {
+            "description": "Instructions on how to implement this detection rule. Ensure that the `YAMLRULENAME_filter` macro is available at the end of the SPL search. This macro is used to filter out known false positives.",
+            "type": "string"
+        },
+        "id": {
+            "description": "Enter a unique UUID.",
+            "type": "string"
+        },
+        "known_false_positives": {
+            "description": "Document any known false positives. Any references to JIRA tickets would go here",
+            "type": "string"
+        },
+        "name": {
+            "description": "Enter the name of the rule, matching the YAML file name all lowercase.",
+            "type": "string"
+        },
+        "references": {
+            "description": "Provide references (e.g., Runbook links).",
+            "items": {
+                "format": "uri",
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "search": {
+            "description": "Provide the SPL (Search Processing Language) query for the rule.",
+            "type": "string"
+        },
+        "status": {
+            "description": "Define the status of the detection rule.",
+            "enum": [
+                "production",
+                "experimental",
+                "deprecated",
+                "validation"
+            ],
+            "type": "string"
+        },
+        "tags": {
+            "description": "Metadata tags for the rule.",
+            "properties": {
+                "analytic_story": {
+                    "description": "Relevant analytic stories.",
+                    "items": {
+                        "enum": [
+                            "Example Stories",
+                            "BlackMatter Ransomware",
+                            "Suspicious GCP Storage Activities",
+                            "Suspicious Okta Activity",
+                            "Windows Registry Abuse",
+                            "Threat Intelligence Brand Mentions Leaks and Exposure",
+                            "Suspicious GCP Admin Activity",
+                            "GitHub Evasion of Audit Controls",
+                            "GitHub Account Abuse",
+                            "Vault Credential Access and Secret Exposure",
+                            "Sensitive or Suspicious Emails",
+                            "Threat Activity Targeting Payment Services",
+                            "Log Source Disruption and Ingestion Gaps",
+                            "GCP Firewall Tampering",
+                            "Google Workspace External Sharing"
+                        ],
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "asset_type": {
+                    "description": "Asset type involved.",
+                    "enum": [
+                        "AWS Account",
+                        "AWS EKS Kubernetes cluster",
+                        "AWS Federated Account",
+                        "AWS Instance",
+                        "Account",
+                        "Amazon EKS Kubernetes cluster",
+                        "Amazon EKS Kubernetes cluster Pod",
+                        "Amazon Elastic Container Registry",
+                        "Azure Tenant",
+                        "Azure AKS Kubernetes cluster",
+                        "Azure Active Directory",
+                        "CircleCI",
+                        "Cloud Compute Instance",
+                        "Cloud Instance",
+                        "DNS Servers",
+                        "Database Server",
+                        "Domain Server",
+                        "EC2 Snapshot",
+                        "Endpoint",
+                        "GCP",
+                        "GCP Account",
+                        "GCP GKE EKS Kubernetes cluster",
+                        "GCP GKE Kubernetes cluster",
+                        "GCP Kubernetes cluster",
+                        "GCP Storage Bucket",
+                        "GDrive",
+                        "GSuite",
+                        "GitHub",
+                        "Google Cloud Platform tenant",
+                        "Identity",
+                        "Infrastructure",
+                        "Instance",
+                        "Kubernetes",
+                        "Network",
+                        "O365 Tenant",
+                        "Okta Tenant",
+                        "Proxy",
+                        "S3 Bucket",
+                        "Splunk Server",
+                        "VPN Appliance",
+                        "Web Server",
+                        "Web Proxy",
+                        "Web Application",
+                        "Windows"
+                    ],
+                    "type": "string"
+                },
+                "mitre_attack_id": {
+                    "description": "Associated MITRE ATT&CK IDs.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "product": {
+                    "description": "Product association.",
+                    "items": {
+                        "enum": [
+                            "Splunk Enterprise Security",
+                            "Splunk Cloud",
+                            "Splunk Behavioral Analytics"
+                        ],
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "security_domain": {
+                    "description": "Security domain for the rule.",
+                    "enum": [
+                        "endpoint",
+                        "network",
+                        "identity",
+                        "application",
+                        "threat",
+                        "access",
+                        "audit"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "type": {
+            "description": "Specify the type of detection.",
+            "enum": [
+                "Anomaly",
+                "Correlation",
+                "Hunting",
+                "TTP",
+                "Baseline",
+                "Embedded"
+            ],
+            "type": "string"
+        },
+        "version": {
+            "description": "Enter the version number (integer expected).",
+            "type": "string"
+        }
+    },
+    "required": [
+        "name",
+        "id",
+        "version",
+        "date",
+        "author",
+        "status",
+        "type",
+        "data_source",
+        "description",
+        "search"
+    ],
+    "title": "Detection Rule Schema",
+    "type": "object"
+}
