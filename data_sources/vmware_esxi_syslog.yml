@@ -28,3 +28,5 @@ example_log: '{"preview":false,"lastrow":true,"result":{"Application":"May","Mes
   "___::_..._--::._._[]:_[@_=.-_=--_=]___:__@...____/","sid":"52eb1a76","source":
   "vmware:esxlog:source::udp:514","sourcetype":"vmw-syslog","splunk_server":"splunk",
   "sub":"Vimsvc.ha-eventmgr","timeendpos":"54","timestartpos":"30"}}'
+output_fields:
+- dest
