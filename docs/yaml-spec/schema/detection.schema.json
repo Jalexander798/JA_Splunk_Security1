@@ -127,8 +127,6 @@
                             "GitHub Evasion of Audit Controls",
                             "GitHub Account Abuse",
                             "Vault Credential Access and Secret Exposure",
-                            "Sensitive or Suspicious Emails",
-                            "Threat Activity Targeting Payment Services",
                             "Log Source Disruption and Ingestion Gaps",
                             "GCP Firewall Tampering",
                             "Google Workspace External Sharing"
