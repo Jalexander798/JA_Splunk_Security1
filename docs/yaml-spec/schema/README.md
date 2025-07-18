@@ -16,6 +16,13 @@ The `contentctl new` CLI wrapper enforces strict keys and values, which can make
 | 5    | Create user snippet (`detection-snippets.code-snippets`) for a detection template | 
 | 6    | Test typing `newdetection` into a `.yml` file and validate schema enforcement     | 
 
+#### Example Usage
+
+
+https://github.com/user-attachments/assets/77ca2d9b-91f3-42a3-b34d-44fee325b892
+
+
+
 
 ### Setup Instructions
 
