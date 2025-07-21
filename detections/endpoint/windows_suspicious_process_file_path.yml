@@ -1,7 +1,7 @@
 name: Windows Suspicious Process File Path
 id: ecddae4e-3d4b-41e2-b3df-e46a88b38521
-version: 13
-date: '2025-05-26'
+version: 14
+date: '2025-07-16'
 author: Teoderick Contreras, Splunk
 status: production
 type: TTP
@@ -75,46 +75,47 @@ rba:
 tags:
   analytic_story:
   - PlugX
-  - BlackByte Ransomware
-  - Rhysida Ransomware
-  - ValleyRAT
-  - Malicious Inno Setup Loader
-  - Double Zero Destructor
-  - Remcos
-  - Handala Wiper
-  - Trickbot
-  - DarkGate Malware
-  - China-Nexus Threat Activity
-  - Prestige Ransomware
-  - Amadey
-  - Phemedrone Stealer
-  - Earth Alux
-  - Azorult
-  - XMRig
-  - Qakbot
-  - XWorm
-  - Chaos Ransomware
-  - IcedID
-  - Graceful Wipe Out Attack
-  - Meduza Stealer
+  - Water Gamayun
+  - Warzone RAT
+  - Swift Slicer
+  - Data Destruction
+  - AgentTesla
   - LockBit Ransomware
   - Volt Typhoon
-  - Data Destruction
-  - Salt Typhoon
   - Brute Ratel C4
   - WhisperGate
-  - Water Gamayun
-  - AgentTesla
-  - Swift Slicer
-  - SystemBC
-  - AsyncRAT
-  - CISA AA23-347A
-  - Hermetic Wiper
-  - RedLine Stealer
-  - DarkCrystal RAT
-  - Warzone RAT
-  - SnappyBee
   - Industroyer2
+  - DarkGate Malware
+  - ValleyRAT
+  - XMRig
+  - Chaos Ransomware
+  - Hermetic Wiper
+  - Remcos
+  - Quasar RAT
+  - Rhysida Ransomware
+  - DarkCrystal RAT
+  - Qakbot
+  - China-Nexus Threat Activity
+  - XWorm
+  - IcedID
+  - CISA AA23-347A
+  - Azorult
+  - Handala Wiper
+  - Salt Typhoon
+  - Earth Alux
+  - Double Zero Destructor
+  - Trickbot
+  - Malicious Inno Setup Loader
+  - BlackByte Ransomware
+  - SystemBC
+  - Phemedrone Stealer
+  - Graceful Wipe Out Attack
+  - Prestige Ransomware
+  - Amadey
+  - AsyncRAT
+  - RedLine Stealer
+  - SnappyBee
+  - Meduza Stealer
   - MoonPeak
   asset_type: Endpoint
   mitre_attack_id:
