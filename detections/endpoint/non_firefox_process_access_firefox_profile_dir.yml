@@ -1,7 +1,7 @@
 name: Non Firefox Process Access Firefox Profile Dir
 id: e6fc13b0-1609-11ec-b533-acde48001122
-version: '10'
-date: '2025-05-26'
+version: 11
+date: '2025-07-16'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -48,22 +48,23 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - NjRAT
-  - Snake Keylogger
-  - AgentTesla
   - DarkGate Malware
-  - China-Nexus Threat Activity
-  - 3CX Supply Chain Attack
-  - Malicious Inno Setup Loader
   - CISA AA23-347A
+  - NjRAT
   - Phemedrone Stealer
   - Azorult
-  - Remcos
-  - RedLine Stealer
   - Salt Typhoon
+  - Remcos
   - Warzone RAT
+  - Quasar RAT
+  - 3CX Supply Chain Attack
+  - AgentTesla
+  - RedLine Stealer
   - SnappyBee
+  - Malicious Inno Setup Loader
   - FIN7
+  - Snake Keylogger
+  - China-Nexus Threat Activity
   asset_type: Endpoint
   mitre_attack_id:
   - T1555.003
