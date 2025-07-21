@@ -42,7 +42,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A user $user$ has logged in using an unusual OS using browser $access_device.browser$ from $src_ip$.
+  message: A user $user$ has logged in using an unusual OS $access_device.os$ using browser $access_device.browser$ from $src_ip$.
   risk_objects:
   - field: user
     type: user

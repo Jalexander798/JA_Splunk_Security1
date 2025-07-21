@@ -43,7 +43,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A policy has been created or updated to allow network bypass 2FA by user $user$ with email $admin_email$"
+  message: A policy has been created or updated to allow network bypass 2FA by user $user$ with email $admin_email$
   risk_objects:
   - field: user
     type: user

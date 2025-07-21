@@ -44,7 +44,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A user $user$ has deleted more than 3 policies"
+  message: A user $user$ has deleted more than 3 policies
   risk_objects:
   - field: user
     type: user

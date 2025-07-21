@@ -41,7 +41,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A user $user$ has generated a bypass code"
+  message: A user $user$ has generated a bypass code
   risk_objects:
   - field: user
     type: user
