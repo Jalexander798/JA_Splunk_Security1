@@ -1,7 +1,7 @@
 name: Cisco NVM - Suspicious Network Connection to IP Lookup Service API
 id: 568cb83e-d79e-4a23-85ec-6e1f6c30cb2f
-version: 1
-date: '2025-07-04'
+version: 2
+date: '2025-07-21'
 author: Nasreddine Bencherchali, Splunk, Janantha Marasinghe
 status: production
 type: Anomaly
@@ -13,6 +13,8 @@ description: |
   This activity is observed in post-exploitation frameworks, stealer malware, and advanced threat actor campaigns.
   The detection relies on Cisco Network Visibility Module (NVM) telemetry and excludes known browser
   processes to reduce noise.
+data_source:
+  - Cisco Network Visibility Module Flow Data
 search: |
   `cisco_network_visibility_module_flowdata`
   dest_hostname IN (
