@@ -19,8 +19,7 @@ search: '`sysmon` EventCode=22  QueryName IN ("*wtfismyip.com", "*checkip.*", "*
   "ident.me", "www.myexternalip.com", "*zen.spamhaus.org", "*cbl.abuseat.org", "*b.barracudacentral.org",
   "*dnsbl-1.uceprotect.net", "*spam.dnsbl.sorbs.net", "*iplogger.org*", "*ip-api.com*",
   "*geoip.*", "*icanhazip.*", "*ipwho.is*", "*ifconfig.me*", "*myip.com*", "*ipstack.com*", "*myexternalip.com*", 
-  "*ip-api.io*", "*trackip.net*", "*ipgeolocation.io*", "*ipfind.io*", "*freegeoip.app*", "*ipv4bot.whatismyipaddress.com*", 
-  "*hacker-target.com/iptools*") 
+  "*ip-api.io*", "*trackip.net*", "*ipgeolocation.io*", "*ipfind.io*", "*freegeoip.app*", "*ipv4bot.whatismyipaddress.com*") 
   |  stats  min(_time) as firstTime max(_time) as lastTime
   count by answer answer_count dvc process_exec process_guid process_name query query_count
   reply_code_id signature signature_id src user_id vendor_product QueryName QueryResults
