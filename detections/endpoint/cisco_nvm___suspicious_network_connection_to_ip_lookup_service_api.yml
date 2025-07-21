@@ -13,6 +13,8 @@ description: |
   This activity is observed in post-exploitation frameworks, stealer malware, and advanced threat actor campaigns.
   The detection relies on Cisco Network Visibility Module (NVM) telemetry and excludes known browser
   processes to reduce noise.
+data_source:
+  - Cisco Network Visibility Module Flow Data
 search: |
   `cisco_network_visibility_module_flowdata`
   dest_hostname IN (
