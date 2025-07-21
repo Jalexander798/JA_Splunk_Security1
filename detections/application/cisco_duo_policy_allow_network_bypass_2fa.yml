@@ -51,7 +51,7 @@ rba:
   threat_objects: []
 tags:
   analytic_story:
-  - Duo Suspicious Activity
+  - Cisco Duo Suspicious Activity
   asset_type: Identity
   mitre_attack_id:
   - T1556

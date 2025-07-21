@@ -42,15 +42,19 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A user $user$ has logged in using an unusual OS"
+  message: A user $user$ has logged in using an unusual OS using browser $access_device.browser$ from $src_ip$.
   risk_objects:
   - field: user
     type: user
     score: 48
-  threat_objects: []
+  threat_objects: 
+  - field: access_device.browser
+    type: http_user_agent
+  - field: src_ip
+    type: ip_address
 tags:
   analytic_story:
-  - Duo Suspicious Activity
+  - Cisco Duo Suspicious Activity
   asset_type: Identity
   mitre_attack_id:
   - T1556
