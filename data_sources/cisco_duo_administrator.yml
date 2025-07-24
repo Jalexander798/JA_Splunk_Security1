@@ -10,8 +10,8 @@ separator: null
 supported_TA:
 - name: Cisco Security Cloud
   url: https://splunkbase.splunk.com/app/7404
-  version: 3.2.3
-fields: 
+  version: 3.3.1
+fields:
 - action
 - actionlabel
 - ctime
@@ -24,4 +24,8 @@ fields:
 - username
 output_fields:
 - user
-example_log: '{"ctime": "Tue Jul  8 12:28:47 2025", "action": "policy_create", "description": "{\"enroll_policy\": \"Allow Access\", \"name\": \"test4\", \"pretty_trusted_devices\": \"\", \"admin_email\": \"test@test.com\"}", "isotimestamp": "2025-07-08T12:28:47+00:00", "object": "test4", "timestamp": 1751977727, "username": "Test Test", "host": "api-41e72ada.duosecurity.com", "extracted_eventtype": "administrator", "actionlabel": "Added policy"}'
+example_log: '{"ctime": "Tue Jul  8 12:28:47 2025", "action": "policy_create", "description":
+  "{\"enroll_policy\": \"Allow Access\", \"name\": \"test4\", \"pretty_trusted_devices\":
+  \"\", \"admin_email\": \"test@test.com\"}", "isotimestamp": "2025-07-08T12:28:47+00:00",
+  "object": "test4", "timestamp": 1751977727, "username": "Test Test", "host": "api-41e72ada.duosecurity.com",
+  "extracted_eventtype": "administrator", "actionlabel": "Added policy"}'
