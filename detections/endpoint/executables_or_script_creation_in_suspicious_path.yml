@@ -1,7 +1,7 @@
 name: Executables Or Script Creation In Suspicious Path
 id: a7e3f0f0-ae42-11eb-b245-acde48001122
-version: 16
-date: '2025-05-06'
+version: 17
+date: '2025-07-16'
 author: Teoderick Contreras, Splunk
 status: production
 type: Anomaly
@@ -18,10 +18,10 @@ data_source:
 search: '| tstats `security_content_summariesonly` values(Filesystem.file_path) as
   file_path count min(_time) as firstTime max(_time) as lastTime from datamodel=Endpoint.Filesystem
   where Filesystem.file_name IN ("*.exe", "*.dll", "*.sys", "*.com", "*.vbs", "*.vbe",
-  "*.js", "*.ps1", "*.bat", "*.cmd", "*.pif", "*.msc") AND Filesystem.file_path IN ("*\\windows\\fonts\\*",
-  "*\\windows\\temp\\*", "*\\users\\public\\*", "*\\windows\\debug\\*", "*\\Users\\Administrator\\Music\\*",
-  "*\\Windows\\servicing\\*", "*\\Users\\Default\\*", "*Recycle.bin*", "*\\Windows\\Media\\*",
-  "*\\Windows\\repair\\*", "*\\PerfLogs\\*")
+  "*.js", "*.ps1", "*.bat", "*.cmd", "*.pif", "*.msc") AND Filesystem.file_path IN
+  ("*\\windows\\fonts\\*", "*\\windows\\temp\\*", "*\\users\\public\\*", "*\\windows\\debug\\*",
+  "*\\Users\\Administrator\\Music\\*", "*\\Windows\\servicing\\*", "*\\Users\\Default\\*",
+  "*Recycle.bin*", "*\\Windows\\Media\\*", "*\\Windows\\repair\\*", "*\\PerfLogs\\*")
   by Filesystem.action Filesystem.dest Filesystem.file_access_time Filesystem.file_create_time
   Filesystem.file_hash Filesystem.file_modify_time Filesystem.file_name Filesystem.file_path
   Filesystem.file_acl Filesystem.file_size Filesystem.process_guid Filesystem.process_id
@@ -63,50 +63,51 @@ rba:
     type: file_name
 tags:
   analytic_story:
-  - AcidPour
-  - AgentTesla
-  - Amadey
-  - AsyncRAT
-  - Azorult
-  - BlackByte Ransomware
-  - Brute Ratel C4
-  - Cactus Ransomware
-  - Chaos Ransomware
-  - China-Nexus Threat Activity
-  - Crypto Stealer
-  - CISA AA23-347A
-  - DarkCrystal RAT
-  - DarkGate Malware
-  - Data Destruction
-  - Derusbi
-  - Double Zero Destructor
-  - Graceful Wipe Out Attack
-  - Handala Wiper
-  - Hermetic Wiper
-  - IcedID
-  - Industroyer2
-  - LockBit Ransomware
-  - Meduza Stealer
-  - MoonPeak
-  - NjRAT
   - PlugX
-  - Qakbot
-  - RedLine Stealer
-  - Remcos
-  - Rhysida Ransomware
-  - Salt Typhoon
-  - SnappyBee
-  - Snake Keylogger
-  - Swift Slicer
-  - SystemBC
-  - Trickbot
-  - ValleyRAT
-  - Volt Typhoon
   - Warzone RAT
+  - Swift Slicer
+  - Data Destruction
+  - AgentTesla
+  - LockBit Ransomware
+  - Volt Typhoon
+  - Brute Ratel C4
+  - Industroyer2
   - WhisperGate
-  - WinDealer RAT
+  - DarkGate Malware
+  - Chaos Ransomware
+  - ValleyRAT
   - XMRig
+  - Hermetic Wiper
+  - Remcos
+  - Quasar RAT
+  - Rhysida Ransomware
+  - DarkCrystal RAT
+  - Qakbot
+  - Snake Keylogger
+  - China-Nexus Threat Activity
+  - IcedID
+  - CISA AA23-347A
+  - Azorult
+  - Handala Wiper
+  - Crypto Stealer
+  - Salt Typhoon
   - Earth Alux
+  - Double Zero Destructor
+  - Trickbot
+  - Cactus Ransomware
+  - BlackByte Ransomware
+  - SystemBC
+  - AcidPour
+  - NjRAT
+  - Graceful Wipe Out Attack
+  - Amadey
+  - Derusbi
+  - AsyncRAT
+  - RedLine Stealer
+  - SnappyBee
+  - Meduza Stealer
+  - WinDealer RAT
+  - MoonPeak
   asset_type: Endpoint
   mitre_attack_id:
   - T1036
