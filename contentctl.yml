@@ -247,3 +247,6 @@ apps:
   version: 4.0.3
   hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-vmware-indexes_403.tgz
 githash: d6fac80e6d50ae06b40f91519a98489d4ce3a3fd
+test_data_caches:
+  - base_url: https://media.githubusercontent.com/media/splunk/attack_data/master/
+    base_directory_name: external_repos/attack_data
