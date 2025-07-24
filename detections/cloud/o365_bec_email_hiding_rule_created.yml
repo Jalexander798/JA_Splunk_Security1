@@ -37,7 +37,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Potential BEC mailbox rule "$Name$" was created by $user$
+  message: Potential BEC mailbox rule - $Name$ was created by user - $user$
   risk_objects:
   - field: user
     type: user
