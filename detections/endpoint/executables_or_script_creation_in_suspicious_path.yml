@@ -112,6 +112,7 @@ tags:
   - WinDealer RAT
   - MoonPeak
   - Interlock Ransomware
+  - Interlock Rat
   asset_type: Endpoint
   mitre_attack_id:
   - T1036
