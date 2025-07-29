@@ -78,6 +78,7 @@ tags:
   - Black Basta Ransomware
   - Clop Ransomware
   - Interlock Ransomware
+  - NailaoLocker Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1485

@@ -309,3 +309,4 @@ Extensions,Name
 *.termite,Termite
 *.interlock,Interlock
 *.1nt3rlock,Interlock
+*.locked,NailaoLocker
