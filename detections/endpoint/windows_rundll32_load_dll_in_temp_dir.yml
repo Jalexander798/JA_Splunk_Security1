@@ -47,7 +47,7 @@ rba:
   risk_objects:
   - field: dest
     type: system
-    score: 10
+    score: 40
   threat_objects:
   - field: parent_process_name
     type: parent_process_name
