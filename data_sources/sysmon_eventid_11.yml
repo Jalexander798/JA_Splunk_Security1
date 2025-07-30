@@ -1,6 +1,6 @@
 name: Sysmon EventID 11
 id: f3db9179-f4f5-416d-bc03-39f4d4ff699e
-version: 3
+version: 4
 date: '2025-07-10'
 author: Patrick Bareiss, Splunk
 description: Logs the creation of a new file, including details about the file 

@@ -1,6 +1,6 @@
 name: Sysmon EventID 13
 id: 19cd00ee-f65f-48ca-bb08-64aac28638ce
-version: 3
+version: 4
 date: '2025-07-10'
 author: Patrick Bareiss, Splunk
 description: Logs changes to a registry key, including details about the 

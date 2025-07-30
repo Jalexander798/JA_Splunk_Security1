@@ -1,6 +1,6 @@
 name: Sysmon EventID 12
 id: 3ef28798-8eaa-4fd2-b074-6f36d08a1b33
-version: 3
+version: 4
 date: '2025-07-10'
 author: Patrick Bareiss, Splunk
 description: Logs the creation of a new registry key, including details about 

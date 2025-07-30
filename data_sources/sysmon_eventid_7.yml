@@ -1,6 +1,6 @@
 name: Sysmon EventID 7
 id: 45512fa5-4d55-4088-9d51-f4dedc16fdff
-version: 3
+version: 4
 date: '2025-07-10'
 author: Patrick Bareiss, Splunk
 description: Logs the loading of an image (module) into a process, including 

@@ -1,6 +1,6 @@
 name: Sysmon EventID 17
 id: 08924246-c8e8-4c95-a9fc-633c43cc82df
-version: 3
+version: 4
 date: '2025-07-10'
 author: Patrick Bareiss, Splunk
 description: Sysmon EventID 17 logs details about the detection of a named pipe.

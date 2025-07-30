@@ -1,6 +1,6 @@
 name: Sysmon EventID 14
 id: 77c4b345-0eab-415e-98c6-f4114b021723
-version: 2
+version: 4
 date: '2025-07-10'
 author: Bhavin Patel, Splunk
 description: Data source object for Sysmon EventID 14

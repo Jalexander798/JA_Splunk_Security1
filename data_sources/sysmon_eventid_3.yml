@@ -1,6 +1,6 @@
 name: Sysmon EventID 3
 id: 01d84dff-4e26-422c-9389-6a579ee6e75b
-version: 3
+version: 4
 date: '2025-07-10'
 author: Patrick Bareiss, Splunk
 description: Logs details of network connections initiated by processes, 

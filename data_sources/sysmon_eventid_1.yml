@@ -1,6 +1,6 @@
 name: Sysmon EventID 1
 id: b375f4d1-d7ca-4bc0-9103-294825c0af17
-version: 3
+version: 4
 date: '2025-07-10'
 author: Patrick Bareiss, Splunk
 description: Logs the creation of a new process, including details such as 

@@ -1,6 +1,6 @@
 name: Sysmon EventID 18
 id: 37eb3554-214e-4e66-af10-c3ffc5b8ca82
-version: 3
+version: 4
 date: '2025-07-10'
 author: Patrick Bareiss, Splunk
 description: Logs the connection to a named pipe, including details about the 

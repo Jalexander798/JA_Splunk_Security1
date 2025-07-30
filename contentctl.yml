@@ -73,7 +73,7 @@ apps:
   appid: Splunk_TA_microsoft_sysmon
   version: 4.0.3
   description: description of app
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-sysmon_403.tgz
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/Splunk_TA_microsoft_sysmon-5.0.0.spl
 - uid: 833
   title: Splunk Add-on for Unix and Linux
   appid: Splunk_TA_nix

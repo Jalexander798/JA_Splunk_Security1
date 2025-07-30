@@ -1,6 +1,6 @@
 name: Sysmon EventID 23
 id: 5ea2721d-f60c-4f48-a047-47d514e327c3
-version: 3
+version: 4
 date: '2025-07-10'
 author: Patrick Bareiss, Splunk
 description: Logs the deletion of a file, including details about the file path,

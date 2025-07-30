@@ -1,6 +1,6 @@
 name: Sysmon EventID 26
 id: 77f946e0-4afb-4789-8d9e-c29c1658f501
-version: 2
+version: 4
 date: '2025-07-10'
 author: Bhavin Patel, Splunk
 description: Data source object for Sysmon EventID 26

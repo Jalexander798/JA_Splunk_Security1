@@ -1,6 +1,6 @@
 name: Sysmon EventID 5
 id: 556471bf-44fa-44e6-97e2-eb25416aeb6d
-version: 3
+version: 4
 date: '2025-07-10'
 author: Patrick Bareiss, Splunk
 description: Logs the termination of a process, including details about the 
