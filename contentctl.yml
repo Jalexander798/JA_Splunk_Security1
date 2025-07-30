@@ -167,9 +167,9 @@ apps:
 - uid: 4055
   title: Splunk Add-on for Microsoft Office 365
   appid: SPLUNK_ADD_ON_FOR_MICROSOFT_OFFICE_365
-  version: 4.8.1
+  version: 4.9.0
   description: description of app
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-microsoft-office-365_481.tgz
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-microsoft-office-365_490.tgz
 - uid: 2890
   title: Splunk Machine Learning Toolkit
   appid: SPLUNK_MACHINE_LEARNING_TOOLKIT
@@ -247,3 +247,6 @@ apps:
   version: 4.0.3
   hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-vmware-indexes_403.tgz
 githash: d6fac80e6d50ae06b40f91519a98489d4ce3a3fd
+test_data_caches:
+- base_url: https://media.githubusercontent.com/media/splunk/attack_data/master/
+  base_directory_name: external_repos/attack_data
