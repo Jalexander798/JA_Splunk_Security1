@@ -1,7 +1,7 @@
 name: Detect Remote Access Software Usage FileInfo
 id: ccad96d7-a48c-4f13-8b9c-9f6a31cba454
-version: 9
-date: '2025-05-02'
+version: 10
+date: '2025-07-29'
 author: Steven Dick
 status: production
 type: Anomaly
@@ -76,6 +76,7 @@ tags:
   - Remote Monitoring and Management Software
   - Cactus Ransomware
   - Seashell Blizzard
+  - Scattered Spider
   asset_type: Endpoint
   mitre_attack_id:
   - T1219

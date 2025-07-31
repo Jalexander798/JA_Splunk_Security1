@@ -1,7 +1,7 @@
 name: Windows PowerShell ScheduleTask
 id: ddf82fcb-e9ee-40e3-8712-a50b5bf323fc
-version: 8
-date: '2025-06-24'
+version: 9
+date: '2025-07-29'
 author: Michael Haag, Splunk
 status: production
 type: Anomaly
@@ -67,6 +67,7 @@ rba:
 tags:
   analytic_story:
     - Scheduled Tasks
+    - Scattered Spider
   asset_type: Endpoint
   atomic_guid:
     - af9fd58f-c4ac-4bf2-a9ba-224b71ff25fd
