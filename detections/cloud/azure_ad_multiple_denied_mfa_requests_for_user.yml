@@ -21,7 +21,7 @@ search: '`azure_monitor_aad` category=SignInLogs operationName="Sign-in activity
   | bucket span=10m _time 
   | rename userAgent as user_agent 
   | fillnull 
-  | stats count min(_time) as firstTime max(_time) as lastTime values(dest) as dest values(user_agent) as user_agent values(src) as src by user status.additionalDetails vendor_account vendor_product signature
+  | stats count min(_time) as firstTime max(_time) as lastTime values(dest) as dest values(user_agent) as user_agent values(src) as src by user status.additionalDetails vendor_account vendor_product signature _time
   | where count > 9 
   | `security_content_ctime(firstTime)` 
   | `security_content_ctime(lastTime)` 
