@@ -1,0 +1,19 @@
+name: Windows RDP Artifacts and Defense Evasion
+id: 22c5dc79-b418-4933-b8ba-9431dfc436a8
+version: 2
+date: '2025-07-30'
+author: Teoderick Contreras, Splunk
+status: production
+description: This detection identifies the use of Remote Desktop Protocol (RDP) on a Windows system followed by actions consistent with artifact cleanup or defense evasion. When a user initiates an RDP session using the native client (mstsc.exe), Windows generates several artifacts, including Default.rdp in the user's Documents folder and bitmap cache files (*.bmc, cache*.bin) under the Terminal Server Client cache directory. These files can be valuable for forensic analysis, as they indicate remote access activity and sometimes reveal details about the accessed system's graphical environment.
+narrative: Adversaries aware of these artifacts may attempt to delete or overwrite them after their session to reduce detection and hinder incident response efforts. Common evasion techniques include removing these files manually or via scripts, disabling RDP caching settings, or using non-standard RDP clients that avoid artifact creation altogether. This detection correlates signs of RDP session activity with subsequent file deletion or cleanup commands targeting known RDP artifact paths. It helps surface post-access OPSEC behavior that often precedes or follows lateral movement, privilege escalation, or data exfiltration. Detecting and alerting on this pattern is critical for identifying stealthy attacker behavior in interactive intrusions.
+references:
+- https://medium.com/@bonguides25/how-to-clear-rdp-connections-history-in-windows-cf0ffb67f344
+- https://thelocalh0st.github.io/posts/rdp/
+tags:
+  category:
+  - Adversary Tactics
+  product:
+  - Splunk Enterprise
+  - Splunk Enterprise Security
+  - Splunk Cloud
+  usecase: Advanced Threat Detection
