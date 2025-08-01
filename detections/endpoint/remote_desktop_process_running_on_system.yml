@@ -1,6 +1,6 @@
 name: Remote Desktop Process Running On System
 id: f5939373-8054-40ad-8c64-cec478a22a4a
-version: 13
+version: 12
 date: '2025-08-01'
 author: David Dorsey, Splunk
 status: experimental
