@@ -41,6 +41,7 @@ search: |-
     (signature="MALIP" OR signature="SQL"), "A vulnerability is being ".attackOutcome." from a ".src_category." IP address ".src_ip.". The server ".dest_nt_host." hosting application ".app_name." was accessed.",
     (signature="DESEREAL"), "The application ".app_name." deserializes untrusted data without sufficiently verifying that the resulting data will be valid. Data which is untrusted cannot be trusted to be well-formed. Malformed data or unexpected data could be used to abuse application logic, deny service, or execute arbitrary code, when deserialized."
     )
+  | `secureapp_es_field_mappings`
   | `cisco_secure_application_alerts_filter`
 how_to_implement: In order to properly run this search, you need to ingest alerts data from AppD SecureApp, specifically ingesting data via HEC. You will also need to ensure that the data is going to sourcetype - `appdynamics_security`. You will need to install the Splunk Add-on for AppDynamics.
 known_false_positives: No known false positives for this detection. If the alerts are noisy, consider tuning this detection by using the _filter macro in this search, and/or updating the tool this alert originates from.
