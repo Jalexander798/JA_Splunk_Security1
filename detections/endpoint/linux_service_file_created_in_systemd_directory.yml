@@ -65,6 +65,7 @@ tags:
   - Linux Living Off The Land
   - Scheduled Tasks
   - Gomir
+  - China-Nexus Threat Activity
   asset_type: Endpoint
   mitre_attack_id:
   - T1053.006
