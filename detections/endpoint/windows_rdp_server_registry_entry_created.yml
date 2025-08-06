@@ -44,9 +44,7 @@ rba:
   - field: dest
     type: system
     score: 10
-  threat_objects:
-  - field: parent_process_name
-    type: parent_process_name
+  threat_objects: []
 tags:
   analytic_story:
   - Windows RDP Artifacts and Defense Evasion
