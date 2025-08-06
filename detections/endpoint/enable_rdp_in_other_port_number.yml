@@ -60,6 +60,7 @@ tags:
   - Prohibited Traffic Allowed or Protocol Mismatch
   - Windows Registry Abuse
   - Windows RDP Artifacts and Defense Evasion
+  - Interlock Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1021

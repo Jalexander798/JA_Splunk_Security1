@@ -33,6 +33,7 @@ tags:
   - Active Directory Lateral Movement
   - BlackByte Ransomware
   - Windows RDP Artifacts and Defense Evasion
+  - Interlock Ransomware
   asset_type: Endpoint
   atomic_guid: []
   mitre_attack_id:
