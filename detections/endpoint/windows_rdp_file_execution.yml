@@ -83,6 +83,7 @@ tags:
   analytic_story:
   - Spearphishing Attachments
   - Windows RDP Artifacts and Defense Evasion
+  - Interlock Ransomware
   asset_type: Endpoint
   mitre_attack_id:
   - T1598.002
