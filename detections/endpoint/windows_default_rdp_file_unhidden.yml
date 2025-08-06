@@ -71,5 +71,5 @@ tests:
 - name: True Positive Test
   attack_data:
   - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1021.001/unhide_file/unhide_file.log
-    source: WinEventLog:Microsoft-Windows-Windows Defender/Operational
+    source: XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
     sourcetype: XmlWinEventLog
