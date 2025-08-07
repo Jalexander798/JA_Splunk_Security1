@@ -71,9 +71,9 @@ apps:
 - uid: 5709
   title: Splunk Add-on for Sysmon
   appid: Splunk_TA_microsoft_sysmon
-  version: 4.0.3
+  version: 5.0.0
   description: description of app
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-sysmon_403.tgz
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-sysmon_500.tgz
 - uid: 833
   title: Splunk Add-on for Unix and Linux
   appid: Splunk_TA_nix
