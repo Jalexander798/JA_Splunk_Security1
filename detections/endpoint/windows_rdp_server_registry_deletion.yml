@@ -46,8 +46,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: The registry was deleted by a suspicious process named $process_name$ with
-    the process path $process_path$ on dest $dest$.
+  message: The registry was deleted on dest $dest$.
   risk_objects:
   - field: dest
     type: system
