@@ -33,7 +33,7 @@ search: |-
       values(Computer) as Computer, values(status) as status, values(src_category) as
       src_category, values(src_ip) as src_ip values(action) as action values(authentication_method) as authentication_method values(dest) as dest values(signature) as signature values(signature_id) as signature_id by TargetLogonId 
   | search NOT src_category="domain_controller"
-  | `windows_ad_replication_request_initiated_from_unsanctioned_location_filter`'
+  | `windows_ad_replication_request_initiated_from_unsanctioned_location_filter`
 how_to_implement:
   To successfully implement this search, you need to be ingesting
   eventcode `4662`. The Advanced Security Audit policy settings `Audit Directory Services
