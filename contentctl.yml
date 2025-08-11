@@ -155,15 +155,15 @@ apps:
 - uid: 5556
   title: Splunk Add-on for Google Workspace
   appid: SPLUNK_ADD_ON_FOR_GOOGLE_WORKSPACE
-  version: 3.0.4
+  version: 3.1.0
   description: description of app
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-google-workspace_304.tgz
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-google-workspace_310.tgz
 - uid: 3110
   title: Splunk Add-on for Microsoft Cloud Services
   appid: SPLUNK_TA_MICROSOFT_CLOUD_SERVICES
-  version: 5.5.0
+  version: 5.6.0
   description: description of app
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-microsoft-cloud-services_550.tgz
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-microsoft-cloud-services_560.tgz
 - uid: 4055
   title: Splunk Add-on for Microsoft Office 365
   appid: SPLUNK_ADD_ON_FOR_MICROSOFT_OFFICE_365
