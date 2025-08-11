@@ -1,7 +1,7 @@
 name: CMD Carry Out String Command Parameter
 id: 54a6ed00-3256-11ec-b031-acde48001122
-version: 13
-date: '2025-07-16'
+version: 14
+date: '2025-08-07'
 author: Teoderick Contreras, Bhavin Patel, Splunk
 status: production
 type: Hunting
@@ -64,6 +64,7 @@ tags:
   - AsyncRAT
   - RedLine Stealer
   - Log4Shell CVE-2021-44228
+  - Interlock Rat
   asset_type: Endpoint
   cve:
   - CVE-2021-44228
