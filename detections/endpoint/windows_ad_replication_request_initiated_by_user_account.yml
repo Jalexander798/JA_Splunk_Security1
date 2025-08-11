@@ -7,6 +7,7 @@ type: TTP
 status: production
 data_source:
 - Windows Event Log Security 4662
+- Windows Event Log Security 4624
 description: The following analytic detects a user account initiating an Active Directory
   replication request, indicative of a DCSync attack. It leverages EventCode 4662
   from the Windows Security Event Log, focusing on specific object types and replication
@@ -16,16 +17,15 @@ description: The following analytic detects a user account initiating an Active 
   escalation, and potential compromise of the entire domain.
 search: |-
   `wineventlog_security` EventCode=4662 ObjectType IN ("%{19195a5b-6da0-11d0-afd3-00c04fd930c9}","domainDNS") 
-    ANDProperties IN ("*Replicating Directory Changes All*","*Manage Replication Topology*","*Remove Replica In Domain*","*{1131f6ad-9c07-11d1-f79f-00c04fc2dcd2}*","*{9923a32a-3607-11d2-b9be-0000f87a36b2}*","*{1131f6ac-9c07-11d1-f79f-00c04fc2dcd2}*")
+    AND Properties IN ("*Replicating Directory Changes All*","*Manage Replication Topology*","*Remove Replica In Domain*","*{1131f6ad-9c07-11d1-f79f-00c04fc2dcd2}*","*{9923a32a-3607-11d2-b9be-0000f87a36b2}*","*{1131f6ac-9c07-11d1-f79f-00c04fc2dcd2}*")
     AND AccessMask="0x100" AND NOT (SubjectUserSid="NT AUT*" OR SubjectUserSid="S-1-5-18" OR SubjectDomainName="Window Manager" OR SubjectUserName="*$") 
   | stats min(_time) as _time, count by SubjectDomainName, SubjectUserName, Computer, Logon_ID, ObjectName, ObjectServer, ObjectType, OperationType, status dest 
   | rename SubjectDomainName as Target_Domain, SubjectUserName as user, Logon_ID as TargetLogonId, _time as attack_time 
   | appendpipe 
       [| map search="search `wineventlog_security` EventCode=4624 TargetLogonId=$TargetLogonId$" 
       | fields - status] 
-  | table attack_time, AuthenticationPackageName, LogonProcessName, LogonType, TargetUserSid, Target_Domain, user, Computer, TargetLogonId, status, src_ip, src_category, ObjectName, ObjectServer, ObjectType, OperationType, dest 
   | stats min(attack_time) as _time values(TargetUserSid) as TargetUserSid, values(Target_Domain) as Target_Domain, values(user) as user, values(Computer) as Computer, values(status) as status, values(src_category) as
-      src_category, values(src_ip) as src_ip by TargetLogonId dest 
+      src_category, values(src_ip) as src_ip values(action) as action values(authentication_method) as authentication_method values(dest) as dest values(signature) as signature values(signature_id) as signature_id by TargetLogonId 
   | `windows_ad_replication_request_initiated_by_user_account_filter`
 how_to_implement: To successfully implement this search, you need to be ingesting
   eventcode `4662`. The Advanced Security Audit policy settings `Audit Directory Services

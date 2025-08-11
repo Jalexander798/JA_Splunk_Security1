@@ -43,7 +43,7 @@ how_to_implement:
   Changes`, `Replicating Directory Changes All`, and `Replicating Directory Changes
   In Filtered Set` Assets and Identities will also need to be configured, with the
   category of domain_controller added for domain controllers.
-known_false_positives: Genuine DC promotion may trigger this alert.
+known_false_positives: Genuine DC promotion may trigger this alert. 
 references:
   - https://adsecurity.org/?p=1729
   - https://www.linkedin.com/pulse/mimikatz-dcsync-event-log-detections-john-dwyer
