@@ -1,7 +1,7 @@
 name: CMD Carry Out String Command Parameter
 id: 54a6ed00-3256-11ec-b031-acde48001122
-version: 12
-date: '2025-05-26'
+version: 14
+date: '2025-08-07'
 author: Teoderick Contreras, Bhavin Patel, Splunk
 status: production
 type: Hunting
@@ -42,27 +42,29 @@ references:
 tags:
   analytic_story:
   - PlugX
+  - Warzone RAT
+  - Data Destruction
   - Winter Vivern
-  - Rhysida Ransomware
-  - Malicious Inno Setup Loader
-  - DarkGate Malware
+  - WhisperGate
   - ProxyNotShell
-  - Log4Shell CVE-2021-44228
+  - DarkGate Malware
+  - Chaos Ransomware
+  - Hermetic Wiper
+  - Quasar RAT
+  - Rhysida Ransomware
+  - DarkCrystal RAT
+  - Qakbot
+  - IcedID
+  - CISA AA23-347A
   - Azorult
   - Living Off The Land
-  - Qakbot
-  - Chaos Ransomware
-  - IcedID
-  - Data Destruction
   - Crypto Stealer
-  - WhisperGate
+  - Malicious Inno Setup Loader
   - NjRAT
   - AsyncRAT
-  - CISA AA23-347A
-  - Hermetic Wiper
   - RedLine Stealer
-  - DarkCrystal RAT
-  - Warzone RAT
+  - Log4Shell CVE-2021-44228
+  - Interlock Rat
   asset_type: Endpoint
   cve:
   - CVE-2021-44228

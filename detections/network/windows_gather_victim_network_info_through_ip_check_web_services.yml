@@ -1,10 +1,10 @@
 name: Windows Gather Victim Network Info Through Ip Check Web Services
 id: 70f7c952-0758-46d6-9148-d8969c4481d1
-version: 12
-date: '2025-05-02'
+version: 13
+date: '2025-07-16'
 author: Teoderick Contreras, Splunk
 status: production
-type: Hunting
+type: Anomaly
 description: The following analytic detects processes attempting to connect to known
   IP check web services. This behavior is identified using Sysmon EventCode 22 logs,
   specifically monitoring DNS queries to services like "wtfismyip.com" and "ipinfo.io".
@@ -18,7 +18,9 @@ search: '`sysmon` EventCode=22  QueryName IN ("*wtfismyip.com", "*checkip.*", "*
   "*ipinfo.io", "*api.ipify.org", "*icanhazip.com", "*ip.anysrc.com","*api.ip.sb",
   "ident.me", "www.myexternalip.com", "*zen.spamhaus.org", "*cbl.abuseat.org", "*b.barracudacentral.org",
   "*dnsbl-1.uceprotect.net", "*spam.dnsbl.sorbs.net", "*iplogger.org*", "*ip-api.com*",
-  "*geoip.*", "*icanhazip.*") |  stats  min(_time) as firstTime max(_time) as lastTime
+  "*geoip.*", "*icanhazip.*", "*ipwho.is*", "*ifconfig.me*", "*myip.com*", "*ipstack.com*", "*myexternalip.com*", 
+  "*ip-api.io*", "*trackip.net*", "*ipgeolocation.io*", "*ipfind.io*", "*freegeoip.app*", "*ipv4bot.whatismyipaddress.com*") 
+  |  stats  min(_time) as firstTime max(_time) as lastTime
   count by answer answer_count dvc process_exec process_guid process_name query query_count
   reply_code_id signature signature_id src user_id vendor_product QueryName QueryResults
   QueryStatus | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`
@@ -31,6 +33,29 @@ known_false_positives: Filter internet browser application to minimize the false
   of this detection.
 references:
 - https://app.any.run/tasks/a6f2ffe2-e6e2-4396-ae2e-04ea0143f2d8/
+drilldown_searches:
+- name: View the detection results for - "$dest$"
+  search: '%original_detection_search% | search  dest = "$dest$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: View risk events for the last 7 days for - "$dest$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+rba:
+  message: a network connection on known abused web services from $dvc$
+  risk_objects:
+  - field: dvc
+    type: system
+    score: 36
+  threat_objects:
+  - field: process_name
+    type: process_name
 tags:
   analytic_story:
   - Azorult
@@ -41,6 +66,7 @@ tags:
   - PXA Stealer
   - Meduza Stealer
   - Water Gamayun
+  - Quasar RAT
   asset_type: Endpoint
   mitre_attack_id:
   - T1590.005
