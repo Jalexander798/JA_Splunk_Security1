@@ -3,9 +3,8 @@ id: aeee5374-3203-4286-b744-a8cc4ad1cd7e
 version: 3
 date: '2025-07-10'
 author: Patrick Bareiss, Splunk
-description: Logs WMI (Windows Management Instrumentation) consumer activity, 
-  including details about the WMI event consumer, associated process, and event 
-  data.
+description: Logs WMI (Windows Management Instrumentation) consumer activity, including
+  details about the WMI event consumer, associated process, and event data.
 mitre_components:
 - WMI Creation
 - Process Metadata
@@ -18,7 +17,7 @@ configuration: https://github.com/SwiftOnSecurity/sysmon-config
 supported_TA:
 - name: Splunk Add-on for Sysmon
   url: https://splunkbase.splunk.com/app/5709
-  version: 4.0.3
+  version: 5.0.0
 fields:
 - _time
 - Channel
@@ -105,17 +104,11 @@ output_fields:
 - user
 - user_id
 - vendor_product
-example_log: <Event 
-  xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider
-  Name='Microsoft-Windows-Sysmon' 
-  Guid='{5770385F-C22A-43E0-BF4C-06F5698FFBD9}'/><EventID>20</EventID><Version>3</Version><Level>4</Level><Task>20</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated
+example_log: <Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider
+  Name='Microsoft-Windows-Sysmon' Guid='{5770385F-C22A-43E0-BF4C-06F5698FFBD9}'/><EventID>20</EventID><Version>3</Version><Level>4</Level><Task>20</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated
   SystemTime='2020-12-08T13:54:48.517698800Z'/><EventRecordID>6249</EventRecordID><Correlation/><Execution
-  ProcessID='2504' 
-  ThreadID='3252'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>win-dc-935.attackrange.local</Computer><Security
-  UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>-</Data><Data 
-  Name='EventType'>WmiConsumerEvent</Data><Data Name='UtcTime'>2020-12-08 
-  13:54:48.514</Data><Data Name='Operation'>Deleted</Data><Data 
-  Name='User'>ATTACKRANGE\Administrator</Data><Data Name='Name'> 
-  "AtomicRedTeam-WMIPersistence-Example"</Data><Data Name='Type'>Command 
-  Line</Data><Data Name='Destination'> 
-  "C:\\Windows\\System32\\notepad.exe"</Data></EventData></Event>
+  ProcessID='2504' ThreadID='3252'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>win-dc-935.attackrange.local</Computer><Security
+  UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>-</Data><Data Name='EventType'>WmiConsumerEvent</Data><Data
+  Name='UtcTime'>2020-12-08 13:54:48.514</Data><Data Name='Operation'>Deleted</Data><Data
+  Name='User'>ATTACKRANGE\Administrator</Data><Data Name='Name'> "AtomicRedTeam-WMIPersistence-Example"</Data><Data
+  Name='Type'>Command Line</Data><Data Name='Destination'> "C:\\Windows\\System32\\notepad.exe"</Data></EventData></Event>
