@@ -237,10 +237,10 @@ apps:
     for flows both on and off premise.
   hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/cisco-endpoint-security-analytics-cesa-add-on-for-splunk_407.tgz
 - uid: 5603
-  title: Splunk Add-on for VMware ESXi Logs
-  appid: SPLUNK_ADD_ON_FOR_VMWARE_ESXI_LOGS
-  version: 4.2.1
-  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-vmware-esxi-logs_421.tgz
+  title: Add-on for VMware ESXi Logs
+  appid: Splunk_TA_esxilogs
+  version: 4.2.2
+  hardcoded_path: https://attack-range-appbinaries.s3.us-west-2.amazonaws.com/splunk-add-on-for-vmware-esxi-logs_422.tgz
 - uid: 5640
   title: Splunk Add-on for VMware Indexes
   appid: SPLUNK_ADD_ON_FOR_VMWARE_INDEXES
