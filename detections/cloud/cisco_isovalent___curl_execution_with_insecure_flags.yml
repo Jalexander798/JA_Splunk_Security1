@@ -1,0 +1,65 @@
+name: Cisco Isovalent - Curl Execution With Insecure Flags
+id: ece07077-e577-42bb-a8d2-c3c102793723
+version: 1
+date: '2025-08-12'
+author: Bhavin Patel, Splunk
+type: Anomaly
+data_source:
+- Cisco Isovalent Process Exec
+status: production
+description: Detects the execution of curl commands with insecure flags within the Cisco Isovalent environment. This analytic monitors for the use of the -k or --insecure flags, which may indicate attempts to bypass SSL/TLS verification, potentially exposing the system to man-in-the-middle attacks.
+search: |
+  `cisco_isovalent` process_exec.process.pod.name!=""
+    (process_name="*curl") 
+  | regex process="(?i)(?<!\w)-(?:[a-z]*k[a-z]*|-(insecure|proxy-insecure|doh-insecure))" 
+  | rename process_exec.process.pod.namespace as WorkloadNamespace 
+  | rename process_exec.process.pod.labels{} as WorkloadLabels 
+  | rename process_exec.ancestors{}.binary as WorkloadAncestorsBinary 
+  | eval WorkloadAncestorsBinary=mvjoin(WorkloadAncestorsBinary, " <- ") 
+  | eval WorkloadLabels=mvjoin(WorkloadLabels, "; ") 
+  | stats count by cluster_name process_exec.parent.pod.container.name process_name process
+      WorkloadNamespace, parent_process, WorkloadAncestorsBinary user_id | `cisco_isovalent___curl_execution_with_insecure_flags_filter`
+how_to_implement: This analytic leverages Tetragon logs to be ingested using the
+  Cisco Security Cloud App.
+known_false_positives: Legitimate use of curl with insecure flags for testing purposes.
+references:
+- https://isovalent.com
+- https://tetragon.io
+drilldown_searches:
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search user = "$user$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+rba:
+  message: A curl execution with insecure flags has been detected by user on container pod namespace $WorkloadNamespace$
+  risk_objects:
+  - field: WorkloadNamespace
+    type: system
+    score: 45
+  threat_objects: []
+tags:
+  analytic_story:
+  - Cisco Isovalent Suspicious Activity
+  asset_type: Endpoint
+  mitre_attack_id:
+  - T1071
+  product:
+  - Splunk Enterprise
+  - Splunk Enterprise Security
+  - Splunk Cloud
+  security_domain: endpoint
+tests:
+  - name: True Positive Test - Cisco Isovalent Process Exec
+    attack_data:
+    - data: https://media.githubusercontent.com/media/splunk/attack_data/refs/heads/master/datasets/cisco_isovalent/cisco_isovalent_process_exec/cisco_isovalent_process_exec.log
+      source: not_applicable
+      sourcetype: cisco:isovalent
