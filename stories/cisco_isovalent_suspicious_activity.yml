@@ -1,0 +1,21 @@
+name: Cisco Isovalent Suspicious Activity
+id: 245ac99a-1355-44fe-9ef7-a7e826e20c6f
+version: 1
+date: '2025-08-12'
+author: Bhavin Patel, Splunk
+status: production
+description: This analytics story focuses on identifying suspicious activities and potential security threats within environments using Cisco Isovalent. It provides detection rules and guidance to help security teams recognize signs of adversary tactics such as unauthorized access attempts, unusual network activity, and other behaviors indicative of potential compromise.
+narrative: |
+  Cisco Isovalent provides advanced networking and security capabilities for Kubernetes environments. However, attackers continue to develop techniques to exploit vulnerabilities and misconfigurations. This story brings together detections that highlight suspicious activity patterns in Isovalent-protected environments, such as unusual shell executions, anomalous network connections, and other indicators of potential compromise. By leveraging these detections, security teams can quickly identify and respond to threats targeting Kubernetes environments, reducing the risk of successful attacks and subsequent malicious activity.
+references:
+- https://isovalent.com
+- https://tetragon.io
+tags:
+  category:
+  - Adversary Tactics
+  - Cloud Security
+  product:
+  - Splunk Enterprise
+  - Splunk Enterprise Security
+  - Splunk Cloud
+  usecase: Advanced Threat Detection

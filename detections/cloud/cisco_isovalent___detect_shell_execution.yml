@@ -1,0 +1,63 @@
+name: Cisco Isovalent - Detect Shell Execution
+id: 12345678-abcd-1234-ef00-1234567890ab
+version: 1
+date: '2025-08-12'
+author: Bhavin Patel, Splunk
+type: Anomaly
+data_source:
+- Cisco Isovalent Process Exec
+status: production
+description: Gaining shell access through a compromised workload is one of the primary goals of an attack. Isovalent Networking for Kubernetes uses eBPF to hook into the kernel and provide visibility into process_exec events, including information about the process ancestry tree (process_exec.process.binary, process_exec.ancestors{}.binary fields) and the Kubernetes workload identity (process_exec.process.pod.namespace, process_exec.process.pod.labels{} fields). Security teams can use this information to build a robust alert and threat detection system. This analytic monitors an exec of a shell inside a container namespace.
+search: |
+  `cisco_isovalent` process_exec.process.pod.name!=""
+  (process_exec.process.binary="*/bin/sh" OR process_exec.process.binary="*/bin/bash")
+  | rename process_exec.process.pod.namespace as WorkloadNamespace 
+  | rename process_exec.process.pod.labels{} as WorkloadLabels
+  | rename process_exec.ancestors{}.binary as WorkloadAncestorsBinary
+  | eval WorkloadAncestorsBinary=mvjoin(WorkloadAncestorsBinary, " <- ")
+  | eval WorkloadLabels=mvjoin(WorkloadLabels, "; ") 
+  | stats count by WorkloadNamespace, process_exec.process.binary, process_exec.parent.binary, WorkloadAncestorsBinary | `cisco_isovalent___detect_shell_execution_filter`
+how_to_implement: This analytic leverages Tetragon logs to be ingested using the
+  Cisco Security Cloud App.
+known_false_positives: Shell scripts executed by legitimate users or automated processes.
+references:
+- https://isovalent.com
+- https://tetragon.io
+drilldown_searches:
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search user = "$user$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+rba:
+  message: A shell execution has been detected by user on container pod namespace $WorkloadNamespace$
+  risk_objects:
+  - field: WorkloadNamespace
+    type: system
+    score: 49
+  threat_objects: []
+tags:
+  analytic_story:
+  - Cisco Isovalent Suspicious Activity
+  asset_type: Endpoint
+  mitre_attack_id:
+  - T1059
+  product:
+  - Splunk Enterprise
+  - Splunk Enterprise Security
+  - Splunk Cloud
+  security_domain: endpoint
+tests:
+  - name: True Positive Test
+    attack_data:
+    - data: https://media.githubusercontent.com/media/splunk/attack_data/refs/heads/master/datasets/cisco_isovalent/cisco_isovalent_process_exec/cisco_isovalent_process_exec.log
+      source: not_applicable
+      sourcetype: cisco:isovalent
