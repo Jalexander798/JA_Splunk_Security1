@@ -1,0 +1,117 @@
+name: RMM Agent Install Followed By First Outbound Connection
+id: null
+version: 1
+date: '2025-08-17'
+author: Riyan Pratama (sudo3rs)
+data_source:
+  - Sysmon
+  - Windows Security Event Log
+  - Windows System Event Log
+  - Web Proxy
+  - Firewall
+type: TTP
+status: production
+description: |
+  Detects installation or service registration of common Remote Monitoring & Management (RMM) tools
+  (e.g., AnyDesk, ConnectWise ScreenConnect, Atera, Splashtop, TeamViewer) followed within a short
+  window by the first outbound connection from the same host to the vendor’s cloud endpoints.
+  This correlation highlights “living-off-RMM” abuse where an attacker deploys a legitimate RMM
+  agent for persistent remote access, then immediately dials out to external control infrastructure.
+  A SOC should investigate promptly, as this often indicates hands-on-keyboard activity enabling
+  remote control, data staging/exfiltration, or further lateral movement.
+search: |
+  (
+    (`wineventlog_system` EventCode=7045) OR
+    (`wineventlog_security` EventCode=4697) OR
+    (`sysmon` EventCode=1)
+  )
+  (Image="*anydesk*.exe" OR Image="*screenconnect*" OR Image="*connectwise*" OR Image="*atera*" OR Image="*splashtop*" OR Image="*teamviewer*"
+   OR ServiceFileName="*AnyDesk*" OR ServiceFileName="*ScreenConnect*" OR ServiceFileName="*ConnectWise*" OR ServiceFileName="*Atera*" OR ServiceFileName="*Splashtop*" OR ServiceFileName="*TeamViewer*")
+  | eval indicator=coalesce(Image, ServiceFileName, ServiceName)
+  | eval rmm_brand=case(
+      like(lower(indicator), "%anydesk%"), "AnyDesk",
+      like(lower(indicator), "%screenconnect%") OR like(lower(indicator), "%connectwise%"), "ScreenConnect",
+      like(lower(indicator), "%atera%"), "Atera",
+      like(lower(indicator), "%splashtop%"), "Splashtop",
+      like(lower(indicator), "%teamviewer%"), "TeamViewer",
+      true(), "Other"
+    )
+  | eval marker="install"
+  | table _time host user Image ServiceName ServiceFileName rmm_brand marker
+  | append [
+      search (index=proxy OR index=fw OR index=network)
+        (
+          dest_domain="*.anydesk.com" OR dest_domain="*.anydeskcontrol.com" OR
+          dest_domain="*.screenconnect.com" OR dest_domain="*.connectwise.com" OR
+          dest_domain="*.atera.com" OR dest_domain="*.splashtop.com" OR
+          dest_domain="*.teamviewer.com"
+        )
+        OR (app IN ("anydesk","connectwise","atera","splashtop","teamviewer"))
+      | eval marker="connect"
+      | table _time host dest dest_ip dest_domain app marker
+    ]
+  | transaction host maxspan=1h
+  | where mvfind(marker, "install")>=0 AND mvfind(marker, "connect")>=0
+  | eval firstTime=_time, lastTime=_time
+  | stats earliest(_time) as firstTime latest(_time) as lastTime
+          values(rmm_brand) as rmm_brand
+          values(Image) as image
+          values(ServiceName) as service
+          values(ServiceFileName) as service_file
+          values(dest_domain) as dest_domains
+          values(dest_ip) as dest_ips
+          values(app) as apps
+          by host
+  | `security_content_ctime(firstTime)`
+  | `security_content_ctime(lastTime)`
+  | `rmm_agent_install_first_outbound_connection_filter`
+how_to_implement: |
+  Ingest endpoint and network telemetry:
+    - Sysmon (Process Create = EventCode 1) and/or Windows logs (System 7045, Security 4697) for installs/services.
+    - Web proxy / firewall logs with dest_domain (or app) fields to observe outbound to vendor clouds.
+  Adjust the proxy/firewall indexes and sourcetypes to match your environment. Maintain an allowlist lookup
+  of sanctioned corporate RMM deployments (e.g., by host or organizational unit) and reference it in the
+  filter macro. Consider enriching with GeoIP/ASN to flag “new ASN” if available.
+known_false_positives: |
+  Legitimate IT onboarding (helpdesk rolling out a new RMM) or break/fix may trigger this analytic.
+  Add approved hosts/OUs or change windows to an allowlist lookup and apply in the filter macro.
+references: []
+drilldown_searches:
+  - name: View detection results for host "$host$"
+    search: '%original_detection_search% | search host="$host$"'
+    earliest_offset: $info_min_time$
+    latest_offset: $info_max_time$
+  - name: View risk events (7d) for "$host$"
+    search: '| from datamodel Risk.All_Risk
+             | search normalized_risk_object="$host$" starthoursago=168
+             | stats count min(_time) as firstTime max(_time) as lastTime
+               values(search_name) as "Search Name"
+               values(risk_message) as "Risk Message"
+               values(analyticstories) as "Analytic Stories"
+               values(annotations._all) as "Annotations"
+               values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
+             by normalized_risk_object
+             | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`'
+    earliest_offset: $info_min_time$
+    latest_offset: $info_max_time$
+rba:
+  message: RMM agent installed on $host$ followed by first outbound connection to vendor infrastructure (brands=$rmm_brand$).
+  risk_objects:
+    - field: host
+      type: host
+      score: 70
+  threat_objects: []
+tags:
+  analytic_story:
+    - Remote Access Software Abuse
+    - Suspicious Remote Management
+  asset_type: Endpoint
+  mitre_attack_id:
+    - T1219   # Remote Access Software
+    - T1071   # Application Layer Protocol (C2 over HTTPS/Web)
+  product:
+    - Splunk Enterprise
+    - Splunk Enterprise Security
+    - Splunk Cloud
+  security_domain: endpoint
+tests: []
