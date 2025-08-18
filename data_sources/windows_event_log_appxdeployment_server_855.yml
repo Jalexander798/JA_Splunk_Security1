@@ -40,6 +40,12 @@ fields:
 - dest
 - host
 - user_id
+output_fields:
+- _time
+- dest
+- dvc
+- EventCode
+- user_id
 references:
 - https://learn.microsoft.com/en-us/windows/win32/appxpkg/troubleshooting
 - https://www.advancedinstaller.com/msix-installation-or-launching-errors-and-fixes.html

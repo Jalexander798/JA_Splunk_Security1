@@ -49,16 +49,9 @@ fields:
 - user_id
 output_fields:
 - _time
-- CallingProcess
 - dest
 - dvc
 - EventCode
-- HasFullTrust
-- host
-- IsCentennial
-- PackageDisplayName
-- PackageFullName
-- PackageSourceUri
 - Path
 - ProcessID
 - user_id
