@@ -1,4 +1,5 @@
-definition: (source="WinEventLog:Microsoft-Windows-TerminalServices-RDPClient/Operational" OR source="XmlWinEventLog:Microsoft-Windows-TerminalServices-RDPClient/Operational")
-description: customer specific splunk configurations(eg- index, source, sourcetype).
+definition: (source="XmlWinEventLog:Microsoft-Windows-TerminalServices-RDPClient/Operational")
+description:
+  customer specific splunk configurations(eg- index, source, sourcetype).
   Replace the macro definition with configurations for your Splunk environment.
 name: wineventlog_rdp
