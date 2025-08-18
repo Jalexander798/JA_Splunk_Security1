@@ -33,7 +33,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A MSIX/AppX package "$PackagePath$" was successfully installed on $host$ by user $user_id$.
+  message: A MSIX/AppX package $PackagePath$ was successfully installed on $host$ by user $user_id$.
   risk_objects:
   - field: host
     type: system
