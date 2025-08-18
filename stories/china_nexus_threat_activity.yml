@@ -12,6 +12,9 @@ references:
 - https://www.judiciary.senate.gov/imo/media/doc/2024-11-19_pm_-_testimony_-_meyers.pdf
 - https://go.crowdstrike.com/rs/281-OBQ-266/images/GlobalThreatReport2024.pdf
 - https://www.crowdstrike.com/adversaries/envoy-panda/
+- https://www.trendmicro.com/en_us/research/25/g/revisiting-unc3886-tactics-to-defend-against-present-risk.html
+- https://cloud.google.com/blog/topics/threat-intelligence/apt40-examining-a-china-nexus-espionage-actor
+- https://cloud.google.com/blog/topics/threat-intelligence/uncovering-unc3886-espionage-operations
 tags:
   category:
   - Malware
