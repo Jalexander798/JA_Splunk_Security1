@@ -5,9 +5,9 @@ author: Patrick Bareiss
 description: This configuration file applies to all detections of type Correlation.
   These correlations will generate Notable Events.
 scheduling:
-  cron_schedule: 0 * * * *
-  earliest_time: -70m@m
-  latest_time: -10m@m
+  cron_schedule: '{minute} * * * *'
+  earliest_time: -60m@m
+  latest_time: +10m@m
   schedule_window: auto
 alert_action:
   notable:
