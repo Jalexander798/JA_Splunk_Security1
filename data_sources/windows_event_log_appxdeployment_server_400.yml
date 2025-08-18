@@ -47,6 +47,21 @@ fields:
 - dest
 - host
 - user_id
+output_fields:
+- _time
+- CallingProcess
+- dest
+- dvc
+- EventCode
+- HasFullTrust
+- host
+- IsCentennial
+- PackageDisplayName
+- PackageFullName
+- PackageSourceUri
+- Path
+- ProcessID
+- user_id
 references:
 - https://learn.microsoft.com/en-us/windows/msix/desktop/desktop-to-uwp-behind-the-scenes
 - https://learn.microsoft.com/en-us/windows/msix/package/package-identity

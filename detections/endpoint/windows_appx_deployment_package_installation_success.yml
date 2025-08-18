@@ -9,7 +9,7 @@ description: This analytic detects successful MSIX/AppX package installations on
 data_source:
 - Windows Event Log AppXDeployment-Server 854
 search: '`wineventlog_appxdeploymentserver` EventCode=854
-  | stats count min(_time) as firstTime max(_time) as lastTime values(Path) as PackagePath by host EventCode user_id
+  | stats count min(_time) as firstTime max(_time) as lastTime values(Path) as PackagePath by dvc EventCode user_id | rename dvc as dest
   | `security_content_ctime(firstTime)`
   | `security_content_ctime(lastTime)`
   | `windows_appx_deployment_package_installation_success_filter`'
@@ -20,22 +20,22 @@ references:
 - https://www.appdeploynews.com/packaging-types/msix/troubleshooting-an-msix-package/
 - https://www.advancedinstaller.com/msix-installation-or-launching-errors-and-fixes.html
 drilldown_searches:
-- name: View the detection results for - "$host$"
-  search: '%original_detection_search% | search host = "$host$"'
+- name: View the detection results for - "$dest$"
+  search: '%original_detection_search% | search dest = "$dest$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View related unsigned package installations for - "$host$"
-  search: 'source="XmlWinEventLog:Microsoft-Windows-AppXDeploymentServer/Operational" EventCode=603 Flags="8388608" host="$host$"'
+- name: View related unsigned package installations for - "$dest$"
+  search: 'source="XmlWinEventLog:Microsoft-Windows-AppXDeploymentServer/Operational" EventCode=603 Flags="8388608" host="$dest$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View related full trust package installations for - "$host$"
-  search: 'source="XmlWinEventLog:Microsoft-Windows-AppXDeploymentServer/Operational" EventCode=400 HasFullTrust="true" host="$host$"'
+- name: View related full trust package installations for - "$dest$"
+  search: 'source="XmlWinEventLog:Microsoft-Windows-AppXDeploymentServer/Operational" EventCode=400 HasFullTrust="true" host="$dest$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A MSIX/AppX package $PackagePath$ was successfully installed on $host$ by user $user_id$.
+  message: A MSIX/AppX package $PackagePath$ was successfully installed on $dest$ by user $user_id$.
   risk_objects:
-  - field: host
+  - field: dest
     type: system
     score: 10
   threat_objects:
