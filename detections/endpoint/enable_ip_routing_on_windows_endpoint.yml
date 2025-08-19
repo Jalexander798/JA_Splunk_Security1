@@ -1,0 +1,85 @@
+name: Enable IP Routing On Windows Endpoint
+id: f6b49ed5-05bb-4c11-b2b5-98c92dceea9b
+version: 1
+date: '2025-07-07'
+author: Mahdi Hamedani Nezhad
+status: production
+type: Anomaly
+description: |
+  This detection identifies the enabling of IP routing on a Windows system by monitoring changes to the `IPEnableRouter` registry key.
+  Malicious actors may enable IP forwarding on compromised hosts to pivot network traffic or build rogue routing paths, allowing lateral movement or data exfiltration.
+  This behavior is suspicious in most enterprise environments and warrants investigation, especially if the change originates from an unexpected process or user.
+data_source:
+- Windows Registry
+- Sysmon EventID 13
+- Splunk Windows TA (registry auditing)
+search: |-
+  | tstats `security_content_summariesonly` count min(_time) as firstTime max(_time) as lastTime 
+    FROM datamodel=Endpoint.Registry 
+    WHERE (Registry.registry_value_name="IPEnableRouter" 
+    AND Registry.registry_path="*\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters*" 
+    AND Registry.registry_value_data="0x00000001") 
+  by Registry.action Registry.dest Registry.process_guid Registry.process_id 
+     Registry.registry_hive Registry.registry_path Registry.registry_key_name 
+     Registry.registry_value_data Registry.registry_value_name Registry.registry_value_type 
+     Registry.status Registry.user Registry.vendor_product 
+  | `drop_dm_object_name(Registry)` 
+  | `security_content_ctime(firstTime)` 
+  | `security_content_ctime(lastTime)` 
+  | `enable_ip_routing_on_windows_endpoint_filter`
+how_to_implement: |
+  This detection relies on registry monitoring through tools like Sysmon (Event ID 13) or native Windows Event Logging with registry auditing enabled.
+  Ensure that logs are normalized to the `Endpoint.Registry` data model using the Common Information Model (CIM).
+  Deploy the Splunk Add-on for Microsoft Windows and configure registry auditing or ingest data from an EDR that supports registry event telemetry.
+known_false_positives: |
+  Some legitimate administrative scripts or configuration management tools may enable IP routing intentionally, especially on gateway servers or routers.
+  Filtering based on user, process, or host may be necessary in such environments.
+references:
+- https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/enable-ip-routing
+- https://attack.mitre.org/techniques/T1098/
+drilldown_searches:
+- name: View registry modification events for - "$dest$"
+  search: '%original_detection_search% | search  dest="$dest$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: View risk events for - "$dest$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+rba:
+  message: The registry key IPEnableRouter was set to enable routing on $dest$ by user $user$.
+  risk_objects:
+  - field: user
+    type: user
+    score: 30
+  - field: dest
+    type: system
+    score: 30
+  threat_objects:
+  - field: registry_value_name
+    type: registry_key
+tags:
+  analytic_story:
+  - Lateral Movement
+  - Windows Registry Monitoring
+  asset_type: Endpoint
+  atomic_guid: []
+  mitre_attack_id:
+  - T1098
+  - T1562.001
+  product:
+  - Splunk Enterprise
+  - Splunk Enterprise Security
+  - Splunk Cloud
+  security_domain: endpoint
+tests:
+- name: True Positive Test - Enable IP Routing
+  attack_data:
+  - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/windows/registry/enable_ip_routing.reg.log
+    source: WinEventLog:Microsoft-Windows-Sysmon/Operational
+    sourcetype: XmlWinEventLog
