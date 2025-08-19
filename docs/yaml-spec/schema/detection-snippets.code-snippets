@@ -1,0 +1,38 @@
+{
+  "New Detection YAML": {
+    "prefix": "newdetection",
+    "body": [
+      "name: ''",
+      "id: ''",
+      "version: ''",
+      "date: ''",
+      "author: ''",
+      "status: ''",
+      "type: ''",
+      "data_source:",
+      "  - ''",
+      "description: ''",
+      "search: ''",
+      "how_to_implement: ''",
+      "known_false_positives: ''",
+      "references:",
+      "  - ''",
+      "drilldown_searches:",
+      "  - name: ''",
+      "    search: ''",
+      "    earliest_offset: ''",
+      "    latest_offset: ''",
+      "tags:",
+      "  analytic_story:",
+      "    - ''",
+      "  asset_type: ''",
+      "  mitre_attack_id:",
+      "    - ''",
+      "  product:",
+      "    - ''",
+      "  security_domain: ''"
+    ],
+    "description": "Updated minimal template for a new detection YAML file"
+  }
+}
+{

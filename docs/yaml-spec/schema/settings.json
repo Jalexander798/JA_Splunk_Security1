@@ -1,0 +1,5 @@
+{
+  "yaml.schemas": {
+    "./.vscode/schemas/detection.schema.json": "path_to_where_you_keep_your/detections*.yml"
+  }
+}
