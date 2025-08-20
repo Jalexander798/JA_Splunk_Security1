@@ -1,0 +1,101 @@
+name: Windows Modify Registry for IE Proxy Settings
+id: d833f972-1ff4-4ef6-b020-831aa6d13fdd
+version: 2
+date: '2025-07-15'
+author: Zaki Zarkasih (FPT Metrodata Indonesia)
+type: TTP
+status: production
+description: >
+  This detection identifies suspicious modifications to Internet Explorer (IE) proxy configuration via Windows Registry. 
+  Adversaries commonly abuse IE proxy settings to redirect network traffic through attacker-controlled infrastructure, often 
+  by modifying keys such as `ProxyEnable`, `ProxyServer`, `AutoConfigURL`, or even `ProtocolDefaults` and `ZoneMapDomains` 
+  to affect how Internet traffic is routed. These changes are typically made using command-line utilities such as `reg.exe`, `powershell.exe`, or `cmd.exe`. Such 
+  behavior may indicate attempts to bypass security controls, establish covert C2 channels, or manipulate user traffic for credential interception.
+data_source:
+  - Windows Event Log Security 4688
+search: >
+  index="windows"
+  sourcetype=WinEventLog:Security
+  EventCode=4688
+  Process_Command_Line="*\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings*"
+  (New_Process_Name="*\\reg.exe" OR New_Process_Name="*\\powershell.exe" OR New_Process_Name="*\\cmd.exe")
+  NOT (
+      Details="DWORD*" 
+      OR Details IN ("Cookie:", "Visited:", "(Empty)") 
+      OR match(Process_Command_Line, ".*\\\\Cache.*|.*\\\\ZoneMap.*|.*\\\\WpadDecision.*") 
+      OR Details="Binary Data" 
+      OR Process_Command_Line="*\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\Accepted Documents*" 
+      OR New_Process_Name="C:\\Windows\\System32\\RuntimeBroker.exe"
+  )
+  | rex field=Process_Command_Line "(?i)(new-itemproperty|set-itemproperty|set-item|reg\\s+add|new-item)[^\n\r]*?(?<registry_path>HK(?:EY_)?(?:LM|CU|CR|U)[:\\\\][^\"'\s]+(?:\\\\[^\"'\s]*)*)"
+  | eval Timestamp=strftime(_time, "%d-%m-%Y %H:%M:%S")
+  | table Timestamp, ComputerName, Account_Name, New_Process_Name, Process_Command_Line, registry_path, Creator_Process_Name
+  | rename 
+      ComputerName as "Host", 
+      Account_Name as "User", 
+      New_Process_Name as "Created Process", 
+      Process_Command_Line as "Command Line", 
+      Creator_Process_Name as "Parent Command"
+  | sort - Timestamp
+  | `windows_modify_registry_for_ie_proxy_settings_filter`
+how_to_implement: >
+  Ensure Windows Event Log Security EventCode 4688 is collected and CIM-mapped correctly. 
+  This detection uses raw event data and assumes the availability of command-line logging.
+  CIM compliance is not required for this version, but field consistency (e.g., `New_Process_Name`, `Process_Command_Line`) is essential.
+known_false_positives: >
+  Legitimate administrative scripts may also modify Internet Explorer proxy settings.
+  Validate with IT operations or automation teams before escalating.
+references:
+  - https://attack.mitre.org/techniques/T1112/
+  - https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/windows-scripting/aa752038(v=vs.84)
+  - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1112/T1112.md
+drilldown_searches:
+  - name: View detection results for "$dest$" and "$User$"
+    search: '%original_detection_search% | search dest="$dest$" User="$User$"'
+    earliest_offset: $info_min_time$
+    latest_offset: $info_max_time$
+  - name: View risk events last 7 days for "$dest$" and "$User$"
+    search: >
+      | from datamodel Risk.All_Risk 
+      | search normalized_risk_object IN ("$dest$", "$User$")
+      | stats count min(_time) as firstTime max(_time) as lastTime 
+          values(search_name) as "Search Name" 
+          values(risk_message) as "Risk Message" 
+          values(analyticstories) as "Analytic Stories" 
+          values(annotations._alert_type) as "Alert Type" 
+      by normalized_risk_object 
+      | sort - lastTime
+    earliest_offset: $info_min_time$
+    latest_offset: $info_max_time$
+rba:
+  message: Internet Explorer registry proxy setting was modified on host $dest$ by user $User$ at path: $registry_path$
+  risk_objects:
+    - field: dest
+      type: system
+      score: 20
+    - field: User
+      type: user
+      score: 30
+    - field: registry_path
+      type: registry_path
+      score: 35
+  threat_objects:
+    - field: New_Process_Name
+      type: process
+tags:
+  analytic_story:
+    - Windows Registry Abuse
+  asset_type: Endpoint
+  mitre_attack_id:
+    - T1112
+  product:
+    - Splunk Enterprise
+    - Splunk Enterprise Security
+    - Splunk Cloud
+  security_domain: endpoint
+tests:
+  - name: True Positive Test
+    attack_data:
+      - data: https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1112/atomic_red_team/windows-sysmon.log
+        source: WinEventLog:Microsoft-Windows-Sysmon/Operational
+        sourcetype: xmlwineventlog
