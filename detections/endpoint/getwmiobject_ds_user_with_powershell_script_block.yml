@@ -1,7 +1,7 @@
 name: GetWmiObject DS User with PowerShell Script Block
 id: fabd364e-04f3-11ec-b34b-acde48001122
-version: 9
-date: '2025-05-02'
+version: 10
+date: '2025-07-03'
 author: Teoderick Contreras, Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -16,7 +16,7 @@ description: The following analytic detects the execution of the `Get-WmiObject`
 data_source:
 - Powershell Script Block Logging 4104
 search: '`powershell` EventCode=4104 ScriptBlockText = "*get-wmiobject*" ScriptBlockText
-  = "*ds_user*" ScriptBlockText = "*-namespace*" ScriptBlockText = "*root\\directory\\ldap*"
+  = "*ds_user*" (ScriptBlockText = "*-namespace*" OR ScriptBlockText = "*-ns*") ScriptBlockText = "*root\\directory\\ldap*"
   | fillnull | stats count min(_time) as firstTime max(_time) as lastTime by dest
   signature signature_id user_id vendor_product EventID Guid Opcode Name Path ProcessID
   ScriptBlockId ScriptBlockText | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)`

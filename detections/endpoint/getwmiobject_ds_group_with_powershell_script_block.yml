@@ -1,7 +1,7 @@
 name: GetWmiObject Ds Group with PowerShell Script Block
 id: 67740bd3-1506-469c-b91d-effc322cc6e5
-version: 9
-date: '2025-06-24'
+version: 10
+date: '2025-07-03'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -16,8 +16,8 @@ description:
 data_source:
   - Powershell Script Block Logging 4104
 search:
-  '`powershell` EventCode=4104 (ScriptBlockText=*Get-WmiObject* AND ScriptBlockText="*namespace
-  root\\directory\\ldap*" AND ScriptBlockText="*class ds_group*") | fillnull | stats
+  '`powershell` EventCode=4104 (ScriptBlockText=*Get-WmiObject* AND (ScriptBlockText="*namespace
+  root\\directory\\ldap*" OR ScriptBlockText="*ns root\\directory\\ldap*") AND (ScriptBlockText="*class ds_group*" OR ScriptBlockText="*classname ds_group*")) | fillnull | stats
   count min(_time) as firstTime max(_time) as lastTime by dest signature signature_id
   user_id vendor_product EventID Guid Opcode Name Path ProcessID ScriptBlockId ScriptBlockText
   | `security_content_ctime(firstTime)` | `security_content_ctime(lastTime)` |`getwmiobject_ds_group_with_powershell_script_block_filter`'

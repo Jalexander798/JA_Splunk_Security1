@@ -1,7 +1,7 @@
 name: Remote Process Instantiation via WMI and PowerShell
 id: 112638b4-4634-11ec-b9ab-3e22fbd008af
-version: 16
-date: '2025-05-02'
+version: 17
+date: '2025-07-03'
 author: Mauricio Velazco, Splunk
 status: production
 type: TTP
@@ -18,7 +18,7 @@ data_source:
 - CrowdStrike ProcessRollup2
 search: '| tstats `security_content_summariesonly` count min(_time) as firstTime max(_time)
   as lastTime from datamodel=Endpoint.Processes where `process_powershell` (Processes.process="*Invoke-WmiMethod*"
-  AND Processes.process="*-CN*" AND Processes.process="*-Class Win32_Process*" AND  Processes.process="*-Name
+  AND (Processes.process="*-CN*" OR Processes.process="*-ComputerName*") AND Processes.process="*-Class Win32_Process*" AND  Processes.process="*-Name
   create*") by Processes.action Processes.dest Processes.original_file_name Processes.parent_process
   Processes.parent_process_exec Processes.parent_process_guid Processes.parent_process_id
   Processes.parent_process_name Processes.parent_process_path Processes.process Processes.process_exec
@@ -35,7 +35,7 @@ how_to_implement: The detection is based on data that originates from Endpoint D
   the EDR product. The logs must also be mapped to the `Processes` node of the `Endpoint`
   data model. Use the Splunk Common Information Model (CIM) to normalize the field
   names and speed up the data modeling process.
-known_false_positives: Administrators may leverage WWMI and powershell.exe to start
+known_false_positives: Administrators may leverage WMI and powershell.exe to start
   a process on remote systems, but this activity is usually limited to a small set
   of hosts or users.
 references:
