@@ -23,7 +23,7 @@ search: |
   | `drop_dm_object_name("All_Traffic")`
   | where max_bytes > 500
   | eval severity=case(max_bytes>1400, "critical", max_bytes>1000, "high", 1=1, "medium")
-  | `cisco_smart_install_oversized_message_detection_filter`
+  | `cisco_smart_install_oversized_packet_detection_filter`
 how_to_implement: |
   To implement this search, ingest network traffic into the Network_Traffic data model (e.g., via Splunk Stream with
   sourcetype "stream:tcp"). The search analyzes TCP traffic to destination port 4786 (Cisco Smart Install) over hourly
