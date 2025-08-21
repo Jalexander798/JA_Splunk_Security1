@@ -1,0 +1,56 @@
+name: Cisco Isovalent - Cron Job Creation
+id: 45678901-defg-4567-hi23-456789012def
+version: 1
+date: '2025-08-12'
+author: Bhavin Patel, Splunk
+type: Anomaly
+data_source:
+- Cisco Isovalent Process Exec
+status: production
+description: The following analytic detects the creation of a cron job within the Cisco Isovalent environment. It identifies this activity by monitoring process execution logs for cron job creation events. This behavior is significant for a SOC as it could allow an attacker to execute malicious tasks repeatedly and automatically, posing a threat to the Kubernetes infrastructure. If confirmed malicious, this activity could lead to persistent attacks, service disruptions, or unauthorized access to sensitive information.
+search: |
+  `cisco_isovalent` process_exec.process.binary="*/bin/cron"
+  | stats count values(user.groups{}) as user_groups by process_exec.process.pod.name, process_exec.process.pod.namespace, process_exec.process.binary, process_exec.process.arguments, process_exec.process.start_time, process_exec.process.pod.container.image.name
+  | rename process_exec.process.pod.name as PodName, process_exec.process.pod.namespace as Namespace, process_exec.process.binary as Binary, process_exec.process.arguments as Arguments, process_exec.process.start_time as StartTime, process_exec.process.pod.container.image.name as ImageName
+  | `cisco_isovalent___cron_job_creation_filter`
+how_to_implement: The detection is based on data that originates from Cisco Isovalent logs. Ensure that logging is enabled in your Cisco Isovalent environment. These logs provide a record of the process execution events, which is crucial for monitoring and detecting suspicious activities. Use the Cisco Security Cloud App to collect the logs.
+known_false_positives: unknown
+references:
+- https://isovalent.com
+- https://tetragon.io
+drilldown_searches:
+- name: View the detection results for - "$user$"
+  search: '%original_detection_search% | search user = "$user$"'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+- name: View risk events for the last 7 days for - "$user$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$user$")
+    starthoursago=168  | stats count min(_time) as firstTime max(_time) as lastTime
+    values(search_name) as "Search Name" values(risk_message) as "Risk Message" values(analyticstories)
+    as "Analytic Stories" values(annotations._all) as "Annotations" values(annotations.mitre_attack.mitre_tactic)
+    as "ATT&CK Tactics" by normalized_risk_object | `security_content_ctime(firstTime)`
+    | `security_content_ctime(lastTime)`'
+  earliest_offset: $info_min_time$
+  latest_offset: $info_max_time$
+rba:
+  message: Cisco Isovalent cron job creation detected in namespace $Namespace$
+  risk_objects:
+  - field: Namespace
+    type: system
+    score: 50
+  threat_objects:
+  - field: PodName
+    type: pod
+    score: 50
+  threat_objects: []
+tags:
+  analytic_story:
+  - Cisco Isovalent Suspicious Activity
+  asset_type: Kubernetes
+  mitre_attack_id:
+  - T1053.007
+  product:
+  - Splunk Enterprise
+  - Splunk Enterprise Security
+  - Splunk Cloud
+  security_domain: network
