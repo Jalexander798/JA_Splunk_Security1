@@ -27,13 +27,12 @@ references:
 - https://tools.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-20180328-smi2
 - https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/a1/sec-a1-cr-book/sec-cr-a2.html#wp3796044403
 drilldown_searches:
-- name: View the detection results for - "$dest$" and "$username$"
-  search: '%original_detection_search% | search dest = "$dest$" username = "$username$"'
+- name: View the detection results for - "$dest$"
+  search: '%original_detection_search% | search dest = "$dest$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
-- name: View risk events for the last 7 days for - "$dest$" and "$username$"
-  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$",
-    "$username$") starthoursago=168  | stats count min(_time)
+- name: View risk events for the last 7 days for - "$dest$"
+  search: '| from datamodel Risk.All_Risk | search normalized_risk_object IN ("$dest$") starthoursago=168  | stats count min(_time)
     as firstTime max(_time) as lastTime values(search_name) as "Search Name" values(risk_message)
     as "Risk Message" values(analyticstories) as "Analytic Stories" values(annotations._all)
     as "Annotations" values(annotations.mitre_attack.mitre_tactic) as "ATT&CK Tactics"
