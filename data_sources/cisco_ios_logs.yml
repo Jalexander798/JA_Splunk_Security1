@@ -8,24 +8,78 @@ source: cisco:ios
 sourcetype: cisco:ios
 separator: null
 supported_TA:
-- name: Splunk Add-on for Cisco IOS
+- name: Cisco Networks Add-on
   url: https://splunkbase.splunk.com/app/1467
-  version: 3.0.0
+  version: 2.7.8
 fields:
 - _time
-- host
-- user
+- aci_message_text
+- action
+- app
+- authenticator
+- bytes
+- change_type
+- cipher
+- cisco_header
 - command
-- username
+- config_source
+- date_hour
+- date_mday
+- date_minute
+- date_month
+- date_second
+- date_wday
+- date_year
+- date_zone
 - dest
+- dest_interface
+- dest_mac
+- dest_port
+- device_time
+- direct_ap_mac
+- dvc
+- event_id
+- eventtype
+- facility
+- hmac
+- host
+- index
+- line
+- linecount
+- message_text
+- mnemonic
+- product
+- punct
+- reliable_time
+- severity
+- severity_description
+- severity_id
+- severity_id_and_name
+- severity_name
+- source
+- sourcetype
+- splunk_server
+- splunk_server_group
 - src
+- src_interface
 - src_ip
-- dest_ip
-- message
+- src_mac
+- subfacility
+- tag
+- tag::action
+- tag::app
+- tag::eventtype
+- timeendpos
+- timestartpos
+- transport
+- tty
+- type
+- user
+- vendor
+- vendor_action
+- vlan
 output_fields:
 - user
-- command
-- username
 - dest
 example_log: 'Aug 20 17:10:21.639: %AAA-6-USERNAME_CONFIGURATION: user with username: attacker configured
   Aug 20 17:10:21.664: %AAA-6-USER_PRIVILEGE_UPDATE: username: attacker privilege updated with priv-15
