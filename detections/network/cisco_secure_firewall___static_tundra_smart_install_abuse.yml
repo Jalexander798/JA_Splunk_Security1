@@ -6,11 +6,11 @@ author: Bhavin Patel, Michael Haag, Splunk
 status: production
 type: TTP
 description: |
-  This analytic detects activity associated with "Static Tundra" style abuse of the Cisco Smart Install (SMI) protocol
+  This analytic detects activity associated with "Static Tundra" threat actor abuse of the Cisco Smart Install (SMI) protocol
   using Cisco Secure Firewall Intrusion Events. It leverages Cisco Secure Firewall Threat Defense IntrusionEvent logs to
   identify occurrences of Smart Install exploitation and protocol abuse, including denial-of-service and buffer overflow
   attempts. The detection triggers when multiple Cisco Smart Install-related Snort signatures are observed in a short period from the
-  same source, which is indicative of active exploitation or reconnaissance against Cisco devices that expose SMI.
+  same source, which is indicative of active exploitation or reconnaissance against Cisco devices that expose SMI. 
 data_source:
   - Cisco Secure Firewall Threat Defense Intrusion Event
 search: |
@@ -45,15 +45,11 @@ known_false_positives: |
   Network scanning or testing tools that probe Cisco Smart Install endpoints may trigger similar signatures.
   Validate against maintenance windows or approved security assessments.
 references:
-  - https://blog.talosintelligence.com/smart-install-issues/
-  - https://blog.talosintelligence.com/cisco-smart-install-remote-code-execution/
-  - https://www.cisa.gov/news-events/alerts/2018/04/05/cisco-smart-install-abused-large-scale-attacks
-  - https://tools.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-20180328-smi
-  - https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/118978-configure-smart-install-00.html
-  
+- https://blog.talosintelligence.com/static-tundra/
+- https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-20180328-smi2
 drilldown_searches:
-- name: View the detection results for - "$dest_ip$" and "$src_ip$"
-  search: '%original_detection_search% | search  dest_ip = "$dest_ip$" and src_ip = "$src_ip$"'
+- name: View the detection results for - "$dest_ip$"
+  search: '%original_detection_search% | search  dest_ip = "$dest_ip$"'
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 - name: View risk events for the last 7 days for - "$dest_ip$"
@@ -78,7 +74,7 @@ rba:
 tags:
   analytic_story: 
     - Cisco Secure Firewall Threat Defense Analytics
-    - Cisco Smart Install Exploitation
+    - Cisco Smart Install Remote Code Execution CVE-2018-0171
   asset_type: Network
   security_domain: network
   mitre_attack_id:
