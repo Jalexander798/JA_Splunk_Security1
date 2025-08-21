@@ -8,9 +8,8 @@ type: Anomaly
 description: This analytic detects the creation of privileged user accounts on Cisco IOS devices, which could indicate an attacker establishing backdoor access. The detection focuses on identifying when user accounts are created with privilege level 15 (the highest administrative privilege level in Cisco IOS) or when existing accounts have their privileges elevated. This type of activity is particularly concerning when performed by unauthorized users or during unusual hours, as it may represent a key step in establishing persistence following the exploitation of vulnerabilities like CVE-2018-0171 in Cisco Smart Install. Threat actors like Static Tundra have been observed creating privileged accounts as part of their attack chain after gaining initial access to network devices.
 data_source:
 - Cisco IOS Logs
-search: '| tstats `security_content_summariesonly` count values(All_Changes.command) as commands min(_time) as firstTime max(_time) as lastTime from datamodel=Change.All_Changes 
-    where sourcetype="cisco:ios" 
-    AND (
+search: '| tstats `security_content_summariesonly` count values(All_Changes.command) as command min(_time) as firstTime max(_time) as lastTime from datamodel=Change.All_Changes 
+    where (
       (All_Changes.command="*username * privilege 15*") OR 
       (All_Changes.command="*username * password*" AND All_Changes.command="*USER TABLE MODIFIED*") OR
       (All_Changes.command="*USER_PRIVILEGE_UPDATE*priv-15*")
@@ -42,7 +41,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: A suspicious privileged account was created or modified on Cisco IOS device "$dest$" by user "$user$"
+  message: A suspicious privileged account was created or modified on Cisco IOS device $dest$ by user $user$
   risk_objects:
   - field: dest
     type: system
@@ -51,7 +50,7 @@ rba:
     type: user
     score: 50
   threat_objects:
-  - field: commands
+  - field: command
     type: command
 tags:
   analytic_story:

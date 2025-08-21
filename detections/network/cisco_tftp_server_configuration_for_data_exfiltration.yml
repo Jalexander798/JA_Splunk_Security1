@@ -8,9 +8,8 @@ type: TTP
 description: This analytic detects the configuration of TFTP services on Cisco IOS devices that could be used to exfiltrate sensitive configuration files. Threat actors like Static Tundra have been observed configuring TFTP servers to make device configuration files accessible for exfiltration after gaining initial access. The detection specifically looks for commands that expose critical configuration files such as startup-config, running-config, and other sensitive system information through TFTP. This activity is particularly concerning as it may represent an attempt to steal credentials, network topology information, and other sensitive data stored in device configurations.
 data_source:
 - Cisco IOS Logs
-search: '| tstats `security_content_summariesonly` count values(All_Changes.command) as commands min(_time) as firstTime max(_time) as lastTime from datamodel=Change.All_Changes 
-  where sourcetype="cisco:ios" 
-  AND (All_Changes.command="*tftp-server*") 
+search: '| tstats `security_content_summariesonly` count values(All_Changes.command) as command min(_time) as firstTime max(_time) as lastTime from datamodel=Change.All_Changes 
+  where  (All_Changes.command="*tftp-server*") 
   AND (
     All_Changes.command="*nvram:startup-config*" OR 
     All_Changes.command="*bootflash:running-config*" OR 
@@ -46,7 +45,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Suspicious TFTP server configuration detected on Cisco device "$dest$" by user "$user$", potentially exposing sensitive configuration files
+  message: Suspicious TFTP server configuration detected on Cisco device $dest$ by user $user$, potentially exposing sensitive configuration files
   risk_objects:
   - field: dest
     type: system
@@ -55,7 +54,7 @@ rba:
     type: user
     score: 40
   threat_objects:
-  - field: commands
+  - field: command
     type: command
 tags:
   analytic_story:

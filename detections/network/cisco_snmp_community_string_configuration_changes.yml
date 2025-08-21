@@ -8,9 +8,8 @@ type: Anomaly
 description: This analytic detects changes to SNMP community strings on Cisco devices, which could indicate an attacker establishing persistence or attempting to extract credentials. After gaining initial access to network devices, threat actors like Static Tundra often modify SNMP configurations to enable unauthorized monitoring and data collection. This detection specifically looks for the configuration of SNMP community strings with read-write (rw) or read-only (ro) permissions, as well as the configuration of SNMP hosts that may be used to exfiltrate data. These activities are particularly concerning as they may represent attempts to establish persistent access or extract sensitive information from compromised devices.
 data_source:
 - Cisco IOS Logs
-search: '| tstats `security_content_summariesonly` count values(All_Changes.command) as commands min(_time) as firstTime max(_time) as lastTime from datamodel=Change.All_Changes 
-  where sourcetype="cisco:ios" 
-  AND (
+search: '| tstats `security_content_summariesonly` count values(All_Changes.command) as command min(_time) as firstTime max(_time) as lastTime from datamodel=Change.All_Changes 
+  where (
     (All_Changes.command="*snmp-server community*rw*") OR 
     (All_Changes.command="*snmp-server community*ro*") OR
     (All_Changes.command="*snmp-server host*")
@@ -42,7 +41,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Suspicious SNMP community string configuration changes detected on Cisco device "$dest$" by user "$user$", which may indicate persistence establishment
+  message: Suspicious SNMP community string configuration changes detected on Cisco device $dest$ by user $user$, which may indicate persistence establishment
   risk_objects:
   - field: dest
     type: system
@@ -51,7 +50,7 @@ rba:
     type: user
     score: 40
   threat_objects:
-  - field: commands
+  - field: command
     type: command
 tags:
   analytic_story:

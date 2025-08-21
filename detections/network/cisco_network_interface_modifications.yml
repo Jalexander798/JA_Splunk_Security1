@@ -8,9 +8,8 @@ type: Anomaly
 description: This analytic detects the creation or modification of network interfaces on Cisco devices, which could indicate an attacker establishing persistence or preparing for lateral movement. After gaining initial access to network devices, threat actors like Static Tundra often create new interfaces (particularly loopback interfaces) to establish covert communication channels or maintain persistence. This detection specifically looks for the configuration of new interfaces, interface state changes, and the assignment of IP addresses to interfaces. These activities are particularly concerning when they involve unusual interface names or descriptions containing suspicious terms.
 data_source:
 - Cisco IOS Logs
-search: '| tstats `security_content_summariesonly` count values(All_Changes.command) as commands min(_time) as firstTime max(_time) as lastTime from datamodel=Change.All_Changes 
-  where sourcetype="cisco:ios" 
-  AND (
+search: '| tstats `security_content_summariesonly` count values(All_Changes.command) as command min(_time) as firstTime max(_time) as lastTime from datamodel=Change.All_Changes 
+  where (
     (All_Changes.command="*interface*") OR 
     (All_Changes.command="*LINEPROTO-5-UPDOWN*") OR
     (All_Changes.command="*ip address*")
@@ -42,7 +41,7 @@ drilldown_searches:
   earliest_offset: $info_min_time$
   latest_offset: $info_max_time$
 rba:
-  message: Suspicious network interface modifications detected on Cisco device "$dest$" by user "$user$", which may indicate persistence establishment
+  message: Suspicious network interface modifications detected on Cisco device $dest$ by user $user$, which may indicate persistence establishment
   risk_objects:
   - field: dest
     type: system
@@ -51,7 +50,7 @@ rba:
     type: user
     score: 45
   threat_objects:
-  - field: commands
+  - field: command
     type: command
 tags:
   analytic_story:
