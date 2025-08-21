@@ -3,7 +3,7 @@ id: 9e4c8d7b-6f5e-4a3d-b2c1-0a9b8c7d6e5f
 version: 1
 date: '2025-08-21'
 author: Michael Haag, Splunk
-description: Data source object for Cisco IOS system logs
+description: Data source object for Cisco IOS system logs. Cisco IOS logs provide operational and security telemetry from Cisco network devices (IOS, IOS XE, IOS XR, NX-OS, WLC, and APs). The Cisco Networks Add-on for Splunk (TA-cisco_ios) normalizes these events by setting proper sourcetypes and extracting fields for switches, routers, controllers, and access points; deploy the TA on indexers/HFs and search heads, and the Cisco Networks (cisco_ios) App on search heads. Supported platforms include Catalyst, ASR, ISR, Nexus, CRS, and other IOS-based devices, enabling consistent investigation, alerting, and reporting in Splunk Enterprise and Splunk Cloud. This data is ingested via SYSLOG.
 source: cisco:ios
 sourcetype: cisco:ios
 separator: null
