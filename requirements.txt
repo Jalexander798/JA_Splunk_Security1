@@ -40,7 +40,7 @@ Pillow==8.3.2
 platformdirs==2.3.0
 pre-commit==2.14.1
 progress==1.6
-prompt-toolkit==1.0.14
+prompt-toolkit==3.0.51
 pyfiglet==0.8.post1
 Pygments==2.10.0
 PyInquirer==1.0.3
